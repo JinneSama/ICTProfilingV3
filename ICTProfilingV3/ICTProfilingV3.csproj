@@ -1,0 +1,973 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F425ECDD-2B59-4A55-911A-C991438960B5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ICTProfilingV3</RootNamespace>
+    <AssemblyName>ICTProfilingV3</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionsForms\frmActionList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmActionList.Designer.cs">
+      <DependentUpon>frmActionList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\frmActionTree.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmActionTree.Designer.cs">
+      <DependentUpon>frmActionTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\frmAddEditProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmAddEditProgram.Designer.cs">
+      <DependentUpon>frmAddEditProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\frmAddNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmAddNode.Designer.cs">
+      <DependentUpon>frmAddNode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\frmDocAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmDocAction.Designer.cs">
+      <DependentUpon>frmDocAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\frmRouteToUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmRouteToUsers.Designer.cs">
+      <DependentUpon>frmRouteToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ActionsForms\UCActions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\UCActions.Designer.cs">
+      <DependentUpon>UCActions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEditDeliveries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEditDeliveries.Designer.cs">
+      <DependentUpon>frmAddEditDeliveries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEditDeliveriesSpecsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEditDeliveriesSpecsDetails.Designer.cs">
+      <DependentUpon>frmAddEditDeliveriesSpecsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmAddEquipment.Designer.cs">
+      <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\UCDeliveries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\UCDeliveries.Designer.cs">
+      <DependentUpon>UCDeliveries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\UCDeliveriesSpecs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\UCDeliveriesSpecs.Designer.cs">
+      <DependentUpon>UCDeliveriesSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Equipments\frmAddEditBrand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Equipments\frmAddEditBrand.Designer.cs">
+      <DependentUpon>frmAddEditBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Equipments\frmAddEditModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Equipments\frmAddEditModel.Designer.cs">
+      <DependentUpon>frmAddEditModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Equipments\frmEquipmentSpecsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Equipments\frmEquipmentSpecsDetails.Designer.cs">
+      <DependentUpon>frmEquipmentSpecsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipment.Designer.cs">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentBrand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentBrand.Designer.cs">
+      <DependentUpon>frmEquipmentBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentModels.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentModels.Designer.cs">
+      <DependentUpon>frmEquipmentModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentSpecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmEquipmentSpecs.Designer.cs">
+      <DependentUpon>frmEquipmentSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmSuppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmSuppliers.Designer.cs">
+      <DependentUpon>frmSuppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LookUpTables\frmTechSpecsBasis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LookUpTables\frmTechSpecsBasis.Designer.cs">
+      <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEEquipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEEquipment.Designer.cs">
+      <DependentUpon>frmAddEditPPEEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEs.Designer.cs">
+      <DependentUpon>frmAddEditPPEs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEsSpecsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmAddEditPPEsSpecsDetails.Designer.cs">
+      <DependentUpon>frmAddEditPPEsSpecsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPEInventoryForms\UCPPEs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\UCPPEs.Designer.cs">
+      <DependentUpon>UCPPEs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PPEInventoryForms\UCPPEsSpecs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\UCPPEsSpecs.Designer.cs">
+      <DependentUpon>UCPPEsSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepairForms\frmAddEditRepair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RepairForms\frmAddEditRepair.Designer.cs">
+      <DependentUpon>frmAddEditRepair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RepairForms\UCAddPPEEquipment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RepairForms\UCAddPPEEquipment.Designer.cs">
+      <DependentUpon>UCAddPPEEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RepairForms\UCRepair.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RepairForms\UCRepair.Designer.cs">
+      <DependentUpon>UCRepair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTechSpecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTechSpecs.Designer.cs">
+      <DependentUpon>frmAddEditTechSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTechSpecsICTSpecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTechSpecsICTSpecs.Designer.cs">
+      <DependentUpon>frmAddEditTechSpecsICTSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTSICTSpecsDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TechSpecsForms\frmAddEditTSICTSpecsDetails.Designer.cs">
+      <DependentUpon>frmAddEditTSICTSpecsDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechSpecsForms\UCRequestedTechSpecs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TechSpecsForms\UCRequestedTechSpecs.Designer.cs">
+      <DependentUpon>UCRequestedTechSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TechSpecsForms\UCTechSpecs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TechSpecsForms\UCTechSpecs.Designer.cs">
+      <DependentUpon>UCTechSpecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TicketRequestForms\frmTypeOfRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TicketRequestForms\frmTypeOfRequest.Designer.cs">
+      <DependentUpon>frmTypeOfRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TicketRequestForms\UCTARequestDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TicketRequestForms\UCTARequestDashboard.Designer.cs">
+      <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\frmAddEditUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\frmAddEditUser.Designer.cs">
+      <DependentUpon>frmAddEditUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\frmStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\frmStaff.Designer.cs">
+      <DependentUpon>frmStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\frmUserRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\frmUserRoles.Designer.cs">
+      <DependentUpon>frmUserRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersForms\frmUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersForms\frmUsers.Designer.cs">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ActionsForms\frmActionList.resx">
+      <DependentUpon>frmActionList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmActionTree.resx">
+      <DependentUpon>frmActionTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmAddEditProgram.resx">
+      <DependentUpon>frmAddEditProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmAddNode.resx">
+      <DependentUpon>frmAddNode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmDocAction.resx">
+      <DependentUpon>frmDocAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmRouteToUsers.resx">
+      <DependentUpon>frmRouteToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\UCActions.resx">
+      <DependentUpon>UCActions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\frmAddEditDeliveries.resx">
+      <DependentUpon>frmAddEditDeliveries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\frmAddEditDeliveriesSpecsDetails.resx">
+      <DependentUpon>frmAddEditDeliveriesSpecsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\frmAddEquipment.resx">
+      <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\UCDeliveries.resx">
+      <DependentUpon>UCDeliveries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\UCDeliveriesSpecs.resx">
+      <DependentUpon>UCDeliveriesSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Equipments\frmAddEditBrand.resx">
+      <DependentUpon>frmAddEditBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Equipments\frmAddEditModel.resx">
+      <DependentUpon>frmAddEditModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Equipments\frmEquipmentSpecsDetails.resx">
+      <DependentUpon>frmEquipmentSpecsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmEquipment.resx">
+      <DependentUpon>frmEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmEquipmentBrand.resx">
+      <DependentUpon>frmEquipmentBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmEquipmentModels.resx">
+      <DependentUpon>frmEquipmentModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmEquipmentSpecs.resx">
+      <DependentUpon>frmEquipmentSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmSuppliers.resx">
+      <DependentUpon>frmSuppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LookUpTables\frmTechSpecsBasis.resx">
+      <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\frmAddEditPPEEquipment.resx">
+      <DependentUpon>frmAddEditPPEEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\frmAddEditPPEs.resx">
+      <DependentUpon>frmAddEditPPEs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\frmAddEditPPEsSpecsDetails.resx">
+      <DependentUpon>frmAddEditPPEsSpecsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\UCPPEs.resx">
+      <DependentUpon>UCPPEs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\UCPPEsSpecs.resx">
+      <DependentUpon>UCPPEsSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RepairForms\frmAddEditRepair.resx">
+      <DependentUpon>frmAddEditRepair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RepairForms\UCAddPPEEquipment.resx">
+      <DependentUpon>UCAddPPEEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RepairForms\UCRepair.resx">
+      <DependentUpon>UCRepair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TechSpecsForms\frmAddEditTechSpecs.resx">
+      <DependentUpon>frmAddEditTechSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TechSpecsForms\frmAddEditTechSpecsICTSpecs.resx">
+      <DependentUpon>frmAddEditTechSpecsICTSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TechSpecsForms\frmAddEditTSICTSpecsDetails.resx">
+      <DependentUpon>frmAddEditTSICTSpecsDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TechSpecsForms\UCRequestedTechSpecs.resx">
+      <DependentUpon>UCRequestedTechSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TechSpecsForms\UCTechSpecs.resx">
+      <DependentUpon>UCTechSpecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketRequestForms\frmTypeOfRequest.resx">
+      <DependentUpon>frmTypeOfRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketRequestForms\UCTARequestDashboard.resx">
+      <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\frmAddEditUser.resx">
+      <DependentUpon>frmAddEditUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\frmStaff.resx">
+      <DependentUpon>frmStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\frmUserRoles.resx">
+      <DependentUpon>frmUserRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersForms\frmUsers.resx">
+      <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Models.Entities.ActionsDropdowns.datasource" />
+    <None Include="Properties\DataSources\Models.Entities.Brand.datasource" />
+    <None Include="Properties\DataSources\Models.Entities.DeliveriesSpecs.datasource" />
+    <None Include="Properties\DataSources\Models.Entities.DeliveriesSpecsDetails.datasource" />
+    <None Include="Properties\DataSources\Models.Entities.EquipmentSpecs.datasource" />
+    <None Include="Properties\DataSources\Models.ViewModels.ActionTreeViewModel.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\EntityManager.csproj">
+      <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>
+      <Name>EntityManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\assignto_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\assignto_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ide_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ide_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boproduct_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boproduct_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\showtestreport_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\showtestreport_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boorderitem_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boorderitem_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customeremployees_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bosale_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bosale_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bodetails_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bodetails_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfile_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\botask_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\botask_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boorderitem_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ide_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boreport2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boreport2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customization_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customization_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brand_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brand_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\b_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tag_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tag_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pielabelsdatalabels2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pielabelsdatalabels2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addgroupheader_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addgroupheader_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x168.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfile_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfile_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfile_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1610.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bouser_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bouser_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1611.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1612.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1613.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apply_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fieldsettingspivottable_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fieldsettingspivottable_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\projectdirectory_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\projectdirectory_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treeview_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treeview_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treeview_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treeview_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listbullets_righttoleft_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listbullets_righttoleft_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1614.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1615.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1616.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\saveandclose_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treeview_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\autoexpand_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1617.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\insert_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfooter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\insert_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\assignto_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\assignto_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1618.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1619.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\female_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\female_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x168.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\financial_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\financial_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gotofooter_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gotofooter_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listnumbers_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\listnumbers_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inserttablerowsabove_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\about_16x165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1620.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1621.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lookup&amp;reference_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lookup&amp;reference_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\additem_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1622.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1623.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1624.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1625.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\currency_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="StandardPRForms\" />
+    <Folder Include="VerifyPRForms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\costanalysis_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\costanalysis_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customization_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\customization_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ide_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ide_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edittask_16x1610.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1626.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1627.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfile_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bosale_16x161.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+</Project>
