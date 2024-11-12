@@ -1,5 +1,9 @@
-﻿using DevExpress.XtraLayout;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.Pdf.Native.BouncyCastle.Asn1.X509;
+using DevExpress.XtraLayout;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -17,6 +21,7 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl
     {
         private IUnitOfWork _unitOfWork;
+        public string filterText { get; set; }
         public UCDeliveries()
         {
             InitializeComponent();
@@ -41,16 +46,10 @@ namespace ICTProfilingV3.DeliveriesForms
             return Task.CompletedTask;
         }
 
-        private async void gridDeliveries_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            await LoadEquipmentSpecs();
-            LoadActions();
-            await LoadDetails();
-        }
-
         private async Task LoadDetails()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            if (row == null) return;
 
             var deliveriesDetails = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.Supplier);
             var requestingEmployee = HRMISEmployees.GetEmployees().FirstOrDefault(x => x.Id == deliveriesDetails.RequestedById);
@@ -69,8 +68,11 @@ namespace ICTProfilingV3.DeliveriesForms
         private async Task LoadEquipmentSpecs()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var deliveries = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
             tabEquipmentSpecs.Controls.Clear();
+
+            if (row == null) return;
+
+            var deliveries = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
             tabEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(deliveries, _unitOfWork)
             {
                 Dock = DockStyle.Fill
@@ -81,6 +83,8 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             tabAction.Controls.Clear();
+
+            if (row == null) return;
             tabAction.Controls.Add(new UCActions(new ActionType
             {
                 Id = row.Id,
@@ -105,7 +109,51 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+                var ds = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
+                    x => x.DeliveriesSpecs.Select(s => s.Model),
+                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
+                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)).ToList();
+                var rpt = new DeliveriesReport
+                {
+                    DataSource = ds
+                };
 
+                var frm = new frmReportViewer(rpt);
+                frm.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UCDeliveries_Load(object sender, EventArgs e)
+        {
+            if (filterText != null) gridDeliveries.ActiveFilterCriteria = new BinaryOperator("TicketNo", filterText);
+        }
+
+        private async void gridDeliveries_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            await LoadEquipmentSpecs();
+            LoadActions();
+            await LoadDetails();
+        }
+
+        private void hplTicket_Click(object sender, EventArgs e)
+        {
+            var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCTARequestDashboard()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.Id.ToString()
+            });
         }
     }
 }

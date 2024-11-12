@@ -38,6 +38,9 @@
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition1 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition2 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition3 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
+            DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition4 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
+            DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition5 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
+            DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition6 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableSpan tableSpan1 = new DevExpress.XtraEditors.TableLayout.TableSpan();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement1 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement2 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
@@ -54,7 +57,7 @@
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.gcStaff = new DevExpress.XtraGrid.GridControl();
             this.tvStaff = new DevExpress.XtraGrid.Views.Tile.TileView();
-            this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAddStaff = new DevExpress.XtraEditors.SimpleButton();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
@@ -69,6 +72,7 @@
             // ImageColumn
             // 
             this.ImageColumn.Caption = "Image";
+            this.ImageColumn.FieldName = "Image";
             this.ImageColumn.Name = "ImageColumn";
             this.ImageColumn.Visible = true;
             this.ImageColumn.VisibleIndex = 0;
@@ -76,6 +80,7 @@
             // FullnameColumn
             // 
             this.FullnameColumn.Caption = "Fullname";
+            this.FullnameColumn.FieldName = "Users.FullName";
             this.FullnameColumn.Name = "FullnameColumn";
             this.FullnameColumn.Visible = true;
             this.FullnameColumn.VisibleIndex = 1;
@@ -83,6 +88,7 @@
             // UsernameColumn
             // 
             this.UsernameColumn.Caption = "Username";
+            this.UsernameColumn.FieldName = "Users.UserName";
             this.UsernameColumn.Name = "UsernameColumn";
             this.UsernameColumn.Visible = true;
             this.UsernameColumn.VisibleIndex = 2;
@@ -90,6 +96,7 @@
             // PositionColumn
             // 
             this.PositionColumn.Caption = "Position";
+            this.PositionColumn.FieldName = "Users.Position";
             this.PositionColumn.Name = "PositionColumn";
             this.PositionColumn.Visible = true;
             this.PositionColumn.VisibleIndex = 3;
@@ -174,19 +181,22 @@
             this.tvStaff.OptionsTiles.GroupTextPadding = new System.Windows.Forms.Padding(12, 8, 12, 8);
             this.tvStaff.OptionsTiles.IndentBetweenGroups = 0;
             this.tvStaff.OptionsTiles.IndentBetweenItems = 0;
-            this.tvStaff.OptionsTiles.ItemSize = new System.Drawing.Size(258, 164);
+            this.tvStaff.OptionsTiles.ItemSize = new System.Drawing.Size(258, 110);
             this.tvStaff.OptionsTiles.LayoutMode = DevExpress.XtraGrid.Views.Tile.TileViewLayoutMode.List;
             this.tvStaff.OptionsTiles.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tvStaff.OptionsTiles.Padding = new System.Windows.Forms.Padding(0);
             this.tvStaff.OptionsTiles.RowCount = 0;
-            tableColumnDefinition1.Length.Value = 89D;
-            tableColumnDefinition2.Length.Value = 135D;
+            tableColumnDefinition1.Length.Value = 131D;
+            tableColumnDefinition2.Length.Value = 103D;
             this.tvStaff.TileColumns.Add(tableColumnDefinition1);
             this.tvStaff.TileColumns.Add(tableColumnDefinition2);
             this.tvStaff.TileRows.Add(tableRowDefinition1);
             this.tvStaff.TileRows.Add(tableRowDefinition2);
             this.tvStaff.TileRows.Add(tableRowDefinition3);
-            tableSpan1.RowSpan = 3;
+            this.tvStaff.TileRows.Add(tableRowDefinition4);
+            this.tvStaff.TileRows.Add(tableRowDefinition5);
+            this.tvStaff.TileRows.Add(tableRowDefinition6);
+            tableSpan1.RowSpan = 6;
             this.tvStaff.TileSpans.Add(tableSpan1);
             tileViewItemElement1.Column = this.ImageColumn;
             tileViewItemElement1.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
@@ -197,20 +207,21 @@
             tileViewItemElement2.ColumnIndex = 1;
             tileViewItemElement2.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement2.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement2.RowIndex = 1;
             tileViewItemElement2.Text = "FullnameColumn";
             tileViewItemElement2.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement3.Column = this.UsernameColumn;
             tileViewItemElement3.ColumnIndex = 1;
             tileViewItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement3.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement3.RowIndex = 1;
+            tileViewItemElement3.RowIndex = 2;
             tileViewItemElement3.Text = "UsernameColumn";
             tileViewItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement4.Column = this.PositionColumn;
             tileViewItemElement4.ColumnIndex = 1;
             tileViewItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement4.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement4.RowIndex = 2;
+            tileViewItemElement4.RowIndex = 4;
             tileViewItemElement4.Text = "PositionColumn";
             tileViewItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             this.tvStaff.TileTemplate.Add(tileViewItemElement1);
@@ -218,20 +229,21 @@
             this.tvStaff.TileTemplate.Add(tileViewItemElement3);
             this.tvStaff.TileTemplate.Add(tileViewItemElement4);
             // 
-            // btnAdd
+            // btnAddStaff
             // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnAdd.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAdd.Appearance.Options.UseBackColor = true;
-            this.btnAdd.Appearance.Options.UseForeColor = true;
-            this.btnAdd.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x162;
-            this.btnAdd.Location = new System.Drawing.Point(792, 42);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(98, 28);
-            this.btnAdd.TabIndex = 110;
-            this.btnAdd.Text = "Add Staff";
+            this.btnAddStaff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddStaff.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAddStaff.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddStaff.Appearance.Options.UseBackColor = true;
+            this.btnAddStaff.Appearance.Options.UseForeColor = true;
+            this.btnAddStaff.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x162;
+            this.btnAddStaff.Location = new System.Drawing.Point(792, 42);
+            this.btnAddStaff.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddStaff.Name = "btnAddStaff";
+            this.btnAddStaff.Size = new System.Drawing.Size(98, 28);
+            this.btnAddStaff.TabIndex = 110;
+            this.btnAddStaff.Text = "Add Staff";
+            this.btnAddStaff.Click += new System.EventHandler(this.btnAddStaff_Click);
             // 
             // panelControl1
             // 
@@ -255,7 +267,7 @@
             this.ClientSize = new System.Drawing.Size(901, 646);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnAddStaff);
             this.Controls.Add(this.panel1);
             this.Name = "frmStaff";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -277,7 +289,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraGrid.GridControl gcStaff;
-        private DevExpress.XtraEditors.SimpleButton btnAdd;
+        private DevExpress.XtraEditors.SimpleButton btnAddStaff;
         private DevExpress.XtraGrid.Views.Tile.TileView tvStaff;
         private DevExpress.XtraGrid.Columns.TileViewColumn ImageColumn;
         private DevExpress.XtraGrid.Columns.TileViewColumn FullnameColumn;

@@ -47,6 +47,7 @@
             this.gridTechSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -101,6 +102,7 @@
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
@@ -203,6 +205,7 @@
             this.btnVerifyPR.Size = new System.Drawing.Size(120, 28);
             this.btnVerifyPR.TabIndex = 113;
             this.btnVerifyPR.Text = "Verify PR";
+            this.btnVerifyPR.Click += new System.EventHandler(this.btnVerifyPR_Click);
             // 
             // labelControl8
             // 
@@ -269,7 +272,8 @@
             this.gcTechSpecs.MainView = this.gridTechSpecs;
             this.gcTechSpecs.Name = "gcTechSpecs";
             this.gcTechSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnDelete});
+            this.btnDelete,
+            this.hplTicket});
             this.gcTechSpecs.Size = new System.Drawing.Size(574, 671);
             this.gcTechSpecs.TabIndex = 0;
             this.gcTechSpecs.UseEmbeddedNavigator = true;
@@ -291,7 +295,7 @@
             this.gridTechSpecs.Name = "gridTechSpecs";
             this.gridTechSpecs.OptionsFind.AlwaysVisible = true;
             this.gridTechSpecs.OptionsView.ShowGroupPanel = false;
-            this.gridTechSpecs.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridTechSpecs_FocusedRowChanged);
+            this.gridTechSpecs.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridTechSpecs_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -307,13 +311,18 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Ticket No";
+            this.gridColumn2.ColumnEdit = this.hplTicket;
             this.gridColumn2.FieldName = "TicketId";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 59;
+            // 
+            // hplTicket
+            // 
+            this.hplTicket.AutoHeight = false;
+            this.hplTicket.Name = "hplTicket";
+            this.hplTicket.Click += new System.EventHandler(this.hplTicket_Click);
             // 
             // gridColumn3
             // 
@@ -461,6 +470,7 @@
             this.slueNotedBy.Properties.NullText = "";
             this.slueNotedBy.Properties.PopupView = this.gridView5;
             this.slueNotedBy.Properties.ReadOnly = true;
+            this.slueNotedBy.Properties.UseReadOnlyAppearance = false;
             this.slueNotedBy.Properties.ValueMember = "Id";
             this.slueNotedBy.Size = new System.Drawing.Size(276, 22);
             this.slueNotedBy.TabIndex = 113;
@@ -503,6 +513,7 @@
             this.slueReviewedBy.Properties.NullText = "";
             this.slueReviewedBy.Properties.PopupView = this.gridView4;
             this.slueReviewedBy.Properties.ReadOnly = true;
+            this.slueReviewedBy.Properties.UseReadOnlyAppearance = false;
             this.slueReviewedBy.Properties.ValueMember = "Id";
             this.slueReviewedBy.Size = new System.Drawing.Size(276, 22);
             this.slueReviewedBy.TabIndex = 112;
@@ -545,6 +556,7 @@
             this.sluePreparedBy.Properties.NullText = "";
             this.sluePreparedBy.Properties.PopupView = this.gridView2;
             this.sluePreparedBy.Properties.ReadOnly = true;
+            this.sluePreparedBy.Properties.UseReadOnlyAppearance = false;
             this.sluePreparedBy.Properties.ValueMember = "Id";
             this.sluePreparedBy.Size = new System.Drawing.Size(276, 22);
             this.sluePreparedBy.TabIndex = 111;
@@ -841,6 +853,7 @@
             this.pnlDeliveries.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
@@ -936,5 +949,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
     }
 }

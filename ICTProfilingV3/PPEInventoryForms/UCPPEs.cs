@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using DevExpress.Data.Filtering;
+using Models.Enums;
 using Models.HRMISEntites;
 using Models.Repository;
 using Models.ViewModels;
@@ -13,6 +14,7 @@ namespace ICTProfilingV3.PPEInventoryForms
     public partial class UCPPEs : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly IUnitOfWork _unitOfWork;
+        public string filterText { get; set; }
         public UCPPEs()
         {
             InitializeComponent();
@@ -35,11 +37,24 @@ namespace ICTProfilingV3.PPEInventoryForms
             });
             gcPPEs.DataSource = ppeModel;
         }
+
+        private async Task LoadHistory()
+        {
+            var row = (PPEsViewModel)gridPPEs.GetFocusedRow();
+            gcHistory.Controls.Clear();
+            if (row == null) return;
+            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
+            gcHistory.Controls.Add(new UCRepairHistory(ppe)
+            {
+                Dock = DockStyle.Fill
+            });
+        }
         private async Task LoadEquipmentSpecs()
         {
             var row = (PPEsViewModel)gridPPEs.GetFocusedRow();
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);  
             gcEquipmentSpecs.Controls.Clear();
+            if (row == null) return;
+            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
             gcEquipmentSpecs.Controls.Add(new UCPPEsSpecs(ppe, _unitOfWork)
             {
                 Dock = DockStyle.Fill
@@ -64,6 +79,8 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async Task LoadDetails()
         {
             var row = (PPEsViewModel)gridPPEs.GetFocusedRow();
+            if (row == null) return;
+            lblPropertyNo.Text = row.PropertyNo;
             var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
             slueEmployee.EditValue = (long?)ppe?.IssuedToId;
             txtContactNo.Text = ppe.ContactNo;
@@ -89,12 +106,7 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async void UCPPEs_Load(object sender, System.EventArgs e)
         {
             await LoadPPEs();
-        }
-
-        private async void gridPPEs_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            await LoadDetails();
-            await LoadEquipmentSpecs();
+            if (filterText != null) gridPPEs.ActiveFilterCriteria = new BinaryOperator("PropertyNo", filterText);
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
@@ -105,6 +117,13 @@ namespace ICTProfilingV3.PPEInventoryForms
             frm.ShowDialog();
 
             await LoadPPEs();
+        }
+
+        private async void gridPPEs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            await LoadDetails();
+            await LoadEquipmentSpecs();
+            await LoadHistory();
         }
     }
 }

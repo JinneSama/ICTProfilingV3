@@ -24,6 +24,7 @@ namespace Models.Entities
         public string PONo { get; set; }
         public string ReceiptNo { get; set; }
         public int? SupplierId { get; set; }
+        public bool? IsDeleted { get; set; }    
 
         [ForeignKey("SupplierId")]
         public Supplier Supplier { get; set; }

@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -40,6 +40,7 @@
             this.gridDeliveries = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -47,7 +48,6 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
@@ -80,6 +80,7 @@
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcDeliveries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -145,7 +146,8 @@
             this.gcDeliveries.MainView = this.gridDeliveries;
             this.gcDeliveries.Name = "gcDeliveries";
             this.gcDeliveries.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnDelete});
+            this.btnDelete,
+            this.hplTicket});
             this.gcDeliveries.Size = new System.Drawing.Size(574, 642);
             this.gcDeliveries.TabIndex = 0;
             this.gcDeliveries.UseEmbeddedNavigator = true;
@@ -166,7 +168,7 @@
             this.gridDeliveries.Name = "gridDeliveries";
             this.gridDeliveries.OptionsFind.AlwaysVisible = true;
             this.gridDeliveries.OptionsView.ShowGroupPanel = false;
-            this.gridDeliveries.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridDeliveries_FocusedRowChanged);
+            this.gridDeliveries.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridDeliveries_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -182,13 +184,18 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Ticket No";
+            this.gridColumn2.ColumnEdit = this.hplTicket;
             this.gridColumn2.FieldName = "TicketNo";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 87;
+            // 
+            // hplTicket
+            // 
+            this.hplTicket.AutoHeight = false;
+            this.hplTicket.Name = "hplTicket";
+            this.hplTicket.Click += new System.EventHandler(this.hplTicket_Click);
             // 
             // gridColumn3
             // 
@@ -246,9 +253,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -257,7 +264,6 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlButtons.Controls.Add(this.simpleButton1);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnPreview);
@@ -266,21 +272,6 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1105, 50);
             this.pnlButtons.TabIndex = 5;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.simpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.simpleButton1.Appearance.Options.UseBackColor = true;
-            this.simpleButton1.Appearance.Options.UseForeColor = true;
-            this.simpleButton1.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bosale_16x161;
-            this.simpleButton1.Location = new System.Drawing.Point(848, 10);
-            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(111, 28);
-            this.simpleButton1.TabIndex = 114;
-            this.simpleButton1.Text = "Verify PR";
             // 
             // lblEpisNo
             // 
@@ -329,7 +320,7 @@
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(751, 10);
+            this.btnEdit.Location = new System.Drawing.Point(866, 10);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -613,12 +604,14 @@
             this.Controls.Add(this.panel1);
             this.Name = "UCDeliveries";
             this.Size = new System.Drawing.Size(1692, 689);
+            this.Load += new System.EventHandler(this.UCDeliveries_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).EndInit();
             this.pnlDeliveries.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcDeliveries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDeliveries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
@@ -688,6 +681,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
     }
 }

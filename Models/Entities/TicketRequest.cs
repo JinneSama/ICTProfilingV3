@@ -12,11 +12,11 @@ namespace Models.Entities
         public int Id { get; set; }
         public DateTime? DateCreated { get; set; }
         public string CreatedBy { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [ForeignKey("CreatedBy")]
         public Users CreatedByUser { get; set; }
         public TicketStatus TicketStatus { get; set; }
-        public bool Deleted { get; set; }
         public RequestType RequestType { get; set; }
         public int? StaffId { get; set; }
 

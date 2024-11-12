@@ -1,9 +1,14 @@
-﻿using EntityManager.Managers;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.Xpo.DB;
+using EntityManager.Managers;
 using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.PurchaseRequestForms;
+using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers.User;
 using Models.Models;
 using Models.Repository;
 using Models.ViewModels;
@@ -12,6 +17,7 @@ using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
@@ -19,6 +25,7 @@ namespace ICTProfilingV3.TechSpecsForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
+        public string filterText { get; set; }
         public UCTechSpecs()
         {
             InitializeComponent();
@@ -43,6 +50,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private async Task LoadDetails()
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            if (row == null) return;
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
             txtDate.DateTime = ts.DateRequested ?? DateTime.MinValue;
             rdbtnGender.SelectedIndex = (int)ts.ReqByGender;
@@ -84,19 +92,14 @@ namespace ICTProfilingV3.TechSpecsForms
             gcTechSpecs.DataSource = new BindingList<TechSpecsViewModel>(ts.ToList());
         }
 
-        private async void gridTechSpecs_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            await LoadDetails();
-            await LoadSpecs();
-            LoadActions();
-        }
-
         private async Task LoadSpecs()
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            tabRequestedSpecs.Controls.Clear();
+            if (row == null) return;
+
             lblTSId.Text = row.Id.ToString();
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
-            tabRequestedSpecs.Controls.Clear();
             tabRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(ts)
             {
                 Dock = System.Windows.Forms.DockStyle.Fill
@@ -107,6 +110,8 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             tabAction.Controls.Clear();
+            if (row == null) return;
+
             tabAction.Controls.Add(new UCActions(new ActionType { Id = row.Id, RequestType = Models.Enums.RequestType.TechSpecs})
             {
                 Dock = System.Windows.Forms.DockStyle.Fill
@@ -124,6 +129,81 @@ namespace ICTProfilingV3.TechSpecsForms
         private async void UCTechSpecs_Load(object sender, EventArgs e)
         {
             await LoadAll();
+            if (filterText != null) gridTechSpecs.ActiveFilterCriteria = new BinaryOperator("TicketId",filterText);
         }
+
+        private async void btnVerifyPR_Click(object sender, EventArgs e)
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            var res = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.TechSpecsId == row.Id);
+
+            if (res == null) await CreatePR(row);
+            else await GotoPR(row);
+        }
+
+        private async Task GotoPR(TechSpecsViewModel row)
+        {
+            var res = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            var pr = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.TechSpecsId == row.Id);
+
+            main.mainPanel.Controls.Add(new UCPR()
+            {
+                Dock = DockStyle.Fill,
+                filterText = pr.Id.ToString()
+            });
+        }
+
+        private async Task CreatePR(TechSpecsViewModel row)
+        {
+            if (MessageBox.Show("No PR Saved for this Tech Specs, Verify New PR?",
+                                "Question", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            var res = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
+
+            var pr = new PurchaseRequest
+            {
+                ChiefId = res.ReqByChiefId,
+                TechSpecsId = res.Id,
+                ReqById = res.ReqById,
+                CreatedById = UserStore.UserId,
+                DateCreated = DateTime.UtcNow
+            };
+
+            unitOfWork.PurchaseRequestRepo.Insert(pr);
+            await unitOfWork.SaveChangesAsync();
+
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCPR()
+            {
+                Dock = DockStyle.Fill,
+                filterText = pr.Id.ToString()
+            });
+        }
+
+        private async void gridTechSpecs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            await LoadDetails();
+            await LoadSpecs();
+            LoadActions();
+        }
+
+        private void hplTicket_Click(object sender, EventArgs e)
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCTARequestDashboard()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.Id.ToString()
+            });
+        }
+
     }
 }

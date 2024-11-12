@@ -157,6 +157,7 @@ namespace ICTProfilingV3.ActionsForms
             updateAction.MainActId = (int?)lueMainActivity.EditValue;
             updateAction.ActivityId = (int?)lueActivity.EditValue;
             updateAction.SubActivityId = (int?)lueSubActivity.EditValue;
+            updateAction.RequestType = actionType.RequestType;
             updateAction.RoutedUsers.Clear();
 
             if (_routedUsers == null) _routedUsers = new List<UsersViewModel>();
@@ -181,7 +182,8 @@ namespace ICTProfilingV3.ActionsForms
                 ProgramId = (int?)lueProgram.EditValue,
                 MainActId = (int?)lueMainActivity.EditValue,
                 ActivityId = (int?)lueActivity.EditValue,
-                SubActivityId = (int?)lueSubActivity.EditValue
+                SubActivityId = (int?)lueSubActivity.EditValue,
+                RequestType = actionType.RequestType
             };
 
             if (_routedUsers == null) _routedUsers = new List<UsersViewModel>();
@@ -203,10 +205,31 @@ namespace ICTProfilingV3.ActionsForms
                 unitOfWork.Save();
             }
 
+            if (actionType.RequestType == RequestType.Repairs)
+            {
+                var deliveries = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == actionType.Id);
+                deliveries.Actions.Add(Action);
+                unitOfWork.Save();
+            }
+
             if (actionType.RequestType == RequestType.TechSpecs)
             {
                 var techSpecs = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == actionType.Id);
                 techSpecs.Actions.Add(Action);
+                unitOfWork.Save();
+            }
+
+            if (actionType.RequestType == RequestType.CAS)
+            {
+                var deliveries = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == actionType.Id);
+                deliveries.Actions.Add(Action);
+                unitOfWork.Save();
+            }
+
+            if (actionType.RequestType == RequestType.PR)
+            {
+                var deliveries = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == actionType.Id);
+                deliveries.Actions.Add(Action);
                 unitOfWork.Save();
             }
         }

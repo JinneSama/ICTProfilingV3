@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -47,6 +47,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.lblPropertyNo = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
@@ -174,7 +175,7 @@
             this.gridPPEs.Name = "gridPPEs";
             this.gridPPEs.OptionsFind.AlwaysVisible = true;
             this.gridPPEs.OptionsView.ShowGroupPanel = false;
-            this.gridPPEs.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridPPEs_FocusedRowChanged);
+            this.gridPPEs.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridPPEs_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -252,9 +253,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -263,6 +264,7 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Controls.Add(this.lblPropertyNo);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnAdd);
@@ -271,6 +273,17 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1122, 50);
             this.pnlButtons.TabIndex = 6;
+            // 
+            // lblPropertyNo
+            // 
+            this.lblPropertyNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblPropertyNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPropertyNo.Appearance.Options.UseFont = true;
+            this.lblPropertyNo.Appearance.Options.UseForeColor = true;
+            this.lblPropertyNo.Location = new System.Drawing.Point(135, 10);
+            this.lblPropertyNo.Name = "lblPropertyNo";
+            this.lblPropertyNo.Size = new System.Drawing.Size(0, 30);
+            this.lblPropertyNo.TabIndex = 114;
             // 
             // lblEpisNo
             // 
@@ -291,9 +304,9 @@
             this.labelControl8.Appearance.Options.UseForeColor = true;
             this.labelControl8.Location = new System.Drawing.Point(12, 10);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(112, 30);
+            this.labelControl8.Size = new System.Drawing.Size(117, 30);
             this.labelControl8.TabIndex = 112;
-            this.labelControl8.Text = "Property No";
+            this.labelControl8.Text = "Property No:";
             // 
             // btnAdd
             // 
@@ -738,7 +751,7 @@
             this.gcHistory.Name = "gcHistory";
             this.gcHistory.Size = new System.Drawing.Size(591, 420);
             this.gcHistory.TabIndex = 122;
-            this.gcHistory.Text = "History";
+            this.gcHistory.Text = "Repair History";
             // 
             // UCPPEs
             // 
@@ -836,5 +849,6 @@
         private DevExpress.XtraEditors.LookUpEdit cboStatus;
         private DevExpress.XtraEditors.GroupControl gcEquipmentSpecs;
         private DevExpress.XtraEditors.GroupControl gcHistory;
+        private DevExpress.XtraEditors.LabelControl lblPropertyNo;
     }
 }

@@ -28,6 +28,11 @@ namespace Models.Repository
         IGenericRepository<PPEsSpecs> PPEsSpecsRepo { get; }
         IGenericRepository<PPEsSpecsDetails> PPEsSpecsDetailsRepo { get; }
         IGenericRepository<Repairs> RepairsRepo { get; }
+        IGenericRepository<CustomerActionSheet> CustomerActionSheetRepo { get; }
+        IGenericRepository<PurchaseRequest> PurchaseRequestRepo { get; }
+        IGenericRepository<StandardPRSpecs> StandardPRSpecsRepo { get; }
+        IGenericRepository<StandardPRSpecsDetails> StandardPRSpecsDetailsRepo { get; }
+        IGenericRepository<PRStandardPRSpecs> PRStandardPRSpecsRepo { get; }
         void Save();
         Task SaveChangesAsync();
     }

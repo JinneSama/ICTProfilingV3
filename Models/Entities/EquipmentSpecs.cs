@@ -11,6 +11,7 @@ namespace Models.Entities
             EquipmentSpecsDetails = new HashSet<EquipmentSpecsDetails>();
             TechSpecsBasis = new HashSet<TechSpecsBasis>();
             TechSpecsICTSpecs = new HashSet<TechSpecsICTSpecs>();
+            StandardPRSpecs = new HashSet<StandardPRSpecs>();
         }
         public int Id { get; set; }
         public string Description { get; set; }
@@ -23,5 +24,6 @@ namespace Models.Entities
         public virtual ICollection<EquipmentSpecsDetails> EquipmentSpecsDetails { get; set; }
         public virtual ICollection<TechSpecsBasis> TechSpecsBasis { get; set; }
         public virtual ICollection<TechSpecsICTSpecs> TechSpecsICTSpecs { get; set; }
+        public virtual ICollection<StandardPRSpecs> StandardPRSpecs { get; set; }   
     }
 }

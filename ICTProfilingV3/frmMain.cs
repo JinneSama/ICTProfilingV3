@@ -4,11 +4,15 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors.Mask;
 using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.CustomerActionSheetForms;
+using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LoginForms;
 using ICTProfilingV3.LookUpTables;
 using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.UsersForms;
@@ -131,6 +135,44 @@ namespace ICTProfilingV3
         {
             mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new UCRepair()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnCAS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCCAS()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnStandardPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frm = new frmStandardPRList();
+            frm.ShowDialog();
+        }
+
+        private void btnVPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCPR()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnLogout_SelectedChanged(object sender, BackstageViewItemEventArgs e)
+        {
+
+        }
+
+        private void btnRoutedActions_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCRoutedActions()
             {
                 Dock = DockStyle.Fill
             });

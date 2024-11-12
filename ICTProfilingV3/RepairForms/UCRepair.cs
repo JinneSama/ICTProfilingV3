@@ -1,12 +1,18 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.PivotGrid.ServerMode;
+using DevExpress.XtraCharts.Native;
+using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Models;
 using Models.Repository;
 using Models.ViewModels;
+using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -17,7 +23,8 @@ namespace ICTProfilingV3.RepairForms
     public partial class UCRepair : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IICTUserManager _userManager;  
+        private readonly IICTUserManager _userManager;
+        public string filterText { get; set; }
         public UCRepair()
         {
             InitializeComponent();
@@ -47,6 +54,7 @@ namespace ICTProfilingV3.RepairForms
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             tabAction.Controls.Clear();
+            if (row == null) return;
             tabAction.Controls.Add(new UCActions(new ActionType
             {
                 Id = row.Id,
@@ -60,6 +68,7 @@ namespace ICTProfilingV3.RepairForms
         {
             ClearAllFields();
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            if(row == null) return;
             var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.PPEsSpecs);
             if (repair == null) return;
@@ -89,7 +98,8 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task LoadEquipmentDetails(PPEs ppe, PPEsSpecs ppeSpecs)
         {
-            if(ppe == null) return;
+            LoadPPEEquipment(ppe);
+            if (ppe == null) return;
             txtPropertyNo.Text = ppe.PropertyNo;   
             txtIssuedTo.Text = HRMISEmployees.GetEmployeeById(ppe.IssuedToId)?.Employee;
             txtStatus.Text = ppe.Status.ToString();
@@ -108,6 +118,14 @@ namespace ICTProfilingV3.RepairForms
             txtSerialNo.Text = specs.SerialNo;
         }
 
+        private void LoadPPEEquipment(PPEs specs)
+        {
+            tabEquipmentSpecs.Controls.Clear();
+            tabEquipmentSpecs.Controls.Add(new UCAddPPEEquipment(specs, _unitOfWork, false)
+            {
+                Dock = DockStyle.Fill
+            });
+        }
         private void ClearAllFields()
         {
             foreach (var item in this.Controls)
@@ -126,15 +144,77 @@ namespace ICTProfilingV3.RepairForms
             }
         }
 
-        private void btnEdit_Click(object sender, System.EventArgs e)
+        private async void btnEdit_Click(object sender, System.EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var frm = new frmAddEditRepair(_unitOfWork, row.Id);
+            frm.ShowDialog();
+
+            await LoadRepairDetails();
+        }
+
+        private void UCRepair_Load(object sender, EventArgs e)
+        {
+            if (filterText != null) gridRepair.ActiveFilterCriteria = new BinaryOperator("Id",filterText);
+        }
+        private async void btnSignatories_Click(object sender, EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var frm = new frmEditSignatories(_unitOfWork, row.Id);
+            frm.ShowDialog();
+
+            await LoadRepairDetails();
+        }
+
+        private async void btnFindings_Click(object sender, EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var frm = new frmEditFindings(_unitOfWork, row.Id);
+            frm.ShowDialog();
+
+            await LoadRepairDetails();
+        }
+
+        private void btnLedger_Click(object sender, EventArgs e)
         {
 
         }
 
-        private async void gridRepair_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void btnTR_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void gridRepair_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
             await LoadRepairDetails();
             LoadActions();
+        }
+
+        private void hplTicket_Click(object sender, EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCTARequestDashboard()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.Id.ToString()
+            });
+        }
+
+        private void hplPPE_Click(object sender, EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCPPEs()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.PropertyNo.ToString()
+            });
         }
     }
 }

@@ -351,6 +351,7 @@
             this.groupControl3.Size = new System.Drawing.Size(411, 195);
             this.groupControl3.TabIndex = 80;
             this.groupControl3.Text = "Repair Request Details";
+            this.groupControl3.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl3_Paint);
             // 
             // slueDeliveredBy
             // 
@@ -679,6 +680,7 @@
             this.Name = "frmAddEditRepair";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditRepair_FormClosing);
+            this.Load += new System.EventHandler(this.frmAddEditRepair_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).EndInit();

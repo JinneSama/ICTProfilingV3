@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -41,6 +41,7 @@
             this.gridRepair = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -49,9 +50,12 @@
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnLedger = new DevExpress.XtraEditors.SimpleButton();
+            this.btnSignatories = new DevExpress.XtraEditors.SimpleButton();
+            this.btnFindings = new DevExpress.XtraEditors.SimpleButton();
             this.lblRepairNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
+            this.btnTR = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
@@ -102,11 +106,13 @@
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
+            this.hplPPE = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridRepair)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -141,6 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPreparedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -199,7 +206,9 @@
             this.gcRepair.MainView = this.gridRepair;
             this.gcRepair.Name = "gcRepair";
             this.gcRepair.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnDelete});
+            this.btnDelete,
+            this.hplTicket,
+            this.hplPPE});
             this.gcRepair.Size = new System.Drawing.Size(574, 756);
             this.gcRepair.TabIndex = 0;
             this.gcRepair.UseEmbeddedNavigator = true;
@@ -221,7 +230,7 @@
             this.gridRepair.Name = "gridRepair";
             this.gridRepair.OptionsFind.AlwaysVisible = true;
             this.gridRepair.OptionsView.ShowGroupPanel = false;
-            this.gridRepair.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridRepair_FocusedRowChanged);
+            this.gridRepair.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridRepair_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -237,13 +246,18 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Ticket No";
+            this.gridColumn2.ColumnEdit = this.hplTicket;
             this.gridColumn2.FieldName = "Id";
             this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsColumn.AllowEdit = false;
-            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
             this.gridColumn2.Width = 87;
+            // 
+            // hplTicket
+            // 
+            this.hplTicket.AutoHeight = false;
+            this.hplTicket.Name = "hplTicket";
+            this.hplTicket.Click += new System.EventHandler(this.hplTicket_Click);
             // 
             // gridColumn3
             // 
@@ -259,10 +273,9 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Property No";
+            this.gridColumn4.ColumnEdit = this.hplPPE;
             this.gridColumn4.FieldName = "PropertyNo";
             this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsColumn.AllowEdit = false;
-            this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
             this.gridColumn4.Width = 87;
@@ -301,9 +314,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -320,14 +333,65 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Controls.Add(this.btnLedger);
+            this.pnlButtons.Controls.Add(this.btnSignatories);
+            this.pnlButtons.Controls.Add(this.btnFindings);
             this.pnlButtons.Controls.Add(this.lblRepairNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
-            this.pnlButtons.Controls.Add(this.btnPreview);
+            this.pnlButtons.Controls.Add(this.btnTR);
             this.pnlButtons.Controls.Add(this.btnEdit);
             this.pnlButtons.Location = new System.Drawing.Point(582, 39);
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1296, 50);
             this.pnlButtons.TabIndex = 86;
+            // 
+            // btnLedger
+            // 
+            this.btnLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLedger.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLedger.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnLedger.Appearance.Options.UseBackColor = true;
+            this.btnLedger.Appearance.Options.UseForeColor = true;
+            this.btnLedger.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x16;
+            this.btnLedger.Location = new System.Drawing.Point(1042, 10);
+            this.btnLedger.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLedger.Name = "btnLedger";
+            this.btnLedger.Size = new System.Drawing.Size(108, 28);
+            this.btnLedger.TabIndex = 116;
+            this.btnLedger.Text = "Ledger";
+            this.btnLedger.Click += new System.EventHandler(this.btnLedger_Click);
+            // 
+            // btnSignatories
+            // 
+            this.btnSignatories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSignatories.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSignatories.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnSignatories.Appearance.Options.UseBackColor = true;
+            this.btnSignatories.Appearance.Options.UseForeColor = true;
+            this.btnSignatories.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.editcontact_16x16;
+            this.btnSignatories.Location = new System.Drawing.Point(636, 10);
+            this.btnSignatories.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSignatories.Name = "btnSignatories";
+            this.btnSignatories.Size = new System.Drawing.Size(129, 28);
+            this.btnSignatories.TabIndex = 115;
+            this.btnSignatories.Text = "Signatories";
+            this.btnSignatories.Click += new System.EventHandler(this.btnSignatories_Click);
+            // 
+            // btnFindings
+            // 
+            this.btnFindings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFindings.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnFindings.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnFindings.Appearance.Options.UseBackColor = true;
+            this.btnFindings.Appearance.Options.UseForeColor = true;
+            this.btnFindings.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.lookup_reference_16x162;
+            this.btnFindings.Location = new System.Drawing.Point(769, 10);
+            this.btnFindings.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFindings.Name = "btnFindings";
+            this.btnFindings.Size = new System.Drawing.Size(172, 28);
+            this.btnFindings.TabIndex = 114;
+            this.btnFindings.Text = "Findings/Recommendations";
+            this.btnFindings.Click += new System.EventHandler(this.btnFindings_Click);
             // 
             // lblRepairNo
             // 
@@ -352,20 +416,21 @@
             this.labelControl8.TabIndex = 112;
             this.labelControl8.Text = "EPiS No.:";
             // 
-            // btnPreview
+            // btnTR
             // 
-            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnPreview.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnPreview.Appearance.Options.UseBackColor = true;
-            this.btnPreview.Appearance.Options.UseForeColor = true;
-            this.btnPreview.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.print_16x16;
-            this.btnPreview.Location = new System.Drawing.Point(1154, 10);
-            this.btnPreview.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(138, 28);
-            this.btnPreview.TabIndex = 111;
-            this.btnPreview.Text = "Preview";
+            this.btnTR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTR.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnTR.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnTR.Appearance.Options.UseBackColor = true;
+            this.btnTR.Appearance.Options.UseForeColor = true;
+            this.btnTR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x161;
+            this.btnTR.Location = new System.Drawing.Point(1154, 10);
+            this.btnTR.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTR.Name = "btnTR";
+            this.btnTR.Size = new System.Drawing.Size(138, 28);
+            this.btnTR.TabIndex = 111;
+            this.btnTR.Text = "Technical Report";
+            this.btnTR.Click += new System.EventHandler(this.btnTR_Click);
             // 
             // btnEdit
             // 
@@ -375,7 +440,7 @@
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(1057, 10);
+            this.btnEdit.Location = new System.Drawing.Point(945, 10);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -553,7 +618,7 @@
             // 
             // txtRequestProblem
             // 
-            this.txtRequestProblem.Location = new System.Drawing.Point(941, 52);
+            this.txtRequestProblem.Location = new System.Drawing.Point(941, 47);
             this.txtRequestProblem.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestProblem.Name = "txtRequestProblem";
             this.txtRequestProblem.Properties.ReadOnly = true;
@@ -563,7 +628,7 @@
             // 
             // txtAccessories
             // 
-            this.txtAccessories.Location = new System.Drawing.Point(941, 24);
+            this.txtAccessories.Location = new System.Drawing.Point(941, 20);
             this.txtAccessories.Name = "txtAccessories";
             this.txtAccessories.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtAccessories.Properties.Appearance.Options.UseFont = true;
@@ -585,7 +650,7 @@
             // 
             // txtStatus
             // 
-            this.txtStatus.Location = new System.Drawing.Point(521, 105);
+            this.txtStatus.Location = new System.Drawing.Point(521, 106);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtStatus.Properties.Appearance.Options.UseFont = true;
@@ -626,7 +691,7 @@
             // 
             // txtSerialNo
             // 
-            this.txtSerialNo.Location = new System.Drawing.Point(521, 77);
+            this.txtSerialNo.Location = new System.Drawing.Point(521, 76);
             this.txtSerialNo.Name = "txtSerialNo";
             this.txtSerialNo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtSerialNo.Properties.Appearance.Options.UseFont = true;
@@ -637,7 +702,7 @@
             // 
             // txtModel
             // 
-            this.txtModel.Location = new System.Drawing.Point(521, 52);
+            this.txtModel.Location = new System.Drawing.Point(520, 48);
             this.txtModel.Name = "txtModel";
             this.txtModel.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtModel.Properties.Appearance.Options.UseFont = true;
@@ -649,7 +714,7 @@
             // txtBrand
             // 
             this.txtBrand.EditValue = "";
-            this.txtBrand.Location = new System.Drawing.Point(521, 24);
+            this.txtBrand.Location = new System.Drawing.Point(520, 20);
             this.txtBrand.Name = "txtBrand";
             this.txtBrand.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtBrand.Properties.Appearance.Options.UseFont = true;
@@ -701,7 +766,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(101, 108);
+            this.txtDescription.Location = new System.Drawing.Point(98, 103);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Properties.ReadOnly = true;
@@ -751,7 +816,7 @@
             // 
             // txtEquipment
             // 
-            this.txtEquipment.Location = new System.Drawing.Point(101, 80);
+            this.txtEquipment.Location = new System.Drawing.Point(98, 76);
             this.txtEquipment.Name = "txtEquipment";
             this.txtEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtEquipment.Properties.Appearance.Options.UseFont = true;
@@ -762,7 +827,7 @@
             // 
             // txtIssuedTo
             // 
-            this.txtIssuedTo.Location = new System.Drawing.Point(101, 52);
+            this.txtIssuedTo.Location = new System.Drawing.Point(98, 48);
             this.txtIssuedTo.Name = "txtIssuedTo";
             this.txtIssuedTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtIssuedTo.Properties.Appearance.Options.UseFont = true;
@@ -774,7 +839,7 @@
             // txtPropertyNo
             // 
             this.txtPropertyNo.EditValue = "";
-            this.txtPropertyNo.Location = new System.Drawing.Point(101, 24);
+            this.txtPropertyNo.Location = new System.Drawing.Point(98, 20);
             this.txtPropertyNo.Name = "txtPropertyNo";
             this.txtPropertyNo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPropertyNo.Properties.Appearance.Options.UseFont = true;
@@ -941,8 +1006,8 @@
             this.tabDetails.Size = new System.Drawing.Size(1297, 229);
             this.tabDetails.TabIndex = 91;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabEquipmentSpecs,
-            this.tabAction});
+            this.tabAction,
+            this.tabEquipmentSpecs});
             // 
             // tabEquipmentSpecs
             // 
@@ -955,6 +1020,12 @@
             this.tabAction.Name = "tabAction";
             this.tabAction.Size = new System.Drawing.Size(1295, 204);
             this.tabAction.Text = "Action";
+            // 
+            // hplPPE
+            // 
+            this.hplPPE.AutoHeight = false;
+            this.hplPPE.Name = "hplPPE";
+            this.hplPPE.Click += new System.EventHandler(this.hplPPE_Click);
             // 
             // UCRepair
             // 
@@ -970,12 +1041,14 @@
             this.Controls.Add(this.groupControl4);
             this.Name = "UCRepair";
             this.Size = new System.Drawing.Size(1881, 799);
+            this.Load += new System.EventHandler(this.UCRepair_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).EndInit();
             this.pnlDeliveries.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridRepair)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
@@ -1015,6 +1088,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPreparedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1038,7 +1112,7 @@
         private DevExpress.XtraEditors.PanelControl pnlButtons;
         private DevExpress.XtraEditors.LabelControl lblRepairNo;
         private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.SimpleButton btnPreview;
+        private DevExpress.XtraEditors.SimpleButton btnTR;
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl10;
@@ -1090,5 +1164,10 @@
         private DevExpress.XtraTab.XtraTabPage tabEquipmentSpecs;
         private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.SimpleButton btnFindings;
+        private DevExpress.XtraEditors.SimpleButton btnSignatories;
+        private DevExpress.XtraEditors.SimpleButton btnLedger;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplPPE;
     }
 }

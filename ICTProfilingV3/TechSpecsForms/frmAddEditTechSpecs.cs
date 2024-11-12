@@ -68,7 +68,8 @@ namespace ICTProfilingV3.TechSpecsForms
             var ticket = new TicketRequest()
             {
                 DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted
+                TicketStatus = TicketStatus.Accepted,
+                RequestType = RequestType.TechSpecs
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();
@@ -99,14 +100,17 @@ namespace ICTProfilingV3.TechSpecsForms
             });
         }
 
-        private void frmAddEditTechSpecs_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private async void frmAddEditTechSpecs_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            if (!IsSave) DeleteTechSpecs();
+            if (!IsSave) await DeleteTechSpecs();
         }
 
-        private void DeleteTechSpecs()
+        private async Task DeleteTechSpecs()
         {
-
+            await unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
+            await unitOfWork.SaveChangesAsync();
+            await unitOfWork.TechSpecsRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

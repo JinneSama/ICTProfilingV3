@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using Models.Entities;
+using Models.Enums;
 using System;
 
 namespace Models.ViewModels

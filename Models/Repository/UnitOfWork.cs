@@ -34,6 +34,11 @@ namespace Models.Repository
         public IGenericRepository<PPEsSpecs> PPEsSpecsRepo => new GenericRepository<PPEsSpecs>(_context);
         public IGenericRepository<PPEsSpecsDetails> PPEsSpecsDetailsRepo => new GenericRepository<PPEsSpecsDetails>(_context);
         public IGenericRepository<Repairs> RepairsRepo => new GenericRepository<Repairs>(_context);
+        public IGenericRepository<CustomerActionSheet> CustomerActionSheetRepo => new GenericRepository<CustomerActionSheet>(_context);
+        public IGenericRepository<PurchaseRequest> PurchaseRequestRepo => new GenericRepository<PurchaseRequest>(_context);
+        public IGenericRepository<StandardPRSpecs> StandardPRSpecsRepo => new GenericRepository<StandardPRSpecs>(_context);
+        public IGenericRepository<StandardPRSpecsDetails> StandardPRSpecsDetailsRepo => new GenericRepository<StandardPRSpecsDetails>(_context);
+        public IGenericRepository<PRStandardPRSpecs> PRStandardPRSpecsRepo => new GenericRepository<PRStandardPRSpecs>(_context);
 
         public UnitOfWork()
         {

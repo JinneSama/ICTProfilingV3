@@ -18,22 +18,53 @@ namespace ICTProfilingV3.RepairForms
     public partial class frmAddEditRepair : DevExpress.XtraEditors.XtraForm
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly SaveType saveType;
         private Repairs _Repairs;
+        private readonly int repairId;
         private bool IsSave = false;
         private UCAddPPEEquipment UCAddPPEEquipment;
+
         public frmAddEditRepair()
         {
             InitializeComponent();
             _unitOfWork = new UnitOfWork();
+            saveType = SaveType.Insert;
             CreateTicket();
             LoadDropdowns();
         }
+
+        public frmAddEditRepair(IUnitOfWork uow, int repair)
+        {
+            InitializeComponent();
+            saveType = SaveType.Update;
+            IsSave = true;
+            _unitOfWork = uow;
+            repairId = repair;
+            LoadDropdowns();
+        }
+
+        private async Task LoadDetails()
+        {
+            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);    
+            _Repairs = repair;
+
+            if(repair.DateCreated != null) txtDate.DateTime = (DateTime)repair.DateCreated;
+            slueEmployee.EditValue = repair.RequestedById;
+            rdbtnGender.SelectedIndex = (int)repair.Gender;
+            txtContactNo.Text = repair.ContactNo;
+            if (repair.DateDelivered != null) txtDateofDelivery.DateTime = (DateTime)repair.DateDelivered;
+            slueDeliveredBy.EditValue = repair.DeliveredById;
+            sluePropertyNo.EditValue = repair.PPEsId;
+            txtRequestProblem.Text = repair.Problems;
+        }
+
         private void CreateTicket()
         {
             var ticket = new TicketRequest()
             {
                 DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted
+                TicketStatus = TicketStatus.Accepted,
+                RequestType = RequestType.Repairs
             };
             _unitOfWork.TicketRequestRepo.Insert(ticket);
             _unitOfWork.Save();
@@ -49,12 +80,11 @@ namespace ICTProfilingV3.RepairForms
             _Repairs = repairs;
         }
 
-        private async void LoadDropdowns()
+        private void LoadDropdowns()
         {
             var employees = HRMISEmployees.GetEmployees();
             slueEmployee.Properties.DataSource = employees;
             slueDeliveredBy.Properties.DataSource = employees;
-            await LoadPPEs();
         }
         private async Task LoadPPEs()
         {
@@ -68,7 +98,8 @@ namespace ICTProfilingV3.RepairForms
                 DateCreated = x.DateCreated,
                 Office = HRMISEmployees.GetEmployeeById(x.IssuedToId)?.Office,
                 Status = x?.Status
-            });
+            }).ToList();
+
             sluePropertyNo.Properties.DataSource = ppeModel;
         }
 
@@ -88,10 +119,15 @@ namespace ICTProfilingV3.RepairForms
         private async Task LoadEquipmentSpecs()
         {
             var row = (PPEsViewModel)sluePropertyNo.Properties.View.GetFocusedRow();
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
+
+            int repId;
+            if (row == null) repId = (int)_Repairs.PPEsId;
+            else repId = row.Id;
+
+            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == repId);
             gcEquipmentSpecs.Controls.Clear();
 
-            var equipmentSpecsForm = new UCAddPPEEquipment(ppe, _unitOfWork)
+            var equipmentSpecsForm = new UCAddPPEEquipment(ppe, _unitOfWork , false)
             {
                 Dock = DockStyle.Fill
             };
@@ -105,37 +141,23 @@ namespace ICTProfilingV3.RepairForms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            var resPPEEquipment = await SavePPEEquipment();
-            if (resPPEEquipment == null) return;
-
-            await Save(resPPEEquipment.FirstOrDefault());
+            await Save();
             IsSave = true;
             this.Close();
         }
-
-        private async Task<List<PPEsSpecsViewModel>> SavePPEEquipment()
+        private async Task Save()
         {
-            List<PPEsSpecsViewModel> markedPPEsSpecs = await UCAddPPEEquipment.RetrieveSelectedEquipment();
-            if (markedPPEsSpecs.Count > 1 || markedPPEsSpecs.Count <= 0) 
-            {
-                MessageBox.Show("Plese Select 1 Equipment only!");
-                return null;
-            }
-            return markedPPEsSpecs;
-        }
-
-        private async Task Save(PPEsSpecsViewModel pPEsSpecsViewModel)
-        {
-            var reqEmployee = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
+            var reqEmployee = HRMISEmployees.GetEmployeeById((long?)slueEmployee.EditValue);
             var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == _Repairs.Id);
-            repair.RequestedById = (long)reqEmployee.Id;
+            repair.RequestedById = (long)slueEmployee.EditValue;
             repair.ReqByChiefId = HRMISEmployees.GetChief(reqEmployee.Office, reqEmployee.Division).ChiefId;
             repair.DeliveredById = (long)slueDeliveredBy.EditValue;
             repair.Problems = txtRequestProblem.Text;
             repair.Gender = (Gender)rdbtnGender.SelectedIndex;
             repair.ContactNo = txtContactNo.Text;
             repair.PPEsId = (int?)sluePropertyNo.EditValue;
-            repair.PPESpecsId = pPEsSpecsViewModel.Id;
+            repair.DateCreated = txtDate.DateTime;
+            repair.DateDelivered = txtDateofDelivery.DateTime;
 
             await _unitOfWork.SaveChangesAsync();
         }
@@ -151,6 +173,17 @@ namespace ICTProfilingV3.RepairForms
             await _unitOfWork.SaveChangesAsync();
             await _unitOfWork.RepairsRepo.DeleteByEx(x => x.Id == _Repairs.Id);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private async void frmAddEditRepair_Load(object sender, EventArgs e)
+        {
+            await LoadPPEs();
+            if (saveType == SaveType.Update) await LoadDetails();
+        }
+
+        private void groupControl3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

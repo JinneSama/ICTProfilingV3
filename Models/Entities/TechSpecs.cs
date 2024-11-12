@@ -25,6 +25,7 @@ namespace Models.Entities
         public bool? RequestBasedApprovedPPMP { get; set; }
         public bool? RequestBasedRequestLetter { get; set; }
         public bool? RequestBasedForReplacement{ get; set; }
+        public bool? IsDeleted { get; set; }
         public TicketRequest TicketRequest { get; set; }
         public string PreparedById { get; set; }
 

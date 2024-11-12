@@ -41,5 +41,10 @@ namespace EntityManager.Context
         public DbSet<PPEsSpecs> PPEsSpecs { get; set; }
         public DbSet<PPEsSpecsDetails> PPEsSpecsDetails { get; set; }
         public DbSet<Repairs> Repairs { get; set; }
+        public DbSet<CustomerActionSheet> CustomerActionSheets { get; set; }
+        public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
+        public DbSet<StandardPRSpecs> StandardPRSpecs { get; set; }
+        public DbSet<StandardPRSpecsDetails> standardPRSpecsDetails { get; set; }
+        public DbSet<PRStandardPRSpecs> PRStandardPRSpecs { get; set; }
     }
 }

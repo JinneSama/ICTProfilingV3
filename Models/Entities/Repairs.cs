@@ -20,10 +20,12 @@ namespace Models.Entities
         //----HRIS Data----
 
         public DateTime? DateCreated { get; set; }
+        public DateTime? DateDelivered { get; set; }
         public string Problems { get; set; }
         public string Findings { get; set; }
         public string Recommendations { get; set; }
         public string PreparedById { get; set; }
+        public bool? IsDeleted { get; set; }
 
         [ForeignKey("PreparedById")]
         private Users PreparedByUsers { get; set; }

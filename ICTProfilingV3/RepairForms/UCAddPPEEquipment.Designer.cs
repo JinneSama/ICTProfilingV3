@@ -55,7 +55,7 @@
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridMark = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipmentSpecs)).BeginInit();
@@ -139,13 +139,12 @@
             this.gridColumn20,
             this.gridColumn21,
             this.gridColumn13,
-            this.gridColumn14});
+            this.gridMark});
             this.gridEquipmentSpecs.GridControl = this.gcEquipmentSpecs;
             this.gridEquipmentSpecs.Name = "gridEquipmentSpecs";
             this.gridEquipmentSpecs.OptionsView.ShowDetailButtons = false;
             this.gridEquipmentSpecs.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridEquipmentSpecs.OptionsView.ShowGroupPanel = false;
-            this.gridEquipmentSpecs.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridEquipmentSpecs_FocusedRowChanged);
             // 
             // gridEditBtn
             // 
@@ -285,14 +284,14 @@
             this.gridColumn13.OptionsColumn.FixedWidth = true;
             this.gridColumn13.Width = 33;
             // 
-            // gridColumn14
+            // gridMark
             // 
-            this.gridColumn14.Caption = " ";
-            this.gridColumn14.FieldName = "Mark";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
-            this.gridColumn14.Width = 58;
+            this.gridMark.Caption = " ";
+            this.gridMark.FieldName = "Mark";
+            this.gridMark.Name = "gridMark";
+            this.gridMark.Visible = true;
+            this.gridMark.VisibleIndex = 0;
+            this.gridMark.Width = 58;
             // 
             // UCAddPPEEquipment
             // 
@@ -331,6 +330,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridMark;
     }
 }

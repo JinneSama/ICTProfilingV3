@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Data.Linq.Helpers;
+using DevExpress.XtraEditors;
 using ICTProfilingV3.PPEInventoryForms;
 using Models.Entities;
 using Models.Repository;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,17 +20,46 @@ namespace ICTProfilingV3.RepairForms
     public partial class UCAddPPEEquipment : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly PPEs _ppe;
+        private readonly PPEsSpecs ppeSpecs;
         private IUnitOfWork unitOfWork;
-        public UCAddPPEEquipment(PPEs ppe, IUnitOfWork _unitOfWork)
+        private readonly bool showMark;
+
+        public UCAddPPEEquipment(PPEs ppe, IUnitOfWork _unitOfWork, bool showMark)
         {
             InitializeComponent();
             unitOfWork = _unitOfWork;
+            this.showMark = !showMark;
             _ppe = ppe;
+            if (_ppe == null) return;
             LoadEquipmentSpecs();
         }
+
+        public UCAddPPEEquipment(PPEsSpecs ppeSpecs, IUnitOfWork _unitOfWork, bool showMark)
+        {
+            InitializeComponent();
+            this.ppeSpecs = ppeSpecs;
+            unitOfWork = _unitOfWork;
+            this.showMark = showMark;
+            if (ppeSpecs == null) return;
+            LoadEquipmentSpecs();
+        }
+
         private void LoadEquipmentSpecs()
         {
-            var res = unitOfWork.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id).Select(x => new PPEsSpecsViewModel
+            gridMark.Visible = !showMark;
+            IEnumerable<PPEsSpecs> res;
+            if (showMark) res = unitOfWork.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id,
+                x => x.Model,
+                x => x.Model.Brand,
+                x => x.Model.Brand.EquipmentSpecs,
+                x => x.Model.Brand.EquipmentSpecs.Equipment).ToList();
+            else res = unitOfWork.PPEsSpecsRepo.FindAllAsync(x => x.Id == ppeSpecs.Id,
+                x => x.Model,
+                x => x.Model.Brand,
+                x => x.Model.Brand.EquipmentSpecs,
+                x => x.Model.Brand.EquipmentSpecs.Equipment).ToList();
+
+            var data = res.Select(x => new PPEsSpecsViewModel
             {
                 Id = x.Id,
                 ItemNo = x.ItemNo,
@@ -42,7 +73,8 @@ namespace ICTProfilingV3.RepairForms
                 TotalCost = x.TotalCost,
                 PPEsSpecsDetails = x.PPEsSpecsDetails
             });
-            gcEquipmentSpecs.DataSource = new BindingList<PPEsSpecsViewModel>(res.ToList());
+
+            gcEquipmentSpecs.DataSource = new BindingList<PPEsSpecsViewModel>(data.ToList());
         }
 
         private void btnInfo_Click(object sender, EventArgs e)
@@ -61,10 +93,6 @@ namespace ICTProfilingV3.RepairForms
                     markedPPEsSpecs.Add(equipment);
             }
             return Task.FromResult(markedPPEsSpecs);
-        }
-        private void gridEquipmentSpecs_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-
         }
     }
 }

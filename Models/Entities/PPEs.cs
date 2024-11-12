@@ -24,6 +24,7 @@ namespace Models.Entities
         public long? UnitValue { get; set; }
         public long? TotalValue { get; set; }
         public string Remarks { get; set; }
+        public bool? IsDeleted { get; set; }
         public virtual ICollection<PPEsSpecs> PPEsSpecs { get; set; }
         public virtual ICollection<Repairs> Repairs { get; set; }
         public PPEs()

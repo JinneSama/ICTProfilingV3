@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Entities\CustomerActionSheet.cs" />
     <Compile Include="Entities\Actions.cs" />
     <Compile Include="Entities\ActionsDropdowns.cs" />
     <Compile Include="Entities\ActionTaken.cs" />
@@ -75,9 +77,13 @@
     <Compile Include="Entities\PPEs.cs" />
     <Compile Include="Entities\PPEsSpecs.cs" />
     <Compile Include="Entities\PPEsSpecsDetails.cs" />
+    <Compile Include="Entities\PRStandardPRSpecs.cs" />
+    <Compile Include="Entities\PurchaseRequest.cs" />
     <Compile Include="Entities\Repairs.cs" />
     <Compile Include="Entities\RoleDesignation.cs" />
     <Compile Include="Entities\Roles.cs" />
+    <Compile Include="Entities\StandardPRSpecs.cs" />
+    <Compile Include="Entities\StandardPRSpecsDetails.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\TechSpecs.cs" />
     <Compile Include="Entities\TechSpecsBasis.cs" />
@@ -87,8 +93,10 @@
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Enums\ActionCategory.cs" />
     <Compile Include="Enums\Designation.cs" />
+    <Compile Include="Enums\EnumHelper.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\PPEStatus.cs" />
+    <Compile Include="Enums\PRQuarter.cs" />
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Enums\SaveType.cs" />
     <Compile Include="Enums\TicketStatus.cs" />
@@ -125,45 +133,49 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202410280558033_InitialMigration.cs" />
-    <Compile Include="Migrations\202410280558033_InitialMigration.Designer.cs">
-      <DependentUpon>202410280558033_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202411091226537_Initial-Migration.cs" />
+    <Compile Include="Migrations\202411091226537_Initial-Migration.Designer.cs">
+      <DependentUpon>202411091226537_Initial-Migration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202410300719399_TechSpecsActions.cs" />
-    <Compile Include="Migrations\202410300719399_TechSpecsActions.Designer.cs">
-      <DependentUpon>202410300719399_TechSpecsActions.cs</DependentUpon>
+    <Compile Include="Migrations\202411091231550_NullableitemNoAndQuantity.cs" />
+    <Compile Include="Migrations\202411091231550_NullableitemNoAndQuantity.Designer.cs">
+      <DependentUpon>202411091231550_NullableitemNoAndQuantity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411010832511_TSDeliveriesUpdate.cs" />
-    <Compile Include="Migrations\202411010832511_TSDeliveriesUpdate.Designer.cs">
-      <DependentUpon>202411010832511_TSDeliveriesUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.cs" />
+    <Compile Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.Designer.cs">
+      <DependentUpon>202411091240286_PRStandardPRSpecsTotalCost.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411010841299_TSDeliveriesUpdate1.cs" />
-    <Compile Include="Migrations\202411010841299_TSDeliveriesUpdate1.Designer.cs">
-      <DependentUpon>202411010841299_TSDeliveriesUpdate1.cs</DependentUpon>
+    <Compile Include="Migrations\202411091318187_PRAddReqById.cs" />
+    <Compile Include="Migrations\202411091318187_PRAddReqById.Designer.cs">
+      <DependentUpon>202411091318187_PRAddReqById.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411021301328_RepairNullablePPE.cs" />
-    <Compile Include="Migrations\202411021301328_RepairNullablePPE.Designer.cs">
-      <DependentUpon>202411021301328_RepairNullablePPE.cs</DependentUpon>
+    <Compile Include="Migrations\202411091319447_PRAddReqById1.cs" />
+    <Compile Include="Migrations\202411091319447_PRAddReqById1.Designer.cs">
+      <DependentUpon>202411091319447_PRAddReqById1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411021314455_PPEsNullable.cs" />
-    <Compile Include="Migrations\202411021314455_PPEsNullable.Designer.cs">
-      <DependentUpon>202411021314455_PPEsNullable.cs</DependentUpon>
+    <Compile Include="Migrations\202411091321473_PRAddQuarter.cs" />
+    <Compile Include="Migrations\202411091321473_PRAddQuarter.Designer.cs">
+      <DependentUpon>202411091321473_PRAddQuarter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411040648413_PPEUpdate.cs" />
-    <Compile Include="Migrations\202411040648413_PPEUpdate.Designer.cs">
-      <DependentUpon>202411040648413_PPEUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\202411101026539_AddUsersInPR.cs" />
+    <Compile Include="Migrations\202411101026539_AddUsersInPR.Designer.cs">
+      <DependentUpon>202411101026539_AddUsersInPR.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411040659143_PPEUpdate1.cs" />
-    <Compile Include="Migrations\202411040659143_PPEUpdate1.Designer.cs">
-      <DependentUpon>202411040659143_PPEUpdate1.cs</DependentUpon>
+    <Compile Include="Migrations\202411110129587_RepairDeliveredDate.cs" />
+    <Compile Include="Migrations\202411110129587_RepairDeliveredDate.Designer.cs">
+      <DependentUpon>202411110129587_RepairDeliveredDate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411050348200_UpdateRepairDate.cs" />
-    <Compile Include="Migrations\202411050348200_UpdateRepairDate.Designer.cs">
-      <DependentUpon>202411050348200_UpdateRepairDate.cs</DependentUpon>
+    <Compile Include="Migrations\202411110902396_AddDeletedToProcesses.cs" />
+    <Compile Include="Migrations\202411110902396_AddDeletedToProcesses.Designer.cs">
+      <DependentUpon>202411110902396_AddDeletedToProcesses.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202411050611131_RepairActions.cs" />
-    <Compile Include="Migrations\202411050611131_RepairActions.Designer.cs">
-      <DependentUpon>202411050611131_RepairActions.cs</DependentUpon>
+    <Compile Include="Migrations\202411111023571_AddImagePathToITStaff.cs" />
+    <Compile Include="Migrations\202411111023571_AddImagePathToITStaff.Designer.cs">
+      <DependentUpon>202411111023571_AddImagePathToITStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202411111253506_AddRequestTypeToActions.cs" />
+    <Compile Include="Migrations\202411111253506_AddRequestTypeToActions.Designer.cs">
+      <DependentUpon>202411111253506_AddRequestTypeToActions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionType.cs" />
@@ -178,16 +190,23 @@
     <Compile Include="ViewModels\ActionTreeViewModel.cs" />
     <Compile Include="ViewModels\BrandModelViewModel.cs" />
     <Compile Include="ViewModels\BrandViewModel.cs" />
+    <Compile Include="ViewModels\CASViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\EquipmentSpecsViewModel.cs" />
     <Compile Include="ViewModels\PPEsSpecsViewModel.cs" />
     <Compile Include="ViewModels\PPEsViewModel.cs" />
+    <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
+    <Compile Include="ViewModels\PRViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />
+    <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
+    <Compile Include="ViewModels\StaffViewModel.cs" />
+    <Compile Include="ViewModels\StandardPRViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsViewModel.cs" />
+    <Compile Include="ViewModels\TicketRequestViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,38 +222,40 @@
     <None Include="Properties\DataSources\Models.Entities.EquipmentSpecs.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202410280558033_InitialMigration.resx">
-      <DependentUpon>202410280558033_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091226537_Initial-Migration.resx">
+      <DependentUpon>202411091226537_Initial-Migration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202410300719399_TechSpecsActions.resx">
-      <DependentUpon>202410300719399_TechSpecsActions.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091231550_NullableitemNoAndQuantity.resx">
+      <DependentUpon>202411091231550_NullableitemNoAndQuantity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411010832511_TSDeliveriesUpdate.resx">
-      <DependentUpon>202411010832511_TSDeliveriesUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.resx">
+      <DependentUpon>202411091240286_PRStandardPRSpecsTotalCost.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411010841299_TSDeliveriesUpdate1.resx">
-      <DependentUpon>202411010841299_TSDeliveriesUpdate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091318187_PRAddReqById.resx">
+      <DependentUpon>202411091318187_PRAddReqById.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411021301328_RepairNullablePPE.resx">
-      <DependentUpon>202411021301328_RepairNullablePPE.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091319447_PRAddReqById1.resx">
+      <DependentUpon>202411091319447_PRAddReqById1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411021314455_PPEsNullable.resx">
-      <DependentUpon>202411021314455_PPEsNullable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411091321473_PRAddQuarter.resx">
+      <DependentUpon>202411091321473_PRAddQuarter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411040648413_PPEUpdate.resx">
-      <DependentUpon>202411040648413_PPEUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411101026539_AddUsersInPR.resx">
+      <DependentUpon>202411101026539_AddUsersInPR.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411040659143_PPEUpdate1.resx">
-      <DependentUpon>202411040659143_PPEUpdate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411110129587_RepairDeliveredDate.resx">
+      <DependentUpon>202411110129587_RepairDeliveredDate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411050348200_UpdateRepairDate.resx">
-      <DependentUpon>202411050348200_UpdateRepairDate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411110902396_AddDeletedToProcesses.resx">
+      <DependentUpon>202411110902396_AddDeletedToProcesses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411050611131_RepairActions.resx">
-      <DependentUpon>202411050611131_RepairActions.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202411111023571_AddImagePathToITStaff.resx">
+      <DependentUpon>202411111023571_AddImagePathToITStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202411111253506_AddRequestTypeToActions.resx">
+      <DependentUpon>202411111253506_AddRequestTypeToActions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

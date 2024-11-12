@@ -59,7 +59,8 @@ namespace ICTProfilingV3.DeliveriesForms
             var ticket = new TicketRequest()
             {
                 DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted
+                TicketStatus = TicketStatus.Accepted,
+                RequestType = RequestType.Deliveries
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();
@@ -92,18 +93,21 @@ namespace ICTProfilingV3.DeliveriesForms
             });
         }
 
-        private void frmAddEditDeliveries_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private async void frmAddEditDeliveries_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            if (!IsSave) DeleteDeliveries();
+            if (!IsSave) await DeleteDeliveries();
         }
 
-        private void DeleteDeliveries()
+        private async Task DeleteDeliveries()
         {
-            unitOfWork.DeliveriesSpecsRepo.DeleteRange(x => x.DeliveriesId == _deliveries.Id);
-            unitOfWork.Save();
+            await unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _deliveries.Id);
+            await unitOfWork.SaveChangesAsync();
 
-            unitOfWork.DeliveriesRepo.Delete(_deliveries);
-            unitOfWork.Save();
+            unitOfWork.DeliveriesSpecsRepo.DeleteRange(x => x.DeliveriesId == _deliveries.Id);
+            await unitOfWork.SaveChangesAsync();
+
+            await unitOfWork.DeliveriesRepo.DeleteByEx(x => x.Id == _deliveries.Id);
+            await unitOfWork.SaveChangesAsync();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)

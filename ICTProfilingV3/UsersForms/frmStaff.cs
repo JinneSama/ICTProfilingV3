@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using Models.Repository;
+using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,8 +25,16 @@ namespace ICTProfilingV3.UsersForms
 
         private void LoadStaff()
         {
-            var res = unitOfWork.UsersRepo.GetAll();
+            var res = unitOfWork.UsersRepo.GetAll().Select(x => new StaffViewModel
+            {
+                Users = x
+            });
             gcStaff.DataSource = res.ToList();  
+        }
+
+        private void btnAddStaff_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

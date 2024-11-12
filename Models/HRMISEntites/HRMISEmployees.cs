@@ -53,6 +53,11 @@ namespace Models.HRMISEntites
             return await employees.ToListAsync();
         }
 
+        public static IEnumerable<EmployeesViewModel> GetChiefOfOffices()
+        {
+            return ChiefOfOffices.ToList().Select(x => GetEmployeeById(x.ChiefId)).ToList();
+        }
+
         public static IEnumerable<EmployeesViewModel> GetEmployees()
         {
             return _employees;

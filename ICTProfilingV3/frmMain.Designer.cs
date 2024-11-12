@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
+            this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
+            this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
+            this.btnLogout = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
             this.btnDashboard = new DevExpress.XtraBars.BarButtonItem();
             this.btnTARequest = new DevExpress.XtraBars.BarButtonItem();
             this.btnTechSpecs = new DevExpress.XtraBars.BarButtonItem();
@@ -54,6 +57,7 @@
             this.btnReport = new DevExpress.XtraBars.BarButtonItem();
             this.btnSPR = new DevExpress.XtraBars.BarButtonItem();
             this.btnRepairSpecs = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRoutedActions = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -72,11 +76,14 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.mainPanel = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
+            this.backstageViewControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
             // 
+            this.ribbon.ApplicationButtonDropDownControl = this.backstageViewControl1;
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
@@ -105,9 +112,10 @@
             this.btnPRQuarter,
             this.btnReport,
             this.btnSPR,
-            this.btnRepairSpecs});
+            this.btnRepairSpecs,
+            this.btnRoutedActions});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 28;
+            this.ribbon.MaxItemId = 29;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -115,6 +123,35 @@
             this.ribbonPage3});
             this.ribbon.Size = new System.Drawing.Size(1036, 154);
             this.ribbon.StatusBar = this.ribbonStatusBar;
+            // 
+            // backstageViewControl1
+            // 
+            this.backstageViewControl1.Controls.Add(this.backstageViewClientControl1);
+            this.backstageViewControl1.Items.Add(this.btnLogout);
+            this.backstageViewControl1.Location = new System.Drawing.Point(77, 231);
+            this.backstageViewControl1.Name = "backstageViewControl1";
+            this.backstageViewControl1.OwnerControl = this.ribbon;
+            this.backstageViewControl1.SelectedTab = this.btnLogout;
+            this.backstageViewControl1.SelectedTabIndex = 0;
+            this.backstageViewControl1.Size = new System.Drawing.Size(480, 150);
+            this.backstageViewControl1.TabIndex = 5;
+            this.backstageViewControl1.VisibleInDesignTime = true;
+            // 
+            // backstageViewClientControl1
+            // 
+            this.backstageViewClientControl1.Location = new System.Drawing.Point(132, 63);
+            this.backstageViewClientControl1.Name = "backstageViewClientControl1";
+            this.backstageViewClientControl1.Size = new System.Drawing.Size(347, 86);
+            this.backstageViewClientControl1.TabIndex = 1;
+            // 
+            // btnLogout
+            // 
+            this.btnLogout.Caption = "Logout";
+            this.btnLogout.ContentControl = this.backstageViewClientControl1;
+            this.btnLogout.ImageOptions.ItemNormal.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Selected = true;
+            this.btnLogout.SelectedChanged += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.btnLogout_SelectedChanged);
             // 
             // btnDashboard
             // 
@@ -166,6 +203,7 @@
             this.btnCAS.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bodetails_16x16;
             this.btnCAS.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bodetails_32x32;
             this.btnCAS.Name = "btnCAS";
+            this.btnCAS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCAS_ItemClick);
             // 
             // btnVPR
             // 
@@ -174,10 +212,11 @@
             this.btnVPR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bosale_16x16;
             this.btnVPR.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bosale_32x32;
             this.btnVPR.Name = "btnVPR";
+            this.btnVPR.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVPR_ItemClick);
             // 
             // barButtonItem6
             // 
-            this.barButtonItem6.Caption = "User Tasks";
+            this.barButtonItem6.Caption = "Tasks";
             this.barButtonItem6.Id = 8;
             this.barButtonItem6.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.botask_16x16;
             this.barButtonItem6.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.botask_32x32;
@@ -298,6 +337,7 @@
             this.btnStandardPR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.gotofooter_16x16;
             this.btnStandardPR.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.gotofooter_32x32;
             this.btnStandardPR.Name = "btnStandardPR";
+            this.btnStandardPR.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStandardPR_ItemClick);
             // 
             // btnPRQuarter
             // 
@@ -331,6 +371,15 @@
             this.btnRepairSpecs.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.customization_32x321;
             this.btnRepairSpecs.Name = "btnRepairSpecs";
             // 
+            // btnRoutedActions
+            // 
+            this.btnRoutedActions.Caption = "Routed Actions";
+            this.btnRoutedActions.Id = 28;
+            this.btnRoutedActions.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.documentmap_16x16;
+            this.btnRoutedActions.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.documentmap_32x32;
+            this.btnRoutedActions.Name = "btnRoutedActions";
+            this.btnRoutedActions.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoutedActions_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -348,6 +397,7 @@
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnDashboard);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem6);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnRoutedActions);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonPageGroup2
@@ -373,7 +423,6 @@
             // 
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCAS);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnVPR);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnSPR);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             // 
             // ribbonPageGroup7
@@ -420,7 +469,6 @@
             // 
             // ribbonPageGroup10
             // 
-            this.ribbonPageGroup10.ItemLinks.Add(this.btnPRQuarter);
             this.ribbonPageGroup10.ItemLinks.Add(this.btnStandardPR);
             this.ribbonPageGroup10.Name = "ribbonPageGroup10";
             this.ribbonPageGroup10.Text = "Purchase Request";
@@ -465,6 +513,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1036, 650);
+            this.Controls.Add(this.backstageViewControl1);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
@@ -475,6 +524,8 @@
             this.Text = "ICT Profiling V3";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
+            this.backstageViewControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainPanel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -497,7 +548,6 @@
         private DevExpress.XtraBars.BarButtonItem btnCAS;
         private DevExpress.XtraBars.BarButtonItem btnVPR;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
-        private DevExpress.XtraEditors.PanelControl mainPanel;
         private DevExpress.XtraBars.BarButtonItem barButtonItem6;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
@@ -526,5 +576,10 @@
         private DevExpress.XtraBars.BarButtonItem btnSPR;
         private DevExpress.XtraBars.BarButtonItem btnRepairSpecs;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup12;
+        private DevExpress.XtraBars.BarButtonItem btnRoutedActions;
+        public DevExpress.XtraEditors.PanelControl mainPanel;
+        private DevExpress.XtraBars.Ribbon.BackstageViewControl backstageViewControl1;
+        private DevExpress.XtraBars.Ribbon.BackstageViewClientControl backstageViewClientControl1;
+        private DevExpress.XtraBars.Ribbon.BackstageViewTabItem btnLogout;
     }
 }

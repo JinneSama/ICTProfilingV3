@@ -53,8 +53,8 @@ namespace ICTProfilingV3.PPEInventoryForms
             rdbtnGender.SelectedIndex = (int)(_PPEs?.Gender ?? 0);
             txtPropertyNo.Text = _PPEs.PropertyNo;
             spinQty.Value = _PPEs.Quantity;
-            spinUnitCost.Value = (decimal)_PPEs.UnitValue;
-            spintTotal.Value = (decimal)_PPEs.TotalValue;
+            spinUnitCost.Value = (decimal)(_PPEs.UnitValue ?? 0);
+            spintTotal.Value = (decimal)(_PPEs.TotalValue ?? 0);
             cboUnit.EditValue = _PPEs.Unit;
             txtInvoiceDate.DateTime = _PPEs?.DateCreated ?? DateTime.UtcNow;
             cboStatus.EditValue = _PPEs.Status;
@@ -100,6 +100,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             editPPE.Unit = (Unit)cboUnit.EditValue;
             editPPE.UnitValue = (long?)spinUnitCost.Value;
             editPPE.TotalValue = (long?)spintTotal.Value;
+            editPPE.DateCreated = DateTime.UtcNow;
 
             unitOfWork.Save();
             IsSave = true;

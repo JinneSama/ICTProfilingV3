@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Models.Entities
         public DateTime? ActionDate { get; set; }
         public string Remarks { get; set; }
         public bool? IsSend { get; set; }
+        public RequestType RequestType { get; set; }
         public int? ProgramId { get; set; }
 
         [ForeignKey("ProgramId")]
@@ -45,6 +47,12 @@ namespace Models.Entities
         public int? RepairId { get; set; }
         [ForeignKey("RepairId")]
         public Repairs Repairs { get; set; }
+        public int? PurchaseRequestId { get; set; }
+        [ForeignKey("PurchaseRequestId")]
+        public PurchaseRequest PurchaseRequest { get; set; }
+        public int? CustomerActionSheetId { get; set; }
+        [ForeignKey("CustomerActionSheetId")]
+        public CustomerActionSheet CustomerActionSheet { get; set; }
 
         public string CreatedById { get; set; }
 
