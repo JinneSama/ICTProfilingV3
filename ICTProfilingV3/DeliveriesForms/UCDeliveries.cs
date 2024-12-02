@@ -29,7 +29,7 @@ namespace ICTProfilingV3.DeliveriesForms
             LoadDeliveries();
         }
 
-        private Task LoadDeliveries()
+        private void LoadDeliveries()
         {
             var deliveries = _unitOfWork.DeliveriesRepo.GetAll(x => x.Supplier,
                 x => x.TicketRequest).ToList().Select(x => new DeliveriesViewModel
@@ -40,22 +40,23 @@ namespace ICTProfilingV3.DeliveriesForms
                 Office = HRMISEmployees.GetEmployees().FirstOrDefault(h => h.Id == x.RequestedById).Office,
                 Supplier = x.Supplier.SupplierName,
                 DeliveryId = "EPiS-" + x.Id,
-                PONo = x.PONo
+                PONo = x.PONo,
+                Deliveries = x
             });
             gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(deliveries.ToList());
-            return Task.CompletedTask;
         }
 
-        private async Task LoadDetails()
+        private async void LoadDetails()
         {
+            _unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
-            var deliveriesDetails = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.Supplier);
+            var deliveriesDetails = row.Deliveries;
             var requestingEmployee = HRMISEmployees.GetEmployees().FirstOrDefault(x => x.Id == deliveriesDetails.RequestedById);
             txtChief.Text = HRMISEmployees.GetEmployeeById(requestingEmployee.ChiefOfOffices.ChiefId).Employee;
             lblEpisNo.Text = deliveriesDetails.Id.ToString();
-            txtOffice.Text = string.Join("-", requestingEmployee.Office, requestingEmployee.Division);
+            txtOffice.Text = string.Join(" ", requestingEmployee.Office, requestingEmployee.Division);
             txtReqBy.Text = requestingEmployee.Employee;
             txtTel.Text = deliveriesDetails.ContactNo;
             txtDeliveredBy.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.DeliveredById).Employee;
@@ -97,38 +98,34 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnEdit_Click(object sender, System.EventArgs e)
         {
+            var rowHandle = gridDeliveries.FocusedRowHandle;
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             var deliveries = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id);
-            var frm = new frmAddEditDeliveries(deliveries, _unitOfWork);
+            var frm = new frmAddEditDeliveries(deliveries);
             frm.ShowDialog();
 
-            await LoadDeliveries();
-            await LoadDetails();
+            LoadDeliveries();
+            LoadDetails();
             await LoadEquipmentSpecs();
+
+            gridDeliveries.FocusedRowHandle = rowHandle;
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            try
+            var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            var ds = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
+                x => x.DeliveriesSpecs.Select(s => s.Model),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)).ToList();
+            var rpt = new rptDeliveries
             {
-                var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-                var ds = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
-                    x => x.DeliveriesSpecs.Select(s => s.Model),
-                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
-                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
-                    x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)).ToList();
-                var rpt = new DeliveriesReport
-                {
-                    DataSource = ds
-                };
+                DataSource = ds
+            };
 
-                var frm = new frmReportViewer(rpt);
-                frm.ShowDialog();
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message, exception.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            var frm = new frmReportViewer(rpt);
+            frm.ShowDialog();
         }
 
         private void UCDeliveries_Load(object sender, EventArgs e)
@@ -140,7 +137,7 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             await LoadEquipmentSpecs();
             LoadActions();
-            await LoadDetails();
+            LoadDetails();
         }
 
         private void hplTicket_Click(object sender, EventArgs e)
@@ -154,6 +151,13 @@ namespace ICTProfilingV3.DeliveriesForms
                 Dock = DockStyle.Fill,
                 filterText = row.Id.ToString()
             });
+        }
+
+        private void btnCompReport_Click(object sender, EventArgs e)
+        {
+            var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            var frm = new frmComparisonReport(row.Deliveries);    
+            frm.ShowDialog();
         }
     }
 }

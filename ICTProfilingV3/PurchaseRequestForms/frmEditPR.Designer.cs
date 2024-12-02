@@ -34,7 +34,6 @@
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.lblPuchaseId = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -53,6 +52,7 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
+            this.lblPRNo = new DevExpress.XtraEditors.LabelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -104,8 +104,8 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.lblPRNo);
             this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Controls.Add(this.lblPuchaseId);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl1.Location = new System.Drawing.Point(0, 37);
             this.panelControl1.Name = "panelControl1";
@@ -118,19 +118,9 @@
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(16, 3);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(83, 30);
+            this.labelControl1.Size = new System.Drawing.Size(59, 30);
             this.labelControl1.TabIndex = 7;
-            this.labelControl1.Text = "EPiS No.:";
-            // 
-            // lblPuchaseId
-            // 
-            this.lblPuchaseId.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblPuchaseId.Appearance.Options.UseFont = true;
-            this.lblPuchaseId.Location = new System.Drawing.Point(427, 3);
-            this.lblPuchaseId.Name = "lblPuchaseId";
-            this.lblPuchaseId.Size = new System.Drawing.Size(54, 30);
-            this.lblPuchaseId.TabIndex = 6;
-            this.lblPuchaseId.Text = "PR Id:";
+            this.labelControl1.Text = "PR Id.:";
             // 
             // groupControl1
             // 
@@ -350,6 +340,15 @@
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // lblPRNo
+            // 
+            this.lblPRNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblPRNo.Appearance.Options.UseFont = true;
+            this.lblPRNo.Location = new System.Drawing.Point(91, 3);
+            this.lblPRNo.Name = "lblPRNo";
+            this.lblPRNo.Size = new System.Drawing.Size(0, 30);
+            this.lblPRNo.TabIndex = 8;
+            // 
             // frmEditPR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -390,7 +389,6 @@
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl lblPuchaseId;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.TextEdit txtRequestedByDivision;
         private DevExpress.XtraEditors.TextEdit txtRequestedByOffice;
@@ -409,5 +407,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraEditors.LabelControl lblPRNo;
     }
 }

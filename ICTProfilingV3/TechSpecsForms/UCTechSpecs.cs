@@ -4,15 +4,19 @@ using EntityManager.Managers;
 using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.PurchaseRequestForms;
+using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Managers.User;
 using Models.Models;
+using Models.ReportViewModel;
 using Models.Repository;
 using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
@@ -26,6 +30,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
         public string filterText { get; set; }
+        public bool IsTechSpecs { get; set; }
         public UCTechSpecs()
         {
             InitializeComponent();
@@ -33,9 +38,9 @@ namespace ICTProfilingV3.TechSpecsForms
             userManager = new ICTUserManager();
         }
 
-        private async Task LoadAll()
+        private void LoadAll()
         {
-            await LoadTechSpecs();
+            LoadTechSpecs();
             LoadDropdowns();
         }
         private void LoadDropdowns()
@@ -51,7 +56,18 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             if (row == null) return;
+            if (!IsTechSpecs)
+            {
+                colRepair.Visible = true;
+                colTicket.Visible = false;
+            }
+            else
+            {
+                colRepair.Visible = false;
+                colTicket.Visible = true;
+            }
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
+            if(ts == null) return;
             txtDate.DateTime = ts.DateRequested ?? DateTime.MinValue;
             rdbtnGender.SelectedIndex = (int)ts.ReqByGender;
             txtContactNo.Text = ts.ContactNo;
@@ -76,9 +92,11 @@ namespace ICTProfilingV3.TechSpecsForms
             txtRequestedByDivision.Text = reqByUser?.Division;
         }
 
-        private async Task LoadTechSpecs()
+        private void LoadTechSpecs()
         {
-            var res = await unitOfWork.TechSpecsRepo.GetAll(x => x.TicketRequest).ToListAsync();
+            var res = unitOfWork.TechSpecsRepo.GetAll(x => x.TicketRequest, x => x.Repairs).ToList();
+            if(IsTechSpecs) res = res.Where(x => x.TicketRequest.IsRepairTechSpecs != true).ToList();
+            else res = res.Where(x => x.TicketRequest.IsRepairTechSpecs == true).ToList();
             var ts = res.Select(x => new TechSpecsViewModel
             {
                 Id = x.Id,
@@ -87,7 +105,8 @@ namespace ICTProfilingV3.TechSpecsForms
                 DateRequested = x.DateRequested,
                 Office = HRMISEmployees.GetEmployeeById(x.ReqById)?.Office,
                 Division = HRMISEmployees.GetEmployeeById(x.ReqById)?.Division,
-                TicketId = x.TicketRequest.Id
+                TicketId = x.TicketRequest.Id,
+                RepairId = x.Repairs.Count == 0 ? 0 : x.Repairs.FirstOrDefault().Id
             });
             gcTechSpecs.DataSource = new BindingList<TechSpecsViewModel>(ts.ToList());
         }
@@ -126,10 +145,12 @@ namespace ICTProfilingV3.TechSpecsForms
             frm.ShowDialog();
         }
 
-        private async void UCTechSpecs_Load(object sender, EventArgs e)
+        private void UCTechSpecs_Load(object sender, EventArgs e)
         {
-            await LoadAll();
+            LoadAll();
             if (filterText != null) gridTechSpecs.ActiveFilterCriteria = new BinaryOperator("TicketId",filterText);
+            if(!IsTechSpecs)
+                lblTechSpecs.Text = "Recommended Repair Specs";
         }
 
         private async void btnVerifyPR_Click(object sender, EventArgs e)
@@ -205,5 +226,57 @@ namespace ICTProfilingV3.TechSpecsForms
             });
         }
 
+        private async void btnPreview_Click(object sender, EventArgs e)
+        {
+            await PrintReport();
+        }
+
+        private async Task PrintReport()
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id,
+                x => x.Repairs,
+                x => x.TechSpecsICTSpecs,
+                x => x.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment));
+
+            var chief = HRMISEmployees.GetEmployeeById(ts.ReqByChiefId);
+            var staff = HRMISEmployees.GetEmployeeById(ts.ReqById);
+            var data = new TechSpecsReportViewModel()
+            {
+                PrintedBy = UserStore.Username,
+                DatePrinted = DateTime.UtcNow,
+                Office = string.Join(" ", staff.Office, staff.Division),
+                Chief = chief.Employee,
+                ChiefPosition = chief.Position,
+                Staff = staff.Employee,
+                StaffPosition = staff.Position,
+                TechSpecs = ts,
+                PreparedBy = await userManager.FindUserAsync(ts.PreparedById),
+                ReviewedBy = await userManager.FindUserAsync(ts.ReviewedById),
+                NotedBy = await userManager.FindUserAsync(ts.NotedById),
+                RepairId = ts.Repairs.Count == 0 ? 0 : ts.Repairs.FirstOrDefault().Id
+            };
+
+            var rpt = new rptTechSpecs
+            {
+                DataSource = new List<TechSpecsReportViewModel> { data }
+            };
+
+            var frm = new frmReportViewer(rpt);
+            frm.ShowDialog();
+        }
+
+        private void hplRepair_Click(object sender, EventArgs e)
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCRepair()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.RepairId.ToString()
+            });
+        }
     }
 }

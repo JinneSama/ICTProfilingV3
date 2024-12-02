@@ -5,14 +5,19 @@ using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers.User;
 using Models.Models;
+using Models.ReportViewModel;
 using Models.Repository;
 using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -180,9 +185,38 @@ namespace ICTProfilingV3.RepairForms
 
         }
 
-        private void btnTR_Click(object sender, EventArgs e)
+        private async void btnTR_Click(object sender, EventArgs e)
         {
+            await PrintTR();
+        }
 
+        private async Task PrintTR()
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
+                x => x.PPEs,
+                x => x.PPEsSpecs.Model.Brand.EquipmentSpecs.Equipment);
+
+            var data = new RepairTRViewModel
+            {
+                PrintedBy = UserStore.Username,
+                DatePrinted = DateTime.UtcNow,
+                RequestBy = HRMISEmployees.GetEmployeeById(repair.RequestedById),
+                DeliveredBy = HRMISEmployees.GetEmployeeById(repair.DeliveredById),
+                IssuedTo = HRMISEmployees.GetEmployeeById(repair.PPEs.IssuedToId),
+                Repair = repair,
+                ReceivedBy = await _userManager.FindUserAsync(repair.PreparedById),
+                AssesedBy = await _userManager.FindUserAsync(repair.ReviewedById),
+                NotedBy = await _userManager.FindUserAsync(repair.NotedById)
+            };
+
+            var rpt = new rptRepairTR
+            {
+                DataSource = new List<RepairTRViewModel> { data }
+            };
+
+            var frm = new frmReportViewer(rpt);
+            frm.ShowDialog();
         }
 
         private async void gridRepair_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
@@ -214,6 +248,43 @@ namespace ICTProfilingV3.RepairForms
             {
                 Dock = DockStyle.Fill,
                 filterText = row.PropertyNo.ToString()
+            });
+        }
+
+        private async void btnTechSpecs_Click(object sender, EventArgs e)
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id);
+            if (repair.TechSpecsId == null)
+            {
+                if (MessageBox.Show("This Repair has no Rcommended Specs, Proceeding will Generate Recommended Specs to this Repair",
+                    "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
+            }
+            else
+            {
+                NavigateToRepairSpecs(repair);
+                return;
+            }
+
+            var frm = new frmAddEditTechSpecs(repair);
+            frm.ShowDialog();
+
+            var ts = frm.RepairTechSpecs;
+            if (ts == null) return;
+            repair.TechSpecsId = ts.Id;
+            _unitOfWork.Save();
+        }
+
+        private void NavigateToRepairSpecs(Repairs repair)
+        {
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            main.mainPanel.Controls.Clear();
+
+            main.mainPanel.Controls.Add(new UCTechSpecs()
+            {
+                IsTechSpecs = false,
+                Dock = DockStyle.Fill,
+                filterText = repair.TechSpecsId.ToString()
             });
         }
     }

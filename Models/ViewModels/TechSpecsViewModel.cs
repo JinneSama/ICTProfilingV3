@@ -13,5 +13,6 @@ namespace Models.ViewModels
         public string Office { get; set; }
         public string Division { get; set; }
         public int TicketId { get; set; }
+        public int? RepairId { get; set; }
     }
 }

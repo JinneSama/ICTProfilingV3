@@ -117,6 +117,108 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tvRequestInfo.TileHtmlTemplate.Styles" xml:space="preserve">
+    <value>.container{
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	border-width: 0px;
+	border-bottom-width: 0.5rem;
+	border-bottom-color: RoyalBlue;
+	background-color: @Window;
+	border-style: solid;
+	border-radius: 1rem;
+	padding-left: 3rem;
+}
+
+.Separator{
+	margin-left: 2rem;
+	border-style: solid;
+	border-color: RoyalBlue;
+	border-radius: 2rem;
+	height: 13rem;
+}
+.internal-container{
+	padding-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 3rem;
+}
+
+.detail-container{
+	padding-left: 3rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.initials{
+	color: @White;
+	font-weight: bold;
+	background-color: Turquoise;
+	border-radius: 100px;
+	width: 19rem;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.detail-header{
+	margin-bottom: 2rem;
+	font-weight: bold;
+}
+
+.container-padding{
+	margin-left: 4rem;
+}
+
+.detail-left{
+	align-self: flex-start;
+}
+
+.detail{
+	padding-top: 0.5rem;
+	font-size: 1.3rem;
+}
+
+.photo{
+	width:10rem;
+	height:10rem;
+	border: solid 1px Turquoise;
+	object-fit:contain;
+	background-color:white;
+	border-radius: 10rem;
+}
+
+</value>
+  </data>
+  <data name="tvRequestInfo.TileHtmlTemplate.Template" xml:space="preserve">
+    <value>&lt;div class="container"&gt;
+	&lt;div class="internal-container"&gt;
+		&lt;div class="photo"&gt;&lt;img class="photo" src="${Image}"/&gt;&lt;/div&gt;
+		&lt;div class="detail-container"&gt;
+			&lt;div class="initials"&gt;${ITStaff.Users.UserName}&lt;/div&gt;
+			&lt;div class="detail"&gt;${ITStaff.Users.FullName}&lt;/div&gt;
+			&lt;div class="detail"&gt;${ITStaff.Users.Position}&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;div class="Separator"&gt;&lt;/div&gt;
+	&lt;div class="detail-container container-padding"&gt;
+		&lt;div class="detail detail-header"&gt;Requesting Office Chief&lt;/div&gt;
+		&lt;div class="detail"&gt;${Chief.Employee}&lt;/div&gt;
+		&lt;div class="detail"&gt;${Chief.Position}&lt;/div&gt;
+		&lt;div class="detail"&gt;${Chief.Office} {Chief.Division}&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnNewRequest.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

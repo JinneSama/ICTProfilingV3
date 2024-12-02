@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using Models.Entities;
+using Models.Enums;
 
 namespace Models.ViewModels
 {
@@ -11,5 +12,6 @@ namespace Models.ViewModels
         public string PONo { get; set; }
         public string Supplier { get; set; }
         public string DeliveryId { get; set; }
+        public Deliveries Deliveries { get; set; }
     }
 }

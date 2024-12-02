@@ -1,7 +1,10 @@
 ﻿using DevExpress.CodeParser;
+using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
+using ICTProfilingV3.ReportForms;
 using Models.Entities;
 using Models.Enums;
+using Models.ReportViewModel;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -167,6 +170,40 @@ namespace ICTProfilingV3.StandardPRForms
                 unitOfWork.PRStandardPRSpecsRepo.Insert(prSPR);
             }
             await unitOfWork.SaveChangesAsync();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            var quarter = (PRQuarter)lueQuarter.EditValue;
+            var SPRs = unitOfWork.StandardPRSpecsRepo.FindAllAsync(x => x.Quarter == quarter,
+                x => x.EquipmentSpecs.Equipment);
+            var supplies = new StandardPREquipmentSupplies
+            {
+                Quarter = EnumHelper.GetEnumDescription(quarter),
+                Title = "IT SUPPLIES",
+                StandardPRSpecs = SPRs.Where(x => x.UnitCost < 50000).ToList()
+            };
+            var equipments = new StandardPREquipmentSupplies
+            {
+                Quarter = EnumHelper.GetEnumDescription(quarter),
+                Title = "IT EQUIPMENTS",
+                StandardPRSpecs = SPRs.Where(x => x.UnitCost >= 50000).ToList()
+            };
+
+            var equipmentSupplies = new List<StandardPREquipmentSupplies>() { supplies, equipments };
+
+            var report = new StandardPRReportViewModel
+            {
+                StandardPREquipmentSupplies = equipmentSupplies,
+            };
+
+            var rpt = new rptStandardPR
+            {
+                DataSource = new List<StandardPRReportViewModel> { report }
+            };
+
+            var frm = new frmReportViewer(rpt);
+            frm.ShowDialog();
         }
     }
 }

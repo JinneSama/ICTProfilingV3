@@ -58,6 +58,14 @@
             this.btnSPR = new DevExpress.XtraBars.BarButtonItem();
             this.btnRepairSpecs = new DevExpress.XtraBars.BarButtonItem();
             this.btnRoutedActions = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.lblEmployee = new DevExpress.XtraBars.BarStaticItem();
+            this.lblPosition = new DevExpress.XtraBars.BarStaticItem();
+            this.btnPGNAccounts = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRequests = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
+            this.skinRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
+            this.btnPGNOffices = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -71,10 +79,15 @@
             this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup15 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup13 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.mainPanel = new DevExpress.XtraEditors.PanelControl();
+            this.UpdateThread = new System.ComponentModel.BackgroundWorker();
+            this.lblUpdate = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -113,13 +126,25 @@
             this.btnReport,
             this.btnSPR,
             this.btnRepairSpecs,
-            this.btnRoutedActions});
+            this.btnRoutedActions,
+            this.barButtonItem1,
+            this.lblEmployee,
+            this.lblPosition,
+            this.btnPGNAccounts,
+            this.btnRequests,
+            this.barButtonItem4,
+            this.skinRibbonGalleryBarItem1,
+            this.btnPGNOffices,
+            this.lblUpdate});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 29;
+            this.ribbon.MaxItemId = 38;
             this.ribbon.Name = "ribbon";
+            this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
+            this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2,
+            this.ribbonPage4,
             this.ribbonPage3});
             this.ribbon.Size = new System.Drawing.Size(1036, 154);
             this.ribbon.StatusBar = this.ribbonStatusBar;
@@ -151,7 +176,7 @@
             this.btnLogout.ImageOptions.ItemNormal.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Selected = true;
-            this.btnLogout.SelectedChanged += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.btnLogout_SelectedChanged);
+            this.btnLogout.ItemPressed += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.btnLogout_ItemPressed);
             // 
             // btnDashboard
             // 
@@ -354,6 +379,7 @@
             this.btnReport.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.report_16x16;
             this.btnReport.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.report_32x32;
             this.btnReport.Name = "btnReport";
+            this.btnReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnReport_ItemClick);
             // 
             // btnSPR
             // 
@@ -365,11 +391,12 @@
             // 
             // btnRepairSpecs
             // 
-            this.btnRepairSpecs.Caption = "Repair Specs";
+            this.btnRepairSpecs.Caption = "Recommended Repair Specs";
             this.btnRepairSpecs.Id = 27;
             this.btnRepairSpecs.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.customization_16x161;
             this.btnRepairSpecs.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.customization_32x321;
             this.btnRepairSpecs.Name = "btnRepairSpecs";
+            this.btnRepairSpecs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRepairSpecs_ItemClick);
             // 
             // btnRoutedActions
             // 
@@ -379,6 +406,71 @@
             this.btnRoutedActions.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.documentmap_32x32;
             this.btnRoutedActions.Name = "btnRoutedActions";
             this.btnRoutedActions.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoutedActions_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "barButtonItem1";
+            this.barButtonItem1.Id = 29;
+            this.barButtonItem1.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x169;
+            this.barButtonItem1.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.add_32x32;
+            this.barButtonItem1.Name = "barButtonItem1";
+            // 
+            // lblEmployee
+            // 
+            this.lblEmployee.Caption = "Employee";
+            this.lblEmployee.Id = 30;
+            this.lblEmployee.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bocustomer_16x16;
+            this.lblEmployee.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bocustomer_32x32;
+            this.lblEmployee.Name = "lblEmployee";
+            this.lblEmployee.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // lblPosition
+            // 
+            this.lblPosition.Caption = "Position";
+            this.lblPosition.Id = 31;
+            this.lblPosition.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bodetails_16x161;
+            this.lblPosition.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bodetails_32x321;
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // btnPGNAccounts
+            // 
+            this.btnPGNAccounts.Caption = "PGN Accounts";
+            this.btnPGNAccounts.Id = 32;
+            this.btnPGNAccounts.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.paste_16x162;
+            this.btnPGNAccounts.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.paste_32x322;
+            this.btnPGNAccounts.Name = "btnPGNAccounts";
+            this.btnPGNAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPGNAccounts_ItemClick);
+            // 
+            // btnRequests
+            // 
+            this.btnRequests.Caption = "PGN Request Manager";
+            this.btnRequests.Id = 33;
+            this.btnRequests.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.format_16x16;
+            this.btnRequests.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.format_32x32;
+            this.btnRequests.Name = "btnRequests";
+            this.btnRequests.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRequests_ItemClick);
+            // 
+            // barButtonItem4
+            // 
+            this.barButtonItem4.Caption = "barButtonItem4";
+            this.barButtonItem4.Id = 34;
+            this.barButtonItem4.Name = "barButtonItem4";
+            // 
+            // skinRibbonGalleryBarItem1
+            // 
+            this.skinRibbonGalleryBarItem1.Caption = "skinRibbonGalleryBarItem1";
+            this.skinRibbonGalleryBarItem1.Id = 35;
+            this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
+            // 
+            // btnPGNOffices
+            // 
+            this.btnPGNOffices.Caption = "Offices";
+            this.btnPGNOffices.Id = 36;
+            this.btnPGNOffices.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.boposition2_16x16;
+            this.btnPGNOffices.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.boposition2_32x32;
+            this.btnPGNOffices.Name = "btnPGNOffices";
+            this.btnPGNOffices.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPGNOffices_ItemClick);
             // 
             // ribbonPage1
             // 
@@ -438,7 +530,8 @@
             this.ribbonPageGroup6,
             this.ribbonPageGroup9,
             this.ribbonPageGroup10,
-            this.ribbonPageGroup8});
+            this.ribbonPageGroup8,
+            this.ribbonPageGroup15});
             this.ribbonPage2.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.inserttablerowsabove_16x16;
             this.ribbonPage2.Name = "ribbonPage2";
             this.ribbonPage2.Text = "Look Up Tables";
@@ -480,6 +573,27 @@
             this.ribbonPageGroup8.Name = "ribbonPageGroup8";
             this.ribbonPageGroup8.Text = "Actions";
             // 
+            // ribbonPageGroup15
+            // 
+            this.ribbonPageGroup15.ItemLinks.Add(this.btnPGNOffices);
+            this.ribbonPageGroup15.Name = "ribbonPageGroup15";
+            this.ribbonPageGroup15.Text = "PGN";
+            // 
+            // ribbonPage4
+            // 
+            this.ribbonPage4.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup13});
+            this.ribbonPage4.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.publicfix_16x16;
+            this.ribbonPage4.Name = "ribbonPage4";
+            this.ribbonPage4.Text = "PGN";
+            // 
+            // ribbonPageGroup13
+            // 
+            this.ribbonPageGroup13.ItemLinks.Add(this.btnPGNAccounts);
+            this.ribbonPageGroup13.ItemLinks.Add(this.btnRequests);
+            this.ribbonPageGroup13.Name = "ribbonPageGroup13";
+            this.ribbonPageGroup13.Text = "Transactions";
+            // 
             // ribbonPage3
             // 
             this.ribbonPage3.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -495,6 +609,7 @@
             // 
             // ribbonStatusBar
             // 
+            this.ribbonStatusBar.ItemLinks.Add(this.lblUpdate);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 629);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
@@ -507,6 +622,16 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1036, 475);
             this.mainPanel.TabIndex = 2;
+            // 
+            // UpdateThread
+            // 
+            this.UpdateThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateThread_DoWork);
+            // 
+            // lblUpdate
+            // 
+            this.lblUpdate.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.lblUpdate.Id = 37;
+            this.lblUpdate.Name = "lblUpdate";
             // 
             // frmMain
             // 
@@ -521,7 +646,7 @@
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "ICT Profiling V3";
+            this.Text = "EPiS v3";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
@@ -581,5 +706,18 @@
         private DevExpress.XtraBars.Ribbon.BackstageViewControl backstageViewControl1;
         private DevExpress.XtraBars.Ribbon.BackstageViewClientControl backstageViewClientControl1;
         private DevExpress.XtraBars.Ribbon.BackstageViewTabItem btnLogout;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarStaticItem lblEmployee;
+        private DevExpress.XtraBars.BarStaticItem lblPosition;
+        private DevExpress.XtraBars.BarButtonItem btnPGNAccounts;
+        private DevExpress.XtraBars.BarButtonItem btnRequests;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem4;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup13;
+        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem1;
+        private DevExpress.XtraBars.BarButtonItem btnPGNOffices;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup15;
+        private System.ComponentModel.BackgroundWorker UpdateThread;
+        private DevExpress.XtraBars.BarStaticItem lblUpdate;
     }
 }

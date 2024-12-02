@@ -34,8 +34,18 @@
             this.txtPONo = new DevExpress.XtraEditors.TextEdit();
             this.slueDeliveredBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
@@ -55,22 +65,12 @@
             this.txtDeliveryReceipt = new DevExpress.XtraEditors.TextEdit();
             this.slueSupplierName = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelEquipmentSpecs = new DevExpress.XtraEditors.PanelControl();
-            this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPONo.Properties)).BeginInit();
@@ -162,6 +162,54 @@
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "Id";
+            this.gridColumn10.FieldName = "EmpId";
+            this.gridColumn10.MinWidth = 15;
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Width = 56;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "Employee";
+            this.gridColumn11.FieldName = "Employee";
+            this.gridColumn11.MinWidth = 225;
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 0;
+            this.gridColumn11.Width = 300;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "Position";
+            this.gridColumn12.FieldName = "Position";
+            this.gridColumn12.MinWidth = 202;
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 1;
+            this.gridColumn12.Width = 300;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "Office";
+            this.gridColumn13.FieldName = "Office";
+            this.gridColumn13.MinWidth = 67;
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 2;
+            this.gridColumn13.Width = 67;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "Division";
+            this.gridColumn14.FieldName = "Division";
+            this.gridColumn14.MinWidth = 382;
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 3;
+            this.gridColumn14.Width = 412;
+            // 
             // slueEmployee
             // 
             this.slueEmployee.EditValue = "";
@@ -192,6 +240,54 @@
             this.gridView6.Name = "gridView6";
             this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView6.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "Id";
+            this.gridColumn15.FieldName = "EmpId";
+            this.gridColumn15.MinWidth = 15;
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Width = 56;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Employee";
+            this.gridColumn16.FieldName = "Employee";
+            this.gridColumn16.MinWidth = 225;
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 0;
+            this.gridColumn16.Width = 225;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "Position";
+            this.gridColumn17.FieldName = "Position";
+            this.gridColumn17.MinWidth = 202;
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 1;
+            this.gridColumn17.Width = 202;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "Office";
+            this.gridColumn18.FieldName = "Office";
+            this.gridColumn18.MinWidth = 67;
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 2;
+            this.gridColumn18.Width = 67;
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "Division";
+            this.gridColumn19.FieldName = "Division";
+            this.gridColumn19.MinWidth = 382;
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 3;
+            this.gridColumn19.Width = 382;
             // 
             // labelControl11
             // 
@@ -409,6 +505,22 @@
             this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView5.OptionsView.ShowGroupPanel = false;
             // 
+            // colSupplier
+            // 
+            this.colSupplier.Caption = "Supplier Name";
+            this.colSupplier.FieldName = "SupplierName";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.Visible = true;
+            this.colSupplier.VisibleIndex = 0;
+            // 
+            // colAddress
+            // 
+            this.colAddress.Caption = "Address";
+            this.colAddress.FieldName = "Address";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.Visible = true;
+            this.colAddress.VisibleIndex = 1;
+            // 
             // labelControl3
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -460,118 +572,6 @@
             this.panelEquipmentSpecs.Name = "panelEquipmentSpecs";
             this.panelEquipmentSpecs.Size = new System.Drawing.Size(1213, 324);
             this.panelEquipmentSpecs.TabIndex = 90;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.Caption = "Supplier Name";
-            this.colSupplier.FieldName = "SupplierName";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.Visible = true;
-            this.colSupplier.VisibleIndex = 0;
-            // 
-            // colAddress
-            // 
-            this.colAddress.Caption = "Address";
-            this.colAddress.FieldName = "Address";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.Visible = true;
-            this.colAddress.VisibleIndex = 1;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "Id";
-            this.gridColumn10.FieldName = "EmpId";
-            this.gridColumn10.MinWidth = 15;
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Width = 56;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "Employee";
-            this.gridColumn11.FieldName = "Employee";
-            this.gridColumn11.MinWidth = 225;
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 0;
-            this.gridColumn11.Width = 300;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "Position";
-            this.gridColumn12.FieldName = "Position";
-            this.gridColumn12.MinWidth = 202;
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 1;
-            this.gridColumn12.Width = 300;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "Office";
-            this.gridColumn13.FieldName = "Office";
-            this.gridColumn13.MinWidth = 67;
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 2;
-            this.gridColumn13.Width = 67;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "Division";
-            this.gridColumn14.FieldName = "Division";
-            this.gridColumn14.MinWidth = 382;
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 3;
-            this.gridColumn14.Width = 412;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "Id";
-            this.gridColumn15.FieldName = "EmpId";
-            this.gridColumn15.MinWidth = 15;
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Width = 56;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Employee";
-            this.gridColumn16.FieldName = "Employee";
-            this.gridColumn16.MinWidth = 225;
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 0;
-            this.gridColumn16.Width = 225;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Position";
-            this.gridColumn17.FieldName = "Position";
-            this.gridColumn17.MinWidth = 202;
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 1;
-            this.gridColumn17.Width = 202;
-            // 
-            // gridColumn18
-            // 
-            this.gridColumn18.Caption = "Office";
-            this.gridColumn18.FieldName = "Office";
-            this.gridColumn18.MinWidth = 67;
-            this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 2;
-            this.gridColumn18.Width = 67;
-            // 
-            // gridColumn19
-            // 
-            this.gridColumn19.Caption = "Division";
-            this.gridColumn19.FieldName = "Division";
-            this.gridColumn19.MinWidth = 382;
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 3;
-            this.gridColumn19.Width = 382;
             // 
             // frmAddEditDeliveries
             // 

@@ -4,6 +4,8 @@ using ICTProfilingV3.PPEInventoryForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers;
+using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -15,7 +17,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class frmAddEditRepair : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditRepair : DevExpress.XtraEditors.XtraForm, ITicketStatus
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly SaveType saveType;
@@ -160,6 +162,7 @@ namespace ICTProfilingV3.RepairForms
             repair.DateDelivered = txtDateofDelivery.DateTime;
 
             await _unitOfWork.SaveChangesAsync();
+            await ModifyStatus(TicketStatus.Accepted, repair.Id);
         }
 
         private async void frmAddEditRepair_FormClosing(object sender, FormClosingEventArgs e)
@@ -169,9 +172,9 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task DeleteRepair()
         {
-            await _unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _Repairs.Id);
+            _unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _Repairs.Id);
             await _unitOfWork.SaveChangesAsync();
-            await _unitOfWork.RepairsRepo.DeleteByEx(x => x.Id == _Repairs.Id);
+            _unitOfWork.RepairsRepo.DeleteByEx(x => x.Id == _Repairs.Id);
             await _unitOfWork.SaveChangesAsync();
         }
 
@@ -184,6 +187,19 @@ namespace ICTProfilingV3.RepairForms
         private void groupControl3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public async Task ModifyStatus(TicketStatus status, int ticketId)
+        {
+            var ticketStatus = new TicketRequestStatus
+            {
+                Status = status,
+                DateStatusChanged = DateTime.UtcNow,
+                ChangedByUserId = UserStore.UserId,
+                TicketRequestId = ticketId
+            };
+            _unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

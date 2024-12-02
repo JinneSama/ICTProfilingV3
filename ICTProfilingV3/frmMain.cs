@@ -1,23 +1,24 @@
-﻿using System.Linq;
+﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraEditors.Mask;
-using EntityManager.Managers.User;
+using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LoginForms;
 using ICTProfilingV3.LookUpTables;
+using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.ToolForms;
 using ICTProfilingV3.UsersForms;
-using Models.HRMISEntites;
-
 namespace ICTProfilingV3
 {
     public partial class frmMain : RibbonForm
@@ -25,8 +26,17 @@ namespace ICTProfilingV3
         public frmMain()
         {
             InitializeComponent();
-            var frm = new frmLogin();
+            var frm = new frmLogin(this);
             frm.ShowDialog();
+
+            if (!UpdateThread.IsBusy)
+                UpdateThread.RunWorkerAsync();
+        }
+
+        public void SetUser(string name, string position)
+        {
+            lblEmployee.Caption = name;
+            lblPosition.Caption = position;
         }
 
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -118,7 +128,8 @@ namespace ICTProfilingV3
             mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new UCTechSpecs()
             {
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                IsTechSpecs = true
             });
         }
 
@@ -164,11 +175,6 @@ namespace ICTProfilingV3
             });
         }
 
-        private void btnLogout_SelectedChanged(object sender, BackstageViewItemEventArgs e)
-        {
-
-        }
-
         private void btnRoutedActions_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             mainPanel.Controls.Clear();
@@ -176,6 +182,81 @@ namespace ICTProfilingV3
             {
                 Dock = DockStyle.Fill
             });
+        }
+
+        private void btnReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frm = new frmAccomplishmentReport();
+            frm.ShowDialog();
+        }
+
+        private void btnLogout_ItemPressed(object sender, BackstageViewItemEventArgs e)
+        {
+            backstageViewControl1.Close();
+            lblEmployee.Caption = string.Empty;
+            lblPosition.Caption = string.Empty;
+            mainPanel.Controls.Clear();
+            var frm = new frmLogin(this);
+            frm.ShowDialog();
+        }
+
+        private void btnRepairSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCTechSpecs()
+            {
+                IsTechSpecs = false,
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnPGNAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCPGNAccounts()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnPGNOffices_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frm = new frmPGNOffices();
+            frm.ShowDialog();
+        }
+
+        private void btnRequests_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCPGNRequests()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void UpdateThread_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var updateNow = true;
+            while (updateNow)
+            {
+                Thread.Sleep(1000);
+                if (UpdateHelpers.InstallUpdateSyncWithInfo())
+                    Invoke(new Action(() =>
+                    {
+                        updateNow = false;
+                        lblUpdate.Caption = @"EPiSv3: Update available(the system is updating)";
+                        UpdateHelpers.applicationDeployment.UpdateCompleted += (se, ev) =>
+                        {
+                            new frmUpdateNotification().ShowDialog(this);
+                        };
+                        UpdateHelpers.applicationDeployment.UpdateProgressChanged += (se, ev) =>
+                        {
+                            lblUpdate.Caption =
+                                $@"EPiSv3: Update available(the system is updating) {ev.ProgressPercentage}%";
+                        };
+                        UpdateHelpers.applicationDeployment.UpdateAsync();
+                    }));
+            }
         }
     }
 }

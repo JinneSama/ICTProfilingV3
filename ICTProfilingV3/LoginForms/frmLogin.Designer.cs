@@ -28,93 +28,166 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
+            this.pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
+            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.txtUsername = new DevExpress.XtraEditors.TextEdit();
+            this.lblversion = new DevExpress.XtraEditors.LabelControl();
+            this.chkRemember = new DevExpress.XtraEditors.CheckEdit();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // labelControl1
+            // pictureEdit2
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(20, 326);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(50, 15);
-            this.labelControl1.TabIndex = 74;
-            this.labelControl1.Text = "Password";
+            this.pictureEdit2.EditValue = global::ICTProfilingV3.Properties.Resources.PGIS;
+            this.pictureEdit2.Location = new System.Drawing.Point(14, 143);
+            this.pictureEdit2.Name = "pictureEdit2";
+            this.pictureEdit2.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit2.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.pictureEdit2.Size = new System.Drawing.Size(355, 80);
+            this.pictureEdit2.TabIndex = 91;
             // 
-            // labelControl2
+            // pictureEdit1
             // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(20, 302);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(53, 15);
-            this.labelControl2.TabIndex = 71;
-            this.labelControl2.Text = "Username";
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogin.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnLogin.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnLogin.Appearance.Options.UseBackColor = true;
-            this.btnLogin.Appearance.Options.UseForeColor = true;
-            this.btnLogin.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.apply_16x16;
-            this.btnLogin.Location = new System.Drawing.Point(266, 347);
-            this.btnLogin.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(98, 28);
-            this.btnLogin.TabIndex = 89;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.pictureEdit1.EditValue = global::ICTProfilingV3.Properties.Resources.nv_logo;
+            this.pictureEdit1.Location = new System.Drawing.Point(105, 12);
+            this.pictureEdit1.Name = "pictureEdit1";
+            this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEdit1.Properties.Appearance.BackColor2 = System.Drawing.Color.Transparent;
+            this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+            this.pictureEdit1.Size = new System.Drawing.Size(175, 125);
+            this.pictureEdit1.TabIndex = 90;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(78, 323);
+            this.txtPassword.Location = new System.Drawing.Point(11, 81);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(286, 20);
+            this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Properties.Appearance.Options.UseFont = true;
+            this.txtPassword.Properties.UseSystemPasswordChar = true;
+            this.txtPassword.Size = new System.Drawing.Size(331, 28);
             this.txtPassword.TabIndex = 73;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(78, 299);
+            this.txtUsername.Location = new System.Drawing.Point(11, 49);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(286, 20);
+            this.txtUsername.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Properties.Appearance.Options.UseFont = true;
+            this.txtUsername.Size = new System.Drawing.Size(331, 28);
             this.txtUsername.TabIndex = 72;
+            // 
+            // lblversion
+            // 
+            this.lblversion.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblversion.Appearance.Options.UseFont = true;
+            this.lblversion.Appearance.Options.UseTextOptions = true;
+            this.lblversion.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblversion.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lblversion.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblversion.Location = new System.Drawing.Point(14, 229);
+            this.lblversion.Name = "lblversion";
+            this.lblversion.Size = new System.Drawing.Size(355, 27);
+            this.lblversion.TabIndex = 92;
+            this.lblversion.Text = "Version";
+            // 
+            // chkRemember
+            // 
+            this.chkRemember.Location = new System.Drawing.Point(11, 114);
+            this.chkRemember.Name = "chkRemember";
+            this.chkRemember.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.chkRemember.Properties.Appearance.Options.UseForeColor = true;
+            this.chkRemember.Properties.Caption = "Remember Me?";
+            this.chkRemember.Size = new System.Drawing.Size(113, 19);
+            this.chkRemember.TabIndex = 93;
+            // 
+            // groupControl1
+            // 
+            this.groupControl1.Controls.Add(this.btnLogin);
+            this.groupControl1.Controls.Add(this.labelControl1);
+            this.groupControl1.Controls.Add(this.txtUsername);
+            this.groupControl1.Controls.Add(this.chkRemember);
+            this.groupControl1.Controls.Add(this.txtPassword);
+            this.groupControl1.Location = new System.Drawing.Point(14, 262);
+            this.groupControl1.Name = "groupControl1";
+            this.groupControl1.Size = new System.Drawing.Size(353, 180);
+            this.groupControl1.TabIndex = 94;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseTextOptions = true;
+            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControl1.Location = new System.Drawing.Point(11, 17);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(331, 27);
+            this.labelControl1.TabIndex = 94;
+            this.labelControl1.Text = "Date";
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Appearance.BackColor = System.Drawing.Color.Green;
+            this.btnLogin.Appearance.BorderColor = System.Drawing.Color.Transparent;
+            this.btnLogin.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Appearance.Options.UseBackColor = true;
+            this.btnLogin.Appearance.Options.UseBorderColor = true;
+            this.btnLogin.Appearance.Options.UseFont = true;
+            this.btnLogin.Location = new System.Drawing.Point(11, 139);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(331, 30);
+            this.btnLogin.TabIndex = 95;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(388, 415);
-            this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.labelControl2);
+            this.ClientSize = new System.Drawing.Size(379, 466);
+            this.Controls.Add(this.groupControl1);
+            this.Controls.Add(this.lblversion);
+            this.Controls.Add(this.pictureEdit2);
+            this.Controls.Add(this.pictureEdit1);
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtPassword;
         private DevExpress.XtraEditors.TextEdit txtUsername;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit2;
+        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.LabelControl lblversion;
+        private DevExpress.XtraEditors.CheckEdit chkRemember;
+        private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
     }
 }

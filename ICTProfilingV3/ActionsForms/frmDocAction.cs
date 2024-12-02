@@ -232,6 +232,13 @@ namespace ICTProfilingV3.ActionsForms
                 deliveries.Actions.Add(Action);
                 unitOfWork.Save();
             }
+
+            if (actionType.RequestType == RequestType.PGN)
+            {
+                var deliveries = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == actionType.Id);
+                deliveries.Actions.Add(Action);
+                unitOfWork.Save();
+            }
         }
 
         private void frmDocAction_Load(object sender, EventArgs e)

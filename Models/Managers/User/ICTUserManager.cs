@@ -35,6 +35,7 @@ namespace EntityManager.Managers.User
             user.UserName = userModel.Username;
             user.Email = userModel.Username + "@gmail.com";
 
+            await _userManager.UpdateAsync(user);
             var getRole = _roleManager.FindById(user.Roles.FirstOrDefault().RoleId);
             if(getRole.Name != userModel.role)
             {

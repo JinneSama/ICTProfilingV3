@@ -144,6 +144,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
 
             main.mainPanel.Controls.Add(new UCTechSpecs()
             {
+                IsTechSpecs = true,
                 Dock = DockStyle.Fill,
                 filterText = pr.PurchaseRequest.TechSpecsId.ToString()
             });

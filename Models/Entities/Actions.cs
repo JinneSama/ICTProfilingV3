@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Models.Entities
 {
@@ -53,6 +50,9 @@ namespace Models.Entities
         public int? CustomerActionSheetId { get; set; }
         [ForeignKey("CustomerActionSheetId")]
         public CustomerActionSheet CustomerActionSheet { get; set; }
+        public int? PGNRequestId { get; set; }
+        [ForeignKey("PGNRequestId")]
+        public PGNRequests PGNRequests { get; set; }
 
         public string CreatedById { get; set; }
 

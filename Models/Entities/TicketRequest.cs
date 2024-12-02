@@ -1,6 +1,7 @@
 ﻿using Models.Enums;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,5 +26,11 @@ namespace Models.Entities
         public Deliveries Deliveries { get; set; }
         public TechSpecs TechSpecs { get; set; }
         public Repairs Repairs { get; set; }
+        public bool? IsRepairTechSpecs{ get; set; }
+        public ICollection<TicketRequestStatus> TicketRequestStatus { get; set; }
+        public TicketRequest()
+        {
+            TicketRequestStatus = new HashSet<TicketRequestStatus>();
+        }
     }
 }

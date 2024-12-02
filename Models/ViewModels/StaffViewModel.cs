@@ -1,4 +1,6 @@
 ﻿using Models.Entities;
+using Models.Enums;
+using System;
 using System.Drawing;
 
 namespace Models.ViewModels
@@ -6,6 +8,24 @@ namespace Models.ViewModels
     public class StaffViewModel
     {
         public Users Users { get; set; }
-        public Image Image => Image.FromFile("C:\\Users\\Scott\\Downloads\\employee.jpg");
+        public Image Image => string.IsNullOrWhiteSpace(Staff.ImagePath) ? null : Image.FromFile(Staff.ImagePath);
+        public ITStaff Staff { get; set; }
+        public bool? Mark { get; set; }
+        public string Initials => GetInitials(Users.FullName);
+        public string Section => EnumHelper.GetEnumDescription(Staff.Section);
+
+        static string GetInitials(string fullName)
+        {
+            string[] nameParts = fullName.Split(' ', (char)StringSplitOptions.RemoveEmptyEntries);
+            string initials = string.Empty;
+            foreach (string part in nameParts)
+            {
+                if (!string.IsNullOrEmpty(part))
+                {
+                    initials += part[0];
+                }
+            }
+            return initials.ToUpper();
+        }
     }
 }

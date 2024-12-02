@@ -48,6 +48,11 @@ namespace Models.Entities
 
         [ForeignKey("PPESpecsId")]
         public PPEsSpecs PPEsSpecs { get; set; }
+
+        public int? TechSpecsId { get; set; }
+
+        [ForeignKey("TechSpecsId")]
+        public TechSpecs TechSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
 
         public Repairs()

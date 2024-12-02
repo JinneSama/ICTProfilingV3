@@ -72,6 +72,15 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
                    x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
 
+            if (_actionType.RequestType == RequestType.PGN)
+                return (await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == _actionType.Id,
+                   x => x.Actions.Select(a => a.CreatedBy),
+                   x => x.Actions.Select(a => a.ProgramDropdowns),
+                   x => x.Actions.Select(a => a.ActivityDropdowns),
+                   x => x.Actions.Select(a => a.MainActDropdowns),
+                   x => x.Actions.Select(a => a.SubActivityDropdowns),
+                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+
             return null;
 
         }
