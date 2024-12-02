@@ -80,6 +80,8 @@
             this.groupRequestedSpecs = new DevExpress.XtraEditors.GroupControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.lblRepairNo = new DevExpress.XtraEditors.LabelControl();
+            this.lblRepair = new DevExpress.XtraEditors.LabelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -114,6 +116,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.lblRepairNo);
+            this.panel1.Controls.Add(this.lblRepair);
             this.panel1.Controls.Add(this.lblRequestNo);
             this.panel1.Controls.Add(this.labelControl7);
             this.panel1.Controls.Add(this.labelControl16);
@@ -703,6 +707,36 @@
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // lblRepairNo
+            // 
+            this.lblRepairNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRepairNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblRepairNo.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblRepairNo.Appearance.Options.UseFont = true;
+            this.lblRepairNo.Appearance.Options.UseForeColor = true;
+            this.lblRepairNo.LineVisible = true;
+            this.lblRepairNo.Location = new System.Drawing.Point(575, 3);
+            this.lblRepairNo.Name = "lblRepairNo";
+            this.lblRepairNo.Size = new System.Drawing.Size(33, 30);
+            this.lblRepairNo.TabIndex = 6;
+            this.lblRepairNo.Text = "100";
+            this.lblRepairNo.Visible = false;
+            // 
+            // lblRepair
+            // 
+            this.lblRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRepair.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblRepair.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblRepair.Appearance.Options.UseFont = true;
+            this.lblRepair.Appearance.Options.UseForeColor = true;
+            this.lblRepair.LineVisible = true;
+            this.lblRepair.Location = new System.Drawing.Point(466, 3);
+            this.lblRepair.Name = "lblRepair";
+            this.lblRepair.Size = new System.Drawing.Size(103, 30);
+            this.lblRepair.TabIndex = 5;
+            this.lblRepair.Text = "Repair No.:";
+            this.lblRepair.Visible = false;
+            // 
             // frmAddEditTechSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -808,5 +842,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraEditors.LabelControl lblRepairNo;
+        private DevExpress.XtraEditors.LabelControl lblRepair;
     }
 }

@@ -44,7 +44,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDeleteSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnAddMarked = new DevExpress.XtraEditors.SimpleButton();
+            this.btnDeleteAll = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gcSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteSpecs)).BeginInit();
@@ -165,27 +165,27 @@
             this.gridColumn7.VisibleIndex = 0;
             this.gridColumn7.Width = 41;
             // 
-            // btnAddMarked
+            // btnDeleteAll
             // 
-            this.btnAddMarked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddMarked.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnAddMarked.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAddMarked.Appearance.Options.UseBackColor = true;
-            this.btnAddMarked.Appearance.Options.UseForeColor = true;
-            this.btnAddMarked.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
-            this.btnAddMarked.Location = new System.Drawing.Point(6, 45);
-            this.btnAddMarked.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddMarked.Name = "btnAddMarked";
-            this.btnAddMarked.Size = new System.Drawing.Size(134, 28);
-            this.btnAddMarked.TabIndex = 173;
-            this.btnAddMarked.Text = "Delete All";
+            this.btnDeleteAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDeleteAll.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnDeleteAll.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnDeleteAll.Appearance.Options.UseBackColor = true;
+            this.btnDeleteAll.Appearance.Options.UseForeColor = true;
+            this.btnDeleteAll.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            this.btnDeleteAll.Location = new System.Drawing.Point(6, 45);
+            this.btnDeleteAll.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDeleteAll.Name = "btnDeleteAll";
+            this.btnDeleteAll.Size = new System.Drawing.Size(134, 28);
+            this.btnDeleteAll.TabIndex = 173;
+            this.btnDeleteAll.Text = "Delete All";
             // 
             // frmAddEditStandardPRSpecsDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1120, 606);
-            this.Controls.Add(this.btnAddMarked);
+            this.Controls.Add(this.btnDeleteAll);
             this.Controls.Add(this.gcSpecsDetails);
             this.Controls.Add(this.panel1);
             this.Name = "frmAddEditStandardPRSpecsDetails";
@@ -210,6 +210,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDeleteSpecs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraEditors.SimpleButton btnAddMarked;
+        private DevExpress.XtraEditors.SimpleButton btnDeleteAll;
     }
 }

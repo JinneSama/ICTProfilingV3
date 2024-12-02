@@ -11,6 +11,7 @@ namespace Models.Enums
         [Description("Repair")]
         Repairs = 2,
         PR = 3,
-        CAS = 4
+        CAS = 4,
+        PGN = 5
     }
 }

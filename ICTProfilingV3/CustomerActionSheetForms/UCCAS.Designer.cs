@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
             this.gcCAS = new DevExpress.XtraGrid.GridControl();
             this.gridCAS = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -59,6 +59,8 @@
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
+            this.txtName = new DevExpress.XtraEditors.TextEdit();
+            this.txtAssistedBy = new DevExpress.XtraEditors.TextEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.lblCASNo = new DevExpress.XtraEditors.LabelControl();
@@ -66,8 +68,9 @@
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.txtAssistedBy = new DevExpress.XtraEditors.TextEdit();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).BeginInit();
@@ -82,12 +85,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlDeliveries
@@ -95,9 +99,9 @@
             this.pnlDeliveries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDeliveries.Controls.Add(this.gcCAS);
-            this.pnlDeliveries.Location = new System.Drawing.Point(0, 0);
+            this.pnlDeliveries.Location = new System.Drawing.Point(0, 39);
             this.pnlDeliveries.Name = "pnlDeliveries";
-            this.pnlDeliveries.Size = new System.Drawing.Size(578, 658);
+            this.pnlDeliveries.Size = new System.Drawing.Size(578, 619);
             this.pnlDeliveries.TabIndex = 5;
             // 
             // gcCAS
@@ -113,7 +117,7 @@
             this.gcCAS.Name = "gcCAS";
             this.gcCAS.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete});
-            this.gcCAS.Size = new System.Drawing.Size(574, 654);
+            this.gcCAS.Size = new System.Drawing.Size(574, 615);
             this.gcCAS.TabIndex = 0;
             this.gcCAS.UseEmbeddedNavigator = true;
             this.gcCAS.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -211,9 +215,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -242,7 +246,7 @@
             this.groupControl3.Controls.Add(this.txtContactNo);
             this.groupControl3.Controls.Add(this.txtName);
             this.groupControl3.Controls.Add(this.txtAssistedBy);
-            this.groupControl3.Location = new System.Drawing.Point(582, 58);
+            this.groupControl3.Location = new System.Drawing.Point(581, 97);
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(820, 359);
             this.groupControl3.TabIndex = 88;
@@ -394,93 +398,6 @@
             this.txtContactNo.Size = new System.Drawing.Size(368, 22);
             this.txtContactNo.TabIndex = 4;
             // 
-            // pnlButtons
-            // 
-            this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlButtons.Controls.Add(this.btnAdd);
-            this.pnlButtons.Controls.Add(this.lblCASNo);
-            this.pnlButtons.Controls.Add(this.labelControl1);
-            this.pnlButtons.Controls.Add(this.btnEdit);
-            this.pnlButtons.Location = new System.Drawing.Point(582, 2);
-            this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(820, 50);
-            this.pnlButtons.TabIndex = 89;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnAdd.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAdd.Appearance.Options.UseBackColor = true;
-            this.btnAdd.Appearance.Options.UseForeColor = true;
-            this.btnAdd.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x165;
-            this.btnAdd.Location = new System.Drawing.Point(723, 10);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(93, 28);
-            this.btnAdd.TabIndex = 114;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // lblCASNo
-            // 
-            this.lblCASNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblCASNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lblCASNo.Appearance.Options.UseFont = true;
-            this.lblCASNo.Appearance.Options.UseForeColor = true;
-            this.lblCASNo.Location = new System.Drawing.Point(165, 10);
-            this.lblCASNo.Name = "lblCASNo";
-            this.lblCASNo.Size = new System.Drawing.Size(0, 30);
-            this.lblCASNo.TabIndex = 113;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 10);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(147, 30);
-            this.labelControl1.TabIndex = 112;
-            this.labelControl1.Text = "CAS Repair No.:";
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnEdit.Appearance.Options.UseBackColor = true;
-            this.btnEdit.Appearance.Options.UseForeColor = true;
-            this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(626, 10);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(93, 28);
-            this.btnEdit.TabIndex = 110;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // tabDetails
-            // 
-            this.tabDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabDetails.Location = new System.Drawing.Point(582, 423);
-            this.tabDetails.Name = "tabDetails";
-            this.tabDetails.SelectedTabPage = this.tabAction;
-            this.tabDetails.Size = new System.Drawing.Size(820, 235);
-            this.tabDetails.TabIndex = 90;
-            this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabAction});
-            // 
-            // tabAction
-            // 
-            this.tabAction.Name = "tabAction";
-            this.tabAction.Size = new System.Drawing.Size(818, 210);
-            this.tabAction.Text = "Action";
-            // 
             // txtName
             // 
             this.txtName.EditValue = "";
@@ -501,10 +418,135 @@
             this.txtAssistedBy.Size = new System.Drawing.Size(368, 22);
             this.txtAssistedBy.TabIndex = 133;
             // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnAdd);
+            this.pnlButtons.Controls.Add(this.lblCASNo);
+            this.pnlButtons.Controls.Add(this.labelControl1);
+            this.pnlButtons.Controls.Add(this.btnEdit);
+            this.pnlButtons.Location = new System.Drawing.Point(579, 39);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(826, 50);
+            this.pnlButtons.TabIndex = 89;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnAdd.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAdd.Appearance.Options.UseBackColor = true;
+            this.btnAdd.Appearance.Options.UseForeColor = true;
+            this.btnAdd.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x165;
+            this.btnAdd.Location = new System.Drawing.Point(719, 8);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(93, 28);
+            this.btnAdd.TabIndex = 114;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // lblCASNo
+            // 
+            this.lblCASNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblCASNo.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblCASNo.Appearance.Options.UseFont = true;
+            this.lblCASNo.Appearance.Options.UseForeColor = true;
+            this.lblCASNo.Location = new System.Drawing.Point(163, 8);
+            this.lblCASNo.Name = "lblCASNo";
+            this.lblCASNo.Size = new System.Drawing.Size(0, 30);
+            this.lblCASNo.TabIndex = 113;
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.Appearance.Options.UseForeColor = true;
+            this.labelControl1.Location = new System.Drawing.Point(10, 8);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(147, 30);
+            this.labelControl1.TabIndex = 112;
+            this.labelControl1.Text = "CAS Repair No.:";
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnEdit.Appearance.Options.UseBackColor = true;
+            this.btnEdit.Appearance.Options.UseForeColor = true;
+            this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
+            this.btnEdit.Location = new System.Drawing.Point(622, 8);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(93, 28);
+            this.btnEdit.TabIndex = 110;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // tabDetails
+            // 
+            this.tabDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabDetails.Location = new System.Drawing.Point(582, 462);
+            this.tabDetails.Name = "tabDetails";
+            this.tabDetails.SelectedTabPage = this.tabAction;
+            this.tabDetails.Size = new System.Drawing.Size(820, 196);
+            this.tabDetails.TabIndex = 90;
+            this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabAction});
+            // 
+            // tabAction
+            // 
+            this.tabAction.Name = "tabAction";
+            this.tabAction.Size = new System.Drawing.Size(818, 171);
+            this.tabAction.Text = "Action";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.labelControl16);
+            this.panel1.Controls.Add(this.lblEpisNo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1405, 37);
+            this.panel1.TabIndex = 91;
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl16.Appearance.Options.UseFont = true;
+            this.labelControl16.Appearance.Options.UseForeColor = true;
+            this.labelControl16.Location = new System.Drawing.Point(24, 4);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(103, 30);
+            this.labelControl16.TabIndex = 2;
+            this.labelControl16.Text = "CAS Repair";
+            // 
+            // lblEpisNo
+            // 
+            this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblEpisNo.Appearance.Options.UseFont = true;
+            this.lblEpisNo.Appearance.Options.UseForeColor = true;
+            this.lblEpisNo.Location = new System.Drawing.Point(24, 3);
+            this.lblEpisNo.Name = "lblEpisNo";
+            this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
+            this.lblEpisNo.TabIndex = 1;
+            // 
             // UCCAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabDetails);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.groupControl3);
@@ -527,13 +569,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -575,5 +619,8 @@
         private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraEditors.TextEdit txtAssistedBy;
+        private System.Windows.Forms.Panel panel1;
+        private DevExpress.XtraEditors.LabelControl labelControl16;
+        private DevExpress.XtraEditors.LabelControl lblEpisNo;
     }
 }

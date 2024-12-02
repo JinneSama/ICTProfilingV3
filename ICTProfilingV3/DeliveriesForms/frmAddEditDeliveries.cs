@@ -3,6 +3,8 @@ using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers;
+using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -13,7 +15,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class frmAddEditDeliveries : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditDeliveries : DevExpress.XtraEditors.XtraForm, ITicketStatus
     {
         private IUnitOfWork unitOfWork;
         private Models.Entities.Deliveries _deliveries;
@@ -28,13 +30,13 @@ namespace ICTProfilingV3.DeliveriesForms
             LoadDropdowns();
             CreateTicket();
         }
-        public frmAddEditDeliveries(Deliveries deliveries , IUnitOfWork uow)
+        public frmAddEditDeliveries(Deliveries deliveries)
         {
             InitializeComponent();
             SaveType = SaveType.Update;
             _deliveries = deliveries;
             IsSave = true;
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
             LoadEquipmentSpecs();
         }
@@ -100,13 +102,13 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task DeleteDeliveries()
         {
-            await unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _deliveries.Id);
+            unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _deliveries.Id);
             await unitOfWork.SaveChangesAsync();
 
             unitOfWork.DeliveriesSpecsRepo.DeleteRange(x => x.DeliveriesId == _deliveries.Id);
             await unitOfWork.SaveChangesAsync();
 
-            await unitOfWork.DeliveriesRepo.DeleteByEx(x => x.Id == _deliveries.Id);
+            unitOfWork.DeliveriesRepo.DeleteByEx(x => x.Id == _deliveries.Id);
             await unitOfWork.SaveChangesAsync();
         }
 
@@ -120,6 +122,7 @@ namespace ICTProfilingV3.DeliveriesForms
         private async Task SaveDeliveries()
         {
             var deliveries = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == _deliveries.Id);
+            if (deliveries == null) return;
             deliveries.DateRequested = txtDate.DateTime;
             deliveries.RequestedById = (long)slueEmployee.EditValue;
             deliveries.Gender = (Gender)rdbtnGender.SelectedIndex;
@@ -130,7 +133,8 @@ namespace ICTProfilingV3.DeliveriesForms
             deliveries.PONo = txtPONo.Text;
             deliveries.ReceiptNo = txtDeliveryReceipt.Text;
 
-            unitOfWork.Save();
+            await unitOfWork.SaveChangesAsync();
+            await ModifyStatus(TicketStatus.Accepted, deliveries.Id);
         }
 
         private void btnAddSupplier_Click(object sender, EventArgs e)
@@ -149,6 +153,19 @@ namespace ICTProfilingV3.DeliveriesForms
         private void frmAddEditDeliveries_Load(object sender, EventArgs e)
         {
             LoadDetails();
+        }
+
+        public async Task ModifyStatus(TicketStatus status, int ticketId)
+        {
+            var ticketStatus = new TicketRequestStatus
+            {
+                Status = status,
+                DateStatusChanged = DateTime.UtcNow,
+                ChangedByUserId = UserStore.UserId,
+                TicketRequestId = ticketId
+            };
+            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

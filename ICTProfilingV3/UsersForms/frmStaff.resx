@@ -117,4 +117,302 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tvStaff.TileHtmlTemplate.Styles" xml:space="preserve">
+    <value>.root {
+	height: 84px;
+	font-family: "Segoe UI";
+	font-size: 14px;
+	background-color: @Window;
+	border-style: solid;
+	border-width: 0px;
+	border-left-width: 4px;
+	border-left-color: @Primary;
+}
+.content {
+	margin-top:18%;
+	margin-bottom:18%;
+	margin-Left:16px;
+	margin-right:20px;
+	display:flex;
+	background-color:@Window;
+}
+.position{
+	color: @White;
+	font-weight: bold;
+	background-color: Turquoise;
+	border-radius: 100px;
+	width: 20rem;
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.initials {
+	color: @White;
+	font-weight: bold;
+	background-color: @Primary;
+	border-radius: 100px;
+	width: 6rem;
+	height: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.photo {
+	width:6rem;
+	height:6rem;
+	border-radius:100px;
+	border: solid 1px @Primary;
+	object-fit:contain;
+	background-color:white;
+}
+.mail-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	margin-left: 8px;
+}
+.plaintext {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.date {
+	align-self:center;
+	text-align:right;
+}
+.from {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	margin-top:-4px;
+	font-weight:normal;
+}
+.subject {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.buttons {
+	margin-right:-6px;
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:flex-end;
+}
+</value>
+  </data>
+  <data name="tvStaff.TileHtmlTemplate.Template" xml:space="preserve">
+    <value>&lt;div class="root" id="root"&gt;
+	&lt;div class="content"&gt;
+			&lt;div class="initials" id="initials"&gt;${Initials}&lt;/div&gt;
+		&lt;div id="photo"&gt;&lt;img class="photo" src="${Image}"/&gt;&lt;/div&gt;
+		&lt;div class="mail-content"&gt;
+			&lt;div class="position" id="position"&gt;${Users.UserName}&lt;/div&gt;
+			&lt;div class="from" id="from"&gt;${Users.FullName}&lt;/div&gt;
+			&lt;div class="subject" id="subject"&gt;${Users.Position}&lt;/div&gt;
+		&lt;/div&gt;
+		&lt;div&gt;
+			&lt;div class="date" id="date"&gt;${Date}&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="Image.Styles" xml:space="preserve">
+    <value>.root {
+	height: 84px;
+	font-family: "Segoe UI";
+	font-size: 14px;
+	background-color: @Window;
+	border-style: solid;
+	border-width: 0px;
+	border-left-width: 4px;
+	border-left-color: @Primary;
+}
+.content {
+	margin-top:18%;
+	margin-bottom:18%;
+	margin-Left:16px;
+	margin-right:20px;
+	display:flex;
+	background-color:@Window;
+}
+.position{
+	color: @White;
+	font-weight: bold;
+	background-color: Turquoise;
+	border-radius: 100px;
+	width: 20rem;
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.initials {
+	color: @White;
+	font-weight: bold;
+	background-color: @Primary;
+	border-radius: 100px;
+	width: 6rem;
+	height: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.photo {
+	width:6rem;
+	height:6rem;
+	border-radius:100px;
+	border: solid 1px @Primary;
+	object-fit:contain;
+	background-color:white;
+}
+.mail-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	margin-left: 8px;
+}
+.plaintext {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.date {
+	align-self:center;
+	text-align:right;
+}
+.from {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	margin-top:-4px;
+	font-weight:normal;
+}
+.subject {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.buttons {
+	margin-right:-6px;
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:flex-end;
+}
+</value>
+  </data>
+  <data name="Image.Template" xml:space="preserve">
+    <value>&lt;div class="root" id="root"&gt;
+	&lt;div class="content"&gt;
+			&lt;div id="photo"&gt;&lt;img class="photo" src="${Image}"/&gt;&lt;/div&gt;
+		&lt;div class="mail-content"&gt;
+			&lt;div class="position" id="position"&gt;${Users.UserName}&lt;/div&gt;
+			&lt;div class="from" id="from"&gt;${Users.FullName}&lt;/div&gt;
+			&lt;div class="subject" id="subject"&gt;${Users.Position}&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="Initials.Styles" xml:space="preserve">
+    <value>.root {
+	height: 84px;
+	font-family: "Segoe UI";
+	font-size: 14px;
+	background-color: @Window;
+	border-style: solid;
+	border-width: 0px;
+	border-left-width: 4px;
+	border-left-color: @Primary;
+}
+.content {
+	margin-top:18%;
+	margin-bottom:18%;
+	margin-Left:16px;
+	margin-right:20px;
+	display:flex;
+	background-color:@Window;
+}
+.position{
+	color: @White;
+	font-weight: bold;
+	background-color: Turquoise;
+	border-radius: 100px;
+	width: 20rem;
+	height: 2.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.initials {
+	color: @White;
+	font-weight: bold;
+	background-color: @Primary;
+	border-radius: 100px;
+	width: 6rem;
+	height: 6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.photo {
+	width:6rem;
+	height:6rem;
+	border-radius:100px;
+	border: solid 1px @Primary;
+	object-fit:contain;
+	background-color:white;
+}
+.mail-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	margin-left: 8px;
+}
+.plaintext {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.date {
+	align-self:center;
+	text-align:right;
+}
+.from {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+	margin-top:-4px;
+	font-weight:normal;
+}
+.subject {
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.buttons {
+	margin-right:-6px;
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:flex-end;
+}
+</value>
+  </data>
+  <data name="Initials.Template" xml:space="preserve">
+    <value>&lt;div class="root" id="root"&gt;
+	&lt;div class="content"&gt;
+			&lt;div class="initials" id="initials"&gt;${Initials}&lt;/div&gt;
+		&lt;div class="mail-content"&gt;
+			&lt;div class="position" id="position"&gt;${Users.UserName}&lt;/div&gt;
+			&lt;div class="from" id="from"&gt;${Users.FullName}&lt;/div&gt;
+			&lt;div class="subject" id="subject"&gt;${Users.Position}&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
 </root>

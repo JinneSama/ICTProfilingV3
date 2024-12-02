@@ -48,7 +48,8 @@ namespace Models.HRMISEntites
                     Employee = x.fldLastname + ", " + x.fldFirstname + " " + x.fldMIddleName + " " + x.fldNameExt,
                     Office = x.flddetailed == true ? x.flddetailedTo : x.fldOfficeID,
                     Division = x.flddetailed == true ? x.flddetailedToDivision : x.fldDivision,
-                    Position = x.fldPosition
+                    Position = x.fldPosition,
+                    Username = x.fldUsername
                 });
             return await employees.ToListAsync();
         }

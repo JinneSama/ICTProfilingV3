@@ -131,7 +131,7 @@ namespace ICTProfilingV3.StandardPRForms
 
         private async Task DeletePR()
         {
-            await _unitOfWork.PurchaseRequestRepo.DeleteByEx(x => x.Id == _purchaseRequest.Id);
+            _unitOfWork.PurchaseRequestRepo.DeleteByEx(x => x.Id == _purchaseRequest.Id);
             await _unitOfWork.SaveChangesAsync();
         }
 

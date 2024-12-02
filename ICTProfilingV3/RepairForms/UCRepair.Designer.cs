@@ -44,12 +44,14 @@
             this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.hplPPE = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnTechSpecs = new DevExpress.XtraEditors.SimpleButton();
             this.btnLedger = new DevExpress.XtraEditors.SimpleButton();
             this.btnSignatories = new DevExpress.XtraEditors.SimpleButton();
             this.btnFindings = new DevExpress.XtraEditors.SimpleButton();
@@ -106,13 +108,13 @@
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
-            this.hplPPE = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridRepair)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -147,7 +149,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPreparedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -280,6 +281,12 @@
             this.gridColumn4.VisibleIndex = 4;
             this.gridColumn4.Width = 87;
             // 
+            // hplPPE
+            // 
+            this.hplPPE.AutoHeight = false;
+            this.hplPPE.Name = "hplPPE";
+            this.hplPPE.Click += new System.EventHandler(this.hplPPE_Click);
+            // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Issued To";
@@ -333,6 +340,10 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnTechSpecs);
             this.pnlButtons.Controls.Add(this.btnLedger);
             this.pnlButtons.Controls.Add(this.btnSignatories);
             this.pnlButtons.Controls.Add(this.btnFindings);
@@ -340,20 +351,36 @@
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnTR);
             this.pnlButtons.Controls.Add(this.btnEdit);
-            this.pnlButtons.Location = new System.Drawing.Point(582, 39);
+            this.pnlButtons.Location = new System.Drawing.Point(579, 39);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(1296, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(1301, 50);
             this.pnlButtons.TabIndex = 86;
+            // 
+            // btnTechSpecs
+            // 
+            this.btnTechSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTechSpecs.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnTechSpecs.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnTechSpecs.Appearance.Options.UseBackColor = true;
+            this.btnTechSpecs.Appearance.Options.UseForeColor = true;
+            this.btnTechSpecs.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.boreport_16x16;
+            this.btnTechSpecs.Location = new System.Drawing.Point(505, 9);
+            this.btnTechSpecs.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTechSpecs.Name = "btnTechSpecs";
+            this.btnTechSpecs.Size = new System.Drawing.Size(129, 28);
+            this.btnTechSpecs.TabIndex = 117;
+            this.btnTechSpecs.Text = "TechSpecs";
+            this.btnTechSpecs.Click += new System.EventHandler(this.btnTechSpecs_Click);
             // 
             // btnLedger
             // 
             this.btnLedger.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLedger.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLedger.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnLedger.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnLedger.Appearance.Options.UseBackColor = true;
             this.btnLedger.Appearance.Options.UseForeColor = true;
             this.btnLedger.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x16;
-            this.btnLedger.Location = new System.Drawing.Point(1042, 10);
+            this.btnLedger.Location = new System.Drawing.Point(1044, 9);
             this.btnLedger.Margin = new System.Windows.Forms.Padding(2);
             this.btnLedger.Name = "btnLedger";
             this.btnLedger.Size = new System.Drawing.Size(108, 28);
@@ -364,12 +391,12 @@
             // btnSignatories
             // 
             this.btnSignatories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSignatories.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSignatories.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnSignatories.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSignatories.Appearance.Options.UseBackColor = true;
             this.btnSignatories.Appearance.Options.UseForeColor = true;
             this.btnSignatories.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.editcontact_16x16;
-            this.btnSignatories.Location = new System.Drawing.Point(636, 10);
+            this.btnSignatories.Location = new System.Drawing.Point(638, 9);
             this.btnSignatories.Margin = new System.Windows.Forms.Padding(2);
             this.btnSignatories.Name = "btnSignatories";
             this.btnSignatories.Size = new System.Drawing.Size(129, 28);
@@ -380,12 +407,12 @@
             // btnFindings
             // 
             this.btnFindings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnFindings.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnFindings.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnFindings.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnFindings.Appearance.Options.UseBackColor = true;
             this.btnFindings.Appearance.Options.UseForeColor = true;
             this.btnFindings.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.lookup_reference_16x162;
-            this.btnFindings.Location = new System.Drawing.Point(769, 10);
+            this.btnFindings.Location = new System.Drawing.Point(771, 9);
             this.btnFindings.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindings.Name = "btnFindings";
             this.btnFindings.Size = new System.Drawing.Size(172, 28);
@@ -396,10 +423,10 @@
             // lblRepairNo
             // 
             this.lblRepairNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblRepairNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblRepairNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblRepairNo.Appearance.Options.UseFont = true;
             this.lblRepairNo.Appearance.Options.UseForeColor = true;
-            this.lblRepairNo.Location = new System.Drawing.Point(100, 10);
+            this.lblRepairNo.Location = new System.Drawing.Point(98, 8);
             this.lblRepairNo.Name = "lblRepairNo";
             this.lblRepairNo.Size = new System.Drawing.Size(0, 30);
             this.lblRepairNo.TabIndex = 113;
@@ -407,10 +434,10 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Appearance.Options.UseForeColor = true;
-            this.labelControl8.Location = new System.Drawing.Point(12, 10);
+            this.labelControl8.Location = new System.Drawing.Point(10, 8);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(83, 30);
             this.labelControl8.TabIndex = 112;
@@ -419,12 +446,12 @@
             // btnTR
             // 
             this.btnTR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnTR.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnTR.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnTR.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnTR.Appearance.Options.UseBackColor = true;
             this.btnTR.Appearance.Options.UseForeColor = true;
             this.btnTR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x161;
-            this.btnTR.Location = new System.Drawing.Point(1154, 10);
+            this.btnTR.Location = new System.Drawing.Point(1156, 9);
             this.btnTR.Margin = new System.Windows.Forms.Padding(2);
             this.btnTR.Name = "btnTR";
             this.btnTR.Size = new System.Drawing.Size(138, 28);
@@ -435,12 +462,12 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnEdit.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(945, 10);
+            this.btnEdit.Location = new System.Drawing.Point(947, 9);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -1021,12 +1048,6 @@
             this.tabAction.Size = new System.Drawing.Size(1295, 204);
             this.tabAction.Text = "Action";
             // 
-            // hplPPE
-            // 
-            this.hplPPE.AutoHeight = false;
-            this.hplPPE.Name = "hplPPE";
-            this.hplPPE.Click += new System.EventHandler(this.hplPPE_Click);
-            // 
             // UCRepair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1049,6 +1070,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridRepair)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
@@ -1088,7 +1110,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPreparedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.hplPPE)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1169,5 +1190,6 @@
         private DevExpress.XtraEditors.SimpleButton btnLedger;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplPPE;
+        private DevExpress.XtraEditors.SimpleButton btnTechSpecs;
     }
 }

@@ -46,5 +46,11 @@ namespace EntityManager.Context
         public DbSet<StandardPRSpecs> StandardPRSpecs { get; set; }
         public DbSet<StandardPRSpecsDetails> standardPRSpecsDetails { get; set; }
         public DbSet<PRStandardPRSpecs> PRStandardPRSpecs { get; set; }
+        public DbSet<PGNAccounts> PGNAccounts { get; set; }
+        public DbSet<PGNDocuments> PGNDocuments { get; set; }
+        public DbSet<PGNMacAddresses> PGNMacAddresses { get; set; }
+        public DbSet<PGNNonEmployee> PGNNonEmployees { get; set; }
+        public DbSet<PGNRequests> PGNRequests { get; set; }
+        public DbSet<PGNGroupOffices> PGNGroupOffices { get; set; }
     }
 }

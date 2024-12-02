@@ -41,10 +41,12 @@ namespace Models.Entities
         private Users NotedByUsers { get; set; }
         public virtual ICollection<TechSpecsICTSpecs> TechSpecsICTSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        public virtual ICollection<Repairs> Repairs { get; set; }
         public TechSpecs()
         {
             TechSpecsICTSpecs = new HashSet<TechSpecsICTSpecs>();
             Actions = new HashSet<Actions>();
+            Repairs = new HashSet<Repairs>();
         }
     }
 }

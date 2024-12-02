@@ -1,7 +1,24 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ICTProfilingV3.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Username" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RememberMe" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NetworkPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\172.17.16.244\ICTv2_Repositories\ICTv3Documents</Value>
+    </Setting>
+    <Setting Name="NetworkUsername" Type="System.String" Scope="User">
+      <Value Profile="(Default)">pitd.jsilao</Value>
+    </Setting>
+    <Setting Name="NetworkPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">WcZLRX</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

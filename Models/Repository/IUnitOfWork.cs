@@ -33,6 +33,14 @@ namespace Models.Repository
         IGenericRepository<StandardPRSpecs> StandardPRSpecsRepo { get; }
         IGenericRepository<StandardPRSpecsDetails> StandardPRSpecsDetailsRepo { get; }
         IGenericRepository<PRStandardPRSpecs> PRStandardPRSpecsRepo { get; }
+        IGenericRepository<ITStaff> ITStaffRepo { get; }
+        IGenericRepository<TicketRequestStatus> TicketRequestStatusRepo { get; }
+        IGenericRepository<PGNAccounts> PGNAccountsRepo { get; }
+        IGenericRepository<PGNDocuments> PGNDocumentsRepo { get; }
+        IGenericRepository<PGNMacAddresses> PGNMacAddressesRepo { get; }
+        IGenericRepository<PGNNonEmployee> PGNNonEmployeeRepo { get; }
+        IGenericRepository<PGNRequests> PGNRequestsRepo { get; }
+        IGenericRepository<PGNGroupOffices> PGNGroupOfficesRepo { get; }
         void Save();
         Task SaveChangesAsync();
     }

@@ -15,6 +15,29 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>\\172.17.16.14\C%24\inetpub\wwwroot\episv3\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://172.17.16.14/episv3/</InstallUrl>
+    <ProductName>EPiSv3</ProductName>
+    <PublisherName>GO-PITD</PublisherName>
+    <SuiteName>EPiSv3</SuiteName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +57,21 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>EPIS_LOGO.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>DFFED669B70BAB38ADDB8D157BFEECB596E653E7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ICTProfilingV3_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v21.2.Core, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -58,6 +96,7 @@
     <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraCharts.v21.2.Extensions, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v21.2.UI, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v21.2.Wizard, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraDiagram.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -163,6 +202,12 @@
     <Compile Include="DashboardForms\UCRoutedActions.Designer.cs">
       <DependentUpon>UCRoutedActions.cs</DependentUpon>
     </Compile>
+    <Compile Include="DashboardForms\UCUserTasks.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCUserTasks.Designer.cs">
+      <DependentUpon>UCUserTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveriesForms\frmAddEditDeliveries.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +225,12 @@
     </Compile>
     <Compile Include="DeliveriesForms\frmAddEquipment.Designer.cs">
       <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmComparisonReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmComparisonReport.Designer.cs">
+      <DependentUpon>frmComparisonReport.cs</DependentUpon>
     </Compile>
     <Compile Include="DeliveriesForms\UCDeliveries.cs">
       <SubType>UserControl</SubType>
@@ -259,6 +310,72 @@
     <Compile Include="LookUpTables\frmTechSpecsBasis.Designer.cs">
       <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
     </Compile>
+    <Compile Include="PGNForms\frmAddEditAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmAddEditAccount.Designer.cs">
+      <DependentUpon>frmAddEditAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\frmAddEditRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmAddEditRequest.Designer.cs">
+      <DependentUpon>frmAddEditRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\frmAddRequestAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmAddRequestAccount.Designer.cs">
+      <DependentUpon>frmAddRequestAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\frmPGNOffices.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmPGNOffices.Designer.cs">
+      <DependentUpon>frmPGNOffices.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\frmSelectFromHRMIS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmSelectFromHRMIS.Designer.cs">
+      <DependentUpon>frmSelectFromHRMIS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\frmSelectNotee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PGNForms\frmSelectNotee.Designer.cs">
+      <DependentUpon>frmSelectNotee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\UCMacAdresses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PGNForms\UCMacAdresses.Designer.cs">
+      <DependentUpon>UCMacAdresses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNAccounts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNAccounts.Designer.cs">
+      <DependentUpon>UCPGNAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNRequests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNRequests.Designer.cs">
+      <DependentUpon>UCPGNRequests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNScanDocuments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PGNForms\UCPGNScanDocuments.Designer.cs">
+      <DependentUpon>UCPGNScanDocuments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PGNForms\UCRequestAccount.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PGNForms\UCRequestAccount.Designer.cs">
+      <DependentUpon>UCRequestAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="PPEInventoryForms\frmAddEditPPEEquipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -315,6 +432,42 @@
     <Compile Include="RepairForms\frmEditSignatories.Designer.cs">
       <DependentUpon>frmEditSignatories.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\frmAccomplishmentReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportForms\frmAccomplishmentReport.Designer.cs">
+      <DependentUpon>frmAccomplishmentReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptAccomplishment.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptAccomplishment.Designer.cs">
+      <DependentUpon>rptAccomplishment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptPGN.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptPGN.Designer.cs">
+      <DependentUpon>rptPGN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptRepairTR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptRepairTR.Designer.cs">
+      <DependentUpon>rptRepairTR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptStandardPR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptStandardPR.Designer.cs">
+      <DependentUpon>rptStandardPR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptTechSpecs.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptTechSpecs.Designer.cs">
+      <DependentUpon>rptTechSpecs.cs</DependentUpon>
+    </Compile>
     <Compile Include="StandardPRForms\frmAddEditStandardPR.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,11 +516,11 @@
     <Compile Include="RepairForms\UCRepair.Designer.cs">
       <DependentUpon>UCRepair.cs</DependentUpon>
     </Compile>
-    <Compile Include="ReportForms\DeliveriesReport.cs">
+    <Compile Include="ReportForms\rptDeliveries.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReportForms\DeliveriesReport.Designer.cs">
-      <DependentUpon>DeliveriesReport.cs</DependentUpon>
+    <Compile Include="ReportForms\rptDeliveries.Designer.cs">
+      <DependentUpon>rptDeliveries.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForms\frmReportViewer.cs">
       <SubType>Form</SubType>
@@ -411,6 +564,12 @@
     <Compile Include="TechSpecsForms\UCTechSpecs.Designer.cs">
       <DependentUpon>UCTechSpecs.cs</DependentUpon>
     </Compile>
+    <Compile Include="TicketRequestForms\frmAssignTo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TicketRequestForms\frmAssignTo.Designer.cs">
+      <DependentUpon>frmAssignTo.cs</DependentUpon>
+    </Compile>
     <Compile Include="TicketRequestForms\frmTypeOfRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -422,6 +581,12 @@
     </Compile>
     <Compile Include="TicketRequestForms\UCTARequestDashboard.Designer.cs">
       <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmUpdateNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmUpdateNotification.Designer.cs">
+      <DependentUpon>frmUpdateNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersForms\frmAddEditStaff.cs">
       <SubType>Form</SubType>
@@ -483,6 +648,9 @@
     <EmbeddedResource Include="DashboardForms\UCRoutedActions.resx">
       <DependentUpon>UCRoutedActions.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCUserTasks.resx">
+      <DependentUpon>UCUserTasks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\frmAddEditDeliveries.resx">
       <DependentUpon>frmAddEditDeliveries.cs</DependentUpon>
     </EmbeddedResource>
@@ -491,6 +659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\frmAddEquipment.resx">
       <DependentUpon>frmAddEquipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\frmComparisonReport.resx">
+      <DependentUpon>frmComparisonReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\UCDeliveries.resx">
       <DependentUpon>UCDeliveries.cs</DependentUpon>
@@ -531,6 +702,39 @@
     <EmbeddedResource Include="LookUpTables\frmTechSpecsBasis.resx">
       <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmAddEditAccount.resx">
+      <DependentUpon>frmAddEditAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmAddEditRequest.resx">
+      <DependentUpon>frmAddEditRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmAddRequestAccount.resx">
+      <DependentUpon>frmAddRequestAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmPGNOffices.resx">
+      <DependentUpon>frmPGNOffices.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmSelectFromHRMIS.resx">
+      <DependentUpon>frmSelectFromHRMIS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\frmSelectNotee.resx">
+      <DependentUpon>frmSelectNotee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\UCMacAdresses.resx">
+      <DependentUpon>UCMacAdresses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\UCPGNAccounts.resx">
+      <DependentUpon>UCPGNAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\UCPGNRequests.resx">
+      <DependentUpon>UCPGNRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\UCPGNScanDocuments.resx">
+      <DependentUpon>UCPGNScanDocuments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PGNForms\UCRequestAccount.resx">
+      <DependentUpon>UCRequestAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PPEInventoryForms\frmAddEditPPEEquipment.resx">
       <DependentUpon>frmAddEditPPEEquipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -569,6 +773,24 @@
     <EmbeddedResource Include="RepairForms\frmEditSignatories.resx">
       <DependentUpon>frmEditSignatories.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\frmAccomplishmentReport.resx">
+      <DependentUpon>frmAccomplishmentReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptAccomplishment.resx">
+      <DependentUpon>rptAccomplishment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptPGN.resx">
+      <DependentUpon>rptPGN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptRepairTR.resx">
+      <DependentUpon>rptRepairTR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptStandardPR.resx">
+      <DependentUpon>rptStandardPR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptTechSpecs.resx">
+      <DependentUpon>rptTechSpecs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StandardPRForms\frmAddEditStandardPR.resx">
       <DependentUpon>frmAddEditStandardPR.cs</DependentUpon>
     </EmbeddedResource>
@@ -593,8 +815,8 @@
     <EmbeddedResource Include="RepairForms\UCRepair.resx">
       <DependentUpon>UCRepair.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportForms\DeliveriesReport.resx">
-      <DependentUpon>DeliveriesReport.cs</DependentUpon>
+    <EmbeddedResource Include="ReportForms\rptDeliveries.resx">
+      <DependentUpon>rptDeliveries.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\frmReportViewer.resx">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
@@ -617,11 +839,17 @@
     <EmbeddedResource Include="TechSpecsForms\UCTechSpecs.resx">
       <DependentUpon>UCTechSpecs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TicketRequestForms\frmAssignTo.resx">
+      <DependentUpon>frmAssignTo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TicketRequestForms\frmTypeOfRequest.resx">
       <DependentUpon>frmTypeOfRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TicketRequestForms\UCTARequestDashboard.resx">
       <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmUpdateNotification.resx">
+      <DependentUpon>frmUpdateNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersForms\frmAddEditStaff.resx">
       <DependentUpon>frmAddEditStaff.cs</DependentUpon>
@@ -638,6 +866,7 @@
     <EmbeddedResource Include="UsersForms\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ICTProfilingV3_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Models.Entities.ActionsDropdowns.datasource" />
     <None Include="Properties\DataSources\Models.Entities.Brand.datasource" />
@@ -659,6 +888,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{3f290cc6-23e6-4500-8cfa-9df3c75c4013}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\EntityManager.csproj">
       <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>
       <Name>EntityManager</Name>
@@ -1230,6 +1463,163 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\printpreview_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printpreview_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printpreview_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adateoccurring_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh2_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adateoccurring_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x169.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bocustomer_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bocustomer_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bodetails_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bodetails_32x321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nv_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PGIS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\productcomparisons_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\productsalesreport_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boreport_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printpreview_16x164.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\publicfix_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste_32x322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\format_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x1610.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1636.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x167.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1637.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boposition2_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boposition2_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addgroupheader_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bodetails_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x161.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printarea_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printarea_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preview_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preview_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1638.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printpreview_16x165.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1639.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_16x1640.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x162.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward_16x163.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\printpreview_16x166.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Epis.ico" />
+    <Content Include="EPIS_LOGO.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -74,6 +74,12 @@
     <Compile Include="Entities\EquipmentSpecsDetails.cs" />
     <Compile Include="Entities\ITStaff.cs" />
     <Compile Include="Entities\Model.cs" />
+    <Compile Include="Entities\PGNAccounts.cs" />
+    <Compile Include="Entities\PGNDocuments.cs" />
+    <Compile Include="Entities\PGNGroupOffices.cs" />
+    <Compile Include="Entities\PGNMacAddresses.cs" />
+    <Compile Include="Entities\PGNNonEmployee.cs" />
+    <Compile Include="Entities\PGNRequests.cs" />
     <Compile Include="Entities\PPEs.cs" />
     <Compile Include="Entities\PPEsSpecs.cs" />
     <Compile Include="Entities\PPEsSpecsDetails.cs" />
@@ -90,15 +96,24 @@
     <Compile Include="Entities\TechSpecsICTSpecs.cs" />
     <Compile Include="Entities\TechSpecsICTSpecsDetails.cs" />
     <Compile Include="Entities\TicketRequest.cs" />
+    <Compile Include="Entities\TicketRequestStatus.cs" />
     <Compile Include="Entities\Users.cs" />
     <Compile Include="Enums\ActionCategory.cs" />
+    <Compile Include="Enums\CommunicationType.cs" />
     <Compile Include="Enums\Designation.cs" />
     <Compile Include="Enums\EnumHelper.cs" />
     <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Enums\PGNDesignations.cs" />
+    <Compile Include="Enums\PGNDeviceConnection.cs" />
+    <Compile Include="Enums\PGNDevices.cs" />
+    <Compile Include="Enums\PGNStatus.cs" />
+    <Compile Include="Enums\PGNTrafficSpeed.cs" />
+    <Compile Include="Enums\PGNUserType.cs" />
     <Compile Include="Enums\PPEStatus.cs" />
     <Compile Include="Enums\PRQuarter.cs" />
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Enums\SaveType.cs" />
+    <Compile Include="Enums\Sections.cs" />
     <Compile Include="Enums\TicketStatus.cs" />
     <Compile Include="Enums\Unit.cs" />
     <Compile Include="HRMISEntites\Division.cs">
@@ -126,6 +141,7 @@
     <Compile Include="HRMISEntites\Office.cs">
       <DependentUpon>HRMISv2Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Managers\ITicketStatus.cs" />
     <Compile Include="Managers\RoleManager.cs" />
     <Compile Include="Managers\Role\ICTRoleManager.cs" />
     <Compile Include="Managers\Role\IICTRoleManager.cs" />
@@ -133,55 +149,20 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202411091226537_Initial-Migration.cs" />
-    <Compile Include="Migrations\202411091226537_Initial-Migration.Designer.cs">
-      <DependentUpon>202411091226537_Initial-Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411091231550_NullableitemNoAndQuantity.cs" />
-    <Compile Include="Migrations\202411091231550_NullableitemNoAndQuantity.Designer.cs">
-      <DependentUpon>202411091231550_NullableitemNoAndQuantity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.cs" />
-    <Compile Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.Designer.cs">
-      <DependentUpon>202411091240286_PRStandardPRSpecsTotalCost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411091318187_PRAddReqById.cs" />
-    <Compile Include="Migrations\202411091318187_PRAddReqById.Designer.cs">
-      <DependentUpon>202411091318187_PRAddReqById.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411091319447_PRAddReqById1.cs" />
-    <Compile Include="Migrations\202411091319447_PRAddReqById1.Designer.cs">
-      <DependentUpon>202411091319447_PRAddReqById1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411091321473_PRAddQuarter.cs" />
-    <Compile Include="Migrations\202411091321473_PRAddQuarter.Designer.cs">
-      <DependentUpon>202411091321473_PRAddQuarter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411101026539_AddUsersInPR.cs" />
-    <Compile Include="Migrations\202411101026539_AddUsersInPR.Designer.cs">
-      <DependentUpon>202411101026539_AddUsersInPR.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411110129587_RepairDeliveredDate.cs" />
-    <Compile Include="Migrations\202411110129587_RepairDeliveredDate.Designer.cs">
-      <DependentUpon>202411110129587_RepairDeliveredDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411110902396_AddDeletedToProcesses.cs" />
-    <Compile Include="Migrations\202411110902396_AddDeletedToProcesses.Designer.cs">
-      <DependentUpon>202411110902396_AddDeletedToProcesses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411111023571_AddImagePathToITStaff.cs" />
-    <Compile Include="Migrations\202411111023571_AddImagePathToITStaff.Designer.cs">
-      <DependentUpon>202411111023571_AddImagePathToITStaff.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202411111253506_AddRequestTypeToActions.cs" />
-    <Compile Include="Migrations\202411111253506_AddRequestTypeToActions.Designer.cs">
-      <DependentUpon>202411111253506_AddRequestTypeToActions.cs</DependentUpon>
+    <Compile Include="Migrations\202412020214178_Initial-Create.cs" />
+    <Compile Include="Migrations\202412020214178_Initial-Create.Designer.cs">
+      <DependentUpon>202412020214178_Initial-Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ChiefOfOffices.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
+    <Compile Include="ReportViewModel\PGNReportViewModel.cs" />
+    <Compile Include="ReportViewModel\RepairTRViewModel.cs" />
+    <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />
+    <Compile Include="ReportViewModel\TechSpecsReportViewModel.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\IGenericRepository.cs" />
     <Compile Include="Repository\IUnitOfWork.cs" />
@@ -195,6 +176,8 @@
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\EquipmentSpecsViewModel.cs" />
+    <Compile Include="ViewModels\PGNAccountsViewModel.cs" />
+    <Compile Include="ViewModels\PGNRequestViewModel.cs" />
     <Compile Include="ViewModels\PPEsSpecsViewModel.cs" />
     <Compile Include="ViewModels\PPEsViewModel.cs" />
     <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
@@ -206,6 +189,7 @@
     <Compile Include="ViewModels\StandardPRViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsViewModel.cs" />
+    <Compile Include="ViewModels\TicketInfo.cs" />
     <Compile Include="ViewModels\TicketRequestViewModel.cs" />
     <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
@@ -222,41 +206,6 @@
     <None Include="Properties\DataSources\Models.Entities.EquipmentSpecs.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202411091226537_Initial-Migration.resx">
-      <DependentUpon>202411091226537_Initial-Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411091231550_NullableitemNoAndQuantity.resx">
-      <DependentUpon>202411091231550_NullableitemNoAndQuantity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411091240286_PRStandardPRSpecsTotalCost.resx">
-      <DependentUpon>202411091240286_PRStandardPRSpecsTotalCost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411091318187_PRAddReqById.resx">
-      <DependentUpon>202411091318187_PRAddReqById.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411091319447_PRAddReqById1.resx">
-      <DependentUpon>202411091319447_PRAddReqById1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411091321473_PRAddQuarter.resx">
-      <DependentUpon>202411091321473_PRAddQuarter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411101026539_AddUsersInPR.resx">
-      <DependentUpon>202411101026539_AddUsersInPR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411110129587_RepairDeliveredDate.resx">
-      <DependentUpon>202411110129587_RepairDeliveredDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411110902396_AddDeletedToProcesses.resx">
-      <DependentUpon>202411110902396_AddDeletedToProcesses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411111023571_AddImagePathToITStaff.resx">
-      <DependentUpon>202411111023571_AddImagePathToITStaff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202411111253506_AddRequestTypeToActions.resx">
-      <DependentUpon>202411111253506_AddRequestTypeToActions.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
@@ -270,6 +219,11 @@
       <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
       <LastGenOutput>HRMISv2Entities.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202412020214178_Initial-Create.resx">
+      <DependentUpon>202412020214178_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

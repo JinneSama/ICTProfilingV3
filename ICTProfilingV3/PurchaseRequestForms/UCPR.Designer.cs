@@ -252,24 +252,27 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlButtons.Controls.Add(this.lblPRNo);
             this.pnlButtons.Controls.Add(this.labelControl1);
             this.pnlButtons.Controls.Add(this.btnAddStandardPR);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnEdit);
-            this.pnlButtons.Location = new System.Drawing.Point(582, 45);
+            this.pnlButtons.Location = new System.Drawing.Point(579, 43);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(925, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(928, 50);
             this.pnlButtons.TabIndex = 6;
             // 
             // lblPRNo
             // 
             this.lblPRNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblPRNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPRNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblPRNo.Appearance.Options.UseFont = true;
             this.lblPRNo.Appearance.Options.UseForeColor = true;
-            this.lblPRNo.Location = new System.Drawing.Point(366, 8);
+            this.lblPRNo.Location = new System.Drawing.Point(364, 10);
             this.lblPRNo.Name = "lblPRNo";
             this.lblPRNo.Size = new System.Drawing.Size(0, 30);
             this.lblPRNo.TabIndex = 116;
@@ -277,10 +280,10 @@
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(291, 8);
+            this.labelControl1.Location = new System.Drawing.Point(289, 10);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(69, 30);
             this.labelControl1.TabIndex = 115;
@@ -289,12 +292,12 @@
             // btnAddStandardPR
             // 
             this.btnAddStandardPR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddStandardPR.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAddStandardPR.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnAddStandardPR.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnAddStandardPR.Appearance.Options.UseBackColor = true;
             this.btnAddStandardPR.Appearance.Options.UseForeColor = true;
             this.btnAddStandardPR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x168;
-            this.btnAddStandardPR.Location = new System.Drawing.Point(791, 10);
+            this.btnAddStandardPR.Location = new System.Drawing.Point(784, 12);
             this.btnAddStandardPR.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddStandardPR.Name = "btnAddStandardPR";
             this.btnAddStandardPR.Size = new System.Drawing.Size(128, 28);
@@ -305,10 +308,10 @@
             // lblEpisNo
             // 
             this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblEpisNo.Appearance.Options.UseFont = true;
             this.lblEpisNo.Appearance.Options.UseForeColor = true;
-            this.lblEpisNo.Location = new System.Drawing.Point(80, 10);
+            this.lblEpisNo.Location = new System.Drawing.Point(78, 10);
             this.lblEpisNo.Name = "lblEpisNo";
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 113;
@@ -316,10 +319,10 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Appearance.Options.UseForeColor = true;
-            this.labelControl8.Location = new System.Drawing.Point(12, 10);
+            this.labelControl8.Location = new System.Drawing.Point(13, 10);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(59, 30);
             this.labelControl8.TabIndex = 112;
@@ -328,12 +331,12 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnEdit.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(694, 10);
+            this.btnEdit.Location = new System.Drawing.Point(687, 12);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);

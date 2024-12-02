@@ -26,6 +26,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
             if(PR.DateCreated != null) txtDate.DateTime = (DateTime)PR.DateCreated;
             slueEmployee.EditValue = PR.ChiefId;
             txtPRNo.Text = PR.PRNo;
+            lblPRNo.Text = PR.Id.ToString();
         }
 
         private void LoadDropdowns()
@@ -36,7 +37,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private void slueEmployee_EditValueChanged(object sender, System.EventArgs e)
         {
             var row = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
-            if (row != null) return;
+            if (row == null) row = HRMISEmployees.GetEmployeeById(PR.ChiefId);
 
             txtRequestingOfficeChiefPos.Text = row.Position;
             txtRequestedByOffice.Text = row.Office;

@@ -1,26 +1,37 @@
 ﻿using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers;
+using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
-    public partial class frmAddEditTechSpecs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditTechSpecs : DevExpress.XtraEditors.XtraForm, ITicketStatus
     {
         private readonly IUnitOfWork unitOfWork;
         private TechSpecs _techSpecs;
         private bool IsSave = false; 
         private SaveType SaveType;
+        public TechSpecs RepairTechSpecs { get; set; }
         public frmAddEditTechSpecs()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
             CreateTicket();
+        }
+        public frmAddEditTechSpecs(Repairs repair)
+        {
+            InitializeComponent();
+            unitOfWork = new UnitOfWork();
+            LoadDropdowns();
+            CreateRepairTicket(repair);
         }
 
         public frmAddEditTechSpecs(TechSpecs ts, IUnitOfWork uow)
@@ -61,6 +72,32 @@ namespace ICTProfilingV3.TechSpecsForms
             slueReviewedBy.EditValue = (string)_techSpecs.ReviewedById;
             slueNotedBy.EditValue = (string)_techSpecs.NotedById;
             slueEmployee.EditValue = _techSpecs.ReqById;
+        }
+        private void CreateRepairTicket(Repairs repair)
+        {
+            var ticket = new TicketRequest()
+            {
+                DateCreated = DateTime.UtcNow,
+                TicketStatus = TicketStatus.Accepted,
+                RequestType = RequestType.TechSpecs,
+                IsRepairTechSpecs = true
+            };
+            unitOfWork.TicketRequestRepo.Insert(ticket);
+            unitOfWork.Save();
+
+            var techSpecs = new TechSpecs()
+            {
+                Id = ticket.Id
+            };
+
+            unitOfWork.TechSpecsRepo.Insert(techSpecs);
+            unitOfWork.Save();
+
+            _techSpecs = techSpecs;
+            lblRepair.Visible = true;
+            lblRepairNo.Visible = true;
+            lblRepairNo.Text = repair.Id.ToString();
+            LoadTechSpecs();
         }
 
         private void CreateTicket()
@@ -107,15 +144,15 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private async Task DeleteTechSpecs()
         {
-            await unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
-            await unitOfWork.SaveChangesAsync();
-            await unitOfWork.TechSpecsRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
+            unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
+            unitOfWork.TechSpecsRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
             await unitOfWork.SaveChangesAsync();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
             IsSave = true;
+            RepairTechSpecs = _techSpecs;
             await SaveTechSpecs();
             this.Close();
         }
@@ -143,6 +180,7 @@ namespace ICTProfilingV3.TechSpecsForms
             ts.NotedById = (string)slueNotedBy.EditValue;
 
             await unitOfWork.SaveChangesAsync();
+            await ModifyStatus(TicketStatus.Accepted, ts.Id);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -167,6 +205,19 @@ namespace ICTProfilingV3.TechSpecsForms
         private void frmAddEditTechSpecs_Load(object sender, EventArgs e)
         {
             if (SaveType == SaveType.Update) LoadDetails();
+        }
+
+        public async Task ModifyStatus(TicketStatus status, int ticketId)
+        {
+            var ticketStatus = new TicketRequestStatus
+            {
+                Status = status,
+                DateStatusChanged = DateTime.UtcNow,
+                ChangedByUserId = UserStore.UserId,
+                TicketRequestId = ticketId
+            };
+            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Models.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,6 +20,8 @@ namespace Models.Entities
             RepairsReviewedBy = new HashSet<Repairs>();
             RepairsNotedBy = new HashSet<Repairs>();
             PurchaseRequests = new HashSet<PurchaseRequest>();
+            TicketRequestStatus = new HashSet<TicketRequestStatus>();
+            PGNRequests = new HashSet<PGNRequests>();
         }
         public string FullName { get; set; }
         public string Position { get; set; }
@@ -35,5 +38,7 @@ namespace Models.Entities
         public ICollection<Repairs> RepairsReviewedBy { get; set; }
         public ICollection<Repairs> RepairsNotedBy { get; set; }
         public ICollection<PurchaseRequest> PurchaseRequests { get; set; }
+        public ICollection<TicketRequestStatus> TicketRequestStatus { get; set; }
+        public ICollection<PGNRequests> PGNRequests { get; set; }
     }
 }

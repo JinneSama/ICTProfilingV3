@@ -20,11 +20,12 @@ namespace ICTProfilingV3.CustomerActionSheetForms
         {
             InitializeComponent();
             this._unitOfWork = new UnitOfWork();
+            LoadCAS();
         }
 
-        private async Task LoadCAS()
+        private void LoadCAS()
         {
-            var res = await _unitOfWork.CustomerActionSheetRepo.GetAll(x => x.AssistedBy).ToListAsync();
+            var res = _unitOfWork.CustomerActionSheetRepo.GetAll(x => x.AssistedBy).ToList();
             var cas = res.Select(x => new CASViewModel
             {
                 Id = x.Id,
@@ -33,20 +34,19 @@ namespace ICTProfilingV3.CustomerActionSheetForms
                 Request = x.ClientRequest,
                 AssistedBy = x.AssistedBy?.FullName,
                 CustomerActionSheet = x
-            });
-            gcCAS.DataSource = new BindingList<CASViewModel>(cas.ToList());
+            }).ToList();
+            gcCAS.DataSource = new BindingList<CASViewModel>(cas);
         }
 
-        private async void UCCAS_Load(object sender, System.EventArgs e)
+        private void UCCAS_Load(object sender, System.EventArgs e)
         {
-            await LoadCAS();
             if(filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
 
         private void gridCAS_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             var row = (CASViewModel)gridCAS.GetFocusedRow();
-            lblCASNo.Text = row.Id.ToString();
+            if(row != null) lblCASNo.Text = row.Id.ToString();
             LoadDetails();
             LoadActions();
         }
@@ -74,22 +74,22 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             });
         }
 
-        private async void btnEdit_Click(object sender, System.EventArgs e)
+        private void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (CASViewModel)gridCAS.GetFocusedRow();
             var frm = new frmAddEditCAS(_unitOfWork,row);
             frm.ShowDialog();
 
-            await LoadCAS();
+            LoadCAS();
             LoadDetails();
         }
 
-        private async void btnAdd_Click(object sender, System.EventArgs e)
+        private void btnAdd_Click(object sender, System.EventArgs e)
         {
             var frm = new frmAddEditCAS(_unitOfWork);
             frm.ShowDialog();
 
-            await LoadCAS();
+            LoadCAS();
         }
     }
 }

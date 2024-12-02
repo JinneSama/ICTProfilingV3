@@ -48,6 +48,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnCompReport = new DevExpress.XtraEditors.SimpleButton();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
@@ -264,22 +265,45 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BackColor2 = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BorderColor = System.Drawing.Color.Black;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.Appearance.Options.UseBorderColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnCompReport);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnPreview);
             this.pnlButtons.Controls.Add(this.btnEdit);
-            this.pnlButtons.Location = new System.Drawing.Point(587, 43);
+            this.pnlButtons.Location = new System.Drawing.Point(581, 43);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(1105, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(1111, 50);
             this.pnlButtons.TabIndex = 5;
+            // 
+            // btnCompReport
+            // 
+            this.btnCompReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCompReport.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnCompReport.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCompReport.Appearance.Options.UseBackColor = true;
+            this.btnCompReport.Appearance.Options.UseForeColor = true;
+            this.btnCompReport.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.productsalesreport_16x16;
+            this.btnCompReport.Location = new System.Drawing.Point(719, 10);
+            this.btnCompReport.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCompReport.Name = "btnCompReport";
+            this.btnCompReport.Size = new System.Drawing.Size(140, 28);
+            this.btnCompReport.TabIndex = 114;
+            this.btnCompReport.Text = "Comparison Report";
+            this.btnCompReport.Click += new System.EventHandler(this.btnCompReport_Click);
             // 
             // lblEpisNo
             // 
             this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblEpisNo.Appearance.Options.UseFont = true;
             this.lblEpisNo.Appearance.Options.UseForeColor = true;
-            this.lblEpisNo.Location = new System.Drawing.Point(100, 10);
+            this.lblEpisNo.Location = new System.Drawing.Point(98, 8);
             this.lblEpisNo.Name = "lblEpisNo";
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 113;
@@ -287,10 +311,10 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Appearance.Options.UseForeColor = true;
-            this.labelControl8.Location = new System.Drawing.Point(12, 10);
+            this.labelControl8.Location = new System.Drawing.Point(10, 8);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(83, 30);
             this.labelControl8.TabIndex = 112;
@@ -299,12 +323,12 @@
             // btnPreview
             // 
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnPreview.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnPreview.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnPreview.Appearance.Options.UseBackColor = true;
             this.btnPreview.Appearance.Options.UseForeColor = true;
             this.btnPreview.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.print_16x16;
-            this.btnPreview.Location = new System.Drawing.Point(963, 10);
+            this.btnPreview.Location = new System.Drawing.Point(960, 10);
             this.btnPreview.Margin = new System.Windows.Forms.Padding(2);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(138, 28);
@@ -315,12 +339,12 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnEdit.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(866, 10);
+            this.btnEdit.Location = new System.Drawing.Point(863, 10);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -331,6 +355,8 @@
             // groupControl1
             // 
             this.groupControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.groupControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.groupControl1.Appearance.Options.UseFont = true;
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -345,7 +371,7 @@
             this.groupControl1.Controls.Add(this.txtSupplierName);
             this.groupControl1.Location = new System.Drawing.Point(587, 273);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(562, 142);
+            this.groupControl1.Size = new System.Drawing.Size(1101, 142);
             this.groupControl1.TabIndex = 40;
             this.groupControl1.Text = "Supplier";
             // 
@@ -440,6 +466,8 @@
             // groupControl3
             // 
             this.groupControl3.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.groupControl3.Appearance.Options.UseFont = true;
             this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -456,7 +484,7 @@
             this.groupControl3.Controls.Add(this.txtOffice);
             this.groupControl3.Location = new System.Drawing.Point(589, 98);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(560, 171);
+            this.groupControl3.Size = new System.Drawing.Size(1099, 171);
             this.groupControl3.TabIndex = 39;
             this.groupControl3.Text = "Requesting Office";
             // 
@@ -682,5 +710,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
+        private DevExpress.XtraEditors.SimpleButton btnCompReport;
     }
 }

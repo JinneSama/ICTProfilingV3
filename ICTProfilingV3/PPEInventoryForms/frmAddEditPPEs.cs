@@ -120,7 +120,7 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async Task DeletePPE()
         {
             unitOfWork.PPEsSpecsRepo.DeleteRange(x => x.PPEsId == _PPEs.Id);
-            await unitOfWork.PPesRepo.DeleteByEx(x => x.Id == _PPEs.Id);
+            unitOfWork.PPesRepo.DeleteByEx(x => x.Id == _PPEs.Id);
             await unitOfWork.SaveChangesAsync();
         }
     }

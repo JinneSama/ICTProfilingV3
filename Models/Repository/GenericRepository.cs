@@ -26,9 +26,9 @@ namespace Models.Repository
             dbSet.Remove(entity);
         }
 
-        public async Task DeleteByEx(Expression<Func<TEntity, bool>> expression)
+        public void DeleteByEx(Expression<Func<TEntity, bool>> expression)
         {
-            TEntity entity = await dbSet.FirstOrDefaultAsync(expression);
+            TEntity entity = dbSet.FirstOrDefault(expression);
             if (entity != null)
             {
                 Delete(entity);

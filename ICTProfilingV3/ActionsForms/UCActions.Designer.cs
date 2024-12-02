@@ -92,6 +92,11 @@
             this.gcActions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcActions.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcActions.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcActions.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcActions.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcActions.EmbeddedNavigator.Buttons.Remove.Visible = false;
             this.gcActions.Location = new System.Drawing.Point(0, 35);
             this.gcActions.MainView = this.gridActions;
             this.gcActions.Name = "gcActions";
@@ -100,6 +105,7 @@
             this.btnEdit});
             this.gcActions.Size = new System.Drawing.Size(1271, 318);
             this.gcActions.TabIndex = 98;
+            this.gcActions.UseEmbeddedNavigator = true;
             this.gcActions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridActions});
             // 
@@ -122,6 +128,7 @@
             formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Green;
             formatConditionRuleExpression1.Appearance.BorderColor = System.Drawing.Color.Black;
             formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
             formatConditionRuleExpression1.Appearance.Options.UseBorderColor = true;
             formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;

@@ -410,13 +410,14 @@
             this.btnPrint.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnPrint.Appearance.Options.UseBackColor = true;
             this.btnPrint.Appearance.Options.UseForeColor = true;
-            this.btnPrint.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printer_16x16;
+            this.btnPrint.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x164;
             this.btnPrint.Location = new System.Drawing.Point(1068, 10);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(96, 28);
             this.btnPrint.TabIndex = 169;
             this.btnPrint.Text = "Print";
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // lueQuarter
             // 
