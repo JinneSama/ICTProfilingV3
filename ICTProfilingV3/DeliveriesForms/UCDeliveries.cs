@@ -46,12 +46,13 @@ namespace ICTProfilingV3.DeliveriesForms
             gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(deliveries.ToList());
         }
 
-        private async void LoadDetails()
+        private void LoadDetails()
         {
             _unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
+            spbTicketStatus.SelectedItemIndex = ((int)row.Status) - 1;
             var deliveriesDetails = row.Deliveries;
             var requestingEmployee = HRMISEmployees.GetEmployees().FirstOrDefault(x => x.Id == deliveriesDetails.RequestedById);
             txtChief.Text = HRMISEmployees.GetEmployeeById(requestingEmployee.ChiefOfOffices.ChiefId).Employee;

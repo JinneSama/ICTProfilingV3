@@ -3,12 +3,13 @@ using Models.Repository;
 using Models.ViewModels;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.ActionsForms
 {
     public partial class frmActionTree : DevExpress.XtraEditors.XtraForm
     {
-        private readonly IUnitOfWork unitOfWork;
+        private IUnitOfWork unitOfWork;
         public frmActionTree()
         {
             InitializeComponent();
@@ -18,6 +19,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private void LoadActionTree()
         {
+            unitOfWork = new UnitOfWork();
             var tree = unitOfWork.ActionsDropdownsRepo.GetAll().ToList();
             var treeViewModel = tree.Select(x => new ActionTreeViewModel
             {
@@ -36,13 +38,44 @@ namespace ICTProfilingV3.ActionsForms
             LoadActionTree();
         }
 
-        private void btnAddNode_Click(object sender, System.EventArgs e)
+        private void treeActionDropdown_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+                treeMenu.ShowPopup(MousePosition);
+        }
+
+        private void btnAddChildNode_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var node = (ActionTreeViewModel)treeActionDropdown.GetFocusedRow();
             if (node == null) return;
             if ((int)node.ActionTree.ActionCategory >= 3) return;
-            var frm = new frmAddNode(SaveType.Insert , node);
+            var frm = new frmAddNode(SaveType.Insert, node);
             frm.ShowDialog();
+            LoadActionTree();
+        }
+
+        private void btnDeleteNode_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var msgRes = MessageBox.Show("Delete this Node?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            var node = (ActionTreeViewModel)treeActionDropdown.GetFocusedRow();
+            if (node == null) return;
+
+            unitOfWork.ActionsDropdownsRepo.DeleteByEx(x => x.Id == node.ActionTree.Id);
+            unitOfWork.Save();
+
+            LoadActionTree();
+        }
+
+        private void btnEditNode_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var node = (ActionTreeViewModel)treeActionDropdown.GetFocusedRow();
+            if (node == null) return;
+
+            var frm = new frmEditNode(node);
+            frm.ShowDialog();
+
             LoadActionTree();
         }
     }

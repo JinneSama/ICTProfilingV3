@@ -22,6 +22,9 @@ namespace Models.Entities
             PurchaseRequests = new HashSet<PurchaseRequest>();
             TicketRequestStatus = new HashSet<TicketRequestStatus>();
             PGNRequests = new HashSet<PGNRequests>();
+            CRPreparedBy = new HashSet<ComparisonReport>();
+            CRReviewedBy = new HashSet<ComparisonReport>();
+            CRNotedBy = new HashSet<ComparisonReport>();
         }
         public string FullName { get; set; }
         public string Position { get; set; }
@@ -40,5 +43,8 @@ namespace Models.Entities
         public ICollection<PurchaseRequest> PurchaseRequests { get; set; }
         public ICollection<TicketRequestStatus> TicketRequestStatus { get; set; }
         public ICollection<PGNRequests> PGNRequests { get; set; }
+        public ICollection<ComparisonReport> CRPreparedBy { get; set; }
+        public ICollection<ComparisonReport> CRReviewedBy { get; set; }
+        public ICollection<ComparisonReport> CRNotedBy { get; set; }
     }
 }

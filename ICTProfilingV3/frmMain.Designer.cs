@@ -39,7 +39,7 @@
             this.btnRepair = new DevExpress.XtraBars.BarButtonItem();
             this.btnCAS = new DevExpress.XtraBars.BarButtonItem();
             this.btnVPR = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem6 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUserTasks = new DevExpress.XtraBars.BarButtonItem();
             this.btnSuppliers = new DevExpress.XtraBars.BarButtonItem();
             this.btnEquipment = new DevExpress.XtraBars.BarButtonItem();
             this.btnBrand = new DevExpress.XtraBars.BarButtonItem();
@@ -66,6 +66,8 @@
             this.barButtonItem4 = new DevExpress.XtraBars.BarButtonItem();
             this.skinRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
             this.btnPGNOffices = new DevExpress.XtraBars.BarButtonItem();
+            this.lblUpdate = new DevExpress.XtraBars.BarStaticItem();
+            this.btnQueue = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -87,7 +89,6 @@
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.mainPanel = new DevExpress.XtraEditors.PanelControl();
             this.UpdateThread = new System.ComponentModel.BackgroundWorker();
-            this.lblUpdate = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -108,7 +109,7 @@
             this.btnRepair,
             this.btnCAS,
             this.btnVPR,
-            this.barButtonItem6,
+            this.btnUserTasks,
             this.btnSuppliers,
             this.btnEquipment,
             this.btnBrand,
@@ -135,9 +136,10 @@
             this.barButtonItem4,
             this.skinRibbonGalleryBarItem1,
             this.btnPGNOffices,
-            this.lblUpdate});
+            this.lblUpdate,
+            this.btnQueue});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 38;
+            this.ribbon.MaxItemId = 39;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -158,7 +160,7 @@
             this.backstageViewControl1.OwnerControl = this.ribbon;
             this.backstageViewControl1.SelectedTab = this.btnLogout;
             this.backstageViewControl1.SelectedTabIndex = 0;
-            this.backstageViewControl1.Size = new System.Drawing.Size(480, 150);
+            this.backstageViewControl1.Size = new System.Drawing.Size(522, 157);
             this.backstageViewControl1.TabIndex = 5;
             this.backstageViewControl1.VisibleInDesignTime = true;
             // 
@@ -166,7 +168,7 @@
             // 
             this.backstageViewClientControl1.Location = new System.Drawing.Point(132, 63);
             this.backstageViewClientControl1.Name = "backstageViewClientControl1";
-            this.backstageViewClientControl1.Size = new System.Drawing.Size(347, 86);
+            this.backstageViewClientControl1.Size = new System.Drawing.Size(389, 93);
             this.backstageViewClientControl1.TabIndex = 1;
             // 
             // btnLogout
@@ -239,13 +241,14 @@
             this.btnVPR.Name = "btnVPR";
             this.btnVPR.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVPR_ItemClick);
             // 
-            // barButtonItem6
+            // btnUserTasks
             // 
-            this.barButtonItem6.Caption = "Tasks";
-            this.barButtonItem6.Id = 8;
-            this.barButtonItem6.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.botask_16x16;
-            this.barButtonItem6.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.botask_32x32;
-            this.barButtonItem6.Name = "barButtonItem6";
+            this.btnUserTasks.Caption = "Tasks";
+            this.btnUserTasks.Id = 8;
+            this.btnUserTasks.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.botask_16x16;
+            this.btnUserTasks.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.botask_32x32;
+            this.btnUserTasks.Name = "btnUserTasks";
+            this.btnUserTasks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserTasks_ItemClick);
             // 
             // btnSuppliers
             // 
@@ -472,6 +475,21 @@
             this.btnPGNOffices.Name = "btnPGNOffices";
             this.btnPGNOffices.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPGNOffices_ItemClick);
             // 
+            // lblUpdate
+            // 
+            this.lblUpdate.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
+            this.lblUpdate.Id = 37;
+            this.lblUpdate.Name = "lblUpdate";
+            // 
+            // btnQueue
+            // 
+            this.btnQueue.Caption = "Queue";
+            this.btnQueue.Id = 38;
+            this.btnQueue.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.team_16x16;
+            this.btnQueue.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.team_32x32;
+            this.btnQueue.Name = "btnQueue";
+            this.btnQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQueue_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -488,9 +506,11 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnDashboard);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem6);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnUserTasks);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnQueue);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnRoutedActions);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Text = "Dashboard";
             // 
             // ribbonPageGroup2
             // 
@@ -627,12 +647,6 @@
             // 
             this.UpdateThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateThread_DoWork);
             // 
-            // lblUpdate
-            // 
-            this.lblUpdate.Alignment = DevExpress.XtraBars.BarItemLinkAlignment.Right;
-            this.lblUpdate.Id = 37;
-            this.lblUpdate.Name = "lblUpdate";
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -646,7 +660,7 @@
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
-            this.Text = "EPiS v3";
+            this.Text = "Electronic Profiling Information System v3";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
@@ -673,7 +687,7 @@
         private DevExpress.XtraBars.BarButtonItem btnCAS;
         private DevExpress.XtraBars.BarButtonItem btnVPR;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem6;
+        private DevExpress.XtraBars.BarButtonItem btnUserTasks;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
@@ -719,5 +733,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup15;
         private System.ComponentModel.BackgroundWorker UpdateThread;
         private DevExpress.XtraBars.BarStaticItem lblUpdate;
+        private DevExpress.XtraBars.BarButtonItem btnQueue;
     }
 }

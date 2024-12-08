@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Models.Enums;
 using Models.Managers;
 using Models.Managers.User;
+using DevExpress.XtraGrid.Views.Tile;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
@@ -21,10 +22,19 @@ namespace ICTProfilingV3.TicketRequestForms
         public frmAssignTo(TicketRequest ticket)
         {
             InitializeComponent();
+            InitStaffs();
             unitOfWork = new UnitOfWork();
             lblTicketNo.Text = ticket.Id.ToString();
             this.ticket = ticket;
             LoadStaff();
+        }
+
+        private void InitStaffs()
+        {
+            tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.Repair });
+            tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.Network });
+            tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.IS });
+            tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.Records });
         }
         private void LoadStaff()
         {

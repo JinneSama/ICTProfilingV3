@@ -172,6 +172,12 @@
     <Compile Include="ActionsForms\frmDocAction.Designer.cs">
       <DependentUpon>frmDocAction.cs</DependentUpon>
     </Compile>
+    <Compile Include="ActionsForms\frmEditNode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmEditNode.Designer.cs">
+      <DependentUpon>frmEditNode.cs</DependentUpon>
+    </Compile>
     <Compile Include="ActionsForms\frmRouteToUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,12 @@
     </Compile>
     <Compile Include="CustomerActionSheetForms\UCCAS.Designer.cs">
       <DependentUpon>UCCAS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardForms\UCQueue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCQueue.Designer.cs">
+      <DependentUpon>UCQueue.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardForms\UCRoutedActions.cs">
       <SubType>UserControl</SubType>
@@ -444,6 +456,12 @@
     <Compile Include="ReportForms\rptAccomplishment.Designer.cs">
       <DependentUpon>rptAccomplishment.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReportForms\rptComparisonReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptComparisonReport.Designer.cs">
+      <DependentUpon>rptComparisonReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportForms\rptPGN.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -633,6 +651,9 @@
     <EmbeddedResource Include="ActionsForms\frmDocAction.resx">
       <DependentUpon>frmDocAction.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ActionsForms\frmEditNode.resx">
+      <DependentUpon>frmEditNode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ActionsForms\frmRouteToUsers.resx">
       <DependentUpon>frmRouteToUsers.cs</DependentUpon>
     </EmbeddedResource>
@@ -644,6 +665,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerActionSheetForms\UCCAS.resx">
       <DependentUpon>UCCAS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCQueue.resx">
+      <DependentUpon>UCQueue.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCRoutedActions.resx">
       <DependentUpon>UCRoutedActions.cs</DependentUpon>
@@ -778,6 +802,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\rptAccomplishment.resx">
       <DependentUpon>rptAccomplishment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptComparisonReport.resx">
+      <DependentUpon>rptComparisonReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\rptPGN.resx">
       <DependentUpon>rptPGN.cs</DependentUpon>
@@ -1620,6 +1647,36 @@
   <ItemGroup>
     <Content Include="Epis.ico" />
     <Content Include="EPIS_LOGO.ico" />
+    <None Include="Resources\addgroupfooter_32x32.png" />
+    <None Include="Resources\addgroupfooter_16x16.png" />
+    <None Include="Resources\clearall_32x32.png" />
+    <None Include="Resources\clearall_16x16.png" />
+    <None Include="Resources\compatibility_32x32.png" />
+    <None Include="Resources\compatibility_16x16.png" />
+    <None Include="Resources\bosale_16x162.png" />
+    <None Include="Resources\printpreview_16x167.png" />
+    <None Include="Resources\save_16x168.png" />
+    <None Include="Resources\cancel_32x32.png" />
+    <None Include="Resources\cancel_16x161.png" />
+    <None Include="Resources\edittask_32x32.png" />
+    <None Include="Resources\edittask_16x1613.png" />
+    <None Include="Resources\add_32x321.png" />
+    <None Include="Resources\add_16x1611.png" />
+    <None Include="Resources\business_businessman.svg" />
+    <None Include="Resources\bo_order_item.svg" />
+    <None Include="Resources\finishmerge.svg" />
+    <None Include="Resources\actions_checkcircled.svg" />
+    <None Include="Resources\check1.svg" />
+    <None Include="Resources\check.svg" />
+    <None Include="Resources\apply_16x163.png" />
+    <None Include="Resources\apply_16x162.png" />
+    <None Include="Resources\apply_16x161.png" />
+    <None Include="Resources\additem_16x165.png" />
+    <None Include="Resources\additem_16x164.png" />
+    <None Include="Resources\edittask_16x1612.png" />
+    <None Include="Resources\edittask_16x1611.png" />
+    <None Include="Resources\team_32x32.png" />
+    <None Include="Resources\team_16x16.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -41,6 +41,9 @@ namespace Models.Repository
         IGenericRepository<PGNNonEmployee> PGNNonEmployeeRepo { get; }
         IGenericRepository<PGNRequests> PGNRequestsRepo { get; }
         IGenericRepository<PGNGroupOffices> PGNGroupOfficesRepo { get; }
+        IGenericRepository<ComparisonReport> ComparisonReportRepo { get; }
+        IGenericRepository<ComparisonReportSpecs> ComparisonReportSpecsRepo { get; }
+        IGenericRepository<ComparisonReportSpecsDetails> ComparisonReportSpecsDetailsRepo { get; }
         void Save();
         Task SaveChangesAsync();
     }

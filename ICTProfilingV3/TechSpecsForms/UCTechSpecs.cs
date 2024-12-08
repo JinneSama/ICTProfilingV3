@@ -68,6 +68,7 @@ namespace ICTProfilingV3.TechSpecsForms
             }
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
             if(ts == null) return;
+            spbTicketStatus.SelectedItemIndex = ((int)ts.TicketRequest.TicketStatus) - 1;
             txtDate.DateTime = ts.DateRequested ?? DateTime.MinValue;
             rdbtnGender.SelectedIndex = (int)ts.ReqByGender;
             txtContactNo.Text = ts.ContactNo;

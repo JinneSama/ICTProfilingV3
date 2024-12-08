@@ -430,6 +430,40 @@ namespace Models.Repository
             set => _PGNGroupOfficesRepo = value;
         }
 
+        private IGenericRepository<ComparisonReport> _ComparisonReportRepo;
+        public IGenericRepository<ComparisonReport> ComparisonReportRepo
+        {
+            get
+            {
+                if (_ComparisonReportRepo == null)
+                    _ComparisonReportRepo = new GenericRepository<ComparisonReport>(_context);
+                return _ComparisonReportRepo;
+            }
+            set => _ComparisonReportRepo = value;
+        }
+        private IGenericRepository<ComparisonReportSpecs> _ComparisonReportSpecsRepo;
+        public IGenericRepository<ComparisonReportSpecs> ComparisonReportSpecsRepo
+        {
+            get
+            {
+                if (_ComparisonReportSpecsRepo == null)
+                    _ComparisonReportSpecsRepo = new GenericRepository<ComparisonReportSpecs>(_context);
+                return _ComparisonReportSpecsRepo;
+            }
+            set => _ComparisonReportSpecsRepo = value;
+        }
+        private IGenericRepository<ComparisonReportSpecsDetails> _ComparisonReportSpecsDetailsRepo;
+        public IGenericRepository<ComparisonReportSpecsDetails> ComparisonReportSpecsDetailsRepo
+        {
+            get
+            {
+                if (_ComparisonReportSpecsDetailsRepo == null)
+                    _ComparisonReportSpecsDetailsRepo = new GenericRepository<ComparisonReportSpecsDetails>(_context);
+                return _ComparisonReportSpecsDetailsRepo;
+            }
+            set => _ComparisonReportSpecsDetailsRepo = value;
+        }
+
         public UnitOfWork()
         {
             _context = ApplicationDbContext.Create();

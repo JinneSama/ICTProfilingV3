@@ -32,11 +32,12 @@ namespace Models.Entities
         public TicketRequest TicketRequest { get; set; }
         public virtual ICollection<DeliveriesSpecs> DeliveriesSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
-
+        public virtual ICollection<ComparisonReport> ComparisonReports { get; set; }
         public Deliveries()
         {
             DeliveriesSpecs = new HashSet<DeliveriesSpecs>();
             Actions = new HashSet<Actions>();
+            ComparisonReports = new HashSet<ComparisonReport>();
         }
     }
 }

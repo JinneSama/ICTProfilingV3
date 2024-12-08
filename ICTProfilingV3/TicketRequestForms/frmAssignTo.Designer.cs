@@ -112,16 +112,17 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(617, 37);
+            this.panel1.Size = new System.Drawing.Size(1180, 37);
             this.panel1.TabIndex = 82;
             // 
             // lblTicketNo
             // 
+            this.lblTicketNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTicketNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.lblTicketNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblTicketNo.Appearance.Options.UseFont = true;
             this.lblTicketNo.Appearance.Options.UseForeColor = true;
-            this.lblTicketNo.Location = new System.Drawing.Point(582, 3);
+            this.lblTicketNo.Location = new System.Drawing.Point(1121, 3);
             this.lblTicketNo.Name = "lblTicketNo";
             this.lblTicketNo.Size = new System.Drawing.Size(11, 30);
             this.lblTicketNo.TabIndex = 4;
@@ -129,11 +130,12 @@
             // 
             // labelControl1
             // 
+            this.labelControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
             this.labelControl1.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Appearance.Options.UseForeColor = true;
-            this.labelControl1.Location = new System.Drawing.Point(483, 3);
+            this.labelControl1.Location = new System.Drawing.Point(1022, 3);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(93, 30);
             this.labelControl1.TabIndex = 3;
@@ -175,7 +177,7 @@
             this.gcAssign.Location = new System.Drawing.Point(0, 76);
             this.gcAssign.MainView = this.tvAssign;
             this.gcAssign.Name = "gcAssign";
-            this.gcAssign.Size = new System.Drawing.Size(617, 567);
+            this.gcAssign.Size = new System.Drawing.Size(1180, 708);
             this.gcAssign.TabIndex = 83;
             this.gcAssign.UseEmbeddedNavigator = true;
             this.gcAssign.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -183,6 +185,10 @@
             // 
             // tvAssign
             // 
+            this.tvAssign.Appearance.Group.BackColor = System.Drawing.Color.Silver;
+            this.tvAssign.Appearance.Group.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tvAssign.Appearance.Group.Options.UseBackColor = true;
+            this.tvAssign.Appearance.Group.Options.UseFont = true;
             this.tvAssign.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.tileViewColumn1,
             this.tileViewColumn2,
@@ -195,10 +201,12 @@
             this.tvAssign.FocusBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.tvAssign.GridControl = this.gcAssign;
             this.tvAssign.Name = "tvAssign";
-            this.tvAssign.OptionsTiles.IndentBetweenGroups = 7;
+            this.tvAssign.OptionsBehavior.AllowSmoothScrolling = true;
+            this.tvAssign.OptionsKanban.ShowGroupBackground = DevExpress.Utils.DefaultBoolean.True;
+            this.tvAssign.OptionsTiles.IndentBetweenGroups = 20;
             this.tvAssign.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(13);
-            this.tvAssign.OptionsTiles.ItemSize = new System.Drawing.Size(220, 170);
-            this.tvAssign.OptionsTiles.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tvAssign.OptionsTiles.ItemSize = new System.Drawing.Size(248, 170);
+            this.tvAssign.OptionsTiles.LayoutMode = DevExpress.XtraGrid.Views.Tile.TileViewLayoutMode.Kanban;
             this.tvAssign.OptionsTiles.RowCount = 0;
             this.tvAssign.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colSection, DevExpress.Data.ColumnSortOrder.Ascending)});
@@ -260,13 +268,15 @@
             // 
             // panelControl3
             // 
+            this.panelControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelControl3.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
             this.panelControl3.Appearance.Options.UseBackColor = true;
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl3.Controls.Add(this.btnSave);
             this.panelControl3.Location = new System.Drawing.Point(0, 38);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(617, 40);
+            this.panelControl3.Size = new System.Drawing.Size(1180, 40);
             this.panelControl3.TabIndex = 114;
             // 
             // btnSave
@@ -276,8 +286,8 @@
             this.btnSave.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSave.Appearance.Options.UseBackColor = true;
             this.btnSave.Appearance.Options.UseForeColor = true;
-            this.btnSave.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.save_16x165;
-            this.btnSave.Location = new System.Drawing.Point(508, 5);
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
+            this.btnSave.Location = new System.Drawing.Point(1071, 5);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(98, 28);
@@ -289,7 +299,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 642);
+            this.ClientSize = new System.Drawing.Size(1180, 783);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.gcAssign);
             this.Controls.Add(this.panel1);

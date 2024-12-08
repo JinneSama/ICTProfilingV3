@@ -12,7 +12,7 @@ namespace Models.ViewModels
         public ITStaff Staff { get; set; }
         public bool? Mark { get; set; }
         public string Initials => GetInitials(Users.FullName);
-        public string Section => EnumHelper.GetEnumDescription(Staff.Section);
+        public Sections Section => Staff.Section;
 
         static string GetInitials(string fullName)
         {

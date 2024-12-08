@@ -258,5 +258,23 @@ namespace ICTProfilingV3
                     }));
             }
         }
+
+        private void btnQueue_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCQueue()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnUserTasks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCUserTasks()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
     }
 }

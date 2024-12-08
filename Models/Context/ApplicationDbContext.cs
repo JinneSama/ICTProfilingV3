@@ -52,5 +52,8 @@ namespace EntityManager.Context
         public DbSet<PGNNonEmployee> PGNNonEmployees { get; set; }
         public DbSet<PGNRequests> PGNRequests { get; set; }
         public DbSet<PGNGroupOffices> PGNGroupOffices { get; set; }
+        public DbSet<ComparisonReport> ComparisonReports { get; set; }
+        public DbSet<ComparisonReportSpecs> ComparisonReportSpecs { get; set; }
+        public DbSet<ComparisonReportSpecsDetails> ComparisonReportSpecsDetails { get; set; }
     }
 }

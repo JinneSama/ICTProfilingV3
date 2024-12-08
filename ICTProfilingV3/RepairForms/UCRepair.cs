@@ -78,6 +78,7 @@ namespace ICTProfilingV3.RepairForms
                 x => x.PPEsSpecs);
             if (repair == null) return;
 
+            spbTicketStatus.SelectedItemIndex = ((int)repair.TicketRequest.TicketStatus) - 1;
             var employee = HRMISEmployees.GetEmployeeById(repair.RequestedById);
             var chief = HRMISEmployees.GetChief(employee?.Office, employee?.Division);
 

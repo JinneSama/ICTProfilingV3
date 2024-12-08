@@ -41,5 +41,10 @@ namespace ICTProfilingV3.ActionsForms
             unitOfWork.Save();
             this.Close();
         }
+
+        private void btnClose_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

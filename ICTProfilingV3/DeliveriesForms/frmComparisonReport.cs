@@ -8,5 +8,10 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             InitializeComponent();
         }
+
+        private void LoadData()
+        {
+
+        }
     }
 }

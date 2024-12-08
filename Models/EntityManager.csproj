@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Entities\ComparisonReport.cs" />
+    <Compile Include="Entities\ComparisonReportSpecs.cs" />
+    <Compile Include="Entities\ComparisonReportSpecsDetails.cs" />
     <Compile Include="Entities\CustomerActionSheet.cs" />
     <Compile Include="Entities\Actions.cs" />
     <Compile Include="Entities\ActionsDropdowns.cs" />
@@ -187,6 +190,7 @@
     <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
     <Compile Include="ViewModels\StaffViewModel.cs" />
     <Compile Include="ViewModels\StandardPRViewModel.cs" />
+    <Compile Include="ViewModels\TasksViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
     <Compile Include="ViewModels\TechSpecsViewModel.cs" />
     <Compile Include="ViewModels\TicketInfo.cs" />
