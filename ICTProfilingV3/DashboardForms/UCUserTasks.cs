@@ -2,6 +2,7 @@
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Tile;
 using Models.Enums;
+using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -53,7 +54,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadData()
         {
-            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.IsRepairTechSpecs == null,
+            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.IsRepairTechSpecs == null && (x.CreatedBy == UserStore.UserId) ,
                 x => x.Repairs,
                 x => x.TechSpecs,
                 x => x.Deliveries).ToList().Select(x => new TasksViewModel
