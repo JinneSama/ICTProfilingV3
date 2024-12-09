@@ -66,7 +66,8 @@ namespace ICTProfilingV3.RepairForms
             {
                 DateCreated = DateTime.UtcNow,
                 TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.Repairs
+                RequestType = RequestType.Repairs,
+                CreatedBy = UserStore.UserId
             };
             _unitOfWork.TicketRequestRepo.Insert(ticket);
             _unitOfWork.Save();

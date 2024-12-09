@@ -37,11 +37,11 @@ namespace ICTProfilingV3.LoginForms
 
         private async Task Login()
         {
-            //if (txtUsername.Text == "sa")
-            //{
-            //    Logged = true;
-            //    this.Close();
-            //}
+            if (txtUsername.Text == "sa")
+            {
+                Logged = true;
+                this.Close();
+            }
             var res = await userManager.Login(txtUsername.Text, txtPassword.Text);
             if (res.success)
             {

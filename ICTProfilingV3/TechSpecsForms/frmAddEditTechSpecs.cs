@@ -80,7 +80,8 @@ namespace ICTProfilingV3.TechSpecsForms
                 DateCreated = DateTime.UtcNow,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.TechSpecs,
-                IsRepairTechSpecs = true
+                IsRepairTechSpecs = true,
+                CreatedBy = UserStore.UserId
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();

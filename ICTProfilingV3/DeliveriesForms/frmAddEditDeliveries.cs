@@ -62,7 +62,8 @@ namespace ICTProfilingV3.DeliveriesForms
             {
                 DateCreated = DateTime.UtcNow,
                 TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.Deliveries
+                RequestType = RequestType.Deliveries,
+                CreatedBy = UserStore.UserId
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();

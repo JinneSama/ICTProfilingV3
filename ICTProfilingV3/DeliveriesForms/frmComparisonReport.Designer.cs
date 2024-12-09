@@ -42,15 +42,20 @@
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule6 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression6 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gridCRSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repoRTE = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rteRTF = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemRichTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCR = new DevExpress.XtraGrid.GridControl();
             this.gridCR = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -63,6 +68,9 @@
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnShowInfo = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
@@ -76,7 +84,7 @@
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.slueAssesedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueReviewedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -89,9 +97,6 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtInspectedDate = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.txtEPiSNo = new DevExpress.XtraEditors.TextEdit();
-            this.textEdit8 = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtSupplier = new DevExpress.XtraEditors.TextEdit();
@@ -111,10 +116,10 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridCRSpecs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rteRTF)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoRTE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowInfo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -122,13 +127,11 @@
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueAssesedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEPiSNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOffice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateOfDelivery.Properties)).BeginInit();
@@ -146,62 +149,59 @@
             this.gridColumn11,
             this.gridColumn12,
             this.gridColumn13,
-            this.gridColumn1});
+            this.gridColumn1,
+            this.gridColumn24});
             gridFormatRule1.ApplyToRow = true;
             gridFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression1.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression1.Expression = "[IsDiscrepancy] = True";
             gridFormatRule1.Rule = formatConditionRuleExpression1;
             this.gridCRSpecs.FormatRules.Add(gridFormatRule1);
             this.gridCRSpecs.GridControl = this.gcCR;
             this.gridCRSpecs.Name = "gridCRSpecs";
             this.gridCRSpecs.OptionsView.RowAutoHeight = true;
             this.gridCRSpecs.OptionsView.ShowGroupPanel = false;
+            this.gridCRSpecs.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridCRSpecs_RowClick);
             // 
             // gridColumn9
             // 
             this.gridColumn9.Caption = "Type";
-            this.gridColumn9.FieldName = "PRSpecs";
+            this.gridColumn9.ColumnEdit = this.repoRTE;
+            this.gridColumn9.FieldName = "Type";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 0;
             // 
+            // repoRTE
+            // 
+            this.repoRTE.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.Html;
+            this.repoRTE.Name = "repoRTE";
+            this.repoRTE.ShowCaretInReadOnly = false;
+            // 
             // gridColumn10
             // 
             this.gridColumn10.Caption = "Purchase Request";
-            this.gridColumn10.ColumnEdit = this.rteRTF;
-            this.gridColumn10.FieldName = "PRDescription";
+            this.gridColumn10.ColumnEdit = this.repoRTE;
+            this.gridColumn10.FieldName = "PR";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 1;
             // 
-            // rteRTF
-            // 
-            this.rteRTF.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.PlainText;
-            this.rteRTF.Name = "rteRTF";
-            this.rteRTF.ShowCaretInReadOnly = false;
-            // 
             // gridColumn11
             // 
             this.gridColumn11.Caption = "Abstract of Quotation";
-            this.gridColumn11.ColumnEdit = this.repositoryItemRichTextEdit1;
+            this.gridColumn11.ColumnEdit = this.repoRTE;
             this.gridColumn11.FieldName = "Quotation";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 2;
             // 
-            // repositoryItemRichTextEdit1
-            // 
-            this.repositoryItemRichTextEdit1.DocumentFormat = DevExpress.XtraRichEdit.DocumentFormat.Html;
-            this.repositoryItemRichTextEdit1.Name = "repositoryItemRichTextEdit1";
-            this.repositoryItemRichTextEdit1.ShowCaretInReadOnly = false;
-            // 
             // gridColumn12
             // 
             this.gridColumn12.Caption = "Purchase Order";
-            this.gridColumn12.ColumnEdit = this.repositoryItemRichTextEdit1;
+            this.gridColumn12.ColumnEdit = this.repoRTE;
             this.gridColumn12.FieldName = "PO";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
@@ -210,8 +210,8 @@
             // gridColumn13
             // 
             this.gridColumn13.Caption = "Actual Delivery";
-            this.gridColumn13.ColumnEdit = this.repositoryItemRichTextEdit1;
-            this.gridColumn13.FieldName = "Delivery";
+            this.gridColumn13.ColumnEdit = this.repoRTE;
+            this.gridColumn13.FieldName = "ActualDelivery";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 4;
@@ -222,21 +222,27 @@
             this.gridColumn1.FieldName = "Discrepancy";
             this.gridColumn1.Name = "gridColumn1";
             // 
+            // gridColumn24
+            // 
+            this.gridColumn24.Caption = "gridColumn24";
+            this.gridColumn24.FieldName = "IsDiscrepancy";
+            this.gridColumn24.Name = "gridColumn24";
+            // 
             // gcCR
             // 
             this.gcCR.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             gridLevelNode1.LevelTemplate = this.gridCRSpecs;
-            gridLevelNode1.RelationName = "ComparisonReport";
+            gridLevelNode1.RelationName = "Specifications";
             this.gcCR.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
             this.gcCR.Location = new System.Drawing.Point(0, 238);
             this.gcCR.MainView = this.gridCR;
             this.gcCR.Name = "gcCR";
             this.gcCR.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemRichTextEdit1,
-            this.rteRTF});
+            this.repoRTE,
+            this.btnShowInfo});
             this.gcCR.Size = new System.Drawing.Size(1430, 389);
             this.gcCR.TabIndex = 11;
             this.gcCR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -257,14 +263,16 @@
             this.gridColumn8,
             this.gridColumn20,
             this.gridColumn21,
-            this.gridColumn22});
+            this.gridColumn22,
+            this.gridColumn23,
+            this.gridColumn25});
             gridFormatRule2.Column = this.gridColumn5;
             gridFormatRule2.ColumnApplyTo = this.gridColumn5;
             gridFormatRule2.Name = "Format0";
             formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression2.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression2.Expression = "[CRSpecs.IsDiscrepancy] = True";
             gridFormatRule2.Rule = formatConditionRuleExpression2;
             gridFormatRule3.Column = this.gridColumn6;
             gridFormatRule3.ColumnApplyTo = this.gridColumn6;
@@ -272,7 +280,7 @@
             formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression3.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression3.Expression = "[CRSpecs.IsDiscrepancy] = True";
             gridFormatRule3.Rule = formatConditionRuleExpression3;
             gridFormatRule4.Column = this.gridColumn7;
             gridFormatRule4.ColumnApplyTo = this.gridColumn7;
@@ -280,7 +288,7 @@
             formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression4.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression4.Expression = "[CRSpecs.IsDiscrepancy] = True";
             gridFormatRule4.Rule = formatConditionRuleExpression4;
             gridFormatRule5.Column = this.gridColumn8;
             gridFormatRule5.ColumnApplyTo = this.gridColumn8;
@@ -288,7 +296,7 @@
             formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression5.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression5.Expression = "[CRSpecs.IsDiscrepancy] = True";
             gridFormatRule5.Rule = formatConditionRuleExpression5;
             gridFormatRule6.Column = this.gridColumn20;
             gridFormatRule6.ColumnApplyTo = this.gridColumn20;
@@ -296,7 +304,7 @@
             formatConditionRuleExpression6.Appearance.BackColor = System.Drawing.Color.Yellow;
             formatConditionRuleExpression6.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression6.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression6.Expression = "[Discrepancy] = True";
+            formatConditionRuleExpression6.Expression = "[CRSpecs.IsDiscrepancy] = True";
             gridFormatRule6.Rule = formatConditionRuleExpression6;
             this.gridCR.FormatRules.Add(gridFormatRule2);
             this.gridCR.FormatRules.Add(gridFormatRule3);
@@ -306,83 +314,87 @@
             this.gridCR.GridControl = this.gcCR;
             this.gridCR.Name = "gridCR";
             this.gridCR.OptionsView.RowAutoHeight = true;
+            this.gridCR.OptionsView.ShowDetailButtons = false;
+            this.gridCR.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridCR.OptionsView.ShowGroupPanel = false;
+            this.gridCR.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridCR_RowClick);
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "ItemNo";
-            this.gridColumn2.FieldName = "ItemNo";
+            this.gridColumn2.FieldName = "CRSpecs.ItemNo";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 0;
-            this.gridColumn2.Width = 51;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 40;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Qty";
-            this.gridColumn3.FieldName = "Quantity";
+            this.gridColumn3.FieldName = "CRSpecs.Quantity";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
-            this.gridColumn3.Width = 44;
+            this.gridColumn3.VisibleIndex = 2;
+            this.gridColumn3.Width = 34;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Unit";
-            this.gridColumn4.FieldName = "Unit";
+            this.gridColumn4.FieldName = "CRSpecs.Unit";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
-            this.gridColumn4.Width = 49;
+            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.Width = 38;
             // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Type";
-            this.gridColumn5.FieldName = "Type";
+            this.gridColumn5.ColumnEdit = this.repoRTE;
+            this.gridColumn5.FieldName = "CRSpecs.Type";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
-            this.gridColumn5.Width = 238;
+            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.Width = 196;
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "Purchase Request";
-            this.gridColumn6.ColumnEdit = this.rteRTF;
-            this.gridColumn6.FieldName = "PRDescription";
+            this.gridColumn6.ColumnEdit = this.repoRTE;
+            this.gridColumn6.FieldName = "CRSpecs.PR";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 4;
-            this.gridColumn6.Width = 232;
+            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.Width = 191;
             // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Abstract of Quotation";
-            this.gridColumn7.ColumnEdit = this.repositoryItemRichTextEdit1;
-            this.gridColumn7.FieldName = "Quotation";
+            this.gridColumn7.ColumnEdit = this.repoRTE;
+            this.gridColumn7.FieldName = "CRSpecs.Quotation";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 5;
-            this.gridColumn7.Width = 308;
+            this.gridColumn7.VisibleIndex = 6;
+            this.gridColumn7.Width = 254;
             // 
             // gridColumn8
             // 
             this.gridColumn8.Caption = "Purchase Order";
-            this.gridColumn8.ColumnEdit = this.repositoryItemRichTextEdit1;
-            this.gridColumn8.FieldName = "PO";
+            this.gridColumn8.ColumnEdit = this.repoRTE;
+            this.gridColumn8.FieldName = "CRSpecs.PO";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
-            this.gridColumn8.Width = 267;
+            this.gridColumn8.VisibleIndex = 7;
+            this.gridColumn8.Width = 220;
             // 
             // gridColumn20
             // 
             this.gridColumn20.Caption = "Actual Delivery";
-            this.gridColumn20.ColumnEdit = this.repositoryItemRichTextEdit1;
-            this.gridColumn20.FieldName = "Delivery";
+            this.gridColumn20.ColumnEdit = this.repoRTE;
+            this.gridColumn20.FieldName = "CRSpecs.ActualDelivery";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 7;
-            this.gridColumn20.Width = 249;
+            this.gridColumn20.VisibleIndex = 8;
+            this.gridColumn20.Width = 205;
             // 
             // gridColumn21
             // 
@@ -392,12 +404,38 @@
             // 
             // gridColumn22
             // 
-            this.gridColumn22.ColumnEdit = this.rteRTF;
-            this.gridColumn22.FieldName = "Remarks";
+            this.gridColumn22.ColumnEdit = this.repoRTE;
+            this.gridColumn22.FieldName = "CRSpecs.Remarks";
             this.gridColumn22.Name = "gridColumn22";
             this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 8;
-            this.gridColumn22.Width = 217;
+            this.gridColumn22.VisibleIndex = 9;
+            this.gridColumn22.Width = 196;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.ColumnEdit = this.btnShowInfo;
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.OptionsColumn.FixedWidth = true;
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 0;
+            this.gridColumn23.Width = 35;
+            // 
+            // btnShowInfo
+            // 
+            this.btnShowInfo.AutoHeight = false;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.about_16x1610;
+            this.btnShowInfo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnShowInfo.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.about_16x1610;
+            this.btnShowInfo.Name = "btnShowInfo";
+            this.btnShowInfo.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnShowInfo.Click += new System.EventHandler(this.btnShowInfo_Click);
+            // 
+            // gridColumn25
+            // 
+            this.gridColumn25.Caption = "gridColumn25";
+            this.gridColumn25.FieldName = "CRSpecs.IsDiscrepancy";
+            this.gridColumn25.Name = "gridColumn25";
             // 
             // panel1
             // 
@@ -493,6 +531,7 @@
             this.btnPreview.Size = new System.Drawing.Size(114, 28);
             this.btnPreview.TabIndex = 111;
             this.btnPreview.Text = "Preview";
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnSave
             // 
@@ -508,6 +547,7 @@
             this.btnSave.Size = new System.Drawing.Size(120, 28);
             this.btnSave.TabIndex = 110;
             this.btnSave.Text = "Save Changes";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // groupControl1
             // 
@@ -516,16 +556,13 @@
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
             this.groupControl1.Controls.Add(this.slueNotedBy);
-            this.groupControl1.Controls.Add(this.slueAssesedBy);
+            this.groupControl1.Controls.Add(this.slueReviewedBy);
             this.groupControl1.Controls.Add(this.sluePreparedBy);
             this.groupControl1.Controls.Add(this.labelControl10);
             this.groupControl1.Controls.Add(this.labelControl9);
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Controls.Add(this.txtInspectedDate);
             this.groupControl1.Controls.Add(this.labelControl5);
-            this.groupControl1.Controls.Add(this.labelControl6);
-            this.groupControl1.Controls.Add(this.txtEPiSNo);
-            this.groupControl1.Controls.Add(this.textEdit8);
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.txtSupplier);
@@ -582,20 +619,20 @@
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 1;
             // 
-            // slueAssesedBy
+            // slueReviewedBy
             // 
-            this.slueAssesedBy.Location = new System.Drawing.Point(1006, 52);
-            this.slueAssesedBy.Name = "slueAssesedBy";
-            this.slueAssesedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueAssesedBy.Properties.Appearance.Options.UseFont = true;
-            this.slueAssesedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueReviewedBy.Location = new System.Drawing.Point(1006, 52);
+            this.slueReviewedBy.Name = "slueReviewedBy";
+            this.slueReviewedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueReviewedBy.Properties.Appearance.Options.UseFont = true;
+            this.slueReviewedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueAssesedBy.Properties.DisplayMember = "FullName";
-            this.slueAssesedBy.Properties.NullText = "";
-            this.slueAssesedBy.Properties.PopupView = this.gridView4;
-            this.slueAssesedBy.Properties.ValueMember = "Id";
-            this.slueAssesedBy.Size = new System.Drawing.Size(270, 22);
-            this.slueAssesedBy.TabIndex = 118;
+            this.slueReviewedBy.Properties.DisplayMember = "FullName";
+            this.slueReviewedBy.Properties.NullText = "";
+            this.slueReviewedBy.Properties.PopupView = this.gridView4;
+            this.slueReviewedBy.Properties.ValueMember = "Id";
+            this.slueReviewedBy.Size = new System.Drawing.Size(270, 22);
+            this.slueReviewedBy.TabIndex = 118;
             // 
             // gridView4
             // 
@@ -690,7 +727,7 @@
             // 
             // txtInspectedDate
             // 
-            this.txtInspectedDate.Location = new System.Drawing.Point(579, 50);
+            this.txtInspectedDate.Location = new System.Drawing.Point(584, 25);
             this.txtInspectedDate.Name = "txtInspectedDate";
             this.txtInspectedDate.Properties.ReadOnly = true;
             this.txtInspectedDate.Properties.UseReadOnlyAppearance = false;
@@ -699,35 +736,11 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(419, 53);
+            this.labelControl5.Location = new System.Drawing.Point(424, 28);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(129, 13);
             this.labelControl5.TabIndex = 11;
             this.labelControl5.Text = "Technically Inspected Date";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Location = new System.Drawing.Point(419, 27);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(36, 13);
-            this.labelControl6.TabIndex = 10;
-            this.labelControl6.Text = "EPiS No";
-            // 
-            // txtEPiSNo
-            // 
-            this.txtEPiSNo.Location = new System.Drawing.Point(579, 24);
-            this.txtEPiSNo.Name = "txtEPiSNo";
-            this.txtEPiSNo.Properties.ReadOnly = true;
-            this.txtEPiSNo.Properties.UseReadOnlyAppearance = false;
-            this.txtEPiSNo.Size = new System.Drawing.Size(259, 20);
-            this.txtEPiSNo.TabIndex = 8;
-            // 
-            // textEdit8
-            // 
-            this.textEdit8.Location = new System.Drawing.Point(579, 24);
-            this.textEdit8.Name = "textEdit8";
-            this.textEdit8.Size = new System.Drawing.Size(259, 20);
-            this.textEdit8.TabIndex = 9;
             // 
             // labelControl4
             // 
@@ -828,6 +841,7 @@
             this.btnSetDiscrepancy.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.compatibility_16x16;
             this.btnSetDiscrepancy.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.compatibility_32x32;
             this.btnSetDiscrepancy.Name = "btnSetDiscrepancy";
+            this.btnSetDiscrepancy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSetDiscrepancy_ItemClick);
             // 
             // btnClearDiscrepancy
             // 
@@ -836,6 +850,7 @@
             this.btnClearDiscrepancy.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.clearall_16x16;
             this.btnClearDiscrepancy.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.clearall_32x32;
             this.btnClearDiscrepancy.Name = "btnClearDiscrepancy";
+            this.btnClearDiscrepancy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearDiscrepancy_ItemClick);
             // 
             // btnAddRow
             // 
@@ -907,10 +922,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.gridCRSpecs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rteRTF)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repoRTE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnShowInfo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
@@ -921,13 +936,11 @@
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueAssesedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEPiSNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOffice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateOfDelivery.Properties)).EndInit();
@@ -956,9 +969,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtInspectedDate;
         private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.TextEdit txtEPiSNo;
-        private DevExpress.XtraEditors.TextEdit textEdit8;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.TextEdit txtSupplier;
@@ -972,7 +982,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueAssesedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueReviewedBy;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
@@ -984,9 +994,8 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridCRSpecs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit rteRTF;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEdit1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repoRTE;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -1010,5 +1019,9 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnShowInfo;
     }
 }

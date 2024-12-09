@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -1647,6 +1647,8 @@
   <ItemGroup>
     <Content Include="Epis.ico" />
     <Content Include="EPIS_LOGO.ico" />
+    <None Include="Resources\about_16x1613.png" />
+    <None Include="Resources\about_16x1612.png" />
     <None Include="Resources\addgroupfooter_32x32.png" />
     <None Include="Resources\addgroupfooter_16x16.png" />
     <None Include="Resources\clearall_32x32.png" />
