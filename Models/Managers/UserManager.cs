@@ -2,6 +2,8 @@
 using Models.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using Models.Managers;
 
 namespace EntityManager.Managers
 {
@@ -30,6 +32,8 @@ namespace EntityManager.Managers
                 RequireLowercase = true,
                 RequireUppercase = true
             };
+
+            manager.UserTokenProvider = new CustomTokenProvider<Users>();
 
             return manager;
         }

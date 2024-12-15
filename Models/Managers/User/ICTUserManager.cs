@@ -44,7 +44,7 @@ namespace EntityManager.Managers.User
             }
 
             if (userModel.Password == null || userModel.Password == string.Empty) return;
-            var token = await _userManager.GeneratePasswordResetTokenAsync(userModel.UserId);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
             await _userManager.ResetPasswordAsync(userModel.UserId, token, userModel.Password);
         }
 

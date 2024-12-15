@@ -9,7 +9,21 @@ namespace Models.ViewModels
     {
         public int CRId { get; set; }
         public ComparisonReportSpecs CRSpecs { get; set; }
-        public IEnumerable<ComparisonReportSpecsDetails> CRSpecsDetails { get; set; }
+        private IEnumerable<ComparisonReportSpecsDetails> _CRSpecsDetails;
+        public IEnumerable<ComparisonReportSpecsDetails> CRSpecsDetails 
+        {
+            get
+            {
+                if (_CRSpecsDetails == null)
+                    return new BindingList<ComparisonReportSpecsDetails>();
+
+                return new BindingList<ComparisonReportSpecsDetails>(_CRSpecsDetails.OrderBy(x => x.ItemOrder).ToList());
+            }
+            set
+            {
+                _CRSpecsDetails = value;
+            }
+        }
         public BindingList<ComparisonReportSpecsDetails> Specifications
         {
             get

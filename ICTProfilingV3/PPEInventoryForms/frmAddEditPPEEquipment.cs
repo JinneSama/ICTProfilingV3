@@ -108,7 +108,7 @@ namespace ICTProfilingV3.PPEInventoryForms
         {
             var equipment = new PPEsSpecs
             {
-                PPEs = _PPE,
+                PPEsId = _PPE.Id,
                 Quantity = (int)spinQty.Value,
                 Unit = (Unit)cboUnit.EditValue,
                 Model = slueModel.Properties.View.GetFocusedRow() as Model,
@@ -152,7 +152,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == _PPEsSpecs.Id);
             ppeSpecs.Quantity = (int)spinQty.Value;
             ppeSpecs.Unit = (Unit)cboUnit.EditValue;
-            ppeSpecs.Model = slueModel.Properties.View.GetFocusedRow() as Model;
+            ppeSpecs.ModelId = (int)slueModel.EditValue;
             ppeSpecs.UnitCost = (long)spinUnitCost.Value;
             ppeSpecs.TotalCost = (long)spintTotal.Value;
             ppeSpecs.SerialNo = txtSerialNo.Text;
@@ -203,6 +203,11 @@ namespace ICTProfilingV3.PPEInventoryForms
         private void spinUnitCost_EditValueChanged(object sender, EventArgs e)
         {
             CalcTotalValue();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

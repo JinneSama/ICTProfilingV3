@@ -74,7 +74,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
-            this.btnCompReport = new DevExpress.XtraEditors.SimpleButton();
+            this.btnRevert = new DevExpress.XtraEditors.SimpleButton();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
@@ -313,6 +313,7 @@
             this.gridCR.FormatRules.Add(gridFormatRule6);
             this.gridCR.GridControl = this.gcCR;
             this.gridCR.Name = "gridCR";
+            this.gridCR.OptionsDetail.AllowExpandEmptyDetails = true;
             this.gridCR.OptionsView.RowAutoHeight = true;
             this.gridCR.OptionsView.ShowDetailButtons = false;
             this.gridCR.OptionsView.ShowGroupExpandCollapseButtons = false;
@@ -469,7 +470,7 @@
             this.pnlButtons.Appearance.Options.UseBackColor = true;
             this.pnlButtons.Appearance.Options.UseBorderColor = true;
             this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.pnlButtons.Controls.Add(this.btnCompReport);
+            this.pnlButtons.Controls.Add(this.btnRevert);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnPreview);
@@ -479,20 +480,21 @@
             this.pnlButtons.Size = new System.Drawing.Size(1430, 50);
             this.pnlButtons.TabIndex = 6;
             // 
-            // btnCompReport
+            // btnRevert
             // 
-            this.btnCompReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCompReport.Appearance.BackColor = System.Drawing.Color.Turquoise;
-            this.btnCompReport.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnCompReport.Appearance.Options.UseBackColor = true;
-            this.btnCompReport.Appearance.Options.UseForeColor = true;
-            this.btnCompReport.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bosale_16x162;
-            this.btnCompReport.Location = new System.Drawing.Point(1054, 10);
-            this.btnCompReport.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCompReport.Name = "btnCompReport";
-            this.btnCompReport.Size = new System.Drawing.Size(121, 28);
-            this.btnCompReport.TabIndex = 114;
-            this.btnCompReport.Text = "Select PR";
+            this.btnRevert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRevert.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnRevert.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnRevert.Appearance.Options.UseBackColor = true;
+            this.btnRevert.Appearance.Options.UseForeColor = true;
+            this.btnRevert.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.reset_16x16;
+            this.btnRevert.Location = new System.Drawing.Point(1054, 10);
+            this.btnRevert.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRevert.Name = "btnRevert";
+            this.btnRevert.Size = new System.Drawing.Size(121, 28);
+            this.btnRevert.TabIndex = 114;
+            this.btnRevert.Text = "Revert All";
+            this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
             // 
             // lblEpisNo
             // 
@@ -859,6 +861,7 @@
             this.btnAddRow.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.addgroupfooter_16x16;
             this.btnAddRow.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.addgroupfooter_32x32;
             this.btnAddRow.Name = "btnAddRow";
+            this.btnAddRow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddRow_ItemClick);
             // 
             // barManager1
             // 
@@ -958,7 +961,7 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.PanelControl pnlButtons;
-        private DevExpress.XtraEditors.SimpleButton btnCompReport;
+        private DevExpress.XtraEditors.SimpleButton btnRevert;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.SimpleButton btnPreview;

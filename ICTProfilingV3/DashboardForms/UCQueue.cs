@@ -1,5 +1,7 @@
 ﻿using Models.Enums;
 using Models.Repository;
+using Models.ViewModels;
+using System.Drawing;
 using System.Linq;
 
 namespace ICTProfilingV3.DashboardForms
@@ -16,11 +18,85 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadData()
         {
-            var res = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.TicketStatus == TicketStatus.OnProcess);
-            gcOnProcess.DataSource = res.ToList();
+            LoadWaiting();
+            LoadOnProcess();
+            LoadForRelease();
+        }
 
-            var res2 = unitOfWork.TicketRequestRepo.GetAll();
-            gcWaiting.DataSource = res2.ToList();
+        private void LoadWaiting()
+        {
+            var res = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.TicketStatus == TicketStatus.Accepted || x.TicketStatus == TicketStatus.Assigned,
+                x => x.ITStaff,
+                x => x.ITStaff.Users,
+                x => x.Deliveries,
+                x => x.TechSpecs,
+                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                {
+                    Ticket = s
+                });
+            gcWaiting.DataSource = res.ToList();
+        }
+
+        private void LoadForRelease()
+        {
+            var res = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.TicketStatus == TicketStatus.ForRelease,
+                x => x.ITStaff,
+                x => x.ITStaff.Users,
+                x => x.Deliveries,
+                x => x.TechSpecs,
+                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                {
+                    Ticket = s
+                }); 
+            gcForRelease.DataSource = res.ToList();
+        }
+
+        private void LoadOnProcess()
+        {
+            var res = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.TicketStatus == TicketStatus.OnProcess,
+                x => x.ITStaff,
+                x => x.ITStaff.Users,
+                x => x.Deliveries,
+                x => x.TechSpecs,
+                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                {
+                    Ticket = s
+                }); 
+            gcOnProcess.DataSource = res.ToList();
+        }
+
+        private void tvWaiting_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
+        {
+            var task = tvWaiting.GetRow(e.RowHandle) as QueueViewModel;
+            if (task == null) return;
+
+            e.Item["Ticket.RequestType"].Appearance.Normal.BackColor = GetLabelColor(task.Ticket.RequestType);
+        }
+        private Color GetLabelColor(RequestType type)
+        {
+            switch (type)
+            {
+                case RequestType.TechSpecs: return ColorTranslator.FromHtml("#f06562");
+                case RequestType.Deliveries: return ColorTranslator.FromHtml("#1fb876");
+                case RequestType.Repairs: return ColorTranslator.FromHtml("#fca90a");
+                default: return ColorTranslator.FromHtml("#969696");
+            }
+        }
+
+        private void tvForRelese_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
+        {
+            var task = tvWaiting.GetRow(e.RowHandle) as QueueViewModel;
+            if (task == null) return;
+
+            e.Item["Ticket.RequestType"].Appearance.Normal.BackColor = GetLabelColor(task.Ticket.RequestType);
+        }
+
+        private void tvOnProcess_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
+        {
+            var task = tvWaiting.GetRow(e.RowHandle) as QueueViewModel;
+            if (task == null) return;
+
+            e.Item["Ticket.RequestType"].Appearance.Normal.BackColor = GetLabelColor(task.Ticket.RequestType);
         }
     }
 }

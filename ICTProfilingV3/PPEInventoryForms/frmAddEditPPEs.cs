@@ -40,12 +40,11 @@ namespace ICTProfilingV3.PPEInventoryForms
             unitOfWork.Save();
 
             _PPEs = newPPE;
-
-            LoadEquipmentSpecs();
         }
 
         private void LoadDetails()
         {
+            LoadEquipmentSpecs();
             if (_SaveType == SaveType.Insert) return;
             
             slueEmployee.EditValue = _PPEs.IssuedToId;
@@ -122,6 +121,20 @@ namespace ICTProfilingV3.PPEInventoryForms
             unitOfWork.PPEsSpecsRepo.DeleteRange(x => x.PPEsId == _PPEs.Id);
             unitOfWork.PPesRepo.DeleteByEx(x => x.Id == _PPEs.Id);
             await unitOfWork.SaveChangesAsync();
+        }
+        private void CalcTotalValue()
+        {
+            spintTotal.Value = spinUnitCost.Value * spinQty.Value;
+        }
+
+        private void spinUnitCost_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTotalValue();
+        }
+
+        private void spinQty_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTotalValue();
         }
     }
 }

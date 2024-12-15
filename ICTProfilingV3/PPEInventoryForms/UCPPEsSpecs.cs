@@ -58,7 +58,12 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async void btnEditData_Click(object sender, EventArgs e)
         {
             var row = (PPEsSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == row.Id);
+            var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == row.Id,
+                x => x.Model,
+                x => x.Model.Brand,
+                x => x.Model.Brand.EquipmentSpecs,
+                x => x.Model.Brand.EquipmentSpecs.Equipment);
+            if (ppeSpecs == null) return;
             var frm = new frmAddEditPPEEquipment(ppeSpecs, unitOfWork);
             frm.ShowDialog();
 

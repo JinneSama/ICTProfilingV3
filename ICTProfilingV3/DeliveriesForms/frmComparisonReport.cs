@@ -83,8 +83,11 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void CreateComparisonReport()
         {
-            var cr = new ComparisonReport { DeliveryId = deliveries.Id };
-            unitOfWork.ComparisonReportRepo.Insert(cr);
+            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
+            if (cr == null){
+                cr = new ComparisonReport { DeliveryId = deliveries.Id };
+                unitOfWork.ComparisonReportRepo.Insert(cr);
+            }
             foreach(var item in deliveries.DeliveriesSpecs)
             {
                 var crSpecs = new ComparisonReportSpecs
@@ -93,7 +96,7 @@ namespace ICTProfilingV3.DeliveriesForms
                     ItemNo = item.ItemNo,
                     Quantity = item.Quantity,
                     Unit = item.Unit,
-                    Type = item.Model.Brand.EquipmentSpecs.Equipment.EquipmentName,
+                    Type = item.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName,
                     ActualDelivery = item.Model.Brand.BrandName + " " + item.Model.ModelName
                 };
                 unitOfWork.ComparisonReportSpecsRepo.Insert(crSpecs);
@@ -101,7 +104,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 {
                     var crSpecsDetails = new ComparisonReportSpecsDetails
                     {
-                        ComparisonReportSpecsId = item.Id,
+                        ComparisonReportSpecs = crSpecs,
                         Type = itemDetails.Specs,
                         ActualDelivery = itemDetails.Description,
                         ItemOrder = itemDetails.ItemNo
@@ -186,14 +189,16 @@ namespace ICTProfilingV3.DeliveriesForms
             for (int i = 0; i < gridCR.RowCount; i++)
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
-                unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == row.CRSpecs.Id);
+                if(row == null) continue;
                 unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == row.CRId);
+                unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == row.CRSpecs.Id);
                 unitOfWork.Save();
             }
 
             for (int i = 0; i < gridCR.RowCount; i++)
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
+                if (row == null) continue;
                 var detailRow = gridCR.GetDetailView(i, 0);
 
                 var crSpecs = new ComparisonReportSpecs
@@ -212,9 +217,11 @@ namespace ICTProfilingV3.DeliveriesForms
                 };
                 unitOfWork.ComparisonReportSpecsRepo.Insert(crSpecs);
 
+                if (detailRow == null) continue;
                 for (int x = 0; x < detailRow.RowCount; x++)
                 {
                     var spec = (ComparisonReportSpecsDetails)detailRow.GetRow(x);
+                    if(spec == null) continue;
                     var crSpecsDetails = new ComparisonReportSpecsDetails
                     {
                         ItemOrder = x + 1,
@@ -224,7 +231,7 @@ namespace ICTProfilingV3.DeliveriesForms
                         PO = spec.PO,
                         ActualDelivery = spec.ActualDelivery,
                         IsDiscrepancy = spec.IsDiscrepancy,
-                        ComparisonReportSpecsId = crSpecs.Id
+                        ComparisonReportSpecs = crSpecs
                     };
                     unitOfWork.ComparisonReportSpecsDetailsRepo.Insert(crSpecsDetails);
                 }
@@ -248,7 +255,9 @@ namespace ICTProfilingV3.DeliveriesForms
             var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id,
                 x => x.PreparedByUser,
                 x => x.NotedByUser,
-                x => x.ReviewedByUser);
+                x => x.ReviewedByUser,
+                x => x.ComparisonReportSpecs,
+                x => x.ComparisonReportSpecs.Select(s => s.ComparisonReportSpecsDetails));
 
             var employee = HRMISEmployees.GetEmployeeById(deliveries.RequestedById);
 
@@ -276,6 +285,30 @@ namespace ICTProfilingV3.DeliveriesForms
             rptCR.CreateDocument();
             var frm = new frmReportViewer(rptCR);
             frm.ShowDialog();
+        }
+
+        private async void btnRevert_Click(object sender, EventArgs e)
+        {
+            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
+            if (cr == null) return;
+
+            var crSpecs = cr.ComparisonReportSpecs;
+
+            foreach (var crSpec in crSpecs)
+            {
+                unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == crSpec.Id);
+            }
+            unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == cr.Id);
+            unitOfWork.Save();
+            CreateComparisonReport();
+        }
+
+        private void btnAddRow_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var masterRowHandle = gridCR.FocusedRowHandle;
+            var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
+            var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
+            row.AddNewRow();
         }
     }
     

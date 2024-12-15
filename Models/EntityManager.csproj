@@ -144,6 +144,7 @@
     <Compile Include="HRMISEntites\Office.cs">
       <DependentUpon>HRMISv2Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Managers\CustomTokenProvider.cs" />
     <Compile Include="Managers\ITicketStatus.cs" />
     <Compile Include="Managers\RoleManager.cs" />
     <Compile Include="Managers\Role\ICTRoleManager.cs" />
@@ -152,9 +153,9 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202412080917356_Initial-Create.cs" />
-    <Compile Include="Migrations\202412080917356_Initial-Create.Designer.cs">
-      <DependentUpon>202412080917356_Initial-Create.cs</DependentUpon>
+    <Compile Include="Migrations\202412090148527_ComparisonReportTables.cs" />
+    <Compile Include="Migrations\202412090148527_ComparisonReportTables.Designer.cs">
+      <DependentUpon>202412090148527_ComparisonReportTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionType.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="ViewModels\PPEsViewModel.cs" />
     <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
     <Compile Include="ViewModels\PRViewModel.cs" />
+    <Compile Include="ViewModels\QueueViewModel.cs" />
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
@@ -227,8 +229,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202412080917356_Initial-Create.resx">
-      <DependentUpon>202412080917356_Initial-Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202412090148527_ComparisonReportTables.resx">
+      <DependentUpon>202412090148527_ComparisonReportTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

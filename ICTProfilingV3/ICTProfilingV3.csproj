@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -201,6 +201,12 @@
     </Compile>
     <Compile Include="CustomerActionSheetForms\UCCAS.Designer.cs">
       <DependentUpon>UCCAS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardForms\UCDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCDashboard.Designer.cs">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardForms\UCQueue.cs">
       <SubType>UserControl</SubType>
@@ -665,6 +671,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerActionSheetForms\UCCAS.resx">
       <DependentUpon>UCCAS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCDashboard.resx">
+      <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCQueue.resx">
       <DependentUpon>UCQueue.cs</DependentUpon>
@@ -1647,6 +1656,7 @@
   <ItemGroup>
     <Content Include="Epis.ico" />
     <Content Include="EPIS_LOGO.ico" />
+    <None Include="Resources\reset_16x16.png" />
     <None Include="Resources\about_16x1613.png" />
     <None Include="Resources\about_16x1612.png" />
     <None Include="Resources\addgroupfooter_32x32.png" />

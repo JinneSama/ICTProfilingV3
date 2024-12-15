@@ -67,7 +67,8 @@ namespace ICTProfilingV3.UsersForms
                 Username = txtUsername.Text,
                 Fullname = txtFullname.Text,
                 Position = txtPosition.Text,
-                role = (string)lueUserRole.EditValue
+                role = (string)lueUserRole.EditValue,
+                Password = txtPassword.Text
             };
             await _userManager.UpdateUser(userModel);
             this.Close();

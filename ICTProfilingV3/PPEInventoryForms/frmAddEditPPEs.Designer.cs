@@ -298,6 +298,7 @@
             this.spinUnitCost.Properties.UseMaskAsDisplayFormat = true;
             this.spinUnitCost.Size = new System.Drawing.Size(138, 20);
             this.spinUnitCost.TabIndex = 107;
+            this.spinUnitCost.EditValueChanged += new System.EventHandler(this.spinUnitCost_EditValueChanged);
             // 
             // cboUnit
             // 
@@ -333,6 +334,7 @@
             this.spinQty.Properties.UseMaskAsDisplayFormat = true;
             this.spinQty.Size = new System.Drawing.Size(138, 20);
             this.spinQty.TabIndex = 105;
+            this.spinQty.EditValueChanged += new System.EventHandler(this.spinQty_EditValueChanged);
             // 
             // labelControl10
             // 

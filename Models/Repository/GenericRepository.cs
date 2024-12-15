@@ -37,7 +37,8 @@ namespace Models.Repository
 
         public void DeleteRange(Expression<Func<TEntity, bool>> expression)
         {
-            dbSet.RemoveRange(FindAllAsync(expression));
+            var entities = FindAllAsync(expression);
+            dbSet.RemoveRange(entities);
         }
 
         public IQueryable<TEntity> FindAllAsync(Expression<Func<TEntity, bool>> expression, params Expression<Func<TEntity, object>>[] includes)

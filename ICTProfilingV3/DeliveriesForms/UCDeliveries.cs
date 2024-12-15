@@ -154,10 +154,19 @@ namespace ICTProfilingV3.DeliveriesForms
             });
         }
 
-        private void btnCompReport_Click(object sender, EventArgs e)
+        private async void btnCompReport_Click(object sender, EventArgs e)
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var frm = new frmComparisonReport(row.Deliveries);    
+            var del = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Deliveries.Id,
+                x => x.Supplier,
+                x => x.TicketRequest,
+                x => x.DeliveriesSpecs.Select(s => s.Model),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
+
+            if (del == null) return;
+            var frm = new frmComparisonReport(del);    
             frm.ShowDialog();
         }
     }
