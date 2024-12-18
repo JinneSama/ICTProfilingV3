@@ -31,22 +31,22 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
-            this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.slueUser = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.lueSection = new DevExpress.XtraEditors.LookUpEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.lueSection = new DevExpress.XtraEditors.LookUpEdit();
+            this.slueUser = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.peStaffImage = new DevExpress.XtraEditors.PictureEdit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueUser.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.peStaffImage.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -83,15 +83,6 @@
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
             // 
-            // pictureEdit1
-            // 
-            this.pictureEdit1.Location = new System.Drawing.Point(106, 62);
-            this.pictureEdit1.Name = "pictureEdit1";
-            this.pictureEdit1.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-            this.pictureEdit1.Size = new System.Drawing.Size(288, 221);
-            this.pictureEdit1.TabIndex = 84;
-            // 
             // labelControl1
             // 
             this.labelControl1.Location = new System.Drawing.Point(12, 62);
@@ -102,36 +93,13 @@
             // 
             // labelControl2
             // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl2.Appearance.Options.UseFont = true;
             this.labelControl2.Location = new System.Drawing.Point(12, 321);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(35, 13);
+            this.labelControl2.Size = new System.Drawing.Size(39, 15);
             this.labelControl2.TabIndex = 87;
             this.labelControl2.Text = "Section";
-            // 
-            // slueUser
-            // 
-            this.slueUser.Location = new System.Drawing.Point(106, 289);
-            this.slueUser.Name = "slueUser";
-            this.slueUser.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueUser.Properties.Appearance.Options.UseFont = true;
-            this.slueUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueUser.Properties.DisplayMember = "FullName";
-            this.slueUser.Properties.NullText = "";
-            this.slueUser.Properties.PopupView = this.gridView2;
-            this.slueUser.Properties.ValueMember = "Id";
-            this.slueUser.Size = new System.Drawing.Size(288, 22);
-            this.slueUser.TabIndex = 110;
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn14,
-            this.gridColumn15});
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // labelControl8
             // 
@@ -142,21 +110,6 @@
             this.labelControl8.Size = new System.Drawing.Size(57, 15);
             this.labelControl8.TabIndex = 109;
             this.labelControl8.Text = "Select User";
-            // 
-            // lueSection
-            // 
-            this.lueSection.Location = new System.Drawing.Point(106, 318);
-            this.lueSection.Margin = new System.Windows.Forms.Padding(2);
-            this.lueSection.Name = "lueSection";
-            this.lueSection.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lueSection.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
-            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Section", "Section", 15, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.lueSection.Properties.DisplayMember = "Section";
-            this.lueSection.Properties.NullText = "";
-            this.lueSection.Properties.ValueMember = "Id";
-            this.lueSection.Size = new System.Drawing.Size(288, 20);
-            this.lueSection.TabIndex = 146;
             // 
             // btnSave
             // 
@@ -190,6 +143,48 @@
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // lueSection
+            // 
+            this.lueSection.Location = new System.Drawing.Point(106, 318);
+            this.lueSection.Margin = new System.Windows.Forms.Padding(2);
+            this.lueSection.Name = "lueSection";
+            this.lueSection.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lueSection.Properties.Appearance.Options.UseFont = true;
+            this.lueSection.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueSection.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Section", "Section", 15, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
+            this.lueSection.Properties.DisplayMember = "Section";
+            this.lueSection.Properties.NullText = "";
+            this.lueSection.Properties.ValueMember = "Id";
+            this.lueSection.Size = new System.Drawing.Size(288, 22);
+            this.lueSection.TabIndex = 146;
+            // 
+            // slueUser
+            // 
+            this.slueUser.Location = new System.Drawing.Point(106, 289);
+            this.slueUser.Name = "slueUser";
+            this.slueUser.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueUser.Properties.Appearance.Options.UseFont = true;
+            this.slueUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueUser.Properties.DisplayMember = "FullName";
+            this.slueUser.Properties.NullText = "";
+            this.slueUser.Properties.PopupView = this.gridView2;
+            this.slueUser.Properties.ValueMember = "Id";
+            this.slueUser.Size = new System.Drawing.Size(288, 22);
+            this.slueUser.TabIndex = 110;
+            // 
+            // gridView2
+            // 
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn14,
+            this.gridColumn15});
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
             // gridColumn14
             // 
             this.gridColumn14.Caption = "Employee";
@@ -206,6 +201,15 @@
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 1;
             // 
+            // peStaffImage
+            // 
+            this.peStaffImage.Location = new System.Drawing.Point(106, 62);
+            this.peStaffImage.Name = "peStaffImage";
+            this.peStaffImage.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.peStaffImage.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.peStaffImage.Size = new System.Drawing.Size(288, 221);
+            this.peStaffImage.TabIndex = 84;
+            // 
             // frmAddEditStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,16 +222,16 @@
             this.Controls.Add(this.labelControl8);
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.pictureEdit1);
+            this.Controls.Add(this.peStaffImage);
             this.Controls.Add(this.panel1);
             this.Name = "frmAddEditStaff";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.peStaffImage.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,7 +242,7 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
-        private DevExpress.XtraEditors.PictureEdit pictureEdit1;
+        private DevExpress.XtraEditors.PictureEdit peStaffImage;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SearchLookUpEdit slueUser;

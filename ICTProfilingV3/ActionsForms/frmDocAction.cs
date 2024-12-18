@@ -53,9 +53,11 @@ namespace ICTProfilingV3.ActionsForms
             _routedUsers = users;
         }
 
-        private void LoadActionList()
+        private async void LoadActionList()
         {
             lueActionTaken.Properties.DataSource = unitOfWork.ActionTakenRepo.GetAll().ToList();
+
+            await LoadTicketStatus();
         }
         private void LoadDropdown()
         {
@@ -66,6 +68,7 @@ namespace ICTProfilingV3.ActionsForms
                 NodeValue = s.Order + "." + s.Value
             }).OrderBy(o => o.ActionTree.Order);
             lueProgram.Properties.DataSource = new BindingList<ActionTreeViewModel>(dropdown.ToList());
+            lueTicketStatus.Properties.DataSource = Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>().Select(x => new { Type = x, TypeView = EnumHelper.GetEnumDescription(x) });
         }
 
         private void lueProgram_EditValueChanged(object sender, EventArgs e)
@@ -144,6 +147,17 @@ namespace ICTProfilingV3.ActionsForms
             }
         }
 
+        private async Task UpdateTicketStatus()
+        {
+            if (actionType.RequestType != RequestType.TechSpecs && actionType.RequestType != RequestType.Deliveries && actionType.RequestType != RequestType.Repairs) return;
+                
+            var ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == actionType.Id);
+            if (ticket == null) return;
+
+            ticket.TicketStatus = (TicketStatus)lueTicketStatus.EditValue;
+            unitOfWork.Save();
+        }
+
         private async Task UpdateDocAction(bool send)
         {
             var updateAction = await unitOfWork.ActionsRepo.FindAsync(x => x.Id == _actions.Id);
@@ -167,6 +181,7 @@ namespace ICTProfilingV3.ActionsForms
                 updateAction.RoutedUsers.Add(rUser);
             }
             unitOfWork.Save();
+            await UpdateTicketStatus();
         }
 
         private async void InsertDocAction(bool send)
@@ -193,6 +208,7 @@ namespace ICTProfilingV3.ActionsForms
                 docAction.RoutedUsers.Add(rUser);
             }
             await SaveToProcess(docAction);
+            await UpdateTicketStatus();
             this.Close();
         }
 
@@ -207,8 +223,8 @@ namespace ICTProfilingV3.ActionsForms
 
             if (actionType.RequestType == RequestType.Repairs)
             {
-                var deliveries = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
+                var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == actionType.Id);
+                repair.Actions.Add(Action);
                 unitOfWork.Save();
             }
 
@@ -221,24 +237,44 @@ namespace ICTProfilingV3.ActionsForms
 
             if (actionType.RequestType == RequestType.CAS)
             {
-                var deliveries = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
+                var cas = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == actionType.Id);
+                cas.Actions.Add(Action);
                 unitOfWork.Save();
             }
 
             if (actionType.RequestType == RequestType.PR)
             {
-                var deliveries = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
+                var pr = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == actionType.Id);
+                pr.Actions.Add(Action);
                 unitOfWork.Save();
             }
 
             if (actionType.RequestType == RequestType.PGN)
             {
-                var deliveries = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
+                var pgn = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == actionType.Id);
+                pgn.Actions.Add(Action);
                 unitOfWork.Save();
             }
+
+            if (actionType.RequestType == RequestType.M365)
+            {
+                var mo = await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == actionType.Id);
+                mo.Actions.Add(Action);
+                unitOfWork.Save();
+            }
+        }
+
+        private async Task LoadTicketStatus()
+        {
+            if (actionType.RequestType != RequestType.TechSpecs && actionType.RequestType != RequestType.Deliveries && actionType.RequestType != RequestType.Repairs)
+            {
+                lueTicketStatus.Enabled = false;
+                return;
+            }
+            var ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == actionType.Id);
+            if (ticket == null) return;
+
+            lueTicketStatus.EditValue = ticket.TicketStatus;
         }
 
         private void frmDocAction_Load(object sender, EventArgs e)

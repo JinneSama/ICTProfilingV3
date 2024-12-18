@@ -20,5 +20,11 @@
     <Setting Name="NetworkPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">WcZLRX</Value>
     </Setting>
+    <Setting Name="StaffNetworkPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">\\172.17.16.244\ICTv2_Repositories\ICTv3StaffImages</Value>
+    </Setting>
+    <Setting Name="LastVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

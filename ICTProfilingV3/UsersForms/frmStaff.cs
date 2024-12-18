@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
+using Helpers.NetworkFolder;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -10,10 +11,14 @@ namespace ICTProfilingV3.UsersForms
     public partial class frmStaff : DevExpress.XtraEditors.XtraForm
     {
         private readonly IUnitOfWork unitOfWork;
+        private DocumentHandler documentHandler;
         public frmStaff()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
+            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
+                Properties.Settings.Default.NetworkUsername,
+                Properties.Settings.Default.NetworkPassword);
             LoadStaff();
         }
 
@@ -43,10 +48,11 @@ namespace ICTProfilingV3.UsersForms
 
         private void LoadStaff()
         {
-            var res = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests).Select(x => new StaffViewModel
+            var res = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests,
+                x => x.Users).ToList().Select(x => new StaffViewModel
             {
-                Users = x.Users,
-                Staff = x
+                Staff = x,
+                Image = documentHandler.GetImage(x.UserId + ".jpeg")
             });
             gcStaff.DataSource = res.ToList();  
         }
@@ -71,6 +77,15 @@ namespace ICTProfilingV3.UsersForms
             var row = (StaffViewModel)tvStaff.GetRow(e.RowHandle);
             LoadAssignedTo(row);
             LoadProcessCount(row);
+        }
+
+        private void btnEditStaff_Click(object sender, EventArgs e)
+        {
+            var row = (StaffViewModel)tvStaff.GetFocusedRow();
+            var frm = new frmAddEditStaff(row);
+            frm.ShowDialog();
+
+            LoadStaff();
         }
     }
 }

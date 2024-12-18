@@ -44,6 +44,9 @@ namespace Models.Repository
         IGenericRepository<ComparisonReport> ComparisonReportRepo { get; }
         IGenericRepository<ComparisonReportSpecs> ComparisonReportSpecsRepo { get; }
         IGenericRepository<ComparisonReportSpecsDetails> ComparisonReportSpecsDetailsRepo { get; }
+        IGenericRepository<ChangeLogs> ChangeLogsRepo { get; }
+        IGenericRepository<MOAccounts> MOAccountRepo { get; }
+        IGenericRepository<MOAccountUsers> MOAccountUserRepo { get; }
         void Save();
         Task SaveChangesAsync();
     }

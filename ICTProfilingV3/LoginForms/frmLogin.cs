@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using ICTProfilingV3.ToolForms;
 using Models.Managers.User;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,24 @@ namespace ICTProfilingV3.LoginForms
             userManager = new ICTUserManager();
             frmMain = _frmMain;
             RetrieveLoginDetails();
+
+            LoadChangelogs();
+        }
+        private void LoadChangelogs()
+        {
+            lblDate.Text = DateTime.UtcNow.ToString("MMM-dd-yyyy");
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+                lblversion.Text = "Login to Access EPIS v" + cd.CurrentVersion.ToString();
+                string version = cd.CurrentVersion.ToString();
+                if (version != Properties.Settings.Default.LastVersion)
+                {
+                    Properties.Settings.Default.LastVersion = version;
+                    frmChangelogs frm = new frmChangelogs(version);
+                    frm.ShowDialog();
+                }
+            }
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)

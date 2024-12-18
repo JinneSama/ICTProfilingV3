@@ -81,8 +81,16 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
                    x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
 
-            return null;
+            if (_actionType.RequestType == RequestType.M365)
+                return (await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == _actionType.Id,
+                   x => x.Actions.Select(a => a.CreatedBy),
+                   x => x.Actions.Select(a => a.ProgramDropdowns),
+                   x => x.Actions.Select(a => a.ActivityDropdowns),
+                   x => x.Actions.Select(a => a.MainActDropdowns),
+                   x => x.Actions.Select(a => a.SubActivityDropdowns),
+                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
 
+            return null;
         }
         private async void LoadActions()
         {

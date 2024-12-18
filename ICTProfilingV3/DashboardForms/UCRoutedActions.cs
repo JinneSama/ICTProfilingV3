@@ -4,6 +4,7 @@ using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.MOForms;
 using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
@@ -107,6 +108,12 @@ namespace ICTProfilingV3.DashboardForms
                 Dock = DockStyle.Fill,
                 filterText = row.Actions.PGNRequestId.ToString()
             });
+
+            if (row.Actions.RequestType == RequestType.M365) NavigateToProcess(new UCMOAccountUserRequests()
+            {
+                Dock = DockStyle.Fill,
+                filterText = row.Actions.MOAccountUserId.ToString()
+            });
         }
 
         private void LoadActions(ActionType actionType)
@@ -163,6 +170,9 @@ namespace ICTProfilingV3.DashboardForms
                     break;
                 case RequestType.PGN:
                     Id = actions.Actions.PGNRequestId;
+                    break;
+                case RequestType.M365:
+                    Id = actions.Actions.MOAccountUserId;
                     break;
                 default:
                     break;

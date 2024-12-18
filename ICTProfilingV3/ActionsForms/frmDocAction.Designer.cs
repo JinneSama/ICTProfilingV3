@@ -53,6 +53,8 @@
             this.txtRoutedTo = new DevExpress.XtraEditors.TextEdit();
             this.btnNewActionTaken = new DevExpress.XtraEditors.SimpleButton();
             this.btnRouteTo = new DevExpress.XtraEditors.SimpleButton();
+            this.lueTicketStatus = new DevExpress.XtraEditors.LookUpEdit();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueProgram.Properties)).BeginInit();
@@ -63,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deActionDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueActionTaken.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoutedTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueTicketStatus.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -171,7 +174,7 @@
             this.btnSaveAndSend.Appearance.Options.UseBackColor = true;
             this.btnSaveAndSend.Appearance.Options.UseForeColor = true;
             this.btnSaveAndSend.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.export_16x16;
-            this.btnSaveAndSend.Location = new System.Drawing.Point(237, 294);
+            this.btnSaveAndSend.Location = new System.Drawing.Point(237, 315);
             this.btnSaveAndSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveAndSend.Name = "btnSaveAndSend";
             this.btnSaveAndSend.Size = new System.Drawing.Size(139, 28);
@@ -187,7 +190,7 @@
             this.btnSaveAndClose.Appearance.Options.UseBackColor = true;
             this.btnSaveAndClose.Appearance.Options.UseForeColor = true;
             this.btnSaveAndClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.saveandclose_16x16;
-            this.btnSaveAndClose.Location = new System.Drawing.Point(380, 294);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(380, 315);
             this.btnSaveAndClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(137, 28);
@@ -203,7 +206,7 @@
             this.btnClose.Appearance.Options.UseBackColor = true;
             this.btnClose.Appearance.Options.UseForeColor = true;
             this.btnClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
-            this.btnClose.Location = new System.Drawing.Point(521, 294);
+            this.btnClose.Location = new System.Drawing.Point(521, 315);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(97, 28);
@@ -351,11 +354,36 @@
             this.btnRouteTo.Text = "Staff";
             this.btnRouteTo.Click += new System.EventHandler(this.btnRouteTo_Click);
             // 
+            // lueTicketStatus
+            // 
+            this.lueTicketStatus.Location = new System.Drawing.Point(101, 293);
+            this.lueTicketStatus.Name = "lueTicketStatus";
+            this.lueTicketStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueTicketStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Type", "Status")});
+            this.lueTicketStatus.Properties.DisplayMember = "TypeView";
+            this.lueTicketStatus.Properties.NullText = "";
+            this.lueTicketStatus.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lueTicketStatus.Properties.ValueMember = "Type";
+            this.lueTicketStatus.Size = new System.Drawing.Size(517, 20);
+            this.lueTicketStatus.TabIndex = 98;
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(11, 296);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(62, 13);
+            this.labelControl9.TabIndex = 99;
+            this.labelControl9.Text = "Ticket Status";
+            // 
             // frmDocAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 332);
+            this.ClientSize = new System.Drawing.Size(630, 349);
+            this.Controls.Add(this.labelControl9);
+            this.Controls.Add(this.lueTicketStatus);
             this.Controls.Add(this.btnNewActionTaken);
             this.Controls.Add(this.btnRouteTo);
             this.Controls.Add(this.btnSaveAndSend);
@@ -392,6 +420,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.deActionDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueActionTaken.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRoutedTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueTicketStatus.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,5 +452,7 @@
         private DevExpress.XtraEditors.SimpleButton btnSaveAndSend;
         private DevExpress.XtraEditors.SimpleButton btnNewActionTaken;
         private DevExpress.XtraEditors.SimpleButton btnRouteTo;
+        private DevExpress.XtraEditors.LookUpEdit lueTicketStatus;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
     }
 }

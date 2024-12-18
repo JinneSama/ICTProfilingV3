@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using Models.Entities;
+using Models.Enums;
 using Models.Repository;
 using Models.ViewModels;
 using System.Drawing;
@@ -29,8 +30,11 @@ namespace ICTProfilingV3.DashboardForms
                 x => x.ITStaff,
                 x => x.ITStaff.Users,
                 x => x.Deliveries,
+                x => x.Deliveries.Actions,
                 x => x.TechSpecs,
-                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                x => x.TechSpecs.Actions,
+                x => x.Repairs,
+                x => x.Repairs.Actions).ToList().Select(s => new QueueViewModel
                 {
                     Ticket = s
                 });
@@ -43,11 +47,14 @@ namespace ICTProfilingV3.DashboardForms
                 x => x.ITStaff,
                 x => x.ITStaff.Users,
                 x => x.Deliveries,
+                x => x.Deliveries.Actions,
                 x => x.TechSpecs,
-                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                x => x.TechSpecs.Actions,
+                x => x.Repairs,
+                x => x.Repairs.Actions).ToList().Select(s => new QueueViewModel
                 {
                     Ticket = s
-                }); 
+                });
             gcForRelease.DataSource = res.ToList();
         }
 
@@ -57,11 +64,14 @@ namespace ICTProfilingV3.DashboardForms
                 x => x.ITStaff,
                 x => x.ITStaff.Users,
                 x => x.Deliveries,
+                x => x.Deliveries.Actions,
                 x => x.TechSpecs,
-                x => x.Repairs).ToList().Select(s => new QueueViewModel
+                x => x.TechSpecs.Actions,
+                x => x.Repairs,
+                x => x.Repairs.Actions).ToList().Select(s => new QueueViewModel
                 {
                     Ticket = s
-                }); 
+                });
             gcOnProcess.DataSource = res.ToList();
         }
 
@@ -85,7 +95,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void tvForRelese_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
         {
-            var task = tvWaiting.GetRow(e.RowHandle) as QueueViewModel;
+            var task = tvForRelease.GetRow(e.RowHandle) as QueueViewModel;
             if (task == null) return;
 
             e.Item["Ticket.RequestType"].Appearance.Normal.BackColor = GetLabelColor(task.Ticket.RequestType);
@@ -93,7 +103,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void tvOnProcess_ItemCustomize(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventArgs e)
         {
-            var task = tvWaiting.GetRow(e.RowHandle) as QueueViewModel;
+            var task = tvOnProcess.GetRow(e.RowHandle) as QueueViewModel;
             if (task == null) return;
 
             e.Item["Ticket.RequestType"].Appearance.Normal.BackColor = GetLabelColor(task.Ticket.RequestType);

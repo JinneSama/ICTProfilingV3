@@ -3,11 +3,13 @@ using DevExpress.PivotGrid.ServerMode;
 using DevExpress.XtraCharts.Native;
 using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -18,6 +20,7 @@ using Models.Repository;
 using Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -29,10 +32,14 @@ namespace ICTProfilingV3.RepairForms
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IICTUserManager _userManager;
+        private DocumentHandler documentHandler;
         public string filterText { get; set; }
         public UCRepair()
         {
             InitializeComponent();
+            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
+                Properties.Settings.Default.NetworkUsername,
+                Properties.Settings.Default.NetworkPassword);
             _unitOfWork = new UnitOfWork();
             _userManager = new ICTUserManager();
             LoadRepair();
@@ -50,7 +57,8 @@ namespace ICTProfilingV3.RepairForms
                 PropertyNo = x.PPEs?.PropertyNo,
                 IssuedTo = HRMISEmployees.GetEmployeeById(x.RequestedById)?.Employee,
                 Office = HRMISEmployees.GetEmployeeById(x.RequestedById)?.Office,
-                RepairId = "EPiS-" + x.Id
+                RepairId = "EPiS-" + x.Id,
+                Repair = x
             });
             gcRepair.DataSource = repair; 
         }
@@ -65,6 +73,26 @@ namespace ICTProfilingV3.RepairForms
                 Id = row.Id,
                 RequestType = RequestType.Repairs,
             })
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+        private async void LoadStaff()
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
+            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            var res = new StaffModel
+            {
+                Image = img,
+                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
+                PhotoVisible = img == null ? true : false,
+                InitialsVisible = img == null ? false : true
+            };
+
+            staffPanel.Controls.Clear();
+            staffPanel.Controls.Add(new UCAssignedTo(res)
             {
                 Dock = DockStyle.Fill
             });
@@ -224,6 +252,7 @@ namespace ICTProfilingV3.RepairForms
         {
             await LoadRepairDetails();
             LoadActions();
+            LoadStaff();
         }
 
         private void hplTicket_Click(object sender, EventArgs e)

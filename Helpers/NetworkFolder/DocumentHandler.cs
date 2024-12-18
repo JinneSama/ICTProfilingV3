@@ -18,7 +18,6 @@ namespace Helpers.NetworkFolder
             this.password = password;
             credentials = new NetworkCredential(username, password);
         }
-
         public void SaveImage(Image image, string sourcePath , string fileName)
         {
             image.Save(sourcePath);
@@ -48,6 +47,7 @@ namespace Helpers.NetworkFolder
             byte[] fileBytes = null;
             using (new ConnectToFolder(networkPath, credentials))
             {
+                if(!File.Exists(DownloadURL)) return null;
                 fileBytes = File.ReadAllBytes(DownloadURL);
             }
             return fileBytes;

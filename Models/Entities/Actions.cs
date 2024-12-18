@@ -53,6 +53,9 @@ namespace Models.Entities
         public int? PGNRequestId { get; set; }
         [ForeignKey("PGNRequestId")]
         public PGNRequests PGNRequests { get; set; }
+        public int? MOAccountUserId { get; set; }
+        [ForeignKey("MOAccountUserId")]
+        public MOAccountUsers MOAccountUsers { get; set; }
 
         public string CreatedById { get; set; }
 

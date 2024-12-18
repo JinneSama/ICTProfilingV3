@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using Models.Entities;
+using Models.Enums;
 using Models.Models;
 using System;
 
@@ -14,5 +15,6 @@ namespace Models.ViewModels
         public string Division { get; set; }
         public int TicketId { get; set; }
         public int? RepairId { get; set; }
+        public TechSpecs TechSpecs { get; set; }
     }
 }

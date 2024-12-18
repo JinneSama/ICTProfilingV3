@@ -1,9 +1,9 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.Pdf.Native.BouncyCastle.Asn1.X509;
-using DevExpress.XtraLayout;
+using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -11,7 +11,9 @@ using Models.Models;
 using Models.Repository;
 using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,10 +23,15 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl
     {
         private IUnitOfWork _unitOfWork;
+        private DocumentHandler documentHandler;
+
         public string filterText { get; set; }
         public UCDeliveries()
         {
             InitializeComponent();
+            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
+                Properties.Settings.Default.NetworkUsername,
+                Properties.Settings.Default.NetworkPassword);
             _unitOfWork = new UnitOfWork();
             LoadDeliveries();
         }
@@ -44,6 +51,27 @@ namespace ICTProfilingV3.DeliveriesForms
                 Deliveries = x
             });
             gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(deliveries.ToList());
+        }
+
+        private async void LoadStaff()
+        {
+            var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
+            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            var res = new StaffModel
+            {
+                Image = img,
+                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
+                PhotoVisible = img == null ? true : false,
+                InitialsVisible = img == null ? false : true
+            };
+
+            staffPanel.Controls.Clear();
+            staffPanel.Controls.Add(new UCAssignedTo(res)
+            {
+                Dock = DockStyle.Fill
+            });
         }
 
         private void LoadDetails()
@@ -139,6 +167,7 @@ namespace ICTProfilingV3.DeliveriesForms
             await LoadEquipmentSpecs();
             LoadActions();
             LoadDetails();
+            LoadStaff();
         }
 
         private void hplTicket_Click(object sender, EventArgs e)

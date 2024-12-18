@@ -42,7 +42,6 @@ namespace Models.ViewModels
 
             var staff = new StaffViewModel
             {
-                Users = TicketRequest?.ITStaff?.Users,
                 Staff = TicketRequest?.ITStaff
             };
             var actions = GetActions();

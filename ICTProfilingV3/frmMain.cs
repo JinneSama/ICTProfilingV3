@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Xpo;
 using DevExpress.XtraBars.Ribbon;
+using Helpers.NetworkFolder;
 using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.CustomerActionSheetForms;
@@ -9,6 +13,7 @@ using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LoginForms;
 using ICTProfilingV3.LookUpTables;
+using ICTProfilingV3.MOForms;
 using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.PurchaseRequestForms;
@@ -19,6 +24,7 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using ICTProfilingV3.UsersForms;
+using static System.Net.WebRequestMethods;
 namespace ICTProfilingV3
 {
     public partial class frmMain : RibbonForm
@@ -275,6 +281,37 @@ namespace ICTProfilingV3
             {
                 Dock = DockStyle.Fill
             });
+        }
+
+        private void btnChanges_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var frm = new frmViewChangeLogs();
+            frm.ShowDialog();
+        }
+
+        private void btnChangelogs_ItemPressed(object sender, BackstageViewItemEventArgs e)
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+                var version = cd.CurrentVersion.ToString();
+
+                var frm = new frmChangelogs(version);
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnMOAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCMOAccounts()
+            {
+                Dock = DockStyle.Fill
+            });
+        }
+
+        private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
         }
     }
 }

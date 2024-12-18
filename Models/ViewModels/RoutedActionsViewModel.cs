@@ -30,6 +30,7 @@ namespace Models.ViewModels
             if (_action?.RequestType == Enums.RequestType.PR) return _action?.PurchaseRequestId?.ToString();
             if (_action?.RequestType == Enums.RequestType.CAS) return _action?.CustomerActionSheetId?.ToString();
             if (_action?.RequestType == Enums.RequestType.PGN) return _action?.PGNRequestId?.ToString();
+            if (_action?.RequestType == Enums.RequestType.M365) return _action?.MOAccountUserId?.ToString();
             return null;
         }
 

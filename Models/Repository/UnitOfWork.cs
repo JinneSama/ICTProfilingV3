@@ -464,6 +464,42 @@ namespace Models.Repository
             set => _ComparisonReportSpecsDetailsRepo = value;
         }
 
+        private IGenericRepository<ChangeLogs> _ChangeLogsRepo;
+        public IGenericRepository<ChangeLogs> ChangeLogsRepo
+        {
+            get
+            {
+                if (_ChangeLogsRepo == null)
+                    _ChangeLogsRepo = new GenericRepository<ChangeLogs>(_context);
+                return _ChangeLogsRepo;
+            }
+            set => _ChangeLogsRepo = value;
+        }
+
+        private IGenericRepository<MOAccounts> _MOAccountRepo;
+        public IGenericRepository<MOAccounts> MOAccountRepo
+        {
+            get
+            {
+                if (_MOAccountRepo == null)
+                    _MOAccountRepo = new GenericRepository<MOAccounts>(_context);
+                return _MOAccountRepo;
+            }
+            set => _MOAccountRepo = value;
+        }
+
+        private IGenericRepository<MOAccountUsers> _MOAccountUserRepo;
+        public IGenericRepository<MOAccountUsers> MOAccountUserRepo
+        {
+            get
+            {
+                if (_MOAccountUserRepo == null)
+                    _MOAccountUserRepo = new GenericRepository<MOAccountUsers>(_context);
+                return _MOAccountUserRepo;
+            }
+            set => _MOAccountUserRepo = value;
+        }
+
         public UnitOfWork()
         {
             _context = ApplicationDbContext.Create();

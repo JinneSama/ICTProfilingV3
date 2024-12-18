@@ -94,5 +94,29 @@ namespace ICTProfilingV3.Properties {
                 this["NetworkPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\172.17.16.244\\ICTv2_Repositories\\ICTv3StaffImages")]
+        public string StaffNetworkPath {
+            get {
+                return ((string)(this["StaffNetworkPath"]));
+            }
+            set {
+                this["StaffNetworkPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastVersion {
+            get {
+                return ((string)(this["LastVersion"]));
+            }
+            set {
+                this["LastVersion"] = value;
+            }
+        }
     }
 }

@@ -25,6 +25,9 @@ namespace Models.Entities
             CRPreparedBy = new HashSet<ComparisonReport>();
             CRReviewedBy = new HashSet<ComparisonReport>();
             CRNotedBy = new HashSet<ComparisonReport>();
+            ChangeLogsBy = new HashSet<ChangeLogs>();
+            MOAccounts = new HashSet<MOAccounts>();
+            MOAccountUsers = new HashSet<MOAccountUsers>();
         }
         public string FullName { get; set; }
         public string Position { get; set; }
@@ -46,5 +49,8 @@ namespace Models.Entities
         public ICollection<ComparisonReport> CRPreparedBy { get; set; }
         public ICollection<ComparisonReport> CRReviewedBy { get; set; }
         public ICollection<ComparisonReport> CRNotedBy { get; set; }
+        public ICollection<ChangeLogs> ChangeLogsBy { get; set; }
+        public ICollection<MOAccountUsers> MOAccountUsers { get; set; }
+        public ICollection<MOAccounts> MOAccounts { get; set; }
     }
 }

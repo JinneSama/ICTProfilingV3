@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
             this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
+            this.backstageViewClientControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.btnLogout = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
+            this.btnChangelogs = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
             this.btnDashboard = new DevExpress.XtraBars.BarButtonItem();
             this.btnTARequest = new DevExpress.XtraBars.BarButtonItem();
             this.btnTechSpecs = new DevExpress.XtraBars.BarButtonItem();
@@ -68,6 +72,8 @@
             this.btnPGNOffices = new DevExpress.XtraBars.BarButtonItem();
             this.lblUpdate = new DevExpress.XtraBars.BarStaticItem();
             this.btnQueue = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChanges = new DevExpress.XtraBars.BarButtonItem();
+            this.btnMOAccounts = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -75,6 +81,7 @@
             this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup16 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -82,6 +89,7 @@
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup15 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup14 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage4 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup13 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -137,9 +145,11 @@
             this.skinRibbonGalleryBarItem1,
             this.btnPGNOffices,
             this.lblUpdate,
-            this.btnQueue});
+            this.btnQueue,
+            this.btnChanges,
+            this.btnMOAccounts});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 39;
+            this.ribbon.MaxItemId = 41;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -148,28 +158,37 @@
             this.ribbonPage2,
             this.ribbonPage4,
             this.ribbonPage3});
-            this.ribbon.Size = new System.Drawing.Size(1036, 154);
+            this.ribbon.Size = new System.Drawing.Size(1322, 154);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // backstageViewControl1
             // 
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl1);
+            this.backstageViewControl1.Controls.Add(this.backstageViewClientControl2);
             this.backstageViewControl1.Items.Add(this.btnLogout);
+            this.backstageViewControl1.Items.Add(this.btnChangelogs);
             this.backstageViewControl1.Location = new System.Drawing.Point(77, 231);
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbon;
-            this.backstageViewControl1.SelectedTab = this.btnLogout;
-            this.backstageViewControl1.SelectedTabIndex = 0;
-            this.backstageViewControl1.Size = new System.Drawing.Size(522, 157);
+            this.backstageViewControl1.SelectedTab = this.btnChangelogs;
+            this.backstageViewControl1.SelectedTabIndex = 1;
+            this.backstageViewControl1.Size = new System.Drawing.Size(522, 196);
             this.backstageViewControl1.TabIndex = 5;
             this.backstageViewControl1.VisibleInDesignTime = true;
             // 
             // backstageViewClientControl1
             // 
-            this.backstageViewClientControl1.Location = new System.Drawing.Point(132, 63);
+            this.backstageViewClientControl1.Location = new System.Drawing.Point(154, 62);
             this.backstageViewClientControl1.Name = "backstageViewClientControl1";
-            this.backstageViewClientControl1.Size = new System.Drawing.Size(389, 93);
+            this.backstageViewClientControl1.Size = new System.Drawing.Size(368, 134);
             this.backstageViewClientControl1.TabIndex = 1;
+            // 
+            // backstageViewClientControl2
+            // 
+            this.backstageViewClientControl2.Location = new System.Drawing.Point(154, 63);
+            this.backstageViewClientControl2.Name = "backstageViewClientControl2";
+            this.backstageViewClientControl2.Size = new System.Drawing.Size(367, 132);
+            this.backstageViewClientControl2.TabIndex = 2;
             // 
             // btnLogout
             // 
@@ -177,8 +196,16 @@
             this.btnLogout.ContentControl = this.backstageViewClientControl1;
             this.btnLogout.ImageOptions.ItemNormal.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Selected = true;
             this.btnLogout.ItemPressed += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.btnLogout_ItemPressed);
+            // 
+            // btnChangelogs
+            // 
+            this.btnChangelogs.Caption = "Changelogs";
+            this.btnChangelogs.ContentControl = this.backstageViewClientControl2;
+            this.btnChangelogs.ImageOptions.ItemNormal.Image = global::ICTProfilingV3.Properties.Resources.logical_16x16;
+            this.btnChangelogs.Name = "btnChangelogs";
+            this.btnChangelogs.Selected = true;
+            this.btnChangelogs.ItemPressed += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.btnChangelogs_ItemPressed);
             // 
             // btnDashboard
             // 
@@ -186,6 +213,7 @@
             this.btnDashboard.Id = 1;
             this.btnDashboard.ImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.chart;
             this.btnDashboard.Name = "btnDashboard";
+            this.btnDashboard.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDashboard_ItemClick);
             // 
             // btnTARequest
             // 
@@ -463,7 +491,21 @@
             // skinRibbonGalleryBarItem1
             // 
             this.skinRibbonGalleryBarItem1.Caption = "skinRibbonGalleryBarItem1";
+            // 
+            // 
+            // 
+            this.skinRibbonGalleryBarItem1.Gallery.AllowHoverImages = true;
+            this.skinRibbonGalleryBarItem1.Gallery.ColumnCount = 4;
+            this.skinRibbonGalleryBarItem1.Gallery.FixedHoverImageSize = false;
+            this.skinRibbonGalleryBarItem1.Gallery.ImageSize = new System.Drawing.Size(16, 16);
+            this.skinRibbonGalleryBarItem1.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImageLayout = DevExpress.Utils.Drawing.ImageLayoutMode.Squeeze;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImageLocation = DevExpress.Utils.Locations.Top;
+            skinPaddingEdges1.Left = 8;
+            skinPaddingEdges1.Right = 8;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges1;
             this.skinRibbonGalleryBarItem1.Id = 35;
+            this.skinRibbonGalleryBarItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("skinRibbonGalleryBarItem1.ImageOptions.SvgImage")));
             this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
             // 
             // btnPGNOffices
@@ -490,6 +532,24 @@
             this.btnQueue.Name = "btnQueue";
             this.btnQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQueue_ItemClick);
             // 
+            // btnChanges
+            // 
+            this.btnChanges.Caption = "Changelogs";
+            this.btnChanges.Id = 39;
+            this.btnChanges.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bochangehistory_16x16;
+            this.btnChanges.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bochangehistory_32x32;
+            this.btnChanges.Name = "btnChanges";
+            this.btnChanges.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnChanges_ItemClick);
+            // 
+            // btnMOAccounts
+            // 
+            this.btnMOAccounts.Caption = "M365 Accounts";
+            this.btnMOAccounts.Id = 40;
+            this.btnMOAccounts.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.operatingsystem_16x16;
+            this.btnMOAccounts.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.operatingsystem_32x32;
+            this.btnMOAccounts.Name = "btnMOAccounts";
+            this.btnMOAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMOAccounts_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -498,7 +558,8 @@
             this.ribbonPageGroup3,
             this.ribbonPageGroup12,
             this.ribbonPageGroup4,
-            this.ribbonPageGroup7});
+            this.ribbonPageGroup7,
+            this.ribbonPageGroup16});
             this.ribbonPage1.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.home_16x16;
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Home";
@@ -543,6 +604,12 @@
             this.ribbonPageGroup7.Name = "ribbonPageGroup7";
             this.ribbonPageGroup7.Text = "Inventory";
             // 
+            // ribbonPageGroup16
+            // 
+            this.ribbonPageGroup16.ItemLinks.Add(this.btnMOAccounts);
+            this.ribbonPageGroup16.Name = "ribbonPageGroup16";
+            this.ribbonPageGroup16.Text = "Softwares";
+            // 
             // ribbonPage2
             // 
             this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -551,7 +618,8 @@
             this.ribbonPageGroup9,
             this.ribbonPageGroup10,
             this.ribbonPageGroup8,
-            this.ribbonPageGroup15});
+            this.ribbonPageGroup15,
+            this.ribbonPageGroup14});
             this.ribbonPage2.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.inserttablerowsabove_16x16;
             this.ribbonPage2.Name = "ribbonPage2";
             this.ribbonPage2.Text = "Look Up Tables";
@@ -597,7 +665,13 @@
             // 
             this.ribbonPageGroup15.ItemLinks.Add(this.btnPGNOffices);
             this.ribbonPageGroup15.Name = "ribbonPageGroup15";
-            this.ribbonPageGroup15.Text = "PGN";
+            this.ribbonPageGroup15.Text = "PGN/M365 Office";
+            // 
+            // ribbonPageGroup14
+            // 
+            this.ribbonPageGroup14.ItemLinks.Add(this.btnChanges);
+            this.ribbonPageGroup14.Name = "ribbonPageGroup14";
+            this.ribbonPageGroup14.Text = "System";
             // 
             // ribbonPage4
             // 
@@ -633,14 +707,14 @@
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 629);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1036, 21);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1322, 21);
             // 
             // mainPanel
             // 
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(0, 154);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1036, 475);
+            this.mainPanel.Size = new System.Drawing.Size(1322, 475);
             this.mainPanel.TabIndex = 2;
             // 
             // UpdateThread
@@ -651,7 +725,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 650);
+            this.ClientSize = new System.Drawing.Size(1322, 650);
             this.Controls.Add(this.backstageViewControl1);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.ribbonStatusBar);
@@ -734,5 +808,11 @@
         private System.ComponentModel.BackgroundWorker UpdateThread;
         private DevExpress.XtraBars.BarStaticItem lblUpdate;
         private DevExpress.XtraBars.BarButtonItem btnQueue;
+        private DevExpress.XtraBars.Ribbon.BackstageViewClientControl backstageViewClientControl2;
+        private DevExpress.XtraBars.Ribbon.BackstageViewTabItem btnChangelogs;
+        private DevExpress.XtraBars.BarButtonItem btnChanges;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup14;
+        private DevExpress.XtraBars.BarButtonItem btnMOAccounts;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup16;
     }
 }

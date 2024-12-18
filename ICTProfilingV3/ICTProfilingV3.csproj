@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -328,6 +328,30 @@
     <Compile Include="LookUpTables\frmTechSpecsBasis.Designer.cs">
       <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
     </Compile>
+    <Compile Include="MOForms\frmAddEditAccountUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MOForms\frmAddEditAccountUsers.Designer.cs">
+      <DependentUpon>frmAddEditAccountUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MOForms\frmAddEditMOAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MOForms\frmAddEditMOAccount.Designer.cs">
+      <DependentUpon>frmAddEditMOAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MOForms\UCMOAccounts.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MOForms\UCMOAccounts.Designer.cs">
+      <DependentUpon>UCMOAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MOForms\UCMOAccountUserRequests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MOForms\UCMOAccountUserRequests.Designer.cs">
+      <DependentUpon>UCMOAccountUserRequests.cs</DependentUpon>
+    </Compile>
     <Compile Include="PGNForms\frmAddEditAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -606,11 +630,35 @@
     <Compile Include="TicketRequestForms\UCTARequestDashboard.Designer.cs">
       <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\frmAddEditChangeLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmAddEditChangeLogs.Designer.cs">
+      <DependentUpon>frmAddEditChangeLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmViewChangeLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmViewChangeLogs.Designer.cs">
+      <DependentUpon>frmViewChangeLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmChangelogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmChangelogs.Designer.cs">
+      <DependentUpon>frmChangelogs.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\frmUpdateNotification.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ToolForms\frmUpdateNotification.Designer.cs">
       <DependentUpon>frmUpdateNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\UCAssignedTo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolForms\UCAssignedTo.Designer.cs">
+      <DependentUpon>UCAssignedTo.cs</DependentUpon>
     </Compile>
     <Compile Include="UsersForms\frmAddEditStaff.cs">
       <SubType>Form</SubType>
@@ -734,6 +782,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LookUpTables\frmTechSpecsBasis.resx">
       <DependentUpon>frmTechSpecsBasis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MOForms\frmAddEditAccountUsers.resx">
+      <DependentUpon>frmAddEditAccountUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MOForms\frmAddEditMOAccount.resx">
+      <DependentUpon>frmAddEditMOAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MOForms\UCMOAccounts.resx">
+      <DependentUpon>UCMOAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MOForms\UCMOAccountUserRequests.resx">
+      <DependentUpon>UCMOAccountUserRequests.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PGNForms\frmAddEditAccount.resx">
       <DependentUpon>frmAddEditAccount.cs</DependentUpon>
@@ -884,8 +944,20 @@
     <EmbeddedResource Include="TicketRequestForms\UCTARequestDashboard.resx">
       <DependentUpon>UCTARequestDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmAddEditChangeLogs.resx">
+      <DependentUpon>frmAddEditChangeLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmViewChangeLogs.resx">
+      <DependentUpon>frmViewChangeLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmChangelogs.resx">
+      <DependentUpon>frmChangelogs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\frmUpdateNotification.resx">
       <DependentUpon>frmUpdateNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\UCAssignedTo.resx">
+      <DependentUpon>UCAssignedTo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UsersForms\frmAddEditStaff.resx">
       <DependentUpon>frmAddEditStaff.cs</DependentUpon>
@@ -1656,6 +1728,36 @@
   <ItemGroup>
     <Content Include="Epis.ico" />
     <Content Include="EPIS_LOGO.ico" />
+    <None Include="Resources\customer_16x16.png" />
+    <None Include="Resources\about_16x1615.png" />
+    <None Include="Resources\about_16x1614.png" />
+    <None Include="Resources\additem_16x167.png" />
+    <None Include="Resources\additem_16x166.png" />
+    <None Include="Resources\addfile_16x166.png" />
+    <None Include="Resources\edittask_16x1618.png" />
+    <None Include="Resources\edittask_16x1617.png" />
+    <None Include="Resources\close_16x1647.png" />
+    <None Include="Resources\close_16x1646.png" />
+    <None Include="Resources\close_16x1645.png" />
+    <None Include="Resources\add_16x1613.png" />
+    <None Include="Resources\operatingsystem_32x32.png" />
+    <None Include="Resources\operatingsystem_16x16.png" />
+    <None Include="Resources\save_16x169.png" />
+    <None Include="Resources\edittask_16x1616.png" />
+    <None Include="Resources\edittask_16x1615.png" />
+    <None Include="Resources\close_16x1644.png" />
+    <None Include="Resources\close_16x1643.png" />
+    <None Include="Resources\add_16x1612.png" />
+    <None Include="Resources\bochangehistory_32x32.png" />
+    <None Include="Resources\bochangehistory_16x16.png" />
+    <None Include="Resources\logical_16x16.png" />
+    <None Include="Resources\close_32x322.png" />
+    <None Include="Resources\close_16x1642.png" />
+    <None Include="Resources\edittask_16x1614.png" />
+    <None Include="Resources\close_32x321.png" />
+    <None Include="Resources\close_16x1641.png" />
+    <None Include="Resources\upload_32x32.png" />
+    <None Include="Resources\upload_16x16.png" />
     <None Include="Resources\reset_16x16.png" />
     <None Include="Resources\about_16x1613.png" />
     <None Include="Resources\about_16x1612.png" />

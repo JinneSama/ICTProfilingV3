@@ -27,10 +27,12 @@ namespace Models.Entities
         public bool? IsDeleted { get; set; }
         public virtual ICollection<PPEsSpecs> PPEsSpecs { get; set; }
         public virtual ICollection<Repairs> Repairs { get; set; }
+        public virtual ICollection<MOAccountUsers> MOAccountUsers { get; set; }
         public PPEs()
         {
             PPEsSpecs = new HashSet<PPEsSpecs>();
             Repairs= new HashSet<Repairs>();    
+            MOAccountUsers = new HashSet<MOAccountUsers>();
         }
     }
 }

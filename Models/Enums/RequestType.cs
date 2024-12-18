@@ -12,6 +12,7 @@ namespace Models.Enums
         Repairs = 2,
         PR = 3,
         CAS = 4,
-        PGN = 5
+        PGN = 5,
+        M365 = 6
     }
 }

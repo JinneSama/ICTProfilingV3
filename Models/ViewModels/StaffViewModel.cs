@@ -7,8 +7,8 @@ namespace Models.ViewModels
 {
     public class StaffViewModel
     {
-        public Users Users { get; set; }
-        public Image Image => string.IsNullOrWhiteSpace(Staff.ImagePath) ? null : Image.FromFile(Staff.ImagePath);
+        public Users Users => Staff.Users;
+        public Image Image { get; set; }
         public ITStaff Staff { get; set; }
         public bool? Mark { get; set; }
         public string Initials => GetInitials(Users.FullName);

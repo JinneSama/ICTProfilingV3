@@ -11,6 +11,7 @@ using Models.Enums;
 using Models.Managers;
 using Models.Managers.User;
 using DevExpress.XtraGrid.Views.Tile;
+using Helpers.NetworkFolder;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
@@ -18,10 +19,15 @@ namespace ICTProfilingV3.TicketRequestForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly TicketRequest ticket;
+        private DocumentHandler documentHandler;
 
         public frmAssignTo(TicketRequest ticket)
         {
             InitializeComponent();
+            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
+                Properties.Settings.Default.NetworkUsername,
+                Properties.Settings.Default.NetworkPassword);
+
             InitStaffs();
             unitOfWork = new UnitOfWork();
             lblTicketNo.Text = ticket.Id.ToString();
@@ -38,11 +44,11 @@ namespace ICTProfilingV3.TicketRequestForms
         }
         private void LoadStaff()
         {
-            var res = unitOfWork.ITStaffRepo.GetAll().Select(x => new StaffViewModel
+            var res = unitOfWork.ITStaffRepo.GetAll(x => x.Users).ToList().Select(x => new StaffViewModel
             {
                 Mark = x.Id == ticket.StaffId ? true : false,
-                Users = x.Users,
-                Staff = x
+                Staff = x,
+                Image = documentHandler.GetImage(x.UserId + ".jpeg")
             });
             gcAssign.DataSource = res.ToList();
             SetFocusToMarked();

@@ -55,5 +55,8 @@ namespace EntityManager.Context
         public DbSet<ComparisonReport> ComparisonReports { get; set; }
         public DbSet<ComparisonReportSpecs> ComparisonReportSpecs { get; set; }
         public DbSet<ComparisonReportSpecsDetails> ComparisonReportSpecsDetails { get; set; }
+        public DbSet<ChangeLogs> ChangeLogs { get; set; }
+        public DbSet<MOAccounts> MOAccounts { get; set; }
+        public DbSet<MOAccountUsers> MOAccountUsers { get; set; }
     }
 }

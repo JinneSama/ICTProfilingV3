@@ -1,12 +1,12 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.Xpo.DB;
-using EntityManager.Managers;
 using EntityManager.Managers.User;
+using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,11 +30,15 @@ namespace ICTProfilingV3.TechSpecsForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
+        private DocumentHandler documentHandler;
         public string filterText { get; set; }
         public bool IsTechSpecs { get; set; }
         public UCTechSpecs()
         {
             InitializeComponent();
+            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
+                Properties.Settings.Default.NetworkUsername,
+                Properties.Settings.Default.NetworkPassword);
             unitOfWork = new UnitOfWork();
             userManager = new ICTUserManager();
         }
@@ -107,7 +112,8 @@ namespace ICTProfilingV3.TechSpecsForms
                 Office = HRMISEmployees.GetEmployeeById(x.ReqById)?.Office,
                 Division = HRMISEmployees.GetEmployeeById(x.ReqById)?.Division,
                 TicketId = x.TicketRequest.Id,
-                RepairId = x.Repairs.Count == 0 ? 0 : x.Repairs.FirstOrDefault().Id
+                RepairId = x.Repairs.Count == 0 ? 0 : x.Repairs.FirstOrDefault().Id,
+                TechSpecs = x
             });
             gcTechSpecs.DataSource = new BindingList<TechSpecsViewModel>(ts.ToList());
         }
@@ -123,6 +129,26 @@ namespace ICTProfilingV3.TechSpecsForms
             tabRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(ts)
             {
                 Dock = System.Windows.Forms.DockStyle.Fill
+            });
+        }
+        private async void LoadStaff()
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            var staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.TechSpecs.TicketRequest.StaffId, x => x.Users);
+            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            var res = new StaffModel
+            {
+                Image = img,
+                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
+                PhotoVisible = img == null ? true : false,
+                InitialsVisible = img == null ? false : true
+            };
+
+            staffPanel.Controls.Clear();
+            staffPanel.Controls.Add(new UCAssignedTo(res)
+            {
+                Dock = DockStyle.Fill
             });
         }
 
@@ -209,9 +235,12 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private async void gridTechSpecs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            if(row == null) return; 
             await LoadDetails();
             await LoadSpecs();
             LoadActions();
+            LoadStaff();
         }
 
         private void hplTicket_Click(object sender, EventArgs e)

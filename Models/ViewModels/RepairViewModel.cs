@@ -13,5 +13,6 @@ namespace Models.ViewModels
         public string IssuedTo { get; set; }
         public string Office { get; set; }
         public string RepairId { get; set; }
+        public Repairs Repair { get; set; }
     }
 }
