@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -137,9 +137,9 @@
             this.pnlDeliveries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDeliveries.Controls.Add(this.gcPPEs);
-            this.pnlDeliveries.Location = new System.Drawing.Point(0, 47);
+            this.pnlDeliveries.Location = new System.Drawing.Point(0, 43);
             this.pnlDeliveries.Name = "pnlDeliveries";
-            this.pnlDeliveries.Size = new System.Drawing.Size(578, 671);
+            this.pnlDeliveries.Size = new System.Drawing.Size(578, 675);
             this.pnlDeliveries.TabIndex = 5;
             // 
             // gcPPEs
@@ -155,7 +155,7 @@
             this.gcPPEs.Name = "gcPPEs";
             this.gcPPEs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete});
-            this.gcPPEs.Size = new System.Drawing.Size(574, 667);
+            this.gcPPEs.Size = new System.Drawing.Size(574, 671);
             this.gcPPEs.TabIndex = 0;
             this.gcPPEs.UseEmbeddedNavigator = true;
             this.gcPPEs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -253,9 +253,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -264,23 +264,26 @@
             // 
             this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlButtons.Controls.Add(this.lblPropertyNo);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnAdd);
             this.pnlButtons.Controls.Add(this.btnEdit);
-            this.pnlButtons.Location = new System.Drawing.Point(582, 47);
+            this.pnlButtons.Location = new System.Drawing.Point(580, 43);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(1122, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(1127, 50);
             this.pnlButtons.TabIndex = 6;
             // 
             // lblPropertyNo
             // 
             this.lblPropertyNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblPropertyNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblPropertyNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblPropertyNo.Appearance.Options.UseFont = true;
             this.lblPropertyNo.Appearance.Options.UseForeColor = true;
-            this.lblPropertyNo.Location = new System.Drawing.Point(135, 10);
+            this.lblPropertyNo.Location = new System.Drawing.Point(133, 8);
             this.lblPropertyNo.Name = "lblPropertyNo";
             this.lblPropertyNo.Size = new System.Drawing.Size(0, 30);
             this.lblPropertyNo.TabIndex = 114;
@@ -288,10 +291,10 @@
             // lblEpisNo
             // 
             this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
             this.lblEpisNo.Appearance.Options.UseFont = true;
             this.lblEpisNo.Appearance.Options.UseForeColor = true;
-            this.lblEpisNo.Location = new System.Drawing.Point(100, 10);
+            this.lblEpisNo.Location = new System.Drawing.Point(98, 8);
             this.lblEpisNo.Name = "lblEpisNo";
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 113;
@@ -299,10 +302,10 @@
             // labelControl8
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelControl8.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl8.Appearance.Options.UseFont = true;
             this.labelControl8.Appearance.Options.UseForeColor = true;
-            this.labelControl8.Location = new System.Drawing.Point(12, 10);
+            this.labelControl8.Location = new System.Drawing.Point(10, 8);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(117, 30);
             this.labelControl8.TabIndex = 112;
@@ -311,12 +314,12 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAdd.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnAdd.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnAdd.Appearance.Options.UseBackColor = true;
             this.btnAdd.Appearance.Options.UseForeColor = true;
             this.btnAdd.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x164;
-            this.btnAdd.Location = new System.Drawing.Point(1025, 10);
+            this.btnAdd.Location = new System.Drawing.Point(1023, 11);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(93, 28);
@@ -327,12 +330,12 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnEdit.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnEdit.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(928, 10);
+            this.btnEdit.Location = new System.Drawing.Point(926, 11);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);

@@ -1,10 +1,16 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
+using Models.HRMISEntites;
+using Models.Managers.User;
+using Models.ReportViewModel;
 using Models.Repository;
 using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -109,7 +115,29 @@ namespace ICTProfilingV3.MOForms
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            var accounts = unitOfWork.MOAccountRepo.GetAll(x => x.Office,
+                x => x.MOAccountUsers,
+                x => x.MOAccountUsers.Select(s => s.PPE)).ToList().Select(x => new MOAccountsViewModel
+                {
+                    MOAccount = x,
+                    MOAccountUsers = new BindingList<MOAccountUsers>(x.MOAccountUsers.ToList())
+                });
 
+            var rptAccounts = new MOAccountReportViewModel
+            {
+                MOAccountsViewModel = accounts,
+                DatePrinted = DateTime.UtcNow,
+                PrintedBy = UserStore.Username
+            };
+
+            var rptM365 = new rptM365
+            {
+                DataSource = new List<MOAccountReportViewModel> { rptAccounts }
+            };
+
+            rptM365.CreateDocument();
+            var frm = new frmReportViewer(rptM365);
+            frm.ShowDialog();
         }
     }
 }

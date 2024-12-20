@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.Xpo;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
+using EntityManager.Managers.Role;
+using EntityManager.Managers.User;
 using Helpers.NetworkFolder;
 using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
@@ -24,19 +29,62 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using ICTProfilingV3.UsersForms;
+using Models.Entities;
+using Models.Enums;
+using Models.Managers.User;
 using static System.Net.WebRequestMethods;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace ICTProfilingV3
 {
     public partial class frmMain : RibbonForm
     {
+        private IICTUserManager userManager;
+        private IICTRoleManager roleManager;
         public frmMain()
         {
             InitializeComponent();
+            userManager = new ICTUserManager();
+            roleManager = new ICTRoleManager();
             var frm = new frmLogin(this);
             frm.ShowDialog();
 
             if (!UpdateThread.IsBusy)
                 UpdateThread.RunWorkerAsync();
+        }
+
+        public async void setRoleDesignations()
+        {
+            var user = await userManager.FindUserAsync(UserStore.UserId);
+            if (user.Roles == null) return;
+            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
+            if(role == null) return;    
+
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                if(page.Tag != null)
+                    if(role.Select(s => s.Designation).ToList().Contains(ConvertTagToEnum(page.Tag.ToString()))) page.Visible = true;
+                    else page.Visible = false;
+                foreach(RibbonPageGroup group in page.Groups)
+                {
+                    if (group.Tag != null)
+                        if (role.Select(s => s.Designation).ToList().Contains(ConvertTagToEnum(group.Tag.ToString()))) group.Visible = true;
+                        else group.Visible = false;
+                    foreach (BarButtonItemLink button in group.ItemLinks)
+                    {
+                        var btn = button.Item;
+                        if (btn.Tag != null)
+                            if (role.Select(s => s.Designation).ToList().Contains(ConvertTagToEnum(btn.Tag.ToString()))) btn.Visibility = BarItemVisibility.Always;
+                            else btn.Visibility = BarItemVisibility.Never;
+                    }
+                }
+            }
+        }
+        public Designation ConvertTagToEnum(string tag)
+        {
+            if (Enum.TryParse(tag, out Designation enumValue))
+                return enumValue;
+            else
+                return Designation.Unknown;
         }
 
         public void SetUser(string name, string position)

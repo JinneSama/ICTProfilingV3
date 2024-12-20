@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -10,14 +11,10 @@ namespace Helpers.NetworkFolder
 {
     public class HTTPNetworkFolder
     {
-        private readonly HttpClient httpClient;
-        public HTTPNetworkFolder()
+        private static readonly HttpClient httpClient = new HttpClient
         {
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri("http://localhost:8085/api/files/")
-            };
-        }
+            BaseAddress = new Uri("http://172.17.16.13:8888/api/files/")
+        };
 
         public async Task<List<string>> GetFiles()
         {
@@ -30,30 +27,33 @@ namespace Helpers.NetworkFolder
             return files.ToList();
         }
 
-        public async Task UploadFile(string filePath, string fileName)
+        public async Task UploadFile(Image img, string fileName)
         {
             using (var content = new MultipartFormDataContent())
             {
-                var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                content.Add(new StreamContent(fileStream), "file", fileName);
+                using (var memoryStream = new MemoryStream())
+                {
+                    img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    content.Add(new StreamContent(memoryStream), "file", fileName);
 
-                var response = await httpClient.PostAsync("upload/", content);
-                response.EnsureSuccessStatusCode();
+                    var response = await httpClient.PostAsync("upload/", content);
+                    response.EnsureSuccessStatusCode();
+                }
             }
         }
 
-        public async Task DownloadFile(string fileName, string savePath)
+        public async Task<Image> DownloadFile(string fileName)
         {
+            Image img = null;
             var response = await httpClient.GetAsync("download/" + fileName);
-            response.EnsureSuccessStatusCode();
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound) return null;
 
             using (var stream = await response.Content.ReadAsStreamAsync())
             {
-                using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
-                {
-                    await stream.CopyToAsync(fileStream);
-                }
+                img = Image.FromStream(stream);
             }
+            return img;
         }
 
         public async Task DeleteFile(string fileName)

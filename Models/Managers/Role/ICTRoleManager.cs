@@ -65,6 +65,12 @@ namespace EntityManager.Managers.Role
             return _roleManager.Roles.OfType<Roles>();
         }
 
+        public async Task<IEnumerable<RoleDesignation>> GetRoleDesignations(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId) as Roles;
+            return role.RoleDesignations.ToList();
+        }
+
         private List<RoleDesignation> SeparateDesignations(string roleId, string Designations)
         {
             var roles = Designations.Split(',');

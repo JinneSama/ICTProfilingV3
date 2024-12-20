@@ -168,6 +168,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
     <Compile Include="ReportViewModel\ComparisonReportPrintViewModel.cs" />
+    <Compile Include="ReportViewModel\MOAccountReportViewModel.cs" />
     <Compile Include="ReportViewModel\PGNReportViewModel.cs" />
     <Compile Include="ReportViewModel\RepairTRViewModel.cs" />
     <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />

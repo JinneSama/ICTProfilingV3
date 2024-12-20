@@ -30,15 +30,13 @@ namespace ICTProfilingV3.TechSpecsForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
         public string filterText { get; set; }
         public bool IsTechSpecs { get; set; }
         public UCTechSpecs()
         {
             InitializeComponent();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
+            networkFolder = new HTTPNetworkFolder();
             unitOfWork = new UnitOfWork();
             userManager = new ICTUserManager();
         }
@@ -135,7 +133,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             var staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.TechSpecs.TicketRequest.StaffId, x => x.Users);
-            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            Image img = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,

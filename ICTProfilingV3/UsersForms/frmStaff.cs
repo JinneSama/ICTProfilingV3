@@ -4,6 +4,7 @@ using Helpers.NetworkFolder;
 using Models.Repository;
 using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 namespace ICTProfilingV3.UsersForms
@@ -11,14 +12,12 @@ namespace ICTProfilingV3.UsersForms
     public partial class frmStaff : DevExpress.XtraEditors.XtraForm
     {
         private readonly IUnitOfWork unitOfWork;
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
         public frmStaff()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
+            networkFolder = new HTTPNetworkFolder();
             LoadStaff();
         }
 
@@ -46,15 +45,20 @@ namespace ICTProfilingV3.UsersForms
                 }).ToList();
         }
 
-        private void LoadStaff()
+        private async void LoadStaff()
         {
-            var res = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests,
-                x => x.Users).ToList().Select(x => new StaffViewModel
+            var staffList = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests, x => x.Users).ToList();
+            var staffViewModels = new List<StaffViewModel>();
+            foreach (var staff in staffList)
             {
-                Staff = x,
-                Image = documentHandler.GetImage(x.UserId + ".jpeg")
-            });
-            gcStaff.DataSource = res.ToList();  
+                var image = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
+                staffViewModels.Add(new StaffViewModel
+                {
+                    Staff = staff,
+                    Image = image
+                });
+            }
+            gcStaff.DataSource = staffViewModels.ToList();  
         }
 
         private void btnAddStaff_Click(object sender, EventArgs e)

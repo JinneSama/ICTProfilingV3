@@ -23,15 +23,13 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl
     {
         private IUnitOfWork _unitOfWork;
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
 
         public string filterText { get; set; }
         public UCDeliveries()
         {
             InitializeComponent();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
+            networkFolder = new HTTPNetworkFolder();
             _unitOfWork = new UnitOfWork();
             LoadDeliveries();
         }
@@ -57,7 +55,7 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
-            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            Image img = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,

@@ -20,16 +20,14 @@ namespace ICTProfilingV3.UsersForms
         private readonly StaffViewModel staffViewModel;
         private readonly SaveType saveType;
 
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
         public frmAddEditStaff()
         {
             InitializeComponent();
             userManager = new ICTUserManager();
             unitOfWork = new UnitOfWork();
+            networkFolder = new HTTPNetworkFolder();
             LoadDropdowns();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
             saveType = SaveType.Insert;
         }
 
@@ -39,17 +37,15 @@ namespace ICTProfilingV3.UsersForms
             userManager = new ICTUserManager();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
+            networkFolder = new HTTPNetworkFolder();
             this.staffViewModel = staffViewModel;
             LoadDetails();
             saveType = SaveType.Update;
         }
 
-        private void LoadDetails()
+        private async void LoadDetails()
         {
-            peStaffImage.Image = documentHandler.GetImage(staffViewModel.Users.Id + ".jpeg");
+            peStaffImage.Image = await networkFolder.DownloadFile(staffViewModel.Users.Id + ".jpeg");
             slueUser.EditValue = staffViewModel.Users.Id;
             lueSection.EditValue = staffViewModel.Staff.Section;
         }
@@ -66,8 +62,10 @@ namespace ICTProfilingV3.UsersForms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            splashScreenUpload.ShowWaitForm();
             if (saveType == SaveType.Insert) SaveStaff();
             else await UpdateStaff();
+            splashScreenUpload.CloseWaitForm();
             this.Close();
         }
 
@@ -80,11 +78,11 @@ namespace ICTProfilingV3.UsersForms
             staff.Section = (Sections)lueSection.EditValue;
             staff.UserId = (string)slueUser.EditValue;
 
-            documentHandler.SaveImage(image, Path.Combine(Application.StartupPath, staff.UserId + ".jpeg"), staff.UserId + ".jpeg");
+            await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
             unitOfWork.Save();
         }
 
-        private void SaveStaff()
+        private async void SaveStaff()
         {
             var image = peStaffImage.Image;
             var staff = new ITStaff
@@ -93,7 +91,7 @@ namespace ICTProfilingV3.UsersForms
                 Section = (Sections)lueSection.EditValue,
                 UserId = (string)slueUser.EditValue
             };
-            documentHandler.SaveImage(image, Path.Combine(Application.StartupPath, staff.UserId + ".jpeg"), staff.UserId + ".jpeg");
+            await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
             unitOfWork.ITStaffRepo.Insert(staff);
             unitOfWork.Save();
         }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
+            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges2 = new DevExpress.Skins.SkinPaddingEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -222,6 +222,7 @@
             this.btnTARequest.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.assignto_16x16;
             this.btnTARequest.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.assignto_32x32;
             this.btnTARequest.Name = "btnTARequest";
+            this.btnTARequest.Tag = "TARequest";
             this.btnTARequest.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTARequest_ItemClick);
             // 
             // btnTechSpecs
@@ -231,6 +232,7 @@
             this.btnTechSpecs.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.paste_16x16;
             this.btnTechSpecs.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.paste_32x32;
             this.btnTechSpecs.Name = "btnTechSpecs";
+            this.btnTechSpecs.Tag = "TechSpecs";
             this.btnTechSpecs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTechSpecs_ItemClick);
             // 
             // btnDeliveries
@@ -240,6 +242,7 @@
             this.btnDeliveries.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.boorderitem_16x16;
             this.btnDeliveries.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.boorderitem_32x32;
             this.btnDeliveries.Name = "btnDeliveries";
+            this.btnDeliveries.Tag = "Deliveries";
             this.btnDeliveries.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeliveries_ItemClick);
             // 
             // btnRepair
@@ -249,6 +252,7 @@
             this.btnRepair.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.ide_16x161;
             this.btnRepair.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.ide_32x322;
             this.btnRepair.Name = "btnRepair";
+            this.btnRepair.Tag = "Repair";
             this.btnRepair.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRepair_ItemClick);
             // 
             // btnCAS
@@ -258,6 +262,7 @@
             this.btnCAS.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bodetails_16x16;
             this.btnCAS.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bodetails_32x32;
             this.btnCAS.Name = "btnCAS";
+            this.btnCAS.Tag = "CAS";
             this.btnCAS.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnCAS_ItemClick);
             // 
             // btnVPR
@@ -267,6 +272,7 @@
             this.btnVPR.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bosale_16x16;
             this.btnVPR.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.bosale_32x32;
             this.btnVPR.Name = "btnVPR";
+            this.btnVPR.Tag = "PR";
             this.btnVPR.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnVPR_ItemClick);
             // 
             // btnUserTasks
@@ -348,6 +354,7 @@
             this.btnPPE.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.projectdirectory_16x16;
             this.btnPPE.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.projectdirectory_32x32;
             this.btnPPE.Name = "btnPPE";
+            this.btnPPE.Tag = "PPE";
             this.btnPPE.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPPE_ItemClick);
             // 
             // btnActionTree
@@ -436,6 +443,7 @@
             this.btnRoutedActions.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.documentmap_16x16;
             this.btnRoutedActions.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.documentmap_32x32;
             this.btnRoutedActions.Name = "btnRoutedActions";
+            this.btnRoutedActions.Tag = "RoutedActions";
             this.btnRoutedActions.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRoutedActions_ItemClick);
             // 
             // barButtonItem1
@@ -501,9 +509,9 @@
             this.skinRibbonGalleryBarItem1.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLayout = DevExpress.Utils.Drawing.ImageLayoutMode.Squeeze;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLocation = DevExpress.Utils.Locations.Top;
-            skinPaddingEdges1.Left = 8;
-            skinPaddingEdges1.Right = 8;
-            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges1;
+            skinPaddingEdges2.Left = 8;
+            skinPaddingEdges2.Right = 8;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges2;
             this.skinRibbonGalleryBarItem1.Id = 35;
             this.skinRibbonGalleryBarItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("skinRibbonGalleryBarItem1.ImageOptions.SvgImage")));
             this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
@@ -530,6 +538,7 @@
             this.btnQueue.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.team_16x16;
             this.btnQueue.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.team_32x32;
             this.btnQueue.Name = "btnQueue";
+            this.btnQueue.Tag = "Queue";
             this.btnQueue.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQueue_ItemClick);
             // 
             // btnChanges
@@ -548,6 +557,7 @@
             this.btnMOAccounts.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.operatingsystem_16x16;
             this.btnMOAccounts.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.operatingsystem_32x32;
             this.btnMOAccounts.Name = "btnMOAccounts";
+            this.btnMOAccounts.Tag = "M365";
             this.btnMOAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMOAccounts_ItemClick);
             // 
             // ribbonPage1
@@ -571,12 +581,14 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnQueue);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnRoutedActions);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
+            this.ribbonPageGroup1.Tag = "DashboarContainer";
             this.ribbonPageGroup1.Text = "Dashboard";
             // 
             // ribbonPageGroup2
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.btnTARequest);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Tag = "TicketContainer";
             this.ribbonPageGroup2.Text = "Ticket";
             // 
             // ribbonPageGroup3
@@ -585,29 +597,34 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.btnDeliveries);
             this.ribbonPageGroup3.ItemLinks.Add(this.btnRepair);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Tag = "TransactionContainer";
             this.ribbonPageGroup3.Text = "Transactions";
             // 
             // ribbonPageGroup12
             // 
             this.ribbonPageGroup12.ItemLinks.Add(this.btnRepairSpecs);
             this.ribbonPageGroup12.Name = "ribbonPageGroup12";
+            this.ribbonPageGroup12.Tag = "RepairSpecsContainer";
             // 
             // ribbonPageGroup4
             // 
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCAS);
             this.ribbonPageGroup4.ItemLinks.Add(this.btnVPR);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Tag = "PRCASContainer";
             // 
             // ribbonPageGroup7
             // 
             this.ribbonPageGroup7.ItemLinks.Add(this.btnPPE);
             this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Tag = "InventoryContainer";
             this.ribbonPageGroup7.Text = "Inventory";
             // 
             // ribbonPageGroup16
             // 
             this.ribbonPageGroup16.ItemLinks.Add(this.btnMOAccounts);
             this.ribbonPageGroup16.Name = "ribbonPageGroup16";
+            this.ribbonPageGroup16.Tag = "M365Container";
             this.ribbonPageGroup16.Text = "Softwares";
             // 
             // ribbonPage2
@@ -622,6 +639,7 @@
             this.ribbonPageGroup14});
             this.ribbonPage2.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.inserttablerowsabove_16x16;
             this.ribbonPage2.Name = "ribbonPage2";
+            this.ribbonPage2.Tag = "LookUpTable";
             this.ribbonPage2.Text = "Look Up Tables";
             // 
             // ribbonPageGroup5
@@ -630,6 +648,7 @@
             this.ribbonPageGroup5.ItemLinks.Add(this.btnUserLevels);
             this.ribbonPageGroup5.ItemLinks.Add(this.btnStaff);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Tag = "UserManagement";
             this.ribbonPageGroup5.Text = "User Management";
             // 
             // ribbonPageGroup6
@@ -671,6 +690,7 @@
             // 
             this.ribbonPageGroup14.ItemLinks.Add(this.btnChanges);
             this.ribbonPageGroup14.Name = "ribbonPageGroup14";
+            this.ribbonPageGroup14.Tag = "Changelog";
             this.ribbonPageGroup14.Text = "System";
             // 
             // ribbonPage4
@@ -679,6 +699,7 @@
             this.ribbonPageGroup13});
             this.ribbonPage4.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.publicfix_16x16;
             this.ribbonPage4.Name = "ribbonPage4";
+            this.ribbonPage4.Tag = "PGN";
             this.ribbonPage4.Text = "PGN";
             // 
             // ribbonPageGroup13
@@ -694,6 +715,7 @@
             this.ribbonPageGroup11});
             this.ribbonPage3.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.report_16x161;
             this.ribbonPage3.Name = "ribbonPage3";
+            this.ribbonPage3.Tag = "Report";
             this.ribbonPage3.Text = "Report";
             // 
             // ribbonPageGroup11

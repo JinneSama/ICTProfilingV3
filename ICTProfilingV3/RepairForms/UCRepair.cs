@@ -32,16 +32,14 @@ namespace ICTProfilingV3.RepairForms
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IICTUserManager _userManager;
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
         public string filterText { get; set; }
         public UCRepair()
         {
             InitializeComponent();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
             _unitOfWork = new UnitOfWork();
             _userManager = new ICTUserManager();
+            networkFolder = new HTTPNetworkFolder();
             LoadRepair();
         }
 
@@ -81,7 +79,7 @@ namespace ICTProfilingV3.RepairForms
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
-            Image img = documentHandler.GetImage(staff.UserId + ".jpeg");
+            Image img = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,

@@ -13,6 +13,7 @@ namespace EntityManager.Managers.Role
         Task AssignRoleToUser(string userId, string role);
         Task RemoveRoleFromUser(string userId, string role);
         Task<IdentityRole> FindById(string id);
+        Task<IEnumerable<RoleDesignation>> GetRoleDesignations(string roleId);
         IEnumerable<Roles> GetRoles();
     }
 }

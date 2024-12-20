@@ -35,7 +35,7 @@ namespace ICTProfilingV3.LoginForms
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
                 System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
-                lblversion.Text = "Login to Access EPIS v" + cd.CurrentVersion.ToString();
+                lblversion.Text = "EPiSv3 Rev " + cd.CurrentVersion.ToString();
                 string version = cd.CurrentVersion.ToString();
                 if (version != Properties.Settings.Default.LastVersion)
                 {
@@ -69,6 +69,7 @@ namespace ICTProfilingV3.LoginForms
                 UserStore.Username = res.user.UserName;
                 UserStore.Fullname = res.user.FullName;
 
+                frmMain.setRoleDesignations();
                 frmMain.SetUser(res.user.FullName, res.user.Position);
                 if (chkRemember.Checked) SetLoginDetails();
                 else ClearLoginDetails();

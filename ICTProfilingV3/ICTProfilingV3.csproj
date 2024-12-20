@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -59,7 +59,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>EPIS_LOGO.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\EPIS_LOGO.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>DFFED669B70BAB38ADDB8D157BFEECB596E653E7</ManifestCertificateThumbprint>
@@ -418,6 +418,18 @@
     <Compile Include="PGNForms\UCRequestAccount.Designer.cs">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\WaitFormUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WaitFormUpload.Designer.cs">
+      <DependentUpon>WaitFormUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\WFDownloadImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WFDownloadImage.Designer.cs">
+      <DependentUpon>WFDownloadImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="PPEInventoryForms\frmAddEditPPEEquipment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -491,6 +503,12 @@
     </Compile>
     <Compile Include="ReportForms\rptComparisonReport.Designer.cs">
       <DependentUpon>rptComparisonReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptM365.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptM365.Designer.cs">
+      <DependentUpon>rptM365.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportForms\rptPGN.cs">
       <SubType>Component</SubType>
@@ -690,6 +708,12 @@
     <Compile Include="UsersForms\frmUsers.Designer.cs">
       <DependentUpon>frmUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\WaitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WaitForm1.Designer.cs">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ActionsForms\frmActionList.resx">
       <DependentUpon>frmActionList.cs</DependentUpon>
     </EmbeddedResource>
@@ -828,6 +852,12 @@
     <EmbeddedResource Include="PGNForms\UCRequestAccount.resx">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WaitFormUpload.resx">
+      <DependentUpon>WaitFormUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WFDownloadImage.resx">
+      <DependentUpon>WFDownloadImage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PPEInventoryForms\frmAddEditPPEEquipment.resx">
       <DependentUpon>frmAddEditPPEEquipment.cs</DependentUpon>
     </EmbeddedResource>
@@ -874,6 +904,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\rptComparisonReport.resx">
       <DependentUpon>rptComparisonReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptM365.resx">
+      <DependentUpon>rptM365.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\rptPGN.resx">
       <DependentUpon>rptPGN.cs</DependentUpon>
@@ -973,6 +1006,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UsersForms\frmUsers.resx">
       <DependentUpon>frmUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WaitForm1.resx">
+      <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ICTProfilingV3_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -1726,8 +1762,8 @@
     <None Include="Resources\printpreview_16x166.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Epis.ico" />
-    <Content Include="EPIS_LOGO.ico" />
+    <Content Include="Resources\Epis.ico" />
+    <Content Include="Resources\EPIS_LOGO.ico" />
     <None Include="Resources\customer_16x16.png" />
     <None Include="Resources\about_16x1615.png" />
     <None Include="Resources\about_16x1614.png" />

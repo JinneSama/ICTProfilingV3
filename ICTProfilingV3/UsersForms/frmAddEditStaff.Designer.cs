@@ -42,6 +42,7 @@
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.peStaffImage = new DevExpress.XtraEditors.PictureEdit();
+            this.splashScreenUpload = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ICTProfilingV3.PGNForms.WaitFormUpload), true, true);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueUser.Properties)).BeginInit();
@@ -210,6 +211,10 @@
             this.peStaffImage.Size = new System.Drawing.Size(288, 221);
             this.peStaffImage.TabIndex = 84;
             // 
+            // splashScreenUpload
+            // 
+            this.splashScreenUpload.ClosingDelay = 500;
+            // 
             // frmAddEditStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,5 +258,6 @@
         private DevExpress.XtraEditors.LookUpEdit lueSection;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.SimpleButton btnClose;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenUpload;
     }
 }
