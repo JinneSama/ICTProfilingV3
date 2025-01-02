@@ -133,7 +133,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             var staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.TechSpecs.TicketRequest.StaffId, x => x.Users);
-            Image img = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
+            Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,

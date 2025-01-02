@@ -9,6 +9,7 @@ namespace Models.Entities
         public string Version { get; set; }
         public string Changelogs { get; set; }
         public DateTime? DateCreated { get; set; }
+        public string ImageName { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public Users Users { get; set; }

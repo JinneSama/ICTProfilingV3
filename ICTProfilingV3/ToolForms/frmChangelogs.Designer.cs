@@ -32,13 +32,16 @@
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition1 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition2 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition3 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
+            DevExpress.XtraEditors.TableLayout.TableRowDefinition tableRowDefinition4 = new DevExpress.XtraEditors.TableLayout.TableRowDefinition();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement1 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement2 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement3 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement4 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             this.colDateCreated = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colChanges = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.rteChanges = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             this.colVersion = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colImage = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.gcChangelogs = new DevExpress.XtraGrid.GridControl();
             this.tvChangelogs = new DevExpress.XtraGrid.Views.Tile.TileView();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
@@ -51,7 +54,7 @@
             // 
             // colDateCreated
             // 
-            this.colDateCreated.FieldName = "DateCreated";
+            this.colDateCreated.FieldName = "ChangeLogs.DateCreated";
             this.colDateCreated.Name = "colDateCreated";
             this.colDateCreated.Visible = true;
             this.colDateCreated.VisibleIndex = 0;
@@ -59,7 +62,7 @@
             // colChanges
             // 
             this.colChanges.ColumnEdit = this.rteChanges;
-            this.colChanges.FieldName = "Changelogs";
+            this.colChanges.FieldName = "ChangeLogs.Changelogs";
             this.colChanges.Name = "colChanges";
             this.colChanges.Visible = true;
             this.colChanges.VisibleIndex = 1;
@@ -72,10 +75,17 @@
             // 
             // colVersion
             // 
-            this.colVersion.FieldName = "Version";
+            this.colVersion.FieldName = "ChangeLogs.Version";
             this.colVersion.Name = "colVersion";
             this.colVersion.Visible = true;
             this.colVersion.VisibleIndex = 2;
+            // 
+            // colImage
+            // 
+            this.colImage.FieldName = "Image";
+            this.colImage.Name = "colImage";
+            this.colImage.Visible = true;
+            this.colImage.VisibleIndex = 3;
             // 
             // gcChangelogs
             // 
@@ -85,9 +95,7 @@
             this.gcChangelogs.Location = new System.Drawing.Point(12, 61);
             this.gcChangelogs.MainView = this.tvChangelogs;
             this.gcChangelogs.Name = "gcChangelogs";
-            this.gcChangelogs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.rteChanges});
-            this.gcChangelogs.Size = new System.Drawing.Size(540, 664);
+            this.gcChangelogs.Size = new System.Drawing.Size(647, 754);
             this.gcChangelogs.TabIndex = 0;
             this.gcChangelogs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tvChangelogs});
@@ -97,33 +105,39 @@
             this.tvChangelogs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colDateCreated,
             this.colChanges,
-            this.colVersion});
+            this.colVersion,
+            this.colImage});
             this.tvChangelogs.GridControl = this.gcChangelogs;
             this.tvChangelogs.Name = "tvChangelogs";
             this.tvChangelogs.OptionsTiles.GroupTextPadding = new System.Windows.Forms.Padding(12, 8, 12, 8);
             this.tvChangelogs.OptionsTiles.IndentBetweenGroups = 0;
             this.tvChangelogs.OptionsTiles.IndentBetweenItems = 0;
-            this.tvChangelogs.OptionsTiles.ItemSize = new System.Drawing.Size(654, 120);
+            this.tvChangelogs.OptionsTiles.ItemSize = new System.Drawing.Size(654, 98);
             this.tvChangelogs.OptionsTiles.LayoutMode = DevExpress.XtraGrid.Views.Tile.TileViewLayoutMode.List;
             this.tvChangelogs.OptionsTiles.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tvChangelogs.OptionsTiles.Padding = new System.Windows.Forms.Padding(0);
             this.tvChangelogs.OptionsTiles.RowCount = 0;
+            tableColumnDefinition1.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableColumnDefinition1.Length.Value = 630D;
             this.tvChangelogs.TileColumns.Add(tableColumnDefinition1);
             tableRowDefinition1.AutoHeight = true;
-            tableRowDefinition1.Length.Value = 20D;
+            tableRowDefinition1.Length.Value = 19D;
             tableRowDefinition2.AutoHeight = true;
-            tableRowDefinition2.Length.Value = 49D;
+            tableRowDefinition2.Length.Value = 33D;
             tableRowDefinition2.PaddingBottom = 10;
             tableRowDefinition2.PaddingTop = 10;
             tableRowDefinition3.AutoHeight = true;
-            tableRowDefinition3.Length.Value = 35D;
+            tableRowDefinition3.Length.Value = 15D;
+            tableRowDefinition4.AutoHeight = true;
+            tableRowDefinition4.Length.Value = 15D;
             this.tvChangelogs.TileRows.Add(tableRowDefinition1);
             this.tvChangelogs.TileRows.Add(tableRowDefinition2);
             this.tvChangelogs.TileRows.Add(tableRowDefinition3);
+            this.tvChangelogs.TileRows.Add(tableRowDefinition4);
             tileViewItemElement1.Column = this.colDateCreated;
             tileViewItemElement1.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement1.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement1.RowIndex = 2;
+            tileViewItemElement1.RowIndex = 3;
             tileViewItemElement1.Text = "colDateCreated";
             tileViewItemElement1.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             tileViewItemElement2.Column = this.colChanges;
@@ -139,9 +153,18 @@
             tileViewItemElement3.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
             tileViewItemElement3.Text = "colVersion";
             tileViewItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement4.Column = this.colImage;
+            tileViewItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement4.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement4.ImageOptions.ImageSize = new System.Drawing.Size(550, 400);
+            tileViewItemElement4.RowIndex = 2;
+            tileViewItemElement4.Text = "colImage";
+            tileViewItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
             this.tvChangelogs.TileTemplate.Add(tileViewItemElement1);
             this.tvChangelogs.TileTemplate.Add(tileViewItemElement2);
             this.tvChangelogs.TileTemplate.Add(tileViewItemElement3);
+            this.tvChangelogs.TileTemplate.Add(tileViewItemElement4);
+            this.tvChangelogs.ItemClick += new DevExpress.XtraGrid.Views.Tile.TileViewItemClickEventHandler(this.tvChangelogs_ItemClick);
             // 
             // labelControl1
             // 
@@ -180,7 +203,7 @@
             this.btnClose.Appearance.Options.UseForeColor = true;
             this.btnClose.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
             this.btnClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_32x322;
-            this.btnClose.Location = new System.Drawing.Point(511, 12);
+            this.btnClose.Location = new System.Drawing.Point(618, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(41, 39);
             this.btnClose.TabIndex = 4;
@@ -192,7 +215,7 @@
             this.Appearance.Options.UseBackColor = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 737);
+            this.ClientSize = new System.Drawing.Size(671, 827);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.labelControl1);
@@ -218,6 +241,7 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn colChanges;
         private DevExpress.XtraGrid.Columns.TileViewColumn colVersion;
         private DevExpress.XtraEditors.SimpleButton btnClose;
+        private DevExpress.XtraGrid.Columns.TileViewColumn colImage;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit rteChanges;
     }
 }

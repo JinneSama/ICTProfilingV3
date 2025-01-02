@@ -55,7 +55,7 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
-            Image img = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
+            Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Entities\ActionDocuments.cs" />
     <Compile Include="Entities\ChangeLogs.cs" />
     <Compile Include="Entities\ComparisonReport.cs" />
     <Compile Include="Entities\ComparisonReportSpecs.cs" />
@@ -156,13 +157,15 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202412180711395_AddedMS365Table.cs" />
-    <Compile Include="Migrations\202412180711395_AddedMS365Table.Designer.cs">
-      <DependentUpon>202412180711395_AddedMS365Table.cs</DependentUpon>
+    <Compile Include="Migrations\202501020015360_DocumentsToNAS.cs" />
+    <Compile Include="Migrations\202501020015360_DocumentsToNAS.Designer.cs">
+      <DependentUpon>202501020015360_DocumentsToNAS.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ActionImage.cs" />
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\ChiefOfOffices.cs" />
+    <Compile Include="Models\RequestCount.cs" />
     <Compile Include="Models\StaffModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="ViewModels\BrandModelViewModel.cs" />
     <Compile Include="ViewModels\BrandViewModel.cs" />
     <Compile Include="ViewModels\CASViewModel.cs" />
+    <Compile Include="ViewModels\ChangelogsViewModel.cs" />
     <Compile Include="ViewModels\ComparisonReportViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
@@ -235,8 +239,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202412180711395_AddedMS365Table.resx">
-      <DependentUpon>202412180711395_AddedMS365Table.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501020015360_DocumentsToNAS.resx">
+      <DependentUpon>202501020015360_DocumentsToNAS.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

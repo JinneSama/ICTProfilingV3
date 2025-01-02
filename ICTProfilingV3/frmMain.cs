@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,7 +7,6 @@ using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using EntityManager.Managers.Role;
 using EntityManager.Managers.User;
-using Helpers.NetworkFolder;
 using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.CustomerActionSheetForms;
@@ -29,11 +25,8 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using ICTProfilingV3.UsersForms;
-using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
-using static System.Net.WebRequestMethods;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace ICTProfilingV3
 {
     public partial class frmMain : RibbonForm
@@ -360,6 +353,11 @@ namespace ICTProfilingV3
 
         private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new UCDashboard()
+            {
+                Dock = DockStyle.Fill
+            });
         }
     }
 }

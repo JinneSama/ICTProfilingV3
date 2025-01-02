@@ -151,5 +151,12 @@ namespace ICTProfilingV3.ActionsForms
 
             LoadActions();
         }
+
+        private void btnImages_Click(object sender, EventArgs e)
+        {
+            var row = (ActionsViewModel)gridActions.GetFocusedRow();
+            var frm = new frmActionDocuments(row.Actions);
+            frm.ShowDialog();
+        }
     }
 }

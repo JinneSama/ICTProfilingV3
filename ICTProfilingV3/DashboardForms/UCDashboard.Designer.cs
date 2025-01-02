@@ -31,7 +31,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
+            this.tabRepair = new DevExpress.XtraTab.XtraTabControl();
+            this.tabRequest = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).BeginInit();
+            this.tabRepair.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,15 +73,52 @@
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
             // 
+            // tabRepair
+            // 
+            this.tabRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabRepair.Appearance.BackColor = System.Drawing.Color.MediumBlue;
+            this.tabRepair.Appearance.Options.UseBackColor = true;
+            this.tabRepair.AppearancePage.Header.BackColor = System.Drawing.Color.LightGray;
+            this.tabRepair.AppearancePage.Header.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabRepair.AppearancePage.Header.Options.UseBackColor = true;
+            this.tabRepair.AppearancePage.Header.Options.UseFont = true;
+            this.tabRepair.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.RoyalBlue;
+            this.tabRepair.AppearancePage.HeaderActive.Options.UseBackColor = true;
+            this.tabRepair.Location = new System.Drawing.Point(0, 37);
+            this.tabRepair.Name = "tabRepair";
+            this.tabRepair.SelectedTabPage = this.tabRequest;
+            this.tabRepair.Size = new System.Drawing.Size(1384, 611);
+            this.tabRepair.TabIndex = 85;
+            this.tabRepair.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabRequest,
+            this.xtraTabPage2});
+            // 
+            // tabRequest
+            // 
+            this.tabRequest.Name = "tabRequest";
+            this.tabRequest.Size = new System.Drawing.Size(1382, 583);
+            this.tabRequest.Text = "Requests Data";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1382, 583);
+            this.xtraTabPage2.Text = "Repair Data";
+            // 
             // UCDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabRepair);
             this.Controls.Add(this.panel1);
             this.Name = "UCDashboard";
             this.Size = new System.Drawing.Size(1384, 648);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).EndInit();
+            this.tabRepair.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -86,5 +128,8 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
+        private DevExpress.XtraTab.XtraTabControl tabRepair;
+        private DevExpress.XtraTab.XtraTabPage tabRequest;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
     }
 }

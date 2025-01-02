@@ -10,6 +10,7 @@ namespace Models.Entities
         public Actions()
         {
             RoutedUsers = new HashSet<Users>();
+            ActionDocuments = new HashSet<ActionDocuments>();
         }
         public int Id { get; set; }
         public string ActionTaken { get; set; }
@@ -63,5 +64,6 @@ namespace Models.Entities
         [InverseProperty("CreatedActions")]
         public virtual Users CreatedBy { get; set; }
         public virtual ICollection<Users> RoutedUsers { get; set; }
+        public virtual ICollection<ActionDocuments> ActionDocuments { get; set; }   
     }
 }

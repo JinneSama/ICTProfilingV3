@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.staffPanel = new DevExpress.XtraEditors.PanelControl();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -113,8 +114,8 @@
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepForRelease = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepCompleted = new DevExpress.XtraEditors.StepProgressBarItem();
-            this.staffPanel = new DevExpress.XtraEditors.PanelControl();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).BeginInit();
@@ -156,7 +157,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -170,6 +170,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1954, 37);
             this.panel1.TabIndex = 84;
+            // 
+            // staffPanel
+            // 
+            this.staffPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.staffPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.staffPanel.Appearance.Options.UseBackColor = true;
+            this.staffPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.staffPanel.Location = new System.Drawing.Point(1558, 0);
+            this.staffPanel.Name = "staffPanel";
+            this.staffPanel.Size = new System.Drawing.Size(379, 41);
+            this.staffPanel.TabIndex = 4;
             // 
             // labelControl20
             // 
@@ -330,9 +342,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -1038,7 +1050,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabDetails.Location = new System.Drawing.Point(584, 570);
             this.tabDetails.Name = "tabDetails";
-            this.tabDetails.SelectedTabPage = this.tabEquipmentSpecs;
+            this.tabDetails.SelectedTabPage = this.tabAction;
             this.tabDetails.Size = new System.Drawing.Size(1370, 229);
             this.tabDetails.TabIndex = 91;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
@@ -1105,18 +1117,6 @@
             this.stepCompleted.ContentBlock2.Caption = "Completed";
             this.stepCompleted.Name = "stepCompleted";
             // 
-            // staffPanel
-            // 
-            this.staffPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.staffPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.staffPanel.Appearance.Options.UseBackColor = true;
-            this.staffPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.staffPanel.Location = new System.Drawing.Point(1558, 0);
-            this.staffPanel.Name = "staffPanel";
-            this.staffPanel.Size = new System.Drawing.Size(379, 41);
-            this.staffPanel.TabIndex = 4;
-            // 
             // UCRepair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1135,6 +1135,7 @@
             this.Load += new System.EventHandler(this.UCRepair_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).EndInit();
             this.pnlDeliveries.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gcRepair)).EndInit();
@@ -1181,7 +1182,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).EndInit();
             this.ResumeLayout(false);
 
         }

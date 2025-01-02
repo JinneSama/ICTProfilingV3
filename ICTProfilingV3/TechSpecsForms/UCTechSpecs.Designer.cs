@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.staffPanel = new DevExpress.XtraEditors.PanelControl();
             this.lblTechSpecs = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
@@ -102,8 +103,8 @@
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepForRelease = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepCompleted = new DevExpress.XtraEditors.StepProgressBarItem();
-            this.staffPanel = new DevExpress.XtraEditors.PanelControl();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
@@ -140,7 +141,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -154,6 +154,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1731, 40);
             this.panel1.TabIndex = 108;
+            // 
+            // staffPanel
+            // 
+            this.staffPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.staffPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.staffPanel.Appearance.Options.UseBackColor = true;
+            this.staffPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.staffPanel.Location = new System.Drawing.Point(1339, 0);
+            this.staffPanel.Name = "staffPanel";
+            this.staffPanel.Size = new System.Drawing.Size(379, 44);
+            this.staffPanel.TabIndex = 3;
             // 
             // lblTechSpecs
             // 
@@ -392,9 +404,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -432,7 +444,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabDetails.Location = new System.Drawing.Point(582, 412);
             this.tabDetails.Name = "tabDetails";
-            this.tabDetails.SelectedTabPage = this.tabRequestedSpecs;
+            this.tabDetails.SelectedTabPage = this.tabAction;
             this.tabDetails.Size = new System.Drawing.Size(1149, 302);
             this.tabDetails.TabIndex = 111;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
@@ -915,18 +927,6 @@
             this.stepCompleted.ContentBlock2.Caption = "Completed";
             this.stepCompleted.Name = "stepCompleted";
             // 
-            // staffPanel
-            // 
-            this.staffPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.staffPanel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.staffPanel.Appearance.Options.UseBackColor = true;
-            this.staffPanel.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.staffPanel.Location = new System.Drawing.Point(1339, 0);
-            this.staffPanel.Name = "staffPanel";
-            this.staffPanel.Size = new System.Drawing.Size(379, 44);
-            this.staffPanel.TabIndex = 3;
-            // 
             // UCTechSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -942,6 +942,7 @@
             this.Load += new System.EventHandler(this.UCTechSpecs_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
@@ -980,7 +981,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).EndInit();
             this.ResumeLayout(false);
 
         }

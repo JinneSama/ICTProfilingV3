@@ -500,6 +500,18 @@ namespace Models.Repository
             set => _MOAccountUserRepo = value;
         }
 
+        private IGenericRepository<ActionDocuments> _ActionDocumentsRepo;
+        public IGenericRepository<ActionDocuments> ActionDocumentsRepo
+        {
+            get
+            {
+                if (_ActionDocumentsRepo == null)
+                    _ActionDocumentsRepo = new GenericRepository<ActionDocuments>(_context);
+                return _ActionDocumentsRepo;
+            }
+            set => _ActionDocumentsRepo = value;
+        }
+
         public UnitOfWork()
         {
             _context = ApplicationDbContext.Create();

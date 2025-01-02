@@ -1,5 +1,12 @@
-﻿using Models.Repository;
+﻿using DevExpress.XtraEditors;
+using Helpers.NetworkFolder;
+using Models.Entities;
+using Models.Repository;
+using Models.ViewModels;
+using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.ToolForms
 {
@@ -7,24 +14,56 @@ namespace ICTProfilingV3.ToolForms
     {
         private readonly string version;
         private IUnitOfWork unitOfWork;
+        private readonly HTTPNetworkFolder httpNetworkFolder;
         public frmChangelogs(string version)
         {
             InitializeComponent();
             this.version = version;
+            httpNetworkFolder = new HTTPNetworkFolder();
             unitOfWork = new UnitOfWork();
             LoadDetails();
         }
 
-        private void LoadDetails()
+        private async void LoadDetails()
         {
             lblVersion.Text = "Current Version: " + version;
-            var changes = unitOfWork.ChangeLogsRepo.GetAll().OrderByDescending(x => x.DateCreated);
+            var changes = await Task.WhenAll(
+                unitOfWork.ChangeLogsRepo.GetAll()
+                    .OrderByDescending(x => x.DateCreated)
+                    .ToList()
+                    .Select(async s => new ChangelogsViewModel
+                    {
+                        ChangeLogs = s,
+                        Image = await httpNetworkFolder.DownloadFile(s.ImageName)
+                    })
+            );
             gcChangelogs.DataSource = changes.ToList();
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)
         {
             this.Close();
+        }
+
+        private void tvChangelogs_ItemClick(object sender, DevExpress.XtraGrid.Views.Tile.TileViewItemClickEventArgs e)
+        {
+            var row = (ChangelogsViewModel)tvChangelogs.GetFocusedRow();
+            if (row == null || row.Image == null) return;
+
+            XtraForm xtraForm = new XtraForm()
+            {
+                WindowState = FormWindowState.Maximized,
+                Text = "Changelog Preview"
+            };
+
+            PictureEdit pictureEdit = new PictureEdit()
+            {
+                Dock = DockStyle.Fill,
+                Image = row.Image
+            };
+            pictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+            xtraForm.Controls.Add(pictureEdit);
+            xtraForm.ShowDialog();
         }
     }
 }

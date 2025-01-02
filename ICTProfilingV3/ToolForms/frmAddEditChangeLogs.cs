@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using Helpers.NetworkFolder;
+using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
 using Models.Repository;
@@ -13,10 +14,12 @@ namespace ICTProfilingV3.ToolForms
         private IUnitOfWork unitOfWork;
         private SaveType saveType;
         private readonly ChangeLogs changelogs;
+        private readonly HTTPNetworkFolder httpNetworkFolder;
 
         public frmAddEditChangeLogs()
         {
             InitializeComponent();
+            httpNetworkFolder = new HTTPNetworkFolder();
             unitOfWork = new UnitOfWork();
             saveType = SaveType.Insert;
             LoadInsertDetails();
@@ -26,6 +29,7 @@ namespace ICTProfilingV3.ToolForms
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
+            httpNetworkFolder = new HTTPNetworkFolder();
             saveType = SaveType.Update;
             this.changelogs = changelogs;
             LoadDetails();
@@ -50,10 +54,12 @@ namespace ICTProfilingV3.ToolForms
             return mainVersion + "." + (Convert.ToInt32(lastPart) + 1).ToString();
         }
 
-        private void LoadDetails()
+        private async void LoadDetails()
         {
             txtVersion.Text = changelogs.Version;
             memoChanges.Text = changelogs.Changelogs;
+            var img = await httpNetworkFolder.DownloadFile(changelogs.ImageName);
+            picImageInfo.Image = img;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -64,18 +70,21 @@ namespace ICTProfilingV3.ToolForms
             this.Close();
         }
 
-        private void InsertChanges()
+        private async void InsertChanges()
         {
             var changes = new ChangeLogs
             {
                 Version = txtVersion.Text,
                 DateCreated = DateTime.UtcNow,
                 UserId = UserStore.UserId,
-                Changelogs = memoChanges.Text
-
+                Changelogs = memoChanges.Text,
+                ImageName = txtVersion.Text + ".jpeg",
             };
             unitOfWork.ChangeLogsRepo.Insert(changes);
             unitOfWork.Save();
+
+            if (picImageInfo.Image == null) return;
+            await httpNetworkFolder.UploadFile(picImageInfo.Image, txtVersion.Text + ".jpeg");
         }
 
         private async Task UpdateChanges()
@@ -85,6 +94,9 @@ namespace ICTProfilingV3.ToolForms
 
             changes.Changelogs = memoChanges.Text;
             unitOfWork.Save();
+
+            if (picImageInfo.Image == null) return;
+            await httpNetworkFolder.UploadFile(picImageInfo.Image, txtVersion.Text + ".jpeg");
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

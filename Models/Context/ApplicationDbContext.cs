@@ -58,5 +58,6 @@ namespace EntityManager.Context
         public DbSet<ChangeLogs> ChangeLogs { get; set; }
         public DbSet<MOAccounts> MOAccounts { get; set; }
         public DbSet<MOAccountUsers> MOAccountUsers { get; set; }
+        public DbSet<ActionDocuments> ActionDocuments { get; set; }
     }
 }

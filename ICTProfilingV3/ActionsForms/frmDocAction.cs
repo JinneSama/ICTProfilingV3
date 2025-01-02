@@ -1,4 +1,5 @@
 ﻿using EntityManager.Managers.User;
+using Helpers.NetworkFolder;
 using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
@@ -20,6 +21,8 @@ namespace ICTProfilingV3.ActionsForms
         private readonly SaveType saveType;
         private readonly ActionsViewModel _actions;
         private List<UsersViewModel> _routedUsers;
+
+        private bool saveImages = false;
         public frmDocAction(ActionType _actionType, SaveType saveType, ActionsViewModel actions, IUnitOfWork uow)
         {
             InitializeComponent();
@@ -129,11 +132,13 @@ namespace ICTProfilingV3.ActionsForms
 
         private void btnSaveAndClose_Click(object sender, EventArgs e)
         {
+            saveImages = true;
             Save(false);
         }
 
         private void btnSaveAndSend_Click(object sender, EventArgs e)
         {
+            saveImages = true;
             Save(true);
         }
 
@@ -160,6 +165,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async Task UpdateDocAction(bool send)
         {
+            if (_routedUsers.Count <= 0) send = false;
             var updateAction = await unitOfWork.ActionsRepo.FindAsync(x => x.Id == _actions.Id);
             updateAction.ActionTaken = lueActionTaken.Text;
             updateAction.DateCreated = DateTime.UtcNow;
@@ -186,6 +192,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void InsertDocAction(bool send)
         {
+            if (_routedUsers == null) send = false;
             var docAction = new Actions
             {
                 ActionTaken = lueActionTaken.Text,
@@ -207,6 +214,7 @@ namespace ICTProfilingV3.ActionsForms
                 var rUser = await unitOfWork.UsersRepo.FindAsync(x => x.Id == user.Id);
                 docAction.RoutedUsers.Add(rUser);
             }
+
             await SaveToProcess(docAction);
             await UpdateTicketStatus();
             this.Close();
@@ -262,6 +270,17 @@ namespace ICTProfilingV3.ActionsForms
                 mo.Actions.Add(Action);
                 unitOfWork.Save();
             }
+            SaveImages(Action);
+        }
+
+        private void SaveImages(Actions action)
+        {
+            var docs = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == null);
+            foreach (var doc in docs)
+            {
+                doc.ActionId = action.Id;
+            }
+            unitOfWork.Save();
         }
 
         private async Task LoadTicketStatus()
@@ -280,6 +299,48 @@ namespace ICTProfilingV3.ActionsForms
         private void frmDocAction_Load(object sender, EventArgs e)
         {
             if (saveType == SaveType.Update) LoadDetails(_actions);
+            LoadActionDocuments();
+        }
+
+
+        private void btnAttach_Click(object sender, EventArgs e)
+        {
+            if (saveType == SaveType.Update)
+            {
+                var frm = new frmActionDocuments(_actions.Actions);
+                frm.ShowDialog();
+            }
+            else
+            {
+                var frm = new frmActionDocuments();
+                frm.ShowDialog();
+            }
+            LoadActionDocuments();
+        }
+
+        private async void frmDocAction_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            if (saveType == SaveType.Update) return;
+            if (saveImages) return;
+
+            var res = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == null).ToList();
+            if(res == null) return;
+
+            HTTPNetworkFolder networkFolder = new HTTPNetworkFolder();
+            foreach (var item in res)
+            {
+                await networkFolder.DeleteFile(item.DocumentName);
+            }
+
+            unitOfWork.ActionDocumentsRepo.DeleteRange(x => x.ActionId == null);
+            unitOfWork.Save();
+        }
+
+        private void LoadActionDocuments()
+        {
+            int? actionId = _actions?.Id ?? null;
+            var res = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == actionId);
+            txtAttachFiles.Text = string.Join("," , res.Select(s => s.DocumentName));
         }
     }
 }

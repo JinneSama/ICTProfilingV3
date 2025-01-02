@@ -1,5 +1,4 @@
-﻿
-using EntityManager.Context;
+﻿using EntityManager.Context;
 using System;
 using System.Data.Entity;
 using System.Linq;

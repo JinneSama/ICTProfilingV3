@@ -41,6 +41,11 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddAction = new DevExpress.XtraEditors.SimpleButton();
             this.gcActions = new DevExpress.XtraGrid.GridControl();
@@ -54,10 +59,13 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnImages = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnImages)).BeginInit();
             this.SuspendLayout();
             // 
             // gridColumn7
@@ -69,8 +77,8 @@
             this.gridColumn7.OptionsColumn.AllowFocus = false;
             this.gridColumn7.OptionsColumn.ReadOnly = true;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
-            this.gridColumn7.Width = 218;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 210;
             // 
             // btnAddAction
             // 
@@ -102,7 +110,8 @@
             this.gcActions.Name = "gcActions";
             this.gcActions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete,
-            this.btnEdit});
+            this.btnEdit,
+            this.btnImages});
             this.gcActions.Size = new System.Drawing.Size(1271, 318);
             this.gcActions.TabIndex = 98;
             this.gcActions.UseEmbeddedNavigator = true;
@@ -119,7 +128,8 @@
             this.gridColumn5,
             this.gridColumn6,
             this.gridColumn7,
-            this.gridColumn8});
+            this.gridColumn8,
+            this.gridColumn9});
             gridFormatRule1.Column = this.gridColumn7;
             gridFormatRule1.ColumnApplyTo = this.gridColumn7;
             gridFormatRule1.Name = "Format0";
@@ -191,8 +201,8 @@
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.AllowFocus = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 133;
+            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.Width = 127;
             // 
             // gridColumn4
             // 
@@ -202,8 +212,8 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            this.gridColumn4.Width = 159;
+            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.Width = 152;
             // 
             // gridColumn5
             // 
@@ -213,8 +223,8 @@
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.OptionsColumn.AllowFocus = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
-            this.gridColumn5.Width = 218;
+            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.Width = 210;
             // 
             // gridColumn6
             // 
@@ -224,8 +234,8 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.OptionsColumn.AllowFocus = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
-            this.gridColumn6.Width = 218;
+            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.Width = 210;
             // 
             // gridColumn8
             // 
@@ -235,8 +245,28 @@
             this.gridColumn8.OptionsColumn.AllowEdit = false;
             this.gridColumn8.OptionsColumn.AllowFocus = false;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
-            this.gridColumn8.Width = 240;
+            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.Width = 244;
+            // 
+            // btnImages
+            // 
+            this.btnImages.AutoHeight = false;
+            editorButtonImageOptions3.Image = global::ICTProfilingV3.Properties.Resources.attachment_16x161;
+            this.btnImages.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnImages.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.attachment_16x162;
+            this.btnImages.Name = "btnImages";
+            this.btnImages.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnImages.Click += new System.EventHandler(this.btnImages_Click);
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.ColumnEdit = this.btnImages;
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.FixedWidth = true;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 2;
+            this.gridColumn9.Width = 33;
             // 
             // UCActions
             // 
@@ -250,6 +280,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridActions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnImages)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +300,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEdit;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnImages;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }

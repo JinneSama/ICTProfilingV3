@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Helpers.NetworkFolder.NetworkModel;
+using Newtonsoft.Json;
 
 namespace Helpers.NetworkFolder
 {
@@ -13,7 +18,12 @@ namespace Helpers.NetworkFolder
     {
         private static readonly HttpClient httpClient = new HttpClient
         {
-            BaseAddress = new Uri("http://172.17.16.13:8888/api/files/")
+            BaseAddress = new Uri(ConfigurationManager.AppSettings["FolderURL"])
+        };
+
+        private static readonly HttpClient httpAuthClient = new HttpClient
+        {
+            BaseAddress = new Uri(ConfigurationManager.AppSettings["AuthURL"])
         };
 
         public async Task<List<string>> GetFiles()
@@ -22,13 +32,14 @@ namespace Helpers.NetworkFolder
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            var files = JsonSerializer.Deserialize<string[]>(json);
+            var files = System.Text.Json.JsonSerializer.Deserialize<string[]>(json);
 
             return files.ToList();
         }
 
         public async Task UploadFile(Image img, string fileName)
         {
+            string jwtToken = await CheckAuthentication();
             using (var content = new MultipartFormDataContent())
             {
                 using (var memoryStream = new MemoryStream())
@@ -36,6 +47,7 @@ namespace Helpers.NetworkFolder
                     img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     content.Add(new StreamContent(memoryStream), "file", fileName);
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
 
                     var response = await httpClient.PostAsync("upload/", content);
                     response.EnsureSuccessStatusCode();
@@ -45,21 +57,67 @@ namespace Helpers.NetworkFolder
 
         public async Task<Image> DownloadFile(string fileName)
         {
-            Image img = null;
-            var response = await httpClient.GetAsync("download/" + fileName);
-            if (response.StatusCode == System.Net.HttpStatusCode.NotFound) return null;
+            string jwtToken = await CheckAuthentication();
+            if (string.IsNullOrEmpty(jwtToken)) return null;
+            var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+            var response = await httpClient.SendAsync(request);
 
-            using (var stream = await response.Content.ReadAsStreamAsync())
+            Image img = null;
+            if (response.IsSuccessStatusCode)
             {
-                img = Image.FromStream(stream);
+                using (var stream = await response.Content.ReadAsStreamAsync())
+                {
+                    img = Image.FromStream(stream);
+                }
             }
+            else return null;
+
             return img;
         }
 
         public async Task DeleteFile(string fileName)
         {
+            string jwtToken = await CheckAuthentication();
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", jwtToken);
             var response = await httpClient.DeleteAsync(fileName);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.NotFound) return;
             response.EnsureSuccessStatusCode();
+        }
+
+        private async Task<string> CheckAuthentication()
+        {
+            string username = ConfigurationManager.AppSettings["Username"];
+            string password = ConfigurationManager.AppSettings["Password"];
+
+            string token = TokenCache.CheckCache();
+            if (string.IsNullOrEmpty(token)) token = await AuthenticateUser(username, password, "");
+            return token;
+        }
+
+        public async Task<string> AuthenticateUser(string username, string password, string fileName)
+        {
+            var loginRequest = new LoginRequest
+            {
+                Username = username,
+                Password = password,
+                FileName = fileName
+            };
+
+            var content = new StringContent(
+                Newtonsoft.Json.JsonConvert.SerializeObject(loginRequest),
+                Encoding.UTF8,
+                "application/json");
+
+            var response = await httpAuthClient.PostAsync("login/", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var tokenResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<TokenResponse>(jsonResponse);
+                return tokenResponse.Token;
+            }else return string.Empty;
         }
     }
 }

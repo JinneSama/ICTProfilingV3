@@ -123,8 +123,7 @@ namespace ICTProfilingV3.PGNForms
             progressDownload.Visible = true;
 
             picDocImage.Image = await networkFolder.DownloadFile(row.FileName);
-            progressDownload.Visible = false;
-
+            progressDownload.Visible = false;               
         }
     }
 }

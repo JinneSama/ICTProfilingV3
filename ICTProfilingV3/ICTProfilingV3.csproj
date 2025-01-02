@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -124,6 +124,9 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -142,6 +145,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionsForms\frmActionDocuments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActionsForms\frmActionDocuments.Designer.cs">
+      <DependentUpon>frmActionDocuments.cs</DependentUpon>
+    </Compile>
     <Compile Include="ActionsForms\frmActionList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +222,12 @@
     </Compile>
     <Compile Include="DashboardForms\UCQueue.Designer.cs">
       <DependentUpon>UCQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardForms\UCRequestDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCRequestDashboard.Designer.cs">
+      <DependentUpon>UCRequestDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardForms\UCRoutedActions.cs">
       <SubType>UserControl</SubType>
@@ -714,6 +729,9 @@
     <Compile Include="ToolForms\WaitForm1.Designer.cs">
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ActionsForms\frmActionDocuments.resx">
+      <DependentUpon>frmActionDocuments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ActionsForms\frmActionList.resx">
       <DependentUpon>frmActionList.cs</DependentUpon>
     </EmbeddedResource>
@@ -749,6 +767,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCQueue.resx">
       <DependentUpon>UCQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCRequestDashboard.resx">
+      <DependentUpon>UCRequestDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCRoutedActions.resx">
       <DependentUpon>UCRoutedActions.cs</DependentUpon>
@@ -1762,8 +1783,21 @@
     <None Include="Resources\printpreview_16x166.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\save_16x1610.png" />
+    <None Include="Resources\up_32x32.png" />
+    <None Include="Resources\up_16x16.png" />
+    <None Include="Resources\preview_32x321.png" />
+    <None Include="Resources\preview_16x161.png" />
+    <None Include="Resources\electronics_photo.svg" />
+    <None Include="Resources\close_16x1648.png" />
+    <None Include="Resources\close_32x323.png" />
+    <None Include="Resources\attachment_16x16.png" />
+    <None Include="Resources\attachment_16x161.png" />
+    <None Include="Resources\attachment_16x162.png" />
     <Content Include="Resources\Epis.ico" />
     <Content Include="Resources\EPIS_LOGO.ico" />
+    <None Include="Resources\printarea_32x321.png" />
+    <None Include="Resources\printarea_16x161.png" />
     <None Include="Resources\customer_16x16.png" />
     <None Include="Resources\about_16x1615.png" />
     <None Include="Resources\about_16x1614.png" />

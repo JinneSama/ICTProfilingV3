@@ -38,10 +38,13 @@
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtVersion = new DevExpress.XtraEditors.TextEdit();
             this.memoChanges = new DevExpress.XtraEditors.MemoEdit();
+            this.picImageInfo = new DevExpress.XtraEditors.PictureEdit();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtVersion.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoChanges.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImageInfo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -150,14 +153,33 @@
             // 
             this.memoChanges.Location = new System.Drawing.Point(12, 157);
             this.memoChanges.Name = "memoChanges";
-            this.memoChanges.Size = new System.Drawing.Size(657, 541);
+            this.memoChanges.Size = new System.Drawing.Size(657, 297);
             this.memoChanges.TabIndex = 93;
+            // 
+            // picImageInfo
+            // 
+            this.picImageInfo.Location = new System.Drawing.Point(12, 481);
+            this.picImageInfo.Name = "picImageInfo";
+            this.picImageInfo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.picImageInfo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+            this.picImageInfo.Size = new System.Drawing.Size(306, 217);
+            this.picImageInfo.TabIndex = 94;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(13, 462);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(53, 13);
+            this.labelControl3.TabIndex = 95;
+            this.labelControl3.Text = "Image Info";
             // 
             // frmAddEditChangeLogs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 710);
+            this.Controls.Add(this.labelControl3);
+            this.Controls.Add(this.picImageInfo);
             this.Controls.Add(this.memoChanges);
             this.Controls.Add(this.txtVersion);
             this.Controls.Add(this.labelControl2);
@@ -171,6 +193,7 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtVersion.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memoChanges.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picImageInfo.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,5 +211,7 @@
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.TextEdit txtVersion;
         private DevExpress.XtraEditors.MemoEdit memoChanges;
+        private DevExpress.XtraEditors.PictureEdit picImageInfo;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
     }
 }
