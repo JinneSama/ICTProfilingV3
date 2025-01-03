@@ -33,7 +33,9 @@
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.tabRepair = new DevExpress.XtraTab.XtraTabControl();
             this.tabRequest = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.tabRepairs = new DevExpress.XtraTab.XtraTabPage();
+            this.tabPGN = new DevExpress.XtraTab.XtraTabPage();
+            this.tabM365 = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).BeginInit();
             this.tabRepair.SuspendLayout();
@@ -93,7 +95,9 @@
             this.tabRepair.TabIndex = 85;
             this.tabRepair.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabRequest,
-            this.xtraTabPage2});
+            this.tabRepairs,
+            this.tabPGN,
+            this.tabM365});
             // 
             // tabRequest
             // 
@@ -101,11 +105,23 @@
             this.tabRequest.Size = new System.Drawing.Size(1382, 583);
             this.tabRequest.Text = "Requests Data";
             // 
-            // xtraTabPage2
+            // tabRepairs
             // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1382, 583);
-            this.xtraTabPage2.Text = "Repair Data";
+            this.tabRepairs.Name = "tabRepairs";
+            this.tabRepairs.Size = new System.Drawing.Size(1382, 583);
+            this.tabRepairs.Text = "Repair Data";
+            // 
+            // tabPGN
+            // 
+            this.tabPGN.Name = "tabPGN";
+            this.tabPGN.Size = new System.Drawing.Size(1382, 583);
+            this.tabPGN.Text = "PGN Data";
+            // 
+            // tabM365
+            // 
+            this.tabM365.Name = "tabM365";
+            this.tabM365.Size = new System.Drawing.Size(1382, 583);
+            this.tabM365.Text = "M365 Data";
             // 
             // UCDashboard
             // 
@@ -130,6 +146,8 @@
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraTab.XtraTabControl tabRepair;
         private DevExpress.XtraTab.XtraTabPage tabRequest;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage tabRepairs;
+        private DevExpress.XtraTab.XtraTabPage tabPGN;
+        private DevExpress.XtraTab.XtraTabPage tabM365;
     }
 }

@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>18</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -134,6 +134,7 @@
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -217,11 +218,29 @@
     <Compile Include="DashboardForms\UCDashboard.Designer.cs">
       <DependentUpon>UCDashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="DashboardForms\UCM365Dashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCM365Dashboard.Designer.cs">
+      <DependentUpon>UCM365Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardForms\UCPGNDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCPGNDashboard.Designer.cs">
+      <DependentUpon>UCPGNDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="DashboardForms\UCQueue.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DashboardForms\UCQueue.Designer.cs">
       <DependentUpon>UCQueue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardForms\UCRepairDashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\UCRepairDashboard.Designer.cs">
+      <DependentUpon>UCRepairDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardForms\UCRequestDashboard.cs">
       <SubType>UserControl</SubType>
@@ -765,8 +784,17 @@
     <EmbeddedResource Include="DashboardForms\UCDashboard.resx">
       <DependentUpon>UCDashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCM365Dashboard.resx">
+      <DependentUpon>UCM365Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCPGNDashboard.resx">
+      <DependentUpon>UCPGNDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCQueue.resx">
       <DependentUpon>UCQueue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\UCRepairDashboard.resx">
+      <DependentUpon>UCRepairDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCRequestDashboard.resx">
       <DependentUpon>UCRequestDashboard.cs</DependentUpon>

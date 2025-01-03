@@ -164,7 +164,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionImage.cs" />
     <Compile Include="Models\ActionType.cs" />
+    <Compile Include="Models\BrandCount.cs" />
     <Compile Include="Models\ChiefOfOffices.cs" />
+    <Compile Include="Models\RepairStatusCount.cs" />
     <Compile Include="Models\RequestCount.cs" />
     <Compile Include="Models\StaffModel.cs" />
     <Compile Include="Models\UserModel.cs" />
