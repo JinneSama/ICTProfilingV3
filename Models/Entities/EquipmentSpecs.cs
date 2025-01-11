@@ -17,6 +17,7 @@ namespace Models.Entities
         public string Description { get; set; }
         public string Remarks { get; set; }
         public int EquipmentId { get; set; }
+        public int OldPK { get; set; }
 
         [ForeignKey("EquipmentId")]
         public Equipment Equipment { get; set; }

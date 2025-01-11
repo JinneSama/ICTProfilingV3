@@ -10,6 +10,7 @@ namespace Models.ViewModels
     public class TicketRequestViewModel
     {
         private EmployeesViewModel employee;
+        private EmployeesViewModel chief;
         private TicketRequest _ticketRequest;
         public TicketRequest TicketRequest
         {
@@ -27,18 +28,33 @@ namespace Models.ViewModels
         private void SetEmployee(TicketRequest ticket)
         {
             long? reqById = null;
-            if (ticket.Deliveries != null) reqById = ticket.Deliveries.RequestedById;
-            if (ticket.TechSpecs != null) reqById = ticket.TechSpecs.ReqById;
-            if (ticket.Repairs != null) reqById = ticket.Repairs.RequestedById;
+            long? reqyByChief = null;
+            if (ticket.Deliveries != null)
+            {
+                reqById = ticket.Deliveries.RequestedById;
+                reqyByChief = ticket.Deliveries.ReqByChiefId;
+            }
+            if (ticket.TechSpecs != null)
+            {
+                reqById = ticket.TechSpecs.ReqById;
+                reqyByChief = ticket.TechSpecs.ReqByChiefId;
+            }
+            if (ticket.Repairs != null)
+            {
+                reqById = ticket.Repairs.RequestedById;
+                reqyByChief = ticket.Repairs.ReqByChiefId;
+            }
 
-            if (reqById != null) employee = HRMISEmployees.GetEmployeeById(reqById);
+            if (reqById != null)
+            {
+                employee = HRMISEmployees.GetEmployeeById(reqById);
+                chief = HRMISEmployees.GetEmployeeById(reqyByChief);
+            };
         }
 
         private TicketInfo TicketInfo()
         {
             if(employee == null) return null;
-            long? ChiefId = HRMISEmployees.GetChief(employee.Office, employee.Division)?.ChiefId;
-            var chief = HRMISEmployees.GetEmployeeById(ChiefId);
 
             var staff = new StaffViewModel
             {
@@ -65,11 +81,11 @@ namespace Models.ViewModels
         private Actions GetActions()
         {
             if (TicketRequest.RequestType == RequestType.TechSpecs)
-                return TicketRequest.TechSpecs.Actions.LastOrDefault();
+                return TicketRequest.TechSpecs?.Actions?.LastOrDefault() ?? null;
             if (TicketRequest.RequestType == RequestType.Deliveries)
-                return TicketRequest.Deliveries.Actions.LastOrDefault();
+                return TicketRequest.Deliveries?.Actions?.LastOrDefault() ?? null;
             if (TicketRequest.RequestType == RequestType.Repairs)
-                return TicketRequest.Repairs.Actions.LastOrDefault();
+                return TicketRequest.Repairs?.Actions?.LastOrDefault() ?? null;
             return null;
         }
 

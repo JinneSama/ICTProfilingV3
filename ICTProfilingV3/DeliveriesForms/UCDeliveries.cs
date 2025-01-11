@@ -36,13 +36,14 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void LoadDeliveries()
         {
-            var deliveries = _unitOfWork.DeliveriesRepo.GetAll(x => x.Supplier,
-                x => x.TicketRequest).ToList().Select(x => new DeliveriesViewModel
+            var deliveries = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
+                x => x.Supplier,
+                x => x.TicketRequest).OrderByDescending(x => x.DateRequested).ToList().Select(x => new DeliveriesViewModel
             {
                 Id = x.Id,
                 Status = x.TicketRequest.TicketStatus,
                 TicketNo = x.TicketRequest.Id,
-                Office = HRMISEmployees.GetEmployees().FirstOrDefault(h => h.Id == x.RequestedById).Office,
+                Office = HRMISEmployees.GetEmployeeById(x.RequestedById)?.Office,
                 Supplier = x.Supplier.SupplierName,
                 DeliveryId = "EPiS-" + x.Id,
                 PONo = x.PONo,
@@ -54,12 +55,13 @@ namespace ICTProfilingV3.DeliveriesForms
         private async void LoadStaff()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
+            ITStaff staff = null;
+            if(row != null) staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
             Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,
-                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                AssignedTo = row?.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : (staff == null ? "N / A" : staff.Users.UserName),
                 FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
                 PhotoVisible = img == null ? true : false,
                 InitialsVisible = img == null ? false : true
@@ -80,13 +82,13 @@ namespace ICTProfilingV3.DeliveriesForms
 
             spbTicketStatus.SelectedItemIndex = ((int)row.Status) - 1;
             var deliveriesDetails = row.Deliveries;
-            var requestingEmployee = HRMISEmployees.GetEmployees().FirstOrDefault(x => x.Id == deliveriesDetails.RequestedById);
-            txtChief.Text = HRMISEmployees.GetEmployeeById(requestingEmployee.ChiefOfOffices.ChiefId).Employee;
+            var requestingEmployee = HRMISEmployees.GetEmployeeById(deliveriesDetails.RequestedById);
+            txtChief.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.ReqByChiefId)?.Employee;
             lblEpisNo.Text = deliveriesDetails.Id.ToString();
-            txtOffice.Text = string.Join(" ", requestingEmployee.Office, requestingEmployee.Division);
-            txtReqBy.Text = requestingEmployee.Employee;
+            txtOffice.Text = string.Join(" ", requestingEmployee?.Office, requestingEmployee?.Division);
+            txtReqBy.Text = requestingEmployee?.Employee;
             txtTel.Text = deliveriesDetails.ContactNo;
-            txtDeliveredBy.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.DeliveredById).Employee;
+            txtDeliveredBy.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.DeliveredById)?.Employee;
             txtSupplierName.Text = deliveriesDetails.Supplier?.SupplierName;
             txtSupplierAddress.Text = deliveriesDetails.Supplier?.Address;
             txtSupplierTelNo.Text = deliveriesDetails.Supplier?.TelNumber;

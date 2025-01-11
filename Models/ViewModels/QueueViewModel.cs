@@ -22,7 +22,7 @@ namespace Models.ViewModels
 
         public EmployeesViewModel Employee => _employee;
         public string EPiSNo => "EPiS-" + _ticket.Id;
-        public string Office => _employee.Office + " " + _employee.Division;
+        public string Office => _employee?.Office + " " + _employee?.Division;
         public string AssignedTo => _ticket.ITStaff?.Users?.UserName ?? "Not Yet Assigned!";
         public string LastAction => GetLastAction();
         private string GetLastAction()
@@ -30,11 +30,11 @@ namespace Models.ViewModels
             switch (Ticket.RequestType)
             {
                 case RequestType.TechSpecs:
-                    return Ticket.TechSpecs.Actions?.LastOrDefault()?.ActionTaken;
+                    return Ticket?.TechSpecs?.Actions?.LastOrDefault()?.ActionTaken;
                 case RequestType.Deliveries:
-                    return Ticket.Deliveries.Actions?.LastOrDefault()?.ActionTaken;
+                    return Ticket?.Deliveries?.Actions?.LastOrDefault()?.ActionTaken;
                 case RequestType.Repairs:
-                    return Ticket.Repairs.Actions?.LastOrDefault()?.ActionTaken;
+                    return Ticket?.Repairs?.Actions?.LastOrDefault()?.ActionTaken;
                 default: return null;
             }
         }

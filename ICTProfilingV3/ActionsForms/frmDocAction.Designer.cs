@@ -382,6 +382,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.deActionDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deActionDate.Properties.MaskSettings.Set("mask", "g");
             this.deActionDate.Size = new System.Drawing.Size(336, 20);
             this.deActionDate.TabIndex = 0;
             // 

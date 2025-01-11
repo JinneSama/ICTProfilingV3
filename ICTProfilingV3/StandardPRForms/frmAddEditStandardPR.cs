@@ -168,7 +168,7 @@ namespace ICTProfilingV3.StandardPRForms
             txtRequestedByPos.Text = row.Position;
             txtRequestedByOffice.Text = row.Office;
             txtRequestedByDivision.Text = row.Division;
-            ChiefId = HRMISEmployees.GetChief(row.Office, row.Division).ChiefId;
+            ChiefId = HRMISEmployees.GetChief(row.Office, row.Division, empId).ChiefId;
         }
     }
 }

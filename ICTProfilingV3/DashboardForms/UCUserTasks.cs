@@ -54,7 +54,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadData()
         {
-            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.IsRepairTechSpecs == null && (x.ITStaff.UserId == UserStore.UserId || x.ITStaff.UserId == null) ,
+            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId,
                 x => x.Repairs,
                 x => x.TechSpecs,
                 x => x.Deliveries).ToList().Select(x => new TasksViewModel

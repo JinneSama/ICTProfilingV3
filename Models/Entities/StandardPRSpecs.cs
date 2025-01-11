@@ -13,7 +13,7 @@ namespace Models.Entities
         public string Purpose { get; set; }
         public Unit Unit { get; set; }
         public long? UnitCost { get; set; }
-        public int EquipmentSpecsId { get; set; }
+        public int? EquipmentSpecsId { get; set; }
 
         [ForeignKey("EquipmentSpecsId")]
         public EquipmentSpecs EquipmentSpecs { get; set; }

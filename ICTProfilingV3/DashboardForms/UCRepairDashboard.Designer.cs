@@ -31,9 +31,6 @@
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel1 = new DevExpress.XtraCharts.PieSeriesLabel();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel2 = new DevExpress.XtraCharts.PieSeriesLabel();
-            DevExpress.XtraCharts.PieSeriesView pieSeriesView2 = new DevExpress.XtraCharts.PieSeriesView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
@@ -53,10 +50,6 @@
             this.chartCountByBrand = new DevExpress.XtraCharts.ChartControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.gcBrand = new DevExpress.XtraGrid.GridControl();
-            this.gridBrand = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
@@ -72,15 +65,10 @@
             ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCountByBrand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcBrand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridBrand)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -125,6 +113,7 @@
             this.btnFilterbyDate.Size = new System.Drawing.Size(110, 28);
             this.btnFilterbyDate.TabIndex = 117;
             this.btnFilterbyDate.Text = "Filter By Date";
+            this.btnFilterbyDate.Click += new System.EventHandler(this.btnFilterbyDate_Click);
             // 
             // deTo
             // 
@@ -290,22 +279,14 @@
             // 
             // chartCountByBrand
             // 
-            this.chartCountByBrand.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.chartCountByBrand.BackColor = System.Drawing.Color.Transparent;
             this.chartCountByBrand.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartCountByBrand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartCountByBrand.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartCountByBrand.Location = new System.Drawing.Point(5, 24);
+            this.chartCountByBrand.Location = new System.Drawing.Point(2, 21);
             this.chartCountByBrand.Name = "chartCountByBrand";
-            pieSeriesLabel2.Position = DevExpress.XtraCharts.PieSeriesLabelPosition.Inside;
-            pieSeriesLabel2.TextPattern = "{V}";
-            series2.Label = pieSeriesLabel2;
-            series2.Name = "Brand";
-            pieSeriesView2.MinAllowedSizePercentage = 75D;
-            series2.View = pieSeriesView2;
-            this.chartCountByBrand.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series2};
-            this.chartCountByBrand.Size = new System.Drawing.Size(526, 471);
+            this.chartCountByBrand.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.chartCountByBrand.Size = new System.Drawing.Size(529, 704);
             this.chartCountByBrand.TabIndex = 42;
             // 
             // groupControl1
@@ -335,53 +316,12 @@
             this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl2.AppearanceCaption.Options.UseBackColor = true;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.Controls.Add(this.gcBrand);
             this.groupControl2.Controls.Add(this.chartCountByBrand);
             this.groupControl2.Location = new System.Drawing.Point(713, 56);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(533, 727);
             this.groupControl2.TabIndex = 92;
             this.groupControl2.Text = "Count of Items by Brand";
-            // 
-            // gcBrand
-            // 
-            this.gcBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcBrand.Location = new System.Drawing.Point(5, 501);
-            this.gcBrand.MainView = this.gridBrand;
-            this.gcBrand.Name = "gcBrand";
-            this.gcBrand.Size = new System.Drawing.Size(523, 221);
-            this.gcBrand.TabIndex = 43;
-            this.gcBrand.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridBrand});
-            // 
-            // gridBrand
-            // 
-            this.gridBrand.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2});
-            this.gridBrand.GridControl = this.gcBrand;
-            this.gridBrand.Name = "gridBrand";
-            this.gridBrand.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Brand";
-            this.gridColumn1.FieldName = "Brand";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            this.gridColumn1.Width = 380;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Total";
-            this.gridColumn2.FieldName = "Quantity";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 122;
             // 
             // UCRepairDashboard
             // 
@@ -408,16 +348,11 @@
             ((System.ComponentModel.ISupportInitialize)(pieSeriesView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartByStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCountByBrand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gcBrand)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridBrand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -436,11 +371,7 @@
         private DevExpress.XtraCharts.ChartControl chartCountByBrand;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraGrid.GridControl gcBrand;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridBrand;
         private DevExpress.XtraCharts.ChartControl chartByStatus;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.GridControl gcStatus;
         private DevExpress.XtraGrid.Views.Grid.GridView gridStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;

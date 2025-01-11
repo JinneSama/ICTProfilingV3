@@ -14,6 +14,7 @@ namespace Models.Entities
         public string PhoneNumber { get; set; }
         public bool? Status { get; set; }
         public bool? IsDeleted { get; set; }
+        public int OldPK { get; set; }
         public virtual ICollection<Deliveries> Deliveries { get; set; }
         public Supplier()
         {

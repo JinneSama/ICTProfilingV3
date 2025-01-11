@@ -46,10 +46,14 @@ namespace Helpers.NetworkFolder
                 {
                     img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
                     memoryStream.Seek(0, SeekOrigin.Begin);
-                    content.Add(new StreamContent(memoryStream), "file", fileName);
+
+                    var imageContent = new StreamContent(memoryStream);
+                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+                    content.Add(imageContent, "file", fileName);
+
                     httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
 
-                    var response = await httpClient.PostAsync("upload/", content);
+                    var response = await httpClient.PostAsync("upload/", content); 
                     response.EnsureSuccessStatusCode();
                 }
             }

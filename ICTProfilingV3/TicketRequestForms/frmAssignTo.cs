@@ -12,6 +12,8 @@ using Models.Managers;
 using Models.Managers.User;
 using DevExpress.XtraGrid.Views.Tile;
 using Helpers.NetworkFolder;
+using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DeliveriesForms;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
@@ -19,20 +21,18 @@ namespace ICTProfilingV3.TicketRequestForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly TicketRequest ticket;
-        private DocumentHandler documentHandler;
+        private HTTPNetworkFolder networkFolder;
 
         public frmAssignTo(TicketRequest ticket)
         {
             InitializeComponent();
-            documentHandler = new DocumentHandler(Properties.Settings.Default.StaffNetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
+            networkFolder = new HTTPNetworkFolder();
 
-            InitStaffs();
             unitOfWork = new UnitOfWork();
             lblTicketNo.Text = ticket.Id.ToString();
             this.ticket = ticket;
-            LoadStaff();
+            InitStaffs();
+            
         }
 
         private void InitStaffs()
@@ -42,14 +42,20 @@ namespace ICTProfilingV3.TicketRequestForms
             tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.IS });
             tvAssign.OptionsKanban.Groups.Add(new KanbanGroup() { GroupValue = Sections.Records });
         }
-        private void LoadStaff()
+        private async Task LoadStaff()
         {
             var res = unitOfWork.ITStaffRepo.GetAll(x => x.Users).ToList().Select(x => new StaffViewModel
             {
                 Mark = x.Id == ticket.StaffId ? true : false,
                 Staff = x,
-                Image = documentHandler.GetImage(x.UserId + ".jpeg")
-            });
+                UserId = x.UserId
+            }).ToList();
+
+            foreach(var item in res)
+            {
+                var img = await networkFolder.DownloadFile(item.UserId + ".jpeg");
+                item.Image = img;
+            }
             gcAssign.DataSource = res.ToList();
             SetFocusToMarked();
         }
@@ -83,6 +89,15 @@ namespace ICTProfilingV3.TicketRequestForms
             {
                 await UpdateTicket(staff.FirstOrDefault());
                 this.Close();
+
+                var actionType = new Models.Models.ActionType
+                {
+                    Id = ticket.Id,
+                    RequestType = ticket.RequestType
+                };
+
+                var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, staff.FirstOrDefault().Users);
+                frm.ShowDialog();
             }
         }
 
@@ -108,6 +123,11 @@ namespace ICTProfilingV3.TicketRequestForms
             };
             unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
             await unitOfWork.SaveChangesAsync();    
+        }
+
+        private async void frmAssignTo_Load(object sender, EventArgs e)
+        {
+            await LoadStaff();
         }
     }
 }

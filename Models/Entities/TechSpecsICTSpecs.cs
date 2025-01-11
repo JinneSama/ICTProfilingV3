@@ -19,7 +19,7 @@ namespace Models.Entities
 
         [ForeignKey("TechSpecsId")]
         public TechSpecs TechSpecs { get; set; }
-        public int EquipmentSpecsId { get; set; }
+        public int? EquipmentSpecsId { get; set; }
 
         [ForeignKey("EquipmentSpecsId")]
         public EquipmentSpecs EquipmentSpecs { get; set; }

@@ -45,8 +45,9 @@ namespace ICTProfilingV3.RepairForms
 
         private void LoadRepair()
         {
-            var res = _unitOfWork.RepairsRepo.GetAll(x => x.TicketRequest,
-                x => x.PPEs).ToList();
+            var res = _unitOfWork.RepairsRepo.FindAllAsync(x => x.TicketRequest.StaffId != null,
+                x => x.TicketRequest,
+                x => x.PPEs).OrderByDescending(x => x.DateCreated).ToList();
             var repair = res.Select(x => new RepairViewModel
             {
                 Id = x.Id,
@@ -66,24 +67,28 @@ namespace ICTProfilingV3.RepairForms
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             tabAction.Controls.Clear();
             if (row == null) return;
-            tabAction.Controls.Add(new UCActions(new ActionType
+
+            var ucAction = new UCActions(new ActionType
             {
                 Id = row.Id,
-                RequestType = RequestType.Repairs,
+                RequestType = RequestType.Repairs
             })
             {
                 Dock = DockStyle.Fill
-            });
+            };
+            if(row.Repair.PPEs.Status == PPEStatus.Condemned) ucAction.btnAddAction.Enabled = false;
+            tabAction.Controls.Add(ucAction);
         }
         private async void LoadStaff()
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
+            ITStaff staff = null;
+            if(row != null) staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
             Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
                 Image = img,
-                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                AssignedTo = row?.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : (staff == null ? "N / A" : staff.Users.UserName),
                 FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
                 PhotoVisible = img == null ? true : false,
                 InitialsVisible = img == null ? false : true
@@ -106,7 +111,7 @@ namespace ICTProfilingV3.RepairForms
 
             spbTicketStatus.SelectedItemIndex = ((int)repair.TicketRequest.TicketStatus) - 1;
             var employee = HRMISEmployees.GetEmployeeById(repair.RequestedById);
-            var chief = HRMISEmployees.GetChief(employee?.Office, employee?.Division);
+            var chief = HRMISEmployees.GetChief(employee?.Office, employee?.Division, repair.RequestedById);
 
             lblRepairNo.Text = repair.Id.ToString();
             txtOffice.Text = string.Join(" ", employee?.Office , employee?.Division);
@@ -118,13 +123,21 @@ namespace ICTProfilingV3.RepairForms
             txtFindings.Text = repair.Findings;
             txtRecommendation.Text = repair.Recommendations;
             txtRequestProblem.Text = repair.Problems;
-            var prepared = await _userManager.FindUserAsync(repair.PreparedById);
+            var prepared = repair?.PreparedById == null ? null : await _userManager.FindUserAsync(repair.PreparedById);
             txtPreparedBy.Text = prepared?.FullName;
-            var assesed = await _userManager.FindUserAsync(repair.ReviewedById);
+            var assesed = repair?.ReviewedById == null ? null : await _userManager.FindUserAsync(repair.ReviewedById);
             txtAssessedBy.Text = assesed?.FullName;
-            var noted = await _userManager.FindUserAsync(repair.NotedById);
+            var noted = repair?.NotedById == null ? null : await _userManager.FindUserAsync(repair.NotedById);
             txtNotedBy.Text = noted?.FullName;
-
+            if(repair.PPEs.Status == PPEStatus.Condemned)
+            {
+                SetButtons(true);
+                MessageBox.Show("This Equipment is Condemned!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                SetButtons(false);
+            }
             await LoadEquipmentDetails(repair.PPEs , repair.PPEsSpecs);
         }
 
@@ -303,6 +316,15 @@ namespace ICTProfilingV3.RepairForms
             _unitOfWork.Save();
         }
 
+        private void SetButtons(bool condemned)
+        {
+            var controls = pnlButtons.Controls;
+            foreach (Control c in controls)
+            {
+                if (c is SimpleButton)
+                    c.Enabled = !condemned;
+            }
+        }
         private void NavigateToRepairSpecs(Repairs repair)
         {
             var main = Application.OpenForms["frmMain"] as frmMain;
@@ -314,6 +336,20 @@ namespace ICTProfilingV3.RepairForms
                 Dock = DockStyle.Fill,
                 filterText = repair.TechSpecsId.ToString()
             });
+        }
+
+        private async void btnCondemned_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Condemn this Equipment?","Confimation",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.Cancel) return;
+
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Repair.PPEsId);
+            if(ppe == null) return;
+
+            ppe.Status = PPEStatus.Condemned;
+
+            await _unitOfWork.SaveChangesAsync();
+            LoadRepair();
         }
     }
 }

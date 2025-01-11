@@ -36,11 +36,14 @@ namespace EntityManager.Managers.User
             user.Email = userModel.Username + "@gmail.com";
 
             await _userManager.UpdateAsync(user);
-            var getRole = _roleManager.FindById(user.Roles.FirstOrDefault().RoleId);
-            if(getRole.Name != userModel.role)
+            var getRole = _roleManager.FindById(user.Roles?.FirstOrDefault()?.RoleId);
+            if(getRole?.Name != userModel.role)
             {
-                var res1 = await _userManager.RemoveFromRoleAsync(user.Id, getRole.Name);
-                var res2 = await _userManager.AddToRoleAsync(user.Id, userModel.role);   
+                if(getRole != null)
+                {
+                    var res1 = await _userManager.RemoveFromRoleAsync(user.Id, getRole?.Name);
+                }
+                var res2 = await _userManager.AddToRoleAsync(user.Id, userModel.role);
             }
 
             if (userModel.Password == null || userModel.Password == string.Empty) return;

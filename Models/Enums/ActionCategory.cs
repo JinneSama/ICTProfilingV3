@@ -9,7 +9,7 @@ namespace Models.Enums
     public enum ActionCategory
     {
         Programs = 0,
-        MainAct = 1,
+        MainAct = 1, //Project
         Activity = 2,
         SubActivity = 3
     }

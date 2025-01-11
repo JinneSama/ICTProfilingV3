@@ -48,8 +48,8 @@ namespace ICTProfilingV3.UsersForms
         {
             txtUsername.Text = _users.UserName;
             txtFullname.Text = _users.FullName;
-            var role = await roleManager.FindById(_users.Roles.FirstOrDefault().RoleId);
-            lueUserRole.EditValue = role.Name;
+            var role = await roleManager.FindById(_users.Roles?.FirstOrDefault()?.RoleId);
+            lueUserRole.EditValue = role?.Name;
             txtPosition.Text = _users.Position;
         }
 

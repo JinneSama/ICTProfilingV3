@@ -1,4 +1,5 @@
 ﻿using Models.Models;
+using Models.OFMISEntities;
 using Models.ViewModels;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +42,7 @@ namespace Models.HRMISEntites
         }
         private async static Task<IEnumerable<EmployeesViewModel>> InitEmployees()
         {
-            var employees = _context.Employees.Where(x => x.fldDeleted == false)
+            var employees = _context.Employees
                 .Select(x => new EmployeesViewModel
                 {
                     Id = x.fldEmpID,
@@ -66,12 +67,32 @@ namespace Models.HRMISEntites
 
         public static EmployeesViewModel GetEmployeeById(long? Id)
         {
-            return _employees.FirstOrDefault(x => x.Id == Id);
+            var emp = _employees.FirstOrDefault(x => x.Id == Id);
+            if (Id == null) return null;
+            if (emp == null) emp = OFMISEmployees.GetEmployeeById((int)Id);
+            return emp;
         }
-        public static ChiefOfOffices GetChief(string Office, string Division)
+        public static ChiefOfOffices GetChief(string Office, string Division, long? employeeId)
         {
-            if (string.IsNullOrEmpty(Division) || string.IsNullOrWhiteSpace(Division)) return ChiefOfOffices.FirstOrDefault(x => x.Office == Office);
-            else return ChiefOfOffices.FirstOrDefault(x => x.Division.Contains(Division));
+            ChiefOfOffices chief = null;
+
+            if (string.IsNullOrEmpty(Division) || string.IsNullOrWhiteSpace(Division)) chief = ChiefOfOffices.FirstOrDefault(x => x.Office == Office);
+            else chief = ChiefOfOffices.FirstOrDefault(x => x.Division.Contains(Division));
+
+            if(chief == null)
+            {
+                var empId = OFMISEmployees.GetEmployeeById((int)employeeId)?.Id;
+                if(empId == null) return null;
+                var resChief = OFMISEmployees.GetEmployeeById((int)empId);
+                var res = new ChiefOfOffices()
+                {
+                    ChiefId = (long)resChief.Id,
+                    Office = resChief.Office,
+                    Division = resChief.Division,
+                };
+                chief = res;
+            }
+            return chief;
         }
     }
 

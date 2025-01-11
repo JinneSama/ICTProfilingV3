@@ -35,11 +35,11 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private void LoadPR()
         {
             var pr = unitOfWork.PurchaseRequestRepo.GetAll(x => x.CreatedByUser,
-                x => x.TechSpecs).ToList()
+                x => x.TechSpecs).OrderByDescending(x => x.DateCreated).ToList()
                 .Select(x => new PRViewModel
                 {
                     PurchaseRequest = x,
-                    Office = HRMISEmployees.GetEmployeeById(x.ReqById)?.Office,
+                    Office = HRMISEmployees.GetEmployeeById(x.ChiefId)?.Office,
                     CreatedBy = x.CreatedByUser?.UserName
                 });
             gcPR.DataSource = new BindingList<PRViewModel>(pr.ToList());

@@ -1,4 +1,5 @@
 ﻿using DevExpress.Data.ODataLinq.Helpers;
+using DevExpress.Pdf.Native.BouncyCastle.Ocsp;
 using DevExpress.XtraCharts;
 using DevExpress.XtraRichEdit.API.Native;
 using Models.Entities;
@@ -40,15 +41,23 @@ namespace ICTProfilingV3.DashboardForms
             var res = repairData.ToList().Select(s => new BrandCount
             {
                 Brand = s.PPEs.PPEsSpecs.Select(x => x.Model.Brand.BrandName).FirstOrDefault(),
-                Office = HRMISEmployees.GetEmployeeById(s.RequestedById).Office,
+                Office = HRMISEmployees.GetEmployeeById(s.RequestedById)?.Office,
                 Quantity = s.PPEs.Quantity
             });
-            chartRepairbyOffice.DataSource = res;
-            chartRepairbyOffice.SeriesTemplate.ChangeView(ViewType.Bar);
+
+            var resData = res.GroupBy(x => x.Office).Select(s => new BrandCount
+            {
+                Office = s.Key,
+                Quantity = s.Sum(z => z.Quantity)
+            });
+
+            chartRepairbyOffice.DataSource = resData;
+            chartRepairbyOffice.SeriesTemplate.ChangeView(ViewType.StackedBar);
             chartRepairbyOffice.SeriesDataMember = "Office";
             chartRepairbyOffice.SeriesTemplate.ArgumentDataMember = "Office";
             chartRepairbyOffice.SeriesTemplate.ValueDataMembers.AddRange("Quantity");
-            chartRepairbyOffice.SeriesTemplate.Label.TextPattern = "{A}: {V:0}";
+            chartRepairbyOffice.SeriesTemplate.Label.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+
             chartRepairbyOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
             ((DevExpress.XtraCharts.XYDiagram)chartRepairbyOffice.Diagram).Rotated = true;
         }
@@ -58,7 +67,7 @@ namespace ICTProfilingV3.DashboardForms
             var res = repairData.ToList().Select(s => new BrandCount
             {
                 Brand = s.PPEs.PPEsSpecs.Select(x => x.Model.Brand.BrandName).FirstOrDefault(),
-                Office = HRMISEmployees.GetEmployeeById(s.RequestedById).Office,
+                Office = HRMISEmployees.GetEmployeeById(s.RequestedById)?.Office,
                 Quantity = s.PPEs.Quantity
             });
 
@@ -68,16 +77,15 @@ namespace ICTProfilingV3.DashboardForms
                 Quantity = x.Sum(s => s.Quantity)
             }).ToList();
 
-            var series1 = chartCountByBrand.Series["Brand"];
-            series1.Label.TextPattern = "{A}\nTotal:{V}\nPercentage:{VP:0.00%}";
-            series1.LegendTextPattern = "{A}";
-            series1.Points.Clear();
-            foreach(var item in resGrouped)
-            {
-                if(item.Brand == null) continue;
-                series1.Points.Add(new SeriesPoint(item.Brand, item.Quantity));
-            }
-            gcBrand.DataSource = resGrouped;
+            chartCountByBrand.DataSource = resGrouped;
+            chartCountByBrand.SeriesTemplate.ChangeView(ViewType.StackedBar);
+            chartCountByBrand.SeriesDataMember = "Brand";
+            chartCountByBrand.SeriesTemplate.ArgumentDataMember = "Brand";
+            chartCountByBrand.SeriesTemplate.ValueDataMembers.AddRange("Quantity");
+            chartCountByBrand.SeriesTemplate.Label.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+
+            chartCountByBrand.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            ((DevExpress.XtraCharts.XYDiagram)chartCountByBrand.Diagram).Rotated = true;
         }
 
         private void LoadItemByStatusData(IQueryable<Repairs> repairData)
@@ -105,6 +113,17 @@ namespace ICTProfilingV3.DashboardForms
                 Brand = s.PPEs.PPEsSpecs.Select(x => x.Model.Brand.BrandName).FirstOrDefault() ?? "No Brand",
                 Status = (Models.Enums.PPEStatus)s.PPEs.Status
             }).ToList();
+        }
+
+        private void btnFilterbyDate_Click(object sender, EventArgs e)
+        {
+            var dateFrom = deFrom?.DateTime;
+            var dateTo = deTo?.DateTime;
+            Expression<Func<Repairs, bool>> dateFilter;
+
+            if (dateFrom == null || dateTo == null) dateFilter = null;
+            dateFilter = x => x.DateCreated > dateFrom && x.DateCreated < dateTo;
+            LoadData(dateFilter);
         }
     }
 }

@@ -23,7 +23,7 @@ namespace ICTProfilingV3.ActionsForms
         private List<UsersViewModel> _routedUsers;
 
         private bool saveImages = false;
-        public frmDocAction(ActionType _actionType, SaveType saveType, ActionsViewModel actions, IUnitOfWork uow)
+        public frmDocAction(ActionType _actionType, SaveType saveType, ActionsViewModel actions, IUnitOfWork uow, Users user)
         {
             InitializeComponent();
             if(uow == null) unitOfWork = new UnitOfWork();
@@ -34,6 +34,20 @@ namespace ICTProfilingV3.ActionsForms
             _actions = actions;
             LoadDropdown();
             LoadActionList();
+            if(user != null) SetRoutedUser(user);
+        }
+
+        private void SetRoutedUser(Users user)
+        {
+            var routedUsers = new List<UsersViewModel>();
+            var usr = new UsersViewModel()
+            {
+                Id = user.Id,
+                Fullname = user.FullName
+            };
+            routedUsers.Add(usr);
+            _routedUsers = routedUsers;
+            txtRoutedTo.Text = string.Join(", ", routedUsers.Select(x => x.Fullname));
         }
 
         private void LoadDetails(ActionsViewModel actions)
@@ -64,7 +78,7 @@ namespace ICTProfilingV3.ActionsForms
         }
         private void LoadDropdown()
         {
-            deActionDate.DateTime = DateTime.UtcNow;
+            deActionDate.DateTime = DateTime.Now;
             var dropdown = unitOfWork.ActionsDropdownsRepo.FindAllAsync(x => x.ActionCategory == ActionCategory.Programs).Select(s => new ActionTreeViewModel
             {
                 ActionTree = s,

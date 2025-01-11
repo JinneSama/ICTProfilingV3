@@ -14,9 +14,9 @@ namespace Models.Entities
         [Key, ForeignKey("TicketRequest")]
         public int Id { get; set; }
         //----HRIS Data----
-        public long RequestedById { get; set; }
-        public long ReqByChiefId { get; set; }
-        public long DeliveredById { get; set; }
+        public long? RequestedById { get; set; }
+        public long? ReqByChiefId { get; set; }
+        public long? DeliveredById { get; set; }
         //----HRIS Data----
 
         public DateTime? DateCreated { get; set; }

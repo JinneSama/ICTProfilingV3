@@ -2,8 +2,11 @@
 using DevExpress.XtraEditors.Camera;
 using Helpers.NetworkFolder;
 using Helpers.Scanner;
+using Helpers.Security;
 using Models.Entities;
+using Models.Managers.User;
 using Models.Repository;
+using System;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,6 +51,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void btnScan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!CheckUser()) return;
             var scannedDocs = ScanDocument.ScanImages();
             if (scannedDocs == null) return;
 
@@ -61,6 +65,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void btnFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!CheckUser()) return;
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tiff|All Files|*.*";
             openFileDialog.Title = "Select an Image";
@@ -76,6 +81,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void btnCamera_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!CheckUser()) return;
             TakePictureDialog dialog = new TakePictureDialog();
             dialog.ResolutionMode = ResolutionMode.Maximum;
             if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel) return;
@@ -111,6 +117,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            if (!CheckUser()) return;
             var msgRes = MessageBox.Show("Delete this Document?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
 
@@ -153,9 +160,14 @@ namespace ICTProfilingV3.ActionsForms
             unitOfWork.Save();
 
             var actionDocsRes = await unitOfWork.ActionDocumentsRepo.FindAsync(x => x.Id == actionDocs.Id);
-            if(actionDocsRes != null) 
+
+            var securityStamp = Guid.NewGuid().ToString();
+            var documentName = Cryptography.Encrypt("Action_Document_" + actionDocsRes.Id , securityStamp);
+
+            if (actionDocsRes != null) 
             {
-                actionDocsRes.DocumentName = "Action_Document_" + actionDocsRes.Id + ".jpeg";
+                actionDocsRes.SecurityStamp = securityStamp;
+                actionDocsRes.DocumentName = documentName + ".jpeg";
                 unitOfWork.Save();
             }
 
@@ -169,6 +181,16 @@ namespace ICTProfilingV3.ActionsForms
 
             Image image = await networkFolder.DownloadFile(row.DocumentName);
             picDocImage.Image = image;
+        }
+
+        private bool CheckUser()
+        {
+            if (action.CreatedById != UserStore.UserId)
+            {
+                MessageBox.Show("This Option is not Available!");
+                return false;
+            }
+            return true;
         }
     }
 }

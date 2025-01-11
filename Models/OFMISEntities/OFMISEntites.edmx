@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OFMISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="128" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="128" />
+          <Property Name="ExtName" Type="nvarchar" MaxLength="5" />
+          <Property Name="Position" Type="nvarchar" MaxLength="128" />
+          <Property Name="OfficeName" Type="nvarchar" MaxLength="128" />
+          <Property Name="OffcAcr" Type="nvarchar" MaxLength="128" />
+          <Property Name="OfficeId" Type="int" />
+          <Property Name="TIN" Type="nvarchar" MaxLength="128" />
+          <Property Name="PagIbig" Type="nvarchar" MaxLength="128" />
+          <Property Name="PhilHealth" Type="nvarchar" MaxLength="128" />
+          <Property Name="SSS" Type="nvarchar" MaxLength="128" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salutation" Type="nvarchar" MaxLength="20" />
+          <Property Name="SG" Type="nvarchar" MaxLength="20" />
+          <Property Name="GSIS" Type="nvarchar" MaxLength="20" />
+          <Property Name="SalaryGrade" Type="nvarchar" MaxLength="20" />
+          <Property Name="Steps" Type="nvarchar" MaxLength="20" />
+          <Property Name="MonthlySalary" Type="money" />
+          <Property Name="DailySalary" Type="money" />
+          <Property Name="IsHead" Type="bit" />
+          <Property Name="IsSignatories" Type="bit" />
+          <Property Name="Note" Type="nvarchar" MaxLength="128" />
+          <Property Name="EmployeeNameByLastName" Type="nvarchar" MaxLength="387" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="386" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="LBPAccount" Type="nvarchar" MaxLength="128" />
+          <Property Name="Deactivate" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Offices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OffcAcr" Type="nvarchar(max)" />
+          <Property Name="OfficeName" Type="nvarchar(max)" />
+          <Property Name="Chief" Type="nvarchar(max)" />
+          <Property Name="ChiefPosition" Type="nvarchar(max)" />
+          <Property Name="ResponsibilityCenter" Type="nvarchar(max)" />
+          <Property Name="ResponsibilityCenterCode" Type="nvarchar(max)" />
+          <Property Name="IsDivision" Type="bit" />
+          <Property Name="UnderOf" Type="int" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="TelNo" Type="nvarchar(max)" />
+          <Property Name="Salutation" Type="nvarchar(max)" />
+          <Property Name="InsideAddress" Type="nvarchar(max)" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="RCText" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Website" Type="nvarchar" MaxLength="250" />
+          <Property Name="rStatus" Type="int" />
+          <Property Name="LbacStatus" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="128" />
+          <Property Name="EmailConfirmed" Type="bit" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" />
+          <Property Name="TwoFactorEnabled" Type="bit" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" />
+          <Property Name="AccessFailedCount" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdatedBy" Type="nvarchar" MaxLength="150" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CivilStatus" Type="nvarchar" MaxLength="12" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="6" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="500" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="500" />
+          <Property Name="TownCity" Type="int" />
+          <Property Name="Cellular" Type="nvarchar" MaxLength="25" />
+          <Property Name="Height" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Weight" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Religion" Type="nvarchar" MaxLength="50" />
+          <Property Name="Citizenship" Type="nvarchar" MaxLength="50" />
+          <Property Name="Languages" Type="nvarchar(max)" />
+          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="OfficeId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="DMSAdmin" Type="bit" />
+          <Property Name="DMSViewPAPs" Type="bit" />
+          <Property Name="isHead" Type="bit" />
+          <Property Name="LbacUser" Type="bit" />
+          <Property Name="LbacRole" Type="int" />
+          <Property Name="LbacFullName" Type="nvarchar(max)" />
+          <Property Name="NewUserFromHRMIS" Type="bit" />
+          <Property Name="fldDMS" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Employees_Offices">
+          <End Role="Offices" Type="Self.Offices" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offices_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Offices" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offices_Offices">
+          <End Role="Offices" Type="Self.Offices" Multiplicity="0..1" />
+          <End Role="Offices1" Type="Self.Offices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offices1">
+              <PropertyRef Name="UnderOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Offices">
+          <End Role="Offices" Type="Self.Offices" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OFMISModelStoreContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employees_Offices" Association="Self.FK_Employees_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offices_Employees" Association="Self.FK_Offices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offices_Offices" Association="Self.FK_Offices_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Offices1" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Offices" Association="Self.FK_Users_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OFMISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ExtName" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OffcAcr" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeId" Type="Int32" />
+          <Property Name="TIN" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PagIbig" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PhilHealth" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SSS" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salutation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SG" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GSIS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SalaryGrade" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Steps" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MonthlySalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DailySalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsHead" Type="Boolean" />
+          <Property Name="IsSignatories" Type="Boolean" />
+          <Property Name="Note" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeNameByLastName" Type="String" MaxLength="387" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="EmployeeName" Type="String" MaxLength="386" FixedLength="false" Unicode="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LBPAccount" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Deactivate" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_Employees_Offices" FromRole="Employees" ToRole="Offices" />
+          <NavigationProperty Name="Offices" Relationship="Self.FK_Offices_Employees" FromRole="Employees" ToRole="Offices" />
+        </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OffcAcr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Chief" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChiefPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibilityCenter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResponsibilityCenterCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDivision" Type="Boolean" />
+          <Property Name="UnderOf" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="7" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salutation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsideAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="RCText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="rStatus" Type="Int32" />
+          <Property Name="LbacStatus" Type="Boolean" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Offices" FromRole="Offices" ToRole="Employees" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Offices_Employees" FromRole="Offices" ToRole="Employees" />
+          <NavigationProperty Name="Offices1" Relationship="Self.FK_Offices_Offices" FromRole="Offices" ToRole="Offices1" />
+          <NavigationProperty Name="Office1" Relationship="Self.FK_Offices_Offices" FromRole="Offices1" ToRole="Offices" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Offices" FromRole="Offices" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" />
+          <Property Name="AccessFailedCount" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedBy" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CivilStatus" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="AddressLine2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TownCity" Type="Int32" />
+          <Property Name="Cellular" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Religion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Citizenship" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OfficeId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DMSAdmin" Type="Boolean" />
+          <Property Name="DMSViewPAPs" Type="Boolean" />
+          <Property Name="isHead" Type="Boolean" />
+          <Property Name="LbacUser" Type="Boolean" />
+          <Property Name="LbacRole" Type="Int32" />
+          <Property Name="LbacFullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewUserFromHRMIS" Type="Boolean" />
+          <Property Name="fldDMS" Type="Boolean" />
+          <NavigationProperty Name="Office" Relationship="Self.FK_Users_Offices" FromRole="Users" ToRole="Offices" />
+        </EntityType>
+        <Association Name="FK_Employees_Offices">
+          <End Role="Offices" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offices_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Offices" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offices">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Offices_Offices">
+          <End Role="Offices" Type="Self.Office" Multiplicity="0..1" />
+          <End Role="Offices1" Type="Self.Office" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Offices1">
+              <PropertyRef Name="UnderOf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Offices">
+          <End Role="Offices" Type="Self.Office" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Offices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OFMISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Offices" EntityType="Self.Office" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Employees_Offices" Association="Self.FK_Employees_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offices_Employees" Association="Self.FK_Offices_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Offices" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Offices_Offices" Association="Self.FK_Offices_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Offices1" EntitySet="Offices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Offices" Association="Self.FK_Users_Offices">
+            <End Role="Offices" EntitySet="Offices" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OFMISModelStoreContainer" CdmEntityContainer="OFMISEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="OFMISModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ExtName" ColumnName="ExtName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="OffcAcr" ColumnName="OffcAcr" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="TIN" ColumnName="TIN" />
+                <ScalarProperty Name="PagIbig" ColumnName="PagIbig" />
+                <ScalarProperty Name="PhilHealth" ColumnName="PhilHealth" />
+                <ScalarProperty Name="SSS" ColumnName="SSS" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="SG" ColumnName="SG" />
+                <ScalarProperty Name="GSIS" ColumnName="GSIS" />
+                <ScalarProperty Name="SalaryGrade" ColumnName="SalaryGrade" />
+                <ScalarProperty Name="Steps" ColumnName="Steps" />
+                <ScalarProperty Name="MonthlySalary" ColumnName="MonthlySalary" />
+                <ScalarProperty Name="DailySalary" ColumnName="DailySalary" />
+                <ScalarProperty Name="IsHead" ColumnName="IsHead" />
+                <ScalarProperty Name="IsSignatories" ColumnName="IsSignatories" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="EmployeeNameByLastName" ColumnName="EmployeeNameByLastName" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="LBPAccount" ColumnName="LBPAccount" />
+                <ScalarProperty Name="Deactivate" ColumnName="Deactivate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="OFMISModel.Office">
+              <MappingFragment StoreEntitySet="Offices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OffcAcr" ColumnName="OffcAcr" />
+                <ScalarProperty Name="OfficeName" ColumnName="OfficeName" />
+                <ScalarProperty Name="Chief" ColumnName="Chief" />
+                <ScalarProperty Name="ChiefPosition" ColumnName="ChiefPosition" />
+                <ScalarProperty Name="ResponsibilityCenter" ColumnName="ResponsibilityCenter" />
+                <ScalarProperty Name="ResponsibilityCenterCode" ColumnName="ResponsibilityCenterCode" />
+                <ScalarProperty Name="IsDivision" ColumnName="IsDivision" />
+                <ScalarProperty Name="UnderOf" ColumnName="UnderOf" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="InsideAddress" ColumnName="InsideAddress" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="RCText" ColumnName="RCText" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="rStatus" ColumnName="rStatus" />
+                <ScalarProperty Name="LbacStatus" ColumnName="LbacStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="OFMISModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="CivilStatus" ColumnName="CivilStatus" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="TownCity" ColumnName="TownCity" />
+                <ScalarProperty Name="Cellular" ColumnName="Cellular" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DMSAdmin" ColumnName="DMSAdmin" />
+                <ScalarProperty Name="DMSViewPAPs" ColumnName="DMSViewPAPs" />
+                <ScalarProperty Name="isHead" ColumnName="isHead" />
+                <ScalarProperty Name="LbacUser" ColumnName="LbacUser" />
+                <ScalarProperty Name="LbacRole" ColumnName="LbacRole" />
+                <ScalarProperty Name="LbacFullName" ColumnName="LbacFullName" />
+                <ScalarProperty Name="NewUserFromHRMIS" ColumnName="NewUserFromHRMIS" />
+                <ScalarProperty Name="fldDMS" ColumnName="fldDMS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

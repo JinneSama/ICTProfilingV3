@@ -2,6 +2,7 @@
 using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Native;
 using EntityManager.Managers.User;
+using ICTProfilingV3.UsersForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -59,6 +60,7 @@ namespace ICTProfilingV3.DashboardForms
             lblCountOfItem.Text = RequestData.Sum(s => s.Item).ToString();
 
             RefreshChart(RequestData);
+
         }
 
         private Gender GetGender(TicketRequest ticket)
@@ -81,7 +83,7 @@ namespace ICTProfilingV3.DashboardForms
         {
             if (ticket.RequestType == RequestType.TechSpecs) return ticket.TechSpecs.TechSpecsICTSpecs.Sum(x => x.Quantity);
             if (ticket.RequestType == RequestType.Repairs) return ticket.Repairs.PPEs.PPEsSpecs.Sum(x => x.Quantity);
-            if (ticket.RequestType == RequestType.Deliveries) return ticket.Deliveries.DeliveriesSpecs.Sum(x => x.Quantity);
+            if (ticket.RequestType == RequestType.Deliveries) return (int)ticket.Deliveries.DeliveriesSpecs.Sum(x => x.Quantity);
             return 0;
         }
         private string GetOffice(TicketRequest ticket)
@@ -94,6 +96,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void RefreshChart(IEnumerable<RequestCount> dataSource)
         {
+            int counter = 0;
             var res = dataSource.GroupBy(x => new
             {
                 key1 = x.Office,
@@ -105,7 +108,8 @@ namespace ICTProfilingV3.DashboardForms
                 Request = s.Sum(x => x.Request),
                 RequestType = s.Key.key2,
                 Quantity = s.Sum(x => x.Quantity),
-                Item = s.Sum(x => x.Item)
+                Item = s.Sum(x => x.Item),
+                Index = ++counter % 5 == 0 ? 5 : counter % 5
             }).ToList();
 
             chartReqByOffice.DataSource = res;
@@ -114,7 +118,13 @@ namespace ICTProfilingV3.DashboardForms
             chartReqByOffice.SeriesTemplate.ArgumentDataMember = "Office";
             chartReqByOffice.SeriesTemplate.ValueDataMembers.AddRange("Request");
             chartReqByOffice.SeriesTemplate.Label.TextPattern = "{S}: {V:0}";
-            chartReqByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            chartReqByOffice.SeriesTemplate.Label.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+
+            StackedBarTotalLabel totalLabel = ((XYDiagram)chartReqByOffice.Diagram).DefaultPane.StackedBarTotalLabel;
+            totalLabel.Visible = true;
+            totalLabel.ShowConnector = true;
+            totalLabel.TextPattern = "Total:\n{TV:F2}";
+            //chartReqByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
 
             var deliveries = res.Where(w => w.RequestType == RequestType.Deliveries);
             var ts = res.Where(w => w.RequestType == RequestType.TechSpecs);
@@ -138,7 +148,13 @@ namespace ICTProfilingV3.DashboardForms
             ChartItemByOffice.SeriesTemplate.ArgumentDataMember = "Office";
             ChartItemByOffice.SeriesTemplate.ValueDataMembers.AddRange("Item");
             ChartItemByOffice.SeriesTemplate.Label.TextPattern = "{S}: {V:0}";
-            ChartItemByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            ChartItemByOffice.SeriesTemplate.Label.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+
+            StackedBarTotalLabel totalLabelItem = ((XYDiagram)ChartItemByOffice.Diagram).DefaultPane.StackedBarTotalLabel;
+            totalLabelItem.Visible = true;
+            totalLabelItem.ShowConnector = true;
+            totalLabelItem.TextPattern = "Total:\n{TV:F2}";
+            //ChartItemByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
 
             ChartQuantityByOffice.DataSource = res;
             ChartQuantityByOffice.SeriesTemplate.ChangeView(ViewType.StackedBar);
@@ -146,7 +162,13 @@ namespace ICTProfilingV3.DashboardForms
             ChartQuantityByOffice.SeriesTemplate.ArgumentDataMember = "Office";
             ChartQuantityByOffice.SeriesTemplate.ValueDataMembers.AddRange("Quantity");
             ChartQuantityByOffice.SeriesTemplate.Label.TextPattern = "{S}: {V:0}";
-            ChartQuantityByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            ChartQuantityByOffice.SeriesTemplate.Label.ResolveOverlappingMode = ResolveOverlappingMode.Default;
+
+            StackedBarTotalLabel totalLabelOffice = ((XYDiagram)ChartQuantityByOffice.Diagram).DefaultPane.StackedBarTotalLabel;
+            totalLabelOffice.Visible = true;
+            totalLabelOffice.ShowConnector = true;
+            totalLabelOffice.TextPattern = "Total:\n{TV:F2}";
+            //ChartQuantityByOffice.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
 
             RefreshGenderChart(dataSource);
             RefreshChartActedBy(dataSource);
@@ -168,11 +190,14 @@ namespace ICTProfilingV3.DashboardForms
                 TicketStatus = s.Key,
                 Request = s.Sum(x => x.Request)
             });
-            var series1 = chartReqActed.Series["Gender"];
-            series1.DataSource = res;
-            series1.Label.TextPattern = "{A}\nTotal:{V}\n{VP:0.00%}";
-            series1.ArgumentDataMember = "TicketStatus";
-            series1.ValueDataMembers.AddRange("Request");
+            chartReqActed.DataSource = res;
+            chartReqActed.SeriesTemplate.ChangeView(ViewType.Bar);
+            chartReqActed.SeriesDataMember = "TicketStatus";
+            chartReqActed.SeriesTemplate.ArgumentDataMember = "TicketStatus";
+            chartReqActed.SeriesTemplate.ValueDataMembers.AddRange("Request");
+            chartReqActed.SeriesTemplate.Label.TextPattern = "{A}: {V:0}";
+            chartReqActed.SeriesTemplate.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            ((DevExpress.XtraCharts.XYDiagram)chartReqActed.Diagram).Rotated = true;
         }
 
         private void LoadDropdowns()

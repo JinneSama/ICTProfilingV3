@@ -7,12 +7,13 @@ namespace Models.ViewModels
 {
     public class StaffViewModel
     {
-        public Users Users => Staff.Users;
+        public Users Users => Staff?.Users;
         public Image Image { get; set; }
         public ITStaff Staff { get; set; }
         public bool? Mark { get; set; }
         public string Initials => GetInitials(Users.FullName);
         public Sections Section => Staff.Section;
+        public string UserId { get; set; }
 
         static string GetInitials(string fullName)
         {

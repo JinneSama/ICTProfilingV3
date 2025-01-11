@@ -1,5 +1,9 @@
-﻿using ICTProfilingV3.LookUpTables;
+﻿using DevExpress.Office.Utils;
+using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.LookUpTables;
+using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -21,6 +25,7 @@ namespace ICTProfilingV3.DeliveriesForms
         private Models.Entities.Deliveries _deliveries;
         private bool IsSave = false;
         private SaveType SaveType;
+        private EmployeesViewModel ofmisEmployee;
 
         public frmAddEditDeliveries()
         {
@@ -118,6 +123,15 @@ namespace ICTProfilingV3.DeliveriesForms
             IsSave = true;
             await SaveDeliveries();
             this.Close();
+
+            var actionType = new Models.Models.ActionType
+            {
+                Id = _deliveries.Id,
+                RequestType = RequestType.Deliveries
+            };
+
+            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, null);
+            frm.ShowDialog();
         }
 
         private async Task SaveDeliveries()
@@ -125,7 +139,7 @@ namespace ICTProfilingV3.DeliveriesForms
             var deliveries = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == _deliveries.Id);
             if (deliveries == null) return;
             deliveries.DateRequested = txtDate.DateTime;
-            deliveries.RequestedById = (long)slueEmployee.EditValue;
+            deliveries.RequestedById = (long)(slueEmployee.EditValue == null ? ofmisEmployee.Id : slueEmployee.EditValue);
             deliveries.Gender = (Gender)rdbtnGender.SelectedIndex;
             deliveries.ContactNo = txtContactNo.Text;
             deliveries.DeliveredById = (long)slueDeliveredBy.EditValue;
@@ -167,6 +181,23 @@ namespace ICTProfilingV3.DeliveriesForms
             };
             unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
             await unitOfWork.SaveChangesAsync();
+        }
+
+        private void btnOFMIS_Click(object sender, EventArgs e)
+        {
+            var frm = new frmSelectOFMISEmployee();
+            frm.ShowDialog();
+
+            txtRequestedBy.Text = frm.OFMISEmployee.Employee;
+            ofmisEmployee = frm.OFMISEmployee;
+        }
+
+        private void slueEmployee_EditValueChanged(object sender, EventArgs e)
+        {
+            var row = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
+            if (row == null) return;
+
+            txtRequestedBy.Text = row.Employee;
         }
     }
 }

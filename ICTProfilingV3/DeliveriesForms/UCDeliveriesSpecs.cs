@@ -24,15 +24,15 @@ namespace ICTProfilingV3.DeliveriesForms
             var res = unitOfWork.DeliveriesSpecsRepo.FindAllAsync(x => x.DeliveriesId == _deliveries.Id).Select(x => new DeliveriesSpecsViewModel
             {
                 Id = x.Id,
-                ItemNo = x.ItemNo,
-                Quantity = x.Quantity,
+                ItemNo = (int)x.ItemNo,
+                Quantity = (int)x.Quantity,
                 Unit = x.Unit,
                 Equipment = x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName,
                 Description = x.Model.Brand.EquipmentSpecs.Description,
                 Brand = x.Model.Brand.BrandName,
                 Model = x.Model.ModelName,
-                UnitCost = x.UnitCost,
-                TotalCost = x.TotalCost,
+                UnitCost = (long)x.UnitCost,
+                TotalCost = (long)x.TotalCost,
                 DeliveriesSpecsDetails = x.DeliveriesSpecsDetails
             });
             gcEquipmentSpecs.DataSource = new BindingList<DeliveriesSpecsViewModel>(res.ToList());

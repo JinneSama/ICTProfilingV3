@@ -3,8 +3,10 @@ using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Helpers.NetworkFolder;
 using Helpers.Scanner;
+using Helpers.Security;
 using Models.Entities;
 using Models.Repository;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -100,9 +102,12 @@ namespace ICTProfilingV3.PGNForms
             splashScreenUpload.ShowWaitForm();
             foreach (Image image in scannedDocs)
             {
+                var securityStamp = Guid.NewGuid().ToString();
+                var fileName = Cryptography.Encrypt("PGN-" + request.Id + "-" + DocOrder, securityStamp);
                 var doc = new PGNDocuments
                 {
-                    FileName = "PGN-" + request.Id + "-" + DocOrder + ".jpeg",
+                    SecurityStamp = securityStamp,
+                    FileName = fileName + ".jpeg",
                     DocOrder = DocOrder,
                     PGNRequestId = request.Id
                 };

@@ -167,7 +167,7 @@ namespace ICTProfilingV3.TechSpecsForms
             ts.DateAccepted = DateTime.UtcNow;
             ts.DateRequested = txtDate.DateTime;
             ts.ReqById = (long)slueEmployee.EditValue;
-            ts.ReqByChiefId = HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division).ChiefId;
+            ts.ReqByChiefId = HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division, (long)slueEmployee.EditValue).ChiefId;
             ts.ReqByGender = (Gender)rdbtnGender.SelectedIndex;
             ts.ContactNo = txtContactNo.Text;
             ts.RequestBasedApprovedPR = checkEditApprovedPR.Checked;
@@ -193,14 +193,14 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var clickedEmployee = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
             if (clickedEmployee == null) clickedEmployee = HRMISEmployees.GetEmployeeById(_techSpecs.ReqById);
-            var chief = HRMISEmployees.GetChief(clickedEmployee.Office, clickedEmployee.Division);
-            var ChiefDetails = HRMISEmployees.GetEmployeeById(chief.ChiefId);
-            txtRequestingOfficeChief.Text = ChiefDetails.Employee;
-            txtRequestingOfficeChiefPos.Text = ChiefDetails.Position;
+            var chief = HRMISEmployees.GetChief(clickedEmployee?.Office, clickedEmployee?.Division, _techSpecs.ReqById);
+            var ChiefDetails = HRMISEmployees.GetEmployeeById(chief?.ChiefId);
+            txtRequestingOfficeChief.Text = ChiefDetails?.Employee;
+            txtRequestingOfficeChiefPos.Text = ChiefDetails?.Position;
 
-            txtRequestedByPos.Text = clickedEmployee.Position;
-            txtRequestedByOffice.Text = clickedEmployee.Office;
-            txtRequestedByDivision.Text = clickedEmployee.Division;
+            txtRequestedByPos.Text = clickedEmployee?.Position;
+            txtRequestedByOffice.Text = clickedEmployee?.Office;
+            txtRequestedByDivision.Text = clickedEmployee?.Division;
         }
 
         private void frmAddEditTechSpecs_Load(object sender, EventArgs e)

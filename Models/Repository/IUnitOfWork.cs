@@ -49,6 +49,7 @@ namespace Models.Repository
         IGenericRepository<MOAccountUsers> MOAccountUserRepo { get; }
         IGenericRepository<ActionDocuments> ActionDocumentsRepo { get; }
         void Save();
+        void ExecuteCommand(string command);
         Task SaveChangesAsync();
     }
 }

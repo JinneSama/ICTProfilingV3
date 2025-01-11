@@ -63,7 +63,7 @@ namespace ICTProfilingV3.UsersForms
         private async void btnSave_Click(object sender, EventArgs e)
         {
             splashScreenUpload.ShowWaitForm();
-            if (saveType == SaveType.Insert) SaveStaff();
+            if (saveType == SaveType.Insert) await SaveStaff();
             else await UpdateStaff();
             splashScreenUpload.CloseWaitForm();
             this.Close();
@@ -78,11 +78,11 @@ namespace ICTProfilingV3.UsersForms
             staff.Section = (Sections)lueSection.EditValue;
             staff.UserId = (string)slueUser.EditValue;
 
-            await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
-            unitOfWork.Save();
+            if(image != null) await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
+            await unitOfWork.SaveChangesAsync();
         }
 
-        private async void SaveStaff()
+        private async Task SaveStaff()
         {
             var image = peStaffImage.Image;
             var staff = new ITStaff
@@ -91,9 +91,11 @@ namespace ICTProfilingV3.UsersForms
                 Section = (Sections)lueSection.EditValue,
                 UserId = (string)slueUser.EditValue
             };
-            await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
+
+            if (image != null) await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
+
             unitOfWork.ITStaffRepo.Insert(staff);
-            unitOfWork.Save();
+            await unitOfWork.SaveChangesAsync();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -86,7 +86,7 @@ namespace ICTProfilingV3.TechSpecsForms
             slueNotedBy.EditValue = (string)ts.NotedById;
 
             var reqByUser = HRMISEmployees.GetEmployeeById(ts.ReqById);
-            var chief = HRMISEmployees.GetChief(reqByUser?.Office , reqByUser?.Division);
+            var chief = HRMISEmployees.GetChief(reqByUser?.Office , reqByUser?.Division, ts.ReqById);
 
             txtRequestingOfficeChief.Text = HRMISEmployees.GetEmployeeById(chief?.ChiefId)?.Employee;
             txtRequestingOfficeChiefPos.Text = HRMISEmployees.GetEmployeeById(chief?.ChiefId)?.Position;
@@ -98,7 +98,8 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private void LoadTechSpecs()
         {
-            var res = unitOfWork.TechSpecsRepo.GetAll(x => x.TicketRequest, x => x.Repairs).ToList();
+            var res = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.TicketRequest.StaffId != null,
+                x => x.TicketRequest, x => x.Repairs).OrderByDescending(x => x.DateRequested).ToList();
             if(IsTechSpecs) res = res.Where(x => x.TicketRequest.IsRepairTechSpecs != true).ToList();
             else res = res.Where(x => x.TicketRequest.IsRepairTechSpecs == true).ToList();
             var ts = res.Select(x => new TechSpecsViewModel
@@ -137,7 +138,7 @@ namespace ICTProfilingV3.TechSpecsForms
             var res = new StaffModel
             {
                 Image = img,
-                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : staff.Users.UserName,
+                AssignedTo = row.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : (staff == null ? "N / A" : staff.Users.UserName),
                 FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
                 PhotoVisible = img == null ? true : false,
                 InitialsVisible = img == null ? false : true
@@ -273,11 +274,11 @@ namespace ICTProfilingV3.TechSpecsForms
             {
                 PrintedBy = UserStore.Username,
                 DatePrinted = DateTime.UtcNow,
-                Office = string.Join(" ", staff.Office, staff.Division),
+                Office = string.Join(" ", staff?.Office, staff?.Division),
                 Chief = chief.Employee,
-                ChiefPosition = chief.Position,
-                Staff = staff.Employee,
-                StaffPosition = staff.Position,
+                ChiefPosition = chief?.Position,
+                Staff = staff?.Employee,
+                StaffPosition = staff?.Position,
                 TechSpecs = ts,
                 PreparedBy = await userManager.FindUserAsync(ts.PreparedById),
                 ReviewedBy = await userManager.FindUserAsync(ts.ReviewedById),

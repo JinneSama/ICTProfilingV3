@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>18</ApplicationRevision>
+    <ApplicationRevision>25</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -260,6 +260,12 @@
     <Compile Include="DashboardForms\UCUserTasks.Designer.cs">
       <DependentUpon>UCUserTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="DashboardForms\WaitForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DashboardForms\WaitForm2.Designer.cs">
+      <DependentUpon>WaitForm2.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveriesForms\frmAddEditDeliveries.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -451,6 +457,12 @@
     </Compile>
     <Compile Include="PGNForms\UCRequestAccount.Designer.cs">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmSelectOFMISEmployee.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmSelectOFMISEmployee.Designer.cs">
+      <DependentUpon>frmSelectOFMISEmployee.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WaitFormUpload.cs">
       <SubType>Form</SubType>
@@ -805,6 +817,9 @@
     <EmbeddedResource Include="DashboardForms\UCUserTasks.resx">
       <DependentUpon>UCUserTasks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DashboardForms\WaitForm2.resx">
+      <DependentUpon>WaitForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\frmAddEditDeliveries.resx">
       <DependentUpon>frmAddEditDeliveries.cs</DependentUpon>
     </EmbeddedResource>
@@ -900,6 +915,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PGNForms\UCRequestAccount.resx">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmSelectOFMISEmployee.resx">
+      <DependentUpon>frmSelectOFMISEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WaitFormUpload.resx">
       <DependentUpon>WaitFormUpload.cs</DependentUpon>
@@ -1059,6 +1077,7 @@
     <EmbeddedResource Include="ToolForms\WaitForm1.resx">
       <DependentUpon>WaitForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="App.config" />
     <None Include="ICTProfilingV3_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Models.Entities.ActionsDropdowns.datasource" />
@@ -1078,12 +1097,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{3f290cc6-23e6-4500-8cfa-9df3c75c4013}</Project>
       <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ICTMigration\ICTMigration.csproj">
+      <Project>{d7ecab65-fd10-41ea-b995-3384bf42d26a}</Project>
+      <Name>ICTMigration</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\EntityManager.csproj">
       <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>
@@ -1811,6 +1831,7 @@
     <None Include="Resources\printpreview_16x166.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\iconsetredtoblack4_16x16.png" />
     <None Include="Resources\save_16x1610.png" />
     <None Include="Resources\up_32x32.png" />
     <None Include="Resources\up_16x16.png" />

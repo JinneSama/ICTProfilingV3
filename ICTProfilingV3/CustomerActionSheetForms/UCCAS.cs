@@ -25,7 +25,7 @@ namespace ICTProfilingV3.CustomerActionSheetForms
 
         private void LoadCAS()
         {
-            var res = _unitOfWork.CustomerActionSheetRepo.GetAll(x => x.AssistedBy).ToList();
+            var res = _unitOfWork.CustomerActionSheetRepo.GetAll(x => x.AssistedBy).OrderByDescending(x => x.DateCreated).ToList();
             var cas = res.Select(x => new CASViewModel
             {
                 Id = x.Id,

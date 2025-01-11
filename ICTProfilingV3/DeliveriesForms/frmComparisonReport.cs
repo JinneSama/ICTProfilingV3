@@ -52,7 +52,7 @@ namespace ICTProfilingV3.DeliveriesForms
             txtDateOfDelivery.Text = deliveries.DeliveredDate.ToString();
             txtRequestingOffice.Text = employee.Office + " " + employee.Division;
             txtSupplier.Text = deliveries.Supplier.SupplierName;
-            spinAmount.Value = deliveries.DeliveriesSpecs.Sum(x => x.UnitCost);
+            spinAmount.Value = (decimal)deliveries.DeliveriesSpecs.Sum(x => x.UnitCost);
             txtInspectedDate.Text = deliveries.Actions?.FirstOrDefault()?.ActionDate?.ToString() ?? "";
 
             if (deliveries.ComparisonReports.FirstOrDefault() == null) CreateComparisonReport();

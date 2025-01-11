@@ -14,8 +14,8 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             InitializeComponent(); unitOfWork = uow;
             _specs = specs;
-            lblEquipment.Text = specs.EquipmentSpecs.Equipment.EquipmentName;
-            lblDescription.Text = specs.Description;
+            lblEquipment.Text = specs?.EquipmentSpecs?.Equipment?.EquipmentName;
+            lblDescription.Text = specs?.Description;
             LoadSpecs();
         }
 

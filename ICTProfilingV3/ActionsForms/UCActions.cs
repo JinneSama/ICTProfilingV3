@@ -34,7 +34,8 @@ namespace ICTProfilingV3.ActionsForms
                     x => x.Actions.Select(a => a.ActivityDropdowns),
                     x => x.Actions.Select(a => a.MainActDropdowns),
                     x => x.Actions.Select(a => a.SubActivityDropdowns),
-                    x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                    x => x.Actions.Select(a => a.RoutedUsers),
+                    x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
             
             if(_actionType.RequestType == RequestType.TechSpecs)
                 return (await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -43,7 +44,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
 
             if (_actionType.RequestType == RequestType.Repairs)
                 return (await unitOfWork.RepairsRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -52,7 +54,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
 
             if (_actionType.RequestType == RequestType.CAS)
                 return (await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -61,7 +64,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
             
             if (_actionType.RequestType == RequestType.PR)
                 return (await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -70,7 +74,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
 
             if (_actionType.RequestType == RequestType.PGN)
                 return (await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -79,7 +84,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
 
             if (_actionType.RequestType == RequestType.M365)
                 return (await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == _actionType.Id,
@@ -88,7 +94,8 @@ namespace ICTProfilingV3.ActionsForms
                    x => x.Actions.Select(a => a.ActivityDropdowns),
                    x => x.Actions.Select(a => a.MainActDropdowns),
                    x => x.Actions.Select(a => a.SubActivityDropdowns),
-                   x => x.Actions.Select(a => a.RoutedUsers))).Actions.ToList();
+                   x => x.Actions.Select(a => a.RoutedUsers),
+                   x => x.Actions.Select(a => a.ActionDocuments))).Actions.ToList();
 
             return null;
         }
@@ -107,7 +114,8 @@ namespace ICTProfilingV3.ActionsForms
                 Remarks = x.Remarks,
                 CreatedById = x.CreatedById,
                 Actions = x,
-                IsSend = x.IsSend
+                IsSend = (x.IsSend ?? false) && x.RoutedUsers.Any(),
+                hasDocuments = x.ActionDocuments.Any()
             }).OrderByDescending(o => o.ActionDate);
             gcActions.DataSource = new BindingList<ActionsViewModel>(actionsModel.ToList());
         }
@@ -115,7 +123,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private void btnAddAction_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmDocAction(_actionType ,SaveType.Insert , null ,unitOfWork);
+            var frm = new frmDocAction(_actionType ,SaveType.Insert , null ,unitOfWork,null);
             frm.ShowDialog();
 
             LoadActions();
@@ -129,7 +137,7 @@ namespace ICTProfilingV3.ActionsForms
                 MessageBox.Show("Cannot Edit an Action created by other Users!");
                 return;
             }
-            var frm = new frmDocAction(_actionType, SaveType.Update,row, unitOfWork);
+            var frm = new frmDocAction(_actionType, SaveType.Update,row, unitOfWork,null);
             frm.ShowDialog();
 
             LoadActions();

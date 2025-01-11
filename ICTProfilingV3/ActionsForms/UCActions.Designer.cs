@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCActions));
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -47,6 +49,8 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHasDocRule = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colHasDocument = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddAction = new DevExpress.XtraEditors.SimpleButton();
             this.gcActions = new DevExpress.XtraGrid.GridControl();
             this.gridActions = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -59,8 +63,8 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnImages = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnImages = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gcActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
@@ -77,8 +81,27 @@
             this.gridColumn7.OptionsColumn.AllowFocus = false;
             this.gridColumn7.OptionsColumn.ReadOnly = true;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
-            this.gridColumn7.Width = 210;
+            this.gridColumn7.VisibleIndex = 8;
+            this.gridColumn7.Width = 188;
+            // 
+            // colHasDocRule
+            // 
+            this.colHasDocRule.Caption = "gridColumn10";
+            this.colHasDocRule.FieldName = "hasDocuments";
+            this.colHasDocRule.Name = "colHasDocRule";
+            this.colHasDocRule.Width = 68;
+            // 
+            // colHasDocument
+            // 
+            this.colHasDocument.Caption = " ";
+            this.colHasDocument.Name = "colHasDocument";
+            this.colHasDocument.OptionsColumn.AllowEdit = false;
+            this.colHasDocument.OptionsColumn.AllowFocus = false;
+            this.colHasDocument.OptionsColumn.FixedWidth = true;
+            this.colHasDocument.ToolTip = "Green Indicates Actions with Documents";
+            this.colHasDocument.Visible = true;
+            this.colHasDocument.VisibleIndex = 3;
+            this.colHasDocument.Width = 31;
             // 
             // btnAddAction
             // 
@@ -129,7 +152,9 @@
             this.gridColumn6,
             this.gridColumn7,
             this.gridColumn8,
-            this.gridColumn9});
+            this.gridColumn9,
+            this.colHasDocument,
+            this.colHasDocRule});
             gridFormatRule1.Column = this.gridColumn7;
             gridFormatRule1.ColumnApplyTo = this.gridColumn7;
             gridFormatRule1.Name = "Format0";
@@ -144,7 +169,16 @@
             formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
             formatConditionRuleExpression1.Expression = "IsSend = True";
             gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.colHasDocRule;
+            gridFormatRule2.ColumnApplyTo = this.colHasDocument;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Green;
+            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[hasDocuments] = True";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
             this.gridActions.FormatRules.Add(gridFormatRule1);
+            this.gridActions.FormatRules.Add(gridFormatRule2);
             this.gridActions.GridControl = this.gcActions;
             this.gridActions.Name = "gridActions";
             this.gridActions.OptionsPrint.PrintSelectedRowsOnly = true;
@@ -196,13 +230,15 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Action Date";
+            this.gridColumn3.DisplayFormat.FormatString = "MM/dd/yy hh:mm tt";
+            this.gridColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.gridColumn3.FieldName = "ActionDate";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.AllowFocus = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
-            this.gridColumn3.Width = 127;
+            this.gridColumn3.VisibleIndex = 4;
+            this.gridColumn3.Width = 111;
             // 
             // gridColumn4
             // 
@@ -212,8 +248,8 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
-            this.gridColumn4.Width = 152;
+            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.Width = 133;
             // 
             // gridColumn5
             // 
@@ -223,8 +259,8 @@
             this.gridColumn5.OptionsColumn.AllowEdit = false;
             this.gridColumn5.OptionsColumn.AllowFocus = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            this.gridColumn5.Width = 210;
+            this.gridColumn5.VisibleIndex = 6;
+            this.gridColumn5.Width = 188;
             // 
             // gridColumn6
             // 
@@ -234,8 +270,8 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.OptionsColumn.AllowFocus = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 6;
-            this.gridColumn6.Width = 210;
+            this.gridColumn6.VisibleIndex = 7;
+            this.gridColumn6.Width = 188;
             // 
             // gridColumn8
             // 
@@ -245,8 +281,17 @@
             this.gridColumn8.OptionsColumn.AllowEdit = false;
             this.gridColumn8.OptionsColumn.AllowFocus = false;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 8;
-            this.gridColumn8.Width = 244;
+            this.gridColumn8.VisibleIndex = 9;
+            this.gridColumn8.Width = 242;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.ColumnEdit = this.btnImages;
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.FixedWidth = true;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 2;
+            this.gridColumn9.Width = 37;
             // 
             // btnImages
             // 
@@ -258,15 +303,6 @@
             this.btnImages.Name = "btnImages";
             this.btnImages.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnImages.Click += new System.EventHandler(this.btnImages_Click);
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.ColumnEdit = this.btnImages;
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.FixedWidth = true;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 2;
-            this.gridColumn9.Width = 33;
             // 
             // UCActions
             // 
@@ -286,8 +322,6 @@
         }
 
         #endregion
-
-        private DevExpress.XtraEditors.SimpleButton btnAddAction;
         private DevExpress.XtraGrid.GridControl gcActions;
         private DevExpress.XtraGrid.Views.Grid.GridView gridActions;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -302,5 +336,8 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnImages;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn colHasDocument;
+        private DevExpress.XtraGrid.Columns.GridColumn colHasDocRule;
+        public DevExpress.XtraEditors.SimpleButton btnAddAction;
     }
 }

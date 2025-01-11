@@ -153,7 +153,7 @@ namespace ICTProfilingV3.RepairForms
             var reqEmployee = HRMISEmployees.GetEmployeeById((long?)slueEmployee.EditValue);
             var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == _Repairs.Id);
             repair.RequestedById = (long)slueEmployee.EditValue;
-            repair.ReqByChiefId = HRMISEmployees.GetChief(reqEmployee.Office, reqEmployee.Division).ChiefId;
+            repair.ReqByChiefId = HRMISEmployees.GetChief(reqEmployee.Office, reqEmployee.Division, (long?)slueEmployee.EditValue).ChiefId;
             repair.DeliveredById = (long)slueDeliveredBy.EditValue;
             repair.Problems = txtRequestProblem.Text;
             repair.Gender = (Gender)rdbtnGender.SelectedIndex;

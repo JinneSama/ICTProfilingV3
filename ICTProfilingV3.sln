@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityManager", "Models\Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICTMigration", "ICTMigration\ICTMigration.csproj", "{D7ECAB65-FD10-41EA-B995-3384BF42D26A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7ECAB65-FD10-41EA-B995-3384BF42D26A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7ECAB65-FD10-41EA-B995-3384BF42D26A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7ECAB65-FD10-41EA-B995-3384BF42D26A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7ECAB65-FD10-41EA-B995-3384BF42D26A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

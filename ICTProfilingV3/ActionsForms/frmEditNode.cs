@@ -17,7 +17,7 @@ namespace ICTProfilingV3.ActionsForms
 
         private void LoadDetails()
         {
-            spinOrder.Value = actionTree.ActionTree.Order;
+            spinOrder.Value = (decimal)actionTree.ActionTree.Order;
             txtValue.Text = actionTree.ActionTree.Value;
         }
 

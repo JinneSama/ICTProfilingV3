@@ -12,6 +12,7 @@ namespace Models.Entities
         public int Id { get; set; }
         public string ModelName { get; set; }
         public int BrandId { get; set; }
+        public int OldPK { get; set; }
 
         [ForeignKey("BrandId")]
         public Brand Brand { get; set; }

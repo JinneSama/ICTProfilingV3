@@ -44,11 +44,11 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void LoadEquipmentSpecs()
         {
-            spinQty.Value = _deliveriesSpecs.Quantity;
+            spinQty.Value = (decimal)_deliveriesSpecs.Quantity;
             cboUnit.EditValue = _deliveriesSpecs.Unit;
-            spinUnitCost.Value = _deliveriesSpecs.UnitCost;
-            spintTotal.Value = _deliveriesSpecs.TotalCost;
-            spinItemNo.Value = _deliveriesSpecs.ItemNo;
+            spinUnitCost.Value = (decimal)_deliveriesSpecs.UnitCost;
+            spintTotal.Value = (decimal)_deliveriesSpecs.TotalCost;
+            spinItemNo.Value = (decimal)_deliveriesSpecs.ItemNo;
             txtSerialNo.Text = _deliveriesSpecs.SerialNo;
 
             slueEquipment.EditValue = _deliveriesSpecs.Model.Brand.EquipmenSpecsId;

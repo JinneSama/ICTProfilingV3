@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7ECAB65-FD10-41EA-B995-3384BF42D26A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICTMigration</RootNamespace>
+    <AssemblyName>ICTMigration</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.4\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ICTv2Models\ActionLog.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DeliveriesActualDelivery.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DeliveriesPO.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DeliveriesQuotation.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMigrations\ActionMigration.cs" />
+    <Compile Include="ModelMigrations\AssignedStaffMigration.cs" />
+    <Compile Include="ModelMigrations\LookUpMigration.cs" />
+    <Compile Include="ModelMigrations\RecordProcessesMigration.cs" />
+    <Compile Include="ModelMigrations\TicketMigration.cs" />
+    <Compile Include="ICTv2Models\Action.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\ActionList.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Article.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\CustomerActionSheet.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DeliveriesICTSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DeliveriesICTSpecsDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Delivery.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\DocAction.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Document.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Dropdown.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Employee.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\EquipmentProblem.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\EquipmentProfile.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\EquipmentType.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\EvaluationSheet.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\EvaluationSheet1.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\ICTv2Entities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICTv2Entities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\ICTv2Entities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\ICTv2Entities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ICTv2Entities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Log.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\ME.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Office.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGN.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNAcc.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNAccount.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNAccountHistory.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNAccsHistory.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNAction.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNActivity.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNDropdown.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNMacAdderess.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNNonEmployee.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequest.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequestAccount.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequestAction.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequestImage.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequestIncomingType.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PGNRequestStatu.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PITDService.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PPE.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PPELog.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PPEsNew.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PPEsNewSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PREquipment.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Province.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PRStandardQuarter.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PurchaseOrder.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PurchaseReq.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\PurchaseReqStandardEquipment.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Remark.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Repair.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Setting.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Software.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\SoftwareProfile.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\SophosPGNAccount.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\StandardPRSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Status.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Supplier.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\sysdiagram.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblBarangay.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblBarangayStaff.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblBrgyPosition.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblFWSchedule.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblFWTUActivity.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblFWTUActivityDropdown.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblFWTUEquipmentInstallation.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblFWTUObservation.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblTown.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\tblVisit.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechnicalEvaluationSheet.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecEquipmentProfile.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecRequest.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecsBasi.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecsBasisDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecsICTSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TechSpecsICTSpecsDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketAction.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketEquipment.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketEquipmentBrand.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketEquipmentModel.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketICTSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketICTSpecsDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketReqDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketReqICTSpec.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketReqICTSpecsDetail.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketRequest.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketStatu.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\TicketType.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\Town.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\UnitType.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\User.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\UserClaim.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\UserLogin.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\UserRole.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\UserRolesInAction.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ICTv2Models\WorkOrder.cs">
+      <DependentUpon>ICTv2Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelMigrations\UsersMigration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\EntityManager.csproj">
+      <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>
+      <Name>EntityManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ICTv2Models\ICTv2Entities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ICTv2Entities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="ICTv2Models\ICTv2Entities.edmx.diagram">
+      <DependentUpon>ICTv2Entities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ICTv2Models\ICTv2Entities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ICTv2Entities.Context.cs</LastGenOutput>
+      <DependentUpon>ICTv2Entities.edmx</DependentUpon>
+    </Content>
+    <Content Include="ICTv2Models\ICTv2Entities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ICTv2Entities.edmx</DependentUpon>
+      <LastGenOutput>ICTv2Entities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+</Project>

@@ -538,5 +538,10 @@ namespace Models.Repository
         {
             await _context.SaveChangesAsync();
         }
+
+        public void ExecuteCommand(string command)
+        {
+            _context.Database.ExecuteSqlCommand(command);
+        }
     }
 }

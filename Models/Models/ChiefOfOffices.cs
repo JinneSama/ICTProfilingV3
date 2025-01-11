@@ -1,4 +1,7 @@
-﻿namespace Models.Models
+﻿using Models.ViewModels;
+using System;
+
+namespace Models.Models
 {
     public class ChiefOfOffices
     {

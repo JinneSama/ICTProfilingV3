@@ -31,9 +31,6 @@
             DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel1 = new DevExpress.XtraCharts.PieSeriesLabel();
             DevExpress.XtraCharts.PieSeriesView pieSeriesView1 = new DevExpress.XtraCharts.PieSeriesView();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.PieSeriesLabel pieSeriesLabel2 = new DevExpress.XtraCharts.PieSeriesLabel();
-            DevExpress.XtraCharts.PieSeriesView pieSeriesView2 = new DevExpress.XtraCharts.PieSeriesView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
@@ -88,6 +85,7 @@
             this.ChartItemByOffice = new DevExpress.XtraCharts.ChartControl();
             this.tabQuantity = new DevExpress.XtraTab.XtraTabPage();
             this.ChartQuantityByOffice = new DevExpress.XtraCharts.ChartControl();
+            this.splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ICTProfilingV3.UsersForms.WaitForm1), true, true, typeof(System.Windows.Forms.UserControl));
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -109,9 +107,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartReqActed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).BeginInit();
             this.tabRepair.SuspendLayout();
             this.tabRequest.SuspendLayout();
@@ -439,9 +434,9 @@
             this.lblCountOfRequest.Appearance.Options.UseTextOptions = true;
             this.lblCountOfRequest.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblCountOfRequest.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblCountOfRequest.Location = new System.Drawing.Point(56, 43);
+            this.lblCountOfRequest.Location = new System.Drawing.Point(0, 43);
             this.lblCountOfRequest.Name = "lblCountOfRequest";
-            this.lblCountOfRequest.Size = new System.Drawing.Size(111, 86);
+            this.lblCountOfRequest.Size = new System.Drawing.Size(228, 86);
             this.lblCountOfRequest.TabIndex = 88;
             this.lblCountOfRequest.Text = "100";
             // 
@@ -494,9 +489,9 @@
             this.lblCountOfItem.Appearance.Options.UseTextOptions = true;
             this.lblCountOfItem.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblCountOfItem.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblCountOfItem.Location = new System.Drawing.Point(56, 47);
+            this.lblCountOfItem.Location = new System.Drawing.Point(0, 47);
             this.lblCountOfItem.Name = "lblCountOfItem";
-            this.lblCountOfItem.Size = new System.Drawing.Size(111, 86);
+            this.lblCountOfItem.Size = new System.Drawing.Size(228, 86);
             this.lblCountOfItem.TabIndex = 90;
             this.lblCountOfItem.Text = "100";
             // 
@@ -669,9 +664,9 @@
             this.lblCountOfQuantity.Appearance.Options.UseTextOptions = true;
             this.lblCountOfQuantity.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.lblCountOfQuantity.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.lblCountOfQuantity.Location = new System.Drawing.Point(56, 46);
+            this.lblCountOfQuantity.Location = new System.Drawing.Point(0, 46);
             this.lblCountOfQuantity.Name = "lblCountOfQuantity";
-            this.lblCountOfQuantity.Size = new System.Drawing.Size(111, 86);
+            this.lblCountOfQuantity.Size = new System.Drawing.Size(228, 86);
             this.lblCountOfQuantity.TabIndex = 91;
             this.lblCountOfQuantity.Text = "100";
             // 
@@ -739,26 +734,19 @@
             this.groupControl3.Name = "groupControl3";
             this.groupControl3.Size = new System.Drawing.Size(325, 336);
             this.groupControl3.TabIndex = 91;
-            this.groupControl3.Text = "Percentage of Request by Status";
+            this.groupControl3.Text = "Count of Request by Status";
             // 
             // chartReqActed
             // 
-            this.chartReqActed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chartReqActed.AppearanceNameSerializable = "Terracotta Pie";
             this.chartReqActed.BackColor = System.Drawing.Color.Transparent;
             this.chartReqActed.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartReqActed.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartReqActed.Location = new System.Drawing.Point(5, 23);
+            this.chartReqActed.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartReqActed.Location = new System.Drawing.Point(2, 21);
             this.chartReqActed.Name = "chartReqActed";
-            pieSeriesLabel2.Position = DevExpress.XtraCharts.PieSeriesLabelPosition.Inside;
-            pieSeriesLabel2.TextPattern = "{V}";
-            series2.Label = pieSeriesLabel2;
-            series2.Name = "Gender";
-            pieSeriesView2.MinAllowedSizePercentage = 75D;
-            series2.View = pieSeriesView2;
-            this.chartReqActed.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series2};
-            this.chartReqActed.Size = new System.Drawing.Size(315, 306);
+            this.chartReqActed.PaletteName = "Terracotta Pie";
+            this.chartReqActed.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
+            this.chartReqActed.Size = new System.Drawing.Size(321, 313);
             this.chartReqActed.TabIndex = 42;
             // 
             // tabRepair
@@ -835,6 +823,10 @@
             this.ChartQuantityByOffice.Size = new System.Drawing.Size(1013, 637);
             this.ChartQuantityByOffice.TabIndex = 88;
             // 
+            // splashScreenManager1
+            // 
+            this.splashScreenManager1.ClosingDelay = 500;
+            // 
             // UCRequestDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,9 +866,6 @@
             this.barRequest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(pieSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartReqActed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).EndInit();
             this.tabRepair.ResumeLayout(false);
@@ -945,5 +934,6 @@
         private DevExpress.XtraEditors.LabelControl Repairs;
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl22;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
     }
 }

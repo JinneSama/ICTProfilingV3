@@ -157,19 +157,49 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202501020015360_DocumentsToNAS.cs" />
-    <Compile Include="Migrations\202501020015360_DocumentsToNAS.Designer.cs">
-      <DependentUpon>202501020015360_DocumentsToNAS.cs</DependentUpon>
+    <Compile Include="Migrations\202501110726572_NewDBChanges.cs" />
+    <Compile Include="Migrations\202501110726572_NewDBChanges.Designer.cs">
+      <DependentUpon>202501110726572_NewDBChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501110805188_ActionDocsSecurityStamp.cs" />
+    <Compile Include="Migrations\202501110805188_ActionDocsSecurityStamp.Designer.cs">
+      <DependentUpon>202501110805188_ActionDocsSecurityStamp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionImage.cs" />
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\BrandCount.cs" />
     <Compile Include="Models\ChiefOfOffices.cs" />
+    <Compile Include="Models\OFMISEmployeesModel.cs" />
     <Compile Include="Models\RepairStatusCount.cs" />
     <Compile Include="Models\RequestCount.cs" />
     <Compile Include="Models\StaffModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="OFMISEntities\Employee.cs">
+      <DependentUpon>OFMISEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OFMISEntities\Office.cs">
+      <DependentUpon>OFMISEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OFMISEntities\OFMISEmployees.cs" />
+    <Compile Include="OFMISEntities\OFMISEntites.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OFMISEntites.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OFMISEntities\OFMISEntites.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OFMISEntites.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OFMISEntities\OFMISEntites.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OFMISEntites.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="OFMISEntities\User.cs">
+      <DependentUpon>OFMISEntites.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
     <Compile Include="ReportViewModel\ComparisonReportPrintViewModel.cs" />
@@ -222,6 +252,13 @@
     <None Include="HRMISEntites\HRMISv2Entities.edmx.diagram">
       <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="OFMISEntities\OFMISEntites.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OFMISEntites.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="OFMISEntities\OFMISEntites.edmx.diagram">
+      <DependentUpon>OFMISEntites.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Models.Entities.EquipmentSpecs.datasource" />
   </ItemGroup>
@@ -239,10 +276,23 @@
       <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
       <LastGenOutput>HRMISv2Entities.cs</LastGenOutput>
     </Content>
+    <Content Include="OFMISEntities\OFMISEntites.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OFMISEntites.edmx</DependentUpon>
+      <LastGenOutput>OFMISEntites.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="OFMISEntities\OFMISEntites.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>OFMISEntites.edmx</DependentUpon>
+      <LastGenOutput>OFMISEntites.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501020015360_DocumentsToNAS.resx">
-      <DependentUpon>202501020015360_DocumentsToNAS.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501110726572_NewDBChanges.resx">
+      <DependentUpon>202501110726572_NewDBChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501110805188_ActionDocsSecurityStamp.resx">
+      <DependentUpon>202501110805188_ActionDocsSecurityStamp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

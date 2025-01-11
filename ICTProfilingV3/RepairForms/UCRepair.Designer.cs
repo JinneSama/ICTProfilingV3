@@ -52,6 +52,7 @@
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnCondemned = new DevExpress.XtraEditors.SimpleButton();
             this.btnTechSpecs = new DevExpress.XtraEditors.SimpleButton();
             this.btnLedger = new DevExpress.XtraEditors.SimpleButton();
             this.btnSignatories = new DevExpress.XtraEditors.SimpleButton();
@@ -107,8 +108,8 @@
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
-            this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
             this.spbTicketStatus = new DevExpress.XtraEditors.StepProgressBar();
             this.stepAssigned = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
@@ -364,6 +365,7 @@
             this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
             this.pnlButtons.Appearance.Options.UseBackColor = true;
             this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnCondemned);
             this.pnlButtons.Controls.Add(this.btnTechSpecs);
             this.pnlButtons.Controls.Add(this.btnLedger);
             this.pnlButtons.Controls.Add(this.btnSignatories);
@@ -376,6 +378,22 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1374, 50);
             this.pnlButtons.TabIndex = 86;
+            // 
+            // btnCondemned
+            // 
+            this.btnCondemned.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCondemned.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnCondemned.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCondemned.Appearance.Options.UseBackColor = true;
+            this.btnCondemned.Appearance.Options.UseForeColor = true;
+            this.btnCondemned.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.iconsetredtoblack4_16x16;
+            this.btnCondemned.Location = new System.Drawing.Point(431, 9);
+            this.btnCondemned.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCondemned.Name = "btnCondemned";
+            this.btnCondemned.Size = new System.Drawing.Size(143, 28);
+            this.btnCondemned.TabIndex = 118;
+            this.btnCondemned.Text = "Set As Condemned";
+            this.btnCondemned.Click += new System.EventHandler(this.btnCondemned_Click);
             // 
             // btnTechSpecs
             // 
@@ -1057,17 +1075,17 @@
             this.tabAction,
             this.tabEquipmentSpecs});
             // 
-            // tabEquipmentSpecs
-            // 
-            this.tabEquipmentSpecs.Name = "tabEquipmentSpecs";
-            this.tabEquipmentSpecs.Size = new System.Drawing.Size(1368, 204);
-            this.tabEquipmentSpecs.Text = "Equipment Specs";
-            // 
             // tabAction
             // 
             this.tabAction.Name = "tabAction";
             this.tabAction.Size = new System.Drawing.Size(1368, 204);
             this.tabAction.Text = "Action";
+            // 
+            // tabEquipmentSpecs
+            // 
+            this.tabEquipmentSpecs.Name = "tabEquipmentSpecs";
+            this.tabEquipmentSpecs.Size = new System.Drawing.Size(1368, 204);
+            this.tabEquipmentSpecs.Text = "Equipment Specs";
             // 
             // spbTicketStatus
             // 
@@ -1269,5 +1287,6 @@
         private DevExpress.XtraEditors.StepProgressBarItem stepForRelease;
         private DevExpress.XtraEditors.StepProgressBarItem stepCompleted;
         private DevExpress.XtraEditors.PanelControl staffPanel;
+        private DevExpress.XtraEditors.SimpleButton btnCondemned;
     }
 }

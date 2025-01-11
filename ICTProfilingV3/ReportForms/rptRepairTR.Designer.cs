@@ -1325,11 +1325,13 @@
             // 
             this.xrLabel54.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DeliveredBy].[Employee]")});
+            this.xrLabel54.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel54.LocationFloat = new DevExpress.Utils.PointFloat(525.7574F, 78.99993F);
             this.xrLabel54.Multiline = true;
             this.xrLabel54.Name = "xrLabel54";
             this.xrLabel54.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel54.SizeF = new System.Drawing.SizeF(270.0756F, 23F);
+            this.xrLabel54.StylePriority.UseFont = false;
             this.xrLabel54.Text = "xrLabel12";
             // 
             // xrLabel55

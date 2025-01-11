@@ -18,6 +18,11 @@ namespace Models.Entities
         public string ClientRequest { get; set; }
         public string ActionTaken { get; set; }
         public bool? IsDeleted { get; set; }
+        public int? OldPk { get; set; }
+        public string CreatedById { get; set; }
+
+        [ForeignKey("CreatedById")]
+        public Users CreatedBy { get; set; }
         public string AssistedById { get; set; }
 
         [ForeignKey("AssistedById")]

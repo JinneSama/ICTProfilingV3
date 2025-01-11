@@ -12,5 +12,6 @@ namespace Models.Models
         public int? Item { get; set; }
         public int? Female { get; set; }
         public int? Male { get; set; }
+        public int Index { get; set; }
     }
 }

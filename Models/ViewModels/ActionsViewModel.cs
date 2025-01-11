@@ -19,5 +19,6 @@ namespace Models.ViewModels
         public string RoutedTo { get; set; }
         public string Remarks { get; set; }
         public bool? IsSend { get; set; }
+        public bool? hasDocuments { get; set; }
     }
 }
