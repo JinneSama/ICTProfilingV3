@@ -11,12 +11,11 @@ namespace ICTProfilingV3.DeliveriesForms
         private readonly Deliveries _deliveries;
         private IUnitOfWork unitOfWork;
 
-        public UCDeliveriesSpecs(Deliveries deliveries , IUnitOfWork _unitOfWork)
+        public UCDeliveriesSpecs(Deliveries deliveries)
         {
             InitializeComponent();
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             _deliveries = deliveries;
-            LoadEquipmentSpecs();
         }
 
         private void LoadEquipmentSpecs()
@@ -28,7 +27,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 Quantity = (int)x.Quantity,
                 Unit = x.Unit,
                 Equipment = x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName,
-                Description = x.Model.Brand.EquipmentSpecs.Description,
+                Description = x.Description,
                 Brand = x.Model.Brand.BrandName,
                 Model = x.Model.ModelName,
                 UnitCost = (long)x.UnitCost,
@@ -40,7 +39,7 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void btnAddEquipment_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEquipment(_deliveries, unitOfWork);
+            var frm = new frmAddEquipment(_deliveries);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -58,7 +57,7 @@ namespace ICTProfilingV3.DeliveriesForms
             var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.Model ,
                 x => x.Model.Brand);
-            var frm = new frmAddEquipment(delSpecs, unitOfWork);
+            var frm = new frmAddEquipment(delSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -71,9 +70,14 @@ namespace ICTProfilingV3.DeliveriesForms
                 x => x.Model.Brand,
                 x => x.Model.Brand.EquipmentSpecs,
                 x => x.Model.Brand.EquipmentSpecs.Equipment);
-            var frm = new frmAddEditDeliveriesSpecsDetails(delSpecs,unitOfWork);
+            var frm = new frmAddEditDeliveriesSpecsDetails(delSpecs);
             frm.ShowDialog();
 
+            LoadEquipmentSpecs();
+        }
+
+        private void UCDeliveriesSpecs_Load(object sender, System.EventArgs e)
+        {
             LoadEquipmentSpecs();
         }
     }

@@ -38,17 +38,17 @@ namespace ICTProfilingV3.PGNForms
         }
         private void LoadDetails(PGNAccountsViewModel row)
         {
-            txtName.Text = row.Name;
-            txtPos.Text = row.Position;
-            txtUsername.Text = row.PGNAccount.Username;
-            txtType.Text = row.PGNAccount.UserType.ToString();
-            txtOffice.Text = row.PGNAccount.PGNGroupOffices.OfficeAcr;
-            txtStatus.Text = row.PGNAccount.Status.ToString();
-            txtSignCount.Text = row.PGNAccount.SignInCount.ToString();
+            txtName.Text = row?.Name;
+            txtPos.Text = row?.Position;
+            txtUsername.Text = row?.PGNAccount?.Username;
+            txtType.Text = row?.PGNAccount?.UserType?.ToString();
+            txtOffice.Text = row?.PGNAccount?.PGNGroupOffices?.OfficeAcr;
+            txtStatus.Text = row?.PGNAccount?.Status?.ToString();
+            txtSignCount.Text = row?.PGNAccount?.SignInCount?.ToString();
             txtTS.Text = Models.Enums.EnumHelper.GetEnumDescription(row.PGNAccount.TrafficSpeed);
-            txtCategory.Text = row.PGNAccount.Designation.ToString();
-            txtPassword.Text = row.PGNAccount.Password;
-            txtRemarks.Text = row.PGNAccount.Remarks.ToString();
+            txtCategory.Text = row?.PGNAccount?.Designation.ToString();
+            txtPassword.Text = row?.PGNAccount?.Password;
+            txtRemarks.Text = row?.PGNAccount?.Remarks?.ToString();
         }
 
         private void gridPGN_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
@@ -71,6 +71,7 @@ namespace ICTProfilingV3.PGNForms
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (PGNAccountsViewModel)gridPGN.GetFocusedRow();
+            if(row == null) return;
             var frm = new frmAddEditAccount(row.PGNAccount);
             frm.ShowDialog();
 

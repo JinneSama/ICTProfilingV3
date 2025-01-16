@@ -52,8 +52,10 @@ namespace ICTProfilingV3.DeliveriesForms
             txtDateOfDelivery.Text = deliveries.DeliveredDate.ToString();
             txtRequestingOffice.Text = employee.Office + " " + employee.Division;
             txtSupplier.Text = deliveries.Supplier.SupplierName;
-            spinAmount.Value = (decimal)deliveries.DeliveriesSpecs.Sum(x => x.UnitCost);
-            txtInspectedDate.Text = deliveries.Actions?.FirstOrDefault()?.ActionDate?.ToString() ?? "";
+            spinAmount.Value = (decimal)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity));
+
+            var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138).OrderBy(x => x.ActionDate);
+            txtInspectedDate.DateTime = (DateTime)inspectActions?.FirstOrDefault()?.ActionDate;
 
             if (deliveries.ComparisonReports.FirstOrDefault() == null) CreateComparisonReport();
             else await LoadDetails();
@@ -266,9 +268,9 @@ namespace ICTProfilingV3.DeliveriesForms
                 DateOfDelivery = deliveries.DeliveredDate,
                 RequestingOffice = employee.Office + " " + employee.Division,
                 Supplier = deliveries.Supplier.SupplierName,
-                Amount = (double)deliveries.DeliveriesSpecs.Sum(x => x.UnitCost),
+                Amount = (double)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity)),
                 EpisNo = "EPiS-" + deliveries.TicketRequest.Id.ToString(),
-                TechInspectedDate = deliveries.Actions?.FirstOrDefault()?.ActionDate,
+                TechInspectedDate = txtInspectedDate.DateTime,
                 ComparisonReportSpecs = cr.ComparisonReportSpecs,
                 PreparedBy = cr.PreparedByUser,
                 ReviewedBy = cr.ReviewedByUser,

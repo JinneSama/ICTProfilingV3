@@ -75,6 +75,7 @@
     <Compile Include="ModelMigrations\ActionMigration.cs" />
     <Compile Include="ModelMigrations\AssignedStaffMigration.cs" />
     <Compile Include="ModelMigrations\LookUpMigration.cs" />
+    <Compile Include="ModelMigrations\PGNMigration.cs" />
     <Compile Include="ModelMigrations\RecordProcessesMigration.cs" />
     <Compile Include="ModelMigrations\TicketMigration.cs" />
     <Compile Include="ICTv2Models\Action.cs">

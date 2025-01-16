@@ -13,5 +13,8 @@ namespace ICTProfilingV3.ReportForms
             InitializeComponent();
         }
 
+        private void rptComparisonReport_AfterPrint(object sender, EventArgs e)
+        {
+        }
     }
 }

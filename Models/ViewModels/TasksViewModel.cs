@@ -22,7 +22,7 @@ namespace Models.ViewModels
         public string Status { get; set; }
         public string ReqByName => employee?.Employee;
         public string ReqByPos => employee?.Position;
-        public string Office => employee?.Office + " " + employee?.Division;
+        public string Office => employee?.Office;
         private void SetEmployee()
         {
             long? reqById = null;

@@ -12,10 +12,10 @@ namespace ICTProfilingV3.StandardPRForms
     {
         private readonly StandardPRSpecs standardPRSpecs;
         private readonly IUnitOfWork unitOfWork;
-        public frmAddEditStandardPRSpecsDetails(IUnitOfWork uow , StandardPRSpecs specs)
+        public frmAddEditStandardPRSpecsDetails(StandardPRSpecs specs)
         {
             InitializeComponent();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             standardPRSpecs = specs;
             LoadSpecs();
         }

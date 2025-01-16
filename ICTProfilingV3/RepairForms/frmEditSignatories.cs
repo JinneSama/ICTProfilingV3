@@ -19,11 +19,11 @@ namespace ICTProfilingV3.RepairForms
         private readonly IUnitOfWork unitOfWork;
         private readonly int repairId;
 
-        public frmEditSignatories(IUnitOfWork uow, int repairId)
+        public frmEditSignatories(int repairId)
         {
             InitializeComponent();
             usermanager = new ICTUserManager();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             this.repairId = repairId;
             LoadDropdowns();
         }

@@ -167,7 +167,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
-            var frm = new frmAddEditTechSpecs(ts , unitOfWork);
+            var frm = new frmAddEditTechSpecs(ts);
             frm.ShowDialog();
         }
 

@@ -23,21 +23,21 @@ namespace ICTProfilingV3.PPEInventoryForms
         private SaveType saveType;
         private readonly PPEs _PPE;
         private PPEsSpecs _PPEsSpecs;
-        public frmAddEditPPEEquipment(PPEs PPE, IUnitOfWork _unitOfWork)
+        public frmAddEditPPEEquipment(PPEs PPE)
         {
             InitializeComponent();
             saveType = SaveType.Insert;
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
             _PPE = PPE;
         }
 
-        public frmAddEditPPEEquipment(PPEsSpecs ppesSpecs, IUnitOfWork _unitOfWork)
+        public frmAddEditPPEEquipment(PPEsSpecs ppesSpecs)
         {
             InitializeComponent();
             _PPEsSpecs = ppesSpecs;
             saveType = SaveType.Update;
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
             LoadEquipmentSpecs();
         }

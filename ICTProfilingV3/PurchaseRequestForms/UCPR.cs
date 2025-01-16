@@ -93,7 +93,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private void LoadPRSpecs(PRViewModel row)
         {
             panelSpecs.Controls.Clear();
-            panelSpecs.Controls.Add(new UCStandardPR(unitOfWork, row.PurchaseRequest)
+            panelSpecs.Controls.Add(new UCStandardPR(row.PurchaseRequest)
             {
                 Dock = DockStyle.Fill
             });
@@ -104,12 +104,12 @@ namespace ICTProfilingV3.PurchaseRequestForms
             var row = (PRViewModel)gridPR.GetFocusedRow();
             if (row.PurchaseRequest.TechSpecs == null)
             {
-                var frm = new frmAddEditStandardPR(unitOfWork, row.PurchaseRequest);
+                var frm = new frmAddEditStandardPR( row.PurchaseRequest);
                 frm.ShowDialog();
             }
             else
             {
-                var frm = new frmEditPR(row.PurchaseRequest,unitOfWork);
+                var frm = new frmEditPR(row.PurchaseRequest);
                 frm.ShowDialog();
             }
 

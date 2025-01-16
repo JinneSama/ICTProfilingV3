@@ -95,7 +95,6 @@
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtInspectedDate = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -106,6 +105,7 @@
             this.txtDateOfDelivery = new DevExpress.XtraEditors.TextEdit();
             this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
             this.spinAmount = new DevExpress.XtraEditors.SpinEdit();
+            this.txtInspectedDate = new DevExpress.XtraEditors.DateEdit();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnSetDiscrepancy = new DevExpress.XtraBars.BarButtonItem();
             this.btnClearDiscrepancy = new DevExpress.XtraBars.BarButtonItem();
@@ -131,12 +131,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOffice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateOfDelivery.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAmount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
@@ -563,7 +564,6 @@
             this.groupControl1.Controls.Add(this.labelControl10);
             this.groupControl1.Controls.Add(this.labelControl9);
             this.groupControl1.Controls.Add(this.labelControl1);
-            this.groupControl1.Controls.Add(this.txtInspectedDate);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl3);
@@ -574,6 +574,7 @@
             this.groupControl1.Controls.Add(this.txtDateOfDelivery);
             this.groupControl1.Controls.Add(this.textEdit1);
             this.groupControl1.Controls.Add(this.spinAmount);
+            this.groupControl1.Controls.Add(this.txtInspectedDate);
             this.groupControl1.Location = new System.Drawing.Point(0, 93);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(1430, 139);
@@ -715,7 +716,7 @@
             // 
             this.labelControl9.Location = new System.Drawing.Point(928, 53);
             this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(62, 13);
+            this.labelControl9.Size = new System.Drawing.Size(63, 13);
             this.labelControl9.TabIndex = 16;
             this.labelControl9.Text = "Reviewed By";
             // 
@@ -723,24 +724,15 @@
             // 
             this.labelControl1.Location = new System.Drawing.Point(928, 27);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(59, 13);
+            this.labelControl1.Size = new System.Drawing.Size(58, 13);
             this.labelControl1.TabIndex = 15;
             this.labelControl1.Text = "Prepared By";
-            // 
-            // txtInspectedDate
-            // 
-            this.txtInspectedDate.Location = new System.Drawing.Point(584, 25);
-            this.txtInspectedDate.Name = "txtInspectedDate";
-            this.txtInspectedDate.Properties.ReadOnly = true;
-            this.txtInspectedDate.Properties.UseReadOnlyAppearance = false;
-            this.txtInspectedDate.Size = new System.Drawing.Size(259, 20);
-            this.txtInspectedDate.TabIndex = 12;
             // 
             // labelControl5
             // 
             this.labelControl5.Location = new System.Drawing.Point(424, 28);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(129, 13);
+            this.labelControl5.Size = new System.Drawing.Size(130, 13);
             this.labelControl5.TabIndex = 11;
             this.labelControl5.Text = "Technically Inspected Date";
             // 
@@ -748,7 +740,7 @@
             // 
             this.labelControl4.Location = new System.Drawing.Point(12, 105);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(37, 13);
+            this.labelControl4.Size = new System.Drawing.Size(36, 13);
             this.labelControl4.TabIndex = 7;
             this.labelControl4.Text = "Amount";
             // 
@@ -782,7 +774,7 @@
             // 
             this.labelControl2.Location = new System.Drawing.Point(13, 53);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(86, 13);
+            this.labelControl2.Size = new System.Drawing.Size(85, 13);
             this.labelControl2.TabIndex = 2;
             this.labelControl2.Text = "Requesting Office";
             // 
@@ -790,7 +782,7 @@
             // 
             this.labelControl7.Location = new System.Drawing.Point(12, 27);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(78, 13);
+            this.labelControl7.Size = new System.Drawing.Size(76, 13);
             this.labelControl7.TabIndex = 1;
             this.labelControl7.Text = "Date of Delivery";
             // 
@@ -826,6 +818,24 @@
             this.spinAmount.Properties.UseReadOnlyAppearance = false;
             this.spinAmount.Size = new System.Drawing.Size(233, 20);
             this.spinAmount.TabIndex = 5;
+            // 
+            // txtInspectedDate
+            // 
+            this.txtInspectedDate.EditValue = null;
+            this.txtInspectedDate.Location = new System.Drawing.Point(584, 25);
+            this.txtInspectedDate.Name = "txtInspectedDate";
+            this.txtInspectedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtInspectedDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtInspectedDate.Properties.DisplayFormat.FormatString = "";
+            this.txtInspectedDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtInspectedDate.Properties.EditFormat.FormatString = "";
+            this.txtInspectedDate.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.txtInspectedDate.Properties.MaskSettings.Set("mask", "d");
+            this.txtInspectedDate.Properties.UseReadOnlyAppearance = false;
+            this.txtInspectedDate.Size = new System.Drawing.Size(259, 20);
+            this.txtInspectedDate.TabIndex = 12;
             // 
             // popupMenu1
             // 
@@ -943,12 +953,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplier.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOffice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDateOfDelivery.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinAmount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtInspectedDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
@@ -970,7 +981,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtInspectedDate;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl3;
@@ -1026,5 +1036,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnShowInfo;
+        private DevExpress.XtraEditors.DateEdit txtInspectedDate;
     }
 }

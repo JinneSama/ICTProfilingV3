@@ -192,7 +192,7 @@ namespace ICTProfilingV3.RepairForms
         private async void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var frm = new frmAddEditRepair(_unitOfWork, row.Id);
+            var frm = new frmAddEditRepair(row.Id);
             frm.ShowDialog();
 
             await LoadRepairDetails();
@@ -205,7 +205,7 @@ namespace ICTProfilingV3.RepairForms
         private async void btnSignatories_Click(object sender, EventArgs e)
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var frm = new frmEditSignatories(_unitOfWork, row.Id);
+            var frm = new frmEditSignatories(row.Id);
             frm.ShowDialog();
 
             await LoadRepairDetails();
@@ -214,7 +214,7 @@ namespace ICTProfilingV3.RepairForms
         private async void btnFindings_Click(object sender, EventArgs e)
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var frm = new frmEditFindings(_unitOfWork, row.Id);
+            var frm = new frmEditFindings(row.Id);
             frm.ShowDialog();
 
             await LoadRepairDetails();
@@ -235,6 +235,9 @@ namespace ICTProfilingV3.RepairForms
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.PPEs,
+                x => x.PPEs.PPEsSpecs,
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model),
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
                 x => x.PPEsSpecs.Model.Brand.EquipmentSpecs.Equipment);
 
             var data = new RepairTRViewModel

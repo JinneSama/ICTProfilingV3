@@ -77,7 +77,7 @@ namespace ICTProfilingV3.CustomerActionSheetForms
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (CASViewModel)gridCAS.GetFocusedRow();
-            var frm = new frmAddEditCAS(_unitOfWork,row);
+            var frm = new frmAddEditCAS(row);
             frm.ShowDialog();
 
             LoadCAS();
@@ -86,7 +86,7 @@ namespace ICTProfilingV3.CustomerActionSheetForms
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditCAS(_unitOfWork);
+            var frm = new frmAddEditCAS();
             frm.ShowDialog();
 
             LoadCAS();

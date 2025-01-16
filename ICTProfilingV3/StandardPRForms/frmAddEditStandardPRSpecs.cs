@@ -13,20 +13,20 @@ namespace ICTProfilingV3.StandardPRForms
         private readonly IUnitOfWork unitOfWork;
         private readonly SaveType saveType;
         private readonly StandardPRSpecs specs;
-        public frmAddEditStandardPRSpecs(IUnitOfWork uow)
+        public frmAddEditStandardPRSpecs()
         {
             InitializeComponent();
             saveType = SaveType.Insert;
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 
-        public frmAddEditStandardPRSpecs(IUnitOfWork uow, StandardPRSpecs _specs)
+        public frmAddEditStandardPRSpecs(StandardPRSpecs _specs)
         {
             InitializeComponent();
             saveType = SaveType.Update;
             specs = _specs;
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 

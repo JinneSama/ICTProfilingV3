@@ -17,19 +17,19 @@ namespace ICTProfilingV3.CustomerActionSheetForms
         private readonly IICTUserManager userManager;
         private readonly SaveType saveType;
 
-        public frmAddEditCAS(IUnitOfWork unitOfWork)
+        public frmAddEditCAS()
         {
             InitializeComponent();
             saveType = SaveType.Insert;
-            this.unitOfWork = unitOfWork;
+            this.unitOfWork = new UnitOfWork();
             this.userManager = new ICTUserManager();
             LoadDropdowns();
         }
-        public frmAddEditCAS(IUnitOfWork unitOfWork, CASViewModel cas)
+        public frmAddEditCAS(CASViewModel cas)
         {
             InitializeComponent();
             saveType = SaveType.Update;
-            this.unitOfWork = unitOfWork;
+            this.unitOfWork = new UnitOfWork();
             this.cas = cas;
             this.userManager = new ICTUserManager();
             LoadDropdowns();

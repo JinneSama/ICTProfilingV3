@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.DirectXPaint.Svg;
 using DevExpress.Utils.Filtering;
+using ICTProfilingV3.DeliveriesForms;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
@@ -7,6 +8,7 @@ using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
@@ -16,14 +18,27 @@ namespace ICTProfilingV3.TechSpecsForms
         private readonly TechSpecsICTSpecsViewModel _specs;
         private readonly SaveType _saveType;
 
-        public frmAddEditTechSpecsICTSpecs(IUnitOfWork uow , TechSpecsICTSpecsViewModel specs, SaveType saveType)
+        public frmAddEditTechSpecsICTSpecs(TechSpecsICTSpecsViewModel specs, SaveType saveType)
         {
             InitializeComponent();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             _specs = specs;
             _saveType = saveType;
             LoadDropdowns();
             LoadDetails();
+        }
+
+        private async Task LoadItemNo()
+        {
+            if (_saveType == SaveType.Update) return;
+
+            var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == _specs.TechSpecsId);
+            if(ts == null) return;
+
+            var itemNos = ts.TechSpecsICTSpecs?.OrderBy(x => x.ItemNo)?.LastOrDefault();
+            var newItemNo = itemNos == null ? 0 : itemNos.ItemNo + 1;
+
+            txtItemNo.Value = (decimal)newItemNo;
         }
 
         private void LoadDetails()
@@ -68,7 +83,6 @@ namespace ICTProfilingV3.TechSpecsForms
             if (row == null) row = GetEquipmentDatasource().Where(x => x.Id == _specs.EquipmentSpecsId).FirstOrDefault();
 
             txtDescription.Text = row.Description;
-            txtEquipment.Text = row.Equipment;
         }
 
         private void spinQuantity_EditValueChanged(object sender, EventArgs e)
@@ -126,6 +140,11 @@ namespace ICTProfilingV3.TechSpecsForms
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private async void frmAddEditTechSpecsICTSpecs_Load(object sender, EventArgs e)
+        {
+            await LoadItemNo();
         }
     }
 }

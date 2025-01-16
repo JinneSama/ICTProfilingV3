@@ -14,7 +14,11 @@ namespace Models.Enums
         _8Mbps = 3,
         [Description("10Mbps")]
         _10Mbps = 4,
+        [Description("Moderate Guarantee User")]
+        ModerateGuaranteeUser = 5,
         [Description("High Guarantee User")]
-        HighGuaranteeUser = 5
+        HighGuaranteeUser = 6,
+        [Description("No Policy")]
+        NoPolicy = 7
     }
 }

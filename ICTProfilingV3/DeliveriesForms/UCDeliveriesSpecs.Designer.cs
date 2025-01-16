@@ -350,6 +350,7 @@
             this.Controls.Add(this.gcEquipmentSpecs);
             this.Name = "UCDeliveriesSpecs";
             this.Size = new System.Drawing.Size(1110, 388);
+            this.Load += new System.EventHandler(this.UCDeliveriesSpecs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipmentSpecs)).EndInit();

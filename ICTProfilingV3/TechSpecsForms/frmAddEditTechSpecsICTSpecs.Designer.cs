@@ -44,7 +44,6 @@
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddICTSpecs = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
-            this.txtEquipment = new DevExpress.XtraEditors.TextEdit();
             this.txtPurpose = new DevExpress.XtraEditors.TextEdit();
             this.spinUnitCost = new DevExpress.XtraEditors.SpinEdit();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
@@ -58,7 +57,6 @@
             this.slueUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.spinQuantity = new DevExpress.XtraEditors.SpinEdit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEquipment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
@@ -119,7 +117,7 @@
             // 
             this.labelControl12.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(11, 277);
+            this.labelControl12.Location = new System.Drawing.Point(11, 272);
             this.labelControl12.Name = "labelControl12";
             this.labelControl12.Size = new System.Drawing.Size(43, 15);
             this.labelControl12.TabIndex = 136;
@@ -129,7 +127,7 @@
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.Location = new System.Drawing.Point(11, 227);
+            this.labelControl10.Location = new System.Drawing.Point(12, 227);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(151, 15);
             this.labelControl10.TabIndex = 135;
@@ -149,7 +147,7 @@
             // 
             this.labelControl8.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl8.Appearance.Options.UseFont = true;
-            this.labelControl8.Location = new System.Drawing.Point(11, 253);
+            this.labelControl8.Location = new System.Drawing.Point(11, 249);
             this.labelControl8.Name = "labelControl8";
             this.labelControl8.Size = new System.Drawing.Size(53, 15);
             this.labelControl8.TabIndex = 131;
@@ -159,31 +157,31 @@
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(11, 201);
+            this.labelControl7.Location = new System.Drawing.Point(12, 104);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(25, 15);
+            this.labelControl7.Size = new System.Drawing.Size(28, 15);
             this.labelControl7.TabIndex = 130;
-            this.labelControl7.Text = "Unit ";
+            this.labelControl7.Text = "UOM";
             // 
             // labelControl1
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(11, 130);
+            this.labelControl1.Location = new System.Drawing.Point(11, 153);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 15);
+            this.labelControl1.Size = new System.Drawing.Size(87, 15);
             this.labelControl1.TabIndex = 129;
-            this.labelControl1.Text = "Description";
+            this.labelControl1.Text = "Item Description";
             // 
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(11, 105);
+            this.labelControl4.Location = new System.Drawing.Point(11, 128);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(58, 15);
+            this.labelControl4.Size = new System.Drawing.Size(86, 15);
             this.labelControl4.TabIndex = 128;
-            this.labelControl4.Text = "Equipment";
+            this.labelControl4.Text = "Equipment Type";
             // 
             // btnSave
             // 
@@ -193,7 +191,7 @@
             this.btnSave.Appearance.Options.UseBackColor = true;
             this.btnSave.Appearance.Options.UseForeColor = true;
             this.btnSave.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.save_16x164;
-            this.btnSave.Location = new System.Drawing.Point(362, 301);
+            this.btnSave.Location = new System.Drawing.Point(362, 298);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 28);
@@ -209,7 +207,7 @@
             this.btnClose.Appearance.Options.UseBackColor = true;
             this.btnClose.Appearance.Options.UseForeColor = true;
             this.btnClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
-            this.btnClose.Location = new System.Drawing.Point(460, 301);
+            this.btnClose.Location = new System.Drawing.Point(460, 298);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(97, 28);
@@ -222,7 +220,7 @@
             this.btnAddICTSpecs.AutoSize = true;
             this.btnAddICTSpecs.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.btnAddICTSpecs.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddICTSpecs.ImageOptions.Image")));
-            this.btnAddICTSpecs.Location = new System.Drawing.Point(539, 102);
+            this.btnAddICTSpecs.Location = new System.Drawing.Point(539, 126);
             this.btnAddICTSpecs.Name = "btnAddICTSpecs";
             this.btnAddICTSpecs.Size = new System.Drawing.Size(18, 20);
             this.btnAddICTSpecs.TabIndex = 142;
@@ -232,22 +230,14 @@
             this.btnAddEquipment.AutoSize = true;
             this.btnAddEquipment.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.btnAddEquipment.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.additem_16x16;
-            this.btnAddEquipment.Location = new System.Drawing.Point(515, 103);
+            this.btnAddEquipment.Location = new System.Drawing.Point(515, 126);
             this.btnAddEquipment.Name = "btnAddEquipment";
             this.btnAddEquipment.Size = new System.Drawing.Size(18, 20);
             this.btnAddEquipment.TabIndex = 139;
             // 
-            // txtEquipment
-            // 
-            this.txtEquipment.Location = new System.Drawing.Point(202, 103);
-            this.txtEquipment.Margin = new System.Windows.Forms.Padding(2);
-            this.txtEquipment.Name = "txtEquipment";
-            this.txtEquipment.Size = new System.Drawing.Size(307, 20);
-            this.txtEquipment.TabIndex = 137;
-            // 
             // txtPurpose
             // 
-            this.txtPurpose.Location = new System.Drawing.Point(178, 277);
+            this.txtPurpose.Location = new System.Drawing.Point(178, 269);
             this.txtPurpose.Margin = new System.Windows.Forms.Padding(2);
             this.txtPurpose.Name = "txtPurpose";
             this.txtPurpose.Size = new System.Drawing.Size(379, 20);
@@ -260,7 +250,7 @@
             0,
             0,
             0});
-            this.spinUnitCost.Location = new System.Drawing.Point(178, 225);
+            this.spinUnitCost.Location = new System.Drawing.Point(178, 220);
             this.spinUnitCost.Margin = new System.Windows.Forms.Padding(2);
             this.spinUnitCost.Name = "spinUnitCost";
             this.spinUnitCost.Properties.Appearance.Options.UseTextOptions = true;
@@ -276,7 +266,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(178, 129);
+            this.txtDescription.Location = new System.Drawing.Point(178, 152);
             this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(379, 64);
@@ -290,7 +280,7 @@
             0,
             0});
             this.spintTotal.Enabled = false;
-            this.spintTotal.Location = new System.Drawing.Point(178, 252);
+            this.spintTotal.Location = new System.Drawing.Point(178, 244);
             this.spintTotal.Margin = new System.Windows.Forms.Padding(2);
             this.spintTotal.Name = "spintTotal";
             this.spintTotal.Properties.Appearance.Options.UseTextOptions = true;
@@ -305,7 +295,7 @@
             // 
             // slueEquipment
             // 
-            this.slueEquipment.Location = new System.Drawing.Point(178, 103);
+            this.slueEquipment.Location = new System.Drawing.Point(178, 126);
             this.slueEquipment.Name = "slueEquipment";
             this.slueEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.slueEquipment.Properties.Appearance.Options.UseFont = true;
@@ -315,7 +305,7 @@
             this.slueEquipment.Properties.NullText = "";
             this.slueEquipment.Properties.PopupView = this.gridView4;
             this.slueEquipment.Properties.ValueMember = "Id";
-            this.slueEquipment.Size = new System.Drawing.Size(19, 22);
+            this.slueEquipment.Size = new System.Drawing.Size(331, 22);
             this.slueEquipment.TabIndex = 125;
             this.slueEquipment.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
             // 
@@ -374,7 +364,7 @@
             // 
             // slueUnit
             // 
-            this.slueUnit.Location = new System.Drawing.Point(178, 199);
+            this.slueUnit.Location = new System.Drawing.Point(178, 101);
             this.slueUnit.Margin = new System.Windows.Forms.Padding(2);
             this.slueUnit.Name = "slueUnit";
             this.slueUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -384,7 +374,7 @@
             this.slueUnit.Properties.DisplayMember = "UnitType";
             this.slueUnit.Properties.NullText = "";
             this.slueUnit.Properties.ValueMember = "UnitType";
-            this.slueUnit.Size = new System.Drawing.Size(114, 20);
+            this.slueUnit.Size = new System.Drawing.Size(93, 20);
             this.slueUnit.TabIndex = 145;
             // 
             // spinQuantity
@@ -407,7 +397,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 342);
+            this.ClientSize = new System.Drawing.Size(573, 341);
             this.Controls.Add(this.spinQuantity);
             this.Controls.Add(this.slueUnit);
             this.Controls.Add(this.btnSave);
@@ -415,7 +405,6 @@
             this.Controls.Add(this.btnAddICTSpecs);
             this.Controls.Add(this.labelControl3);
             this.Controls.Add(this.btnAddEquipment);
-            this.Controls.Add(this.txtEquipment);
             this.Controls.Add(this.labelControl12);
             this.Controls.Add(this.txtPurpose);
             this.Controls.Add(this.labelControl10);
@@ -432,9 +421,9 @@
             this.Controls.Add(this.txtItemNo);
             this.Name = "frmAddEditTechSpecsICTSpecs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.frmAddEditTechSpecsICTSpecs_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEquipment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -457,7 +446,6 @@
         private DevExpress.XtraEditors.SimpleButton btnAddICTSpecs;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.SimpleButton btnAddEquipment;
-        private DevExpress.XtraEditors.TextEdit txtEquipment;
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.TextEdit txtPurpose;
         private DevExpress.XtraEditors.LabelControl labelControl10;

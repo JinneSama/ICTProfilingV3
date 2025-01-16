@@ -1,8 +1,11 @@
-﻿using ICTMigration.ModelMigrations;
+﻿using ICTMigration.ICTv2Models;
+using ICTMigration.ModelMigrations;
 using Models.HRMISEntites;
 using Models.OFMISEntities;
+using Models.Repository;
 using System;
 using System.Configuration;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +21,8 @@ namespace ICTProfilingV3
         {
             HRMISEmployees.InitContext();
             OFMISEmployees.InitEmployees();
+            OFMISUsers.InitUsers();
+
 
             MainAsync().GetAwaiter().GetResult();
 
@@ -61,6 +66,9 @@ namespace ICTProfilingV3
                 await assignedStaffMigration.GetAssignedUsersRepair();
                 await assignedStaffMigration.GetAssignedUsersTS();
 
+                PGNMigration pgnMigration = new PGNMigration();
+                await pgnMigration.MigrateNonEmployee();
+                await pgnMigration.MigratePGNAccounts();
             }
         }
     }

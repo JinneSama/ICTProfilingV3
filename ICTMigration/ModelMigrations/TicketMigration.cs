@@ -82,6 +82,8 @@ namespace ICTMigration.ModelMigrations
             var deliveries = ictv2Model.Deliveries.ToList();
             foreach (var deliver in deliveries)
             {
+                if (deliver.Id != 149) 
+                    continue;
                 var supplier = await unitOfWork.SupplierRepo.FindAsync(x => x.OldPK == deliver.SupplierId);
                 var ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == deliver.RequestId);
                 var newDelivery = new Deliveries

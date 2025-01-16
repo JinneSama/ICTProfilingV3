@@ -12,11 +12,11 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private readonly PurchaseRequest PR;
         private readonly IUnitOfWork unitOfWork;
 
-        public frmEditPR(PurchaseRequest _PR, IUnitOfWork uow)
+        public frmEditPR(PurchaseRequest _PR)
         {
             InitializeComponent();
             PR = _PR;
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 

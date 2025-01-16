@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.Utils.SimpleContextButton simpleContextButton1 = new DevExpress.Utils.SimpleContextButton();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCUserTasks));
             DevExpress.XtraEditors.TableLayout.TableColumnDefinition tableColumnDefinition1 = new DevExpress.XtraEditors.TableLayout.TableColumnDefinition();
@@ -49,6 +50,7 @@
             this.colDateCreated = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colAttachedImage = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colEpisNo = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.hplEpisNo = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.colOffice = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colReqBy = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colReqByPos = new DevExpress.XtraGrid.Columns.TileViewColumn();
@@ -62,9 +64,19 @@
             this.tileTasks = new DevExpress.XtraGrid.Views.Tile.TileView();
             this.colStatus = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colMembers = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.btnNavigate = new DevExpress.XtraBars.BarButtonItem();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            ((System.ComponentModel.ISupportInitialize)(this.hplEpisNo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileTasks)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // colDateCreated
@@ -83,10 +95,17 @@
             // 
             // colEpisNo
             // 
+            this.colEpisNo.ColumnEdit = this.hplEpisNo;
             this.colEpisNo.FieldName = "EPiSNo";
             this.colEpisNo.Name = "colEpisNo";
             this.colEpisNo.Visible = true;
             this.colEpisNo.VisibleIndex = 6;
+            // 
+            // hplEpisNo
+            // 
+            this.hplEpisNo.AutoHeight = false;
+            this.hplEpisNo.Name = "hplEpisNo";
+            this.hplEpisNo.Click += new System.EventHandler(this.hplEpisNo_Click);
             // 
             // colOffice
             // 
@@ -174,6 +193,8 @@
             this.gcTasks.Location = new System.Drawing.Point(0, 39);
             this.gcTasks.MainView = this.tileTasks;
             this.gcTasks.Name = "gcTasks";
+            this.gcTasks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.hplEpisNo});
             this.gcTasks.Size = new System.Drawing.Size(1164, 631);
             this.gcTasks.TabIndex = 84;
             this.gcTasks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -326,6 +347,7 @@
             this.tileTasks.TileTemplate.Add(tileViewItemElement8);
             this.tileTasks.BeforeItemDrop += new DevExpress.XtraGrid.Views.Tile.TileViewBeforeItemDropEventHandler(this.tileTasks_BeforeItemDrop);
             this.tileTasks.ItemCustomize += new DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventHandler(this.tileTasks_ItemCustomize);
+            this.tileTasks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tileTasks_MouseDown);
             // 
             // colStatus
             // 
@@ -344,19 +366,86 @@
             this.colMembers.Visible = true;
             this.colMembers.VisibleIndex = 2;
             // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnNavigate)});
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // btnNavigate
+            // 
+            this.btnNavigate.Caption = "Navigate To Process";
+            this.btnNavigate.Id = 0;
+            this.btnNavigate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.doublenext_16x16;
+            this.btnNavigate.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.doublenext_32x32;
+            this.btnNavigate.Name = "btnNavigate";
+            this.btnNavigate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNavigate_ItemClick);
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.btnNavigate});
+            this.barManager1.MaxItemId = 1;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(1164, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 670);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1164, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 670);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1164, 0);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 670);
+            // 
             // UCUserTasks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.gcTasks);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
             this.Name = "UCUserTasks";
             this.Size = new System.Drawing.Size(1164, 670);
+            ((System.ComponentModel.ISupportInitialize)(this.hplEpisNo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcTasks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileTasks)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -378,5 +467,13 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn colReqBy;
         private DevExpress.XtraGrid.Columns.TileViewColumn colReqByPos;
         private DevExpress.XtraGrid.Columns.TileViewColumn colLine;
+        private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplEpisNo;
+        private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraBars.BarButtonItem btnNavigate;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
     }
 }

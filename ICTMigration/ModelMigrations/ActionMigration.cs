@@ -72,12 +72,13 @@ namespace ICTMigration.ModelMigrations
         public async Task MigrateDeliveriesActions()
         {
             //unitOfWork.ExecuteCommand("DBCC CHECKIDENT ('Actions', RESEED, 0);");
-            var delActions = ictv2Model.DocActions.Where(x => x.TableName == "Deliveries");
+            var delActions = ictv2Model.DocActions.Where(x => x.TableName == "Deliveries" && x.ActionDate >= new DateTime(2025, 1, 6)
+             && x.ActionDate <= new DateTime(2025, 1, 8));
             var deliveries = unitOfWork.DeliveriesRepo.GetAll().ToList();
 
             foreach (var deliver in deliveries)
             {
-                if(deliver.Id != 3648) continue;
+                if(deliver.Id != 3663) continue;
                 var oldDel = ictv2Model.Deliveries.FirstOrDefault(x => x.RequestId == deliver.Id);
                 if (oldDel == null) continue;
                 var delAction = delActions.Where(x => x.RefId == oldDel.Id);
@@ -130,8 +131,9 @@ namespace ICTMigration.ModelMigrations
 
             foreach (var repair in repairs)
             {
-                var oldDel = ictv2Model.Repairs.FirstOrDefault(x => x.RequestId == repair.Id);
-                var repairAction = repairActions.Where(x => x.RefId == oldDel.Id);
+                if (repair.Id != 3729) continue;
+                var oldRepair = ictv2Model.Repairs.FirstOrDefault(x => x.RequestId == 3730);
+                var repairAction = repairActions.Where(x => x.RefId == oldRepair.Id);
 
                 foreach (var act in repairAction)
                 {
@@ -181,6 +183,7 @@ namespace ICTMigration.ModelMigrations
 
             foreach(var item in cas)
             {
+                if (item.Id != 53) continue;
                 var actions = casActions.Where(x => x.RefId == item.Id);
                 
                 foreach(var act in actions)

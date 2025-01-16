@@ -716,8 +716,9 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrLabel25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Repair].[PPEs].[PPEsSpecs].[Model].[Brand].[EquipmentSpecs].[EquipmentSpecsDetai" +
-                    "ls].[EquipmentSpecsId]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Repair].[PPEs].[PPEsSpecs].[Description], \'-\',[Repair].[PPEs].[PPEsSpecs]" +
+                    ".[Model].[Brand].[BrandName],\' \' ,[Repair].[PPEs].[PPEsSpecs].[Model].[Brand].[M" +
+                    "odels].[ModelName])\n")});
             this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(134.2262F, 194.0114F);
             this.xrLabel25.Multiline = true;
             this.xrLabel25.Name = "xrLabel25";
@@ -1411,8 +1412,9 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrLabel61.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Repair].[PPEs].[PPEsSpecs].[Model].[Brand].[EquipmentSpecs].[EquipmentSpecsDetai" +
-                    "ls].[EquipmentSpecsId]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Repair].[PPEs].[PPEsSpecs].[Description], \'-\',[Repair].[PPEs].[PPEsSpecs]" +
+                    ".[Model].[Brand].[BrandName],\' \' ,[Repair].[PPEs].[PPEsSpecs].[Model].[Brand].[M" +
+                    "odels].[ModelName])\n")});
             this.xrLabel61.LocationFloat = new DevExpress.Utils.PointFloat(134.2262F, 194.0114F);
             this.xrLabel61.Multiline = true;
             this.xrLabel61.Name = "xrLabel61";

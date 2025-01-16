@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges2 = new DevExpress.Skins.SkinPaddingEdges();
+            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges3 = new DevExpress.Skins.SkinPaddingEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -172,7 +172,7 @@
             this.backstageViewControl1.OwnerControl = this.ribbon;
             this.backstageViewControl1.SelectedTab = this.btnChangelogs;
             this.backstageViewControl1.SelectedTabIndex = 1;
-            this.backstageViewControl1.Size = new System.Drawing.Size(522, 196);
+            this.backstageViewControl1.Size = new System.Drawing.Size(535, 208);
             this.backstageViewControl1.TabIndex = 5;
             this.backstageViewControl1.VisibleInDesignTime = true;
             // 
@@ -187,7 +187,7 @@
             // 
             this.backstageViewClientControl2.Location = new System.Drawing.Point(154, 63);
             this.backstageViewClientControl2.Name = "backstageViewClientControl2";
-            this.backstageViewClientControl2.Size = new System.Drawing.Size(367, 132);
+            this.backstageViewClientControl2.Size = new System.Drawing.Size(380, 144);
             this.backstageViewClientControl2.TabIndex = 2;
             // 
             // btnLogout
@@ -509,9 +509,9 @@
             this.skinRibbonGalleryBarItem1.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLayout = DevExpress.Utils.Drawing.ImageLayoutMode.Squeeze;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLocation = DevExpress.Utils.Locations.Top;
-            skinPaddingEdges2.Left = 8;
-            skinPaddingEdges2.Right = 8;
-            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges2;
+            skinPaddingEdges3.Left = 8;
+            skinPaddingEdges3.Right = 8;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges3;
             this.skinRibbonGalleryBarItem1.Id = 35;
             this.skinRibbonGalleryBarItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("skinRibbonGalleryBarItem1.ImageOptions.SvgImage")));
             this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
@@ -577,8 +577,8 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.btnDashboard);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnUserTasks);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnQueue);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnUserTasks);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnRoutedActions);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Tag = "DashboarContainer";
@@ -586,7 +586,7 @@
             // 
             // ribbonPageGroup2
             // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnTARequest);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnTARequest, true);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Tag = "TicketContainer";
             this.ribbonPageGroup2.Text = "Ticket";
@@ -594,14 +594,15 @@
             // ribbonPageGroup3
             // 
             this.ribbonPageGroup3.ItemLinks.Add(this.btnTechSpecs, true);
+            this.ribbonPageGroup3.ItemLinks.Add(this.btnVPR);
             this.ribbonPageGroup3.ItemLinks.Add(this.btnDeliveries);
-            this.ribbonPageGroup3.ItemLinks.Add(this.btnRepair);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Tag = "TransactionContainer";
             this.ribbonPageGroup3.Text = "Transactions";
             // 
             // ribbonPageGroup12
             // 
+            this.ribbonPageGroup12.ItemLinks.Add(this.btnRepair);
             this.ribbonPageGroup12.ItemLinks.Add(this.btnRepairSpecs);
             this.ribbonPageGroup12.Name = "ribbonPageGroup12";
             this.ribbonPageGroup12.Tag = "RepairSpecsContainer";
@@ -609,7 +610,6 @@
             // ribbonPageGroup4
             // 
             this.ribbonPageGroup4.ItemLinks.Add(this.btnCAS);
-            this.ribbonPageGroup4.ItemLinks.Add(this.btnVPR);
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Tag = "PRCASContainer";
             // 
@@ -644,8 +644,8 @@
             // 
             // ribbonPageGroup5
             // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.btnUsers);
             this.ribbonPageGroup5.ItemLinks.Add(this.btnUserLevels);
+            this.ribbonPageGroup5.ItemLinks.Add(this.btnUsers);
             this.ribbonPageGroup5.ItemLinks.Add(this.btnStaff);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Tag = "UserManagement";
@@ -704,8 +704,8 @@
             // 
             // ribbonPageGroup13
             // 
-            this.ribbonPageGroup13.ItemLinks.Add(this.btnPGNAccounts);
             this.ribbonPageGroup13.ItemLinks.Add(this.btnRequests);
+            this.ribbonPageGroup13.ItemLinks.Add(this.btnPGNAccounts);
             this.ribbonPageGroup13.Name = "ribbonPageGroup13";
             this.ribbonPageGroup13.Text = "Transactions";
             // 

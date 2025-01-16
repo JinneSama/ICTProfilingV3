@@ -24,22 +24,31 @@ namespace ICTProfilingV3.DeliveriesForms
         private readonly Deliveries _deliveries;
         private DeliveriesSpecs _deliveriesSpecs;
 
-        public frmAddEquipment(Deliveries deliveries , IUnitOfWork _unitOfWork) 
+        public frmAddEquipment(Deliveries deliveries) 
         {
             InitializeComponent();
             saveType = SaveType.Insert;
-            unitOfWork = _unitOfWork;
-            LoadDropdowns();
+            unitOfWork = new UnitOfWork();
             _deliveries = deliveries;
+            LoadDropdowns();
+            LoadItemNo();
         }
-        public frmAddEquipment(DeliveriesSpecs deliveriesSpecs, IUnitOfWork _unitOfWork)
+        public frmAddEquipment(DeliveriesSpecs deliveriesSpecs)
         {
             InitializeComponent();
             _deliveriesSpecs = deliveriesSpecs;
             saveType = SaveType.Update;
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             LoadDropdowns();
             LoadEquipmentSpecs();
+        }
+
+        private void LoadItemNo()
+        {
+            var itemNos = _deliveries.DeliveriesSpecs.OrderBy(x => x.ItemNo).LastOrDefault();
+            var newItemNo = itemNos == null ? 0:  itemNos.ItemNo + 1;
+
+            spinItemNo.Value = (decimal)newItemNo;
         }
 
         private void LoadEquipmentSpecs()
@@ -107,12 +116,13 @@ namespace ICTProfilingV3.DeliveriesForms
         }
         private async Task InsertEquipment()
         {
+            var del = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == _deliveries.Id);
             var equipment = new DeliveriesSpecs
             {
-                Deliveries = _deliveries,
+                Deliveries = del,
                 Quantity = (int)spinQty.Value,
                 Unit = (Unit)cboUnit.EditValue,
-                Model = slueModel.Properties.View.GetFocusedRow() as Model,
+                ModelId = (int?)slueModel.EditValue,
                 UnitCost = (long)spinUnitCost.Value,
                 TotalCost = (long)spintTotal.Value,
                 SerialNo = txtSerialNo.Text,

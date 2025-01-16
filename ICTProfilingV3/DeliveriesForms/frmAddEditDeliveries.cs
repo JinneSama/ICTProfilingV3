@@ -95,7 +95,7 @@ namespace ICTProfilingV3.DeliveriesForms
         private void LoadEquipmentSpecs()
         {
             panelEquipmentSpecs.Controls.Clear();
-            panelEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(_deliveries , unitOfWork)
+            panelEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(_deliveries)
             {
                 Dock = DockStyle.Fill
             });
@@ -124,6 +124,7 @@ namespace ICTProfilingV3.DeliveriesForms
             await SaveDeliveries();
             this.Close();
 
+            if (SaveType == SaveType.Update) return;
             var actionType = new Models.Models.ActionType
             {
                 Id = _deliveries.Id,

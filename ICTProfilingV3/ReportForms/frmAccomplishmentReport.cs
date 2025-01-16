@@ -78,12 +78,18 @@ namespace ICTProfilingV3.ReportForms
         private void frmAccomplishmentReport_Load(object sender, EventArgs e)
         {
             LoadDropdowns();
+            sluePreparedBy.EditValue = UserStore.UserId;
+            slueStaff.EditValue = UserStore.UserId;
         }
 
-        private void sluePreparedBy_EditValueChanged(object sender, EventArgs e)
+        private async void sluePreparedBy_EditValueChanged(object sender, EventArgs e)
         {
             var row = (Users)sluePreparedBy.Properties.View.GetFocusedRow();
-            txtPreparedByPos.Text = row.Position;
+            if (row == null)
+            {
+                var usr = await unitOfWork.UsersRepo.FindAsync(x => x.Id == UserStore.UserId);
+                txtPreparedByPos.Text = usr.Position;
+            }else txtPreparedByPos.Text = row.Position;
         }
 
         private void slueReviewedBy_EditValueChanged(object sender, EventArgs e)

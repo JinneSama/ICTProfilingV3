@@ -45,7 +45,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private void btnAddTS_Click(object sender, System.EventArgs e)
         {
             var row = new TechSpecsICTSpecsViewModel { TechSpecsId = _techSpecs.Id };
-            var frm = new frmAddEditTechSpecsICTSpecs(unitOfWork, row , Models.Enums.SaveType.Insert);
+            var frm = new frmAddEditTechSpecsICTSpecs(row , Models.Enums.SaveType.Insert);
             frm.ShowDialog();
             
             LoadTSEquipments();
@@ -60,7 +60,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private void btnEditData_Click(object sender, System.EventArgs e)
         {
             var row = (TechSpecsICTSpecsViewModel)gridICTSpecs.GetFocusedRow();
-            var frm = new frmAddEditTechSpecsICTSpecs(unitOfWork, row, Models.Enums.SaveType.Update);
+            var frm = new frmAddEditTechSpecsICTSpecs(row, Models.Enums.SaveType.Update);
             frm.ShowDialog();
 
             LoadTSEquipments();
@@ -72,7 +72,7 @@ namespace ICTProfilingV3.TechSpecsForms
             var ictSpecs = await unitOfWork.TechSpecsICTSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.EquipmentSpecs.Equipment);
 
-            var frm = new frmAddEditTSICTSpecsDetails(ictSpecs, unitOfWork);
+            var frm = new frmAddEditTSICTSpecsDetails(ictSpecs);
             frm.ShowDialog();
 
             LoadTSEquipments();

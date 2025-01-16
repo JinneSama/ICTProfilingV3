@@ -11,9 +11,10 @@ namespace ICTProfilingV3.PPEInventoryForms
     {
         private IUnitOfWork unitOfWork;
         private PPEsSpecs _specs;
-        public frmAddEditPPEsSpecsDetails(PPEsSpecs specs, IUnitOfWork uow)
+        public frmAddEditPPEsSpecsDetails(PPEsSpecs specs)
         {
-            InitializeComponent(); unitOfWork = uow;
+            InitializeComponent(); 
+            unitOfWork = new UnitOfWork();
             _specs = specs;
             lblEquipment.Text = specs.Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
             lblDescription.Text = specs.Model.Brand.EquipmentSpecs.Description;

@@ -26,11 +26,11 @@ namespace ICTProfilingV3.StandardPRForms
             lblPRId.Text = _purchaseRequest.Id.ToString();
         }
 
-        public frmAddEditStandardPR(IUnitOfWork uow, PurchaseRequest pr)
+        public frmAddEditStandardPR(PurchaseRequest pr)
         {
             InitializeComponent();
             IsSave = true;
-            _unitOfWork = uow;
+            _unitOfWork = new UnitOfWork();
             _purchaseRequest = pr;
             LoadDropdowns();
             LoadDetails();
@@ -88,7 +88,7 @@ namespace ICTProfilingV3.StandardPRForms
         private async void btnAddSpecs_Click(object sender, System.EventArgs e)
         {
             PRQuarter quarter = (PRQuarter)lueQuarter.EditValue;
-            var frm = new frmStandardPRList(_purchaseRequest.Id, quarter,_unitOfWork);
+            var frm = new frmStandardPRList(_purchaseRequest.Id, quarter);
             frm.ShowDialog();
 
             await LoadStandardPRSpecs();

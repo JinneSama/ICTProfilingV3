@@ -34,10 +34,10 @@ namespace ICTProfilingV3.StandardPRForms
             btnAddMarked.Enabled = false;
         }
 
-        public frmStandardPRList(int PRId, PRQuarter Quarter , IUnitOfWork _unitOfWork)
+        public frmStandardPRList(int PRId, PRQuarter Quarter)
         {
             InitializeComponent();
-            this.unitOfWork = _unitOfWork;
+            this.unitOfWork = new UnitOfWork();
             _prId = PRId;
             _quarter = Quarter;
             fromSelect = true;
@@ -84,7 +84,7 @@ namespace ICTProfilingV3.StandardPRForms
 
         private void btnAddStandardPR_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditStandardPRSpecs(unitOfWork);
+            var frm = new frmAddEditStandardPRSpecs();
             frm.ShowDialog();
 
             LoadStandardPR();
@@ -98,7 +98,7 @@ namespace ICTProfilingV3.StandardPRForms
         private void btnAddSpecs_Click(object sender, EventArgs e)
         {
             var row = (StandardPRViewModel)gridSpecs.GetFocusedRow();
-            var frm = new frmAddEditStandardPRSpecsDetails(unitOfWork , row.StandardPRSpecs);
+            var frm = new frmAddEditStandardPRSpecsDetails(row.StandardPRSpecs);
             frm.ShowDialog();
 
             LoadStandardPR();
@@ -129,7 +129,7 @@ namespace ICTProfilingV3.StandardPRForms
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var row = (StandardPRViewModel)gridSpecs.GetFocusedRow();
-            var frm = new frmAddEditStandardPRSpecs(unitOfWork , row.StandardPRSpecs);
+            var frm = new frmAddEditStandardPRSpecs(row.StandardPRSpecs);
             frm.ShowDialog();
 
             LoadStandardPR();

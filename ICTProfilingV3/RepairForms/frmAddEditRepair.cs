@@ -1,4 +1,5 @@
 ﻿using DevExpress.Utils.Drawing;
+using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.PPEInventoryForms;
 using Models.Entities;
@@ -35,12 +36,12 @@ namespace ICTProfilingV3.RepairForms
             LoadDropdowns();
         }
 
-        public frmAddEditRepair(IUnitOfWork uow, int repair)
+        public frmAddEditRepair(int repair)
         {
             InitializeComponent();
             saveType = SaveType.Update;
             IsSave = true;
-            _unitOfWork = uow;
+            _unitOfWork = new UnitOfWork();
             repairId = repair;
             LoadDropdowns();
         }
@@ -147,6 +148,15 @@ namespace ICTProfilingV3.RepairForms
             await Save();
             IsSave = true;
             this.Close();
+            if (saveType == SaveType.Update) return;
+            var actionType = new Models.Models.ActionType
+            {
+                Id = _Repairs.Id,
+                RequestType = RequestType.Repairs
+            };
+
+            var frm = new frmDocAction(actionType, SaveType.Insert, null, _unitOfWork, null);
+            frm.ShowDialog();
         }
         private async Task Save()
         {

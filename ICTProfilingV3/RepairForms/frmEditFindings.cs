@@ -18,10 +18,10 @@ namespace ICTProfilingV3.RepairForms
         private readonly IUnitOfWork unitOfWork;
         private readonly int repairId;
 
-        public frmEditFindings(IUnitOfWork uow, int repairId)
+        public frmEditFindings(int repairId)
         {
             InitializeComponent();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             this.repairId = repairId;
         }
 

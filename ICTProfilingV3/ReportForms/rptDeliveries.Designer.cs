@@ -94,6 +94,7 @@
             this.xrTableCell22 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell25 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLine2 = new DevExpress.XtraReports.UI.XRLine();
@@ -111,16 +112,16 @@
             this.GroupHeader4 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.GroupFooter3 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLine3 = new DevExpress.XtraReports.UI.XRLine();
+            this.groupHeaderBand1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.xrCrossBandBox1 = new DevExpress.XtraReports.UI.XRCrossBandBox();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -374,6 +375,7 @@
             this.lblOffice.SizeF = new System.Drawing.SizeF(322.7918F, 23F);
             this.lblOffice.StylePriority.UseFont = false;
             this.lblOffice.Text = "lblOffice";
+            this.lblOffice.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblOffice_BeforePrint);
             // 
             // xrLabel18
             // 
@@ -932,6 +934,11 @@
             this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             this.xrTableCell25.Weight = 3.8439178160962246D;
             // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Models.Entities.Deliveries);
+            this.objectDataSource1.Name = "objectDataSource1";
+            // 
             // xrPageInfo1
             // 
             this.xrPageInfo1.Font = new System.Drawing.Font("Arial", 8F);
@@ -1012,7 +1019,8 @@
             this.DetailReport3.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.Detail4,
             this.GroupHeader4,
-            this.GroupFooter3});
+            this.GroupFooter3,
+            this.groupHeaderBand1});
             this.DetailReport3.DataMember = "Actions";
             this.DetailReport3.DataSource = this.objectDataSource1;
             this.DetailReport3.Level = 1;
@@ -1076,6 +1084,7 @@
             this.GroupHeader4.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel22});
             this.GroupHeader4.HeightF = 23F;
+            this.GroupHeader4.Level = 1;
             this.GroupHeader4.Name = "GroupHeader4";
             // 
             // GroupFooter3
@@ -1083,6 +1092,7 @@
             this.GroupFooter3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLine3});
             this.GroupFooter3.HeightF = 3.000005F;
+            this.GroupFooter3.Level = 1;
             this.GroupFooter3.Name = "GroupFooter3";
             // 
             // xrLine3
@@ -1090,6 +1100,13 @@
             this.xrLine3.LocationFloat = new DevExpress.Utils.PointFloat(2.083492F, 0F);
             this.xrLine3.Name = "xrLine3";
             this.xrLine3.SizeF = new System.Drawing.SizeF(793.7496F, 3.000005F);
+            // 
+            // groupHeaderBand1
+            // 
+            this.groupHeaderBand1.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("ActionDate", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.groupHeaderBand1.HeightF = 0F;
+            this.groupHeaderBand1.Name = "groupHeaderBand1";
             // 
             // xtraTabbedMdiManager1
             // 
@@ -1111,11 +1128,6 @@
             this.xrPageInfo1});
             this.PageFooter.HeightF = 15.80505F;
             this.PageFooter.Name = "PageFooter";
-            // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Models.Entities.Deliveries);
-            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // rptDeliveries
             // 
@@ -1139,12 +1151,13 @@
             this.PageHeight = 1300;
             this.PaperKind = System.Drawing.Printing.PaperKind.Folio;
             this.Version = "21.2";
+            this.AfterPrint += new System.EventHandler(this.rptDeliveries_AfterPrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -1236,5 +1249,6 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel19;
         private DevExpress.XtraReports.UI.XRLabel xrLabel21;
         private DevExpress.XtraReports.UI.XRLabel xrLabel20;
+        private DevExpress.XtraReports.UI.GroupHeaderBand groupHeaderBand1;
     }
 }

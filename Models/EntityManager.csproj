@@ -157,13 +157,17 @@
     <Compile Include="Managers\User\ICTUserManager.cs" />
     <Compile Include="Managers\User\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202501110726572_NewDBChanges.cs" />
-    <Compile Include="Migrations\202501110726572_NewDBChanges.Designer.cs">
-      <DependentUpon>202501110726572_NewDBChanges.cs</DependentUpon>
+    <Compile Include="Migrations\202501130535154_NewDatabaseEntries.cs" />
+    <Compile Include="Migrations\202501130535154_NewDatabaseEntries.Designer.cs">
+      <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202501110805188_ActionDocsSecurityStamp.cs" />
-    <Compile Include="Migrations\202501110805188_ActionDocsSecurityStamp.Designer.cs">
-      <DependentUpon>202501110805188_ActionDocsSecurityStamp.cs</DependentUpon>
+    <Compile Include="Migrations\202501150712284_PGNNullables.cs" />
+    <Compile Include="Migrations\202501150712284_PGNNullables.Designer.cs">
+      <DependentUpon>202501150712284_PGNNullables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501150814496_M365Nullables.cs" />
+    <Compile Include="Migrations\202501150814496_M365Nullables.Designer.cs">
+      <DependentUpon>202501150814496_M365Nullables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionImage.cs" />
@@ -197,6 +201,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OFMISEntites.edmx</DependentUpon>
     </Compile>
+    <Compile Include="OFMISEntities\OFMISUsers.cs" />
     <Compile Include="OFMISEntities\User.cs">
       <DependentUpon>OFMISEntites.tt</DependentUpon>
     </Compile>
@@ -288,11 +293,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202501110726572_NewDBChanges.resx">
-      <DependentUpon>202501110726572_NewDBChanges.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501130535154_NewDatabaseEntries.resx">
+      <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202501110805188_ActionDocsSecurityStamp.resx">
-      <DependentUpon>202501110805188_ActionDocsSecurityStamp.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501150712284_PGNNullables.resx">
+      <DependentUpon>202501150712284_PGNNullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501150814496_M365Nullables.resx">
+      <DependentUpon>202501150814496_M365Nullables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

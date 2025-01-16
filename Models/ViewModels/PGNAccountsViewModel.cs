@@ -11,19 +11,19 @@ namespace Models.ViewModels
         }
         public PGNAccounts PGNAccount { get; set; }
         public bool IsNonEmployee => PGNAccount?.PGNNonEmployeeId == null ? false : true;
-        public long EmployeeId
+        public long? EmployeeId
         {
             get
             {
-                if(PGNAccount.PGNNonEmployeeId == null) return (long)PGNAccount?.HRMISEmpId;
-                return (long)PGNAccount?.PGNNonEmployeeId;
+                if(PGNAccount.PGNNonEmployeeId == null) return PGNAccount?.HRMISEmpId;
+                return (long?)PGNAccount?.PGNNonEmployeeId;
             }
         }
         public string Position
         {
             get
             {
-                if (PGNAccount.PGNNonEmployeeId == null) return Employee().Position;
+                if (PGNAccount.PGNNonEmployeeId == null) return Employee()?.Position;
                 return PGNAccount.PGNNonEmployee.Position;
             }
         }
@@ -31,7 +31,7 @@ namespace Models.ViewModels
         {
             get
             {
-                if (PGNAccount.PGNNonEmployeeId == null) return Employee().Employee;
+                if (PGNAccount.PGNNonEmployeeId == null) return Employee()?.Employee;
                 return PGNAccount.PGNNonEmployee.FullName;
             }
         }

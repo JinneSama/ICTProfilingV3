@@ -16,6 +16,6 @@ namespace Models.ReportViewModel
         public Users ReceivedBy { get; set; }
         public Users AssesedBy { get; set; }
         public Users NotedBy { get; set; }
-        public string Actions => string.Join(Environment.NewLine, Repair.Actions.Select(x => x.Remarks));
+        public string Actions => string.Join(Environment.NewLine, Repair.Actions.Select(x => x.ActionTaken + "-" + x.Remarks));
     }
 }

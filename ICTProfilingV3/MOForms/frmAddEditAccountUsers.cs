@@ -102,7 +102,7 @@ namespace ICTProfilingV3.MOForms
                 DateOfInstallation = deInstallationDate.DateTime,
                 ProcuredDate = deProcuredDate.DateTime,
                 DeviceNo = (int)spinDeviceNo.Value,
-                PPEId = (int)sluePropertyNo.EditValue,
+                PPEId = (int?)sluePropertyNo.EditValue,
                 Remarks = txtRemarks.Text,
                 IssuedTo = (long)slueIssuedTo.EditValue,
                 AccountUser = (long)slueUser.EditValue,
@@ -123,7 +123,7 @@ namespace ICTProfilingV3.MOForms
             user.DateOfInstallation = deInstallationDate.DateTime;
             user.ProcuredDate = deProcuredDate.DateTime;
             user.DeviceNo = (int)spinDeviceNo.Value;
-            user.PPEId = (int)sluePropertyNo.EditValue;
+            user.PPEId = (int?)sluePropertyNo.EditValue;
             user.Remarks = txtRemarks.Text;
             user.IssuedTo = (long)slueIssuedTo.EditValue;
             user.AccountUser = (long)slueUser.EditValue;

@@ -1,4 +1,6 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DeliveriesForms;
+using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Managers;
@@ -34,10 +36,10 @@ namespace ICTProfilingV3.TechSpecsForms
             CreateRepairTicket(repair);
         }
 
-        public frmAddEditTechSpecs(TechSpecs ts, IUnitOfWork uow)
+        public frmAddEditTechSpecs(TechSpecs ts)
         {
             InitializeComponent();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             _techSpecs = ts;
             SaveType = SaveType.Update;
             LoadDropdowns();
@@ -156,6 +158,15 @@ namespace ICTProfilingV3.TechSpecsForms
             RepairTechSpecs = _techSpecs;
             await SaveTechSpecs();
             this.Close();
+            if (SaveType == SaveType.Update) return;
+            var actionType = new Models.Models.ActionType
+            {
+                Id = _techSpecs.Id,
+                RequestType = RequestType.TechSpecs
+            };
+
+            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, null);
+            frm.ShowDialog();
         }
 
         private async Task SaveTechSpecs()

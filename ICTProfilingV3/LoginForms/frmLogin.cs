@@ -1,7 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using Helpers.Security;
 using ICTProfilingV3.ToolForms;
+using Models.Entities;
 using Models.Managers.User;
+using Models.OFMISEntities;
+using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +21,7 @@ namespace ICTProfilingV3.LoginForms
     public partial class frmLogin : DevExpress.XtraEditors.XtraForm
     {
         private readonly IICTUserManager userManager;
+        private readonly IUnitOfWork unitOfWork;
         private readonly frmMain frmMain;
         private bool Logged = false;
         private bool isLoggingIn = false;
@@ -24,6 +29,7 @@ namespace ICTProfilingV3.LoginForms
         {
             InitializeComponent();
             userManager = new ICTUserManager();
+            unitOfWork = new UnitOfWork();
             frmMain = _frmMain;
             RetrieveLoginDetails();
 
@@ -61,16 +67,29 @@ namespace ICTProfilingV3.LoginForms
                 Logged = true;
                 this.Close();
             }
-            var res = await userManager.Login(txtUsername.Text, txtPassword.Text);
-            if (res.success)
+            Users user = null;
+            bool logged = true;
+            var ofmisUser = await PointToSystemAccount(txtUsername.Text, txtPassword.Text);
+            if(ofmisUser == null)
+            {
+                var res = await userManager.Login(txtUsername.Text, txtPassword.Text);
+                if(!res.success) logged = false;
+                user = res.user;
+            }
+            else
+            {
+                user = ofmisUser;
+            }
+
+            if (logged)
             {
                 Logged = true;
-                UserStore.UserId = res.user.Id;
-                UserStore.Username = res.user.UserName;
-                UserStore.Fullname = res.user.FullName;
+                UserStore.UserId = user.Id;
+                UserStore.Username = user.UserName;
+                UserStore.Fullname = user.FullName;
 
                 frmMain.setRoleDesignations();
-                frmMain.SetUser(res.user.FullName, res.user.Position);
+                frmMain.SetUser(user.FullName,user.Position);
                 if (chkRemember.Checked) SetLoginDetails();
                 else ClearLoginDetails();
                 this.Close();
@@ -78,6 +97,25 @@ namespace ICTProfilingV3.LoginForms
             else MessageBox.Show("Wrong Username and Password!");
         }
 
+        private async Task<User> CheckOFMIS(string username, string password)
+        {
+            var ofmisUser = await OFMISUsers.GetUser(username);
+            if (ofmisUser == null) return null;
+
+            var decryptPass = Cryptography.Decrypt(ofmisUser.PasswordHash, ofmisUser.SecurityStamp);
+            if (Equals(decryptPass, password)) return ofmisUser;
+            else return null;
+        }
+
+        private async Task<Users> PointToSystemAccount(string username, string password)
+        {
+            User user = await CheckOFMIS(username, password);
+            if (user == null) return null;
+
+            var systemUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.UserName);
+            if (systemUser == null) return null;
+            return systemUser;
+        }
         private void ClearLoginDetails()
         {
             Properties.Settings.Default.Username = string.Empty;

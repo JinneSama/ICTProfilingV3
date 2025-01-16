@@ -43,7 +43,7 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditPPEEquipment(_ppe, unitOfWork);
+            var frm = new frmAddEditPPEEquipment(_ppe);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -64,7 +64,7 @@ namespace ICTProfilingV3.PPEInventoryForms
                 x => x.Model.Brand.EquipmentSpecs,
                 x => x.Model.Brand.EquipmentSpecs.Equipment);
             if (ppeSpecs == null) return;
-            var frm = new frmAddEditPPEEquipment(ppeSpecs, unitOfWork);
+            var frm = new frmAddEditPPEEquipment(ppeSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -77,7 +77,7 @@ namespace ICTProfilingV3.PPEInventoryForms
                 x => x.Model.Brand,
                 x => x.Model.Brand.EquipmentSpecs,
                 x => x.Model.Brand.EquipmentSpecs.Equipment);
-            var frm = new frmAddEditPPEsSpecsDetails(ppeSpecs, unitOfWork);
+            var frm = new frmAddEditPPEsSpecsDetails(ppeSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();

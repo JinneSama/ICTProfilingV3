@@ -10,9 +10,10 @@ namespace ICTProfilingV3.TechSpecsForms
     {
         private IUnitOfWork unitOfWork;
         private TechSpecsICTSpecs _specs;
-        public frmAddEditTSICTSpecsDetails(TechSpecsICTSpecs specs, IUnitOfWork uow)
+        public frmAddEditTSICTSpecsDetails(TechSpecsICTSpecs specs)
         {
-            InitializeComponent(); unitOfWork = uow;
+            InitializeComponent(); 
+            unitOfWork = new UnitOfWork();
             _specs = specs;
             lblEquipment.Text = specs?.EquipmentSpecs?.Equipment?.EquipmentName;
             lblDescription.Text = specs?.Description;

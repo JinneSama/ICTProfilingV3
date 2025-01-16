@@ -36,6 +36,7 @@
             this.tabRepairs = new DevExpress.XtraTab.XtraTabPage();
             this.tabPGN = new DevExpress.XtraTab.XtraTabPage();
             this.tabM365 = new DevExpress.XtraTab.XtraTabPage();
+            this.tabCAS = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabRepair)).BeginInit();
             this.tabRepair.SuspendLayout();
@@ -97,7 +98,8 @@
             this.tabRequest,
             this.tabRepairs,
             this.tabPGN,
-            this.tabM365});
+            this.tabM365,
+            this.tabCAS});
             // 
             // tabRequest
             // 
@@ -122,6 +124,12 @@
             this.tabM365.Name = "tabM365";
             this.tabM365.Size = new System.Drawing.Size(1382, 583);
             this.tabM365.Text = "M365 Data";
+            // 
+            // tabCAS
+            // 
+            this.tabCAS.Name = "tabCAS";
+            this.tabCAS.Size = new System.Drawing.Size(1382, 583);
+            this.tabCAS.Text = "CAS Data";
             // 
             // UCDashboard
             // 
@@ -149,5 +157,6 @@
         private DevExpress.XtraTab.XtraTabPage tabRepairs;
         private DevExpress.XtraTab.XtraTabPage tabPGN;
         private DevExpress.XtraTab.XtraTabPage tabM365;
+        private DevExpress.XtraTab.XtraTabPage tabCAS;
     }
 }

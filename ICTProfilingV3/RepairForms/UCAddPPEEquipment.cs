@@ -27,7 +27,7 @@ namespace ICTProfilingV3.RepairForms
         public UCAddPPEEquipment(PPEs ppe, IUnitOfWork _unitOfWork, bool showMark)
         {
             InitializeComponent();
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             this.showMark = !showMark;
             _ppe = ppe;
             if (_ppe == null) return;
@@ -38,7 +38,7 @@ namespace ICTProfilingV3.RepairForms
         {
             InitializeComponent();
             this.ppeSpecs = ppeSpecs;
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             this.showMark = showMark;
             if (ppeSpecs == null) return;
             LoadEquipmentSpecs();

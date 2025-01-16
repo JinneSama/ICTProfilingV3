@@ -13,11 +13,12 @@ namespace Models.Entities
         public int Id { get; set; }
         public long? HRMISEmpId { get; set; }
         public string Username { get; set; }
-        public PGNUserType UserType { get; set; }
-        public PGNStatus Status { get; set; }
+        public PGNUserType? UserType { get; set; }
+        public PGNStatus? Status { get; set; }
+        public string IPAddress { get; set; }
         public int? SignInCount { get; set; }
-        public PGNTrafficSpeed TrafficSpeed { get; set; }
-        public PGNDesignations Designation { get; set; }
+        public PGNTrafficSpeed? TrafficSpeed { get; set; }
+        public PGNDesignations? Designation { get; set; }
         public string Remarks { get; set; }
         public string Password { get; set; }
         public int? PGNGroupOfficesId { get; set; }

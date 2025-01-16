@@ -140,7 +140,7 @@
 	padding-right: 1rem;
 	font-size: 1.3em;
 	font-weight: bold;
-	color: White;
+	color: Black;
 }
 
 .Initials-Container{

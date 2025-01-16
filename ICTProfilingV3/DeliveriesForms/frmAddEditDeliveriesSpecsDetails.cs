@@ -14,10 +14,10 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             InitializeComponent();
         }
-        public frmAddEditDeliveriesSpecsDetails(DeliveriesSpecs specs , IUnitOfWork uow)
+        public frmAddEditDeliveriesSpecsDetails(DeliveriesSpecs specs)
         {
             InitializeComponent();
-            unitOfWork = uow;
+            unitOfWork = new UnitOfWork();
             _specs = specs;
             lblEquipment.Text = specs.Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
             lblDescription.Text = specs.Model.Brand.EquipmentSpecs.Description;

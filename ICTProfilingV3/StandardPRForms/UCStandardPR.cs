@@ -19,10 +19,10 @@ namespace ICTProfilingV3.StandardPRForms
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PurchaseRequest _purchaseRequest;
-        public UCStandardPR(IUnitOfWork uow, PurchaseRequest pr)
+        public UCStandardPR(PurchaseRequest pr)
         {
             InitializeComponent();
-            _unitOfWork = uow;
+            _unitOfWork = new UnitOfWork();
             _purchaseRequest = pr;
         }
         private async Task LoadStandardPRSpecs()

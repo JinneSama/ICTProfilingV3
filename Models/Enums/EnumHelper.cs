@@ -8,6 +8,7 @@ namespace Models.Enums
     {
         public static string GetEnumDescription(Enum value)
         {
+            if (value == null) return null;
             var field = value.GetType().GetField(value.ToString());
             var attribute = (DescriptionAttribute)field.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
             return attribute == null ? value.ToString() : attribute.Description;

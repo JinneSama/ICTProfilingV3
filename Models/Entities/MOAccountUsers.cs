@@ -22,7 +22,7 @@ namespace Models.Entities
         public string Remarks { get; set; }
         public string Description { get; set; }
 
-        public int PPEId { get; set; }
+        public int? PPEId { get; set; }
         [ForeignKey("PPEId")]
         public PPEs PPE { get; set; }
         public int MOAccountId { get; set; }

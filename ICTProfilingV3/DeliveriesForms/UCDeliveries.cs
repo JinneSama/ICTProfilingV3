@@ -98,12 +98,13 @@ namespace ICTProfilingV3.DeliveriesForms
         private async Task LoadEquipmentSpecs()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            tabEquipmentSpecs.Controls.Clear();
-
             if (row == null) return;
 
             var deliveries = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
-            tabEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(deliveries, _unitOfWork)
+            if(deliveries == null) return;
+
+            tabEquipmentSpecs.Controls.Clear();
+            tabEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(deliveries)
             {
                 Dock = DockStyle.Fill
             });
@@ -144,13 +145,15 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             var ds = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
+                x => x.Supplier,
                 x => x.DeliveriesSpecs.Select(s => s.Model),
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)).ToList();
             var rpt = new rptDeliveries
             {
-                DataSource = ds
+                DataSource = ds,
+                Office = txtOffice.Text
             };
 
             var frm = new frmReportViewer(rpt);
