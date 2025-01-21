@@ -11,5 +11,8 @@ namespace Models.ViewModels
         public string Position { get; set; }
         public string Office { get; set; }
         public string Division { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public long? ChiefId { get; set; }
     }
 }

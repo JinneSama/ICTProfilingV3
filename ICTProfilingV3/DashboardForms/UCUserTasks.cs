@@ -3,10 +3,13 @@ using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Tile;
 using DevExpress.XtraGrid.Views.Tile.ViewInfo;
+using EntityManager.Managers.Role;
+using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.TechSpecsForms;
+using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
 using Models.Repository;
@@ -15,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,13 +27,30 @@ namespace ICTProfilingV3.DashboardForms
     public partial class UCUserTasks : DevExpress.XtraEditors.XtraUserControl
     {
         private IUnitOfWork unitOfWork;
+        private readonly IICTUserManager userManager;
+        private readonly IICTRoleManager roleManager;
         public UCUserTasks()
         {
             InitializeComponent();
+            userManager = new ICTUserManager();
+            roleManager = new ICTRoleManager();
             unitOfWork = new UnitOfWork();
             InitKanban();
-            LoadData();
         }
+        private async Task CheckRole()
+        {
+            var user = await userManager.FindUserAsync(UserStore.UserId);
+            if (user.Roles == null)
+                LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+
+            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
+            if (role == null)
+                LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+
+            if (role.Select(x => x.Designation).ToList().Contains(Designation.TaskAdmin)) LoadData(null);
+            else LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+        }
+
         void InitKanban()
         {
             tileTasks.OptionsKanban.ShowGroupBackground = DefaultBoolean.True;
@@ -66,12 +87,14 @@ namespace ICTProfilingV3.DashboardForms
             throw new NotImplementedException();
         }
 
-        private void LoadData()
+        private void LoadData(Expression<Func<TicketRequest,bool>> expression = null)
         {
-            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId,
+            var filterExpression = expression ?? (x => true);
+
+            var tickets = unitOfWork.TicketRequestRepo.GetAll(
                 x => x.Repairs,
                 x => x.TechSpecs,
-                x => x.Deliveries).ToList().Select(x => new TasksViewModel
+                x => x.Deliveries).Where(filterExpression).ToList().Select(x => new TasksViewModel
             {
                 Ticket = x,
                 Status = x.TicketStatus.ToString()
@@ -169,6 +192,11 @@ namespace ICTProfilingV3.DashboardForms
                     this.popupMenu1.ShowPopup(Control.MousePosition);
                 }
             }
+        }
+
+        private async void UCUserTasks_Load(object sender, EventArgs e)
+        {
+            await CheckRole();
         }
     }
 }

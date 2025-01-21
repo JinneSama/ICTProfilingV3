@@ -178,7 +178,7 @@ namespace ICTProfilingV3.TechSpecsForms
             ts.DateAccepted = DateTime.UtcNow;
             ts.DateRequested = txtDate.DateTime;
             ts.ReqById = (long)slueEmployee.EditValue;
-            ts.ReqByChiefId = HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division, (long)slueEmployee.EditValue).ChiefId;
+            ts.ReqByChiefId = (long)HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division, (long)slueEmployee.EditValue).ChiefId;
             ts.ReqByGender = (Gender)rdbtnGender.SelectedIndex;
             ts.ContactNo = txtContactNo.Text;
             ts.RequestBasedApprovedPR = checkEditApprovedPR.Checked;

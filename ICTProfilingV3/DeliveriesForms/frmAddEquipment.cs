@@ -96,8 +96,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
             txtDescription.Text = res.Description;
 
-            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == res.Id);
-            slueBrand.Properties.DataSource = brand.ToList();
+            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == res.Id).ToList();
+            slueBrand.Properties.DataSource = brand;
         }
 
         private void slueBrand_EditValueChanged(object sender, EventArgs e)
@@ -173,6 +173,25 @@ namespace ICTProfilingV3.DeliveriesForms
             this.Close();
         }
 
+        private void RefreshBrand()
+        {
+            var res = (EquipmentSpecsViewModel)slueEquipment.Properties.View.GetFocusedRow();
+
+            if (res == null) return;    
+
+            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == res.Id).ToList();
+            slueBrand.Properties.DataSource = brand;
+        }
+
+        private void RefreshModel()
+        {
+            var res = (Brand)slueBrand.Properties.View.GetFocusedRow();
+            if (res == null) return;
+
+            var model = unitOfWork.ModelRepo.FindAllAsync(x => x.BrandId == res.Id);
+            slueModel.Properties.DataSource = model.ToList();
+        }
+
         private void btnAddEquipment_Click(object sender, EventArgs e)
         {
             var frm = new frmEquipment();
@@ -191,14 +210,14 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var frm = new frmEquipmentBrand();
             frm.ShowDialog();
-            LoadDropdowns();
+            RefreshBrand();
         }
 
         private void btnAddModel_Click(object sender, EventArgs e)
         {
             var frm = new frmEquipmentModels();
             frm.ShowDialog();
-            LoadDropdowns();
+            RefreshModel();
         }
 
         private void spinUnitCost_EditValueChanged(object sender, EventArgs e)

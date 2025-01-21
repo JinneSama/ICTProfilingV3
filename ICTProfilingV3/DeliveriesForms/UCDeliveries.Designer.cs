@@ -61,6 +61,9 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.btnCompReport = new DevExpress.XtraEditors.SimpleButton();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -210,6 +213,7 @@
             this.btnFilterbyDate.Size = new System.Drawing.Size(91, 28);
             this.btnFilterbyDate.TabIndex = 119;
             this.btnFilterbyDate.Text = "Filter By Date";
+            this.btnFilterbyDate.Click += new System.EventHandler(this.btnFilterbyDate_Click);
             // 
             // btnRefresh
             // 
@@ -227,7 +231,7 @@
             // 
             // rdbtnGender
             // 
-            this.rdbtnGender.Location = new System.Drawing.Point(245, 11);
+            this.rdbtnGender.Location = new System.Drawing.Point(245, 8);
             this.rdbtnGender.Margin = new System.Windows.Forms.Padding(2);
             this.rdbtnGender.Name = "rdbtnGender";
             this.rdbtnGender.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -236,8 +240,8 @@
             this.rdbtnGender.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Released", "Released", true, null, "rdbtnReleased"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Recorded", "Recorded", true, null, "rdbtnRecorded"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("All", "(All)", true, null, "rdbtnAll")});
-            this.rdbtnGender.Size = new System.Drawing.Size(273, 18);
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("All", "Assigned", true, null, "rdbtnAll")});
+            this.rdbtnGender.Size = new System.Drawing.Size(229, 24);
             this.rdbtnGender.TabIndex = 110;
             // 
             // slueTaskOf
@@ -254,6 +258,7 @@
             this.slueTaskOf.Properties.ValueMember = "Id";
             this.slueTaskOf.Size = new System.Drawing.Size(185, 22);
             this.slueTaskOf.TabIndex = 109;
+            this.slueTaskOf.EditValueChanged += new System.EventHandler(this.slueTaskOf_EditValueChanged);
             // 
             // gridView2
             // 
@@ -375,7 +380,10 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn10});
             this.gridDeliveries.GridControl = this.gcDeliveries;
             this.gridDeliveries.Name = "gridDeliveries";
             this.gridDeliveries.OptionsFind.AlwaysVisible = true;
@@ -471,6 +479,21 @@
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.FieldName = "Deliveries.DateRequested";
+            this.gridColumn8.Name = "gridColumn8";
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.FieldName = "Deliveries.TicketRequest.ITStaff.UserId";
+            this.gridColumn9.Name = "gridColumn9";
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.FieldName = "RecordedBy";
+            this.gridColumn10.Name = "gridColumn10";
             // 
             // pnlButtons
             // 
@@ -1001,5 +1024,8 @@
         private DevExpress.XtraEditors.RadioGroup rdbtnGender;
         private DevExpress.XtraEditors.SimpleButton btnFilterbyDate;
         private DevExpress.XtraEditors.SimpleButton btnRefresh;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
     }
 }

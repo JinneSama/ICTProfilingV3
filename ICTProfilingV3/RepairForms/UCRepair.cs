@@ -106,8 +106,18 @@ namespace ICTProfilingV3.RepairForms
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             if(row == null) return;
             var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.PPEsSpecs);
+                x => x.PPEs.PPEsSpecs,
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model),
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
             if (repair == null) return;
+
+            txtEquipment.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
+            txtBrand.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.Brand.BrandName;
+            txtModel.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.ModelName;
+            txtDescription.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Description;
+            txtSerialNo.Text = repair.PPEs.SerialNo;
 
             spbTicketStatus.SelectedItemIndex = ((int)repair.TicketRequest.TicketStatus) - 1;
             var employee = HRMISEmployees.GetEmployeeById(repair.RequestedById);

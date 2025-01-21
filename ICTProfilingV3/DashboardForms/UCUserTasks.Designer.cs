@@ -437,6 +437,7 @@
             this.Controls.Add(this.barDockControlTop);
             this.Name = "UCUserTasks";
             this.Size = new System.Drawing.Size(1164, 670);
+            this.Load += new System.EventHandler(this.UCUserTasks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.hplEpisNo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

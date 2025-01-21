@@ -1,5 +1,7 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.XtraRichEdit.Import.OpenXml;
 using Helpers.NetworkFolder;
+using ICTMigration.ICTv2Models;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
@@ -13,6 +15,7 @@ using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,14 +34,25 @@ namespace ICTProfilingV3.DeliveriesForms
             InitializeComponent();
             networkFolder = new HTTPNetworkFolder();
             _unitOfWork = new UnitOfWork();
-            LoadDeliveries();
         }
 
-        private void LoadDeliveries()
+        private void LoadDropdown()
         {
-            var deliveries = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
+            var staff = _unitOfWork.UsersRepo.GetAll().ToList();
+            var res = staff.OrderBy(o => o.FullName);
+
+            slueTaskOf.Properties.DataSource = res.ToList();
+        }
+
+        private async Task LoadDeliveries()
+        {
+            var deliveries = await _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
                 x => x.Supplier,
-                x => x.TicketRequest).OrderByDescending(x => x.DateRequested).ToList().Select(x => new DeliveriesViewModel
+                x => x.TicketRequest,
+                x => x.TicketRequest.ITStaff,
+                x => x.Actions).OrderByDescending(x => x.DateRequested).ToListAsync();
+
+            var delData = deliveries.Select(x => new DeliveriesViewModel
             {
                 Id = x.Id,
                 Status = x.TicketRequest.TicketStatus,
@@ -47,12 +61,13 @@ namespace ICTProfilingV3.DeliveriesForms
                 Supplier = x.Supplier.SupplierName,
                 DeliveryId = "EPiS-" + x.Id,
                 PONo = x.PONo,
-                Deliveries = x
+                Deliveries = x,
+                RecordedBy = x?.Actions?.OrderBy(o => o.ActionDate)?.FirstOrDefault()?.CreatedById
             });
-            gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(deliveries.ToList());
+            gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(delData.ToList());
         }
 
-        private async void LoadStaff()
+        private async Task LoadStaff()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             ITStaff staff = null;
@@ -100,7 +115,9 @@ namespace ICTProfilingV3.DeliveriesForms
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
-            var deliveries = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
+            IUnitOfWork uow = new UnitOfWork();
+            var deliveries = await uow.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
+
             if(deliveries == null) return;
 
             tabEquipmentSpecs.Controls.Clear();
@@ -134,7 +151,7 @@ namespace ICTProfilingV3.DeliveriesForms
             var frm = new frmAddEditDeliveries(deliveries);
             frm.ShowDialog();
 
-            LoadDeliveries();
+            await LoadDeliveries();
             LoadDetails();
             await LoadEquipmentSpecs();
 
@@ -160,8 +177,10 @@ namespace ICTProfilingV3.DeliveriesForms
             frm.ShowDialog();
         }
 
-        private void UCDeliveries_Load(object sender, EventArgs e)
+        private async void UCDeliveries_Load(object sender, EventArgs e)
         {
+            await LoadDeliveries();
+            LoadDropdown();
             if (filterText != null) gridDeliveries.ActiveFilterCriteria = new BinaryOperator("TicketNo", filterText);
         }
 
@@ -170,7 +189,7 @@ namespace ICTProfilingV3.DeliveriesForms
             await LoadEquipmentSpecs();
             LoadActions();
             LoadDetails();
-            LoadStaff();
+            await LoadStaff();
         }
 
         private void hplTicket_Click(object sender, EventArgs e)
@@ -198,8 +217,43 @@ namespace ICTProfilingV3.DeliveriesForms
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
 
             if (del == null) return;
+
+            var inspectActions = del?.Actions?.Where(x => x.SubActivityId == 1138).OrderBy(x => x.ActionDate);
+            if (inspectActions == null || inspectActions.Count() <= 0)
+            {
+                MessageBox.Show("Technical Inspection is not yet Started on this Delivery!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             var frm = new frmComparisonReport(del);    
             frm.ShowDialog();
+        }
+
+        private void FilterGrid()
+        {
+            gridDeliveries.ActiveFilterCriteria = null;
+            var row = (Users)slueTaskOf.Properties.View.GetFocusedRow();
+            var dateFrom = deFrom.DateTime;
+            var dateTo = deTo.DateTime;
+
+            var criteria = gridDeliveries.ActiveFilterCriteria;
+            if (slueTaskOf.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("Deliveries.TicketRequest.ITStaff.UserId", row.Id));
+            if (deFrom.EditValue != null && deTo.EditValue != null)
+            {
+                var fromFilter = new BinaryOperator("Deliveries.DateRequested", dateFrom, BinaryOperatorType.GreaterOrEqual);
+                var toFilter = new BinaryOperator("Deliveries.DateRequested", dateTo, BinaryOperatorType.LessOrEqual);
+                criteria = GroupOperator.And(criteria, GroupOperator.And(fromFilter, toFilter));
+            }
+            gridDeliveries.ActiveFilterCriteria = criteria;
+        }
+
+        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void btnFilterbyDate_Click(object sender, EventArgs e)
+        {
+            FilterGrid();
         }
     }
 }

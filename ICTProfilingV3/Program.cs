@@ -1,5 +1,8 @@
-﻿using ICTMigration.ICTv2Models;
+﻿using DevExpress.XtraSplashScreen;
+using ICTMigration.ICTv2Models;
 using ICTMigration.ModelMigrations;
+using ICTMigration.PPEMigration;
+using ICTProfilingV3.ToolForms;
 using Models.HRMISEntites;
 using Models.OFMISEntities;
 using Models.Repository;
@@ -19,12 +22,9 @@ namespace ICTProfilingV3
         [STAThread]
         static void Main()
         {
-            HRMISEmployees.InitContext();
-            OFMISEmployees.InitEmployees();
-            OFMISUsers.InitUsers();
-
-
+            SplashScreenManager.ShowForm(typeof(frmSplashScreen));
             MainAsync().GetAwaiter().GetResult();
+            SplashScreenManager.CloseForm();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -33,6 +33,10 @@ namespace ICTProfilingV3
 
         private static async Task MainAsync()
         {
+            await HRMISEmployees.InitContext();
+            await OFMISEmployees.InitEmployees();
+            OFMISUsers.InitUsers();
+
             if (ConfigurationManager.AppSettings["Run_Migration"] == "run")
             {
                 LookUpMigration lookup = new LookUpMigration();
@@ -69,6 +73,9 @@ namespace ICTProfilingV3
                 PGNMigration pgnMigration = new PGNMigration();
                 await pgnMigration.MigrateNonEmployee();
                 await pgnMigration.MigratePGNAccounts();
+
+                MigratePPE ppe = new MigratePPE();
+                await ppe.FixMigratedPPEEmployee();
             }
         }
     }

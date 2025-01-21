@@ -47,6 +47,7 @@ namespace ICTProfilingV3.MOForms
             txtRemarks.Text = moAccountUser.Remarks;
             slueIssuedTo.EditValue = moAccountUser.IssuedTo;
             slueUser.EditValue = moAccountUser.AccountUser;
+            txtDescription.Text = moAccountUser.Description;
         }
 
         private void LoadDropdowns()

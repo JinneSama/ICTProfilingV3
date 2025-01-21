@@ -224,6 +224,7 @@
             this.btnAddICTSpecs.Name = "btnAddICTSpecs";
             this.btnAddICTSpecs.Size = new System.Drawing.Size(18, 20);
             this.btnAddICTSpecs.TabIndex = 142;
+            this.btnAddICTSpecs.Click += new System.EventHandler(this.btnAddICTSpecs_Click);
             // 
             // btnAddEquipment
             // 
@@ -234,6 +235,7 @@
             this.btnAddEquipment.Name = "btnAddEquipment";
             this.btnAddEquipment.Size = new System.Drawing.Size(18, 20);
             this.btnAddEquipment.TabIndex = 139;
+            this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
             // 
             // txtPurpose
             // 

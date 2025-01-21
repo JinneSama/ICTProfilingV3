@@ -47,7 +47,7 @@ namespace ICTProfilingV3.UsersForms
 
         private async void LoadStaff()
         {
-            var staffList = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests, x => x.Users).ToList();
+            var staffList = unitOfWork.ITStaffRepo.FindAllAsync(x => x.Users.IsDeleted == false ,x => x.TicketRequests, x => x.Users).ToList();
             var staffViewModels = new List<StaffViewModel>();
             foreach (var staff in staffList)
             {

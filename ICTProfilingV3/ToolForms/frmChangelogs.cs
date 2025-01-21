@@ -26,6 +26,7 @@ namespace ICTProfilingV3.ToolForms
 
         private async void LoadDetails()
         {
+            btnClose.Enabled = false;
             lblVersion.Text = "Current Version: " + version;
             var changes = await Task.WhenAll(
                 unitOfWork.ChangeLogsRepo.GetAll()
@@ -38,6 +39,8 @@ namespace ICTProfilingV3.ToolForms
                     })
             );
             gcChangelogs.DataSource = changes.ToList();
+            btnClose.Enabled = true;
+            progressChanges.Visible = false;
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)

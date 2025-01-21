@@ -60,6 +60,9 @@ namespace ICTProfilingV3.LookUpTables
             var res = await unitOfWork.SupplierRepo.FindAsync(x => x.Id == supplier.Id);
             res.SupplierName = supplier.SupplierName;
             res.Address = supplier.Address;
+            res.PhoneNumber = supplier.PhoneNumber;
+            res.TelNumber = supplier.TelNumber;
+            res.ContactPerson = supplier.ContactPerson;
             unitOfWork.Save();
         }
     }

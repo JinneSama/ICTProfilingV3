@@ -33,7 +33,7 @@ namespace ICTProfilingV3.UsersForms
 
         private void LoadUsers()
         {
-            var users = userManager.GetUsers().ToList();
+            var users = userManager.GetUsers().Where(x => x.IsDeleted == false).ToList();
             var userViewModel = users.Select(x => new UsersViewModel
             {
                 Id = x.Id,

@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils.DirectXPaint.Svg;
 using DevExpress.Utils.Filtering;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.LookUpTables;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
@@ -145,6 +146,20 @@ namespace ICTProfilingV3.TechSpecsForms
         private async void frmAddEditTechSpecsICTSpecs_Load(object sender, EventArgs e)
         {
             await LoadItemNo();
+        }
+
+        private void btnAddICTSpecs_Click(object sender, EventArgs e)
+        {
+            var frm = new frmEquipmentSpecs();
+            frm.ShowDialog();
+            LoadDropdowns();
+        }
+
+        private void btnAddEquipment_Click(object sender, EventArgs e)
+        {
+            var frm = new frmEquipment();
+            frm.ShowDialog();
+            LoadDropdowns();
         }
     }
 }

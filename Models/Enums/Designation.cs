@@ -27,6 +27,7 @@
         PRCASContainer = 22,
         InventoryContainer = 23,
         M365Container = 24,
-        Unknown = 25
+        Unknown = 25,
+        TaskAdmin = 26
     }
 }

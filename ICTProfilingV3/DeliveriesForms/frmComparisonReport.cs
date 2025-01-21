@@ -15,6 +15,10 @@ using ICTProfilingV3.ReportForms;
 using System.Collections.Generic;
 using Models.ReportViewModel;
 using Models.Managers.User;
+using DevExpress.Utils.DragDrop;
+using DevExpress.XtraGrid;
+using System.Drawing;
+using DevExpress.XtraExport.Helpers;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
@@ -32,7 +36,6 @@ namespace ICTProfilingV3.DeliveriesForms
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
             this.deliveries = deliveries;
-            LoadData();
         }
 
         private void ExpandAll()
@@ -44,7 +47,7 @@ namespace ICTProfilingV3.DeliveriesForms
             }
         }
 
-        private async void LoadData()
+        private async Task LoadData()
         {
             lblEpisNo.Text = deliveries.Id.ToString();
 
@@ -57,7 +60,7 @@ namespace ICTProfilingV3.DeliveriesForms
             var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138).OrderBy(x => x.ActionDate);
             txtInspectedDate.DateTime = (DateTime)inspectActions?.FirstOrDefault()?.ActionDate;
 
-            if (deliveries.ComparisonReports.FirstOrDefault() == null) CreateComparisonReport();
+            if (deliveries.ComparisonReports.FirstOrDefault() == null) await CreateComparisonReport();
             else await LoadDetails();
             ExpandAll();
         }
@@ -83,7 +86,7 @@ namespace ICTProfilingV3.DeliveriesForms
             gcCR.DataSource = new BindingList<ComparisonReportViewModel>(crViewModel.ToList());
         }
 
-        private async void CreateComparisonReport()
+        private async Task CreateComparisonReport()
         {
             var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
             if (cr == null){
@@ -114,7 +117,7 @@ namespace ICTProfilingV3.DeliveriesForms
                     unitOfWork.ComparisonReportSpecsDetailsRepo.Insert(crSpecsDetails);
                 }
             }
-            unitOfWork.Save();
+            await unitOfWork.SaveChangesAsync();
             await LoadDetails();
         }
 
@@ -188,7 +191,7 @@ namespace ICTProfilingV3.DeliveriesForms
         private async void btnSave_Click(object sender, EventArgs e)
         {
             await SaveDetails();
-            for (int i = 0; i < gridCR.RowCount; i++)
+            for (int i = 0; i <= gridCR.RowCount; i++)
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
                 if(row == null) continue;
@@ -197,7 +200,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 unitOfWork.Save();
             }
 
-            for (int i = 0; i < gridCR.RowCount; i++)
+            for (int i = 0; i <= gridCR.RowCount; i++)
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
                 if (row == null) continue;
@@ -239,7 +242,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 }
             }
             unitOfWork.Save();
-            LoadData();
+            await LoadData();
             MessageBox.Show("Changes Saved!", "Alert", MessageBoxButtons.OK , MessageBoxIcon.Information);
         }
 
@@ -302,7 +305,7 @@ namespace ICTProfilingV3.DeliveriesForms
             }
             unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == cr.Id);
             unitOfWork.Save();
-            CreateComparisonReport();
+            await CreateComparisonReport();
         }
 
         private void btnAddRow_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -311,6 +314,73 @@ namespace ICTProfilingV3.DeliveriesForms
             var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
             var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
             row.AddNewRow();
+        }
+
+        private async void frmComparisonReport_Load(object sender, EventArgs e)
+        {
+            await LoadData();
+        }
+
+        private void btnRowUp_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (IsDetail)
+            {
+                var masterRowHandle = gridCR.FocusedRowHandle;
+                var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
+                var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
+
+                if (row.FocusedRowHandle == 0) return;
+                var sourceRowData = (ComparisonReportSpecsDetails)row.GetRow(row.FocusedRowHandle);
+                var destRowData = (ComparisonReportSpecsDetails)row.GetRow(row.FocusedRowHandle - 1);
+
+                var sourceIndex = sourceRowData.ItemOrder;
+                var destIndex = destRowData.ItemOrder;
+
+                sourceRowData.ItemOrder = destIndex;
+                destRowData.ItemOrder = sourceIndex;
+
+                row.BeginDataUpdate();
+                row.ClearSorting();
+                row.Columns["ItemOrder"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                row.EndDataUpdate();
+            }
+        }
+
+        private void btnRowDown_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (IsDetail)
+            {
+                var masterRowHandle = gridCR.FocusedRowHandle;
+                var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
+                var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
+
+                if (row.FocusedRowHandle >= row.RowCount - 1) return;
+                var sourceRowData = (ComparisonReportSpecsDetails)row.GetRow(row.FocusedRowHandle);
+                var destRowData = (ComparisonReportSpecsDetails)row.GetRow(row.FocusedRowHandle + 1);
+
+                var sourceIndex = sourceRowData.ItemOrder;
+                var destIndex = destRowData.ItemOrder;
+
+                sourceRowData.ItemOrder = destIndex;
+                destRowData.ItemOrder = sourceIndex;
+
+                row.BeginDataUpdate();
+                row.ClearSorting();
+                row.Columns["ItemOrder"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                row.EndDataUpdate();
+            }
+        }
+
+        private void btnDeleteRow_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (IsDetail)
+            {
+                var masterRowHandle = gridCR.FocusedRowHandle;
+                var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
+                var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
+                row.DeleteRow(rowHandle);
+            }
+        
         }
     }
     

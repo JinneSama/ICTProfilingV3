@@ -32,7 +32,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 Model = x.Model.ModelName,
                 UnitCost = (long)x.UnitCost,
                 TotalCost = (long)x.TotalCost,
-                DeliveriesSpecsDetails = x.DeliveriesSpecsDetails
+                DeliveriesSpecsDetails = x.DeliveriesSpecsDetails.OrderBy(o => o.ItemNo).ToList()
             });
             gcEquipmentSpecs.DataSource = new BindingList<DeliveriesSpecsViewModel>(res.ToList());
         }

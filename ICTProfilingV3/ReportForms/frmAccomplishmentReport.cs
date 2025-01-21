@@ -63,7 +63,9 @@ namespace ICTProfilingV3.ReportForms
                 PreparedBy = await userManager.FindUserAsync((string)sluePreparedBy.EditValue),
                 ReviewedBy = await userManager.FindUserAsync((string)slueReviewedBy.EditValue),
                 ApprovedBy = await userManager.FindUserAsync((string)slueApprovedBy.EditValue),
-                ActionReport = actions
+                ActionReport = actions,
+                AOPosition = txtReviewedByPos.Text,
+                ApprovedPosition = txtApprovedByPos.Text
             };
 
             var rpt = new rptAccomplishment

@@ -36,7 +36,6 @@ namespace Helpers.Update
 
                 if (info.UpdateAvailable)
                 {
-
                     return true;
                 }
                 return false;

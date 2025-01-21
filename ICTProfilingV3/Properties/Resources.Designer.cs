@@ -1213,6 +1213,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap close_32x324 {
+            get {
+                object obj = ResourceManager.GetObject("close_32x324", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap compatibility_16x16 {
             get {
                 object obj = ResourceManager.GetObject("compatibility_16x16", resourceCulture);
@@ -1943,6 +1953,26 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap next_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("next_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap next_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("next_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap nv_logo {
             get {
                 object obj = ResourceManager.GetObject("nv_logo", resourceCulture);
@@ -2096,6 +2126,26 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap preview_32x321 {
             get {
                 object obj = ResourceManager.GetObject("preview_32x321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap previous_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("previous_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap previous_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("previous_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -37,7 +37,8 @@ namespace ICTProfilingV3.MOForms
             txtProcuredDate.Text = row?.ProcuredDate.Value.ToShortDateString();
             txtDeviceNo.Text = row?.DeviceNo.ToString();
             txtPropertyNo.Text = row?.PPE?.PropertyNo;
-            txtDescription.Text = row?.PPE?.Remarks;
+            txtDescription.Text = row?.Description;
+            txtRemarks.Text = row?.Remarks;
             
             var IssuedTo = HRMISEmployees.GetEmployeeById(row.IssuedTo);
             var User = HRMISEmployees.GetEmployeeById(row.AccountUser);

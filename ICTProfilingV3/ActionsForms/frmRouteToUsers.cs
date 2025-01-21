@@ -39,7 +39,7 @@ namespace ICTProfilingV3.ActionsForms
         private void LoadUsers()
         {
             if(_routedUsers == null) _routedUsers = new List<UsersViewModel>();
-            var users = _userManager.GetUsers();
+            var users = _userManager.GetUsers().Where(x => x.IsDeleted == false);
             var userViewModel = users.Select(x => new UsersViewModel
             {
                 Id = x.Id,

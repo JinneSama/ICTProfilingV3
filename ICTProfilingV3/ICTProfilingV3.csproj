@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationRevision>53</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -266,6 +266,12 @@
     <Compile Include="DashboardForms\WaitForm2.Designer.cs">
       <DependentUpon>WaitForm2.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugTools\frmVersionSetter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugTools\frmVersionSetter.Designer.cs">
+      <DependentUpon>frmVersionSetter.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveriesForms\frmAddEditDeliveries.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -463,6 +469,18 @@
     </Compile>
     <Compile Include="ToolForms\frmSelectOFMISEmployee.Designer.cs">
       <DependentUpon>frmSelectOFMISEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmSplashScreen.Designer.cs">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\frmUpdater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmUpdater.Designer.cs">
+      <DependentUpon>frmUpdater.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WaitFormUpload.cs">
       <SubType>Form</SubType>
@@ -820,6 +838,9 @@
     <EmbeddedResource Include="DashboardForms\WaitForm2.resx">
       <DependentUpon>WaitForm2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DebugTools\frmVersionSetter.resx">
+      <DependentUpon>frmVersionSetter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\frmAddEditDeliveries.resx">
       <DependentUpon>frmAddEditDeliveries.cs</DependentUpon>
     </EmbeddedResource>
@@ -918,6 +939,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\frmSelectOFMISEmployee.resx">
       <DependentUpon>frmSelectOFMISEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmSplashScreen.resx">
+      <DependentUpon>frmSplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmUpdater.resx">
+      <DependentUpon>frmUpdater.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WaitFormUpload.resx">
       <DependentUpon>WaitFormUpload.cs</DependentUpon>
@@ -1831,6 +1858,10 @@
     <None Include="Resources\printpreview_16x166.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\previous_32x32.png" />
+    <None Include="Resources\previous_16x16.png" />
+    <None Include="Resources\next_32x32.png" />
+    <None Include="Resources\next_16x16.png" />
     <None Include="Resources\iconsetredtoblack4_16x16.png" />
     <None Include="Resources\save_16x1610.png" />
     <None Include="Resources\up_32x32.png" />
@@ -1845,6 +1876,8 @@
     <None Include="Resources\attachment_16x162.png" />
     <None Include="Resources\doublenext_16x16.png" />
     <None Include="Resources\doublenext_32x32.png" />
+    <None Include="Resources\close_16x1649.png" />
+    <None Include="Resources\close_32x324.png" />
     <Content Include="Resources\Epis.ico" />
     <Content Include="Resources\EPIS_LOGO.ico" />
     <None Include="Resources\printarea_32x321.png" />

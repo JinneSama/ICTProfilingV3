@@ -47,6 +47,7 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.lblVersion = new DevExpress.XtraEditors.LabelControl();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
+            this.progressChanges = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.rteChanges)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcChangelogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tvChangelogs)).BeginInit();
@@ -209,6 +210,16 @@
             this.btnClose.TabIndex = 4;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // progressChanges
+            // 
+            this.progressChanges.Appearance.BackColor = System.Drawing.Color.White;
+            this.progressChanges.Appearance.Options.UseBackColor = true;
+            this.progressChanges.Location = new System.Drawing.Point(267, 405);
+            this.progressChanges.Name = "progressChanges";
+            this.progressChanges.Size = new System.Drawing.Size(144, 66);
+            this.progressChanges.TabIndex = 5;
+            this.progressChanges.Text = "progressPanel1";
+            // 
             // frmChangelogs
             // 
             this.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
@@ -216,6 +227,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 827);
+            this.Controls.Add(this.progressChanges);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.labelControl1);
@@ -243,5 +255,6 @@
         private DevExpress.XtraEditors.SimpleButton btnClose;
         private DevExpress.XtraGrid.Columns.TileViewColumn colImage;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit rteChanges;
+        private DevExpress.XtraWaitForm.ProgressPanel progressChanges;
     }
 }

@@ -12,6 +12,7 @@ namespace Models.ViewModels
         public string PONo { get; set; }
         public string Supplier { get; set; }
         public string DeliveryId { get; set; }
+        public string RecordedBy { get; set; }
         public Deliveries Deliveries { get; set; }
     }
 }

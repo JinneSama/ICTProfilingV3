@@ -1,18 +1,14 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
 using Helpers.Security;
+using ICTProfilingV3.DebugTools;
 using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Managers.User;
 using Models.OFMISEntities;
 using Models.Repository;
+using Models.Service.DTOModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -46,6 +42,8 @@ namespace ICTProfilingV3.LoginForms
                 if (version != Properties.Settings.Default.LastVersion)
                 {
                     Properties.Settings.Default.LastVersion = version;
+                    Properties.Settings.Default.Save();
+
                     frmChangelogs frm = new frmChangelogs(version);
                     frm.ShowDialog();
                 }
@@ -54,6 +52,13 @@ namespace ICTProfilingV3.LoginForms
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+            if(txtUsername.Text == "#SetVersion#")
+            {
+                var frm = new frmVersionSetter();
+                frm.ShowDialog();
+                return;
+            }
+
             if (isLoggingIn) return;
             isLoggingIn = true;
             await Login();
@@ -97,7 +102,7 @@ namespace ICTProfilingV3.LoginForms
             else MessageBox.Show("Wrong Username and Password!");
         }
 
-        private async Task<User> CheckOFMIS(string username, string password)
+        private async Task<OFMISUsersDto> CheckOFMIS(string username, string password)
         {
             var ofmisUser = await OFMISUsers.GetUser(username);
             if (ofmisUser == null) return null;
@@ -109,10 +114,10 @@ namespace ICTProfilingV3.LoginForms
 
         private async Task<Users> PointToSystemAccount(string username, string password)
         {
-            User user = await CheckOFMIS(username, password);
+            var user = await CheckOFMIS(username, password);
             if (user == null) return null;
 
-            var systemUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.UserName);
+            var systemUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.Username);
             if (systemUser == null) return null;
             return systemUser;
         }

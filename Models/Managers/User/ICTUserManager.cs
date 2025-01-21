@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Models.Entities;
 using Models.Models;
-using Models.ViewModels;
 
 namespace EntityManager.Managers.User
 {
@@ -60,7 +59,7 @@ namespace EntityManager.Managers.User
 
         public IEnumerable<Users> GetUsers()
         {
-            return _userManager.Users.ToList();
+            return _userManager.Users.Where(x => x.IsDeleted == false).ToList();
         }
 
         public async Task<Users> FindUserAsync(string userId)

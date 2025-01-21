@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges3 = new DevExpress.Skins.SkinPaddingEdges();
+            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
@@ -158,7 +158,7 @@
             this.ribbonPage2,
             this.ribbonPage4,
             this.ribbonPage3});
-            this.ribbon.Size = new System.Drawing.Size(1322, 154);
+            this.ribbon.Size = new System.Drawing.Size(1322, 161);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // backstageViewControl1
@@ -178,16 +178,16 @@
             // 
             // backstageViewClientControl1
             // 
-            this.backstageViewClientControl1.Location = new System.Drawing.Point(154, 62);
+            this.backstageViewClientControl1.Location = new System.Drawing.Point(169, 62);
             this.backstageViewClientControl1.Name = "backstageViewClientControl1";
-            this.backstageViewClientControl1.Size = new System.Drawing.Size(368, 134);
+            this.backstageViewClientControl1.Size = new System.Drawing.Size(366, 146);
             this.backstageViewClientControl1.TabIndex = 1;
             // 
             // backstageViewClientControl2
             // 
-            this.backstageViewClientControl2.Location = new System.Drawing.Point(154, 63);
+            this.backstageViewClientControl2.Location = new System.Drawing.Point(169, 63);
             this.backstageViewClientControl2.Name = "backstageViewClientControl2";
-            this.backstageViewClientControl2.Size = new System.Drawing.Size(380, 144);
+            this.backstageViewClientControl2.Size = new System.Drawing.Size(365, 144);
             this.backstageViewClientControl2.TabIndex = 2;
             // 
             // btnLogout
@@ -213,6 +213,7 @@
             this.btnDashboard.Id = 1;
             this.btnDashboard.ImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.chart;
             this.btnDashboard.Name = "btnDashboard";
+            this.btnDashboard.Tag = "Dashboard";
             this.btnDashboard.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDashboard_ItemClick);
             // 
             // btnTARequest
@@ -282,6 +283,7 @@
             this.btnUserTasks.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.botask_16x16;
             this.btnUserTasks.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.botask_32x32;
             this.btnUserTasks.Name = "btnUserTasks";
+            this.btnUserTasks.Tag = "Tasks";
             this.btnUserTasks.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUserTasks_ItemClick);
             // 
             // btnSuppliers
@@ -509,9 +511,9 @@
             this.skinRibbonGalleryBarItem1.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLayout = DevExpress.Utils.Drawing.ImageLayoutMode.Squeeze;
             this.skinRibbonGalleryBarItem1.Gallery.ItemImageLocation = DevExpress.Utils.Locations.Top;
-            skinPaddingEdges3.Left = 8;
-            skinPaddingEdges3.Right = 8;
-            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges3;
+            skinPaddingEdges1.Left = 8;
+            skinPaddingEdges1.Right = 8;
+            this.skinRibbonGalleryBarItem1.Gallery.ItemImagePadding = skinPaddingEdges1;
             this.skinRibbonGalleryBarItem1.Id = 35;
             this.skinRibbonGalleryBarItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("skinRibbonGalleryBarItem1.ImageOptions.SvgImage")));
             this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
@@ -726,17 +728,17 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.lblUpdate);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 629);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 626);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1322, 21);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1322, 24);
             // 
             // mainPanel
             // 
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 154);
+            this.mainPanel.Location = new System.Drawing.Point(0, 161);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1322, 475);
+            this.mainPanel.Size = new System.Drawing.Size(1322, 465);
             this.mainPanel.TabIndex = 2;
             // 
             // UpdateThread

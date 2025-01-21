@@ -15,6 +15,8 @@ namespace Models.ReportViewModel
         public Users ReviewedBy { get; set; }
         public Users ApprovedBy { get; set; }
         public string AccomplishmentPeriod { get; set; }
+        public string AOPosition { get; set; }
+        public string ApprovedPosition { get; set; }
         public IEnumerable<ActionReport> ActionReport { get; set; }
     }
 

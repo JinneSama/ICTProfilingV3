@@ -124,7 +124,8 @@ namespace ICTProfilingV3.TechSpecsForms
             if (row == null) return;
 
             lblTSId.Text = row.Id.ToString();
-            var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
+            var uow = new UnitOfWork();
+            var ts = await uow.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
             tabRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(ts)
             {
                 Dock = System.Windows.Forms.DockStyle.Fill

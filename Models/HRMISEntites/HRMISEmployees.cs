@@ -1,63 +1,55 @@
 ﻿using Models.Models;
 using Models.OFMISEntities;
+using Models.Service;
 using Models.ViewModels;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace Models.HRMISEntites
 {
     public static class HRMISEmployees
     {
-        private static HRMISv2Entities _context;
         private static IEnumerable<EmployeesViewModel> _employees;
-        public static IQueryable<ChiefOfOffices> ChiefOfOffices;
-        public static async void InitContext()
+        public static IEnumerable<ChiefOfOffices> ChiefOfOffices;
+        private static HRMISService service;
+        public static async Task InitContext()
         {
-            _context = new HRMISv2Entities();
+            service = new HRMISService();
             _employees = await InitEmployees();
-            ChiefOfOffices = GetOffices();
+            ChiefOfOffices = await GetOffices();
         }
 
-        private static IQueryable<ChiefOfOffices> GetOffices()
+        private static async Task<IEnumerable<ChiefOfOffices>> GetOffices()
         {
-            var offices = _context.Offices;
-            var division = _context.Divisions;
+            var division = await service.GetDivision();
+            var offices = await service.GetOffice();
 
             var res = offices.GroupJoin(
                 division,
-                A => A.fldOfficeID,
-                B => B.fldOfficeID,
-                (A, B) => new { A, B }).SelectMany(x => x.B.DefaultIfEmpty(),
-                (x, B) => new ChiefOfOffices
-                {
-                    ChiefId = (long)(B.fldEmpID == null ? x.A.fldEmpID : B.fldEmpID),
-                    Office = x.A.fldOfficeID,
-                    Division = B.fldDivision
-                });
+                A => A.Office,
+                B => B.Office,
+                (A, B) => new { A, B })
+                .SelectMany(
+                    x => x.B.DefaultIfEmpty(),
+                    (x, B) => new ChiefOfOffices
+                    {
+                        ChiefId = B == null || B.ChiefId == null ? x.A.ChiefId : B.ChiefId.Value,
+                        Office = x.A.Office,
+                        Division = B?.Division
+                    });
+
             return res;
         }
         private async static Task<IEnumerable<EmployeesViewModel>> InitEmployees()
         {
-            var employees = _context.Employees
-                .Select(x => new EmployeesViewModel
-                {
-                    Id = x.fldEmpID,
-                    Employee = x.fldLastname + ", " + x.fldFirstname + " " + x.fldMIddleName + " " + x.fldNameExt,
-                    Office = x.flddetailed == true ? x.flddetailedTo : x.fldOfficeID,
-                    Division = x.flddetailed == true ? x.flddetailedToDivision : x.fldDivision,
-                    Position = x.fldPosition,
-                    Username = x.fldUsername
-                });
-            return await employees.ToListAsync();
+            var employees = await service.GetEmployees();
+            return employees;
         }
 
         public static IEnumerable<EmployeesViewModel> GetChiefOfOffices()
         {
-            return ChiefOfOffices.ToList().Select(x => GetEmployeeById(x.ChiefId)).ToList();
+            return ChiefOfOffices.Select(x => GetEmployeeById(x.ChiefId)).ToList();
         }
 
         public static IEnumerable<EmployeesViewModel> GetEmployees()
@@ -75,12 +67,13 @@ namespace Models.HRMISEntites
         public static ChiefOfOffices GetChief(string Office, string Division, long? employeeId)
         {
             ChiefOfOffices chief = null;
-
             if (string.IsNullOrEmpty(Division) || string.IsNullOrWhiteSpace(Division)) chief = ChiefOfOffices.FirstOrDefault(x => x.Office == Office);
-            else chief = ChiefOfOffices.FirstOrDefault(x => x.Division.Contains(Division));
+            else chief = ChiefOfOffices.FirstOrDefault();
 
             if(chief == null)
             {
+                if (employeeId == null) return null;
+
                 var empId = OFMISEmployees.GetEmployeeById((int)employeeId)?.Id;
                 if(empId == null) return null;
                 var resChief = OFMISEmployees.GetEmployeeById((int)empId);

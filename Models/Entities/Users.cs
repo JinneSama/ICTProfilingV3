@@ -32,6 +32,7 @@ namespace Models.Entities
         public string FullName { get; set; }
         public string Position { get; set; }
         public string OFMISUsername { get; set; }
+        public bool? IsDeleted { get; set; }
         public virtual ICollection<ITStaff> ITStaffs { get; set; }
 
         [InverseProperty("CreatedBy")]

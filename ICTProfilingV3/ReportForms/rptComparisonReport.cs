@@ -16,5 +16,10 @@ namespace ICTProfilingV3.ReportForms
         private void rptComparisonReport_AfterPrint(object sender, EventArgs e)
         {
         }
+
+        private void rptComparisonReport_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
+        }
     }
 }

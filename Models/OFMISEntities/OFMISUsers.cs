@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using Models.Service;
+using Models.Service.DTOModels;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -6,17 +8,15 @@ namespace Models.OFMISEntities
 {
     public class OFMISUsers
     {
-        private static OFMISEntities ofmis;
-        private static IQueryable<User> users;
+        private static OFMISService service;
         public static void InitUsers()
         {
-            ofmis = new OFMISEntities();
-            users = ofmis.Users.AsQueryable();
+           service = new OFMISService();
         }
 
-        public static async Task<User> GetUser(string username)
+        public static async Task<OFMISUsersDto> GetUser(string username)
         {
-            var loggedUser = await users.FirstOrDefaultAsync(x => x.UserName == username);
+            var loggedUser = await service.GetUser(username);
             if(loggedUser == null) return null;
             return loggedUser;
         }

@@ -33,16 +33,39 @@ namespace ICTProfilingV3
     {
         private IICTUserManager userManager;
         private IICTRoleManager roleManager;
+        private string Version;
         public frmMain()
         {
             InitializeComponent();
             userManager = new ICTUserManager();
             roleManager = new ICTRoleManager();
+
+            ForceUserUpdate();
+
             var frm = new frmLogin(this);
             frm.ShowDialog();
 
             if (!UpdateThread.IsBusy)
                 UpdateThread.RunWorkerAsync();
+        }
+
+        private void ForceUserUpdate()
+        {
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+                string version = cd.CurrentVersion.ToString();
+                if (UpdateHelpers.InstallUpdateSyncWithInfo())
+                {
+                    MessageBox.Show($@"This Version of EPiSv3 is no Longer Available (Your Version: {Properties.Settings.Default.LastVersion}), the Application will now Automatically Update", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    
+                    Properties.Settings.Default.LastVersion = version;
+                    Properties.Settings.Default.Save();
+
+                    var frm = new frmUpdater() { NewVersion = version };
+                    frm.ShowDialog();
+                }
+            }
         }
 
         public async void setRoleDesignations()
@@ -294,6 +317,9 @@ namespace ICTProfilingV3
                         lblUpdate.Caption = @"EPiSv3: Update available(the system is updating)";
                         UpdateHelpers.applicationDeployment.UpdateCompleted += (se, ev) =>
                         {
+                            Properties.Settings.Default.LastVersion = Version;
+                            Properties.Settings.Default.Save();
+
                             new frmUpdateNotification().ShowDialog(this);
                         };
                         UpdateHelpers.applicationDeployment.UpdateProgressChanged += (se, ev) =>

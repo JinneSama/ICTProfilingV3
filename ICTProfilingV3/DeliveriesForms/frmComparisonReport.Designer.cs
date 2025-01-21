@@ -56,6 +56,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcCR = new DevExpress.XtraGrid.GridControl();
             this.gridCR = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -109,7 +110,10 @@
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.btnSetDiscrepancy = new DevExpress.XtraBars.BarButtonItem();
             this.btnClearDiscrepancy = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRowUp = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRowDown = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddRow = new DevExpress.XtraBars.BarButtonItem();
+            this.btnDeleteRow = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -151,7 +155,8 @@
             this.gridColumn12,
             this.gridColumn13,
             this.gridColumn1,
-            this.gridColumn24});
+            this.gridColumn24,
+            this.gridColumn26});
             gridFormatRule1.ApplyToRow = true;
             gridFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Yellow;
@@ -174,6 +179,7 @@
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 0;
+            this.gridColumn9.Width = 274;
             // 
             // repoRTE
             // 
@@ -189,6 +195,7 @@
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 1;
+            this.gridColumn10.Width = 274;
             // 
             // gridColumn11
             // 
@@ -198,6 +205,7 @@
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 2;
+            this.gridColumn11.Width = 274;
             // 
             // gridColumn12
             // 
@@ -207,6 +215,7 @@
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 3;
+            this.gridColumn12.Width = 274;
             // 
             // gridColumn13
             // 
@@ -216,6 +225,7 @@
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 4;
+            this.gridColumn13.Width = 281;
             // 
             // gridColumn1
             // 
@@ -228,6 +238,13 @@
             this.gridColumn24.Caption = "gridColumn24";
             this.gridColumn24.FieldName = "IsDiscrepancy";
             this.gridColumn24.Name = "gridColumn24";
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.FieldName = "ItemOrder";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.OptionsColumn.AllowEdit = false;
+            this.gridColumn26.Width = 32;
             // 
             // gcCR
             // 
@@ -494,7 +511,7 @@
             this.btnRevert.Name = "btnRevert";
             this.btnRevert.Size = new System.Drawing.Size(121, 28);
             this.btnRevert.TabIndex = 114;
-            this.btnRevert.Text = "Revert All";
+            this.btnRevert.Text = "Undo";
             this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);
             // 
             // lblEpisNo
@@ -842,7 +859,10 @@
             this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.btnSetDiscrepancy),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnClearDiscrepancy),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddRow)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnRowUp),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnRowDown),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAddRow),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteRow)});
             this.popupMenu1.Manager = this.barManager1;
             this.popupMenu1.Name = "popupMenu1";
             // 
@@ -864,6 +884,24 @@
             this.btnClearDiscrepancy.Name = "btnClearDiscrepancy";
             this.btnClearDiscrepancy.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClearDiscrepancy_ItemClick);
             // 
+            // btnRowUp
+            // 
+            this.btnRowUp.Caption = "Move Row Up";
+            this.btnRowUp.Id = 5;
+            this.btnRowUp.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.previous_16x16;
+            this.btnRowUp.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.previous_32x32;
+            this.btnRowUp.Name = "btnRowUp";
+            this.btnRowUp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRowUp_ItemClick);
+            // 
+            // btnRowDown
+            // 
+            this.btnRowDown.Caption = "Move Row Down";
+            this.btnRowDown.Id = 4;
+            this.btnRowDown.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.next_16x16;
+            this.btnRowDown.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.next_32x32;
+            this.btnRowDown.Name = "btnRowDown";
+            this.btnRowDown.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRowDown_ItemClick);
+            // 
             // btnAddRow
             // 
             this.btnAddRow.Caption = "Add New Row";
@@ -872,6 +910,15 @@
             this.btnAddRow.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.addgroupfooter_32x32;
             this.btnAddRow.Name = "btnAddRow";
             this.btnAddRow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAddRow_ItemClick);
+            // 
+            // btnDeleteRow
+            // 
+            this.btnDeleteRow.Caption = "Delete Row";
+            this.btnDeleteRow.Id = 3;
+            this.btnDeleteRow.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            this.btnDeleteRow.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.close_32x324;
+            this.btnDeleteRow.Name = "btnDeleteRow";
+            this.btnDeleteRow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteRow_ItemClick);
             // 
             // barManager1
             // 
@@ -883,8 +930,11 @@
             this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.btnSetDiscrepancy,
             this.btnClearDiscrepancy,
-            this.btnAddRow});
-            this.barManager1.MaxItemId = 3;
+            this.btnAddRow,
+            this.btnDeleteRow,
+            this.btnRowDown,
+            this.btnRowUp});
+            this.barManager1.MaxItemId = 6;
             // 
             // barDockControlTop
             // 
@@ -934,6 +984,7 @@
             this.Name = "frmComparisonReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmComparisonReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridCRSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repoRTE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcCR)).EndInit();
@@ -1037,5 +1088,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnShowInfo;
         private DevExpress.XtraEditors.DateEdit txtInspectedDate;
+        private DevExpress.XtraBars.BarButtonItem btnDeleteRow;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
+        private DevExpress.XtraBars.BarButtonItem btnRowUp;
+        private DevExpress.XtraBars.BarButtonItem btnRowDown;
     }
 }
