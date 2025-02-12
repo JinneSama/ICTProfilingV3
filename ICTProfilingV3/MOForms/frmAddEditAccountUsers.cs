@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.Drawing;
 using DevExpress.XtraRichEdit.Model.History;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.PPEInventoryForms;
 using Models.Entities;
 using Models.Enums;
@@ -12,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace ICTProfilingV3.MOForms
 {
-    public partial class frmAddEditAccountUsers : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditAccountUsers : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;
@@ -99,7 +100,7 @@ namespace ICTProfilingV3.MOForms
         {
             var user = new MOAccountUsers
             {
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 DateOfInstallation = deInstallationDate.DateTime,
                 ProcuredDate = deProcuredDate.DateTime,
                 DeviceNo = (int)spinDeviceNo.Value,
@@ -120,7 +121,7 @@ namespace ICTProfilingV3.MOForms
             var user = await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == moAccountUser.Id);
             if (user == null) return;
 
-            user.DateCreated = DateTime.UtcNow;
+            user.DateCreated = DateTime.Now;
             user.DateOfInstallation = deInstallationDate.DateTime;
             user.ProcuredDate = deProcuredDate.DateTime;
             user.DeviceNo = (int)spinDeviceNo.Value;

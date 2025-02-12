@@ -1,17 +1,10 @@
-﻿using DevExpress.XtraEditors;
+﻿using ICTProfilingV3.BaseClasses;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmUpdateNotification : DevExpress.XtraEditors.XtraForm
+    public partial class frmUpdateNotification : BaseForm
     {
         public frmUpdateNotification()
         {

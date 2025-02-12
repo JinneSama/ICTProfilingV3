@@ -14,9 +14,9 @@ namespace Models.Entities
         public string Remarks { get; set; }
         public int? Quantity { get; set; }
         public Unit Unit { get; set; }
-        public long? UnitCost { get; set; }
-        public long? TotalCost { get; set; }
-        public long? ProposedBudget { get; set; }
+        public decimal? UnitCost { get; set; }
+        public decimal? TotalCost { get; set; }
+        public decimal? ProposedBudget { get; set; }
         public string Purpose { get; set; }
         public bool? IsActive { get; set; }
         public string SerialNo { get; set; }

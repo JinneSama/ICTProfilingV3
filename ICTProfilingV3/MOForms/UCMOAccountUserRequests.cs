@@ -1,5 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.EvaluationForms;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -66,7 +67,15 @@ namespace ICTProfilingV3.MOForms
                 Dock = System.Windows.Forms.DockStyle.Fill
             });
         }
-
+        private void LoadEvaluationSheet()
+        {
+            var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
+            tabEvaluation.Controls.Clear();
+            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.M365 })
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            });
+        }
         private void gridMOAccountUsers_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
             var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
@@ -75,6 +84,7 @@ namespace ICTProfilingV3.MOForms
             lblEpisNo.Text = "M365-" + row.Id.ToString();
             LoadDetails();
             LoadActions();
+            LoadEvaluationSheet();
         }
 
         private void UCMOAccountUserRequests_Load(object sender, System.EventArgs e)

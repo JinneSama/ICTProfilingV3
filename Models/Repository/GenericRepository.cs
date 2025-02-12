@@ -1,9 +1,13 @@
 ﻿using EntityManager.Context;
+using EntityManager.Interfaces;
+using EntityManager.Utility;
+using Models.Entities;
+using Models.Managers.User;
+using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Models.Repository
@@ -12,17 +16,21 @@ namespace Models.Repository
     {
         private readonly ApplicationDbContext dbContext;
         private readonly DbSet<TEntity> dbSet;
+        private readonly IMachineCredentials _machineCredentials;
 
         public GenericRepository(ApplicationDbContext _dbContext)
         {
             dbContext = _dbContext;
             dbSet = dbContext.Set<TEntity>();
+            _machineCredentials = new MachineCredentials();
         }
 
-        public void Delete(TEntity entity)
+        public async void Delete(TEntity entity)
         {
+            TEntity oldValues = entity;
             if (dbContext.Entry(entity).State == EntityState.Detached) dbSet.Attach(entity);
             dbSet.Remove(entity);
+            await LogChangeAsync(typeof(TEntity).Name, "Delete", oldValues, null);
         }
 
         public void DeleteByEx(Expression<Func<TEntity, bool>> expression)
@@ -73,9 +81,37 @@ namespace Models.Repository
             return query;
         }
 
-        public void Insert(TEntity entity)
+        public async void Insert(TEntity entity)
         {
             dbSet.Add(entity);
+            await LogChangeAsync(typeof(TEntity).Name, "Insert", null, entity);
+        }
+
+        public async Task LogChangeAsync(string tableName, string actionType, object oldValues, object newValues)
+        {
+            var logEntry = new LogEntry
+            {
+                Date = DateTime.UtcNow,
+                TableName = tableName,
+                ActionType = actionType,
+                OldValues = oldValues != null ? JsonConvert.SerializeObject(oldValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }) : null,
+                NewValues = newValues != null ? JsonConvert.SerializeObject(newValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }) : null,
+                CreatedById = UserStore.UserId,
+                MacAddress = _machineCredentials.GetMacAddress(),
+                PCName = _machineCredentials.GetPCName()
+            };
+
+            dbContext.Set<LogEntry>().Add(logEntry);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async void Update(TEntity entity)
+        {
+            var existingEntity = dbSet.Find(dbContext.Entry(entity).Property("Id").CurrentValue);
+            var oldValues = dbContext.Entry(existingEntity).CurrentValues.Clone();
+
+            dbContext.Entry(entity).State = EntityState.Modified;
+            await LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
         }
     }
 }

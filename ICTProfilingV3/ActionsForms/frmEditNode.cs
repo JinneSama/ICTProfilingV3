@@ -1,9 +1,10 @@
-﻿using Models.Repository;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Repository;
 using Models.ViewModels;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmEditNode : DevExpress.XtraEditors.XtraForm
+    public partial class frmEditNode : BaseForm
     {
         private readonly ActionTreeViewModel actionTree;
         private IUnitOfWork unitOfOfWork;

@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Repository;
 using System;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmPGNOffices : DevExpress.XtraEditors.XtraForm
+    public partial class frmPGNOffices : BaseForm
     {
         private IUnitOfWork unitOfWork;
         public frmPGNOffices()

@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraLayout.Helpers;
 using EntityManager.Managers.Role;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.ViewModels;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmUserRoles : DevExpress.XtraEditors.XtraForm
+    public partial class frmUserRoles : BaseForm
     {
         private IICTRoleManager _ICTRoleManager;
         public frmUserRoles()

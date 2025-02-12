@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
@@ -16,7 +17,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.Equipments
 {
-    public partial class frmAddEditModel : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditModel : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;

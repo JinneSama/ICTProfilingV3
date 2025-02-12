@@ -1,12 +1,17 @@
-﻿using Models.Entities;
+﻿using ICTMigration.ICTv2Models;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.LookUpTables;
+using Models.Entities;
 using Models.Repository;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class frmAddEditDeliveriesSpecsDetails : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditDeliveriesSpecsDetails : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private DeliveriesSpecs _specs;
@@ -25,7 +30,7 @@ namespace ICTProfilingV3.DeliveriesForms
         }
         private void LoadSpecs()
         {
-            var data = unitOfWork.DeliveriesSpecsDetailsRepo.FindAllAsync(x => x.DeliveriesSpecsId == _specs.Id);
+            var data = unitOfWork.DeliveriesSpecsDetailsRepo.FindAllAsync(x => x.DeliveriesSpecsId == _specs.Id).OrderBy(o => o.ItemNo);
             gcEquipmentDetails.DataSource = new BindingList<DeliveriesSpecsDetails>(data.ToList());
         }
 
@@ -71,6 +76,42 @@ namespace ICTProfilingV3.DeliveriesForms
             unitOfWork.DeliveriesSpecsDetailsRepo.Delete(equipment);
             unitOfWork.Save();
 
+            LoadSpecs();
+        }
+
+        private async void btnCopySpecs_Click(object sender, System.EventArgs e)
+        {
+            var msgRes = MessageBox.Show("This will Overwrite Existing Specs?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            var frm = new frmEquipmentSpecs()
+            {
+                Copy = true
+            };
+            frm.ShowDialog();
+            await OverwriteSpecs(frm.SpecsDetails);
+        }
+
+        private async Task OverwriteSpecs(IEnumerable<EquipmentSpecsDetails> specsDetails)
+        {
+            if (!specsDetails.Any() || specsDetails == null) return;
+
+            var uow = new UnitOfWork();
+            uow.DeliveriesSpecsDetailsRepo.DeleteRange(x => x.DeliveriesSpecsId == _specs.Id);
+            await uow.SaveChangesAsync();
+
+            foreach (var spec in specsDetails)
+            {
+                var equipmentDetail = new DeliveriesSpecsDetails
+                {
+                    ItemNo = spec.ItemNo,
+                    Specs = spec.DetailSpecs,
+                    Description = spec.DetailDescription,
+                    DeliveriesSpecsId = _specs.Id
+                };
+                uow.DeliveriesSpecsDetailsRepo.Insert(equipmentDetail);
+            }
+            await uow.SaveChangesAsync();
             LoadSpecs();
         }
     }

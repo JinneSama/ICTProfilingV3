@@ -1,4 +1,5 @@
 ﻿using Helpers.Update;
+using ICTProfilingV3.BaseClasses;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -6,9 +7,10 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmUpdater : DevExpress.XtraEditors.XtraForm
+    public partial class frmUpdater : BaseForm
     {
         public string NewVersion { get; set; }
+       
         public frmUpdater()
         {
             InitializeComponent();
@@ -30,11 +32,13 @@ namespace ICTProfilingV3.ToolForms
                         updateNow = false;
                         UpdateHelpers.applicationDeployment.UpdateCompleted += (se, ev) =>
                         {
-                            MessageBox.Show($@"Application Updated to Version: {NewVersion}, the Application will now Restart, Press OK", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show($@"Application Updated, the Application will now Restart, Press OK", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             Application.Restart();
                         };
                         UpdateHelpers.applicationDeployment.UpdateProgressChanged += (se, ev) =>
                         {
+                            lblState.Text = ev.State.ToString();
+                            lblByteSize.Text = $@"{ev.BytesCompleted/1024}Mb / {ev.BytesTotal/1024}Mb";
                             progressUpdate.Position = ev.ProgressPercentage;
                         };
                         UpdateHelpers.applicationDeployment.UpdateAsync();

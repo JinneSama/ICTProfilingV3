@@ -1,8 +1,10 @@
-﻿using System.Windows.Forms;
+﻿using Helpers.Interfaces;
+using System;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.DashboardForms
 {
-    public partial class UCDashboard : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCDashboard : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         public UCDashboard()
         {
@@ -15,7 +17,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadRequestDashboard()
         {
-            tabRequest.Controls.Clear();
+            DisposeUC(tabRequest);
             tabRequest.Controls.Add(new UCRequestDashboard()
             {
                 Dock = DockStyle.Fill
@@ -24,7 +26,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadRepairDashboard()
         {
-            tabRepairs.Controls.Clear();
+            DisposeUC(tabRepairs);
             tabRepairs.Controls.Add(new UCRepairDashboard()
             {
                 Dock = DockStyle.Fill
@@ -33,7 +35,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadPGNDashboard()
         {
-            tabPGN.Controls.Clear();
+            DisposeUC(tabPGN);
             tabPGN.Controls.Add(new UCPGNDashboard()
             {
                 Dock = DockStyle.Fill
@@ -42,11 +44,21 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadM365Dashboard()
         {
-            tabM365.Controls.Clear();
+            DisposeUC(tabM365);
             tabM365.Controls.Add(new UCM365Dashboard()
             {
                 Dock = DockStyle.Fill
             });
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

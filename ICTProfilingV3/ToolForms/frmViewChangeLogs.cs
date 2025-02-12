@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraBars;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Repository;
 using System;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmViewChangeLogs : DevExpress.XtraEditors.XtraForm
+    public partial class frmViewChangeLogs : BaseForm
     {
         private IUnitOfWork unitOfWork;
         public frmViewChangeLogs()

@@ -17,6 +17,7 @@ namespace Models.Entities
         public string ContactNo { get; set; }
         public string ClientRequest { get; set; }
         public string ActionTaken { get; set; }
+        public TicketStatus? Status { get; set; }
         public bool? IsDeleted { get; set; }
         public int? OldPk { get; set; }
         public string CreatedById { get; set; }
@@ -28,10 +29,14 @@ namespace Models.Entities
         [ForeignKey("AssistedById")]
         public Users AssistedBy { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
 
         public CustomerActionSheet()
         {
             Actions = new HashSet<Actions>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

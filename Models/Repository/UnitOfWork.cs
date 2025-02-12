@@ -512,6 +512,54 @@ namespace Models.Repository
             set => _ActionDocumentsRepo = value;
         }
 
+        private IGenericRepository<RecordsRequestStatus> _RecordsRequestStatusRepo;
+        public IGenericRepository<RecordsRequestStatus> RecordsRequestStatus
+        {
+            get
+            {
+                if (_RecordsRequestStatusRepo == null)
+                    _RecordsRequestStatusRepo = new GenericRepository<RecordsRequestStatus>(_context);
+                return _RecordsRequestStatusRepo;
+            }
+            set => _RecordsRequestStatusRepo = value;
+        }
+
+        private IGenericRepository<EvaluationSheet> _EvaluationSheetRepo;
+        public IGenericRepository<EvaluationSheet> EvaluationSheetRepo
+        {
+            get
+            {
+                if (_EvaluationSheetRepo == null)
+                    _EvaluationSheetRepo = new GenericRepository<EvaluationSheet>(_context);
+                return _EvaluationSheetRepo;
+            }
+            set => _EvaluationSheetRepo = value;
+        }
+
+        private IGenericRepository<EvaluationSheetDocument> _EvaluationSheetDocumentRepo;
+        public IGenericRepository<EvaluationSheetDocument> EvaluationSheetDocumentRepo
+        {
+            get
+            {
+                if (_EvaluationSheetDocumentRepo == null)
+                    _EvaluationSheetDocumentRepo = new GenericRepository<EvaluationSheetDocument>(_context);
+                return _EvaluationSheetDocumentRepo;
+            }
+            set => _EvaluationSheetDocumentRepo = value;
+        }
+
+        private IGenericRepository<TechSpecsBasisDetails> _TechSpecsBasisDetailsRepo;
+        public IGenericRepository<TechSpecsBasisDetails> TechSpecsBasisDetailsRepo
+        {
+            get
+            {
+                if (_TechSpecsBasisDetailsRepo == null)
+                    _TechSpecsBasisDetailsRepo = new GenericRepository<TechSpecsBasisDetails>(_context);
+                return _TechSpecsBasisDetailsRepo;
+            }
+            set => _TechSpecsBasisDetailsRepo = value;
+        }
+
         public UnitOfWork()
         {
             _context = ApplicationDbContext.Create();

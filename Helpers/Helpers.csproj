@@ -82,6 +82,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IDisposeUC.cs" />
+    <Compile Include="Interfaces\IEncryptFile.cs" />
+    <Compile Include="Interfaces\IModifyRecordStatus.cs" />
+    <Compile Include="Interfaces\IModifyTicketStatus.cs" />
+    <Compile Include="Interfaces\ISingleInstance.cs" />
     <Compile Include="NetworkFolder\ConnectToFolder.cs" />
     <Compile Include="NetworkFolder\DocumentHandler.cs" />
     <Compile Include="NetworkFolder\HTTPNetworkFolder.cs" />
@@ -92,7 +97,10 @@
     <Compile Include="Scanner\ScanDocument.cs" />
     <Compile Include="Scanner\WIAScanner.cs" />
     <Compile Include="Security\Cryptography.cs" />
+    <Compile Include="Tools\CopyPaste.cs" />
+    <Compile Include="Tools\Models\CopiedSpecs.cs" />
     <Compile Include="Update\UpdateHelpers.cs" />
+    <Compile Include="Utility\SingelInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">

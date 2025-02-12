@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Repository;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
-    public partial class frmSuppliers : DevExpress.XtraEditors.XtraForm
+    public partial class frmSuppliers : BaseForm
     {
         private IUnitOfWork unitOfWork;
         public frmSuppliers()

@@ -74,7 +74,7 @@
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "AssignedTo";
+            this.gridColumn7.Caption = "Routed To";
             this.gridColumn7.FieldName = "RoutedTo";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.AllowEdit = false;

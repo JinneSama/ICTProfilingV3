@@ -33,6 +33,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditTSICTSpecsDetails));
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -44,6 +45,8 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.btnCopyTSBasis = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCopySpecs = new DevExpress.XtraEditors.SimpleButton();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblEquipment = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -179,6 +182,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl1.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
+            this.groupControl1.Controls.Add(this.btnCopyTSBasis);
+            this.groupControl1.Controls.Add(this.btnCopySpecs);
             this.groupControl1.Controls.Add(this.lblDescription);
             this.groupControl1.Controls.Add(this.lblEquipment);
             this.groupControl1.Controls.Add(this.label2);
@@ -187,7 +192,39 @@
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(980, 88);
             this.groupControl1.TabIndex = 94;
-            this.groupControl1.Text = "Equipment Details";
+            this.groupControl1.Text = "Details";
+            // 
+            // btnCopyTSBasis
+            // 
+            this.btnCopyTSBasis.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyTSBasis.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCopyTSBasis.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCopyTSBasis.Appearance.Options.UseBackColor = true;
+            this.btnCopyTSBasis.Appearance.Options.UseForeColor = true;
+            this.btnCopyTSBasis.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.copy_16x164;
+            this.btnCopyTSBasis.Location = new System.Drawing.Point(797, 51);
+            this.btnCopyTSBasis.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCopyTSBasis.Name = "btnCopyTSBasis";
+            this.btnCopyTSBasis.Size = new System.Drawing.Size(176, 28);
+            this.btnCopyTSBasis.TabIndex = 111;
+            this.btnCopyTSBasis.Text = "Copy from TechSpecs Basis";
+            this.btnCopyTSBasis.Click += new System.EventHandler(this.btnCopyTSBasis_Click);
+            // 
+            // btnCopySpecs
+            // 
+            this.btnCopySpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopySpecs.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCopySpecs.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCopySpecs.Appearance.Options.UseBackColor = true;
+            this.btnCopySpecs.Appearance.Options.UseForeColor = true;
+            this.btnCopySpecs.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.copymodeldifferences_16x16;
+            this.btnCopySpecs.Location = new System.Drawing.Point(797, 19);
+            this.btnCopySpecs.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCopySpecs.Name = "btnCopySpecs";
+            this.btnCopySpecs.Size = new System.Drawing.Size(176, 28);
+            this.btnCopySpecs.TabIndex = 110;
+            this.btnCopySpecs.Text = "Copy from Equipment Specs";
+            this.btnCopySpecs.Click += new System.EventHandler(this.btnCopySpecs_Click);
             // 
             // lblDescription
             // 
@@ -214,7 +251,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(21, 56);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Description:";
             // 
@@ -223,7 +260,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 30);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.Size = new System.Drawing.Size(60, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Equipment:";
             // 
@@ -235,6 +272,7 @@
             this.Controls.Add(this.gcEquipmentDetails);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditTSICTSpecsDetails.IconOptions.Icon")));
             this.Name = "frmAddEditTSICTSpecsDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
@@ -266,5 +304,7 @@
         private System.Windows.Forms.Label lblEquipment;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.SimpleButton btnCopySpecs;
+        private DevExpress.XtraEditors.SimpleButton btnCopyTSBasis;
     }
 }

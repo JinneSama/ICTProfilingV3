@@ -28,11 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTechSpecs = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -41,9 +52,10 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -73,7 +85,7 @@
             this.txtIssuedTo = new DevExpress.XtraEditors.TextEdit();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
@@ -100,6 +112,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.OptionsColumn.AllowEdit = false;
+            this.colStatus.OptionsColumn.AllowFocus = false;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 1;
+            this.colStatus.Width = 73;
             // 
             // panel1
             // 
@@ -159,9 +182,55 @@
             this.gridColumn1,
             this.gridColumn2,
             this.gridColumn3,
-            this.gridColumn4,
+            this.colStatus,
             this.gridColumn7,
-            this.gridColumn5});
+            this.gridColumn5,
+            this.gridColumn6});
+            gridFormatRule1.Column = this.colStatus;
+            gridFormatRule1.ColumnApplyTo = this.colStatus;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Coral;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[Status] = 0";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.colStatus;
+            gridFormatRule2.ColumnApplyTo = this.colStatus;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Pink;
+            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[Status] = 1";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.colStatus;
+            gridFormatRule3.ColumnApplyTo = this.colStatus;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression3.Expression = "[Status] = 2";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            gridFormatRule4.Column = this.colStatus;
+            gridFormatRule4.ColumnApplyTo = this.colStatus;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
+            formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression4.Expression = "[Status] = 3";
+            gridFormatRule4.Rule = formatConditionRuleExpression4;
+            gridFormatRule5.Column = this.colStatus;
+            gridFormatRule5.ColumnApplyTo = this.colStatus;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression5.Expression = "[Status] = 4";
+            gridFormatRule5.Rule = formatConditionRuleExpression5;
+            this.gridMOAccountUsers.FormatRules.Add(gridFormatRule1);
+            this.gridMOAccountUsers.FormatRules.Add(gridFormatRule2);
+            this.gridMOAccountUsers.FormatRules.Add(gridFormatRule3);
+            this.gridMOAccountUsers.FormatRules.Add(gridFormatRule4);
+            this.gridMOAccountUsers.FormatRules.Add(gridFormatRule5);
             this.gridMOAccountUsers.GridControl = this.gcMOAccountUsers;
             this.gridMOAccountUsers.Name = "gridMOAccountUsers";
             this.gridMOAccountUsers.OptionsFind.AlwaysVisible = true;
@@ -176,7 +245,7 @@
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.OptionsColumn.AllowFocus = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 4;
             this.gridColumn1.Width = 80;
             // 
             // gridColumn2
@@ -184,8 +253,10 @@
             this.gridColumn2.Caption = "Principal Name";
             this.gridColumn2.FieldName = "MOAccount.PrincipalName";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowEdit = false;
+            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 5;
             this.gridColumn2.Width = 255;
             // 
             // gridColumn3
@@ -199,17 +270,6 @@
             this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 117;
             // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "Status";
-            this.gridColumn4.FieldName = "Office";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsColumn.AllowEdit = false;
-            this.gridColumn4.OptionsColumn.AllowFocus = false;
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
-            this.gridColumn4.Width = 73;
-            // 
             // gridColumn7
             // 
             this.gridColumn7.ColumnEdit = this.btnDelete;
@@ -222,12 +282,27 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.FieldName = "Id";
+            this.gridColumn5.Name = "gridColumn5";
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "EPiS No";
+            this.gridColumn6.FieldName = "Id";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.AllowEdit = false;
+            this.gridColumn6.OptionsColumn.AllowFocus = false;
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 2;
             // 
             // hplTicket
             // 
@@ -564,7 +639,8 @@
             this.tabDetails.Size = new System.Drawing.Size(869, 390);
             this.tabDetails.TabIndex = 115;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabAction});
+            this.tabAction,
+            this.tabEvaluation});
             // 
             // tabAction
             // 
@@ -572,10 +648,11 @@
             this.tabAction.Size = new System.Drawing.Size(867, 365);
             this.tabAction.Text = "Action";
             // 
-            // gridColumn5
+            // tabEvaluation
             // 
-            this.gridColumn5.FieldName = "Id";
-            this.gridColumn5.Name = "gridColumn5";
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(867, 365);
+            this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // UCMOAccountUserRequests
             // 
@@ -634,7 +711,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraEditors.PanelControl pnlButtons;
@@ -666,5 +743,7 @@
         private DevExpress.XtraTab.XtraTabControl tabDetails;
         private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraTab.XtraTabPage tabEvaluation;
     }
 }

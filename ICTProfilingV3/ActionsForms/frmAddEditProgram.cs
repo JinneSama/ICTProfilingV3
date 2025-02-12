@@ -3,10 +3,11 @@ using Models.Entities;
 using System;
 using Models.Enums;
 using Models.Repository;
+using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmAddEditProgram : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditProgram : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         public frmAddEditProgram()

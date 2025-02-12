@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using Models.Repository;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class frmEditSignatories : DevExpress.XtraEditors.XtraForm
+    public partial class frmEditSignatories : BaseForm
     {
         private readonly IICTUserManager usermanager;
         private readonly IUnitOfWork unitOfWork;

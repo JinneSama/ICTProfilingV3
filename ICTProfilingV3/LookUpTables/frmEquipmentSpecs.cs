@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Equipments;
 using Models.Entities;
 using Models.Repository;
@@ -15,15 +16,16 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
-    public partial class frmEquipmentSpecs : DevExpress.XtraEditors.XtraForm
+    public partial class frmEquipmentSpecs : BaseForm
     {
-        IUnitOfWork unitOfWork;
+        private IUnitOfWork unitOfWork;
+        public bool Copy { get; set; }
+        public IEnumerable<EquipmentSpecsDetails> SpecsDetails { get; set; } 
         public frmEquipmentSpecs()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            LoadEquipmentSpecs();
         }
 
         private void LoadDropdowns()
@@ -33,6 +35,8 @@ namespace ICTProfilingV3.LookUpTables
 
         private void LoadEquipmentSpecs()
         {
+            colCopy.Visible = Copy;
+
             var res = unitOfWork.EquipmentSpecsRepo.GetAll(x => x.EquipmentSpecsDetails).ToList();
             var esvm = res.Select(x => new EquipmentSpecsViewModel
             {
@@ -105,6 +109,22 @@ namespace ICTProfilingV3.LookUpTables
         {
             var focusedRow = gridEquipment.FocusedRowHandle;
             gridEquipment.SetMasterRowExpanded(focusedRow, !gridEquipment.GetMasterRowExpanded(focusedRow));
+        }
+
+        private void btnCopySpecs_Click(object sender, EventArgs e)
+        {
+            var row = (EquipmentSpecsViewModel)gridEquipment.GetFocusedRow();
+            SpecsDetails = row.EquipmentSpecsDetails;
+
+            var msgRes = MessageBox.Show("Copy Specs from this Equipment?", "Confirmation!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            this.Close();
+        }
+
+        private void frmEquipmentSpecs_Load(object sender, EventArgs e)
+        {
+            LoadEquipmentSpecs();
         }
     }
 }

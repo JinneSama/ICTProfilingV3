@@ -1,5 +1,8 @@
 ﻿using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
+using Helpers.Security;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
@@ -13,7 +16,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmAddEditStaff : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditStaff : BaseForm
     {
         private readonly IICTUserManager userManager;
         private readonly IUnitOfWork unitOfWork;

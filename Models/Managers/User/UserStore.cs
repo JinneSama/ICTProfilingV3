@@ -1,4 +1,5 @@
 ﻿using Models.Repository;
+using Models.Service.DTOModels;
 using System.Threading.Tasks;
 
 namespace Models.Managers.User
@@ -17,5 +18,7 @@ namespace Models.Managers.User
             if (res == null) return null;
             return res.Id;
         }
+
+        public static ArgumentCredentialsDto ArugmentCredentialsDto { get; set; }
     }
 }

@@ -42,7 +42,9 @@
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.ceCompleted = new DevExpress.XtraEditors.CheckEdit();
             this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
             this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.slueTaskOf = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -59,12 +61,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gcActions = new DevExpress.XtraEditors.GroupControl();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.hplControlNo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoutedActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridRoutedActions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplProcess)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinCtrlNo.Properties)).BeginInit();
@@ -129,7 +133,7 @@
             this.gcRoutedActions.Name = "gcRoutedActions";
             this.gcRoutedActions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.hplProcess});
-            this.gcRoutedActions.Size = new System.Drawing.Size(1438, 416);
+            this.gcRoutedActions.Size = new System.Drawing.Size(1435, 416);
             this.gcRoutedActions.TabIndex = 83;
             this.gcRoutedActions.UseEmbeddedNavigator = true;
             this.gcRoutedActions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -144,9 +148,12 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9});
             this.gridRoutedActions.GridControl = this.gcRoutedActions;
             this.gridRoutedActions.Name = "gridRoutedActions";
+            this.gridRoutedActions.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gridRoutedActions.OptionsView.ShowGroupPanel = false;
             this.gridRoutedActions.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridRoutedActions_FocusedRowObjectChanged);
             // 
@@ -237,11 +244,19 @@
             this.gridColumn7.VisibleIndex = 6;
             this.gridColumn7.Width = 228;
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.FieldName = "Status";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 7;
+            // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel2.Controls.Add(this.ceCompleted);
             this.panel2.Controls.Add(this.btnFilterbyDate);
             this.panel2.Controls.Add(this.btnRefresh);
             this.panel2.Controls.Add(this.slueTaskOf);
@@ -258,6 +273,15 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1435, 81);
             this.panel2.TabIndex = 84;
+            // 
+            // ceCompleted
+            // 
+            this.ceCompleted.Location = new System.Drawing.Point(466, 9);
+            this.ceCompleted.Name = "ceCompleted";
+            this.ceCompleted.Properties.Caption = "Show Completed";
+            this.ceCompleted.Size = new System.Drawing.Size(129, 19);
+            this.ceCompleted.TabIndex = 118;
+            this.ceCompleted.CheckedChanged += new System.EventHandler(this.ceCompleted_CheckedChanged);
             // 
             // btnFilterbyDate
             // 
@@ -474,6 +498,12 @@
             this.gcActions.TabIndex = 89;
             this.gcActions.Text = "Actions";
             // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "gridColumn9";
+            this.gridColumn9.FieldName = "Completed";
+            this.gridColumn9.Name = "gridColumn9";
+            // 
             // UCRoutedActions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -492,6 +522,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.hplProcess)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinCtrlNo.Properties)).EndInit();
@@ -538,5 +569,8 @@
         private DevExpress.XtraEditors.SimpleButton btnFilterbyDate;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplControlNo;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplProcess;
+        private DevExpress.XtraEditors.CheckEdit ceCompleted;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
     }
 }

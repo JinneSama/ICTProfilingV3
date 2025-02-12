@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Enums;
 using Models.Repository;
 using Models.ViewModels;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace ICTProfilingV3.Equipments
 {
-    public partial class frmAddEditBrand : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditBrand : BaseForm
     {
         private SaveType saveType;
         private IUnitOfWork unitOfWork;

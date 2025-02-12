@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditStandardPRSpecsDetails));
             this.panel1 = new System.Windows.Forms.Panel();
             this.gcSpecsDetails = new DevExpress.XtraGrid.GridControl();
             this.gridSpecsDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -45,9 +47,18 @@
             this.btnDeleteSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDeleteAll = new DevExpress.XtraEditors.SimpleButton();
+            this.popupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.btnPasteSpecs = new DevExpress.XtraBars.BarButtonItem();
+            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
+            this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             ((System.ComponentModel.ISupportInitialize)(this.gcSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteSpecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -96,6 +107,7 @@
             this.gridSpecsDetails.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Bottom;
             this.gridSpecsDetails.OptionsView.ShowGroupPanel = false;
             this.gridSpecsDetails.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridSpecsDetails_RowUpdated);
+            this.gridSpecsDetails.MouseUp += new System.Windows.Forms.MouseEventHandler(this.gridSpecsDetails_MouseUp);
             // 
             // gridColumn1
             // 
@@ -179,6 +191,66 @@
             this.btnDeleteAll.Size = new System.Drawing.Size(134, 28);
             this.btnDeleteAll.TabIndex = 173;
             this.btnDeleteAll.Text = "Delete All";
+            this.btnDeleteAll.Click += new System.EventHandler(this.btnDeleteAll_Click);
+            // 
+            // popupMenu
+            // 
+            this.popupMenu.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnPasteSpecs)});
+            this.popupMenu.Manager = this.barManager1;
+            this.popupMenu.Name = "popupMenu";
+            // 
+            // btnPasteSpecs
+            // 
+            this.btnPasteSpecs.Caption = "Paste Specs";
+            this.btnPasteSpecs.Id = 0;
+            this.btnPasteSpecs.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.paste_16x163;
+            this.btnPasteSpecs.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.paste_32x323;
+            this.btnPasteSpecs.Name = "btnPasteSpecs";
+            this.btnPasteSpecs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPasteSpecs_ItemClick);
+            // 
+            // barManager1
+            // 
+            this.barManager1.DockControls.Add(this.barDockControlTop);
+            this.barManager1.DockControls.Add(this.barDockControlBottom);
+            this.barManager1.DockControls.Add(this.barDockControlLeft);
+            this.barManager1.DockControls.Add(this.barDockControlRight);
+            this.barManager1.Form = this;
+            this.barManager1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
+            this.btnPasteSpecs});
+            this.barManager1.MaxItemId = 1;
+            // 
+            // barDockControlTop
+            // 
+            this.barDockControlTop.CausesValidation = false;
+            this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlTop.Manager = this.barManager1;
+            this.barDockControlTop.Size = new System.Drawing.Size(1120, 0);
+            // 
+            // barDockControlBottom
+            // 
+            this.barDockControlBottom.CausesValidation = false;
+            this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 606);
+            this.barDockControlBottom.Manager = this.barManager1;
+            this.barDockControlBottom.Size = new System.Drawing.Size(1120, 0);
+            // 
+            // barDockControlLeft
+            // 
+            this.barDockControlLeft.CausesValidation = false;
+            this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Manager = this.barManager1;
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 606);
+            // 
+            // barDockControlRight
+            // 
+            this.barDockControlRight.CausesValidation = false;
+            this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            this.barDockControlRight.Location = new System.Drawing.Point(1120, 0);
+            this.barDockControlRight.Manager = this.barManager1;
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 606);
             // 
             // frmAddEditStandardPRSpecsDetails
             // 
@@ -188,12 +260,20 @@
             this.Controls.Add(this.btnDeleteAll);
             this.Controls.Add(this.gcSpecsDetails);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.barDockControlLeft);
+            this.Controls.Add(this.barDockControlRight);
+            this.Controls.Add(this.barDockControlBottom);
+            this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditStandardPRSpecsDetails.IconOptions.Icon")));
             this.Name = "frmAddEditStandardPRSpecsDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.gcSpecsDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteSpecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -211,5 +291,12 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDeleteSpecs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.SimpleButton btnDeleteAll;
+        private DevExpress.XtraBars.PopupMenu popupMenu;
+        private DevExpress.XtraBars.BarButtonItem btnPasteSpecs;
+        private DevExpress.XtraBars.BarManager barManager1;
+        private DevExpress.XtraBars.BarDockControl barDockControlTop;
+        private DevExpress.XtraBars.BarDockControl barDockControlBottom;
+        private DevExpress.XtraBars.BarDockControl barDockControlLeft;
+        private DevExpress.XtraBars.BarDockControl barDockControlRight;
     }
 }

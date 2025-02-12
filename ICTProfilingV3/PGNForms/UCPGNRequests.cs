@@ -1,4 +1,5 @@
 ﻿using DevExpress.Data.Filtering;
+using ICTMigration.ICTv2Models;
 using ICTProfilingV3.ActionsForms;
 using Models.Enums;
 using Models.Models;
@@ -24,7 +25,7 @@ namespace ICTProfilingV3.PGNForms
 
         private void LoadData()
         {
-            var req = unitOfWork.PGNRequestsRepo.GetAll(x => x.CreatedByUser).ToList().Select(x => new PGNRequestViewModel
+            var req = unitOfWork.PGNRequestsRepo.GetAll(x => x.CreatedByUser).OrderByDescending(x => x.DateCreated).ToList().Select(x => new PGNRequestViewModel
             {
                 PGNRequest = x
             });
@@ -45,6 +46,8 @@ namespace ICTProfilingV3.PGNForms
             txtSubject.Text = row.PGNRequest?.Subject;
             txtCreatedBy.Text = row.PGNRequest?.CreatedByUser?.FullName;
             lblEpisNo.Text = row.ReqNo;
+
+            spbTicketStatus.SelectedItemIndex = ((int)(row.PGNRequest?.Status ?? TicketStatus.Assigned)) - 1;
         }
 
         private void LoadActions()

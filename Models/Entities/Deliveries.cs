@@ -25,6 +25,10 @@ namespace Models.Entities
         public string ReceiptNo { get; set; }
         public int? SupplierId { get; set; }
         public bool? IsDeleted { get; set; }
+        public long? FindingsRequestedById { get; set; }
+        public DateTime? POServed { get; set; }
+        public string FindingsStatus { get; set; }
+        public string FindingsActionTaken { get; set; }
         public int OldPK { get; set; }
 
         [ForeignKey("SupplierId")]
@@ -34,11 +38,13 @@ namespace Models.Entities
         public virtual ICollection<DeliveriesSpecs> DeliveriesSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
         public virtual ICollection<ComparisonReport> ComparisonReports { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
         public Deliveries()
         {
             DeliveriesSpecs = new HashSet<DeliveriesSpecs>();
             Actions = new HashSet<Actions>();
             ComparisonReports = new HashSet<ComparisonReport>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

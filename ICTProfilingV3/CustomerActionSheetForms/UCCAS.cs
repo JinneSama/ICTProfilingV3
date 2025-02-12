@@ -1,5 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.EvaluationForms;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Models;
@@ -43,14 +44,6 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             if(filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
 
-        private void gridCAS_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            var row = (CASViewModel)gridCAS.GetFocusedRow();
-            if(row != null) lblCASNo.Text = row.Id.ToString();
-            LoadDetails();
-            LoadActions();
-        }
-
         private void LoadDetails()
         {
             var row = (CASViewModel)gridCAS.GetFocusedRow();
@@ -74,6 +67,15 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             });
         }
 
+        private void LoadEvaluationSheet()
+        {
+            var row = (CASViewModel)gridCAS.GetFocusedRow();
+            tabEvaluation.Controls.Clear();
+            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.CAS })
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            });
+        }
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (CASViewModel)gridCAS.GetFocusedRow();
@@ -90,6 +92,17 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             frm.ShowDialog();
 
             LoadCAS();
+        }
+
+        private void gridCAS_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            var row = (CASViewModel)gridCAS.GetFocusedRow();
+            if (row == null) return;
+
+            lblCASNo.Text = row.Id.ToString();
+            LoadDetails();
+            LoadActions();
+            LoadEvaluationSheet();
         }
     }
 }

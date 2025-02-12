@@ -1,6 +1,7 @@
 ﻿using DevExpress.CodeParser;
 using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.ReportForms;
 using Models.Entities;
 using Models.Enums;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.StandardPRForms
 {
-    public partial class frmStandardPRList : DevExpress.XtraEditors.XtraForm
+    public partial class frmStandardPRList : BaseForm
     {
         private readonly int _prId;
         private readonly PRQuarter _quarter;
@@ -156,8 +157,9 @@ namespace ICTProfilingV3.StandardPRForms
 
         private async Task AddMarked()
         {
-            for (var i = 0; i < gridSpecs.RowCount - 2; i++)
+            for (var i = 0; i < gridSpecs.RowCount; i++)
             {
+                if (gridSpecs.GetRowCellValue(i, "Mark") == null) continue;
                 if (!(bool)gridSpecs.GetRowCellValue(i, "Mark")) continue;
                 var res = (StandardPRViewModel)gridSpecs.GetRow(i);
 

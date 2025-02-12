@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using Helpers.Interfaces;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
@@ -17,7 +18,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.MOForms
 {
-    public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private IUnitOfWork unitOfWork;
         public UCMOAccounts()
@@ -104,7 +105,7 @@ namespace ICTProfilingV3.MOForms
             var detailRow = (AccountUsers)row.GetRow(rowHandle);
 
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(new UCMOAccountUserRequests()
             {
@@ -126,7 +127,7 @@ namespace ICTProfilingV3.MOForms
             var rptAccounts = new MOAccountReportViewModel
             {
                 MOAccountsViewModel = accounts,
-                DatePrinted = DateTime.UtcNow,
+                DatePrinted = DateTime.Now,
                 PrintedBy = UserStore.Username
             };
 
@@ -138,6 +139,25 @@ namespace ICTProfilingV3.MOForms
             rptM365.CreateDocument();
             var frm = new frmReportViewer(rptM365);
             frm.ShowDialog();
+        }
+
+        private void btnExpandAll_Click(object sender, EventArgs e)
+        {
+            for (var i = 0; i < gridMO.RowCount; i++)
+            {
+                var focusedRow = gridMO.GetRowHandle(i);
+                gridMO.SetMasterRowExpanded(focusedRow, !gridMO.GetMasterRowExpanded(focusedRow));
+            }
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

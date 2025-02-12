@@ -1,5 +1,6 @@
 ﻿using EntityManager.Managers.Role;
 using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using Models.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmUsers : DevExpress.XtraEditors.XtraForm
+    public partial class frmUsers : BaseForm
     {
         private IICTUserManager userManager;
         private IICTRoleManager roleManager;

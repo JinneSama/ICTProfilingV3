@@ -75,6 +75,11 @@
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
             this.tabAccounts = new DevExpress.XtraTab.XtraTabPage();
+            this.spbTicketStatus = new DevExpress.XtraEditors.StepProgressBar();
+            this.stepAssigned = new DevExpress.XtraEditors.StepProgressBarItem();
+            this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
+            this.stepForRelease = new DevExpress.XtraEditors.StepProgressBarItem();
+            this.stepCompleted = new DevExpress.XtraEditors.StepProgressBarItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
@@ -98,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcScanDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -567,7 +573,7 @@
             this.gcScanDocs.AppearanceCaption.Options.UseFont = true;
             this.gcScanDocs.Location = new System.Drawing.Point(1036, 99);
             this.gcScanDocs.Name = "gcScanDocs";
-            this.gcScanDocs.Size = new System.Drawing.Size(406, 347);
+            this.gcScanDocs.Size = new System.Drawing.Size(434, 347);
             this.gcScanDocs.TabIndex = 127;
             this.gcScanDocs.Text = "Documents";
             // 
@@ -597,10 +603,59 @@
             this.tabAccounts.Size = new System.Drawing.Size(1192, 228);
             this.tabAccounts.Text = "Accounts";
             // 
+            // spbTicketStatus
+            // 
+            this.spbTicketStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.spbTicketStatus.ContentAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.spbTicketStatus.IndentBetweenItems = 70;
+            this.spbTicketStatus.IndicatorToContentBlockDistance = 2;
+            this.spbTicketStatus.ItemOptions.Indicator.Width = 25;
+            this.spbTicketStatus.Items.Add(this.stepAssigned);
+            this.spbTicketStatus.Items.Add(this.stepOnProcess);
+            this.spbTicketStatus.Items.Add(this.stepForRelease);
+            this.spbTicketStatus.Items.Add(this.stepCompleted);
+            this.spbTicketStatus.Location = new System.Drawing.Point(1605, 99);
+            this.spbTicketStatus.Name = "spbTicketStatus";
+            this.spbTicketStatus.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.spbTicketStatus.SelectedItemIndex = 1;
+            this.spbTicketStatus.Size = new System.Drawing.Size(155, 347);
+            this.spbTicketStatus.TabIndex = 129;
+            // 
+            // stepAssigned
+            // 
+            this.stepAssigned.ContentBlock1.ActiveStateImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.business_businessman;
+            this.stepAssigned.ContentBlock2.Appearance.Caption.Options.UseFont = true;
+            this.stepAssigned.ContentBlock2.Caption = "Assigned";
+            this.stepAssigned.Name = "stepAssigned";
+            this.stepAssigned.State = DevExpress.XtraEditors.StepProgressBarItemState.Active;
+            // 
+            // stepOnProcess
+            // 
+            this.stepOnProcess.ContentBlock1.ActiveStateImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.bo_order_item;
+            this.stepOnProcess.ContentBlock2.Appearance.Caption.Options.UseFont = true;
+            this.stepOnProcess.ContentBlock2.Caption = "On Process";
+            this.stepOnProcess.Name = "stepOnProcess";
+            this.stepOnProcess.State = DevExpress.XtraEditors.StepProgressBarItemState.Active;
+            // 
+            // stepForRelease
+            // 
+            this.stepForRelease.ContentBlock1.ActiveStateImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.finishmerge;
+            this.stepForRelease.ContentBlock2.Appearance.Caption.Options.UseFont = true;
+            this.stepForRelease.ContentBlock2.Caption = "For Release";
+            this.stepForRelease.Name = "stepForRelease";
+            // 
+            // stepCompleted
+            // 
+            this.stepCompleted.ContentBlock1.ActiveStateImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.check;
+            this.stepCompleted.ContentBlock2.Appearance.Caption.Options.UseFont = true;
+            this.stepCompleted.ContentBlock2.Caption = "Completed";
+            this.stepCompleted.Name = "stepCompleted";
+            // 
             // UCPGNRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.spbTicketStatus);
             this.Controls.Add(this.tabDetails);
             this.Controls.Add(this.gcScanDocs);
             this.Controls.Add(this.groupControl1);
@@ -636,6 +691,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcScanDocs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -684,5 +740,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraEditors.TextEdit txtSignatory;
         private DevExpress.XtraEditors.TextEdit txtCommType;
+        private DevExpress.XtraEditors.StepProgressBar spbTicketStatus;
+        private DevExpress.XtraEditors.StepProgressBarItem stepAssigned;
+        private DevExpress.XtraEditors.StepProgressBarItem stepOnProcess;
+        private DevExpress.XtraEditors.StepProgressBarItem stepForRelease;
+        private DevExpress.XtraEditors.StepProgressBarItem stepCompleted;
     }
 }

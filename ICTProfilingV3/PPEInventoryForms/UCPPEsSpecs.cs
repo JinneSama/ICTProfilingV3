@@ -24,7 +24,8 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void LoadEquipmentSpecs()
         {
-            var res = unitOfWork.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id).Select(x => new PPEsSpecsViewModel
+            var uow = new UnitOfWork();
+            var res = uow.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id).Select(x => new PPEsSpecsViewModel
             {
                 Id = x.Id,
                 ItemNo = x.ItemNo,

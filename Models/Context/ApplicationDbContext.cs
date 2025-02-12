@@ -59,5 +59,8 @@ namespace EntityManager.Context
         public DbSet<MOAccounts> MOAccounts { get; set; }
         public DbSet<MOAccountUsers> MOAccountUsers { get; set; }
         public DbSet<ActionDocuments> ActionDocuments { get; set; }
+        public DbSet<EvaluationSheet> EvaluationSheet { get; set; }
+        public DbSet<EvaluationSheetDocument> EvaluationSheetDocument { get; set; }
+        public DbSet<TechSpecsBasisDetails> TechSpecsBasisDetails { get; set; }
     }
 }

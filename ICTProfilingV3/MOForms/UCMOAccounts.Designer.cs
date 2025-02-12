@@ -79,6 +79,7 @@
             this.lblTechSpecs = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnExpandAll = new DevExpress.XtraEditors.SimpleButton();
             this.btnUserRequest = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddPN = new DevExpress.XtraEditors.SimpleButton();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
@@ -149,6 +150,7 @@
             // 
             // gridColumn12
             // 
+            this.gridColumn12.Caption = "Device Name";
             this.gridColumn12.FieldName = "MOAccountUser.Description";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;
@@ -253,6 +255,7 @@
             this.gridColumn8});
             this.gridMO.GridControl = this.gcMO;
             this.gridMO.Name = "gridMO";
+            this.gridMO.OptionsFind.AlwaysVisible = true;
             this.gridMO.OptionsView.ShowDetailButtons = false;
             this.gridMO.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridMO.OptionsView.ShowGroupPanel = false;
@@ -422,6 +425,7 @@
             this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
             this.pnlButtons.Appearance.Options.UseBackColor = true;
             this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnExpandAll);
             this.pnlButtons.Controls.Add(this.btnUserRequest);
             this.pnlButtons.Controls.Add(this.btnAddPN);
             this.pnlButtons.Controls.Add(this.btnPreview);
@@ -429,6 +433,22 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1389, 48);
             this.pnlButtons.TabIndex = 110;
+            // 
+            // btnExpandAll
+            // 
+            this.btnExpandAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExpandAll.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnExpandAll.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnExpandAll.Appearance.Options.UseBackColor = true;
+            this.btnExpandAll.Appearance.Options.UseForeColor = true;
+            this.btnExpandAll.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.expandcollapsebuttonpivottable_16x161;
+            this.btnExpandAll.Location = new System.Drawing.Point(959, 10);
+            this.btnExpandAll.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExpandAll.Name = "btnExpandAll";
+            this.btnExpandAll.Size = new System.Drawing.Size(131, 30);
+            this.btnExpandAll.TabIndex = 115;
+            this.btnExpandAll.Text = "Expand/Collapse All";
+            this.btnExpandAll.Click += new System.EventHandler(this.btnExpandAll_Click);
             // 
             // btnUserRequest
             // 
@@ -438,7 +458,7 @@
             this.btnUserRequest.Appearance.Options.UseBackColor = true;
             this.btnUserRequest.Appearance.Options.UseForeColor = true;
             this.btnUserRequest.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.customer_16x16;
-            this.btnUserRequest.Location = new System.Drawing.Point(959, 9);
+            this.btnUserRequest.Location = new System.Drawing.Point(824, 10);
             this.btnUserRequest.Margin = new System.Windows.Forms.Padding(2);
             this.btnUserRequest.Name = "btnUserRequest";
             this.btnUserRequest.Size = new System.Drawing.Size(131, 30);
@@ -538,5 +558,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplRedirect;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraEditors.SimpleButton btnExpandAll;
     }
 }

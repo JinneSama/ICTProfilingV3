@@ -1,5 +1,6 @@
 ﻿using DevExpress.PivotGrid.OLAP.AdoWrappers;
 using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Managers.User;
 using Models.ReportViewModel;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.ReportForms
 {
-    public partial class frmAccomplishmentReport : DevExpress.XtraEditors.XtraForm
+    public partial class frmAccomplishmentReport : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;

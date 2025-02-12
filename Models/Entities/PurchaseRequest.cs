@@ -14,6 +14,7 @@ namespace Models.Entities
         public long? ChiefId { get; set; }  
         public string PRNo { get; set; }
         public PRQuarter? Quarter { get; set; }
+        public TicketStatus? Status { get; set; }
         public bool? IsDeleted { get; set; }
 
         public int? TechSpecsId { get; set; }
@@ -27,10 +28,12 @@ namespace Models.Entities
 
         public virtual ICollection<PRStandardPRSpecs> PRStandardPRSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
         public PurchaseRequest()
         {
             PRStandardPRSpecs = new HashSet<PRStandardPRSpecs>();
-            Actions = new HashSet<Actions>();   
+            Actions = new HashSet<Actions>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
         }
     }
 }

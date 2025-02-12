@@ -1,6 +1,7 @@
 ﻿using ICTMigration.ICTv2Models;
 using Models.Entities;
 using Models.Enums;
+using Models.HRMISEntites;
 using Models.Repository;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,55 @@ namespace ICTMigration.ModelMigrations
             unitOfWork = new UnitOfWork();
         }
 
+        private async Task MigrateBindedAccounts()
+        {
+            var requestV2Accounts = ictv2Model.PGNRequestAccounts.ToList();
+            foreach (var account in requestV2Accounts)
+            {
+                var requestV3 = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == account.fldRequestId);
+                if (requestV3 == null) continue;
+
+            }
+        }
+        public async Task MigratePGNRequests()
+        {
+            unitOfWork.ExecuteCommand("DBCC CHECKIDENT ('PGNRequests', RESEED, 99);");
+            var requestV2 = ictv2Model.PGNRequests.ToList();
+            var lastId = requestV2.OrderBy(x => x.Id).LastOrDefault().RequestId;
+
+            for (var i = 100; i <= lastId; i++)
+            {
+                var currentV2Request = requestV2.FirstOrDefault(x => x.RequestId == i);
+                if (currentV2Request == null)
+                {
+                    var pgnRequest = new PGNRequests();
+                    unitOfWork.PGNRequestsRepo.Insert(pgnRequest);
+                }
+                else
+                {
+                    var currentUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == currentV2Request.RequestBy);
+                    long? empId = null;
+                    if (!string.IsNullOrEmpty(currentV2Request?.SourceEmployee))
+                    {
+                        string s = currentV2Request?.SourceEmployee;
+                        empId = HRMISEmployees.GetEmployees().FirstOrDefault(x => x.Username == s)?.Id;
+                    }
+                    var pgnRequest = new PGNRequests()
+                    {
+                        DateCreated = currentV2Request.DateRequested,
+                        RequestDate = currentV2Request.DateRequested,
+                        CommunicationType = currentV2Request.CommType == 100 ? CommunicationType.PGN : CommunicationType.TA,
+                        SignatoryId = empId,
+                        Subject = currentV2Request.Subject,
+                        CreatedById = currentUser.Id
+                    };
+                    unitOfWork.PGNRequestsRepo.Insert(pgnRequest);
+                }
+            }
+            await unitOfWork.SaveChangesAsync();
+            unitOfWork.PGNRequestsRepo.DeleteRange(x => x.DateCreated == null);
+            await unitOfWork.SaveChangesAsync();
+        }
         public async Task MigratePGNAccounts()
         {
             var empV2 = ictv2Model.PGNAccounts.ToList();

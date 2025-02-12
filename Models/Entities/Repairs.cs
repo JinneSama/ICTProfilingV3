@@ -54,10 +54,12 @@ namespace Models.Entities
         [ForeignKey("TechSpecsId")]
         public TechSpecs TechSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
 
         public Repairs()
         {
             Actions = new HashSet<Actions>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

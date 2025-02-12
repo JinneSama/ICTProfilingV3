@@ -506,10 +506,10 @@
             this.btnRevert.Appearance.Options.UseBackColor = true;
             this.btnRevert.Appearance.Options.UseForeColor = true;
             this.btnRevert.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.reset_16x16;
-            this.btnRevert.Location = new System.Drawing.Point(1054, 10);
+            this.btnRevert.Location = new System.Drawing.Point(1058, 10);
             this.btnRevert.Margin = new System.Windows.Forms.Padding(2);
             this.btnRevert.Name = "btnRevert";
-            this.btnRevert.Size = new System.Drawing.Size(121, 28);
+            this.btnRevert.Size = new System.Drawing.Size(117, 28);
             this.btnRevert.TabIndex = 114;
             this.btnRevert.Text = "Undo";
             this.btnRevert.Click += new System.EventHandler(this.btnRevert_Click);

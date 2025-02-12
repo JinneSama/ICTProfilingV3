@@ -28,6 +28,7 @@
         InventoryContainer = 23,
         M365Container = 24,
         Unknown = 25,
-        TaskAdmin = 26
+        TaskAdmin = 26,
+        AssignTo = 27
     }
 }

@@ -1,4 +1,5 @@
 ﻿using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.ReportForms;
 using Models.Entities;
 using Models.HRMISEntites;
@@ -14,7 +15,7 @@ using System.Security.Principal;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmSelectNotee : DevExpress.XtraEditors.XtraForm
+    public partial class frmSelectNotee : BaseForm
     {
         private IICTUserManager usermanager;
         private readonly PGNRequestViewModel request;
@@ -51,7 +52,7 @@ namespace ICTProfilingV3.PGNForms
                 ReqNo = request.ReqNo,
                 Office = request.Employee.Office + " " + request.Employee.Division,
                 PrintedBy = UserStore.Username,
-                DatePrinted = DateTime.UtcNow.ToShortDateString(),
+                DatePrinted = DateTime.Now.ToShortDateString(),
                 PreparedBy = await usermanager.FindUserAsync(UserStore.UserId),
                 NotedBy = row,
                 PGNAccounts = res

@@ -2,9 +2,12 @@
 using DevExpress.PivotGrid.ServerMode;
 using DevExpress.XtraCharts.Native;
 using DevExpress.XtraEditors;
+using EntityManager.Managers;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.EvaluationForms;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TechSpecsForms;
@@ -28,7 +31,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class UCRepair : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCRepair : DevExpress.XtraEditors.XtraUserControl , IDisposeUC
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IICTUserManager _userManager;
@@ -113,10 +116,10 @@ namespace ICTProfilingV3.RepairForms
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
             if (repair == null) return;
 
-            txtEquipment.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
-            txtBrand.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.Brand.BrandName;
-            txtModel.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Model.ModelName;
-            txtDescription.Text = repair.PPEs.PPEsSpecs.FirstOrDefault().Description;
+            txtEquipment.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model.Brand?.EquipmentSpecs?.Equipment?.EquipmentName;
+            txtBrand.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model?.Brand?.BrandName;
+            txtModel.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model?.ModelName;
+            txtDescription.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Description;
             txtSerialNo.Text = repair.PPEs.SerialNo;
 
             spbTicketStatus.SelectedItemIndex = ((int)repair.TicketRequest.TicketStatus) - 1;
@@ -133,11 +136,13 @@ namespace ICTProfilingV3.RepairForms
             txtFindings.Text = repair.Findings;
             txtRecommendation.Text = repair.Recommendations;
             txtRequestProblem.Text = repair.Problems;
-            var prepared = repair?.PreparedById == null ? null : await _userManager.FindUserAsync(repair.PreparedById);
+
+            var userManager = new ICTUserManager();
+            var prepared = repair?.PreparedById == null ? null : await userManager.FindUserAsync(repair.PreparedById);
             txtPreparedBy.Text = prepared?.FullName;
-            var assesed = repair?.ReviewedById == null ? null : await _userManager.FindUserAsync(repair.ReviewedById);
+            var assesed = repair?.ReviewedById == null ? null : await userManager.FindUserAsync(repair.ReviewedById);
             txtAssessedBy.Text = assesed?.FullName;
-            var noted = repair?.NotedById == null ? null : await _userManager.FindUserAsync(repair.NotedById);
+            var noted = repair?.NotedById == null ? null : await userManager.FindUserAsync(repair.NotedById);
             txtNotedBy.Text = noted?.FullName;
             if(repair.PPEs.Status == PPEStatus.Condemned)
             {
@@ -149,6 +154,15 @@ namespace ICTProfilingV3.RepairForms
                 SetButtons(false);
             }
             await LoadEquipmentDetails(repair.PPEs , repair.PPEsSpecs);
+        }
+        private void LoadEvaluationSheet()
+        {
+            var row = (RepairViewModel)gridRepair.GetFocusedRow();
+            tabEvaluation.Controls.Clear();
+            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.Repairs })
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            });
         }
 
         private async Task LoadEquipmentDetails(PPEs ppe, PPEsSpecs ppeSpecs)
@@ -253,7 +267,7 @@ namespace ICTProfilingV3.RepairForms
             var data = new RepairTRViewModel
             {
                 PrintedBy = UserStore.Username,
-                DatePrinted = DateTime.UtcNow,
+                DatePrinted = DateTime.Now,
                 RequestBy = HRMISEmployees.GetEmployeeById(repair.RequestedById),
                 DeliveredBy = HRMISEmployees.GetEmployeeById(repair.DeliveredById),
                 IssuedTo = HRMISEmployees.GetEmployeeById(repair.PPEs.IssuedToId),
@@ -276,6 +290,7 @@ namespace ICTProfilingV3.RepairForms
         {
             await LoadRepairDetails();
             LoadActions();
+            LoadEvaluationSheet();
             LoadStaff();
         }
 
@@ -296,7 +311,7 @@ namespace ICTProfilingV3.RepairForms
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(new UCPPEs()
             {
@@ -341,7 +356,7 @@ namespace ICTProfilingV3.RepairForms
         private void NavigateToRepairSpecs(Repairs repair)
         {
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(new UCTechSpecs()
             {
@@ -363,6 +378,16 @@ namespace ICTProfilingV3.RepairForms
 
             await _unitOfWork.SaveChangesAsync();
             LoadRepair();
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

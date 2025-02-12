@@ -37,48 +37,48 @@ namespace Helpers.NetworkFolder
             return files.ToList();
         }
 
-        public async Task UploadFile(Image img, string fileName)
-        {
-            string jwtToken = await CheckAuthentication();
-            using (var content = new MultipartFormDataContent())
+            public async Task UploadFile(Image img, string fileName)
             {
-                using (var memoryStream = new MemoryStream())
+                string jwtToken = await CheckAuthentication();
+                using (var content = new MultipartFormDataContent())
                 {
-                    img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    memoryStream.Seek(0, SeekOrigin.Begin);
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        memoryStream.Seek(0, SeekOrigin.Begin);
 
-                    var imageContent = new StreamContent(memoryStream);
-                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
-                    content.Add(imageContent, "file", fileName);
+                        var imageContent = new StreamContent(memoryStream);
+                        imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+                        content.Add(imageContent, "file", fileName);
 
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+                        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
 
-                    var response = await httpClient.PostAsync("upload/", content); 
-                    response.EnsureSuccessStatusCode();
+                        var response = await httpClient.PostAsync("upload/", content); 
+                        response.EnsureSuccessStatusCode();
+                    }
                 }
             }
-        }
 
-        public async Task<Image> DownloadFile(string fileName)
-        {
-            string jwtToken = await CheckAuthentication();
-            if (string.IsNullOrEmpty(jwtToken)) return null;
-            var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
-            var response = await httpClient.SendAsync(request);
-
-            Image img = null;
-            if (response.IsSuccessStatusCode)
+            public async Task<Image> DownloadFile(string fileName)
             {
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                {
-                    img = Image.FromStream(stream);
-                }
-            }
-            else return null;
+                string jwtToken = await CheckAuthentication();
+                if (string.IsNullOrEmpty(jwtToken)) return null;
+                var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+                var response = await httpClient.SendAsync(request);
 
-            return img;
-        }
+                Image img = null;
+                if (response.IsSuccessStatusCode)
+                {
+                    using (var stream = await response.Content.ReadAsStreamAsync())
+                    {
+                        img = Image.FromStream(stream);
+                    }
+                }
+                else return null;
+
+                return img;
+            }
 
         public async Task DeleteFile(string fileName)
         {
@@ -96,7 +96,11 @@ namespace Helpers.NetworkFolder
             string password = ConfigurationManager.AppSettings["Password"];
 
             string token = TokenCache.CheckCache();
-            if (string.IsNullOrEmpty(token)) token = await AuthenticateUser(username, password, "");
+            if (string.IsNullOrEmpty(token))
+            {
+                token = await AuthenticateUser(username, password, "");
+                TokenCache.StoreCache(token);
+            }
             return token;
         }
 

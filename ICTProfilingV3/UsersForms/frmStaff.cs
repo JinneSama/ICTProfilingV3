@@ -1,6 +1,8 @@
 ﻿using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
+using ICTProfilingV3.BaseClasses;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -9,7 +11,7 @@ using System.Data;
 using System.Linq;
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmStaff : DevExpress.XtraEditors.XtraForm
+    public partial class frmStaff : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private HTTPNetworkFolder networkFolder;

@@ -29,11 +29,11 @@ namespace ICTMigration.ModelMigrations
                 var oldTS = ictv2Model.TechSpecs.FirstOrDefault(x => x.RequestId == techSpec.Id);
                 var tsAction = tsActions.Where(x => x.RefId == oldTS.Id);
 
-                foreach(var act in tsAction)
+                foreach (var act in tsAction)
                 {
                     var users = act.Users.ToList();
                     ICollection<Users> newUsers = new HashSet<Users>();
-                    foreach(var user in users)
+                    foreach (var user in users)
                     {
                         var currentUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.UserName);
                         newUsers.Add(currentUser);
@@ -78,11 +78,11 @@ namespace ICTMigration.ModelMigrations
 
             foreach (var deliver in deliveries)
             {
-                if(deliver.Id != 3663) continue;
+                if (deliver.Id != 3663) continue;
                 var oldDel = ictv2Model.Deliveries.FirstOrDefault(x => x.RequestId == deliver.Id);
                 if (oldDel == null) continue;
                 var delAction = delActions.Where(x => x.RefId == oldDel.Id);
-                if(delAction == null) continue;
+                if (delAction == null) continue;
                 foreach (var act in delAction)
                 {
                     var users = act.Users.ToList();
@@ -181,12 +181,12 @@ namespace ICTMigration.ModelMigrations
             var casActions = ictv2Model.DocActions.Where(x => x.TableName == "CustomerActionSheet");
             var cas = unitOfWork.CustomerActionSheetRepo.GetAll().ToList();
 
-            foreach(var item in cas)
+            foreach (var item in cas)
             {
                 if (item.Id != 53) continue;
                 var actions = casActions.Where(x => x.RefId == item.Id);
-                
-                foreach(var act in actions)
+
+                foreach (var act in actions)
                 {
                     var users = act.Users.ToList();
                     ICollection<Users> newUsers = new HashSet<Users>();
@@ -268,7 +268,7 @@ namespace ICTMigration.ModelMigrations
                         ActivityId = activity?.Id,
                         SubActivityId = subAct?.Id,
                         PurchaseRequest = item,
-                        RequestType = RequestType.CAS,
+                        RequestType = RequestType.PR,
                         RoutedUsers = newUsers,
                         CreatedBy = createdBy
                     };
@@ -277,6 +277,53 @@ namespace ICTMigration.ModelMigrations
             }
             await unitOfWork.SaveChangesAsync();
 
+        }
+        public async Task MigratePGNActions()
+        {
+            var pgnActions = ictv2Model.DocActions.Where(x => x.TableName == "PGN");
+            var pgn = unitOfWork.PGNRequestsRepo.GetAll().ToList();
+
+            foreach (var item in pgn)
+            {
+                var actions = pgnActions.Where(x => x.RefId == item.Id);
+                foreach (var act in actions)
+                {
+                    var users = act.Users.ToList();
+                    ICollection<Users> newUsers = new HashSet<Users>();
+                    foreach (var user in users)
+                    {
+                        var currentUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.UserName);
+                        newUsers.Add(currentUser);
+                    }
+                    var program = await unitOfWork.ActionsDropdownsRepo.FindAsync(x => x.Id == act.ProgramId);
+                    var mainAct = await unitOfWork.ActionsDropdownsRepo.FindAsync(x => x.Id == act.MainActivityId);
+                    var activity = await unitOfWork.ActionsDropdownsRepo.FindAsync(x => x.Id == act.ActivityId);
+                    var subAct = await unitOfWork.ActionsDropdownsRepo.FindAsync(x => x.Id == act.SubActivityId);
+
+                    var oldcreatedBy = ictv2Model.Users.FirstOrDefault(x => x.Id == act.CreatedBy);
+                    Users createdBy = null;
+                    if (oldcreatedBy != null) createdBy = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == oldcreatedBy.UserName);
+
+                    var newAction = new Actions
+                    {
+                        ActionTaken = act.ActionTaken,
+                        DateCreated = act.DateCreated,
+                        ActionDate = act.ActionDate,
+                        Remarks = act.Remarks,
+                        IsSend = act.IsSend,
+                        ProgramId = program?.Id,
+                        MainActId = mainAct?.Id,
+                        ActivityId = activity?.Id,
+                        SubActivityId = subAct?.Id,
+                        PGNRequests = item,
+                        RequestType = RequestType.PGN,
+                        RoutedUsers = newUsers,
+                        CreatedBy = createdBy
+                    };
+                    unitOfWork.ActionsRepo.Insert(newAction);
+                }
+            }
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

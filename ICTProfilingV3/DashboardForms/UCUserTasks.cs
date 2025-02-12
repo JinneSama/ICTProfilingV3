@@ -12,10 +12,12 @@ using ICTProfilingV3.TechSpecsForms;
 using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
+using Models.Models;
 using Models.Repository;
 using Models.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -29,6 +31,7 @@ namespace ICTProfilingV3.DashboardForms
         private IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
         private readonly IICTRoleManager roleManager;
+        public bool FromQueue { get; set; } = false;
         public UCUserTasks()
         {
             InitializeComponent();
@@ -36,9 +39,42 @@ namespace ICTProfilingV3.DashboardForms
             roleManager = new ICTRoleManager();
             unitOfWork = new UnitOfWork();
             InitKanban();
+            LoadDropdowns();
+        }
+
+        private void LoadDropdowns()
+        {
+            var data = Enum.GetValues(typeof(RequestType)).Cast<RequestType>().Where(x => x == RequestType.TechSpecs || x == RequestType.Deliveries || x == RequestType.Repairs).Select(x => new
+            {
+                Id = x,
+                Value = EnumHelper.GetEnumDescription(x)
+            }).ToList();
+
+            data.Add(new
+            {
+                Id = RequestType.PR,
+                Value = "(All)"
+            });
+            lueProcessType.Properties.DataSource = data;
+        }
+        private void LoadActions(ActionType actionType)
+        {
+            fpActions.Controls.Clear();
+            fpActions.Controls.Add(new UCActions(actionType)
+            {
+                Dock = DockStyle.Fill
+            });
         }
         private async Task CheckRole()
         {
+            if (FromQueue)
+            {
+                LoadData(null);
+                tileTasks.OptionsDragDrop.AllowDrag = false;
+                return;
+            }
+            tileTasks.OptionsDragDrop.AllowDrag = true;
+
             var user = await userManager.FindUserAsync(UserStore.UserId);
             if (user.Roles == null)
                 LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
@@ -74,8 +110,7 @@ namespace ICTProfilingV3.DashboardForms
                 {
                     data = (TasksViewModel)tileTasks.GetRow(x.RowIndex)
                 });
-                
-                //var tsCount = tileData.GroupBy(x => x.data.Ticket.)
+
                 int count = tileTasks.GetChildRowCount(kanbanGroup);
                 string cards = count == 1 ? " task" : " tasks";
                 e.DisplayText += "<br><size=-2><r>" + count.ToString() + cards;
@@ -93,12 +128,33 @@ namespace ICTProfilingV3.DashboardForms
 
             var tickets = unitOfWork.TicketRequestRepo.GetAll(
                 x => x.Repairs,
-                x => x.TechSpecs,
-                x => x.Deliveries).Where(filterExpression).ToList().Select(x => new TasksViewModel
+                x => x.Repairs.Actions,
+                x => x.Repairs.PPEs, 
+                x => x.Repairs.PPEs.PPEsSpecs, 
+                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model), 
+                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand), 
+                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs), 
+                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
+                x => x.TechSpecs, 
+                x => x.TechSpecs.Actions,
+                x => x.TechSpecs.TechSpecsICTSpecs, 
+                x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs), 
+                x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment),
+                x => x.Deliveries, 
+                x => x.Deliveries.Actions,
+                x => x.Deliveries.DeliveriesSpecs, 
+                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model), 
+                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand), 
+                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs), 
+                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
+                x => x.ITStaff,
+                x => x.ITStaff.Users
+                ).Where(filterExpression).ToList().Select(x => new TasksViewModel
             {
                 Ticket = x,
                 Status = x.TicketStatus.ToString()
             }).OrderByDescending(x => x.Ticket.DateCreated);
+
             if (tickets == null) return;
             gcTasks.DataSource = new BindingList<TasksViewModel>(tickets.ToList());
         }
@@ -184,19 +240,55 @@ namespace ICTProfilingV3.DashboardForms
 
         private void tileTasks_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            if (FromQueue) return;
+            TileViewHitInfo hi = this.tileTasks.CalcHitInfo(e.Location);
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                TileViewHitInfo hi = this.tileTasks.CalcHitInfo(e.Location);
                 if (hi.HitTest == DevExpress.XtraEditors.TileControlHitTest.Item)
                 {
                     this.popupMenu1.ShowPopup(Control.MousePosition);
                 }
             }
+            if (!(hi.HitTest == DevExpress.XtraEditors.TileControlHitTest.Item)) fpPanelActions.HidePopup();
         }
 
         private async void UCUserTasks_Load(object sender, EventArgs e)
         {
             await CheckRole();
+        }
+
+        private void lueProcessType_EditValueChanged(object sender, EventArgs e)
+        {
+            tileTasks.ActiveFilterCriteria = null;
+            var process = (RequestType)lueProcessType.EditValue;
+            if (process == RequestType.PR) return;
+            var criteria = tileTasks.ActiveFilterCriteria;
+            if (lueProcessType.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("Ticket.RequestType", process));
+
+            tileTasks.ActiveFilterCriteria = criteria;
+        }
+
+        private void tileTasks_ItemClick(object sender, TileViewItemClickEventArgs e)
+        {
+            var task = (TasksViewModel)tileTasks.GetFocusedRow();
+            var actionType = new ActionType()
+            {
+                Id = task.Ticket.Id,
+                RequestType = task.Ticket.RequestType
+            };
+            LoadActions(actionType);
+            fpPanelActions.ShowPopup();
+        }
+
+        private void fpPanelActions_ButtonClick(object sender, FlyoutPanelButtonClickEventArgs e)
+        {
+            string tag = e.Button.Tag.ToString();
+            switch (tag)
+            {
+                case "close":
+                    fpPanelActions.HidePopup();
+                    break;
+            }
         }
     }
 }

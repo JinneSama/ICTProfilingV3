@@ -28,11 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
             this.gcCAS = new DevExpress.XtraGrid.GridControl();
             this.gridCAS = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -71,6 +82,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).BeginInit();
@@ -93,6 +105,16 @@
             this.tabDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "CustomerActionSheet.Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.OptionsColumn.AllowEdit = false;
+            this.colStatus.OptionsColumn.AllowFocus = false;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 1;
             // 
             // pnlDeliveries
             // 
@@ -132,12 +154,58 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.colStatus});
+            gridFormatRule1.Column = this.colStatus;
+            gridFormatRule1.ColumnApplyTo = this.colStatus;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Coral;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[CustomerActionSheet].[Status] = 0";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.colStatus;
+            gridFormatRule2.ColumnApplyTo = this.colStatus;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Pink;
+            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[CustomerActionSheet].[Status] = 1";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.colStatus;
+            gridFormatRule3.ColumnApplyTo = this.colStatus;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression3.Expression = "[CustomerActionSheet].[Status] = 2";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            gridFormatRule4.Column = this.colStatus;
+            gridFormatRule4.ColumnApplyTo = this.colStatus;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
+            formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression4.Expression = "[CustomerActionSheet].[Status] = 3";
+            gridFormatRule4.Rule = formatConditionRuleExpression4;
+            gridFormatRule5.Column = this.colStatus;
+            gridFormatRule5.ColumnApplyTo = this.colStatus;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression5.Expression = "[CustomerActionSheet].[Status] = 4";
+            gridFormatRule5.Rule = formatConditionRuleExpression5;
+            this.gridCAS.FormatRules.Add(gridFormatRule1);
+            this.gridCAS.FormatRules.Add(gridFormatRule2);
+            this.gridCAS.FormatRules.Add(gridFormatRule3);
+            this.gridCAS.FormatRules.Add(gridFormatRule4);
+            this.gridCAS.FormatRules.Add(gridFormatRule5);
             this.gridCAS.GridControl = this.gcCAS;
             this.gridCAS.Name = "gridCAS";
             this.gridCAS.OptionsFind.AlwaysVisible = true;
             this.gridCAS.OptionsView.ShowGroupPanel = false;
-            this.gridCAS.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridCAS_FocusedRowChanged);
+            this.gridCAS.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridCAS_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -147,7 +215,7 @@
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.OptionsColumn.AllowFocus = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 2;
             this.gridColumn1.Width = 76;
             // 
             // gridColumn2
@@ -158,7 +226,7 @@
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 109;
             // 
             // gridColumn3
@@ -169,7 +237,7 @@
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.AllowFocus = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 4;
             this.gridColumn3.Width = 109;
             // 
             // gridColumn4
@@ -180,7 +248,7 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             this.gridColumn4.Width = 109;
             // 
             // gridColumn5
@@ -200,7 +268,7 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.OptionsColumn.AllowFocus = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 122;
             // 
             // gridColumn7
@@ -215,9 +283,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -500,7 +568,8 @@
             this.tabDetails.Size = new System.Drawing.Size(820, 196);
             this.tabDetails.TabIndex = 90;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabAction});
+            this.tabAction,
+            this.tabEvaluation});
             // 
             // tabAction
             // 
@@ -541,6 +610,12 @@
             this.lblEpisNo.Name = "lblEpisNo";
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
+            // 
+            // tabEvaluation
+            // 
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(818, 171);
+            this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // UCCAS
             // 
@@ -622,5 +697,7 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraTab.XtraTabPage tabEvaluation;
     }
 }

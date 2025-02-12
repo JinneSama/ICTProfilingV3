@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
@@ -17,7 +18,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.PPEInventoryForms
 {
-    public partial class frmAddEditPPEEquipment : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditPPEEquipment : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;

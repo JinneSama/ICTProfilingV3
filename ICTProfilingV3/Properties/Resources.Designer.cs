@@ -423,6 +423,26 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap addgroupfooter_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("addgroupfooter_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap addgroupfooter_16x162 {
+            get {
+                object obj = ResourceManager.GetObject("addgroupfooter_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap addgroupfooter_32x32 {
             get {
                 object obj = ResourceManager.GetObject("addgroupfooter_32x32", resourceCulture);
@@ -646,6 +666,16 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap attachment_16x162 {
             get {
                 object obj = ResourceManager.GetObject("attachment_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap attachment_16x163 {
+            get {
+                object obj = ResourceManager.GetObject("attachment_16x163", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1043,6 +1073,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap clear_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("clear_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap clearall_16x16 {
             get {
                 object obj = ResourceManager.GetObject("clearall_16x16", resourceCulture);
@@ -1223,6 +1263,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap close_32x325 {
+            get {
+                object obj = ResourceManager.GetObject("close_32x325", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap compatibility_16x16 {
             get {
                 object obj = ResourceManager.GetObject("compatibility_16x16", resourceCulture);
@@ -1236,6 +1286,66 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap compatibility_32x32 {
             get {
                 object obj = ResourceManager.GetObject("compatibility_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("copy_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("copy_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy_16x162 {
+            get {
+                object obj = ResourceManager.GetObject("copy_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy_16x163 {
+            get {
+                object obj = ResourceManager.GetObject("copy_16x163", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copy_16x164 {
+            get {
+                object obj = ResourceManager.GetObject("copy_16x164", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap copymodeldifferences_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("copymodeldifferences_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1561,11 +1671,41 @@ namespace ICTProfilingV3.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage electronics_photo1 {
+            get {
+                object obj = ResourceManager.GetObject("electronics_photo1", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon episv2_logo {
+            get {
+                object obj = ResourceManager.GetObject("episv2_logo", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap expandcollapsebuttonpivottable_16x16 {
             get {
                 object obj = ResourceManager.GetObject("expandcollapsebuttonpivottable_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap expandcollapsebuttonpivottable_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("expandcollapsebuttonpivottable_16x161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2033,6 +2173,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap paste_16x163 {
+            get {
+                object obj = ResourceManager.GetObject("paste_16x163", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paste_32x32 {
             get {
                 object obj = ResourceManager.GetObject("paste_32x32", resourceCulture);
@@ -2056,6 +2206,16 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap paste_32x322 {
             get {
                 object obj = ResourceManager.GetObject("paste_32x322", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap paste_32x323 {
+            get {
+                object obj = ResourceManager.GetObject("paste_32x323", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2113,6 +2273,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap preview_16x162 {
+            get {
+                object obj = ResourceManager.GetObject("preview_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap preview_32x32 {
             get {
                 object obj = ResourceManager.GetObject("preview_32x32", resourceCulture);
@@ -2126,6 +2296,16 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap preview_32x321 {
             get {
                 object obj = ResourceManager.GetObject("preview_32x321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap preview_32x322 {
+            get {
+                object obj = ResourceManager.GetObject("preview_32x322", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2183,6 +2363,16 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap printarea_16x162 {
+            get {
+                object obj = ResourceManager.GetObject("printarea_16x162", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap printarea_32x32 {
             get {
                 object obj = ResourceManager.GetObject("printarea_32x32", resourceCulture);
@@ -2196,6 +2386,16 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap printarea_32x321 {
             get {
                 object obj = ResourceManager.GetObject("printarea_32x321", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printarea_32x322 {
+            get {
+                object obj = ResourceManager.GetObject("printarea_32x322", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2286,6 +2486,26 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap printpreview_16x167 {
             get {
                 object obj = ResourceManager.GetObject("printpreview_16x167", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printpreview_16x168 {
+            get {
+                object obj = ResourceManager.GetObject("printpreview_16x168", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap printpreview_16x169 {
+            get {
+                object obj = ResourceManager.GetObject("printpreview_16x169", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2563,6 +2783,26 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap switchtimescalesto_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("switchtimescalesto_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap switchtimescalesto_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("switchtimescalesto_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap tag_16x16 {
             get {
                 object obj = ResourceManager.GetObject("tag_16x16", resourceCulture);
@@ -2596,6 +2836,16 @@ namespace ICTProfilingV3.Properties {
         internal static System.Drawing.Bitmap team_32x32 {
             get {
                 object obj = ResourceManager.GetObject("team_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap transit_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("transit_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -2663,9 +2913,29 @@ namespace ICTProfilingV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap up_16x161 {
+            get {
+                object obj = ResourceManager.GetObject("up_16x161", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap up_32x32 {
             get {
                 object obj = ResourceManager.GetObject("up_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap up_32x321 {
+            get {
+                object obj = ResourceManager.GetObject("up_32x321", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

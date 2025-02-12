@@ -2,6 +2,7 @@
 using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Native;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using ICTProfilingV3.UsersForms;
 using Models.Entities;
 using Models.Enums;
@@ -12,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace ICTProfilingV3.DashboardForms
@@ -81,7 +83,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private int GetQuantity(TicketRequest ticket)
         {
-            if (ticket.RequestType == RequestType.TechSpecs) return ticket.TechSpecs.TechSpecsICTSpecs.Sum(x => x.Quantity);
+            if (ticket.RequestType == RequestType.TechSpecs) return ticket.TechSpecs.TechSpecsICTSpecs.Sum(x => x.Quantity ?? 0);
             if (ticket.RequestType == RequestType.Repairs) return ticket.Repairs.PPEs.PPEsSpecs.Sum(x => x.Quantity);
             if (ticket.RequestType == RequestType.Deliveries) return (int)ticket.Deliveries.DeliveriesSpecs.Sum(x => x.Quantity);
             return 0;
@@ -190,7 +192,7 @@ namespace ICTProfilingV3.DashboardForms
                 TicketStatus = s.Key,
                 Request = s.Sum(x => x.Request)
             });
-            chartReqActed.DataSource = res;
+            chartReqActed.DataSource = res.OrderByDescending(o => o.TicketStatus);
             chartReqActed.SeriesTemplate.ChangeView(ViewType.Bar);
             chartReqActed.SeriesDataMember = "TicketStatus";
             chartReqActed.SeriesTemplate.ArgumentDataMember = "TicketStatus";

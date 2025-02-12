@@ -47,40 +47,53 @@
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement6 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement7 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement8 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement9 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             this.colDateCreated = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colAttachedImage = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colEpisNo = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.hplEpisNo = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.colOffice = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.colReqBy = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.colReqByPos = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colEquipment = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colLastAction = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colLine = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colLabel = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colAssigned = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colCaption = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lueProcessType = new DevExpress.XtraEditors.LookUpEdit();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
-            this.gcTasks = new DevExpress.XtraGrid.GridControl();
-            this.tileTasks = new DevExpress.XtraGrid.Views.Tile.TileView();
-            this.colStatus = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.colMembers = new DevExpress.XtraGrid.Columns.TileViewColumn();
-            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.btnNavigate = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.btnNavigate = new DevExpress.XtraBars.BarButtonItem();
+            this.gcTasks = new DevExpress.XtraGrid.GridControl();
+            this.tileTasks = new DevExpress.XtraGrid.Views.Tile.TileView();
+            this.colStatus = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colMembers = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.fpPanelActions = new DevExpress.Utils.FlyoutPanel();
+            this.fpActions = new DevExpress.Utils.FlyoutPanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.hplEpisNo)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lueProcessType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileTasks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fpPanelActions)).BeginInit();
+            this.fpPanelActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fpActions)).BeginInit();
             this.SuspendLayout();
             // 
             // colDateCreated
             // 
+            this.colDateCreated.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
+            this.colDateCreated.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.colDateCreated.FieldName = "Ticket.DateCreated";
             this.colDateCreated.Name = "colDateCreated";
             this.colDateCreated.Visible = true;
@@ -114,19 +127,19 @@
             this.colOffice.Visible = true;
             this.colOffice.VisibleIndex = 7;
             // 
-            // colReqBy
+            // colEquipment
             // 
-            this.colReqBy.FieldName = "ReqByName";
-            this.colReqBy.Name = "colReqBy";
-            this.colReqBy.Visible = true;
-            this.colReqBy.VisibleIndex = 8;
+            this.colEquipment.FieldName = "Equipments";
+            this.colEquipment.Name = "colEquipment";
+            this.colEquipment.Visible = true;
+            this.colEquipment.VisibleIndex = 8;
             // 
-            // colReqByPos
+            // colLastAction
             // 
-            this.colReqByPos.FieldName = "ReqByPos";
-            this.colReqByPos.Name = "colReqByPos";
-            this.colReqByPos.Visible = true;
-            this.colReqByPos.VisibleIndex = 9;
+            this.colLastAction.FieldName = "LastAction";
+            this.colLastAction.Name = "colLastAction";
+            this.colLastAction.Visible = true;
+            this.colLastAction.VisibleIndex = 9;
             // 
             // colLine
             // 
@@ -143,6 +156,13 @@
             this.colLabel.Visible = true;
             this.colLabel.VisibleIndex = 3;
             // 
+            // colAssigned
+            // 
+            this.colAssigned.FieldName = "AssignedTo";
+            this.colAssigned.Name = "colAssigned";
+            this.colAssigned.Visible = true;
+            this.colAssigned.VisibleIndex = 11;
+            // 
             // colCaption
             // 
             this.colCaption.Caption = "Caption";
@@ -154,6 +174,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.lueProcessType);
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.labelControl16);
             this.panel1.Controls.Add(this.lblEpisNo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -161,6 +183,38 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1164, 37);
             this.panel1.TabIndex = 83;
+            // 
+            // lueProcessType
+            // 
+            this.lueProcessType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lueProcessType.Location = new System.Drawing.Point(965, 9);
+            this.lueProcessType.Name = "lueProcessType";
+            this.lueProcessType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.lueProcessType.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lueProcessType.Properties.Appearance.Options.UseFont = true;
+            this.lueProcessType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueProcessType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Value", "Process")});
+            this.lueProcessType.Properties.DisplayMember = "Value";
+            this.lueProcessType.Properties.NullText = "";
+            this.lueProcessType.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lueProcessType.Properties.ValueMember = "Id";
+            this.lueProcessType.Size = new System.Drawing.Size(156, 22);
+            this.lueProcessType.TabIndex = 5;
+            this.lueProcessType.EditValueChanged += new System.EventHandler(this.lueProcessType_EditValueChanged);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(909, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 15);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Process:";
             // 
             // labelControl16
             // 
@@ -184,203 +238,6 @@
             this.lblEpisNo.Name = "lblEpisNo";
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
-            // 
-            // gcTasks
-            // 
-            this.gcTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcTasks.Location = new System.Drawing.Point(0, 39);
-            this.gcTasks.MainView = this.tileTasks;
-            this.gcTasks.Name = "gcTasks";
-            this.gcTasks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.hplEpisNo});
-            this.gcTasks.Size = new System.Drawing.Size(1164, 631);
-            this.gcTasks.TabIndex = 84;
-            this.gcTasks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.tileTasks});
-            // 
-            // tileTasks
-            // 
-            this.tileTasks.Appearance.Group.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tileTasks.Appearance.Group.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.tileTasks.Appearance.Group.Options.UseFont = true;
-            this.tileTasks.Appearance.Group.Options.UseForeColor = true;
-            this.tileTasks.Appearance.ItemNormal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tileTasks.Appearance.ItemNormal.Options.UseFont = true;
-            this.tileTasks.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colStatus,
-            this.colCaption,
-            this.colMembers,
-            this.colLabel,
-            this.colDateCreated,
-            this.colAttachedImage,
-            this.colEpisNo,
-            this.colOffice,
-            this.colReqBy,
-            this.colReqByPos,
-            this.colLine});
-            this.tileTasks.ColumnSet.GroupColumn = this.colStatus;
-            this.tileTasks.GridControl = this.gcTasks;
-            this.tileTasks.Name = "tileTasks";
-            this.tileTasks.OptionsBehavior.AllowSmoothScrolling = true;
-            this.tileTasks.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Tile.TileViewEditingMode.EditForm;
-            this.tileTasks.OptionsDragDrop.AllowDrag = true;
-            this.tileTasks.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Nothing;
-            this.tileTasks.OptionsEditForm.PopupEditFormWidth = 500;
-            this.tileTasks.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            this.tileTasks.OptionsFind.AllowFindPanel = false;
-            this.tileTasks.OptionsKanban.GroupFooterButton.Visible = DevExpress.Utils.DefaultBoolean.False;
-            simpleContextButton1.AlignmentOptions.Panel = DevExpress.Utils.ContextItemPanel.Center;
-            simpleContextButton1.AlignmentOptions.Position = DevExpress.Utils.ContextItemPosition.Far;
-            simpleContextButton1.Id = new System.Guid("cb2e2e03-435e-4146-921e-8679c0fc7372");
-            simpleContextButton1.ImageOptionsCollection.ItemNormal.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
-            simpleContextButton1.ImageOptionsCollection.ItemNormal.SvgImageSize = new System.Drawing.Size(16, 16);
-            simpleContextButton1.Name = "btnAdd";
-            simpleContextButton1.ToolTip = "Add a new card";
-            simpleContextButton1.Visibility = DevExpress.Utils.ContextItemVisibility.Visible;
-            this.tileTasks.OptionsKanban.GroupHeaderContextButtons.Add(simpleContextButton1);
-            this.tileTasks.OptionsTiles.GroupTextPadding = new System.Windows.Forms.Padding(0, 12, 0, 12);
-            this.tileTasks.OptionsTiles.HighlightFocusedTileStyle = DevExpress.XtraGrid.Views.Tile.HighlightFocusedTileStyle.Content;
-            this.tileTasks.OptionsTiles.HorizontalContentAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tileTasks.OptionsTiles.IndentBetweenGroups = 20;
-            this.tileTasks.OptionsTiles.IndentBetweenItems = 5;
-            this.tileTasks.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(10);
-            this.tileTasks.OptionsTiles.ItemSize = new System.Drawing.Size(290, 188);
-            this.tileTasks.OptionsTiles.LayoutMode = DevExpress.XtraGrid.Views.Tile.TileViewLayoutMode.Kanban;
-            this.tileTasks.OptionsTiles.Padding = new System.Windows.Forms.Padding(20, 30, 20, 15);
-            this.tileTasks.OptionsTiles.VerticalContentAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.tileTasks.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colStatus, DevExpress.Data.ColumnSortOrder.Ascending)});
-            this.tileTasks.TileColumns.Add(tableColumnDefinition1);
-            tableRowDefinition1.AutoHeight = true;
-            tableRowDefinition1.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
-            tableRowDefinition1.Length.Value = 24D;
-            tableRowDefinition1.PaddingBottom = 5;
-            tableRowDefinition2.AutoHeight = true;
-            tableRowDefinition2.Length.Value = 12D;
-            tableRowDefinition3.AutoHeight = true;
-            tableRowDefinition3.Length.Value = 43D;
-            tableRowDefinition3.PaddingBottom = 5;
-            tableRowDefinition4.AutoHeight = true;
-            tableRowDefinition4.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
-            tableRowDefinition4.Length.Value = 23D;
-            tableRowDefinition4.PaddingBottom = 5;
-            tableRowDefinition5.AutoHeight = true;
-            tableRowDefinition5.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
-            tableRowDefinition5.Length.Value = 23D;
-            tableRowDefinition6.AutoHeight = true;
-            tableRowDefinition6.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
-            tableRowDefinition6.Length.Value = 28D;
-            tableRowDefinition6.PaddingBottom = 10;
-            tableRowDefinition7.AutoHeight = true;
-            tableRowDefinition7.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
-            tableRowDefinition7.Length.Value = 9D;
-            this.tileTasks.TileRows.Add(tableRowDefinition1);
-            this.tileTasks.TileRows.Add(tableRowDefinition2);
-            this.tileTasks.TileRows.Add(tableRowDefinition3);
-            this.tileTasks.TileRows.Add(tableRowDefinition4);
-            this.tileTasks.TileRows.Add(tableRowDefinition5);
-            this.tileTasks.TileRows.Add(tableRowDefinition6);
-            this.tileTasks.TileRows.Add(tableRowDefinition7);
-            tileViewItemElement1.Appearance.Normal.Options.UseFont = true;
-            tileViewItemElement1.Column = this.colDateCreated;
-            tileViewItemElement1.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement1.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement1.RowIndex = 3;
-            tileViewItemElement1.Text = "colDateCreated";
-            tileViewItemElement1.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
-            tileViewItemElement2.Column = this.colAttachedImage;
-            tileViewItemElement2.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement2.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement2.RowIndex = 2;
-            tileViewItemElement2.Text = "colAttachedImage";
-            tileViewItemElement2.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement3.Column = this.colEpisNo;
-            tileViewItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement3.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement3.RowIndex = 6;
-            tileViewItemElement3.Text = "colEpisNo";
-            tileViewItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopRight;
-            tileViewItemElement4.Column = this.colOffice;
-            tileViewItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement4.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement4.RowIndex = 3;
-            tileViewItemElement4.Text = "colOffice";
-            tileViewItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopRight;
-            tileViewItemElement5.Column = this.colReqBy;
-            tileViewItemElement5.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement5.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement5.RowIndex = 4;
-            tileViewItemElement5.Text = "colReqBy";
-            tileViewItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement6.Appearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            tileViewItemElement6.Appearance.Normal.Options.UseFont = true;
-            tileViewItemElement6.Column = this.colReqByPos;
-            tileViewItemElement6.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement6.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement6.RowIndex = 5;
-            tileViewItemElement6.Text = "colReqByPos";
-            tileViewItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement7.Appearance.Normal.BackColor = System.Drawing.Color.RoyalBlue;
-            tileViewItemElement7.Appearance.Normal.Options.UseBackColor = true;
-            tileViewItemElement7.Column = this.colLine;
-            tileViewItemElement7.Height = 2;
-            tileViewItemElement7.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement7.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement7.RowIndex = 1;
-            tileViewItemElement7.Text = "colLine";
-            tileViewItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopCenter;
-            tileViewItemElement7.Width = 275;
-            tileViewItemElement8.Column = this.colLabel;
-            tileViewItemElement8.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            tileViewItemElement8.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
-            tileViewItemElement8.Text = "colLabel";
-            tileViewItemElement8.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
-            this.tileTasks.TileTemplate.Add(tileViewItemElement1);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement2);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement3);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement4);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement5);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement6);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement7);
-            this.tileTasks.TileTemplate.Add(tileViewItemElement8);
-            this.tileTasks.BeforeItemDrop += new DevExpress.XtraGrid.Views.Tile.TileViewBeforeItemDropEventHandler(this.tileTasks_BeforeItemDrop);
-            this.tileTasks.ItemCustomize += new DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventHandler(this.tileTasks_ItemCustomize);
-            this.tileTasks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tileTasks_MouseDown);
-            // 
-            // colStatus
-            // 
-            this.colStatus.Caption = "Status";
-            this.colStatus.FieldName = "Ticket.TicketStatus";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
-            this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 0;
-            // 
-            // colMembers
-            // 
-            this.colMembers.Caption = "Members";
-            this.colMembers.FieldName = "Members";
-            this.colMembers.Name = "colMembers";
-            this.colMembers.Visible = true;
-            this.colMembers.VisibleIndex = 2;
-            // 
-            // popupMenu1
-            // 
-            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnNavigate)});
-            this.popupMenu1.Manager = this.barManager1;
-            this.popupMenu1.Name = "popupMenu1";
-            // 
-            // btnNavigate
-            // 
-            this.btnNavigate.Caption = "Navigate To Process";
-            this.btnNavigate.Id = 0;
-            this.btnNavigate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.doublenext_16x16;
-            this.btnNavigate.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.doublenext_32x32;
-            this.btnNavigate.Name = "btnNavigate";
-            this.btnNavigate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNavigate_ItemClick);
             // 
             // barManager1
             // 
@@ -425,10 +282,241 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 670);
             // 
+            // btnNavigate
+            // 
+            this.btnNavigate.Caption = "Navigate To Process";
+            this.btnNavigate.Id = 0;
+            this.btnNavigate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.doublenext_16x16;
+            this.btnNavigate.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.doublenext_32x32;
+            this.btnNavigate.Name = "btnNavigate";
+            this.btnNavigate.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNavigate_ItemClick);
+            // 
+            // gcTasks
+            // 
+            this.gcTasks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcTasks.Location = new System.Drawing.Point(0, 39);
+            this.gcTasks.MainView = this.tileTasks;
+            this.gcTasks.Name = "gcTasks";
+            this.gcTasks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.hplEpisNo});
+            this.gcTasks.Size = new System.Drawing.Size(1164, 631);
+            this.gcTasks.TabIndex = 84;
+            this.gcTasks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.tileTasks});
+            // 
+            // tileTasks
+            // 
+            this.tileTasks.Appearance.Group.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileTasks.Appearance.Group.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tileTasks.Appearance.Group.Options.UseFont = true;
+            this.tileTasks.Appearance.Group.Options.UseForeColor = true;
+            this.tileTasks.Appearance.ItemNormal.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tileTasks.Appearance.ItemNormal.Options.UseFont = true;
+            this.tileTasks.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colStatus,
+            this.colCaption,
+            this.colMembers,
+            this.colLabel,
+            this.colDateCreated,
+            this.colAttachedImage,
+            this.colEpisNo,
+            this.colOffice,
+            this.colEquipment,
+            this.colLastAction,
+            this.colLine,
+            this.colAssigned});
+            this.tileTasks.ColumnSet.GroupColumn = this.colStatus;
+            this.tileTasks.GridControl = this.gcTasks;
+            this.tileTasks.Name = "tileTasks";
+            this.tileTasks.OptionsBehavior.AllowSmoothScrolling = true;
+            this.tileTasks.OptionsDragDrop.AllowDrag = true;
+            this.tileTasks.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Nothing;
+            this.tileTasks.OptionsEditForm.PopupEditFormWidth = 500;
+            this.tileTasks.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            this.tileTasks.OptionsFind.AllowFindPanel = false;
+            this.tileTasks.OptionsKanban.GroupFooterButton.Visible = DevExpress.Utils.DefaultBoolean.False;
+            simpleContextButton1.AlignmentOptions.Panel = DevExpress.Utils.ContextItemPanel.Center;
+            simpleContextButton1.AlignmentOptions.Position = DevExpress.Utils.ContextItemPosition.Far;
+            simpleContextButton1.Id = new System.Guid("cb2e2e03-435e-4146-921e-8679c0fc7372");
+            simpleContextButton1.ImageOptionsCollection.ItemNormal.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
+            simpleContextButton1.ImageOptionsCollection.ItemNormal.SvgImageSize = new System.Drawing.Size(16, 16);
+            simpleContextButton1.Name = "btnAdd";
+            simpleContextButton1.ToolTip = "Add a new card";
+            simpleContextButton1.Visibility = DevExpress.Utils.ContextItemVisibility.Visible;
+            this.tileTasks.OptionsKanban.GroupHeaderContextButtons.Add(simpleContextButton1);
+            this.tileTasks.OptionsTiles.GroupTextPadding = new System.Windows.Forms.Padding(0, 12, 0, 12);
+            this.tileTasks.OptionsTiles.HighlightFocusedTileStyle = DevExpress.XtraGrid.Views.Tile.HighlightFocusedTileStyle.Content;
+            this.tileTasks.OptionsTiles.HorizontalContentAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.tileTasks.OptionsTiles.IndentBetweenGroups = 20;
+            this.tileTasks.OptionsTiles.IndentBetweenItems = 5;
+            this.tileTasks.OptionsTiles.ItemPadding = new System.Windows.Forms.Padding(10);
+            this.tileTasks.OptionsTiles.ItemSize = new System.Drawing.Size(330, 188);
+            this.tileTasks.OptionsTiles.LayoutMode = DevExpress.XtraGrid.Views.Tile.TileViewLayoutMode.Kanban;
+            this.tileTasks.OptionsTiles.Padding = new System.Windows.Forms.Padding(5);
+            this.tileTasks.OptionsTiles.VerticalContentAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.tileTasks.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colStatus, DevExpress.Data.ColumnSortOrder.Ascending)});
+            this.tileTasks.TileColumns.Add(tableColumnDefinition1);
+            tableRowDefinition1.AutoHeight = true;
+            tableRowDefinition1.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableRowDefinition1.Length.Value = 24D;
+            tableRowDefinition1.PaddingBottom = 5;
+            tableRowDefinition2.AutoHeight = true;
+            tableRowDefinition2.Length.Value = 12D;
+            tableRowDefinition3.AutoHeight = true;
+            tableRowDefinition3.Length.Value = 43D;
+            tableRowDefinition3.PaddingBottom = 5;
+            tableRowDefinition4.AutoHeight = true;
+            tableRowDefinition4.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableRowDefinition4.Length.Value = 23D;
+            tableRowDefinition4.PaddingBottom = 5;
+            tableRowDefinition5.AutoHeight = true;
+            tableRowDefinition5.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableRowDefinition5.Length.Value = 23D;
+            tableRowDefinition6.AutoHeight = true;
+            tableRowDefinition6.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableRowDefinition6.Length.Value = 28D;
+            tableRowDefinition6.PaddingBottom = 10;
+            tableRowDefinition7.AutoHeight = true;
+            tableRowDefinition7.Length.Type = DevExpress.XtraEditors.TableLayout.TableDefinitionLengthType.Pixel;
+            tableRowDefinition7.Length.Value = 9D;
+            this.tileTasks.TileRows.Add(tableRowDefinition1);
+            this.tileTasks.TileRows.Add(tableRowDefinition2);
+            this.tileTasks.TileRows.Add(tableRowDefinition3);
+            this.tileTasks.TileRows.Add(tableRowDefinition4);
+            this.tileTasks.TileRows.Add(tableRowDefinition5);
+            this.tileTasks.TileRows.Add(tableRowDefinition6);
+            this.tileTasks.TileRows.Add(tableRowDefinition7);
+            tileViewItemElement1.Appearance.Normal.Options.UseFont = true;
+            tileViewItemElement1.Column = this.colDateCreated;
+            tileViewItemElement1.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement1.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement1.RowIndex = 2;
+            tileViewItemElement1.Text = "colDateCreated";
+            tileViewItemElement1.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement2.Column = this.colAttachedImage;
+            tileViewItemElement2.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement2.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement2.RowIndex = 2;
+            tileViewItemElement2.Text = "colAttachedImage";
+            tileViewItemElement2.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement3.Column = this.colEpisNo;
+            tileViewItemElement3.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement3.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement3.Text = "colEpisNo";
+            tileViewItemElement3.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopRight;
+            tileViewItemElement4.Column = this.colOffice;
+            tileViewItemElement4.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement4.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement4.RowIndex = 3;
+            tileViewItemElement4.Text = "colOffice";
+            tileViewItemElement4.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement5.Column = this.colEquipment;
+            tileViewItemElement5.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement5.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement5.RowIndex = 4;
+            tileViewItemElement5.Text = "colEquipment";
+            tileViewItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement6.Appearance.Normal.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tileViewItemElement6.Appearance.Normal.Options.UseFont = true;
+            tileViewItemElement6.Column = this.colLastAction;
+            tileViewItemElement6.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement6.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement6.RowIndex = 5;
+            tileViewItemElement6.Text = "colLastAction";
+            tileViewItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement7.Appearance.Normal.BackColor = System.Drawing.Color.RoyalBlue;
+            tileViewItemElement7.Appearance.Normal.Options.UseBackColor = true;
+            tileViewItemElement7.Column = this.colLine;
+            tileViewItemElement7.Height = 2;
+            tileViewItemElement7.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement7.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement7.RowIndex = 1;
+            tileViewItemElement7.Text = "colLine";
+            tileViewItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopCenter;
+            tileViewItemElement7.Width = 300;
+            tileViewItemElement8.Column = this.colLabel;
+            tileViewItemElement8.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement8.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement8.Text = "colLabel";
+            tileViewItemElement8.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopLeft;
+            tileViewItemElement9.Appearance.Normal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            tileViewItemElement9.Appearance.Normal.Options.UseFont = true;
+            tileViewItemElement9.Column = this.colAssigned;
+            tileViewItemElement9.ImageOptions.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            tileViewItemElement9.ImageOptions.ImageScaleMode = DevExpress.XtraEditors.TileItemImageScaleMode.Squeeze;
+            tileViewItemElement9.RowIndex = 2;
+            tileViewItemElement9.Text = "colAssigned";
+            tileViewItemElement9.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.TopRight;
+            this.tileTasks.TileTemplate.Add(tileViewItemElement1);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement2);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement3);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement4);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement5);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement6);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement7);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement8);
+            this.tileTasks.TileTemplate.Add(tileViewItemElement9);
+            this.tileTasks.BeforeItemDrop += new DevExpress.XtraGrid.Views.Tile.TileViewBeforeItemDropEventHandler(this.tileTasks_BeforeItemDrop);
+            this.tileTasks.ItemClick += new DevExpress.XtraGrid.Views.Tile.TileViewItemClickEventHandler(this.tileTasks_ItemClick);
+            this.tileTasks.ItemCustomize += new DevExpress.XtraGrid.Views.Tile.TileViewItemCustomizeEventHandler(this.tileTasks_ItemCustomize);
+            this.tileTasks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tileTasks_MouseDown);
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Ticket.TicketStatus";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.SortMode = DevExpress.XtraGrid.ColumnSortMode.Value;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 0;
+            // 
+            // colMembers
+            // 
+            this.colMembers.Caption = "Members";
+            this.colMembers.FieldName = "Members";
+            this.colMembers.Name = "colMembers";
+            this.colMembers.Visible = true;
+            this.colMembers.VisibleIndex = 2;
+            // 
+            // popupMenu1
+            // 
+            this.popupMenu1.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnNavigate)});
+            this.popupMenu1.Manager = this.barManager1;
+            this.popupMenu1.Name = "popupMenu1";
+            // 
+            // fpPanelActions
+            // 
+            this.fpPanelActions.Controls.Add(this.fpActions);
+            this.fpPanelActions.Location = new System.Drawing.Point(3, 359);
+            this.fpPanelActions.Name = "fpPanelActions";
+            this.fpPanelActions.Options.AnchorType = DevExpress.Utils.Win.PopupToolWindowAnchor.Bottom;
+            this.fpPanelActions.OptionsButtonPanel.ButtonPanelContentAlignment = System.Drawing.ContentAlignment.TopRight;
+            buttonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            this.fpPanelActions.OptionsButtonPanel.Buttons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] {
+            new DevExpress.Utils.PeekFormButton("Close", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, "close", -1, false)});
+            this.fpPanelActions.OwnerControl = this.gcTasks;
+            this.fpPanelActions.Size = new System.Drawing.Size(1161, 308);
+            this.fpPanelActions.TabIndex = 90;
+            this.fpPanelActions.ButtonClick += new DevExpress.Utils.FlyoutPanelButtonClickEventHandler(this.fpPanelActions_ButtonClick);
+            // 
+            // fpActions
+            // 
+            this.fpActions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fpActions.FlyoutPanel = this.fpPanelActions;
+            this.fpActions.Location = new System.Drawing.Point(0, 0);
+            this.fpActions.Name = "fpActions";
+            this.fpActions.Size = new System.Drawing.Size(1161, 308);
+            this.fpActions.TabIndex = 0;
+            // 
             // UCUserTasks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fpPanelActions);
             this.Controls.Add(this.gcTasks);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.barDockControlLeft);
@@ -441,10 +529,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.hplEpisNo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lueProcessType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTasks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileTasks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fpPanelActions)).EndInit();
+            this.fpPanelActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fpActions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -465,8 +557,8 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn colAttachedImage;
         private DevExpress.XtraGrid.Columns.TileViewColumn colEpisNo;
         private DevExpress.XtraGrid.Columns.TileViewColumn colOffice;
-        private DevExpress.XtraGrid.Columns.TileViewColumn colReqBy;
-        private DevExpress.XtraGrid.Columns.TileViewColumn colReqByPos;
+        private DevExpress.XtraGrid.Columns.TileViewColumn colEquipment;
+        private DevExpress.XtraGrid.Columns.TileViewColumn colLastAction;
         private DevExpress.XtraGrid.Columns.TileViewColumn colLine;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplEpisNo;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
@@ -476,5 +568,10 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraEditors.LookUpEdit lueProcessType;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraGrid.Columns.TileViewColumn colAssigned;
+        private DevExpress.Utils.FlyoutPanel fpPanelActions;
+        private DevExpress.Utils.FlyoutPanelControl fpActions;
     }
 }

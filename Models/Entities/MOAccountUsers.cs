@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,8 @@ namespace Models.Entities
         public MOAccountUsers()
         {
             Actions = new HashSet<Actions>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
         public int Id { get; set; }
         public int DeviceNo { get; set; }
@@ -21,6 +24,7 @@ namespace Models.Entities
         public DateTime? ProcuredDate { get; set; }
         public string Remarks { get; set; }
         public string Description { get; set; }
+        public TicketStatus? Status { get; set; }
 
         public int? PPEId { get; set; }
         [ForeignKey("PPEId")]
@@ -32,5 +36,7 @@ namespace Models.Entities
         [ForeignKey("CreatedById")]
         public Users CreatedBy { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
     }
 }

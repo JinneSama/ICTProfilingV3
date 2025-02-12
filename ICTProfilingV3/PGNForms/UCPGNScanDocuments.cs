@@ -1,6 +1,7 @@
 ﻿using DevExpress.Data.ODataLinq.Helpers;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
 using Helpers.Scanner;
 using Helpers.Security;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class UCPGNScanDocuments : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCPGNScanDocuments : DevExpress.XtraEditors.XtraUserControl, IEncryptFile
     {
         private IUnitOfWork unitOfWork;
         private readonly PGNRequests request;
@@ -103,11 +104,11 @@ namespace ICTProfilingV3.PGNForms
             foreach (Image image in scannedDocs)
             {
                 var securityStamp = Guid.NewGuid().ToString();
-                var fileName = Cryptography.Encrypt("PGN-" + request.Id + "-" + DocOrder, securityStamp);
+                var documentData = EncryptFile("PGN-" + request.Id + "-" + DocOrder);
                 var doc = new PGNDocuments
                 {
-                    SecurityStamp = securityStamp,
-                    FileName = fileName + ".jpeg",
+                    SecurityStamp = documentData.securityStamp,
+                    FileName = documentData.filename + ".jpeg",
                     DocOrder = DocOrder,
                     PGNRequestId = request.Id
                 };
@@ -129,6 +130,12 @@ namespace ICTProfilingV3.PGNForms
 
             picDocImage.Image = await networkFolder.DownloadFile(row.FileName);
             progressDownload.Visible = false;               
+        }
+
+        public EncryptionData EncryptFile(string filename)
+        {
+            var securityStamp = Guid.NewGuid().ToString();
+            return new EncryptionData(Cryptography.Encrypt(filename, securityStamp), securityStamp);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Enums;
 using Models.Repository;
 using System;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.MOForms
 {
-    public partial class frmAddEditMOAccount : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditMOAccount : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;

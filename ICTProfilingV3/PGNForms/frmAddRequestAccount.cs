@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmAddRequestAccount : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddRequestAccount : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private readonly PGNRequests request;

@@ -12,6 +12,7 @@ namespace Models.Entities
             Actions = new HashSet<Actions>();
             PGNAccounts = new HashSet<PGNAccounts>();
             PGNDocuments = new HashSet<PGNDocuments>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
         }
         public int Id { get; set; }
         public DateTime? DateCreated { get; set; }
@@ -19,11 +20,13 @@ namespace Models.Entities
         public CommunicationType CommunicationType { get; set; }
         public long? SignatoryId { get; set; }
         public string Subject { get; set; }
+        public TicketStatus? Status { get; set; }
         public string CreatedById { get; set; }
         [ForeignKey("CreatedById")]
         public Users CreatedByUser { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
         public virtual ICollection<PGNAccounts> PGNAccounts { get; set; }
-        public virtual ICollection<PGNDocuments> PGNDocuments { get; set; }    
+        public virtual ICollection<PGNDocuments> PGNDocuments { get; set; }
+        public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
     }
 }

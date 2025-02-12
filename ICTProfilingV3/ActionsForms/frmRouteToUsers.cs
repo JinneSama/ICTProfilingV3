@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models.Enums;
 using Models.Entities;
+using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmRouteToUsers : DevExpress.XtraEditors.XtraForm
+    public partial class frmRouteToUsers : BaseForm
     {
         private readonly IICTUserManager _userManager;
         private readonly IUnitOfWork _unitOfWork;

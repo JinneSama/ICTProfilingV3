@@ -1,7 +1,10 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.Utils.Html.Internal;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.EvaluationForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.ReportForms;
@@ -26,7 +29,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
-    public partial class UCTechSpecs : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCTechSpecs : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
@@ -131,6 +134,16 @@ namespace ICTProfilingV3.TechSpecsForms
                 Dock = System.Windows.Forms.DockStyle.Fill
             });
         }
+        private void LoadEvaluationSheet()
+        {
+            var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
+            tabEvaluation.Controls.Clear();
+            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.TechSpecs })
+            {
+                Dock = System.Windows.Forms.DockStyle.Fill
+            });
+        }
+
         private async void LoadStaff()
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
@@ -195,7 +208,8 @@ namespace ICTProfilingV3.TechSpecsForms
             var main = Application.OpenForms["frmMain"] as frmMain;
             main.mainPanel.Controls.Clear();
 
-            var pr = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.TechSpecsId == row.Id);
+            var uow = new UnitOfWork();
+            var pr = await uow.PurchaseRequestRepo.FindAsync(x => x.TechSpecsId == row.Id);
 
             main.mainPanel.Controls.Add(new UCPR()
             {
@@ -217,14 +231,14 @@ namespace ICTProfilingV3.TechSpecsForms
                 TechSpecsId = res.Id,
                 ReqById = res.ReqById,
                 CreatedById = UserStore.UserId,
-                DateCreated = DateTime.UtcNow
+                DateCreated = DateTime.Now
             };
 
             unitOfWork.PurchaseRequestRepo.Insert(pr);
             await unitOfWork.SaveChangesAsync();
 
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(new UCPR()
             {
@@ -239,6 +253,7 @@ namespace ICTProfilingV3.TechSpecsForms
             if(row == null) return; 
             await LoadDetails();
             await LoadSpecs();
+            LoadEvaluationSheet();
             LoadActions();
             LoadStaff();
         }
@@ -247,7 +262,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(new UCTARequestDashboard()
             {
@@ -267,6 +282,8 @@ namespace ICTProfilingV3.TechSpecsForms
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.Repairs,
                 x => x.TechSpecsICTSpecs,
+                x => x.TechSpecsICTSpecs.Select(s => s.TechSpecsICTSpecsDetails),
+                x => x.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs),
                 x => x.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment));
 
             var chief = HRMISEmployees.GetEmployeeById(ts.ReqByChiefId);
@@ -274,7 +291,7 @@ namespace ICTProfilingV3.TechSpecsForms
             var data = new TechSpecsReportViewModel()
             {
                 PrintedBy = UserStore.Username,
-                DatePrinted = DateTime.UtcNow,
+                DatePrinted = DateTime.Now,
                 Office = string.Join(" ", staff?.Office, staff?.Division),
                 Chief = chief.Employee,
                 ChiefPosition = chief?.Position,
@@ -307,6 +324,16 @@ namespace ICTProfilingV3.TechSpecsForms
                 Dock = DockStyle.Fill,
                 filterText = row.RepairId.ToString()
             });
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

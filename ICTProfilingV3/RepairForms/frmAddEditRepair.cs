@@ -1,5 +1,7 @@
 ﻿using DevExpress.Utils.Drawing;
+using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.PPEInventoryForms;
 using Models.Entities;
@@ -18,7 +20,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class frmAddEditRepair : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAddEditRepair : BaseForm, IModifyTicketStatus
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly SaveType saveType;
@@ -65,7 +67,7 @@ namespace ICTProfilingV3.RepairForms
         {
             var ticket = new TicketRequest()
             {
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.Repairs,
                 CreatedBy = UserStore.UserId
@@ -173,7 +175,7 @@ namespace ICTProfilingV3.RepairForms
             repair.DateDelivered = txtDateofDelivery.DateTime;
 
             await _unitOfWork.SaveChangesAsync();
-            await ModifyStatus(TicketStatus.Accepted, repair.Id);
+            await ModifyTicketStatusStatus(TicketStatus.Accepted, repair.Id);
         }
 
         private async void frmAddEditRepair_FormClosing(object sender, FormClosingEventArgs e)
@@ -200,14 +202,14 @@ namespace ICTProfilingV3.RepairForms
 
         }
 
-        public async Task ModifyStatus(TicketStatus status, int ticketId)
+        public async Task ModifyTicketStatusStatus(TicketStatus status, int Id)
         {
             var ticketStatus = new TicketRequestStatus
             {
                 Status = status,
-                DateStatusChanged = DateTime.UtcNow,
+                DateStatusChanged = DateTime.Now,
                 ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
+                TicketRequestId = Id
             };
             _unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
             await _unitOfWork.SaveChangesAsync();

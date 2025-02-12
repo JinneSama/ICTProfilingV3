@@ -496,7 +496,7 @@
             // 
             this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable6});
-            this.Detail1.HeightF = 18.29166F;
+            this.Detail1.HeightF = 15F;
             this.Detail1.Name = "Detail1";
             // 
             // xrTable6
@@ -507,7 +507,7 @@
             this.xrTable6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow6});
-            this.xrTable6.SizeF = new System.Drawing.SizeF(794.7914F, 17.32F);
+            this.xrTable6.SizeF = new System.Drawing.SizeF(794.7914F, 15F);
             this.xrTable6.StylePriority.UseFont = false;
             // 
             // xrTableRow6
@@ -596,7 +596,7 @@
             this.xrTableCell28.StylePriority.UseTextAlignment = false;
             this.xrTableCell28.Text = "xrTableCell3";
             this.xrTableCell28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell28.Weight = 2.7608571114155209D;
+            this.xrTableCell28.Weight = 2.5007967410884735D;
             // 
             // xrTableCell29
             // 
@@ -612,7 +612,7 @@
             this.xrTableCell29.StylePriority.UsePadding = false;
             this.xrTableCell29.StylePriority.UseTextAlignment = false;
             this.xrTableCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell29.Weight = 3.8439193299602525D;
+            this.xrTableCell29.Weight = 3.7225612607899841D;
             // 
             // xrTableCell41
             // 
@@ -629,7 +629,7 @@
             this.xrTableCell41.StylePriority.UseTextAlignment = false;
             this.xrTableCell41.Text = "xrTableCell41";
             this.xrTableCell41.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell41.Weight = 1.0462436774637058D;
+            this.xrTableCell41.Weight = 1.2196143794206531D;
             // 
             // xrTableCell42
             // 
@@ -646,7 +646,7 @@
             this.xrTableCell42.StylePriority.UseTextAlignment = false;
             this.xrTableCell42.Text = "xrTableCell42";
             this.xrTableCell42.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell42.Weight = 0.92411116438451757D;
+            this.xrTableCell42.Weight = 1.1321589019248863D;
             // 
             // xrTableCell30
             // 
@@ -757,7 +757,7 @@
             this.xrTableCell35.StylePriority.UseTextAlignment = false;
             this.xrTableCell35.Text = "Equipment Type";
             this.xrTableCell35.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell35.Weight = 4.6002083182592157D;
+            this.xrTableCell35.Weight = 4.1668911837672153D;
             // 
             // xrTableCell36
             // 
@@ -770,7 +770,7 @@
             this.xrTableCell36.StylePriority.UseTextAlignment = false;
             this.xrTableCell36.Text = "Description";
             this.xrTableCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell36.Weight = 6.4048334693118854D;
+            this.xrTableCell36.Weight = 6.2026190886564612D;
             // 
             // xrTableCell39
             // 
@@ -783,7 +783,7 @@
             this.xrTableCell39.StylePriority.UseTextAlignment = false;
             this.xrTableCell39.Text = "Brand";
             this.xrTableCell39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell39.Weight = 1.7432735529740226D;
+            this.xrTableCell39.Weight = 2.0321507257859506D;
             // 
             // xrTableCell40
             // 
@@ -796,7 +796,7 @@
             this.xrTableCell40.StylePriority.UseTextAlignment = false;
             this.xrTableCell40.Text = "Model";
             this.xrTableCell40.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell40.Weight = 1.5397800940650699D;
+            this.xrTableCell40.Weight = 1.8864344364005665D;
             // 
             // xrTableCell37
             // 
@@ -829,7 +829,7 @@
             // 
             this.Detail2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable4});
-            this.Detail2.HeightF = 17.32F;
+            this.Detail2.HeightF = 15F;
             this.Detail2.Name = "Detail2";
             this.Detail2.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("ItemNo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
@@ -842,7 +842,7 @@
             this.xrTable4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable4.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow4});
-            this.xrTable4.SizeF = new System.Drawing.SizeF(526.0414F, 17.32F);
+            this.xrTable4.SizeF = new System.Drawing.SizeF(526.0414F, 15F);
             this.xrTable4.StylePriority.UseFont = false;
             // 
             // xrTableRow4
@@ -918,7 +918,7 @@
             this.xrTableCell24.StylePriority.UsePadding = false;
             this.xrTableCell24.StylePriority.UseTextAlignment = false;
             this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell24.Weight = 2.7608570483378436D;
+            this.xrTableCell24.Weight = 2.4798451706645537D;
             // 
             // xrTableCell25
             // 
@@ -934,7 +934,7 @@
             this.xrTableCell25.StylePriority.UsePadding = false;
             this.xrTableCell25.StylePriority.UseTextAlignment = false;
             this.xrTableCell25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrTableCell25.Weight = 3.8439178160962246D;
+            this.xrTableCell25.Weight = 4.1249296937695146D;
             // 
             // objectDataSource1
             // 

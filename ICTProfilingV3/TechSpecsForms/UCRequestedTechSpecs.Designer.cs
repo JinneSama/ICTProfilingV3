@@ -71,9 +71,9 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.btnAddTS = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcICTSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridICTSpecs)).BeginInit();
@@ -308,6 +308,15 @@
             this.gridColumn8.VisibleIndex = 10;
             this.gridColumn8.Width = 234;
             // 
+            // gridColumn9
+            // 
+            this.gridColumn9.ColumnEdit = this.btnDelete;
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.FixedWidth = true;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 1;
+            this.gridColumn9.Width = 31;
+            // 
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
@@ -333,15 +342,6 @@
             this.btnAddTS.TabIndex = 90;
             this.btnAddTS.Text = "Add Specs";
             this.btnAddTS.Click += new System.EventHandler(this.btnAddTS_Click);
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.ColumnEdit = this.btnDelete;
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.FixedWidth = true;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            this.gridColumn9.Width = 31;
             // 
             // UCRequestedTechSpecs
             // 

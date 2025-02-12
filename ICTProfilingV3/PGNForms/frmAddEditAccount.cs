@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Repository;
@@ -12,7 +13,7 @@ using System.Xml.Linq;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmAddEditAccount : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditAccount : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private PGNAccounts account;

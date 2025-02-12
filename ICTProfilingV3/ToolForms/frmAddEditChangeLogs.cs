@@ -1,4 +1,5 @@
 ﻿using Helpers.NetworkFolder;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.Managers.User;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmAddEditChangeLogs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditChangeLogs : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;
@@ -75,7 +76,7 @@ namespace ICTProfilingV3.ToolForms
             var changes = new ChangeLogs
             {
                 Version = txtVersion.Text,
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 UserId = UserStore.UserId,
                 Changelogs = memoChanges.Text,
                 ImageName = txtVersion.Text + ".jpeg",

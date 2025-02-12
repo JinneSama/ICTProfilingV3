@@ -1,5 +1,7 @@
 ﻿using Models.Entities;
+using Models.Enums;
 using Models.HRMISEntites;
+using System.Linq;
 using System.Net.Sockets;
 
 namespace Models.ViewModels
@@ -23,6 +25,34 @@ namespace Models.ViewModels
         public string ReqByName => employee?.Employee;
         public string ReqByPos => employee?.Position;
         public string Office => employee?.Office;
+        private string GetLastAction()
+        {
+            switch (Ticket.RequestType)
+            {
+                case RequestType.TechSpecs:
+                    return $"{Ticket?.TechSpecs?.Actions?.LastOrDefault()?.ActionTaken}\n{Ticket?.TechSpecs?.Actions?.LastOrDefault()?.Remarks}";
+                case RequestType.Deliveries:
+                    return $"{Ticket?.Deliveries?.Actions?.LastOrDefault()?.ActionTaken}\n{Ticket?.TechSpecs?.Actions?.LastOrDefault()?.Remarks}";
+                case RequestType.Repairs:
+                    return $"{Ticket?.Repairs?.Actions?.LastOrDefault()?.ActionTaken}\n{Ticket?.TechSpecs?.Actions?.LastOrDefault()?.Remarks}";
+                default: return null;
+            }
+        }
+        public string AssignedTo => Ticket?.ITStaff?.Users?.UserName ?? "Not yet Assigned";
+        public string LastAction => GetLastAction();
+        private string Equipment()
+        {
+            string equipment = string.Empty;
+            if (Ticket.RequestType == Enums.RequestType.Deliveries)
+                equipment = string.Join(",", Ticket.Deliveries.DeliveriesSpecs.Select(x => $"{x.Quantity} {x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName}"));
+            if (Ticket.RequestType == Enums.RequestType.TechSpecs)
+                equipment = string.Join(",", Ticket.TechSpecs.TechSpecsICTSpecs.Select(x => $"{x.Quantity} {x?.EquipmentSpecs?.Equipment?.EquipmentName}"));
+            if (Ticket.RequestType == Enums.RequestType.Repairs)
+                equipment = string.Join(",", Ticket.Repairs.PPEs.PPEsSpecs.Select(x => $"{x.Quantity} {x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName}"));
+            return equipment;
+        }
+        public string Equipments => Equipment();
+
         private void SetEmployee()
         {
             long? reqById = null;

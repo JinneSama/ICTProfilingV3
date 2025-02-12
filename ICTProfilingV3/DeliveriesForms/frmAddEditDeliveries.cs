@@ -1,8 +1,6 @@
-﻿using DevExpress.Office.Utils;
-using ICTProfilingV3.ActionsForms;
+﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.LookUpTables;
-using ICTProfilingV3.PGNForms;
-using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using Models.Entities;
 using Models.Enums;
@@ -12,14 +10,13 @@ using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class frmAddEditDeliveries : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAddEditDeliveries : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private Models.Entities.Deliveries _deliveries;
@@ -50,14 +47,14 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             if (SaveType == SaveType.Insert) return;
 
-            txtDate.DateTime = _deliveries.DateRequested ?? DateTime.UtcNow;
+            txtDate.DateTime = _deliveries.DateRequested ?? DateTime.Now;
             slueEmployee.EditValue = _deliveries.RequestedById;
             rdbtnGender.SelectedIndex = (int)_deliveries.Gender;
             txtContactNo.Text = _deliveries.ContactNo;
             txtPONo.Text = _deliveries.PONo;
             slueDeliveredBy.EditValue = _deliveries.DeliveredById;
             slueSupplierName.EditValue = _deliveries.SupplierId;
-            txtDateofDelivery.DateTime = _deliveries.DeliveredDate ?? DateTime.UtcNow;
+            txtDateofDelivery.DateTime = _deliveries.DeliveredDate ?? DateTime.Now;
             txtDeliveryReceipt.Text = _deliveries.ReceiptNo;
         }
         
@@ -65,7 +62,7 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var ticket = new TicketRequest()
             {
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.Deliveries,
                 CreatedBy = UserStore.UserId
@@ -150,7 +147,6 @@ namespace ICTProfilingV3.DeliveriesForms
             deliveries.ReceiptNo = txtDeliveryReceipt.Text;
 
             await unitOfWork.SaveChangesAsync();
-            await ModifyStatus(TicketStatus.Accepted, deliveries.Id);
         }
 
         private void btnAddSupplier_Click(object sender, EventArgs e)
@@ -171,19 +167,6 @@ namespace ICTProfilingV3.DeliveriesForms
             LoadDetails();
         }
 
-        public async Task ModifyStatus(TicketStatus status, int ticketId)
-        {
-            var ticketStatus = new TicketRequestStatus
-            {
-                Status = status,
-                DateStatusChanged = DateTime.UtcNow,
-                ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
-            };
-            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await unitOfWork.SaveChangesAsync();
-        }
-
         private void btnOFMIS_Click(object sender, EventArgs e)
         {
             var frm = new frmSelectOFMISEmployee();
@@ -196,8 +179,13 @@ namespace ICTProfilingV3.DeliveriesForms
         private void slueEmployee_EditValueChanged(object sender, EventArgs e)
         {
             var row = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
-            if (row == null) return;
+            if (row == null)
+            {
+                txtRequestedBy.Visible = false;
+                return;
+            }
 
+            txtRequestedBy.Visible = true;
             txtRequestedBy.Text = row.Employee;
         }
     }

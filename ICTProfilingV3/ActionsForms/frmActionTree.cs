@@ -1,4 +1,5 @@
-﻿using Models.Enums;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Enums;
 using Models.Repository;
 using Models.ViewModels;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmActionTree : DevExpress.XtraEditors.XtraForm
+    public partial class frmActionTree : BaseForm
     {
         private IUnitOfWork unitOfWork;
         public frmActionTree()

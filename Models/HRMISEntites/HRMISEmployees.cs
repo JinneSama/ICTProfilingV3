@@ -68,7 +68,7 @@ namespace Models.HRMISEntites
         {
             ChiefOfOffices chief = null;
             if (string.IsNullOrEmpty(Division) || string.IsNullOrWhiteSpace(Division)) chief = ChiefOfOffices.FirstOrDefault(x => x.Office == Office);
-            else chief = ChiefOfOffices.FirstOrDefault();
+            else chief = ChiefOfOffices.FirstOrDefault(x => x.Division == Division);
 
             if(chief == null)
             {

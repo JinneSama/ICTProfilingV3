@@ -20,7 +20,11 @@ namespace Models.Service
             string password = ConfigurationManager.AppSettings["Password"];
 
             string token = TokenCache.CheckCache();
-            if (string.IsNullOrEmpty(token)) token = await AuthenticateUser(username, password, "");
+            if (string.IsNullOrEmpty(token))
+            {
+                token = await AuthenticateUser(username, password, "");
+                TokenCache.StoreCache(token);
+            };
             return token;
         }
 

@@ -28,6 +28,9 @@ namespace Models.Entities
             ChangeLogsBy = new HashSet<ChangeLogs>();
             MOAccounts = new HashSet<MOAccounts>();
             MOAccountUsers = new HashSet<MOAccountUsers>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
+            LogEntry = new HashSet<LogEntry>();
         }
         public string FullName { get; set; }
         public string Position { get; set; }
@@ -54,5 +57,8 @@ namespace Models.Entities
         public ICollection<ChangeLogs> ChangeLogsBy { get; set; }
         public ICollection<MOAccountUsers> MOAccountUsers { get; set; }
         public ICollection<MOAccounts> MOAccounts { get; set; }
+        public ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
+        public virtual ICollection<LogEntry> LogEntry { get; set; }
     }
 }

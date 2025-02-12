@@ -1,8 +1,10 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Camera;
+using Helpers.Interfaces;
 using Helpers.NetworkFolder;
 using Helpers.Scanner;
 using Helpers.Security;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Managers.User;
 using Models.Repository;
@@ -14,7 +16,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmActionDocuments : DevExpress.XtraEditors.XtraForm
+    public partial class frmActionDocuments : BaseForm, IEncryptFile
     {
         private IUnitOfWork unitOfWork;
         private HTTPNetworkFolder networkFolder;
@@ -160,14 +162,12 @@ namespace ICTProfilingV3.ActionsForms
             unitOfWork.Save();
 
             var actionDocsRes = await unitOfWork.ActionDocumentsRepo.FindAsync(x => x.Id == actionDocs.Id);
-
-            var securityStamp = Guid.NewGuid().ToString();
-            var documentName = Cryptography.Encrypt("Action_Document_" + actionDocsRes.Id , securityStamp);
+            var documentData = EncryptFile("Action_Document_" + actionDocsRes.Id);
 
             if (actionDocsRes != null) 
             {
-                actionDocsRes.SecurityStamp = securityStamp;
-                actionDocsRes.DocumentName = documentName + ".jpeg";
+                actionDocsRes.SecurityStamp = documentData.securityStamp;
+                actionDocsRes.DocumentName = documentData.filename + ".jpeg";
                 unitOfWork.Save();
             }
 
@@ -191,6 +191,12 @@ namespace ICTProfilingV3.ActionsForms
                 return false;
             }
             return true;
+        }
+
+        public EncryptionData EncryptFile(string filename)
+        {
+            var securityStamp = Guid.NewGuid().ToString();
+            return new EncryptionData(Cryptography.Encrypt(filename, securityStamp) , securityStamp);
         }
     }
 }

@@ -49,6 +49,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStandardPRList));
             this.gridSpecsDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.bandedGridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bandedGridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -441,7 +442,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Quarter:";
             // 
@@ -510,6 +511,7 @@
             this.Controls.Add(this.gcPR);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmStandardPRList.IconOptions.Icon")));
             this.Name = "frmStandardPRList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

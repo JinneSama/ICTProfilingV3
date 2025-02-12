@@ -1,4 +1,5 @@
-﻿using ICTProfilingV3.Equipments;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Equipments;
 using Models.Repository;
 using Models.ViewModels;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
-    public partial class frmEquipmentModels : DevExpress.XtraEditors.XtraForm
+    public partial class frmEquipmentModels : BaseForm
     {
         private IUnitOfWork unitOfWork;
         public frmEquipmentModels()

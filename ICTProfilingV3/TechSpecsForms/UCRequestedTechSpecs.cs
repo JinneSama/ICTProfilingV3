@@ -22,8 +22,10 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private async void LoadTSEquipments()
         {
-            var res = unitOfWork.TechSpecsICTSpecsRepo.FindAllAsync(x => x.TechSpecsId == _techSpecs.Id,
-                x => x.EquipmentSpecs.Equipment);
+            var uow = new UnitOfWork();
+            var res = uow.TechSpecsICTSpecsRepo.FindAllAsync(x => x.TechSpecsId == _techSpecs.Id,
+                x => x.EquipmentSpecs,
+                x => x.EquipmentSpecs.Equipment).OrderBy(o => o.ItemNo);
             var TSSpecsViewModel = res.Select(x => new TechSpecsICTSpecsViewModel
             {
                 Id = x.Id,

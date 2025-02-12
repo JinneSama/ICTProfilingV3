@@ -1,4 +1,5 @@
 ﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using Models.Entities;
 using Models.Enums;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
-    public partial class frmAddEditTechSpecs : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAddEditTechSpecs : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private TechSpecs _techSpecs;
@@ -79,7 +80,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var ticket = new TicketRequest()
             {
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.TechSpecs,
                 IsRepairTechSpecs = true,
@@ -107,7 +108,7 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             var ticket = new TicketRequest()
             {
-                DateCreated = DateTime.UtcNow,
+                DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.TechSpecs
             };
@@ -142,7 +143,7 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private async void frmAddEditTechSpecs_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            if (!IsSave) await DeleteTechSpecs();
+            if (!IsSave && SaveType == SaveType.Insert) await DeleteTechSpecs();
         }
 
         private async Task DeleteTechSpecs()
@@ -175,7 +176,7 @@ namespace ICTProfilingV3.TechSpecsForms
             if (clickedEmployee == null) clickedEmployee = HRMISEmployees.GetEmployeeById(_techSpecs.ReqById);
 
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == _techSpecs.Id);
-            ts.DateAccepted = DateTime.UtcNow;
+            ts.DateAccepted = DateTime.Now;
             ts.DateRequested = txtDate.DateTime;
             ts.ReqById = (long)slueEmployee.EditValue;
             ts.ReqByChiefId = (long)HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division, (long)slueEmployee.EditValue).ChiefId;
@@ -192,7 +193,6 @@ namespace ICTProfilingV3.TechSpecsForms
             ts.NotedById = (string)slueNotedBy.EditValue;
 
             await unitOfWork.SaveChangesAsync();
-            await ModifyStatus(TicketStatus.Accepted, ts.Id);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -217,19 +217,6 @@ namespace ICTProfilingV3.TechSpecsForms
         private void frmAddEditTechSpecs_Load(object sender, EventArgs e)
         {
             if (SaveType == SaveType.Update) LoadDetails();
-        }
-
-        public async Task ModifyStatus(TicketStatus status, int ticketId)
-        {
-            var ticketStatus = new TicketRequestStatus
-            {
-                Status = status,
-                DateStatusChanged = DateTime.UtcNow,
-                ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
-            };
-            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await unitOfWork.SaveChangesAsync();
         }
     }
 }

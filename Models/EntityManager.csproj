@@ -113,7 +113,10 @@
     <Compile Include="Entities\Equipment.cs" />
     <Compile Include="Entities\EquipmentSpecs.cs" />
     <Compile Include="Entities\EquipmentSpecsDetails.cs" />
+    <Compile Include="Entities\EvaluationSheet.cs" />
+    <Compile Include="Entities\EvaluationSheetDocument.cs" />
     <Compile Include="Entities\ITStaff.cs" />
+    <Compile Include="Entities\LogEntry.cs" />
     <Compile Include="Entities\MOAccounts.cs" />
     <Compile Include="Entities\MOAccountUsers.cs" />
     <Compile Include="Entities\Model.cs" />
@@ -128,6 +131,7 @@
     <Compile Include="Entities\PPEsSpecsDetails.cs" />
     <Compile Include="Entities\PRStandardPRSpecs.cs" />
     <Compile Include="Entities\PurchaseRequest.cs" />
+    <Compile Include="Entities\RecordsRequestStatus.cs" />
     <Compile Include="Entities\Repairs.cs" />
     <Compile Include="Entities\RoleDesignation.cs" />
     <Compile Include="Entities\Roles.cs" />
@@ -136,6 +140,7 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\TechSpecs.cs" />
     <Compile Include="Entities\TechSpecsBasis.cs" />
+    <Compile Include="Entities\TechSpecsBasisDetails.cs" />
     <Compile Include="Entities\TechSpecsICTSpecs.cs" />
     <Compile Include="Entities\TechSpecsICTSpecsDetails.cs" />
     <Compile Include="Entities\TicketRequest.cs" />
@@ -157,17 +162,21 @@
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Enums\SaveType.cs" />
     <Compile Include="Enums\Sections.cs" />
+    <Compile Include="Enums\SheetRating.cs" />
+    <Compile Include="Enums\SheetService.cs" />
     <Compile Include="Enums\TicketStatus.cs" />
     <Compile Include="Enums\Unit.cs" />
+    <Compile Include="Enums\Year.cs" />
+    <Compile Include="FDTSEntities\FDTSData.cs" />
     <Compile Include="HRMISEntites\HRMISEmployees.cs" />
+    <Compile Include="Interfaces\IMachineCredentials.cs" />
     <Compile Include="Managers\CustomTokenProvider.cs" />
-    <Compile Include="Managers\ITicketStatus.cs" />
     <Compile Include="Managers\RoleManager.cs" />
     <Compile Include="Managers\Role\ICTRoleManager.cs" />
-    <Compile Include="Managers\Role\IICTRoleManager.cs" />
+    <Compile Include="Interfaces\IICTRoleManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Managers\User\ICTUserManager.cs" />
-    <Compile Include="Managers\User\IICTUserManager.cs" />
+    <Compile Include="Interfaces\IICTUserManager.cs" />
     <Compile Include="Managers\User\UserStore.cs" />
     <Compile Include="MappingConfigurations\MappingConfig.cs" />
     <Compile Include="Migrations\202501130535154_NewDatabaseEntries.cs" />
@@ -185,6 +194,38 @@
     <Compile Include="Migrations\202501200618012_UsersIsDeletedProp.cs" />
     <Compile Include="Migrations\202501200618012_UsersIsDeletedProp.Designer.cs">
       <DependentUpon>202501200618012_UsersIsDeletedProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.cs" />
+    <Compile Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.Designer.cs">
+      <DependentUpon>202501240300233_RecordsProcessStatusToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501280842181_DeliveriesInitialFindings.cs" />
+    <Compile Include="Migrations\202501280842181_DeliveriesInitialFindings.Designer.cs">
+      <DependentUpon>202501280842181_DeliveriesInitialFindings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501310309012_EvaluationSheetDB.cs" />
+    <Compile Include="Migrations\202501310309012_EvaluationSheetDB.Designer.cs">
+      <DependentUpon>202501310309012_EvaluationSheetDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.cs" />
+    <Compile Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.Designer.cs">
+      <DependentUpon>202501310559264_AllCostsToDecimalandNullabletoUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502030203331_NullableTSQuantity.cs" />
+    <Compile Include="Migrations\202502030203331_NullableTSQuantity.Designer.cs">
+      <DependentUpon>202502030203331_NullableTSQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502030626467_EvaluationSheetRatingValue.cs" />
+    <Compile Include="Migrations\202502030626467_EvaluationSheetRatingValue.Designer.cs">
+      <DependentUpon>202502030626467_EvaluationSheetRatingValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.cs" />
+    <Compile Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.Designer.cs">
+      <DependentUpon>202502070219457_TSBasisSpecsDetailsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502110604180_AddedLogs.cs" />
+    <Compile Include="Migrations\202502110604180_AddedLogs.Designer.cs">
+      <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionImage.cs" />
@@ -207,20 +248,26 @@
     <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />
     <Compile Include="ReportViewModel\TechSpecsReportViewModel.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
-    <Compile Include="Repository\IGenericRepository.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IGenericRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Service\AuthEPiSBackend.cs" />
     <Compile Include="Service\AuthModels\LoginRequest.cs" />
     <Compile Include="Service\AuthModels\TokenResponse.cs" />
+    <Compile Include="Service\DTOModels\ArgumentCredentialsDto.cs" />
+    <Compile Include="Service\DTOModels\DocumentActionsDto.cs" />
+    <Compile Include="Service\DTOModels\FDTSPRDetailsDto.cs" />
     <Compile Include="Service\DTOModels\HRMISDivisionDto.cs" />
     <Compile Include="Service\DTOModels\HRMISEmployeesDto.cs" />
     <Compile Include="Service\DTOModels\HRMISOfficeDto.cs" />
     <Compile Include="Service\DTOModels\OFMISEmployeesDto.cs" />
     <Compile Include="Service\DTOModels\OFMISUsersDto.cs" />
+    <Compile Include="Service\DTOModels\PRDetailsDto.cs" />
+    <Compile Include="Service\FDTSService.cs" />
     <Compile Include="Service\HRMISService.cs" />
     <Compile Include="Service\OFMISService.cs" />
     <Compile Include="Service\TokenCache.cs" />
+    <Compile Include="Utility\MachineCredentials.cs" />
     <Compile Include="ViewModels\ActionsViewModel.cs" />
     <Compile Include="ViewModels\ActionTreeViewModel.cs" />
     <Compile Include="ViewModels\BrandModelViewModel.cs" />
@@ -272,6 +319,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202501200618012_UsersIsDeletedProp.resx">
       <DependentUpon>202501200618012_UsersIsDeletedProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.resx">
+      <DependentUpon>202501240300233_RecordsProcessStatusToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501280842181_DeliveriesInitialFindings.resx">
+      <DependentUpon>202501280842181_DeliveriesInitialFindings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501310309012_EvaluationSheetDB.resx">
+      <DependentUpon>202501310309012_EvaluationSheetDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.resx">
+      <DependentUpon>202501310559264_AllCostsToDecimalandNullabletoUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502030203331_NullableTSQuantity.resx">
+      <DependentUpon>202502030203331_NullableTSQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502030626467_EvaluationSheetRatingValue.resx">
+      <DependentUpon>202502030626467_EvaluationSheetRatingValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.resx">
+      <DependentUpon>202502070219457_TSBasisSpecsDetailsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502110604180_AddedLogs.resx">
+      <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

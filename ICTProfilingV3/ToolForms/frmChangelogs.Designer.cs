@@ -93,7 +93,7 @@
             this.gcChangelogs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcChangelogs.Location = new System.Drawing.Point(12, 61);
+            this.gcChangelogs.Location = new System.Drawing.Point(12, 57);
             this.gcChangelogs.MainView = this.tvChangelogs;
             this.gcChangelogs.Name = "gcChangelogs";
             this.gcChangelogs.Size = new System.Drawing.Size(647, 754);

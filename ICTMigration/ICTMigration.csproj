@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Files\FilesMigration.cs" />
     <Compile Include="ICTv2Models\ActionLog.cs">
       <DependentUpon>ICTv2Entities.tt</DependentUpon>
     </Compile>
@@ -378,8 +380,13 @@
     <Compile Include="ModelMigrations\UsersMigration.cs" />
     <Compile Include="PPEMigration\MigratePPE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketStatusFix\RecordsStatusFix.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\EntityManager.csproj">
       <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>
       <Name>EntityManager</Name>

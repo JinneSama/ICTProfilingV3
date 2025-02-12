@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
 using Models.Enums;
@@ -17,7 +18,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class frmAddEquipment : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEquipment : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;

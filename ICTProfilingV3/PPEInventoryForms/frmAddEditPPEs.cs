@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
 using Models.Repository;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.PPEInventoryForms
 {
-    public partial class frmAddEditPPEs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditPPEs : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private PPEs _PPEs;
@@ -55,7 +56,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             spinUnitCost.Value = (decimal)(_PPEs.UnitValue ?? 0);
             spintTotal.Value = (decimal)(_PPEs.TotalValue ?? 0);
             cboUnit.EditValue = _PPEs.Unit;
-            txtInvoiceDate.DateTime = _PPEs?.DateCreated ?? DateTime.UtcNow;
+            txtInvoiceDate.DateTime = _PPEs?.DateCreated ?? DateTime.Now;
             cboStatus.EditValue = _PPEs.Status;
             txtRemarks.Text = _PPEs.Remarks;    
         }
@@ -99,7 +100,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             editPPE.Unit = (Unit)cboUnit.EditValue;
             editPPE.UnitValue = (long?)spinUnitCost.Value;
             editPPE.TotalValue = (long?)spintTotal.Value;
-            editPPE.DateCreated = DateTime.UtcNow;
+            editPPE.DateCreated = DateTime.Now;
 
             unitOfWork.Save();
             IsSave = true;

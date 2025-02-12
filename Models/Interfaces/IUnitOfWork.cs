@@ -48,6 +48,10 @@ namespace Models.Repository
         IGenericRepository<MOAccounts> MOAccountRepo { get; }
         IGenericRepository<MOAccountUsers> MOAccountUserRepo { get; }
         IGenericRepository<ActionDocuments> ActionDocumentsRepo { get; }
+        IGenericRepository<RecordsRequestStatus> RecordsRequestStatus { get; }
+        IGenericRepository<EvaluationSheet> EvaluationSheetRepo { get; }
+        IGenericRepository<EvaluationSheetDocument> EvaluationSheetDocumentRepo { get; }
+        IGenericRepository<TechSpecsBasisDetails> TechSpecsBasisDetailsRepo { get; }
         void Save();
         void ExecuteCommand(string command);
         Task SaveChangesAsync();

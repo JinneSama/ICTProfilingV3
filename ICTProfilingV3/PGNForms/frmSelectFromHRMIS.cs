@@ -1,10 +1,11 @@
-﻿using Models.HRMISEntites;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.HRMISEntites;
 using Models.ViewModels;
 using System.Linq;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmSelectFromHRMIS : DevExpress.XtraEditors.XtraForm
+    public partial class frmSelectFromHRMIS : BaseForm
     {
         public EmployeesViewModel Employee { get; set; }
         public frmSelectFromHRMIS()

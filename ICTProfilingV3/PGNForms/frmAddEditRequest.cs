@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors.Controls;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmAddEditRequest : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditRequest : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private PGNRequests request;
@@ -37,7 +38,7 @@ namespace ICTProfilingV3.PGNForms
 
         private void CreateRequest()
         {
-            var req = new PGNRequests { CreatedById = UserStore.UserId , DateCreated = DateTime.UtcNow };
+            var req = new PGNRequests { CreatedById = UserStore.UserId , DateCreated = DateTime.Now };
             unitOfWork.PGNRequestsRepo.Insert(req); 
             unitOfWork.Save();
             request = req;
@@ -67,7 +68,7 @@ namespace ICTProfilingV3.PGNForms
             slueSignatory.Properties.DataSource = employees;
 
             lblEPiSNo.Text = string.Join("-", "PGN", request.Id);
-            txtDate.DateTime = DateTime.UtcNow;
+            txtDate.DateTime = DateTime.Now;
 
             var user = await unitOfWork.UsersRepo.FindAsync(x => x.Id == request.CreatedById);
             if (user == null) return;

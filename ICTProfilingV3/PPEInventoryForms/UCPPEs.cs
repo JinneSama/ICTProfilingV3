@@ -54,7 +54,9 @@ namespace ICTProfilingV3.PPEInventoryForms
             var row = (PPEsViewModel)gridPPEs.GetFocusedRow();
             gcEquipmentSpecs.Controls.Clear();
             if (row == null) return;
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
+
+            var uow = new UnitOfWork();
+            var ppe = await uow.PPesRepo.FindAsync(x => x.Id == row.Id);
             gcEquipmentSpecs.Controls.Add(new UCPPEsSpecs(ppe, _unitOfWork)
             {
                 Dock = DockStyle.Fill
@@ -78,10 +80,11 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private async Task LoadDetails()
         {
+            var uow = new UnitOfWork();
             var row = (PPEsViewModel)gridPPEs.GetFocusedRow();
             if (row == null) return;
             lblPropertyNo.Text = row.PropertyNo;
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
+            var ppe = await uow.PPesRepo.FindAsync(x => x.Id == row.Id);
             slueEmployee.EditValue = (long?)ppe?.IssuedToId;
             txtContactNo.Text = ppe.ContactNo;
             rdbtnGender.SelectedIndex = (int)(ppe?.Gender ?? 0);

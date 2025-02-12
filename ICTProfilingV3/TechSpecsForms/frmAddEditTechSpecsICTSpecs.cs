@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.DirectXPaint.Svg;
 using DevExpress.Utils.Filtering;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
-    public partial class frmAddEditTechSpecsICTSpecs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditTechSpecsICTSpecs : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly TechSpecsICTSpecsViewModel _specs;
@@ -47,7 +48,10 @@ namespace ICTProfilingV3.TechSpecsForms
             if (_saveType == SaveType.Insert) return;
 
             txtItemNo.Text = _specs.ItemNo.ToString();
-            spinQuantity.Value = _specs.Quantity;
+
+            if(_specs.Quantity == null) spinQuantity.EditValue = null;
+            else spinQuantity.Value = (decimal)_specs.Quantity;
+
             slueEquipment.EditValue = _specs.EquipmentSpecsId;
             txtDescription.Text = _specs.Description;
             slueUnit.EditValue = _specs.Unit;
@@ -58,10 +62,12 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private void LoadDropdowns()
         {
-            slueUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
+            var unitDropdownData = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
             {
                 UnitType = x
             });
+
+            slueUnit.Properties.DataSource = unitDropdownData;
             var res = GetEquipmentDatasource();
             slueEquipment.Properties.DataSource = res;
         }
@@ -86,11 +92,6 @@ namespace ICTProfilingV3.TechSpecsForms
             txtDescription.Text = row.Description;
         }
 
-        private void spinQuantity_EditValueChanged(object sender, EventArgs e)
-        {
-            spintTotal.Value = spinQuantity.Value * spinUnitCost.Value;
-        }
-
         private void spinUnitCost_EditValueChanged(object sender, EventArgs e)
         {
             spintTotal.Value = spinQuantity.Value * spinUnitCost.Value;
@@ -108,12 +109,18 @@ namespace ICTProfilingV3.TechSpecsForms
             var all = unitOfWork.TechSpecsICTSpecsRepo.GetAll();
             var specs = await unitOfWork.TechSpecsICTSpecsRepo.FindAsync(x => x.Id == _specs.Id);
             specs.ItemNo = (int)txtItemNo.Value;
-            specs.Quantity = (int)spinQuantity.Value;
+
+            if (spinQuantity.EditValue == null) specs.Quantity = null;
+            else specs.Quantity = (int)spinQuantity.Value;
+
             specs.EquipmentSpecsId = (int)slueEquipment.EditValue;
             specs.Description = txtDescription.Text;
-            specs.Unit = (Unit)slueUnit.EditValue;
-            specs.UnitCost = (long)spinUnitCost.Value;
-            specs.TotalCost = (long)spintTotal.Value;
+
+            if (slueUnit.EditValue == null) specs.Unit = null;
+            else specs.Unit = (Unit)slueUnit.EditValue;
+
+            specs.UnitCost = spinUnitCost.Value;
+            specs.TotalCost = spintTotal.Value;
             specs.Purpose = txtPurpose.Text;
             specs.TechSpecsId = _specs.TechSpecsId;
 
@@ -125,12 +132,12 @@ namespace ICTProfilingV3.TechSpecsForms
             var specs = new TechSpecsICTSpecs
             {
                 ItemNo = (int)txtItemNo.Value,
-                Quantity = (int)spinQuantity.Value,
+                Quantity = spinQuantity.EditValue == null ? default(int?) : (int)spinQuantity.Value,
                 EquipmentSpecsId = (int)slueEquipment.EditValue,
                 Description = txtDescription.Text,
-                Unit = Unit.meter,
-                UnitCost = (long)spinUnitCost.Value,
-                TotalCost = (long)spintTotal.Value,
+                Unit = slueUnit.EditValue == null ? default(Unit?) : (Unit)slueUnit.EditValue,
+                UnitCost = spinUnitCost.Value,
+                TotalCost = spintTotal.Value,
                 Purpose = txtPurpose.Text,
                 TechSpecsId = _specs.TechSpecsId
             };
@@ -160,6 +167,21 @@ namespace ICTProfilingV3.TechSpecsForms
             var frm = new frmEquipment();
             frm.ShowDialog();
             LoadDropdowns();
+        }
+
+        private void btnClearUOM_Click(object sender, EventArgs e)
+        {
+            slueUnit.EditValue = null;
+        }
+
+        private void btnClearQuantity_Click(object sender, EventArgs e)
+        {
+            spinQuantity.EditValue = null;
+        }
+
+        private void spinQuantity_EditValueChanged_1(object sender, EventArgs e)
+        {
+            spintTotal.Value = spinQuantity.Value * spinUnitCost.Value;
         }
     }
 }

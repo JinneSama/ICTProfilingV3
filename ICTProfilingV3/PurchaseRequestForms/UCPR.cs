@@ -129,6 +129,19 @@ namespace ICTProfilingV3.PurchaseRequestForms
             LoadPRDetails();
             LoadSpecs();
             LoadActions();
+            LoadFDTSData();
+        }
+
+        private void LoadFDTSData()
+        {
+            var row = (PRViewModel)gridPR.GetFocusedRow();
+            if (row == null) return;
+
+            fpPanelFDTS.Controls.Clear();
+            fpPanelFDTS.Controls.Add(new UCFDTS(row.PurchaseRequest.PRNo)
+            {
+                Dock = DockStyle.Fill
+            });
         }
 
         private void UCPR_Load(object sender, EventArgs e)
@@ -148,6 +161,12 @@ namespace ICTProfilingV3.PurchaseRequestForms
                 Dock = DockStyle.Fill,
                 filterText = pr.PurchaseRequest.TechSpecsId.ToString()
             });
+        }
+
+        private void btnFDTS_Click(object sender, EventArgs e)
+        {
+            if (fpFDTS.IsPopupOpen) fpFDTS.HidePopup();
+            else fpFDTS.ShowPopup();
         }
     }
 }

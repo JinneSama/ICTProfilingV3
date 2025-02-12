@@ -11,6 +11,7 @@ namespace Models.Repository
         IQueryable<TEntity> FindAllAsync(Expression<Func<TEntity, bool>> expression, params Expression<Func<TEntity, object>>[] includes);
         IQueryable<TEntity> GetAll(params Expression<Func<TEntity, object>>[] includes);
         void Insert(TEntity entity);
+        void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteRange(Expression<Func<TEntity, bool>> expression);
         void DeleteByEx(Expression<Func<TEntity, bool>> expression);    

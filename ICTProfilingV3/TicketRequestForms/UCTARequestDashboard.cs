@@ -18,19 +18,35 @@ using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using DevExpress.Data.Filtering;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
+using EntityManager.Managers.Role;
+using Models.Managers.User;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private IUnitOfWork unitOfWork;
+        private readonly IICTUserManager userManager;
+        private readonly IICTRoleManager roleManager;
         public string filterText { get; set; }  
         public UCTARequestDashboard()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
+            userManager = new ICTUserManager();
+            roleManager = new ICTRoleManager();
             LoadDropdowns();
             LoadTickets();
+        }
+        private async Task<bool> CanAssign()
+        {
+            var user = await userManager.FindUserAsync(UserStore.UserId);
+            if (user.Roles == null) return false;
+            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
+            if (role == null) return false;
+
+            return role.Select(x => x.Designation).ToList().Contains(Designation.AssignTo);
         }
 
         private void LoadDropdowns()
@@ -55,7 +71,7 @@ namespace ICTProfilingV3.TicketRequestForms
                 {
                     TicketRequest = x
                 }).OrderByDescending(x => x.TicketRequest.DateCreated);
-            gcTARequests.DataSource = res.ToList();
+            gcTARequests.DataSource = new BindingList<TicketRequestViewModel>(res.ToList());
         }
 
         private void btnNewRequest_Click(object sender, EventArgs e)
@@ -104,7 +120,7 @@ namespace ICTProfilingV3.TicketRequestForms
         private void NavigateToProcess(Control uc)
         {
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(uc);
         }
@@ -114,8 +130,15 @@ namespace ICTProfilingV3.TicketRequestForms
             if (filterText != null) gridRequest.ActiveFilterCriteria = new BinaryOperator("TicketRequest.Id",filterText);
         }
 
-        private void btnAssignTo_Click(object sender, EventArgs e)
+        private async void btnAssignTo_Click(object sender, EventArgs e)
         {
+            var canAssign = await CanAssign();
+            if (!canAssign)
+            {
+                MessageBox.Show("You do not have Permission to Perform this Action, Please Contact Receiving/Helpdesk/Administrator", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             var row = (TicketRequestViewModel)gridRequest.GetFocusedRow();
             var frm = new frmAssignTo(row.TicketRequest);
             frm.ShowDialog();
@@ -186,6 +209,16 @@ namespace ICTProfilingV3.TicketRequestForms
         private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
         {
             FilterGrid();
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

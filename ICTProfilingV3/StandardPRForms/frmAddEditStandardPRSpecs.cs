@@ -5,10 +5,11 @@ using Models.ViewModels;
 using Models.Enums;
 using Models.Entities;
 using System.Threading.Tasks;
+using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.StandardPRForms
 {
-    public partial class frmAddEditStandardPRSpecs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditStandardPRSpecs : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly SaveType saveType;

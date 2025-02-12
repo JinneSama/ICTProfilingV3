@@ -20,7 +20,21 @@ namespace Models.ViewModels
         public string Description => GetDescription();
         public string From { get; set; }
         public string RoutedTo { get; set; }
-        public string Remarks { get; set; } 
+        public string Remarks { get; set; }
+        public bool Completed => Status == TicketStatus.Completed ? true : false;
+        public TicketStatus? Status => GetStatus();
+
+        private TicketStatus? GetStatus()
+        {
+            if (_action?.RequestType == Enums.RequestType.TechSpecs) return _action?.TechSpecs?.TicketRequest.TicketStatus;
+            if (_action?.RequestType == Enums.RequestType.Deliveries) return _action?.Deliveries?.TicketRequest.TicketStatus;
+            if (_action?.RequestType == Enums.RequestType.Repairs) return _action?.Repairs?.TicketRequest.TicketStatus;
+            if (_action?.RequestType == Enums.RequestType.PR) return _action?.PurchaseRequest?.Status;
+            if (_action?.RequestType == Enums.RequestType.CAS) return _action?.CustomerActionSheet?.Status;
+            if (_action?.RequestType == Enums.RequestType.PGN) return _action?.PGNRequests?.Status;
+            if (_action?.RequestType == Enums.RequestType.M365) return _action?.MOAccountUsers?.Status;
+            return null;
+        }
 
         private string GetControlNo()
         {

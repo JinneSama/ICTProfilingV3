@@ -11,13 +11,13 @@ namespace Models.ViewModels
     {
         public int Id { get; set; }
         public int ItemNo { get; set; }
-        public int Quantity { get; set; }
-        public Unit Unit { get; set; }
+        public int? Quantity { get; set; }
+        public Unit? Unit { get; set; }
         public string Equipment { get; set; }
         public int? EquipmentSpecsId { get; set; }
         public string Description { get; set; }
-        public long UnitCost { get; set; }
-        public long TotalCost { get; set; }
+        public decimal? UnitCost { get; set; }
+        public decimal? TotalCost { get; set; }
         public string Purpose { get; set; }
         public int TechSpecsId { get; set; }
         public IEnumerable<TechSpecsICTSpecsDetails> TechSpecsICTSpecsDetails { get; set; }
@@ -25,7 +25,7 @@ namespace Models.ViewModels
         {
             get
             {
-                return new BindingList<TechSpecsICTSpecsDetails>(TechSpecsICTSpecsDetails.ToList());
+                return new BindingList<TechSpecsICTSpecsDetails>(TechSpecsICTSpecsDetails.OrderBy(o => o.ItemNo).ToList());
             }    
         }
     }

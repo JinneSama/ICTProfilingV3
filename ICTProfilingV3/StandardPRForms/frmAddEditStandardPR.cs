@@ -1,6 +1,8 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
+using Models.Managers.User;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.StandardPRForms
 {
-    public partial class frmAddEditStandardPR : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditStandardPR : BaseForm
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly PurchaseRequest _purchaseRequest;

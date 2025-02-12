@@ -34,6 +34,8 @@
             this.hplRepair = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gcHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplRepair)).BeginInit();
@@ -63,7 +65,9 @@
             this.gridHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
-            this.gridColumn3});
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5});
             this.gridHistory.GridControl = this.gcHistory;
             this.gridHistory.Name = "gridHistory";
             this.gridHistory.OptionsView.ShowGroupPanel = false;
@@ -77,7 +81,7 @@
             this.gridColumn1.OptionsColumn.FixedWidth = true;
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 147;
+            this.gridColumn1.Width = 59;
             // 
             // hplRepair
             // 
@@ -94,7 +98,7 @@
             this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 2;
-            this.gridColumn2.Width = 524;
+            this.gridColumn2.Width = 212;
             // 
             // gridColumn3
             // 
@@ -106,7 +110,23 @@
             this.gridColumn3.OptionsColumn.FixedWidth = true;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
-            this.gridColumn3.Width = 144;
+            this.gridColumn3.Width = 110;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.FieldName = "Findings";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 3;
+            this.gridColumn4.Width = 213;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.FieldName = "Recommendations";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 4;
+            this.gridColumn5.Width = 221;
             // 
             // UCRepairHistory
             // 
@@ -130,5 +150,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplRepair;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
     }
 }

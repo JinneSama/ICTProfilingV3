@@ -189,6 +189,8 @@
             this.gridColumn2.Caption = "Username";
             this.gridColumn2.FieldName = "PGNAccount.Username";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowEdit = false;
+            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 136;

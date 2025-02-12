@@ -1,16 +1,15 @@
 ﻿using DevExpress.XtraEditors;
 using Helpers.NetworkFolder;
-using Models.Entities;
+using ICTProfilingV3.BaseClasses;
 using Models.Repository;
 using Models.ViewModels;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmChangelogs : DevExpress.XtraEditors.XtraForm
+    public partial class frmChangelogs : BaseForm
     {
         private readonly string version;
         private IUnitOfWork unitOfWork;

@@ -15,16 +15,13 @@ using ICTProfilingV3.ReportForms;
 using System.Collections.Generic;
 using Models.ReportViewModel;
 using Models.Managers.User;
-using DevExpress.Utils.DragDrop;
-using DevExpress.XtraGrid;
-using System.Drawing;
-using DevExpress.XtraExport.Helpers;
+using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class frmComparisonReport : DevExpress.XtraEditors.XtraForm
+    public partial class frmComparisonReport : BaseForm
     {
-        private readonly Deliveries deliveries;
+        private Deliveries deliveries;
         private IICTUserManager userManager;
         private IUnitOfWork unitOfWork;
 
@@ -49,6 +46,18 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task LoadData()
         {
+            var uow = new UnitOfWork();
+            var del = await uow.DeliveriesRepo.FindAsync(x => x.Id == deliveries.Id,
+                x => x.Supplier,
+                x => x.TicketRequest,
+                x => x.TicketRequest.ITStaff,
+                x => x.TicketRequest.ITStaff.Users,
+                x => x.DeliveriesSpecs.Select(s => s.Model),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
+
+            deliveries = del;
             lblEpisNo.Text = deliveries.Id.ToString();
 
             var employee = HRMISEmployees.GetEmployeeById(deliveries.RequestedById);
@@ -57,7 +66,7 @@ namespace ICTProfilingV3.DeliveriesForms
             txtSupplier.Text = deliveries.Supplier.SupplierName;
             spinAmount.Value = (decimal)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity));
 
-            var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138).OrderBy(x => x.ActionDate);
+            var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138 || x.SubActivityId == 1139).OrderBy(x => x.ActionDate);
             txtInspectedDate.DateTime = (DateTime)inspectActions?.FirstOrDefault()?.ActionDate;
 
             if (deliveries.ComparisonReports.FirstOrDefault() == null) await CreateComparisonReport();
@@ -190,14 +199,19 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+            await SaveData();
+        }
+
+        private async Task SaveData()
+        {
             await SaveDetails();
             for (int i = 0; i <= gridCR.RowCount; i++)
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
-                if(row == null) continue;
+                if (row == null) continue;
                 unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == row.CRId);
                 unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == row.CRSpecs.Id);
-                unitOfWork.Save();
+                await unitOfWork.SaveChangesAsync();
             }
 
             for (int i = 0; i <= gridCR.RowCount; i++)
@@ -226,7 +240,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 for (int x = 0; x < detailRow.RowCount; x++)
                 {
                     var spec = (ComparisonReportSpecsDetails)detailRow.GetRow(x);
-                    if(spec == null) continue;
+                    if (spec == null) continue;
                     var crSpecsDetails = new ComparisonReportSpecsDetails
                     {
                         ItemOrder = x + 1,
@@ -241,9 +255,9 @@ namespace ICTProfilingV3.DeliveriesForms
                     unitOfWork.ComparisonReportSpecsDetailsRepo.Insert(crSpecsDetails);
                 }
             }
-            unitOfWork.Save();
+            await unitOfWork.SaveChangesAsync();
             await LoadData();
-            MessageBox.Show("Changes Saved!", "Alert", MessageBoxButtons.OK , MessageBoxIcon.Information);
+            MessageBox.Show("Changes Saved!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private async Task SaveDetails()
@@ -278,7 +292,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 PreparedBy = cr.PreparedByUser,
                 ReviewedBy = cr.ReviewedByUser,
                 NotedBy = cr.NotedByUser,
-                DatePrinted = DateTime.UtcNow,
+                DatePrinted = DateTime.Now,
                 PrintedBy = UserStore.Username
             };
 

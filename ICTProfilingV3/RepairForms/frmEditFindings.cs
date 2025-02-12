@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Repository;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class frmEditFindings : DevExpress.XtraEditors.XtraForm
+    public partial class frmEditFindings : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly int repairId;

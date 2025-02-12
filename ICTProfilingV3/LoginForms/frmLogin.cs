@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
 using Helpers.Security;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DebugTools;
 using ICTProfilingV3.ToolForms;
 using Models.Entities;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LoginForms
 {
-    public partial class frmLogin : DevExpress.XtraEditors.XtraForm
+    public partial class frmLogin : BaseForm
     {
         private readonly IICTUserManager userManager;
         private readonly IUnitOfWork unitOfWork;
@@ -33,7 +34,7 @@ namespace ICTProfilingV3.LoginForms
         }
         private void LoadChangelogs()
         {
-            lblDate.Text = DateTime.UtcNow.ToString("MMM-dd-yyyy");
+            lblDate.Text = DateTime.Now.ToString("MMM-dd-yyyy");
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
             {
                 System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
@@ -61,23 +62,23 @@ namespace ICTProfilingV3.LoginForms
 
             if (isLoggingIn) return;
             isLoggingIn = true;
-            await Login();
+            await Login(txtUsername.Text , txtPassword.Text);
             isLoggingIn = false;
         }
 
-        private async Task Login()
+        private async Task Login(string username, string password)
         {
-            if (txtUsername.Text == "sa")
+            if (username == "sa")
             {
                 Logged = true;
                 this.Close();
             }
             Users user = null;
             bool logged = true;
-            var ofmisUser = await PointToSystemAccount(txtUsername.Text, txtPassword.Text);
+            var ofmisUser = await PointToSystemAccount(username, password);
             if(ofmisUser == null)
             {
-                var res = await userManager.Login(txtUsername.Text, txtPassword.Text);
+                var res = await userManager.Login(username, password);
                 if(!res.success) logged = false;
                 user = res.user;
             }
@@ -146,6 +147,12 @@ namespace ICTProfilingV3.LoginForms
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(!Logged) Application.Exit();
+        }
+
+        private async void frmLogin_Load(object sender, EventArgs e)
+        {
+            if(UserStore.ArugmentCredentialsDto == null) return;    
+            await Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
         }
     }
 }

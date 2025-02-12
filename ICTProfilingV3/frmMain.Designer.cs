@@ -74,9 +74,10 @@
             this.btnQueue = new DevExpress.XtraBars.BarButtonItem();
             this.btnChanges = new DevExpress.XtraBars.BarButtonItem();
             this.btnMOAccounts = new DevExpress.XtraBars.BarButtonItem();
+            this.btnQuarterlyReport = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -147,9 +148,10 @@
             this.lblUpdate,
             this.btnQueue,
             this.btnChanges,
-            this.btnMOAccounts});
+            this.btnMOAccounts,
+            this.btnQuarterlyReport});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 41;
+            this.ribbon.MaxItemId = 42;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -158,7 +160,7 @@
             this.ribbonPage2,
             this.ribbonPage4,
             this.ribbonPage3});
-            this.ribbon.Size = new System.Drawing.Size(1322, 161);
+            this.ribbon.Size = new System.Drawing.Size(1322, 154);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // backstageViewControl1
@@ -178,16 +180,16 @@
             // 
             // backstageViewClientControl1
             // 
-            this.backstageViewClientControl1.Location = new System.Drawing.Point(169, 62);
+            this.backstageViewClientControl1.Location = new System.Drawing.Point(154, 62);
             this.backstageViewClientControl1.Name = "backstageViewClientControl1";
-            this.backstageViewClientControl1.Size = new System.Drawing.Size(366, 146);
+            this.backstageViewClientControl1.Size = new System.Drawing.Size(381, 146);
             this.backstageViewClientControl1.TabIndex = 1;
             // 
             // backstageViewClientControl2
             // 
-            this.backstageViewClientControl2.Location = new System.Drawing.Point(169, 63);
+            this.backstageViewClientControl2.Location = new System.Drawing.Point(154, 63);
             this.backstageViewClientControl2.Name = "backstageViewClientControl2";
-            this.backstageViewClientControl2.Size = new System.Drawing.Size(365, 144);
+            this.backstageViewClientControl2.Size = new System.Drawing.Size(380, 144);
             this.backstageViewClientControl2.TabIndex = 2;
             // 
             // btnLogout
@@ -562,11 +564,20 @@
             this.btnMOAccounts.Tag = "M365";
             this.btnMOAccounts.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMOAccounts_ItemClick);
             // 
+            // btnQuarterlyReport
+            // 
+            this.btnQuarterlyReport.Caption = "Quarterly Report";
+            this.btnQuarterlyReport.Id = 41;
+            this.btnQuarterlyReport.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.switchtimescalesto_16x16;
+            this.btnQuarterlyReport.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.switchtimescalesto_32x32;
+            this.btnQuarterlyReport.Name = "btnQuarterlyReport";
+            this.btnQuarterlyReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQuarterlyReport_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1,
             this.ribbonPageGroup2,
+            this.ribbonPageGroup1,
             this.ribbonPageGroup3,
             this.ribbonPageGroup12,
             this.ribbonPageGroup4,
@@ -575,6 +586,13 @@
             this.ribbonPage1.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.home_16x16;
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Home";
+            // 
+            // ribbonPageGroup2
+            // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnTARequest, true);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Tag = "TicketContainer";
+            this.ribbonPageGroup2.Text = "Ticket";
             // 
             // ribbonPageGroup1
             // 
@@ -585,13 +603,6 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Tag = "DashboarContainer";
             this.ribbonPageGroup1.Text = "Dashboard";
-            // 
-            // ribbonPageGroup2
-            // 
-            this.ribbonPageGroup2.ItemLinks.Add(this.btnTARequest, true);
-            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Tag = "TicketContainer";
-            this.ribbonPageGroup2.Text = "Ticket";
             // 
             // ribbonPageGroup3
             // 
@@ -723,22 +734,23 @@
             // ribbonPageGroup11
             // 
             this.ribbonPageGroup11.ItemLinks.Add(this.btnReport);
+            this.ribbonPageGroup11.ItemLinks.Add(this.btnQuarterlyReport);
             this.ribbonPageGroup11.Name = "ribbonPageGroup11";
             // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.lblUpdate);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 626);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 629);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1322, 24);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1322, 21);
             // 
             // mainPanel
             // 
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 161);
+            this.mainPanel.Location = new System.Drawing.Point(0, 154);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1322, 465);
+            this.mainPanel.Size = new System.Drawing.Size(1322, 475);
             this.mainPanel.TabIndex = 2;
             // 
             // UpdateThread
@@ -838,5 +850,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup14;
         private DevExpress.XtraBars.BarButtonItem btnMOAccounts;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup16;
+        private DevExpress.XtraBars.BarButtonItem btnQuarterlyReport;
     }
 }

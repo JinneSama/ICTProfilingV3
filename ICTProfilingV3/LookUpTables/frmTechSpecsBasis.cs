@@ -1,6 +1,9 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Repository;
+using Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Diagnostics;
@@ -9,23 +12,26 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
-    public partial class frmTechSpecsBasis : DevExpress.XtraEditors.XtraForm
+    public partial class frmTechSpecsBasis : BaseForm
     {
         private IUnitOfWork unitOfWork;
+        public bool Copy { get; set; }
+        public IEnumerable<TechSpecsBasisDetails> SpecsDetails { get; set; }
         public frmTechSpecsBasis()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
-            LoadSpecsBasis();
         }
 
         private async void LoadSpecsBasis()
         {
+            colCopy.Visible = Copy;
             var equipmentDropdown = unitOfWork.EquipmentSpecsRepo.GetAll(x => x.Equipment);
             equipmentSpecsBindingSource.DataSource = equipmentDropdown.ToList();
 
             var equipmentBasis = await unitOfWork.TechSpecsBasisRepo.GetAll(x => x.EquipmentSpecs,
-                x => x.EquipmentSpecs.Equipment).ToListAsync();
+                x => x.EquipmentSpecs.Equipment,
+                x => x.TechSpecsBasisDetails).ToListAsync();
             gcTSBasis.DataSource = new BindingList<TechSpecsBasis>(equipmentBasis);
         }
 
@@ -88,6 +94,29 @@ namespace ICTProfilingV3.LookUpTables
         private void btnShowInfo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddSpecs_Click(object sender, EventArgs e)
+        {
+            var row = (TechSpecsBasis)gridTSBasis.GetFocusedRow();
+            var frm = new frmTechSpecsBasisDetails(row);
+            frm.ShowDialog();
+        }
+
+        private void btnCopySpecs_Click(object sender, EventArgs e)
+        {
+            var row = (TechSpecsBasis)gridTSBasis.GetFocusedRow();
+            SpecsDetails = row.TechSpecsBasisDetails;
+
+            var msgRes = MessageBox.Show("Copy Specs from this Basis?", "Confirmation!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            this.Close();
+        }
+
+        private void frmTechSpecsBasis_Load(object sender, EventArgs e)
+        {
+            LoadSpecsBasis();
         }
     }
 }

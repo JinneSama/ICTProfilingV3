@@ -1,4 +1,8 @@
-﻿using Models.Entities;
+﻿using DevExpress.XtraBars;
+using Helpers.Tools;
+using Helpers.Tools.Models;
+using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Repository;
 using System;
 using System.ComponentModel;
@@ -8,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.StandardPRForms
 {
-    public partial class frmAddEditStandardPRSpecsDetails : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditStandardPRSpecsDetails : BaseForm
     {
         private readonly StandardPRSpecs standardPRSpecs;
         private readonly IUnitOfWork unitOfWork;
@@ -58,14 +62,67 @@ namespace ICTProfilingV3.StandardPRForms
 
         private void btnDeleteSpecs_Click(object sender, EventArgs e)
         {
-            var msgRes = MessageBox.Show("Delete this Equipment?", "Confirmation", MessageBoxButtons.OKCancel,
+            var msgRes = MessageBox.Show("Delete this Specs", "Confirmation", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
 
             var row = (StandardPRSpecsDetails)gridSpecsDetails.GetFocusedRow();
             unitOfWork.StandardPRSpecsDetailsRepo.DeleteByEx(x => x.Id == row.Id);
-
+            unitOfWork.Save();
             LoadSpecs();
+        }
+
+        private void btnPasteSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var uow = new UnitOfWork();
+            var specs = CopyPaste.PasteSpecs(); 
+            
+            var lastItemNo = 0;
+            var lastSpecs = uow.StandardPRSpecsDetailsRepo.FindAllAsync(x => x.StandardPRSpecsId == standardPRSpecs.Id).ToList().LastOrDefault();
+            if (lastSpecs != null) lastItemNo = lastSpecs.ItemNo;
+
+            foreach (var item in specs)
+            {
+                lastItemNo += 1;
+                AddPastedItems(item, lastItemNo);
+            } 
+            LoadSpecs();
+        }
+
+        private void AddPastedItems(CopiedSpecs copiedSpecs, int itemNo)
+        {
+            var unitOfWork = new UnitOfWork();
+            var specs = new StandardPRSpecsDetails
+            {
+                StandardPRSpecsId = standardPRSpecs.Id,
+                ItemNo = itemNo,
+                Specs = copiedSpecs.Specs,
+                Description = copiedSpecs.Description
+            };
+
+            unitOfWork.StandardPRSpecsDetailsRepo.Insert(specs);
+            unitOfWork.Save();
+        }
+
+        private void gridSpecsDetails_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+        }
+
+        private void btnDeleteAll_Click(object sender, EventArgs e)
+        {
+            var msgRes = MessageBox.Show("Delete all Specifications?", "Confirmation", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            unitOfWork.StandardPRSpecsDetailsRepo.DeleteRange(x => x.StandardPRSpecsId == standardPRSpecs.Id);
+            unitOfWork.Save();
+            LoadSpecs();
+        }
+
+        private void gridSpecsDetails_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                popupMenu.ShowPopup(MousePosition);
         }
     }
 }

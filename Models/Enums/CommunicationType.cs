@@ -1,8 +1,12 @@
-﻿namespace Models.Enums
+﻿using System.ComponentModel;
+
+namespace Models.Enums
 {
     public enum CommunicationType
     {
-        Incoming = 0,
-        Outgoing = 1
+        [Description("PGN Account")]
+        PGN = 0,
+        [Description("Request for TA")]
+        TA = 1
     }
 }

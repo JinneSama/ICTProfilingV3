@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -7,10 +8,11 @@ using Models.Models;
 
 namespace EntityManager.Managers.User
 {
-    public class ICTUserManager : IICTUserManager
+    public class ICTUserManager : IICTUserManager, IDisposable
     {
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
+        private bool disposed;
 
         public ICTUserManager()
         {
@@ -73,5 +75,20 @@ namespace EntityManager.Managers.User
             _userManager.Delete(_userManager.FindById(UserId)); 
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+                if (disposing)
+                {
+                    _userManager.Dispose(); 
+                    _roleManager.Dispose();
+                }
+            disposed = true;
+        }
     }
 }

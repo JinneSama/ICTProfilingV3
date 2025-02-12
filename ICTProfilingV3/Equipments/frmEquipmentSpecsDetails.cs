@@ -1,4 +1,5 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Entities;
 using Models.Repository;
 using System;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.Equipments
 {
-    public partial class frmEquipmentSpecsDetails : DevExpress.XtraEditors.XtraForm
+    public partial class frmEquipmentSpecsDetails : BaseForm
     {
         private IUnitOfWork unitOfWork;
         private EquipmentSpecs _specs;
@@ -28,7 +29,7 @@ namespace ICTProfilingV3.Equipments
 
         private void LoadSpecs()
         {
-            var data = unitOfWork.EquipmentSpecsDetailsRepo.FindAllAsync(x => x.EquipmentSpecsId == _specs.Id); 
+            var data = unitOfWork.EquipmentSpecsDetailsRepo.FindAllAsync(x => x.EquipmentSpecsId == _specs.Id).OrderBy(o => o.ItemNo); 
             gcEquipmentDetails.DataSource = new BindingList<EquipmentSpecsDetails>(data.ToList());  
         }
 

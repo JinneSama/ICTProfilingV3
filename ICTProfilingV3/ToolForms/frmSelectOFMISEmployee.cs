@@ -1,10 +1,11 @@
-﻿using Models.Models;
+﻿using ICTProfilingV3.BaseClasses;
+using Models.Models;
 using Models.OFMISEntities;
 using Models.ViewModels;
 
 namespace ICTProfilingV3.ToolForms
 {
-    public partial class frmSelectOFMISEmployee : DevExpress.XtraEditors.XtraForm
+    public partial class frmSelectOFMISEmployee : BaseForm
     {
         public EmployeesViewModel OFMISEmployee { get; set; }
         public frmSelectOFMISEmployee()

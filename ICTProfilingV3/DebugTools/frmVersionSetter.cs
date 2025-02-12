@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ICTProfilingV3.BaseClasses;
+using System;
 
 namespace ICTProfilingV3.DebugTools
 {
-    public partial class frmVersionSetter : DevExpress.XtraEditors.XtraForm
+    public partial class frmVersionSetter : BaseForm
     {
         public frmVersionSetter()
         {

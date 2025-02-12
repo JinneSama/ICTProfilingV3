@@ -1,6 +1,7 @@
 ﻿using Models.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
 
 namespace Models.Entities
 {
@@ -8,10 +9,10 @@ namespace Models.Entities
     {
         public int Id { get; set; }
         public int ItemNo { get; set; }
-        public int Quantity { get; set; }
-        public Unit Unit { get; set; }
-        public long UnitCost { get; set; }
-        public long TotalCost { get; set; }
+        public int? Quantity { get; set; }
+        public Unit? Unit { get; set; }
+        public decimal? UnitCost { get; set; }
+        public decimal? TotalCost { get; set; }
         public string Description { get; set; }
         public string Purpose { get; set; }
 

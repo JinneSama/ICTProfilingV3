@@ -28,11 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.staffPanel = new DevExpress.XtraEditors.PanelControl();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
@@ -52,7 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gcDeliveries = new DevExpress.XtraGrid.GridControl();
             this.gridDeliveries = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.hplTicket = new DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,6 +75,7 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnFindings = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompReport = new DevExpress.XtraEditors.SimpleButton();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
@@ -98,6 +109,7 @@
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
             this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
@@ -134,6 +146,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.OptionsColumn.AllowEdit = false;
+            this.colStatus.OptionsColumn.AllowFocus = false;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 1;
+            this.colStatus.Width = 83;
             // 
             // panel1
             // 
@@ -374,7 +397,7 @@
             // gridDeliveries
             // 
             this.gridDeliveries.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
+            this.colStatus,
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
@@ -384,22 +407,56 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10});
+            gridFormatRule1.Column = this.colStatus;
+            gridFormatRule1.ColumnApplyTo = this.colStatus;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Coral;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[Status] = 0";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.colStatus;
+            gridFormatRule2.ColumnApplyTo = this.colStatus;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Pink;
+            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[Status] = 1";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.colStatus;
+            gridFormatRule3.ColumnApplyTo = this.colStatus;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression3.Expression = "[Status] = 2";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            gridFormatRule4.Column = this.colStatus;
+            gridFormatRule4.ColumnApplyTo = this.colStatus;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
+            formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression4.Expression = "[Status] = 3";
+            gridFormatRule4.Rule = formatConditionRuleExpression4;
+            gridFormatRule5.Column = this.colStatus;
+            gridFormatRule5.ColumnApplyTo = this.colStatus;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression5.Expression = "[Status] = 4";
+            gridFormatRule5.Rule = formatConditionRuleExpression5;
+            this.gridDeliveries.FormatRules.Add(gridFormatRule1);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule2);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule3);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule4);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule5);
             this.gridDeliveries.GridControl = this.gcDeliveries;
             this.gridDeliveries.Name = "gridDeliveries";
             this.gridDeliveries.OptionsFind.AlwaysVisible = true;
             this.gridDeliveries.OptionsView.ShowGroupPanel = false;
             this.gridDeliveries.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridDeliveries_FocusedRowObjectChanged);
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Status";
-            this.gridColumn1.FieldName = "Status";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.OptionsColumn.AllowEdit = false;
-            this.gridColumn1.OptionsColumn.AllowFocus = false;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 83;
             // 
             // gridColumn2
             // 
@@ -505,6 +562,7 @@
             this.pnlButtons.Appearance.Options.UseBackColor = true;
             this.pnlButtons.Appearance.Options.UseBorderColor = true;
             this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnFindings);
             this.pnlButtons.Controls.Add(this.btnCompReport);
             this.pnlButtons.Controls.Add(this.lblEpisNo);
             this.pnlButtons.Controls.Add(this.labelControl8);
@@ -515,6 +573,22 @@
             this.pnlButtons.Size = new System.Drawing.Size(1111, 50);
             this.pnlButtons.TabIndex = 5;
             // 
+            // btnFindings
+            // 
+            this.btnFindings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFindings.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnFindings.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnFindings.Appearance.Options.UseBackColor = true;
+            this.btnFindings.Appearance.Options.UseForeColor = true;
+            this.btnFindings.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x168;
+            this.btnFindings.Location = new System.Drawing.Point(674, 10);
+            this.btnFindings.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFindings.Name = "btnFindings";
+            this.btnFindings.Size = new System.Drawing.Size(138, 28);
+            this.btnFindings.TabIndex = 115;
+            this.btnFindings.Text = "Initial Findings";
+            this.btnFindings.Click += new System.EventHandler(this.btnFindings_Click);
+            // 
             // btnCompReport
             // 
             this.btnCompReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -523,7 +597,7 @@
             this.btnCompReport.Appearance.Options.UseBackColor = true;
             this.btnCompReport.Appearance.Options.UseForeColor = true;
             this.btnCompReport.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.productsalesreport_16x16;
-            this.btnCompReport.Location = new System.Drawing.Point(719, 10);
+            this.btnCompReport.Location = new System.Drawing.Point(816, 10);
             this.btnCompReport.Margin = new System.Windows.Forms.Padding(2);
             this.btnCompReport.Name = "btnCompReport";
             this.btnCompReport.Size = new System.Drawing.Size(140, 28);
@@ -561,13 +635,13 @@
             this.btnPreview.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnPreview.Appearance.Options.UseBackColor = true;
             this.btnPreview.Appearance.Options.UseForeColor = true;
-            this.btnPreview.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.print_16x16;
+            this.btnPreview.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x168;
             this.btnPreview.Location = new System.Drawing.Point(960, 10);
             this.btnPreview.Margin = new System.Windows.Forms.Padding(2);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(138, 28);
             this.btnPreview.TabIndex = 111;
-            this.btnPreview.Text = "Preview";
+            this.btnPreview.Text = "Withdrawal Report";
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnEdit
@@ -578,7 +652,7 @@
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(863, 10);
+            this.btnEdit.Location = new System.Drawing.Point(577, 10);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -888,7 +962,8 @@
             this.tabDetails.TabIndex = 41;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabAction,
-            this.tabEquipmentSpecs});
+            this.tabEquipmentSpecs,
+            this.tabEvaluation});
             // 
             // tabAction
             // 
@@ -901,6 +976,12 @@
             this.tabEquipmentSpecs.Name = "tabEquipmentSpecs";
             this.tabEquipmentSpecs.Size = new System.Drawing.Size(1100, 243);
             this.tabEquipmentSpecs.Text = "Equipment Specs";
+            // 
+            // tabEvaluation
+            // 
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(1100, 243);
+            this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // UCDeliveries
             // 
@@ -991,7 +1072,7 @@
         private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraGrid.GridControl gcDeliveries;
         private DevExpress.XtraGrid.Views.Grid.GridView gridDeliveries;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
@@ -1027,5 +1108,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraEditors.SimpleButton btnFindings;
+        private DevExpress.XtraTab.XtraTabPage tabEvaluation;
     }
 }

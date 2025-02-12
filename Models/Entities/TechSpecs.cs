@@ -42,11 +42,13 @@ namespace Models.Entities
         public virtual ICollection<TechSpecsICTSpecs> TechSpecsICTSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
         public virtual ICollection<Repairs> Repairs { get; set; }
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
         public TechSpecs()
         {
             TechSpecsICTSpecs = new HashSet<TechSpecsICTSpecs>();
             Actions = new HashSet<Actions>();
             Repairs = new HashSet<Repairs>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

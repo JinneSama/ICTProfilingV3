@@ -1,14 +1,27 @@
-﻿using DevExpress.XtraSplashScreen;
+﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.XtraSplashScreen;
+using Helpers.Interfaces;
+using Helpers.Utility;
+using ICTMigration.Files;
 using ICTMigration.ICTv2Models;
 using ICTMigration.ModelMigrations;
 using ICTMigration.PPEMigration;
+using ICTMigration.TicketStatusFix;
 using ICTProfilingV3.ToolForms;
+using Models.FDTSEntities;
 using Models.HRMISEntites;
+using Models.Managers.User;
 using Models.OFMISEntities;
 using Models.Repository;
+using Models.Service.DTOModels;
+using Newtonsoft.Json;
 using System;
 using System.Configuration;
+using System.Deployment.Application;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +35,23 @@ namespace ICTProfilingV3
         [STAThread]
         static void Main()
         {
+            ISingleInstance instanceGuard = new SingelInstance("EpisV3");
+
+            if (!instanceGuard.IsSingleInstance())
+            {
+                instanceGuard.ShowDuplicateInstanceWarning();
+                return;
+            }
+
+            string filePath = Path.Combine(Path.GetTempPath(), "credentials.json");
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                var credentials = JsonConvert.DeserializeObject<ArgumentCredentialsDto>(json);
+                UserStore.ArugmentCredentialsDto = credentials;
+                File.Delete(filePath);
+            }
+
             SplashScreenManager.ShowForm(typeof(frmSplashScreen));
             MainAsync().GetAwaiter().GetResult();
             SplashScreenManager.CloseForm();
@@ -33,6 +63,7 @@ namespace ICTProfilingV3
 
         private static async Task MainAsync()
         {
+            FDTSData.InitData();
             await HRMISEmployees.InitContext();
             await OFMISEmployees.InitEmployees();
             OFMISUsers.InitUsers();
@@ -44,6 +75,7 @@ namespace ICTProfilingV3
                 await lookup.MigrateActionList();
                 await lookup.MigrateEquipments();
                 await lookup.MigrateStandardPR();
+                await lookup.MigrateTSBasis();
 
                 UsersMigration usersMigration = new UsersMigration();
                 await usersMigration.MigrateUsers();
@@ -63,7 +95,8 @@ namespace ICTProfilingV3
                 await actionMigration.MigrateTSActions();
                 await actionMigration.MigrateDeliveriesActions();
                 await actionMigration.MigrateRepairActions();
-                await actionMigration.MigrateCASActions(); 
+                await actionMigration.MigrateCASActions();
+                await actionMigration.MigratePGNActions();
 
                 AssignedStaffMigration assignedStaffMigration = new AssignedStaffMigration();
                 await assignedStaffMigration.GetAssignedUsersDeliveries();
@@ -76,6 +109,13 @@ namespace ICTProfilingV3
 
                 MigratePPE ppe = new MigratePPE();
                 await ppe.FixMigratedPPEEmployee();
+
+                FilesMigration filesMigration = new FilesMigration();
+                await filesMigration.MigratePGNImages();
+
+                RecordsStatusFix recordsStatusFix = new RecordsStatusFix();
+                await recordsStatusFix.CASFix();
+                await recordsStatusFix.PRFix();
             }
         }
     }

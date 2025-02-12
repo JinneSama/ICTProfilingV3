@@ -76,6 +76,55 @@ namespace ICTMigration.ModelMigrations
             await unitOfWork.SaveChangesAsync();
         }
 
+        public async Task MigrateTSBasis()
+        {
+            var tsBasis = ictv2Model.TechSpecsBasis.ToList();
+            var maxId = tsBasis.OrderBy(o => o.Id).LastOrDefault().Id;
+
+            for (int i = 5; i <= maxId; i++)
+            {
+                var basis = tsBasis.FirstOrDefault(x => x.Id == i);
+                if(basis == null)
+                {
+                    var newBasis = new TechSpecsBasis()
+                    {
+                        EquipmentSpecsId = 1
+                    };
+                    unitOfWork.TechSpecsBasisRepo.Insert(newBasis);
+                }
+                else
+                {
+                    var newEQSP = await unitOfWork.EquipmentSpecsRepo.FindAsync(x => x.OldPK == basis.ICTSpecsId);
+                    var newBasis = new TechSpecsBasis
+                    {
+                        EquipmentSpecsId = newEQSP.Id,
+                        PriceRange = (double)basis.PriceRange,
+                        PriceDate = basis.PriceDate,
+                        URLBasis = basis.Basis,
+                        Remarks = basis.Remarks,
+                        Available = basis.Available
+                    };
+                    unitOfWork.TechSpecsBasisRepo.Insert(newBasis);
+
+                    foreach(var specs in basis.TechSpecsBasisDetails)
+                    {
+                        var newBasisSpecs = new TechSpecsBasisDetails
+                        {
+                            ItemNo = (int)specs.ItemNo,
+                            Specs = specs.EquipmentSpecs,
+                            Description = specs.EquipmentDescrip,
+                            DeliveriesSpecs = newBasis
+                        };
+                        unitOfWork.TechSpecsBasisDetailsRepo.Insert(newBasisSpecs);
+                    }
+                }
+            }
+            await unitOfWork.SaveChangesAsync();
+
+            unitOfWork.TechSpecsBasisRepo.DeleteRange(x => x.PriceDate == null);
+            await unitOfWork.SaveChangesAsync();
+            unitOfWork.ExecuteCommand("DBCC CHECKIDENT ('TechSpecsBasis', RESEED, 200);");
+        }
         public async Task MigrateEquipments()
         {
             var suppliers = ictv2Model.Suppliers.ToList();

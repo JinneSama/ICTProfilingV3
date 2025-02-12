@@ -14,10 +14,14 @@ using DevExpress.XtraGrid.Views.Tile;
 using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.DeliveriesForms;
+using Helpers.Interfaces;
+using EntityManager.Managers.Role;
+using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class frmAssignTo : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAssignTo : BaseForm, IModifyTicketStatus
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly TicketRequest ticket;
@@ -32,8 +36,8 @@ namespace ICTProfilingV3.TicketRequestForms
             lblTicketNo.Text = ticket.Id.ToString();
             this.ticket = ticket;
             InitStaffs();
-            
         }
+
 
         private void InitStaffs()
         {
@@ -108,26 +112,26 @@ namespace ICTProfilingV3.TicketRequestForms
 
             _ticket.StaffId = staffViewModel.Staff.Id;
             _ticket.TicketStatus = TicketStatus.Assigned;
-            await ModifyStatus(TicketStatus.Assigned , _ticket.Id);
+            await ModifyTicketStatusStatus(TicketStatus.Assigned , _ticket.Id);
             await unitOfWork.SaveChangesAsync();
-        }
-
-        public async Task ModifyStatus(TicketStatus status,int ticketId)
-        {
-            var ticketStatus = new TicketRequestStatus
-            {
-                Status = status,
-                DateStatusChanged = DateTime.UtcNow,
-                ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
-            };
-            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await unitOfWork.SaveChangesAsync();    
         }
 
         private async void frmAssignTo_Load(object sender, EventArgs e)
         {
             await LoadStaff();
+        }
+
+        public async Task ModifyTicketStatusStatus(TicketStatus status, int Id)
+        {
+            var ticketStatus = new TicketRequestStatus
+            {
+                Status = status,
+                DateStatusChanged = DateTime.Now,
+                ChangedByUserId = UserStore.UserId,
+                TicketRequestId = Id
+            };
+            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }

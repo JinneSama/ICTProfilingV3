@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraSpellChecker.Parser;
 using EntityManager.Managers.Role;
 using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.Models;
@@ -11,7 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmAddEditUser : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditUser : BaseForm
     {
         private readonly Users _users;
         private readonly IICTUserManager _userManager;

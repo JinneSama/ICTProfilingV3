@@ -1,6 +1,7 @@
 ﻿using DevExpress.Utils.About;
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Equipments;
 using Models.Entities;
 using Models.Repository;
@@ -17,7 +18,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
-    public partial class frmEquipmentBrand : DevExpress.XtraEditors.XtraForm
+    public partial class frmEquipmentBrand : BaseForm
     {
         IUnitOfWork unitOfWork;
         public frmEquipmentBrand()

@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.TechSpecsForms;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class frmTypeOfRequest : DevExpress.XtraEditors.XtraForm
+    public partial class frmTypeOfRequest : BaseForm
     {
         public frmTypeOfRequest()
         {

@@ -1,6 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DeliveriesForms;
@@ -16,18 +16,13 @@ using Models.Models;
 using Models.Repository;
 using Models.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DashboardForms
 {
-    public partial class UCRoutedActions : DevExpress.XtraEditors.XtraUserControl
+    public partial class UCRoutedActions : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
@@ -56,7 +51,13 @@ namespace ICTProfilingV3.DashboardForms
         {
             var actions = unitOfWork.ActionsRepo.FindAllAsync(x => x.RoutedUsers.Any(r => r.Id == UserStore.UserId) && x.IsSend == true,
                 x => x.Repairs,
-                x => x.CustomerActionSheet).ToList();
+                x => x.Repairs.TicketRequest,
+                x => x.Deliveries.TicketRequest,
+                x => x.TechSpecs.TicketRequest,
+                x => x.MOAccountUsers,
+                x => x.CustomerActionSheet,
+                x => x.PurchaseRequest,
+                x => x.PGNRequests).ToList();
             var actionsModel = actions.Select(x => new RoutedActionsViewModel
             {
                 Id = x.Id,
@@ -66,7 +67,8 @@ namespace ICTProfilingV3.DashboardForms
                 Actions = x,
                 From = x.CreatedBy.UserName
             }).OrderByDescending(o => o.ActionDate).ToList();
-            gcRoutedActions.DataSource = actionsModel;  
+            gcRoutedActions.DataSource = actionsModel;
+            FilterGrid();
         }
 
         private void hplControlNo_Click(object sender, EventArgs e)
@@ -128,7 +130,7 @@ namespace ICTProfilingV3.DashboardForms
         private void NavigateToProcess(Control uc)
         {
             var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
+            DisposeUC(main.mainPanel);
 
             main.mainPanel.Controls.Add(uc);
         }
@@ -198,7 +200,15 @@ namespace ICTProfilingV3.DashboardForms
             var criteria = gridRoutedActions.ActiveFilterCriteria;
             if (lueProcessType.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("ProcessType", EnumHelper.GetEnumDescription((RequestType)process)));
             if(slueTaskOf.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("From", row.UserName));
-            if(ctrlNo != 0) criteria = GroupOperator.And(criteria,new BinaryOperator("ControlNo",ctrlNo));
+            if(ctrlNo != 0) 
+                criteria = GroupOperator.And(criteria,new BinaryOperator("ControlNo",ctrlNo));
+
+            if(ceCompleted.Checked == true) 
+                criteria = GroupOperator.And(criteria, GroupOperator.Or(new BinaryOperator("Completed", false), new BinaryOperator("Completed", true)));
+
+            if (ceCompleted.Checked == false)
+                criteria = GroupOperator.And(criteria,new BinaryOperator("Completed", false));
+
             if (deFrom.EditValue != null && deTo.EditValue != null)
             {
                 var fromFilter = new BinaryOperator("ActionDate", dateFrom, BinaryOperatorType.GreaterOrEqual);
@@ -232,6 +242,21 @@ namespace ICTProfilingV3.DashboardForms
         private void spinCtrlNo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) FilterGrid();
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
+        }
+
+        private void ceCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
         }
     }
 }

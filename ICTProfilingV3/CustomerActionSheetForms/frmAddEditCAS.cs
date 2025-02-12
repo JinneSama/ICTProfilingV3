@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Enums;
 using Models.HRMISEntites;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.CustomerActionSheetForms
 {
-    public partial class frmAddEditCAS : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditCAS : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly CASViewModel cas;

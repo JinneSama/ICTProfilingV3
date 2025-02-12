@@ -7,8 +7,10 @@ using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using EntityManager.Managers.Role;
 using EntityManager.Managers.User;
+using Helpers.Interfaces;
 using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
@@ -29,7 +31,7 @@ using Models.Enums;
 using Models.Managers.User;
 namespace ICTProfilingV3
 {
-    public partial class frmMain : RibbonForm
+    public partial class frmMain : BaseRibbonForm , IDisposeUC
     {
         private IICTUserManager userManager;
         private IICTRoleManager roleManager;
@@ -57,7 +59,7 @@ namespace ICTProfilingV3
                 string version = cd.CurrentVersion.ToString();
                 if (UpdateHelpers.InstallUpdateSyncWithInfo())
                 {
-                    MessageBox.Show($@"This Version of EPiSv3 is no Longer Available (Your Version: {Properties.Settings.Default.LastVersion}), the Application will now Automatically Update", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($@"This Version of EPiSv3 is Outdated, the Application will now Automatically Update", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     
                     Properties.Settings.Default.LastVersion = version;
                     Properties.Settings.Default.Save();
@@ -111,7 +113,7 @@ namespace ICTProfilingV3
 
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCTARequestDashboard()
             {
                 Dock = DockStyle.Fill
@@ -150,7 +152,7 @@ namespace ICTProfilingV3
 
         private void btnDeliveries_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCDeliveries()
             {
                 Dock = DockStyle.Fill
@@ -195,7 +197,7 @@ namespace ICTProfilingV3
 
         private void btnTechSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCTechSpecs()
             {
                 Dock = DockStyle.Fill,
@@ -205,7 +207,7 @@ namespace ICTProfilingV3
 
         private void btnPPE_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCPPEs()
             {
                 Dock = DockStyle.Fill
@@ -214,7 +216,7 @@ namespace ICTProfilingV3
 
         private void btnRepair_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCRepair()
             {
                 Dock = DockStyle.Fill
@@ -223,7 +225,7 @@ namespace ICTProfilingV3
 
         private void btnCAS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCCAS()
             {
                 Dock = DockStyle.Fill
@@ -238,7 +240,7 @@ namespace ICTProfilingV3
 
         private void btnVPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCPR()
             {
                 Dock = DockStyle.Fill
@@ -247,7 +249,7 @@ namespace ICTProfilingV3
 
         private void btnRoutedActions_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCRoutedActions()
             {
                 Dock = DockStyle.Fill
@@ -265,14 +267,14 @@ namespace ICTProfilingV3
             backstageViewControl1.Close();
             lblEmployee.Caption = string.Empty;
             lblPosition.Caption = string.Empty;
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             var frm = new frmLogin(this);
             frm.ShowDialog();
         }
 
         private void btnRepairSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCTechSpecs()
             {
                 IsTechSpecs = false,
@@ -282,7 +284,7 @@ namespace ICTProfilingV3
 
         private void btnPGNAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCPGNAccounts()
             {
                 Dock = DockStyle.Fill
@@ -297,7 +299,7 @@ namespace ICTProfilingV3
 
         private void btnRequests_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCPGNRequests()
             {
                 Dock = DockStyle.Fill
@@ -334,16 +336,17 @@ namespace ICTProfilingV3
 
         private void btnQueue_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
-            mainPanel.Controls.Add(new UCQueue()
+            DisposeUC(mainPanel);
+            mainPanel.Controls.Add(new UCUserTasks()
             {
-                Dock = DockStyle.Fill
+                Dock = DockStyle.Fill,
+                FromQueue = true
             });
         }
 
         private void btnUserTasks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCUserTasks()
             {
                 Dock = DockStyle.Fill
@@ -370,7 +373,7 @@ namespace ICTProfilingV3
 
         private void btnMOAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCMOAccounts()
             {
                 Dock = DockStyle.Fill
@@ -379,11 +382,27 @@ namespace ICTProfilingV3
 
         private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            mainPanel.Controls.Clear();
+            DisposeUC(mainPanel);
             mainPanel.Controls.Add(new UCDashboard()
             {
                 Dock = DockStyle.Fill
             });
+        }
+
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
+        }
+
+        private void btnQuarterlyReport_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frm = new frmQuarterlyReport();
+            frm.ShowDialog();
         }
     }
 }

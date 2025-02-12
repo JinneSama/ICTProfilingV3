@@ -167,6 +167,60 @@ namespace ICTMigration.PPEMigration
             }
             await unitOfWork.SaveChangesAsync();
         }
+
+        public void MigratePPESpecs()
+        {
+            access.Open();
+            string query = "SELECT tblProperties.fldPropertyNo AS PropertyNo, tblOffices.fldOfficeID AS Office, " +
+                        "tblEmployees.fldFirstname & ' ' & tblEmployees.fldMIddleName & ' ' & tblEmployees.fldLastname AS Fullname, tblEmployees.fldFirstname AS FirstName, tblEmployees.fldMIddleName, " +
+                        "tblEmployees.fldLastname, tblItemsRecDetails.fldUnitCost AS UnitCost, tblItemsRecDetails.fldQty AS Quantity, tblItemsRecDetails.fldUnit AS Unit, " +
+                        "tblItemsRecDetails.fldDescription AS Specs, tblItemsReceived.fldInvoiceDate AS InvoiceDate, tblArticles.fldArticleName AS Article, " +
+                        "tblArticles.fldDescription AS Description, tblClass.fldClassification, tblType.fldType, tblAccounts.*, tblStatus.fldStatus " +
+                        "FROM tblStatus INNER JOIN (tblOffices INNER JOIN (tblItemsReceived INNER JOIN ((tblClass INNER JOIN ((tblAccounts " +
+                        "INNER JOIN (tblArticles INNER JOIN tblType ON tblArticles.fldTypeID = tblType.fldTypeID) ON tblAccounts.fldAccountCode = tblArticles.fldAccountCode) " +
+                        "INNER JOIN tblItemsRecDetails ON tblArticles.fldArticleCode = tblItemsRecDetails.fldArticleCode) ON tblClass.fldClassCode = tblAccounts.fldClassCode) " +
+                        "INNER JOIN (tblProperties INNER JOIN tblEmployees ON tblProperties.fldEmpID = tblEmployees.fldEmpID) ON tblItemsRecDetails.fldDRDNo = tblProperties.fldDRDNo) " +
+                        "ON tblItemsReceived.fldIRTransNo = tblItemsRecDetails.fldIRTransNo) ON tblOffices.fldOfficeID = tblEmployees.fldOfficeID) ON tblStatus.fldSID = tblProperties.fldSID " +
+                        "WHERE(((tblAccounts.fldAccountTitle) = 'IT Equipment and Software')) " +
+                        "ORDER BY tblProperties.fldPropertyNo ";
+
+            var cmd = new OleDbCommand(query, access);
+            var da = new OleDbDataAdapter(cmd);
+            var dt = new DataTable();
+            da.Fill(dt);
+
+            var result = dt.AsEnumerable().Select(row => new PPEItem
+            {
+                PropertyNo = row["PropertyNo"].ToString(),
+                Office = row["Office"].ToString(),
+                Fullname = row["Fullname"].ToString(),
+                FirstName = row["FirstName"].ToString(),
+                MiddleName = row["fldMIddleName"].ToString(),
+                LastName = row["fldLastname"].ToString(),
+                UnitCost = Convert.ToDecimal(row["UnitCost"]),
+                Quantity = Convert.ToInt32(row["Quantity"]),
+                Unit = row["Unit"].ToString(),
+                Specs = row["Specs"].ToString(),
+                InvoiceDate = (DateTime.TryParse(row["InvoiceDate"].ToString(), out var date) && date >= new DateTime(1753, 1, 1)
+              ? date
+              : (DateTime?)null),
+                Article = row["Article"].ToString(),
+                Description = row["Description"].ToString(),
+                Classification = row["fldClassification"].ToString(),
+                Type = row["fldType"].ToString(),
+                Status = row["fldStatus"].ToString()
+            }).ToList();
+
+            string s = string.Empty;
+            for ( int i = 0; i < 100; i++ )
+            {
+                if( result[i].Article == "Computer" || result[i].Article == "Computer Server")
+                {
+                    string n = $@"'(Property No: {result[i].PropertyNo}) {result[i].Article} {result[i].Specs}', {Environment.NewLine}";
+                    s += n;
+                }
+            }
+        }
     }
 
     public class PPEItem
