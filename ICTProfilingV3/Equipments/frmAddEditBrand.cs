@@ -60,6 +60,7 @@ namespace ICTProfilingV3.Equipments
 
             res.EquipmentSpecs = equipSpecs;
             res.BrandName = txtBrand.Text;
+            unitOfWork.EquipmentSpecsRepo.Update(equipSpecs);
             unitOfWork.Save();
 
             this.Close();

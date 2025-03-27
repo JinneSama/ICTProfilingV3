@@ -9,17 +9,16 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class UCDeliveriesSpecs : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly Deliveries _deliveries;
-        private IUnitOfWork unitOfWork;
 
         public UCDeliveriesSpecs(Deliveries deliveries)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             _deliveries = deliveries;
         }
 
         private void LoadEquipmentSpecs()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var res = unitOfWork.DeliveriesSpecsRepo.FindAllAsync(x => x.DeliveriesId == _deliveries.Id).Select(x => new DeliveriesSpecsViewModel
             {
                 Id = x.Id,
@@ -53,6 +52,7 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnEditData_Click(object sender, System.EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
             var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.Model ,
@@ -65,6 +65,7 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnAddSpecs_Click(object sender, System.EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
             var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.Model.Brand,

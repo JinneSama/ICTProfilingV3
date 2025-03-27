@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Management.Instrumentation;
 
 namespace Models.Entities
@@ -15,6 +16,7 @@ namespace Models.Entities
         public bool? Status { get; set; }
         public bool? IsDeleted { get; set; }
         public int OldPK { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Deliveries> Deliveries { get; set; }
         public Supplier()
         {

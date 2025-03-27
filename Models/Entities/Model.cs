@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Models.Entities
 
         [ForeignKey("BrandId")]
         public Brand Brand { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DeliveriesSpecs> DeliveriesSpecs { get; set; }
         public Model()
         {

@@ -54,6 +54,7 @@ namespace ICTProfilingV3.RepairForms
             repair.PreparedById = (string)sluePreparedBy.EditValue;
             repair.ReviewedById = (string)slueAssesedBy.EditValue;
             repair.NotedById = (string)slueNotedBy.EditValue;
+            unitOfWork.RepairsRepo.Update(repair);
             await unitOfWork.SaveChangesAsync();
         }
 

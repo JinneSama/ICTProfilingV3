@@ -14,5 +14,6 @@
         public string Division { get; set; }
         public string Position { get; set; }
         public string Username { get; set; }
+        public bool IsResigned { get; set; }    
     }
 }

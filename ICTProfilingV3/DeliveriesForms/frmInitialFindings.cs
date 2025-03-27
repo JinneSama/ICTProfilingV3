@@ -82,6 +82,7 @@ namespace ICTProfilingV3.DeliveriesForms
 
             del.FindingsStatus = memoStatus.Text;  
             del.FindingsActionTaken = memoActionTaken.Text;
+            uow.DeliveriesRepo.Update(del);
 
             await uow.SaveChangesAsync();
         }

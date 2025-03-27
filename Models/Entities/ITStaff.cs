@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +16,7 @@ namespace Models.Entities
 
         [ForeignKey("UserId")]
         public Users Users { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TicketRequest> TicketRequests { get; set; }
         public ITStaff()
         {

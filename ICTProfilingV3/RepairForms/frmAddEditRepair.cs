@@ -133,7 +133,7 @@ namespace ICTProfilingV3.RepairForms
             var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == repId);
             gcEquipmentSpecs.Controls.Clear();
 
-            var equipmentSpecsForm = new UCAddPPEEquipment(ppe, _unitOfWork , false)
+            var equipmentSpecsForm = new UCAddPPEEquipment(ppe , false)
             {
                 Dock = DockStyle.Fill
             };
@@ -173,7 +173,7 @@ namespace ICTProfilingV3.RepairForms
             repair.PPEsId = (int?)sluePropertyNo.EditValue;
             repair.DateCreated = txtDate.DateTime;
             repair.DateDelivered = txtDateofDelivery.DateTime;
-
+            _unitOfWork.RepairsRepo.Update(repair);
             await _unitOfWork.SaveChangesAsync();
             await ModifyTicketStatusStatus(TicketStatus.Accepted, repair.Id);
         }

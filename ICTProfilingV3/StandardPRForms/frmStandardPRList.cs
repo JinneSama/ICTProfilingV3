@@ -24,12 +24,9 @@ namespace ICTProfilingV3.StandardPRForms
     {
         private readonly int _prId;
         private readonly PRQuarter _quarter;
-        private readonly bool fromSelect;
-        private readonly IUnitOfWork unitOfWork;
         public frmStandardPRList()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadDropdowns();
             gridMark.Visible = false;
             btnAddMarked.Enabled = false;
@@ -38,10 +35,8 @@ namespace ICTProfilingV3.StandardPRForms
         public frmStandardPRList(int PRId, PRQuarter Quarter)
         {
             InitializeComponent();
-            this.unitOfWork = new UnitOfWork();
             _prId = PRId;
             _quarter = Quarter;
-            fromSelect = true;
             btnAddStandardPR.Enabled = false;
             btnPrint.Enabled = false;
             lueQuarter.EditValue = _quarter;
@@ -51,6 +46,7 @@ namespace ICTProfilingV3.StandardPRForms
         }
         private void LoadStandardPR()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var quarter = (PRQuarter)lueQuarter.EditValue;
 
             var spr = unitOfWork.StandardPRSpecsRepo.FindAllAsync(x => x.Quarter == quarter,
@@ -113,6 +109,7 @@ namespace ICTProfilingV3.StandardPRForms
 
         private void btnDeleteEquipment_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var msgRes = MessageBox.Show("Delete this Equipment?", "Confirmation", MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
@@ -157,6 +154,7 @@ namespace ICTProfilingV3.StandardPRForms
 
         private async Task AddMarked()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             for (var i = 0; i < gridSpecs.RowCount; i++)
             {
                 if (gridSpecs.GetRowCellValue(i, "Mark") == null) continue;
@@ -176,6 +174,7 @@ namespace ICTProfilingV3.StandardPRForms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var quarter = (PRQuarter)lueQuarter.EditValue;
             var SPRs = unitOfWork.StandardPRSpecsRepo.FindAllAsync(x => x.Quarter == quarter,
                 x => x.EquipmentSpecs.Equipment);

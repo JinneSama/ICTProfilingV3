@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,7 @@ namespace Models.Entities
         public string CreatedById { get; set; }
         [ForeignKey("CreatedById")]
         public Users CreatedBy { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MOAccountUsers> MOAccountUsers { get; set; }
     }
 }

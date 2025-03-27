@@ -9,21 +9,19 @@ namespace ICTProfilingV3.TechSpecsForms
 {
     public partial class UCRequestedTechSpecs : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly TechSpecs _techSpecs;
 
         public UCRequestedTechSpecs(TechSpecs techSpecs)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             _techSpecs = techSpecs;
             LoadTSEquipments();
         }
 
         private async void LoadTSEquipments()
         {
-            var uow = new UnitOfWork();
-            var res = uow.TechSpecsICTSpecsRepo.FindAllAsync(x => x.TechSpecsId == _techSpecs.Id,
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            var res = unitOfWork.TechSpecsICTSpecsRepo.FindAllAsync(x => x.TechSpecsId == _techSpecs.Id,
                 x => x.EquipmentSpecs,
                 x => x.EquipmentSpecs.Equipment).OrderBy(o => o.ItemNo);
             var TSSpecsViewModel = res.Select(x => new TechSpecsICTSpecsViewModel
@@ -70,6 +68,7 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private async void btnAddSpecs_Click(object sender, System.EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (TechSpecsICTSpecsViewModel)gridICTSpecs.GetFocusedRow();
             var ictSpecs = await unitOfWork.TechSpecsICTSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.EquipmentSpecs.Equipment);
@@ -82,6 +81,7 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private void btnDelete_Click(object sender, System.EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             if (MessageBox.Show("Delete this Specs?", "Confirmation", MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
 

@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,8 +27,9 @@ namespace Models.Entities
 
         [ForeignKey("PPEsId")]
         public PPEs PPEs { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<PPEsSpecsDetails> PPEsSpecsDetails { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Repairs> Repairs { get; set; }
 
         public PPEsSpecs()

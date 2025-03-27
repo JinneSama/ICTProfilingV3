@@ -169,6 +169,7 @@ namespace ICTProfilingV3.DeliveriesForms
             delSpecs.SerialNo = txtSerialNo.Text;
             delSpecs.ItemNo = (int)spinItemNo.Value;
             delSpecs.Description = txtDescription.Text;
+            unitOfWork.DeliveriesSpecsRepo.Update(delSpecs);
 
             await unitOfWork.SaveChangesAsync();
             this.Close();

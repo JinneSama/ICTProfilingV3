@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -25,9 +26,13 @@ namespace Models.Entities
         public long? TotalValue { get; set; }
         public string Remarks { get; set; }
         public bool? IsDeleted { get; set; }
-        public int? OldPk { get; set; } 
+        //public bool? IsParsed { get; set; }
+        public int? OldPk { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PPEsSpecs> PPEsSpecs { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Repairs> Repairs { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MOAccountUsers> MOAccountUsers { get; set; }
         public PPEs()
         {

@@ -64,6 +64,7 @@ namespace ICTProfilingV3.LookUpTables
             res.PhoneNumber = supplier.PhoneNumber;
             res.TelNumber = supplier.TelNumber;
             res.ContactPerson = supplier.ContactPerson;
+            unitOfWork.SupplierRepo.Update(res);
             unitOfWork.Save();
         }
     }

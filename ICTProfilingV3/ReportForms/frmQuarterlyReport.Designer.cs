@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuarterlyReport));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.lueQuarter = new DevExpress.XtraEditors.LookUpEdit();
@@ -40,10 +40,13 @@
             this.lueYear = new DevExpress.XtraEditors.LookUpEdit();
             this.lueProcess = new DevExpress.XtraEditors.LookUpEdit();
             this.label3 = new System.Windows.Forms.Label();
+            this.lueSection = new DevExpress.XtraEditors.LookUpEdit();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lueQuarter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueYear.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueProcess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -56,6 +59,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(472, 40);
             this.panel1.TabIndex = 146;
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl16.Appearance.Options.UseFont = true;
+            this.labelControl16.Appearance.Options.UseForeColor = true;
+            this.labelControl16.Location = new System.Drawing.Point(12, 3);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(154, 30);
+            this.labelControl16.TabIndex = 3;
+            this.labelControl16.Text = "Quarterly Report";
             // 
             // lblEpisNo
             // 
@@ -77,18 +92,6 @@
             this.label1.TabIndex = 145;
             this.label1.Text = "Quarter:";
             // 
-            // labelControl16
-            // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Appearance.Options.UseForeColor = true;
-            this.labelControl16.Location = new System.Drawing.Point(12, 3);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(154, 30);
-            this.labelControl16.TabIndex = 3;
-            this.labelControl16.Text = "Quarterly Report";
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -97,7 +100,7 @@
             this.btnCancel.Appearance.Options.UseBackColor = true;
             this.btnCancel.Appearance.Options.UseForeColor = true;
             this.btnCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageOptions.Image")));
-            this.btnCancel.Location = new System.Drawing.Point(351, 133);
+            this.btnCancel.Location = new System.Drawing.Point(351, 154);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
@@ -113,12 +116,13 @@
             this.btnSave.Appearance.Options.UseBackColor = true;
             this.btnSave.Appearance.Options.UseForeColor = true;
             this.btnSave.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x169;
-            this.btnSave.Location = new System.Drawing.Point(249, 133);
+            this.btnSave.Location = new System.Drawing.Point(249, 154);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(98, 28);
             this.btnSave.TabIndex = 148;
             this.btnSave.Text = "Preview";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // lueQuarter
             // 
@@ -186,11 +190,38 @@
             this.label3.TabIndex = 152;
             this.label3.Text = "Process:";
             // 
+            // lueSection
+            // 
+            this.lueSection.Location = new System.Drawing.Point(64, 130);
+            this.lueSection.Margin = new System.Windows.Forms.Padding(2);
+            this.lueSection.Name = "lueSection";
+            this.lueSection.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueSection.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("SectionName", "Section")});
+            this.lueSection.Properties.DisplayMember = "SectionName";
+            this.lueSection.Properties.NullText = "";
+            this.lueSection.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lueSection.Properties.ValueMember = "Id";
+            this.lueSection.Size = new System.Drawing.Size(387, 20);
+            this.lueSection.TabIndex = 155;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 133);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.TabIndex = 154;
+            this.label4.Text = "Section:";
+            // 
             // frmQuarterlyReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 172);
+            this.ClientSize = new System.Drawing.Size(472, 194);
+            this.Controls.Add(this.lueSection);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lueProcess);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lueYear);
@@ -200,6 +231,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lueQuarter);
             this.Controls.Add(this.label1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmQuarterlyReport.IconOptions.Icon")));
             this.Name = "frmQuarterlyReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
@@ -207,6 +239,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lueQuarter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueYear.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueProcess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueSection.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +258,7 @@
         private DevExpress.XtraEditors.LookUpEdit lueYear;
         private DevExpress.XtraEditors.LookUpEdit lueProcess;
         private System.Windows.Forms.Label label3;
+        private DevExpress.XtraEditors.LookUpEdit lueSection;
+        private System.Windows.Forms.Label label4;
     }
 }

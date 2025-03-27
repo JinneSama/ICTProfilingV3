@@ -160,6 +160,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             ppeSpecs.ItemNo = (int)spinItemNo.Value;
             ppeSpecs.Description = txtDescription.Text;
 
+            unitOfWork.PPEsSpecsRepo.Update(ppeSpecs);
             await unitOfWork.SaveChangesAsync();
             this.Close();
         }

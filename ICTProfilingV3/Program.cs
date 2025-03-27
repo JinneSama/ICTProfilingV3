@@ -49,7 +49,7 @@ namespace ICTProfilingV3
                 string json = File.ReadAllText(filePath);
                 var credentials = JsonConvert.DeserializeObject<ArgumentCredentialsDto>(json);
                 UserStore.ArugmentCredentialsDto = credentials;
-                File.Delete(filePath);
+                //File.Delete(filePath);
             }
 
             SplashScreenManager.ShowForm(typeof(frmSplashScreen));

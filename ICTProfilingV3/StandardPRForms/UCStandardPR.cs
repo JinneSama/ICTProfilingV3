@@ -17,17 +17,16 @@ namespace ICTProfilingV3.StandardPRForms
 {
     public partial class UCStandardPR : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly PurchaseRequest _purchaseRequest;
         public UCStandardPR(PurchaseRequest pr)
         {
             InitializeComponent();
-            _unitOfWork = new UnitOfWork();
             _purchaseRequest = pr;
         }
         private async Task LoadStandardPRSpecs()
         {
-            var pr = _unitOfWork.PRStandardPRSpecsRepo.FindAllAsync(x => x.PurchaseRequestId == _purchaseRequest.Id,
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            var pr = unitOfWork.PRStandardPRSpecsRepo.FindAllAsync(x => x.PurchaseRequestId == _purchaseRequest.Id,
                 x => x.StandardPRSpecs,
                 x => x.StandardPRSpecs.StandardPRSpecsDetails,
                 x => x.StandardPRSpecs.EquipmentSpecs,

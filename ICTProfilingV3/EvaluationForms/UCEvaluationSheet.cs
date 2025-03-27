@@ -94,7 +94,7 @@ namespace ICTProfilingV3.EvaluationForms
 
             sheet.RatingValue = row.RatingValue;    
             sheet.Remarks = row.Remarks;
-
+            uow.EvaluationSheetRepo.Update(sheet);
             await uow.SaveChangesAsync();
         }
     }

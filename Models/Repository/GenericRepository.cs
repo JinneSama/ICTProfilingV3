@@ -25,12 +25,12 @@ namespace Models.Repository
             _machineCredentials = new MachineCredentials();
         }
 
-        public async void Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             TEntity oldValues = entity;
             if (dbContext.Entry(entity).State == EntityState.Detached) dbSet.Attach(entity);
             dbSet.Remove(entity);
-            await LogChangeAsync(typeof(TEntity).Name, "Delete", oldValues, null);
+            LogChangeAsync(typeof(TEntity).Name, "Delete", oldValues, null);
         }
 
         public void DeleteByEx(Expression<Func<TEntity, bool>> expression)
@@ -81,13 +81,13 @@ namespace Models.Repository
             return query;
         }
 
-        public async void Insert(TEntity entity)
+        public void Insert(TEntity entity)
         {
             dbSet.Add(entity);
-            await LogChangeAsync(typeof(TEntity).Name, "Insert", null, entity);
+            LogChangeAsync(typeof(TEntity).Name, "Insert", null, entity);
         }
 
-        public async Task LogChangeAsync(string tableName, string actionType, object oldValues, object newValues)
+        public void LogChangeAsync(string tableName, string actionType, object oldValues, object newValues)
         {
             var logEntry = new LogEntry
             {
@@ -102,16 +102,16 @@ namespace Models.Repository
             };
 
             dbContext.Set<LogEntry>().Add(logEntry);
-            await dbContext.SaveChangesAsync();
+            dbContext.SaveChanges();
         }
 
-        public async void Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             var existingEntity = dbSet.Find(dbContext.Entry(entity).Property("Id").CurrentValue);
             var oldValues = dbContext.Entry(existingEntity).CurrentValues.Clone();
 
             dbContext.Entry(entity).State = EntityState.Modified;
-            await LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
+            LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
         }
     }
 }

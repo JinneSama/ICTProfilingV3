@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Models.Entities
 {
@@ -28,6 +29,7 @@ namespace Models.Entities
 
         [ForeignKey("DeliveriesId")]
         public Deliveries Deliveries { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DeliveriesSpecsDetails> DeliveriesSpecsDetails { get; set; }
 
         public DeliveriesSpecs()

@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using Helpers.Interfaces;
+using Helpers.Utility;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.ReportForms;
 using ICTProfilingV3.TicketRequestForms;
@@ -20,16 +21,18 @@ namespace ICTProfilingV3.MOForms
 {
     public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IUCManager<Control> _ucManager;
         public UCMOAccounts()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             LoadData();
         }
 
         private void LoadData()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var accounts = unitOfWork.MOAccountRepo.GetAll(x => x.Office,
                 x => x.MOAccountUsers,
                 x => x.MOAccountUsers.Select(s => s.PPE)).ToList().Select(x => new MOAccountsViewModel
@@ -50,6 +53,7 @@ namespace ICTProfilingV3.MOForms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             if (MessageBox.Show("Delete this Account? Users of this account will be deleted as well", 
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
@@ -88,13 +92,10 @@ namespace ICTProfilingV3.MOForms
 
         private void btnUserRequest_Click(object sender, EventArgs e)
         {
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
-
-            main.mainPanel.Controls.Add(new UCMOAccountUserRequests()
+            _ucManager.ShowUCSystemDetails(btnUserRequest.Name, new UCMOAccountUserRequests()
             {
                 Dock = DockStyle.Fill
-            });
+            },null);
         }
 
         private void hplRedirect_Click(object sender, EventArgs e)
@@ -104,18 +105,16 @@ namespace ICTProfilingV3.MOForms
             var row = gridMO.GetDetailView(masterRowHandle, 0) as GridView;
             var detailRow = (AccountUsers)row.GetRow(rowHandle);
 
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
-
-            main.mainPanel.Controls.Add(new UCMOAccountUserRequests()
+            _ucManager.ShowUCSystemDetails(hplRedirect.Name, new UCMOAccountUserRequests()
             {
                 Dock = DockStyle.Fill,
                 filterText = detailRow.MOAccountUser.Id.ToString()
-            });
+            }, new string[] {"filterText"});
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var accounts = unitOfWork.MOAccountRepo.GetAll(x => x.Office,
                 x => x.MOAccountUsers,
                 x => x.MOAccountUsers.Select(s => s.PPE)).ToList().Select(x => new MOAccountsViewModel

@@ -247,7 +247,6 @@
         private DevExpress.XtraEditors.SimpleButton btnAddProgram;
         private DevExpress.Utils.ImageCollection NodeImages;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn1;
-        private System.Windows.Forms.BindingSource actionTreeViewModelBindingSource;
         private System.Windows.Forms.BindingSource bsActionTree;
         private DevExpress.XtraBars.PopupMenu treeMenu;
         private DevExpress.XtraBars.BarButtonItem btnAddChildNode;

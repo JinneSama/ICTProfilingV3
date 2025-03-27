@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,9 @@ namespace Models.Entities
 
         [ForeignKey("EquipmentSpecsId")]
         public EquipmentSpecs EquipmentSpecs { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PRStandardPRSpecs> PRStandardPRSpecs { get; set; }
+        [JsonIgnore]
         public virtual ICollection<StandardPRSpecsDetails> StandardPRSpecsDetails { get; set; }
         public StandardPRSpecs()
         {

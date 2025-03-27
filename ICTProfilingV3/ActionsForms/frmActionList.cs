@@ -37,6 +37,7 @@ namespace ICTProfilingV3.ActionsForms
         {
             var res = await unitOfWork.ActionTakenRepo.FindAsync(x => x.Id == row.Id);
             res.Action = row.Action;
+            unitOfWork.ActionTakenRepo.Update(res);
             unitOfWork.Save();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -39,9 +40,12 @@ namespace Models.Entities
 
         [ForeignKey("NotedById")]
         private Users NotedByUsers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TechSpecsICTSpecs> TechSpecsICTSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Repairs> Repairs { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
         public TechSpecs()
         {

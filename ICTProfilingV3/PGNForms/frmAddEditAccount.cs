@@ -19,13 +19,11 @@ namespace ICTProfilingV3.PGNForms
         private PGNAccounts account;
         private EmployeesViewModel Employee;
         private bool IsSave = false;
-        private SaveType SaveType;
 
         public frmAddEditAccount()
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
-            SaveType = SaveType.Insert;
             LoadDropdowns();
             CreateAccount();
         }
@@ -35,7 +33,6 @@ namespace ICTProfilingV3.PGNForms
             InitializeComponent();
             IsSave = true;
             this.account = account;
-            SaveType = SaveType.Update;
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
             LoadMacAddresses();
@@ -135,6 +132,8 @@ namespace ICTProfilingV3.PGNForms
             acc.PGNGroupOfficesId = (int)txtOffice.EditValue;
             acc.Remarks = txtRemarks.Text;
             acc.Password = txtPassword.Text;
+            
+            unitOfWork.PGNAccountsRepo.Update(acc);
             await unitOfWork.SaveChangesAsync();
         }
 

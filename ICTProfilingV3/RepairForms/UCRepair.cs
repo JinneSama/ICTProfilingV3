@@ -6,6 +6,7 @@ using EntityManager.Managers;
 using EntityManager.Managers.User;
 using Helpers.Interfaces;
 using Helpers.NetworkFolder;
+using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.EvaluationForms;
 using ICTProfilingV3.PPEInventoryForms;
@@ -33,14 +34,15 @@ namespace ICTProfilingV3.RepairForms
 {
     public partial class UCRepair : DevExpress.XtraEditors.XtraUserControl , IDisposeUC
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IICTUserManager _userManager;
+        private readonly IUCManager<Control> _ucManager;
         private HTTPNetworkFolder networkFolder;
         public string filterText { get; set; }
         public UCRepair()
         {
             InitializeComponent();
-            _unitOfWork = new UnitOfWork();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             _userManager = new ICTUserManager();
             networkFolder = new HTTPNetworkFolder();
             LoadRepair();
@@ -48,7 +50,8 @@ namespace ICTProfilingV3.RepairForms
 
         private void LoadRepair()
         {
-            var res = _unitOfWork.RepairsRepo.FindAllAsync(x => x.TicketRequest.StaffId != null,
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            var res = unitOfWork.RepairsRepo.FindAllAsync(x => x.TicketRequest.StaffId != null,
                 x => x.TicketRequest,
                 x => x.PPEs).OrderByDescending(x => x.DateCreated).ToList();
             var repair = res.Select(x => new RepairViewModel
@@ -84,9 +87,10 @@ namespace ICTProfilingV3.RepairForms
         }
         private async void LoadStaff()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             ITStaff staff = null;
-            if(row != null) staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
+            if(row != null) staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Repair.TicketRequest.StaffId, x => x.Users);
             Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
@@ -105,10 +109,12 @@ namespace ICTProfilingV3.RepairForms
         }
         private async Task LoadRepairDetails()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             ClearAllFields();
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
             if(row == null) return;
-            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
+            var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
+                x => x.TicketRequest,
                 x => x.PPEs.PPEsSpecs,
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model),
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
@@ -167,6 +173,7 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task LoadEquipmentDetails(PPEs ppe, PPEsSpecs ppeSpecs)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             LoadPPEEquipment(ppe);
             if (ppe == null) return;
             txtPropertyNo.Text = ppe.PropertyNo;   
@@ -174,7 +181,7 @@ namespace ICTProfilingV3.RepairForms
             txtStatus.Text = ppe.Status.ToString();
 
             if (ppeSpecs == null) return;
-            var specs = await _unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == ppeSpecs.Id,
+            var specs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == ppeSpecs.Id,
                 x => x.Model.Brand,
                 x => x.Model.Brand.EquipmentSpecs,
                 x => x.Model.Brand.EquipmentSpecs.Equipment);
@@ -190,7 +197,7 @@ namespace ICTProfilingV3.RepairForms
         private void LoadPPEEquipment(PPEs specs)
         {
             tabEquipmentSpecs.Controls.Clear();
-            tabEquipmentSpecs.Controls.Add(new UCAddPPEEquipment(specs, _unitOfWork, false)
+            tabEquipmentSpecs.Controls.Add(new UCAddPPEEquipment(specs, false)
             {
                 Dock = DockStyle.Fill
             });
@@ -224,7 +231,12 @@ namespace ICTProfilingV3.RepairForms
 
         private void UCRepair_Load(object sender, EventArgs e)
         {
-            if (filterText != null) gridRepair.ActiveFilterCriteria = new BinaryOperator("Id",filterText);
+            ApplyFilterText();
+        }
+
+        public void ApplyFilterText()
+        {
+            if (filterText != null) gridRepair.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
         private async void btnSignatories_Click(object sender, EventArgs e)
         {
@@ -256,8 +268,9 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task PrintTR()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
+            var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.PPEs,
                 x => x.PPEs.PPEsSpecs,
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model),
@@ -297,33 +310,28 @@ namespace ICTProfilingV3.RepairForms
         private void hplTicket_Click(object sender, EventArgs e)
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
-
-            main.mainPanel.Controls.Add(new UCTARequestDashboard()
+            _ucManager.ShowUCSystemDetails(hplTicket.Name, new UCTARequestDashboard()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.Id.ToString()
-            });
+            },new string[] { "filterText" });
         }
 
         private void hplPPE_Click(object sender, EventArgs e)
         {
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
-
-            main.mainPanel.Controls.Add(new UCPPEs()
+            _ucManager.ShowUCSystemDetails(hplPPE.Name, new UCPPEs()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.PropertyNo.ToString()
-            });
+            }, new string[] { "filterText" });
         }
 
         private async void btnTechSpecs_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id);
+            var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == row.Id);
             if (repair.TechSpecsId == null)
             {
                 if (MessageBox.Show("This Repair has no Rcommended Specs, Proceeding will Generate Recommended Specs to this Repair",
@@ -341,7 +349,7 @@ namespace ICTProfilingV3.RepairForms
             var ts = frm.RepairTechSpecs;
             if (ts == null) return;
             repair.TechSpecsId = ts.Id;
-            _unitOfWork.Save();
+            unitOfWork.Save();
         }
 
         private void SetButtons(bool condemned)
@@ -355,28 +363,26 @@ namespace ICTProfilingV3.RepairForms
         }
         private void NavigateToRepairSpecs(Repairs repair)
         {
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
-
-            main.mainPanel.Controls.Add(new UCTechSpecs()
+            _ucManager.ShowUCSystemDetails(btnTechSpecs.Name, new UCTechSpecs()
             {
                 IsTechSpecs = false,
                 Dock = DockStyle.Fill,
                 filterText = repair.TechSpecsId.ToString()
-            });
+            }, new string[] { "filterText" , "IsTechSpecs" });
         }
 
         private async void btnCondemned_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Condemn this Equipment?","Confimation",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.Cancel) return;
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            if (MessageBox.Show("Condemn this Equipment?","Confimation",MessageBoxButtons.OKCancel,MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             var row = (RepairViewModel)gridRepair.GetFocusedRow();
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Repair.PPEsId);
+            var ppe = await unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Repair.PPEsId);
             if(ppe == null) return;
 
             ppe.Status = PPEStatus.Condemned;
 
-            await _unitOfWork.SaveChangesAsync();
+            await unitOfWork.SaveChangesAsync();
             LoadRepair();
         }
 

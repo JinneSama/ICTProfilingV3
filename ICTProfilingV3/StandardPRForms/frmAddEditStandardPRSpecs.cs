@@ -111,7 +111,7 @@ namespace ICTProfilingV3.StandardPRForms
             sprSpecs.Unit = (Unit)cboUnit.EditValue;
             sprSpecs.UnitCost = (long?)spinUnitCost.Value;
             sprSpecs.EquipmentSpecsId = (int)slueEquipment.EditValue;
-
+            unitOfWork.StandardPRSpecsRepo.Update(sprSpecs);
             await unitOfWork.SaveChangesAsync();
         }
 

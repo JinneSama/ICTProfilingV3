@@ -1,6 +1,4 @@
-﻿using DevExpress.XtraEditors;
-using ICTProfilingV3.DeliveriesForms;
-using Models.Entities;
+﻿using Models.Entities;
 using Models.Repository;
 using Models.ViewModels;
 using System;
@@ -14,10 +12,10 @@ namespace ICTProfilingV3.PPEInventoryForms
     {
         private readonly PPEs _ppe;
         private IUnitOfWork unitOfWork;
-        public UCPPEsSpecs(PPEs ppe, IUnitOfWork _unitOfWork)
+        public UCPPEsSpecs(PPEs ppe)
         {
             InitializeComponent();
-            unitOfWork = _unitOfWork;
+            unitOfWork = new UnitOfWork();
             _ppe = ppe;
             LoadEquipmentSpecs();
         }

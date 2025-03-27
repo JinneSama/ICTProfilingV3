@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,6 +31,7 @@ namespace Models.Entities
         public int? PGNRequestId { get; set; }
         [ForeignKey("PGNRequestId")]
         public PGNRequests PGNRequests { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PGNMacAddresses> MacAddresses { get; set; }
     }
 }

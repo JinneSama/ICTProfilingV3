@@ -82,6 +82,7 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             casUpdate.ClientRequest = txtClientRequest.Text;
             casUpdate.ActionTaken = txtActionTaken.Text;
             casUpdate.AssistedById = (string)slueAssistedBy.EditValue;
+            unitOfWork.CustomerActionSheetRepo.Update(casUpdate);
 
             await unitOfWork.SaveChangesAsync();
         }

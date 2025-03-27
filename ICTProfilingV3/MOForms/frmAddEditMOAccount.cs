@@ -61,7 +61,7 @@ namespace ICTProfilingV3.MOForms
             moAccount.Password = txtPassword.Text;
             moAccount.DateCreated = deDateCreated.DateTime;
             moAccount.OfficeId = (int?)lueOffice.EditValue;
-
+            unitOfWork.MOAccountRepo.Update(moAccount);
             unitOfWork.Save();
         }
 

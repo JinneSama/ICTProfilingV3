@@ -1,4 +1,6 @@
-﻿using Helpers.Update;
+﻿using Helpers.Interfaces;
+using Helpers.Update;
+using Helpers.Utility;
 using ICTProfilingV3.BaseClasses;
 using System;
 using System.ComponentModel;
@@ -9,12 +11,13 @@ namespace ICTProfilingV3.ToolForms
 {
     public partial class frmUpdater : BaseForm
     {
+        private readonly ISingleInstance _singleInstance;
         public string NewVersion { get; set; }
        
         public frmUpdater()
         {
             InitializeComponent();
-
+            _singleInstance = new SingelInstance("EPISv3");
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
@@ -32,6 +35,7 @@ namespace ICTProfilingV3.ToolForms
                         updateNow = false;
                         UpdateHelpers.applicationDeployment.UpdateCompleted += (se, ev) =>
                         {
+                            _singleInstance.ReleaseInstance();
                             MessageBox.Show($@"Application Updated, the Application will now Restart, Press OK", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             Application.Restart();
                         };

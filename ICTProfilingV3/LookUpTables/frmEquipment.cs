@@ -58,6 +58,7 @@ namespace ICTProfilingV3.LookUpTables
             if (equipment == null) return;
 
             equipment.EquipmentName = row.EquipmentName;
+            unitOfWork.EquipmentRepo.Update(equipment);
             unitOfWork.Save();
         }
     }

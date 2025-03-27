@@ -2,6 +2,7 @@
 using DevExpress.XtraRichEdit.Import.OpenXml;
 using Helpers.Interfaces;
 using Helpers.NetworkFolder;
+using Helpers.Utility;
 using ICTMigration.ICTv2Models;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.EvaluationForms;
@@ -29,20 +30,22 @@ namespace ICTProfilingV3.DeliveriesForms
 {
     public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
-        private IUnitOfWork _unitOfWork;
         private HTTPNetworkFolder networkFolder;
+        private IUCManager<Control> _ucManager;
 
         public string filterText { get; set; }
         public UCDeliveries()
         {
             InitializeComponent();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             networkFolder = new HTTPNetworkFolder();
-            _unitOfWork = new UnitOfWork();
         }
 
         private void LoadDropdown()
         {
-            var staff = _unitOfWork.UsersRepo.GetAll().ToList();
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            var staff = unitOfWork.UsersRepo.GetAll().ToList();
             var res = staff.OrderBy(o => o.FullName);
 
             slueTaskOf.Properties.DataSource = res.ToList();
@@ -50,7 +53,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task LoadDeliveries()
         {
-            var deliveries = await _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            var deliveries = await unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
                 x => x.Supplier,
                 x => x.TicketRequest,
                 x => x.TicketRequest.ITStaff).OrderByDescending(x => x.DateRequested).ToListAsync();
@@ -71,9 +75,10 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task LoadStaff()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             ITStaff staff = null;
-            if(row != null) staff = await _unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
+            if(row != null) staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
             Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
             var res = new StaffModel
             {
@@ -83,7 +88,8 @@ namespace ICTProfilingV3.DeliveriesForms
                 PhotoVisible = img == null ? true : false,
                 InitialsVisible = img == null ? false : true
             };
-
+            staffPanel.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
+            GC.Collect();
             staffPanel.Controls.Clear();
             staffPanel.Controls.Add(new UCAssignedTo(res)
             {
@@ -93,7 +99,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void LoadDetails()
         {
-            _unitOfWork = new UnitOfWork();
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
@@ -114,6 +121,8 @@ namespace ICTProfilingV3.DeliveriesForms
         private void LoadEvaluationSheet()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            tabEvaluation.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
+            GC.Collect();
             tabEvaluation.Controls.Clear();
             tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.Deliveries })
             {
@@ -130,6 +139,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
             if(deliveries == null) return;
 
+            tabEquipmentSpecs.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
+            GC.Collect();
             tabEquipmentSpecs.Controls.Clear();
             tabEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(deliveries)
             {
@@ -143,6 +154,8 @@ namespace ICTProfilingV3.DeliveriesForms
             tabAction.Controls.Clear();
 
             if (row == null) return;
+            tabAction.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
+            GC.Collect();
             tabAction.Controls.Add(new UCActions(new ActionType
             {
                 Id = row.Id,
@@ -163,16 +176,17 @@ namespace ICTProfilingV3.DeliveriesForms
             frm.ShowDialog();
 
             await LoadDeliveries();
-            LoadDetails();
             await LoadEquipmentSpecs();
+            LoadDetails();
 
             gridDeliveries.FocusedRowHandle = rowHandle;
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var ds = _unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
+            var ds = unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
                 x => x.Supplier,
                 x => x.DeliveriesSpecs.Select(s => s.Model),
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
@@ -241,6 +255,11 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             await LoadDeliveries();
             LoadDropdown();
+            ApplyFilterText();
+        }
+
+        public void ApplyFilterText()
+        {
             if (filterText != null) gridDeliveries.ActiveFilterCriteria = new BinaryOperator("TicketNo", filterText);
         }
 
@@ -256,20 +275,19 @@ namespace ICTProfilingV3.DeliveriesForms
         private void hplTicket_Click(object sender, EventArgs e)
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
 
-            main.mainPanel.Controls.Add(new UCTARequestDashboard()
+            _ucManager.ShowUCSystemDetails(hplTicket.Name, new UCTARequestDashboard()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.Id.ToString()
-            });
+            }, new string[] {"filterText"});
         }
 
         private async void btnCompReport_Click(object sender, EventArgs e)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var del = await _unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Deliveries.Id,
+            var del = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Deliveries.Id,
                 x => x.Supplier,
                 x => x.TicketRequest,
                 x => x.TicketRequest.ITStaff,

@@ -41,7 +41,12 @@ namespace ICTProfilingV3.CustomerActionSheetForms
 
         private void UCCAS_Load(object sender, System.EventArgs e)
         {
-            if(filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
+            ApplyFilterText();
+        }
+
+        public void ApplyFilterText()
+        {
+            if (filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
 
         private void LoadDetails()

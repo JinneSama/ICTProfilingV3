@@ -40,6 +40,7 @@ namespace ICTProfilingV3.DeliveriesForms
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
+            unitOfWork.DeliveriesSpecsDetailsRepo.Update(specs);
             unitOfWork.Save();
         }
 
@@ -113,6 +114,41 @@ namespace ICTProfilingV3.DeliveriesForms
             }
             await uow.SaveChangesAsync();
             LoadSpecs();
+        }
+
+        private async Task OverwriteSpecsFromTSBasis(IEnumerable<TechSpecsBasisDetails> specsDetails)
+        {
+            if (!specsDetails.Any() || specsDetails == null) return;
+            var uow = new UnitOfWork();
+            uow.TechSpecsICTSpecsDetailsRepo.DeleteRange(x => x.TechSpecsICTSpecsId == _specs.Id);
+            await uow.SaveChangesAsync();
+
+            foreach (var spec in specsDetails)
+            {
+                var equipmentDetail = new DeliveriesSpecsDetails
+                {
+                    ItemNo = spec.ItemNo,
+                    Specs = spec.Specs,
+                    Description = spec.Description,
+                    DeliveriesSpecsId = _specs.Id
+                };
+                uow.DeliveriesSpecsDetailsRepo.Insert(equipmentDetail);
+            }
+            await uow.SaveChangesAsync();
+            LoadSpecs();
+        }
+
+        private async void btnCopyTSBasis_Click(object sender, System.EventArgs e)
+        {
+            var msgRes = MessageBox.Show("This will Overwrite Existing Specs?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (msgRes == DialogResult.Cancel) return;
+
+            var frm = new frmTechSpecsBasis()
+            {
+                Copy = true
+            };
+            frm.ShowDialog();
+            await OverwriteSpecsFromTSBasis(frm.SpecsDetails);
         }
     }
 }

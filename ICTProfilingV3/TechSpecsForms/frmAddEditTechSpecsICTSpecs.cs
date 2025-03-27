@@ -123,7 +123,7 @@ namespace ICTProfilingV3.TechSpecsForms
             specs.TotalCost = spintTotal.Value;
             specs.Purpose = txtPurpose.Text;
             specs.TechSpecsId = _specs.TechSpecsId;
-
+            unitOfWork.TechSpecsICTSpecsRepo.Update(specs);
             unitOfWork.Save();
         }
 

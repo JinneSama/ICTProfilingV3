@@ -53,6 +53,7 @@ namespace ICTProfilingV3.LoginForms
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+            if (ceTerms.Checked == false) return;
             if(txtUsername.Text == "#SetVersion#")
             {
                 var frm = new frmVersionSetter();
@@ -66,7 +67,7 @@ namespace ICTProfilingV3.LoginForms
             isLoggingIn = false;
         }
 
-        private async Task Login(string username, string password)
+        public async Task Login(string username, string password)
         {
             if (username == "sa")
             {
@@ -98,7 +99,8 @@ namespace ICTProfilingV3.LoginForms
                 frmMain.SetUser(user.FullName,user.Position);
                 if (chkRemember.Checked) SetLoginDetails();
                 else ClearLoginDetails();
-                this.Close();
+
+                if (UserStore.ArugmentCredentialsDto == null) this.Close();
             }
             else MessageBox.Show("Wrong Username and Password!");
         }
@@ -149,10 +151,10 @@ namespace ICTProfilingV3.LoginForms
             if(!Logged) Application.Exit();
         }
 
-        private async void frmLogin_Load(object sender, EventArgs e)
-        {
-            if(UserStore.ArugmentCredentialsDto == null) return;    
-            await Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
+        private async void frmLogin_Load(object sender, EventArgs e) {}
+
+        private void memoEdit1_Properties_Spin(object sender, DevExpress.XtraEditors.Controls.SpinEventArgs e)
+        {  
         }
     }
 }

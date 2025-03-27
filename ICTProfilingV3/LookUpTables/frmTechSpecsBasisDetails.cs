@@ -53,6 +53,7 @@ namespace ICTProfilingV3.LookUpTables
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
+            unitOfWork.TechSpecsBasisDetailsRepo.Update(specs);
             unitOfWork.Save();
             LoadSpecs();
         }

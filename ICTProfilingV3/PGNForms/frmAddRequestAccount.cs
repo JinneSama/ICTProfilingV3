@@ -45,6 +45,7 @@ namespace ICTProfilingV3.PGNForms
             if (_request == null) return;
 
             _request.PGNAccounts.Add(row.PGNAccount);
+            unitOfWork.PGNRequestsRepo.Update(_request);
             await unitOfWork.SaveChangesAsync();
         }
     }

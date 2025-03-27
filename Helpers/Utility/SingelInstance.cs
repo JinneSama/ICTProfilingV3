@@ -15,7 +15,8 @@ namespace Helpers.Utility
         }
         public void ReleaseInstance()
         {
-            throw new System.NotImplementedException();
+            mutex.ReleaseMutex();
+            mutex.Dispose();
         }
 
         public bool IsSingleInstance()

@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,8 +26,11 @@ namespace Models.Entities
         [ForeignKey("CreatedById")]
         public Users CreatedByUser { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PGNAccounts> PGNAccounts { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PGNDocuments> PGNDocuments { get; set; }
+        [JsonIgnore]
         public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace Models.MappingConfigurations
                 cfg.CreateMap(u => u.Username, vm => vm.Username);
                 cfg.CreateMap(u => u.FirstName, vm => vm.FirstName);
                 cfg.CreateMap(u => u.LastName, vm => vm.LastName);
+                cfg.CreateMap(u => u.IsResigned, vm => vm.IsResigned);
             });
 
             mapperConfig.AddConfiguration<OFMISEmployeesDto, EmployeesViewModel>(cfg =>

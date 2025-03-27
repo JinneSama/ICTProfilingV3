@@ -13,17 +13,16 @@ namespace ICTProfilingV3.MOForms
 {
     public partial class UCMOAccountUserRequests : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
         public string filterText { get; set; }
         public UCMOAccountUserRequests()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadData();
         }
 
         private void LoadData()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var users = unitOfWork.MOAccountUserRepo.GetAll(x => x.MOAccount,
                 x => x.MOAccount.Office,
                 x => x.PPE);
@@ -88,6 +87,11 @@ namespace ICTProfilingV3.MOForms
         }
 
         private void UCMOAccountUserRequests_Load(object sender, System.EventArgs e)
+        { 
+            ApplyFilterText();
+        }
+
+        public void ApplyFilterText()
         {
             if (filterText != null) gridMOAccountUsers.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }

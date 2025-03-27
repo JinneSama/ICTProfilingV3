@@ -14,5 +14,6 @@ namespace Models.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public long? ChiefId { get; set; }
+        public bool IsResigned { get; set; }
     }
 }

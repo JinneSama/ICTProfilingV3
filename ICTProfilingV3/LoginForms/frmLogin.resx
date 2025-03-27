@@ -117,6 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="memoTerms.EditValue" xml:space="preserve">
+    <value>This system has been developed for internal use by the Provincial Government of Nueva Vizcaya. It is intended solely for authorized personnel and is not designed for external distribution or commercial use.  Unauthorized access, data modification, or misuse of this system is strictly prohibited and may lead to disciplinary or legal action. 
+
+By accessing this system, you acknowledge and accept these terms.
+
+For support or inquiries, please contact the Provincial Information Technology Division.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="frmLogin.IconOptions.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -33,6 +33,7 @@ namespace ICTProfilingV3.ActionsForms
             if (res == null) return;
             res.Value = txtValue.Text;
             res.Order = (int)spinOrder.Value;
+            unitOfOfWork.ActionsDropdownsRepo.Update(res);
             await unitOfOfWork.SaveChangesAsync();
 
             this.Close();

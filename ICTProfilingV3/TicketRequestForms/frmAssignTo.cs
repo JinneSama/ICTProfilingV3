@@ -112,6 +112,7 @@ namespace ICTProfilingV3.TicketRequestForms
 
             _ticket.StaffId = staffViewModel.Staff.Id;
             _ticket.TicketStatus = TicketStatus.Assigned;
+            unitOfWork.TicketRequestRepo.Update(_ticket);
             await ModifyTicketStatusStatus(TicketStatus.Assigned , _ticket.Id);
             await unitOfWork.SaveChangesAsync();
         }

@@ -49,7 +49,7 @@ namespace ICTProfilingV3.StandardPRForms
             sprSpecDetail.Specs = res.Specs;
             sprSpecDetail.ItemNo = res.ItemNo;
             sprSpecDetail.Description = res.Description;
-
+            unitOfWork.StandardPRSpecsDetailsRepo.Update(sprSpecDetail);
             await unitOfWork.SaveChangesAsync();
         }
 

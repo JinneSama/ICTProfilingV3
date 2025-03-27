@@ -82,6 +82,7 @@ namespace ICTProfilingV3.UsersForms
             staff.UserId = (string)slueUser.EditValue;
 
             if(image != null) await networkFolder.UploadFile(image, staff.UserId + ".jpeg");
+            unitOfWork.ITStaffRepo.Update(staff);
             await unitOfWork.SaveChangesAsync();
         }
 

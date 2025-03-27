@@ -42,6 +42,7 @@ namespace ICTProfilingV3.PGNForms
         {
             res.Office = row.Office;
             res.OfficeAcr = row.OfficeAcr;
+            unitOfWork.PGNGroupOfficesRepo.Update(res);
             unitOfWork.Save();
         }
 

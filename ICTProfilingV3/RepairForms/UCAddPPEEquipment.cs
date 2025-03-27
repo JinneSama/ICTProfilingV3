@@ -21,24 +21,21 @@ namespace ICTProfilingV3.RepairForms
     {
         private readonly PPEs _ppe;
         private readonly PPEsSpecs ppeSpecs;
-        private IUnitOfWork unitOfWork;
         private readonly bool showMark;
 
-        public UCAddPPEEquipment(PPEs ppe, IUnitOfWork _unitOfWork, bool showMark)
+        public UCAddPPEEquipment(PPEs ppe,bool showMark)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             this.showMark = !showMark;
             _ppe = ppe;
             if (_ppe == null) return;
             LoadEquipmentSpecs();
         }
 
-        public UCAddPPEEquipment(PPEsSpecs ppeSpecs, IUnitOfWork _unitOfWork, bool showMark)
+        public UCAddPPEEquipment(PPEsSpecs ppeSpecs,bool showMark)
         {
             InitializeComponent();
             this.ppeSpecs = ppeSpecs;
-            unitOfWork = new UnitOfWork();
             this.showMark = showMark;
             if (ppeSpecs == null) return;
             LoadEquipmentSpecs();
@@ -46,6 +43,7 @@ namespace ICTProfilingV3.RepairForms
 
         private void LoadEquipmentSpecs()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             gridMark.Visible = !showMark;
             IEnumerable<PPEsSpecs> res;
             if (showMark) res = unitOfWork.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id,

@@ -47,6 +47,7 @@ namespace ICTProfilingV3.Equipments
             specs.ItemNo = row.ItemNo;
             specs.DetailSpecs = row.DetailSpecs;
             specs.DetailDescription = row.DetailDescription;    
+            unitOfWork.EquipmentSpecsDetailsRepo.Update(specs);
             unitOfWork.Save();
         }
 

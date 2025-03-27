@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Models.Entities
 {
@@ -12,7 +13,9 @@ namespace Models.Entities
         public int Id { get; set; }
         public string OfficeAcr { get; set; }
         public string Office { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PGNAccounts> PGNAccounts { get; set; }
+        [JsonIgnore]
         public virtual ICollection<MOAccounts> MOAccounts { get; set; }
     }
 }

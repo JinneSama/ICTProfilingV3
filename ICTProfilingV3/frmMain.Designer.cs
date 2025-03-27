@@ -75,6 +75,9 @@
             this.btnChanges = new DevExpress.XtraBars.BarButtonItem();
             this.btnMOAccounts = new DevExpress.XtraBars.BarButtonItem();
             this.btnQuarterlyReport = new DevExpress.XtraBars.BarButtonItem();
+            this.btnNavigateBack = new DevExpress.XtraBars.BarButtonItem();
+            this.btnNavigateForward = new DevExpress.XtraBars.BarButtonItem();
+            this.btnRefreshControl = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -149,9 +152,12 @@
             this.btnQueue,
             this.btnChanges,
             this.btnMOAccounts,
-            this.btnQuarterlyReport});
+            this.btnQuarterlyReport,
+            this.btnNavigateBack,
+            this.btnNavigateForward,
+            this.btnRefreshControl});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 42;
+            this.ribbon.MaxItemId = 45;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -160,6 +166,9 @@
             this.ribbonPage2,
             this.ribbonPage4,
             this.ribbonPage3});
+            this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateBack);
+            this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateForward);
+            this.ribbon.QuickToolbarItemLinks.Add(this.btnRefreshControl);
             this.ribbon.Size = new System.Drawing.Size(1322, 154);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
@@ -573,6 +582,27 @@
             this.btnQuarterlyReport.Name = "btnQuarterlyReport";
             this.btnQuarterlyReport.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnQuarterlyReport_ItemClick);
             // 
+            // btnNavigateBack
+            // 
+            this.btnNavigateBack.Id = 42;
+            this.btnNavigateBack.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnNavigateBack.ImageOptions.SvgImage")));
+            this.btnNavigateBack.Name = "btnNavigateBack";
+            this.btnNavigateBack.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNavigateBack_ItemClick);
+            // 
+            // btnNavigateForward
+            // 
+            this.btnNavigateForward.Id = 43;
+            this.btnNavigateForward.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnNavigateForward.ImageOptions.SvgImage")));
+            this.btnNavigateForward.Name = "btnNavigateForward";
+            this.btnNavigateForward.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnNavigateForward_ItemClick);
+            // 
+            // btnRefreshControl
+            // 
+            this.btnRefreshControl.Id = 44;
+            this.btnRefreshControl.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnRefreshControl.ImageOptions.SvgImage")));
+            this.btnRefreshControl.Name = "btnRefreshControl";
+            this.btnRefreshControl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefreshControl_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -766,12 +796,14 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmMain.IconOptions.Icon")));
             this.Name = "frmMain";
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "Electronic Profiling Information System v3";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
             this.backstageViewControl1.ResumeLayout(false);
@@ -851,5 +883,8 @@
         private DevExpress.XtraBars.BarButtonItem btnMOAccounts;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup16;
         private DevExpress.XtraBars.BarButtonItem btnQuarterlyReport;
+        private DevExpress.XtraBars.BarButtonItem btnNavigateBack;
+        private DevExpress.XtraBars.BarButtonItem btnNavigateForward;
+        private DevExpress.XtraBars.BarButtonItem btnRefreshControl;
     }
 }

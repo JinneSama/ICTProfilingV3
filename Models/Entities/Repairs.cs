@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models.Enums;
+using Newtonsoft.Json;
 
 namespace Models.Entities
 {
@@ -54,6 +55,7 @@ namespace Models.Entities
         [ForeignKey("TechSpecsId")]
         public TechSpecs TechSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
 
         public Repairs()

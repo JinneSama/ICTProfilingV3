@@ -62,7 +62,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
             pr.PRNo = txtPRNo.Text;
             pr.DateCreated = txtDate.DateTime;
             pr.ChiefId = (long?)slueEmployee.EditValue;
-
+            unitOfWork.PurchaseRequestRepo.Update(pr);
             await unitOfWork.SaveChangesAsync();
         }
 

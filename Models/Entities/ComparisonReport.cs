@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -22,6 +23,7 @@ namespace Models.Entities
         public string NotedById { get; set; }
         [ForeignKey("NotedById")]
         public Users NotedByUser { get; set; }
+        [JsonIgnore]
         public ICollection<ComparisonReportSpecs> ComparisonReportSpecs { get; set; }
     }
 }

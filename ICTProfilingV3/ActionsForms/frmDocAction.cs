@@ -1,6 +1,4 @@
-﻿using DevExpress.CodeParser;
-using EntityManager.Managers.User;
-using Helpers.Interfaces;
+﻿using Helpers.Interfaces;
 using Helpers.NetworkFolder;
 using ICTProfilingV3.BaseClasses;
 using Models.Entities;
@@ -183,6 +181,7 @@ namespace ICTProfilingV3.ActionsForms
             if (ticket == null) return;
 
             ticket.TicketStatus = (TicketStatus)lueTicketStatus.EditValue;
+            unitOfWork.TicketRequestRepo.Update(ticket);
             await unitOfWork.SaveChangesAsync();
 
             await ModifyTicketStatusStatus((TicketStatus)lueTicketStatus.EditValue, ticket.Id);
@@ -248,6 +247,7 @@ namespace ICTProfilingV3.ActionsForms
                 var rUser = await unitOfWork.UsersRepo.FindAsync(x => x.Id == user.Id);
                 updateAction.RoutedUsers.Add(rUser);
             }
+            unitOfWork.ActionsRepo.Update(updateAction);
             unitOfWork.Save();
             await UpdateTicketStatus();
         }
@@ -288,6 +288,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var deliveries = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == actionType.Id);
                 deliveries.Actions.Add(Action);
+                unitOfWork.DeliveriesRepo.Update(deliveries);
                 unitOfWork.Save();
             }
 
@@ -295,6 +296,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == actionType.Id);
                 repair.Actions.Add(Action);
+                unitOfWork.RepairsRepo.Update(repair);
                 unitOfWork.Save();
             }
 
@@ -302,6 +304,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var techSpecs = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == actionType.Id);
                 techSpecs.Actions.Add(Action);
+                unitOfWork.TechSpecsRepo.Update(techSpecs);
                 unitOfWork.Save();
             }
 
@@ -309,6 +312,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var cas = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == actionType.Id);
                 cas.Actions.Add(Action);
+                unitOfWork.CustomerActionSheetRepo.Update(cas);
                 unitOfWork.Save();
             }
 
@@ -316,6 +320,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var pr = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == actionType.Id);
                 pr.Actions.Add(Action);
+                unitOfWork.PurchaseRequestRepo.Update(pr);
                 unitOfWork.Save();
             }
 
@@ -323,6 +328,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var pgn = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == actionType.Id);
                 pgn.Actions.Add(Action);
+                unitOfWork.PGNRequestsRepo.Update(pgn);
                 unitOfWork.Save();
             }
 
@@ -330,6 +336,7 @@ namespace ICTProfilingV3.ActionsForms
             {
                 var mo = await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == actionType.Id);
                 mo.Actions.Add(Action);
+                unitOfWork.MOAccountUserRepo.Update(mo);
                 unitOfWork.Save();
             }
             SaveImages(Action);

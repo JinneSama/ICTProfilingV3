@@ -90,7 +90,7 @@ namespace ICTProfilingV3.Equipments
 
             model.ModelName = txtModel.Text;
             model.Brand = brand;
-
+            unitOfWork.ModelRepo.Update(model);
             unitOfWork.Save();
 
             this.Close();

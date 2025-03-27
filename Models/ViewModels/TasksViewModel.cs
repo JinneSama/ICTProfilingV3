@@ -44,11 +44,11 @@ namespace Models.ViewModels
         {
             string equipment = string.Empty;
             if (Ticket.RequestType == Enums.RequestType.Deliveries)
-                equipment = string.Join(",", Ticket.Deliveries.DeliveriesSpecs.Select(x => $"{x.Quantity} {x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName}"));
+                equipment = string.Join(",", Ticket.Deliveries.DeliveriesSpecs.Select(x => $"{x.Quantity} {x?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName}"));
             if (Ticket.RequestType == Enums.RequestType.TechSpecs)
                 equipment = string.Join(",", Ticket.TechSpecs.TechSpecsICTSpecs.Select(x => $"{x.Quantity} {x?.EquipmentSpecs?.Equipment?.EquipmentName}"));
             if (Ticket.RequestType == Enums.RequestType.Repairs)
-                equipment = string.Join(",", Ticket.Repairs.PPEs.PPEsSpecs.Select(x => $"{x.Quantity} {x.Model.Brand.EquipmentSpecs.Equipment.EquipmentName}"));
+                equipment = string.Join(",", Ticket.Repairs.PPEs.PPEsSpecs.Select(x => $"{x.Quantity} {x?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName}"));
             return equipment;
         }
         public string Equipments => Equipment();

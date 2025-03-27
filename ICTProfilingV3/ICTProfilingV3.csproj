@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>92</ApplicationRevision>
+    <ApplicationRevision>103</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -494,6 +494,12 @@
     <Compile Include="PGNForms\UCRequestAccount.Designer.cs">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="PPEInventoryForms\frmInventoryParser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PPEInventoryForms\frmInventoryParser.Designer.cs">
+      <DependentUpon>frmInventoryParser.cs</DependentUpon>
+    </Compile>
     <Compile Include="PurchaseRequestForms\UCFDTS.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -505,6 +511,12 @@
     </Compile>
     <Compile Include="ReportForms\frmQuarterlyReport.Designer.cs">
       <DependentUpon>frmQuarterlyReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportForms\rptQuarterlyReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportForms\rptQuarterlyReport.Designer.cs">
+      <DependentUpon>rptQuarterlyReport.cs</DependentUpon>
     </Compile>
     <Compile Include="StandardPRForms\frmGeneratePRSuggestion.cs">
       <SubType>Form</SubType>
@@ -997,11 +1009,17 @@
     <EmbeddedResource Include="PGNForms\UCRequestAccount.resx">
       <DependentUpon>UCRequestAccount.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PPEInventoryForms\frmInventoryParser.resx">
+      <DependentUpon>frmInventoryParser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PurchaseRequestForms\UCFDTS.resx">
       <DependentUpon>UCFDTS.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\frmQuarterlyReport.resx">
       <DependentUpon>frmQuarterlyReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportForms\rptQuarterlyReport.resx">
+      <DependentUpon>rptQuarterlyReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StandardPRForms\frmGeneratePRSuggestion.resx">
       <DependentUpon>frmGeneratePRSuggestion.cs</DependentUpon>

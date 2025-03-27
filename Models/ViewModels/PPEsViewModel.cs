@@ -11,5 +11,7 @@ namespace Models.ViewModels
         public string Office { get; set; }
         public DateTime? DateCreated { get; set; }
         public PPEStatus? Status { get; set; }
+        public bool IsResigned { get; set; }
+
     }
 }

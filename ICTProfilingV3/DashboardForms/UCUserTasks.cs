@@ -69,7 +69,7 @@ namespace ICTProfilingV3.DashboardForms
         {
             if (FromQueue)
             {
-                LoadData(null);
+                await LoadData(false,null);
                 tileTasks.OptionsDragDrop.AllowDrag = false;
                 return;
             }
@@ -77,14 +77,14 @@ namespace ICTProfilingV3.DashboardForms
 
             var user = await userManager.FindUserAsync(UserStore.UserId);
             if (user.Roles == null)
-                LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
 
             var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
             if (role == null)
-                LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
 
-            if (role.Select(x => x.Designation).ToList().Contains(Designation.TaskAdmin)) LoadData(null);
-            else LoadData(x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+            if (role.Select(x => x.Designation).ToList().Contains(Designation.TaskAdmin)) await LoadData(true,null);
+            else await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
         }
 
         void InitKanban()
@@ -122,9 +122,15 @@ namespace ICTProfilingV3.DashboardForms
             throw new NotImplementedException();
         }
 
-        private void LoadData(Expression<Func<TicketRequest,bool>> expression = null)
+        private async Task LoadData(bool taskAdmin,Expression<Func<TicketRequest,bool>> expression = null)
         {
-            var filterExpression = expression ?? (x => true);
+            Expression<Func<TicketRequest, bool>> filterExpression = expression ?? (x => true);
+            Expression<Func<TicketRequest, bool>> filterAdminExpression = (x  => true);
+            var section = await UserStore.Section();
+
+            if (section == null && taskAdmin) filterAdminExpression = (x => true);
+            if (taskAdmin && section != null) filterAdminExpression = x => x.ITStaff.Section == section;
+            if (!taskAdmin && section != null) filterAdminExpression = x => x.ITStaff.Section == section;
 
             var tickets = unitOfWork.TicketRequestRepo.GetAll(
                 x => x.Repairs,
@@ -149,7 +155,7 @@ namespace ICTProfilingV3.DashboardForms
                 x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
                 x => x.ITStaff,
                 x => x.ITStaff.Users
-                ).Where(filterExpression).ToList().Select(x => new TasksViewModel
+                ).Where(filterExpression).Where(filterAdminExpression).ToList().Select(x => new TasksViewModel
             {
                 Ticket = x,
                 Status = x.TicketStatus.ToString()

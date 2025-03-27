@@ -79,7 +79,7 @@ namespace ICTProfilingV3.LookUpTables
             equipment.EquipmentId = row.EquipmentId.Value;
             equipment.Description = row.Description; 
             equipment.Remarks = row.Remarks;
-
+            unitOfWork.EquipmentSpecsRepo.Update(equipment);
             unitOfWork.Save();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -35,9 +36,12 @@ namespace Models.Entities
         public Supplier Supplier { get; set; }
 
         public TicketRequest TicketRequest { get; set; }
+        [JsonIgnore]
         public virtual ICollection<DeliveriesSpecs> DeliveriesSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ComparisonReport> ComparisonReports { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
         public Deliveries()
         {

@@ -80,7 +80,7 @@ namespace ICTProfilingV3.PPEInventoryForms
         private void LoadEquipmentSpecs()
         {
             gcEquipmentSpecs.Controls.Clear();
-            gcEquipmentSpecs.Controls.Add(new UCPPEsSpecs(_PPEs, unitOfWork)
+            gcEquipmentSpecs.Controls.Add(new UCPPEsSpecs(_PPEs)
             {
                 Dock = DockStyle.Fill
             });
@@ -102,6 +102,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             editPPE.TotalValue = (long?)spintTotal.Value;
             editPPE.DateCreated = DateTime.Now;
 
+            unitOfWork.PPesRepo.Update(editPPE);
             unitOfWork.Save();
             IsSave = true;
             this.Close();

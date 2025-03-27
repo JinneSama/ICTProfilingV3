@@ -145,6 +145,7 @@ namespace ICTProfilingV3.DeliveriesForms
             deliveries.DeliveredDate = txtDateofDelivery.DateTime;  
             deliveries.PONo = txtPONo.Text;
             deliveries.ReceiptNo = txtDeliveryReceipt.Text;
+            unitOfWork.DeliveriesRepo.Update(deliveries);
 
             await unitOfWork.SaveChangesAsync();
         }

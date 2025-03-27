@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +25,7 @@ namespace Models.Entities
         public int? ComparisonReportId { get; set; }
         [ForeignKey("ComparisonReportId")]
         public ComparisonReport ComparisonReport { get; set; }
+        [JsonIgnore]
         public ICollection<ComparisonReportSpecsDetails> ComparisonReportSpecsDetails { get; set; }
     }
 }

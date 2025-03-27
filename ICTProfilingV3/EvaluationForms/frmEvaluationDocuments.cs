@@ -7,9 +7,9 @@ namespace ICTProfilingV3.EvaluationForms
 {
     public partial class frmEvaluationDocuments : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private HTTPNetworkFolder networkFolder;
-        private readonly Actions action;
+        //private IUnitOfWork unitOfWork;
+        //private HTTPNetworkFolder networkFolder;
+        //private readonly Actions action;
         public frmEvaluationDocuments()
         {
             InitializeComponent();

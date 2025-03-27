@@ -152,7 +152,7 @@ namespace ICTProfilingV3.StandardPRForms
             pr.PRNo = txtPRNo.Text;
             pr.Quarter = (PRQuarter)lueQuarter.EditValue;
             pr.ChiefId = ChiefId;
-
+            _unitOfWork.PurchaseRequestRepo.Update(pr);
             await _unitOfWork.SaveChangesAsync();
         }
 

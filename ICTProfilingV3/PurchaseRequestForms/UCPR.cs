@@ -1,6 +1,8 @@
 ﻿using DevExpress.Charts.Native;
 using DevExpress.Data.Filtering;
 using DevExpress.XtraEditors;
+using Helpers.Interfaces;
+using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.Equipments;
 using ICTProfilingV3.StandardPRForms;
@@ -23,17 +25,19 @@ namespace ICTProfilingV3.PurchaseRequestForms
 {
     public partial class UCPR : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUCManager<Control> _ucManager;
         public string filterText { get; set; }
         public UCPR()
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             LoadPR();
         }
 
         private void LoadPR()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var pr = unitOfWork.PurchaseRequestRepo.GetAll(x => x.CreatedByUser,
                 x => x.TechSpecs).OrderByDescending(x => x.DateCreated).ToList()
                 .Select(x => new PRViewModel
@@ -72,6 +76,7 @@ namespace ICTProfilingV3.PurchaseRequestForms
 
         private async Task LoadTSSpecs(PRViewModel row)
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.PurchaseRequest.TechSpecs.Id);
             panelSpecs.Controls.Clear();
             panelSpecs.Controls.Add(new UCRequestedTechSpecs(ts)
@@ -152,15 +157,12 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private void hplTechSpecs_Click(object sender, EventArgs e)
         {
             var pr = (PRViewModel)gridPR.GetFocusedRow();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
-
-            main.mainPanel.Controls.Add(new UCTechSpecs()
+            _ucManager.ShowUCSystemDetails(hplTechSpecs.Name, new UCTechSpecs()
             {
                 IsTechSpecs = true,
                 Dock = DockStyle.Fill,
                 filterText = pr.PurchaseRequest.TechSpecsId.ToString()
-            });
+            }, new string[] {"IsTechSpecs", "filterText"});
         }
 
         private void btnFDTS_Click(object sender, EventArgs e)

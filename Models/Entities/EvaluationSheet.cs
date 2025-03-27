@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -34,6 +35,7 @@ namespace Models.Entities
         public string CreatedById { get; set; }
         [ForeignKey("CreatedById")]
         public Users CreatedBy { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheetDocument> EvaluationSheetDocuments { get; set; }
     }
 }

@@ -191,7 +191,7 @@ namespace ICTProfilingV3.TechSpecsForms
             ts.PreparedById = (string)sluePreparedBy.EditValue;
             ts.ReviewedById = (string)slueReviewedBy.EditValue;
             ts.NotedById = (string)slueNotedBy.EditValue;
-
+            unitOfWork.TechSpecsRepo.Update(ts);
             await unitOfWork.SaveChangesAsync();
         }
 

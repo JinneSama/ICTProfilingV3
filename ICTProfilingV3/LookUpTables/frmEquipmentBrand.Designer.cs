@@ -265,6 +265,5 @@
         private DevExpress.XtraEditors.SimpleButton btnAddBrand;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEdit;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private System.Windows.Forms.BindingSource brandBindingSource;
     }
 }

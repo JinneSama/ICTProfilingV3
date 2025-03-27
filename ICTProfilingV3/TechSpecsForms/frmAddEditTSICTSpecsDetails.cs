@@ -36,6 +36,7 @@ namespace ICTProfilingV3.TechSpecsForms
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
+            unitOfWork.TechSpecsICTSpecsDetailsRepo.Update(specs);
             unitOfWork.Save();
         }
 

@@ -86,7 +86,10 @@
     <Compile Include="Interfaces\IEncryptFile.cs" />
     <Compile Include="Interfaces\IModifyRecordStatus.cs" />
     <Compile Include="Interfaces\IModifyTicketStatus.cs" />
+    <Compile Include="Interfaces\IParseInventory.cs" />
     <Compile Include="Interfaces\ISingleInstance.cs" />
+    <Compile Include="Interfaces\IUCManager.cs" />
+    <Compile Include="Inventory\ParseInventory.cs" />
     <Compile Include="NetworkFolder\ConnectToFolder.cs" />
     <Compile Include="NetworkFolder\DocumentHandler.cs" />
     <Compile Include="NetworkFolder\HTTPNetworkFolder.cs" />
@@ -101,6 +104,8 @@
     <Compile Include="Tools\Models\CopiedSpecs.cs" />
     <Compile Include="Update\UpdateHelpers.cs" />
     <Compile Include="Utility\SingelInstance.cs" />
+    <Compile Include="Utility\StringHelper.cs" />
+    <Compile Include="Utility\UCManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="WIA">

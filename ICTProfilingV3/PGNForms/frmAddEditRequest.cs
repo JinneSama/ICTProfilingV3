@@ -92,6 +92,7 @@ namespace ICTProfilingV3.PGNForms
             res.CommunicationType = (CommunicationType)lueCommType.EditValue;
             res.SignatoryId = (long?)slueSignatory.EditValue;
             res.Subject = txtSubject.Text;
+            unitOfWork.PGNRequestsRepo.Update(res);
             await unitOfWork.SaveChangesAsync();
         }
 

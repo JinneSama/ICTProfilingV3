@@ -52,7 +52,7 @@ namespace ICTProfilingV3.LookUpTables
             res.Remarks = row.Remarks;
             res.Available = row.Available;
             res.EquipmentSpecsId = row.EquipmentSpecsId;
-
+            unitOfWork.TechSpecsBasisRepo.Update(res);
             unitOfWork.Save();
         }
 

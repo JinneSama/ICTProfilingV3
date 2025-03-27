@@ -9,6 +9,7 @@ using EntityManager.Managers.Role;
 using EntityManager.Managers.User;
 using Helpers.Interfaces;
 using Helpers.Update;
+using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.CustomerActionSheetForms;
@@ -35,17 +36,15 @@ namespace ICTProfilingV3
     {
         private IICTUserManager userManager;
         private IICTRoleManager roleManager;
-        private string Version;
+        public readonly IUCManager<Control> _ucManager;
+        private string Version = "";
         public frmMain()
         {
             InitializeComponent();
             userManager = new ICTUserManager();
             roleManager = new ICTRoleManager();
-
+            _ucManager = new UCManager<Control>(mainPanel);
             ForceUserUpdate();
-
-            var frm = new frmLogin(this);
-            frm.ShowDialog();
 
             if (!UpdateThread.IsBusy)
                 UpdateThread.RunWorkerAsync();
@@ -113,11 +112,12 @@ namespace ICTProfilingV3
 
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCTARequestDashboard()
-            {
-                Dock = DockStyle.Fill
-            });
+            //DisposeUC(mainPanel);
+            //mainPanel.Controls.Add(new UCTARequestDashboard()
+            //{
+            //    Dock = DockStyle.Fill
+            //});
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTARequestDashboard { Dock = DockStyle.Fill }, null);
         }
 
         private void btnSuppliers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -152,11 +152,7 @@ namespace ICTProfilingV3
 
         private void btnDeliveries_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCDeliveries()
-            {
-                Dock = DockStyle.Fill
-            });
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCDeliveries { Dock = DockStyle.Fill }, null);
         }
 
         private void btnUsers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -197,39 +193,35 @@ namespace ICTProfilingV3
 
         private void btnTechSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCTechSpecs()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTechSpecs()
             {
                 Dock = DockStyle.Fill,
                 IsTechSpecs = true
-            });
+            }, new string[] { "IsTechSpecs" });
         }
 
         private void btnPPE_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCPPEs()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPPEs()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnRepair_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCRepair()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCRepair()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnCAS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCCAS()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCCAS()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnStandardPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -240,20 +232,18 @@ namespace ICTProfilingV3
 
         private void btnVPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCPR()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPR()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnRoutedActions_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCRoutedActions()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCRoutedActions()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -274,21 +264,19 @@ namespace ICTProfilingV3
 
         private void btnRepairSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCTechSpecs()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTechSpecs()
             {
                 IsTechSpecs = false,
                 Dock = DockStyle.Fill
-            });
+            }, new string[] { "IsTechSpecs" });
         }
 
         private void btnPGNAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCPGNAccounts()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPGNAccounts()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnPGNOffices_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -299,11 +287,10 @@ namespace ICTProfilingV3
 
         private void btnRequests_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCPGNRequests()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPGNRequests()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void UpdateThread_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -336,21 +323,19 @@ namespace ICTProfilingV3
 
         private void btnQueue_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCUserTasks()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCUserTasks()
             {
                 Dock = DockStyle.Fill,
                 FromQueue = true
-            });
+            }, new string[] {"FromQueue"});
         }
 
         private void btnUserTasks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCUserTasks()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCUserTasks()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnChanges_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -373,20 +358,18 @@ namespace ICTProfilingV3
 
         private void btnMOAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCMOAccounts()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCMOAccounts()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DisposeUC(mainPanel);
-            mainPanel.Controls.Add(new UCDashboard()
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCDashboard()
             {
                 Dock = DockStyle.Fill
-            });
+            }, null);
         }
 
         public void DisposeUC(Control parent)
@@ -403,6 +386,29 @@ namespace ICTProfilingV3
         {
             var frm = new frmQuarterlyReport();
             frm.ShowDialog();
+        }
+
+        private void btnNavigateBack_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _ucManager.NavigateBack();
+        }
+
+        private void btnNavigateForward_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _ucManager.NavigateForward();
+        }
+
+        private void btnRefreshControl_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _ucManager.RefreshControl();
+        }
+
+        private async void frmMain_Load(object sender, EventArgs e)
+        {
+            var frm = new frmLogin(this);
+
+            if (UserStore.ArugmentCredentialsDto == null) frm.ShowDialog(this);
+            else await frm.Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using ICTProfilingV3.RepairForms;
+﻿using Helpers.Interfaces;
+using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using Models.Entities;
 using Models.Repository;
@@ -12,11 +15,14 @@ namespace ICTProfilingV3.PPEInventoryForms
     public partial class UCRepairHistory : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUCManager<Control> _ucManager;
         private readonly PPEs ppe;
 
         public UCRepairHistory(PPEs _ppe)
         {
             InitializeComponent();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             this._unitOfWork = new UnitOfWork();
             ppe = _ppe;
             LoadHistory();
@@ -31,14 +37,11 @@ namespace ICTProfilingV3.PPEInventoryForms
         private void hplRepair_Click(object sender, System.EventArgs e)
         {
             var row = (Repairs)gridHistory.GetFocusedRow();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
-
-            main.mainPanel.Controls.Add(new UCRepair()
+            _ucManager.ShowUCSystemDetails(hplRepair.Name, new UCRepair()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.Id.ToString()
-            });
+            }, new string[] {"filterText" });
         }
     }
 }

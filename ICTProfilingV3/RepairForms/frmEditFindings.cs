@@ -50,6 +50,7 @@ namespace ICTProfilingV3.RepairForms
             res.Findings = txtFindings.Text;
             res.Recommendations = txtRecommendation.Text;
 
+            unitOfWork.RepairsRepo.Update(res);
             await unitOfWork.SaveChangesAsync();
         }
 

@@ -21,12 +21,14 @@ using EntityManager.Managers.User;
 using Helpers.Interfaces;
 using EntityManager.Managers.Role;
 using Models.Managers.User;
+using Helpers.Utility;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
     public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private IUnitOfWork unitOfWork;
+        private readonly IUCManager<Control> _ucManager;
         private readonly IICTUserManager userManager;
         private readonly IICTRoleManager roleManager;
         public string filterText { get; set; }  
@@ -36,6 +38,8 @@ namespace ICTProfilingV3.TicketRequestForms
             unitOfWork = new UnitOfWork();
             userManager = new ICTUserManager();
             roleManager = new ICTRoleManager();
+            var main = Application.OpenForms["frmMain"] as frmMain;
+            _ucManager = main._ucManager;
             LoadDropdowns();
             LoadTickets();
         }
@@ -95,19 +99,19 @@ namespace ICTProfilingV3.TicketRequestForms
                 IsTechSpecs = true,
                 Dock = DockStyle.Fill,
                 filterText = row.TicketRequest.Id.ToString() 
-            });
+            }, new string[] {"IsTechSpecs", "filterText"});
 
             if (row.TicketRequest.RequestType == RequestType.Deliveries) NavigateToProcess(new UCDeliveries()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.TicketRequest.Id.ToString()
-            });
+            }, new string[] { "filterText" });
 
             if (row.TicketRequest.RequestType == RequestType.Repairs) NavigateToProcess(new UCRepair()
             {
                 Dock = DockStyle.Fill,
                 filterText = row.TicketRequest.Id.ToString()
-            });
+            }, new string[] { "filterText" });
         }
 
         private bool checkStatus()
@@ -117,17 +121,19 @@ namespace ICTProfilingV3.TicketRequestForms
             return false;
         }
 
-        private void NavigateToProcess(Control uc)
+        private void NavigateToProcess(Control uc, string[] propertiesToCopy)
         {
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
-
-            main.mainPanel.Controls.Add(uc);
+            _ucManager.ShowUCSystemDetails(uc.Name, uc , propertiesToCopy);
         }
 
         private void UCTARequestDashboard_Load(object sender, EventArgs e)
         {
-            if (filterText != null) gridRequest.ActiveFilterCriteria = new BinaryOperator("TicketRequest.Id",filterText);
+            ApplyFilterText();
+        }
+
+        public void ApplyFilterText()
+        {
+            if (filterText != null) gridRequest.ActiveFilterCriteria = new BinaryOperator("TicketRequest.Id", filterText);
         }
 
         private async void btnAssignTo_Click(object sender, EventArgs e)

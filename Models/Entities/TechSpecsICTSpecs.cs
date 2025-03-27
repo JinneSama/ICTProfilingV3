@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
@@ -26,6 +27,7 @@ namespace Models.Entities
         public EquipmentSpecs EquipmentSpecs { get; set; }
 
         public int TechSpecsICTSpecsDetailsId { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TechSpecsICTSpecsDetails> TechSpecsICTSpecsDetails { get; set; }
         public TechSpecsICTSpecs()
         {

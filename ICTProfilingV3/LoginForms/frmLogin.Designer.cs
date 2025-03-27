@@ -36,6 +36,8 @@
             this.lblversion = new DevExpress.XtraEditors.LabelControl();
             this.chkRemember = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.ceTerms = new DevExpress.XtraEditors.CheckEdit();
+            this.memoTerms = new DevExpress.XtraEditors.MemoEdit();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
             this.lblDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).BeginInit();
@@ -45,6 +47,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceTerms.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTerms.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEdit2
@@ -108,7 +112,7 @@
             // 
             // chkRemember
             // 
-            this.chkRemember.Location = new System.Drawing.Point(11, 114);
+            this.chkRemember.Location = new System.Drawing.Point(114, 114);
             this.chkRemember.Name = "chkRemember";
             this.chkRemember.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.chkRemember.Properties.Appearance.Options.UseForeColor = true;
@@ -118,6 +122,8 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.ceTerms);
+            this.groupControl1.Controls.Add(this.memoTerms);
             this.groupControl1.Controls.Add(this.btnLogin);
             this.groupControl1.Controls.Add(this.lblDate);
             this.groupControl1.Controls.Add(this.txtUsername);
@@ -125,8 +131,30 @@
             this.groupControl1.Controls.Add(this.txtPassword);
             this.groupControl1.Location = new System.Drawing.Point(14, 262);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(353, 180);
+            this.groupControl1.Size = new System.Drawing.Size(353, 341);
             this.groupControl1.TabIndex = 94;
+            // 
+            // ceTerms
+            // 
+            this.ceTerms.Location = new System.Drawing.Point(114, 274);
+            this.ceTerms.Name = "ceTerms";
+            this.ceTerms.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.ceTerms.Properties.Appearance.Options.UseForeColor = true;
+            this.ceTerms.Properties.Caption = "Accept Terms?";
+            this.ceTerms.Size = new System.Drawing.Size(113, 19);
+            this.ceTerms.TabIndex = 97;
+            // 
+            // memoTerms
+            // 
+            this.memoTerms.EditValue = resources.GetString("memoTerms.EditValue");
+            this.memoTerms.Location = new System.Drawing.Point(11, 139);
+            this.memoTerms.Name = "memoTerms";
+            this.memoTerms.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memoTerms.Properties.Appearance.Options.UseFont = true;
+            this.memoTerms.Properties.ReadOnly = true;
+            this.memoTerms.Properties.Spin += new DevExpress.XtraEditors.Controls.SpinEventHandler(this.memoEdit1_Properties_Spin);
+            this.memoTerms.Size = new System.Drawing.Size(331, 129);
+            this.memoTerms.TabIndex = 96;
             // 
             // btnLogin
             // 
@@ -136,7 +164,7 @@
             this.btnLogin.Appearance.Options.UseBackColor = true;
             this.btnLogin.Appearance.Options.UseBorderColor = true;
             this.btnLogin.Appearance.Options.UseFont = true;
-            this.btnLogin.Location = new System.Drawing.Point(11, 139);
+            this.btnLogin.Location = new System.Drawing.Point(11, 299);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(331, 30);
             this.btnLogin.TabIndex = 95;
@@ -161,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 466);
+            this.ClientSize = new System.Drawing.Size(379, 610);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.lblversion);
             this.Controls.Add(this.pictureEdit2);
@@ -170,7 +198,6 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
-            this.Load += new System.EventHandler(this.frmLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
@@ -178,6 +205,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ceTerms.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTerms.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -192,5 +221,7 @@
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
         private DevExpress.XtraEditors.LabelControl lblDate;
+        private DevExpress.XtraEditors.CheckEdit ceTerms;
+        private DevExpress.XtraEditors.MemoEdit memoTerms;
     }
 }

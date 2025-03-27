@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,29 +37,50 @@ namespace Models.Entities
         public string Position { get; set; }
         public string OFMISUsername { get; set; }
         public bool? IsDeleted { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ITStaff> ITStaffs { get; set; }
-
+        [JsonIgnore]
         [InverseProperty("CreatedBy")]
         public ICollection<Actions> CreatedActions { get; set; }
+        [JsonIgnore]
         public ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public ICollection<TechSpecs> TechSpecsPreaparedBy { get; set; }
+        [JsonIgnore]
         public ICollection<TechSpecs> TechSpecsReviewedBy { get; set; }
+        [JsonIgnore]
         public ICollection<TechSpecs> TechSpecsNotedBy { get; set; }
+        [JsonIgnore]
         public ICollection<CustomerActionSheet> CustomerActionSheet { get; set; }
+        [JsonIgnore]
         public ICollection<Repairs> RepairsPreparedBy { get; set; }
+        [JsonIgnore]
         public ICollection<Repairs> RepairsReviewedBy { get; set; }
+        [JsonIgnore]
         public ICollection<Repairs> RepairsNotedBy { get; set; }
+        [JsonIgnore]
         public ICollection<PurchaseRequest> PurchaseRequests { get; set; }
+        [JsonIgnore]
         public ICollection<TicketRequestStatus> TicketRequestStatus { get; set; }
+        [JsonIgnore]
         public ICollection<PGNRequests> PGNRequests { get; set; }
+        [JsonIgnore]
         public ICollection<ComparisonReport> CRPreparedBy { get; set; }
+        [JsonIgnore]
         public ICollection<ComparisonReport> CRReviewedBy { get; set; }
+        [JsonIgnore]
         public ICollection<ComparisonReport> CRNotedBy { get; set; }
+        [JsonIgnore]
         public ICollection<ChangeLogs> ChangeLogsBy { get; set; }
+        [JsonIgnore]
         public ICollection<MOAccountUsers> MOAccountUsers { get; set; }
+        [JsonIgnore]
         public ICollection<MOAccounts> MOAccounts { get; set; }
+        [JsonIgnore]
         public ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
+        [JsonIgnore]
         public virtual ICollection<LogEntry> LogEntry { get; set; }
     }
 }

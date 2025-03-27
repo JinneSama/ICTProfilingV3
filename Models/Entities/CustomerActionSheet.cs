@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,7 +30,9 @@ namespace Models.Entities
         [ForeignKey("AssistedById")]
         public Users AssistedBy { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
+        [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
 
         public CustomerActionSheet()

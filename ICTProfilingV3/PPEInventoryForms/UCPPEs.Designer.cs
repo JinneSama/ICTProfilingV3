@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCPPEs));
+            this.colResigned = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colIssued = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
@@ -42,7 +47,6 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -53,6 +57,8 @@
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.btnCopy = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -109,6 +115,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcHistory)).BeginInit();
             this.SuspendLayout();
+            // 
+            // colResigned
+            // 
+            this.colResigned.FieldName = "IsResigned";
+            this.colResigned.Name = "colResigned";
+            // 
+            // colIssued
+            // 
+            this.colIssued.Caption = "Issued To";
+            this.colIssued.FieldName = "IssuedTo";
+            this.colIssued.Name = "colIssued";
+            this.colIssued.OptionsColumn.AllowEdit = false;
+            this.colIssued.OptionsColumn.AllowFocus = false;
+            this.colIssued.Visible = true;
+            this.colIssued.VisibleIndex = 5;
+            this.colIssued.Width = 108;
             // 
             // panel1
             // 
@@ -168,9 +190,21 @@
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
-            this.gridColumn5,
+            this.colIssued,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.colResigned});
+            gridFormatRule1.Column = this.colResigned;
+            gridFormatRule1.ColumnApplyTo = this.colIssued;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Tomato;
+            formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.White;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleExpression1.Expression = "[IsResigned] = true";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            this.gridPPEs.FormatRules.Add(gridFormatRule1);
             this.gridPPEs.GridControl = this.gcPPEs;
             this.gridPPEs.Name = "gridPPEs";
             this.gridPPEs.OptionsFind.AlwaysVisible = true;
@@ -190,7 +224,7 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "Date Created";
+            this.gridColumn2.Caption = "Aquisition Date";
             this.gridColumn2.FieldName = "DateCreated";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.AllowEdit = false;
@@ -220,17 +254,6 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             this.gridColumn4.Width = 104;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Issued To";
-            this.gridColumn5.FieldName = "IssuedTo";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.OptionsColumn.AllowEdit = false;
-            this.gridColumn5.OptionsColumn.AllowFocus = false;
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            this.gridColumn5.Width = 108;
             // 
             // gridColumn6
             // 
@@ -347,6 +370,8 @@
             // 
             this.groupControl2.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
+            this.groupControl2.Controls.Add(this.btnCopy);
+            this.groupControl2.Controls.Add(this.simpleButton1);
             this.groupControl2.Controls.Add(this.slueEmployee);
             this.groupControl2.Controls.Add(this.labelControl22);
             this.groupControl2.Controls.Add(this.labelControl1);
@@ -374,6 +399,38 @@
             this.groupControl2.Size = new System.Drawing.Size(524, 420);
             this.groupControl2.TabIndex = 101;
             this.groupControl2.Text = "PPE Details";
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopy.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnCopy.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCopy.Appearance.Options.UseBackColor = true;
+            this.btnCopy.Appearance.Options.UseForeColor = true;
+            this.btnCopy.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCopy.ImageOptions.Image")));
+            this.btnCopy.Location = new System.Drawing.Point(228, 387);
+            this.btnCopy.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(186, 28);
+            this.btnCopy.TabIndex = 112;
+            this.btnCopy.Text = "Copy from Deliveries Specs";
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButton1.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.simpleButton1.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.simpleButton1.Appearance.Options.UseBackColor = true;
+            this.simpleButton1.Appearance.Options.UseForeColor = true;
+            this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButton1.Location = new System.Drawing.Point(131, 387);
+            this.simpleButton1.Margin = new System.Windows.Forms.Padding(2);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(93, 28);
+            this.simpleButton1.TabIndex = 111;
+            this.simpleButton1.Text = "Parse";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
             // 
             // slueEmployee
             // 
@@ -812,7 +869,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn colIssued;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
@@ -853,5 +910,8 @@
         private DevExpress.XtraEditors.GroupControl gcEquipmentSpecs;
         private DevExpress.XtraEditors.GroupControl gcHistory;
         private DevExpress.XtraEditors.LabelControl lblPropertyNo;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton btnCopy;
+        private DevExpress.XtraGrid.Columns.GridColumn colResigned;
     }
 }

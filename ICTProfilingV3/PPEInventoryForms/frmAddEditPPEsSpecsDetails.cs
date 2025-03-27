@@ -33,6 +33,7 @@ namespace ICTProfilingV3.PPEInventoryForms
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
+            unitOfWork.PPEsSpecsDetailsRepo.Update(specs);
             unitOfWork.Save();
         }
 

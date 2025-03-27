@@ -130,7 +130,7 @@ namespace ICTProfilingV3.MOForms
             user.IssuedTo = (long)slueIssuedTo.EditValue;
             user.AccountUser = (long)slueUser.EditValue;
             user.Description = txtDescription.Text;
-
+            unitOfWork.MOAccountUserRepo.Update(user);
             unitOfWork.Save();
         }
     }
