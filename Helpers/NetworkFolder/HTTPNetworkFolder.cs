@@ -7,10 +7,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Helpers.NetworkFolder.NetworkModel;
-using Newtonsoft.Json;
 
 namespace Helpers.NetworkFolder
 {
@@ -37,48 +35,48 @@ namespace Helpers.NetworkFolder
             return files.ToList();
         }
 
-            public async Task UploadFile(Image img, string fileName)
+        public async Task UploadFile(Image img, string fileName)
+        {
+            string jwtToken = await CheckAuthentication();
+            using (var content = new MultipartFormDataContent())
             {
-                string jwtToken = await CheckAuthentication();
-                using (var content = new MultipartFormDataContent())
+                using (var memoryStream = new MemoryStream())
                 {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        memoryStream.Seek(0, SeekOrigin.Begin);
+                    img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
 
-                        var imageContent = new StreamContent(memoryStream);
-                        imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
-                        content.Add(imageContent, "file", fileName);
+                    var imageContent = new StreamContent(memoryStream);
+                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
+                    content.Add(imageContent, "file", fileName);
 
-                        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
 
-                        var response = await httpClient.PostAsync("upload/", content); 
-                        response.EnsureSuccessStatusCode();
-                    }
+                    var response = await httpClient.PostAsync("upload/", content); 
+                    response.EnsureSuccessStatusCode();
                 }
             }
+        }
 
-            public async Task<Image> DownloadFile(string fileName)
+        public async Task<Image> DownloadFile(string fileName)
+        {
+            string jwtToken = await CheckAuthentication();
+            if (string.IsNullOrEmpty(jwtToken)) return null;
+            var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+            var response = await httpClient.SendAsync(request);
+
+            Image img = null;
+            if (response.IsSuccessStatusCode)
             {
-                string jwtToken = await CheckAuthentication();
-                if (string.IsNullOrEmpty(jwtToken)) return null;
-                var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
-                var response = await httpClient.SendAsync(request);
-
-                Image img = null;
-                if (response.IsSuccessStatusCode)
+                using (var stream = await response.Content.ReadAsStreamAsync())
                 {
-                    using (var stream = await response.Content.ReadAsStreamAsync())
-                    {
-                        img = Image.FromStream(stream);
-                    }
+                    img = Image.FromStream(stream);
                 }
-                else return null;
-
-                return img;
             }
+            else return null;
+
+            return img;
+        }
 
         public async Task DeleteFile(string fileName)
         {
@@ -88,6 +86,27 @@ namespace Helpers.NetworkFolder
 
             if(response.StatusCode == System.Net.HttpStatusCode.NotFound) return;
             response.EnsureSuccessStatusCode();
+        }
+
+        public async Task UploadJsonFile(string filePath, string fileName)
+        {
+            string jwtToken = await CheckAuthentication();
+
+            using (var content = new MultipartFormDataContent())
+            {
+                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                {
+                    var fileContent = new StreamContent(fileStream);
+                    fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                    content.Add(fileContent, "file", fileName);
+
+                    httpClient.DefaultRequestHeaders.Authorization =
+                        new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+
+                    var response = await httpClient.PostAsync("uploadJSON/", content);
+                    response.EnsureSuccessStatusCode();
+                }
+            }
         }
 
         private async Task<string> CheckAuthentication()

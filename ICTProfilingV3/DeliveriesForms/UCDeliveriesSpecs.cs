@@ -3,6 +3,7 @@ using Models.Repository;
 using Models.ViewModels;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
@@ -80,6 +81,18 @@ namespace ICTProfilingV3.DeliveriesForms
         private void UCDeliveriesSpecs_Load(object sender, System.EventArgs e)
         {
             LoadEquipmentSpecs();
+        }
+
+        private void btnDelete_Click(object sender, System.EventArgs e)
+        {
+            IUnitOfWork unitOfWork = new UnitOfWork();
+            
+            if (MessageBox.Show("Delete this Specs?", "Confirmation", MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
+
+            var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
+            unitOfWork.DeliveriesSpecsRepo.DeleteByEx(x => x.Id == row.Id);
+            unitOfWork.Save();
         }
     }
 }

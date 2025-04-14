@@ -5,9 +5,14 @@ using Models.Entities;
 using Models.Managers.User;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Models.Repository
@@ -89,13 +94,20 @@ namespace Models.Repository
 
         public void LogChangeAsync(string tableName, string actionType, object oldValues, object newValues)
         {
+            var cleanedOldValues = CleanObject(oldValues);
+            var cleanedNewValues = CleanObject(newValues);
+
             var logEntry = new LogEntry
             {
                 Date = DateTime.UtcNow,
                 TableName = tableName,
                 ActionType = actionType,
-                OldValues = oldValues != null ? JsonConvert.SerializeObject(oldValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }) : null,
-                NewValues = newValues != null ? JsonConvert.SerializeObject(newValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }) : null,
+                OldValues = cleanedOldValues != null
+                    ? JsonConvert.SerializeObject(cleanedOldValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+                    : null,
+                NewValues = cleanedNewValues != null
+                    ? JsonConvert.SerializeObject(cleanedNewValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+                    : null,
                 CreatedById = UserStore.UserId,
                 MacAddress = _machineCredentials.GetMacAddress(),
                 PCName = _machineCredentials.GetPCName()
@@ -105,6 +117,27 @@ namespace Models.Repository
             dbContext.SaveChanges();
         }
 
+        private object CleanObject(object obj)
+        {
+            if (obj == null) return null;
+
+            var type = obj.GetType();
+            var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var dict = new Dictionary<string, object>();
+
+            foreach (var prop in props)
+            {
+                var value = prop.GetValue(obj);
+                if (value == null) continue;
+
+                if (value is string strVal && string.IsNullOrWhiteSpace(strVal)) continue;
+
+                dict[prop.Name] = value;
+            }
+
+            return dict;
+        }
+
         public void Update(TEntity entity)
         {
             var existingEntity = dbSet.Find(dbContext.Entry(entity).Property("Id").CurrentValue);
@@ -112,6 +145,21 @@ namespace Models.Repository
 
             dbContext.Entry(entity).State = EntityState.Modified;
             LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
+        }
+
+        public void TruncateEntity()
+        {
+            var objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
+            var entitySet = objectContext
+                .MetadataWorkspace
+                .GetItems<EntityContainer>(DataSpace.SSpace)
+                .Single()
+                .EntitySets
+                .FirstOrDefault(s => s.ElementType.Name == typeof(TEntity).Name);
+
+            var tableName = entitySet?.Table ?? entitySet?.Name;
+
+            dbContext.Database.ExecuteSqlCommand($@"Truncate Table [{tableName}]");
         }
     }
 }

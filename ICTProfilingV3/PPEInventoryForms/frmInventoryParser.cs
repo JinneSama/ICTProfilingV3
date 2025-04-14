@@ -1,5 +1,6 @@
 ﻿using Helpers.Interfaces;
 using Helpers.Inventory;
+using ICTProfilingV3.BaseClasses;
 using Models.Entities;
 using Models.Repository;
 using System.Collections;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.PPEInventoryForms
 {
-    public partial class frmInventoryParser : DevExpress.XtraEditors.XtraForm
+    public partial class frmInventoryParser : BaseForm
     {
         private Device _device;
         private string _ppeNo;

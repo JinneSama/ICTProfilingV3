@@ -52,6 +52,7 @@ namespace Models.Repository
         IGenericRepository<EvaluationSheet> EvaluationSheetRepo { get; }
         IGenericRepository<EvaluationSheetDocument> EvaluationSheetDocumentRepo { get; }
         IGenericRepository<TechSpecsBasisDetails> TechSpecsBasisDetailsRepo { get; }
+        IGenericRepository<LogEntry> LogEntriesRepo { get; }
         void Save();
         void ExecuteCommand(string command);
         Task SaveChangesAsync();

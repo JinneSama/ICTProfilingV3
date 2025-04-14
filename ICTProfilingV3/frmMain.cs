@@ -410,5 +410,13 @@ namespace ICTProfilingV3
             if (UserStore.ArugmentCredentialsDto == null) frm.ShowDialog(this);
             else await frm.Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
         }
+
+        private void btnLogs_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCLogManager()
+            {
+                Dock = DockStyle.Fill
+            }, null);
+        }
     }
 }

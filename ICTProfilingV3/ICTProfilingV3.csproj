@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>103</ApplicationRevision>
+    <ApplicationRevision>106</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -524,6 +524,12 @@
     <Compile Include="StandardPRForms\frmGeneratePRSuggestion.Designer.cs">
       <DependentUpon>frmGeneratePRSuggestion.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\frmJSONViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\frmJSONViewer.Designer.cs">
+      <DependentUpon>frmJSONViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\frmSelectOFMISEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -541,6 +547,12 @@
     </Compile>
     <Compile Include="ToolForms\frmUpdater.Designer.cs">
       <DependentUpon>frmUpdater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\UCLogManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ToolForms\UCLogManager.Designer.cs">
+      <DependentUpon>UCLogManager.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WaitFormUpload.cs">
       <SubType>Form</SubType>
@@ -1024,6 +1036,9 @@
     <EmbeddedResource Include="StandardPRForms\frmGeneratePRSuggestion.resx">
       <DependentUpon>frmGeneratePRSuggestion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\frmJSONViewer.resx">
+      <DependentUpon>frmJSONViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\frmSelectOFMISEmployee.resx">
       <DependentUpon>frmSelectOFMISEmployee.cs</DependentUpon>
     </EmbeddedResource>
@@ -1032,6 +1047,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\frmUpdater.resx">
       <DependentUpon>frmUpdater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\UCLogManager.resx">
+      <DependentUpon>UCLogManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WaitFormUpload.resx">
       <DependentUpon>WaitFormUpload.cs</DependentUpon>
@@ -1218,6 +1236,10 @@
     <ProjectReference Include="..\ICTMigration\ICTMigration.csproj">
       <Project>{d7ecab65-fd10-41ea-b995-3384bf42d26a}</Project>
       <Name>ICTMigration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{8456df15-dacc-4a96-9799-25dfd6478159}</Project>
+      <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\EntityManager.csproj">
       <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>

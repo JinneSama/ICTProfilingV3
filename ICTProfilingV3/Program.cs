@@ -1,27 +1,22 @@
-﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.XtraSplashScreen;
+﻿using DevExpress.XtraSplashScreen;
 using Helpers.Interfaces;
+using Helpers.Security;
 using Helpers.Utility;
 using ICTMigration.Files;
-using ICTMigration.ICTv2Models;
 using ICTMigration.ModelMigrations;
 using ICTMigration.PPEMigration;
 using ICTMigration.TicketStatusFix;
 using ICTProfilingV3.ToolForms;
+using Infrastructure.Cleaner;
 using Models.FDTSEntities;
 using Models.HRMISEntites;
 using Models.Managers.User;
 using Models.OFMISEntities;
-using Models.Repository;
 using Models.Service.DTOModels;
 using Newtonsoft.Json;
 using System;
 using System.Configuration;
-using System.Deployment.Application;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -67,6 +62,12 @@ namespace ICTProfilingV3
             await HRMISEmployees.InitContext();
             await OFMISEmployees.InitEmployees();
             OFMISUsers.InitUsers();
+
+            if(ConfigurationManager.AppSettings["Run_Migration"] == "run")
+            {
+                ILogCleaner cleaner = new LogCleaner();
+                await cleaner.CleanLogs();
+            }
 
             if (ConfigurationManager.AppSettings["Run_Migration"] == "run")
             {

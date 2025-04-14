@@ -78,6 +78,7 @@
             this.btnNavigateBack = new DevExpress.XtraBars.BarButtonItem();
             this.btnNavigateForward = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefreshControl = new DevExpress.XtraBars.BarButtonItem();
+            this.btnLogs = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -98,6 +99,8 @@
             this.ribbonPageGroup13 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup17 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.mainPanel = new DevExpress.XtraEditors.PanelControl();
             this.UpdateThread = new System.ComponentModel.BackgroundWorker();
@@ -155,9 +158,10 @@
             this.btnQuarterlyReport,
             this.btnNavigateBack,
             this.btnNavigateForward,
-            this.btnRefreshControl});
+            this.btnRefreshControl,
+            this.btnLogs});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 45;
+            this.ribbon.MaxItemId = 46;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -165,7 +169,8 @@
             this.ribbonPage1,
             this.ribbonPage2,
             this.ribbonPage4,
-            this.ribbonPage3});
+            this.ribbonPage3,
+            this.ribbonPage5});
             this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateBack);
             this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateForward);
             this.ribbon.QuickToolbarItemLinks.Add(this.btnRefreshControl);
@@ -603,6 +608,15 @@
             this.btnRefreshControl.Name = "btnRefreshControl";
             this.btnRefreshControl.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRefreshControl_ItemClick);
             // 
+            // btnLogs
+            // 
+            this.btnLogs.Caption = "Logs Manager";
+            this.btnLogs.Id = 45;
+            this.btnLogs.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLogs.ImageOptions.Image")));
+            this.btnLogs.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnLogs.ImageOptions.LargeImage")));
+            this.btnLogs.Name = "btnLogs";
+            this.btnLogs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogs_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -767,6 +781,20 @@
             this.ribbonPageGroup11.ItemLinks.Add(this.btnQuarterlyReport);
             this.ribbonPageGroup11.Name = "ribbonPageGroup11";
             // 
+            // ribbonPage5
+            // 
+            this.ribbonPage5.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup17});
+            this.ribbonPage5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPage5.ImageOptions.Image")));
+            this.ribbonPage5.Name = "ribbonPage5";
+            this.ribbonPage5.Tag = "Tools";
+            this.ribbonPage5.Text = "DB Tools";
+            // 
+            // ribbonPageGroup17
+            // 
+            this.ribbonPageGroup17.ItemLinks.Add(this.btnLogs);
+            this.ribbonPageGroup17.Name = "ribbonPageGroup17";
+            // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.lblUpdate);
@@ -886,5 +914,8 @@
         private DevExpress.XtraBars.BarButtonItem btnNavigateBack;
         private DevExpress.XtraBars.BarButtonItem btnNavigateForward;
         private DevExpress.XtraBars.BarButtonItem btnRefreshControl;
+        private DevExpress.XtraBars.BarButtonItem btnLogs;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup17;
     }
 }

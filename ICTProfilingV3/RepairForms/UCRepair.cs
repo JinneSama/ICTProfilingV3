@@ -275,8 +275,9 @@ namespace ICTProfilingV3.RepairForms
                 x => x.PPEs.PPEsSpecs,
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model),
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
-                x => x.PPEsSpecs.Model.Brand.EquipmentSpecs.Equipment);
-
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
+                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)
+                );
             var data = new RepairTRViewModel
             {
                 PrintedBy = UserStore.Username,

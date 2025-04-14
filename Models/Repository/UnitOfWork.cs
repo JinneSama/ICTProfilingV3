@@ -560,6 +560,18 @@ namespace Models.Repository
             set => _TechSpecsBasisDetailsRepo = value;
         }
 
+        private IGenericRepository<LogEntry> _LogEntriesRepo;
+        public IGenericRepository<LogEntry> LogEntriesRepo
+        {
+            get
+            {
+                if (_LogEntriesRepo == null)
+                    _LogEntriesRepo = new GenericRepository<LogEntry>(_context);
+                return _LogEntriesRepo; 
+            }
+            set => _LogEntriesRepo = value;
+        }
+
         public UnitOfWork()
         {
             _context = ApplicationDbContext.Create();

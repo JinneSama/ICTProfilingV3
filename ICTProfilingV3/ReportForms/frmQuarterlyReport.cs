@@ -125,12 +125,14 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.TechSpecs)
             {
-                var cas = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.DateRequested >= quarterDate.start && x.DateRequested <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
+                var cas = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released recommended")).ActionDate >= quarterDate.start &&
+                x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released recommended")).ActionDate <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
                 && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
                     x => x.EvaluationSheets,
                     x => x.TicketRequest,
                     x => x.TicketRequest.ITStaff,
-                    x => x.TicketRequest.ITStaff.Users).ToList();
+                    x => x.TicketRequest.ITStaff.Users,
+                    x => x.TechSpecsICTSpecs).ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
@@ -149,7 +151,8 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.Repairs)
             {
-                var cas = unitOfWork.RepairsRepo.FindAllAsync(x => x.DateCreated >= quarterDate.start && x.DateCreated <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
+                var cas = unitOfWork.RepairsRepo.FindAllAsync(x => x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate >= quarterDate.start &&
+                x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
                 && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
                     x => x.EvaluationSheets,
                     x => x.TicketRequest,
@@ -158,7 +161,7 @@ namespace ICTProfilingV3.ReportForms
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
-                    Rating = (decimal)(x.EvaluationSheets?.Average(s => s?.RatingValue ?? 0) ?? 0),
+                    Rating = (decimal)(x.EvaluationSheets.Count() == 0 ? 0 : x.EvaluationSheets?.Average(s => s?.RatingValue ?? 0) ?? 0),
                     Staff = x.TicketRequest.ITStaff.Users.FullName,
                     Requested = 1,
                     Items = 1,

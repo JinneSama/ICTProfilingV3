@@ -40,7 +40,7 @@ namespace ICTProfilingV3.MOForms
                     MOAccount = x,
                     MOAccountUsers = new BindingList<MOAccountUsers>(x.MOAccountUsers.ToList())
                 });
-            gcMO.DataSource = accounts.ToList();
+            gcLogs.DataSource = accounts.ToList();
         }
 
         private void btnAddPN_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace ICTProfilingV3.MOForms
             if (MessageBox.Show("Delete this Account? Users of this account will be deleted as well", 
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            var row = (MOAccountsViewModel)gridMO.GetFocusedRow();
+            var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
             unitOfWork.MOAccountUserRepo.DeleteRange(x => x.MOAccountId == row.MOAccount.Id);
             unitOfWork.MOAccountRepo.DeleteByEx(x => x.Id == row.MOAccount.Id);
             unitOfWork.Save();
@@ -65,7 +65,7 @@ namespace ICTProfilingV3.MOForms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            var row = (MOAccountsViewModel)gridMO.GetFocusedRow();
+            var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
             var frm = new frmAddEditMOAccount(row.MOAccount);
             frm.ShowDialog();
 
@@ -77,7 +77,7 @@ namespace ICTProfilingV3.MOForms
             if (MessageBox.Show("Create new User for this Account? this will create a User Request" ,
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            var row = (MOAccountsViewModel)gridMO.GetFocusedRow();
+            var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
             var frm = new frmAddEditAccountUsers(row.MOAccount);
             frm.ShowDialog();
 
@@ -86,8 +86,8 @@ namespace ICTProfilingV3.MOForms
 
         private void btnInfo_Click(object sender, EventArgs e)
         {
-            var focusedRow = gridMO.FocusedRowHandle;
-            gridMO.SetMasterRowExpanded(focusedRow, !gridMO.GetMasterRowExpanded(focusedRow));
+            var focusedRow = gridLogs.FocusedRowHandle;
+            gridLogs.SetMasterRowExpanded(focusedRow, !gridLogs.GetMasterRowExpanded(focusedRow));
         }
 
         private void btnUserRequest_Click(object sender, EventArgs e)
@@ -100,9 +100,9 @@ namespace ICTProfilingV3.MOForms
 
         private void hplRedirect_Click(object sender, EventArgs e)
         {
-            var masterRowHandle = gridMO.FocusedRowHandle;
-            var rowHandle = (gcMO.FocusedView as ColumnView).FocusedRowHandle;
-            var row = gridMO.GetDetailView(masterRowHandle, 0) as GridView;
+            var masterRowHandle = gridLogs.FocusedRowHandle;
+            var rowHandle = (gcLogs.FocusedView as ColumnView).FocusedRowHandle;
+            var row = gridLogs.GetDetailView(masterRowHandle, 0) as GridView;
             var detailRow = (AccountUsers)row.GetRow(rowHandle);
 
             _ucManager.ShowUCSystemDetails(hplRedirect.Name, new UCMOAccountUserRequests()
@@ -142,10 +142,10 @@ namespace ICTProfilingV3.MOForms
 
         private void btnExpandAll_Click(object sender, EventArgs e)
         {
-            for (var i = 0; i < gridMO.RowCount; i++)
+            for (var i = 0; i < gridLogs.RowCount; i++)
             {
-                var focusedRow = gridMO.GetRowHandle(i);
-                gridMO.SetMasterRowExpanded(focusedRow, !gridMO.GetMasterRowExpanded(focusedRow));
+                var focusedRow = gridLogs.GetRowHandle(i);
+                gridLogs.SetMasterRowExpanded(focusedRow, !gridLogs.GetMasterRowExpanded(focusedRow));
             }
         }
 

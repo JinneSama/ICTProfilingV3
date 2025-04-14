@@ -14,6 +14,7 @@ namespace Models.Repository
         void Update(TEntity entity);
         void Delete(TEntity entity);
         void DeleteRange(Expression<Func<TEntity, bool>> expression);
-        void DeleteByEx(Expression<Func<TEntity, bool>> expression);    
+        void DeleteByEx(Expression<Func<TEntity, bool>> expression);  
+        void TruncateEntity();
     }
 }

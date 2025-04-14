@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICTMigration", "ICTMigratio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapper", "Mapper\Mapper.csproj", "{3355023C-3F1B-48BA-B112-91FA9840CAC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{8456DF15-DACC-4A96-9799-25DFD6478159}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{3355023C-3F1B-48BA-B112-91FA9840CAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3355023C-3F1B-48BA-B112-91FA9840CAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3355023C-3F1B-48BA-B112-91FA9840CAC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8456DF15-DACC-4A96-9799-25DFD6478159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8456DF15-DACC-4A96-9799-25DFD6478159}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8456DF15-DACC-4A96-9799-25DFD6478159}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8456DF15-DACC-4A96-9799-25DFD6478159}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
