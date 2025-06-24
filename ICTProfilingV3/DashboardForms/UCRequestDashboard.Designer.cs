@@ -748,6 +748,7 @@
             this.chartReqActed.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
             this.chartReqActed.Size = new System.Drawing.Size(321, 313);
             this.chartReqActed.TabIndex = 42;
+            this.chartReqActed.ObjectSelected += new DevExpress.XtraCharts.HotTrackEventHandler(this.chartReqActed_ObjectSelected);
             // 
             // tabRepair
             // 

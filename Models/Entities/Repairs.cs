@@ -22,8 +22,11 @@ namespace Models.Entities
 
         public DateTime? DateCreated { get; set; }
         public DateTime? DateDelivered { get; set; }
+        [MaxLength(1024)]
         public string Problems { get; set; }
+        [MaxLength(1024)]
         public string Findings { get; set; }
+        [MaxLength(1024)]
         public string Recommendations { get; set; }
         public string PreparedById { get; set; }
         public bool? IsDeleted { get; set; }
@@ -39,6 +42,7 @@ namespace Models.Entities
         [ForeignKey("NotedById")]
         private Users NotedByUsers { get; set; }
         public Gender Gender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
         public TicketRequest TicketRequest { get; set; }
         public int? PPEsId { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -34,13 +35,15 @@ namespace ICTProfilingV3
 {
     public partial class frmMain : BaseRibbonForm , IDisposeUC
     {
+        private readonly IServiceProvider _serviceProvider;
         private IICTUserManager userManager;
         private IICTRoleManager roleManager;
         public readonly IUCManager<Control> _ucManager;
         private string Version = "";
-        public frmMain()
+        public frmMain(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             userManager = new ICTUserManager();
             roleManager = new ICTRoleManager();
             _ucManager = new UCManager<Control>(mainPanel);
@@ -50,6 +53,13 @@ namespace ICTProfilingV3
                 UpdateThread.RunWorkerAsync();
         }
 
+        private void StartUpControl(IEnumerable<Models.Entities.RoleDesignation> role)
+        {
+            if(role.Select(x => x.Designation).Contains(Designation.TARequest))
+                btnTARequest.PerformClick();
+            else
+                btnUserTasks.PerformClick();
+        }
         private void ForceUserUpdate()
         {
             if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -65,6 +75,25 @@ namespace ICTProfilingV3
 
                     var frm = new frmUpdater() { NewVersion = version };
                     frm.ShowDialog();
+                }
+            }
+        }
+        public void setClientDesignation()
+        {
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                if (page.Tag == null) page.Visible = true;
+                else page.Visible = false;
+                foreach (RibbonPageGroup group in page.Groups)
+                {
+                    if(group.Tag?.ToString() == "Client") group.Visible = true;
+                    else group.Visible = false;
+                    foreach (BarButtonItemLink button in group.ItemLinks)
+                    {
+                        var btn = button.Item;
+                        if (btn.Tag?.ToString() == "Client") btn.Visibility = BarItemVisibility.Always;
+                        else btn.Visibility = BarItemVisibility.Never;
+                    }
                 }
             }
         }
@@ -95,6 +124,8 @@ namespace ICTProfilingV3
                     }
                 }
             }
+
+            StartUpControl(role);
         }
         public Designation ConvertTagToEnum(string tag)
         {
@@ -113,11 +144,10 @@ namespace ICTProfilingV3
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             //DisposeUC(mainPanel);
-            //mainPanel.Controls.Add(new UCTARequestDashboard()
-            //{
-            //    Dock = DockStyle.Fill
-            //});
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTARequestDashboard { Dock = DockStyle.Fill }, null);
+            var ucManager = (UCTARequestDashboard)_serviceProvider.GetService(typeof(UCTARequestDashboard));
+            ucManager.Dock = DockStyle.Fill;
+            mainPanel.Controls.Add(ucManager);
+            //_ucManager.ShowUCSystemDetails(e.Item.Name, new UCTARequestDashboard { Dock = DockStyle.Fill }, null);
         }
 
         private void btnSuppliers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -409,6 +439,7 @@ namespace ICTProfilingV3
 
             if (UserStore.ArugmentCredentialsDto == null) frm.ShowDialog(this);
             else await frm.Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
+
         }
 
         private void btnLogs_ItemClick(object sender, ItemClickEventArgs e)
@@ -417,6 +448,11 @@ namespace ICTProfilingV3
             {
                 Dock = DockStyle.Fill
             }, null);
+        }
+
+        private void btnClientRequests_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCClientDashboard { Dock = DockStyle.Fill }, null);
         }
     }
 }

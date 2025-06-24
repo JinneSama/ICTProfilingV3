@@ -135,7 +135,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private void LoadTechSpecsICTSpecs()
         {
             groupRequestedSpecs.Controls.Clear();
-            groupRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(_techSpecs)
+            groupRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(_techSpecs, false)
             {
                 Dock = System.Windows.Forms.DockStyle.Fill
             });

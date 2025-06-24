@@ -1,6 +1,7 @@
 ﻿using Models.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
@@ -14,7 +15,9 @@ namespace Models.Entities
         public Unit? Unit { get; set; }
         public decimal? UnitCost { get; set; }
         public decimal? TotalCost { get; set; }
+        [MaxLength(1024)]
         public string Description { get; set; }
+        [MaxLength(1024)]
         public string Purpose { get; set; }
 
         public int TechSpecsId { get; set; }

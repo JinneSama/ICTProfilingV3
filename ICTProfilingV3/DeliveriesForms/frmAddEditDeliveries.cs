@@ -92,7 +92,7 @@ namespace ICTProfilingV3.DeliveriesForms
         private void LoadEquipmentSpecs()
         {
             panelEquipmentSpecs.Controls.Clear();
-            panelEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(_deliveries)
+            panelEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(_deliveries, false)
             {
                 Dock = DockStyle.Fill
             });

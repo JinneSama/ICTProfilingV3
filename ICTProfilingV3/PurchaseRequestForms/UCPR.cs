@@ -70,8 +70,23 @@ namespace ICTProfilingV3.PurchaseRequestForms
         {
             var row = (PRViewModel)gridPR.GetFocusedRow();
             if (row == null) return;
+
+            if(!string.IsNullOrWhiteSpace(row.PurchaseRequest.PRNo))
+            {
+                LoadOFMISPR(row.PurchaseRequest.PRNo);
+                return;
+            }
             if (row.PurchaseRequest.TechSpecsId == null) LoadPRSpecs(row);
             else await LoadTSSpecs(row);
+        }
+
+        private void LoadOFMISPR(string pRNo)
+        {
+            panelSpecs.Controls.Clear();
+            panelSpecs.Controls.Add(new UCOFMISPR(pRNo)
+            {
+                Dock = DockStyle.Fill
+            });
         }
 
         private async Task LoadTSSpecs(PRViewModel row)

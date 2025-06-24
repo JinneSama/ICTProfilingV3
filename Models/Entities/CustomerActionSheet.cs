@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -11,11 +12,16 @@ namespace Models.Entities
         public int Id { get; set; }
         public long? ClientId { get; set; }
         public DateTime? DateCreated { get; set; }
+        [MaxLength(128)]
         public string ClientName { get; set; }
+        [MaxLength(128)]
         public string Office { get; set; }
         public Gender Gender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
+        [MaxLength(128)]
         public string ClientRequest { get; set; }
+        [MaxLength(128)]
         public string ActionTaken { get; set; }
         public TicketStatus? Status { get; set; }
         public bool? IsDeleted { get; set; }

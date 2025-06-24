@@ -56,7 +56,7 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcICTSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridICTSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridEditBtn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEdit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnEditData = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -68,10 +68,10 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddSpecs = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDelete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.btnAddTS = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
@@ -132,7 +132,7 @@
             gridLevelNode1.RelationName = "Specifications";
             this.gcICTSpecs.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gcICTSpecs.Location = new System.Drawing.Point(0, 35);
+            this.gcICTSpecs.Location = new System.Drawing.Point(0, 25);
             this.gcICTSpecs.MainView = this.gridICTSpecs;
             this.gcICTSpecs.Name = "gcICTSpecs";
             this.gcICTSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -140,7 +140,7 @@
             this.btnEditData,
             this.btnAddSpecs,
             this.btnDelete});
-            this.gcICTSpecs.Size = new System.Drawing.Size(1215, 320);
+            this.gcICTSpecs.Size = new System.Drawing.Size(1215, 330);
             this.gcICTSpecs.TabIndex = 91;
             this.gcICTSpecs.UseEmbeddedNavigator = true;
             this.gcICTSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -150,7 +150,7 @@
             // gridICTSpecs
             // 
             this.gridICTSpecs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridEditBtn,
+            this.colEdit,
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
@@ -160,23 +160,23 @@
             this.gridColumn7,
             this.gridColumn20,
             this.gridColumn21,
-            this.gridColumn13,
+            this.colAddSpecs,
             this.gridColumn8,
-            this.gridColumn9});
+            this.colDelete});
             this.gridICTSpecs.GridControl = this.gcICTSpecs;
             this.gridICTSpecs.Name = "gridICTSpecs";
             this.gridICTSpecs.OptionsView.ShowDetailButtons = false;
             this.gridICTSpecs.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridICTSpecs.OptionsView.ShowGroupPanel = false;
             // 
-            // gridEditBtn
+            // colEdit
             // 
-            this.gridEditBtn.ColumnEdit = this.btnEditData;
-            this.gridEditBtn.Name = "gridEditBtn";
-            this.gridEditBtn.OptionsColumn.FixedWidth = true;
-            this.gridEditBtn.Visible = true;
-            this.gridEditBtn.VisibleIndex = 2;
-            this.gridEditBtn.Width = 37;
+            this.colEdit.ColumnEdit = this.btnEditData;
+            this.colEdit.Name = "colEdit";
+            this.colEdit.OptionsColumn.FixedWidth = true;
+            this.colEdit.Visible = true;
+            this.colEdit.VisibleIndex = 2;
+            this.colEdit.Width = 37;
             // 
             // btnEditData
             // 
@@ -201,6 +201,8 @@
             this.gridColumn3.Caption = "Item No";
             this.gridColumn3.FieldName = "ItemNo";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.AllowEdit = false;
+            this.gridColumn3.OptionsColumn.AllowFocus = false;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 3;
             this.gridColumn3.Width = 85;
@@ -210,6 +212,8 @@
             this.gridColumn4.Caption = "Qty";
             this.gridColumn4.FieldName = "Quantity";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.AllowEdit = false;
+            this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
             this.gridColumn4.Width = 70;
@@ -219,6 +223,8 @@
             this.gridColumn5.Caption = "Unit";
             this.gridColumn5.FieldName = "Unit";
             this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.AllowEdit = false;
+            this.gridColumn5.OptionsColumn.AllowFocus = false;
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
             this.gridColumn5.Width = 70;
@@ -248,6 +254,8 @@
             this.gridColumn6.Caption = "Equipment";
             this.gridColumn6.FieldName = "Equipment";
             this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.AllowEdit = false;
+            this.gridColumn6.OptionsColumn.AllowFocus = false;
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 179;
@@ -257,6 +265,8 @@
             this.gridColumn7.Caption = "Description";
             this.gridColumn7.FieldName = "Description";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.AllowEdit = false;
+            this.gridColumn7.OptionsColumn.AllowFocus = false;
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 7;
             this.gridColumn7.Width = 226;
@@ -266,6 +276,8 @@
             this.gridColumn20.Caption = "Unit Cost";
             this.gridColumn20.FieldName = "UnitCost";
             this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.OptionsColumn.AllowEdit = false;
+            this.gridColumn20.OptionsColumn.AllowFocus = false;
             this.gridColumn20.Visible = true;
             this.gridColumn20.VisibleIndex = 8;
             this.gridColumn20.Width = 103;
@@ -275,18 +287,20 @@
             this.gridColumn21.Caption = "Total Cost";
             this.gridColumn21.FieldName = "TotalCost";
             this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.OptionsColumn.AllowEdit = false;
+            this.gridColumn21.OptionsColumn.AllowFocus = false;
             this.gridColumn21.Visible = true;
             this.gridColumn21.VisibleIndex = 9;
             this.gridColumn21.Width = 91;
             // 
-            // gridColumn13
+            // colAddSpecs
             // 
-            this.gridColumn13.ColumnEdit = this.btnAddSpecs;
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.OptionsColumn.FixedWidth = true;
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 11;
-            this.gridColumn13.Width = 33;
+            this.colAddSpecs.ColumnEdit = this.btnAddSpecs;
+            this.colAddSpecs.Name = "colAddSpecs";
+            this.colAddSpecs.OptionsColumn.FixedWidth = true;
+            this.colAddSpecs.Visible = true;
+            this.colAddSpecs.VisibleIndex = 11;
+            this.colAddSpecs.Width = 33;
             // 
             // btnAddSpecs
             // 
@@ -304,18 +318,20 @@
             this.gridColumn8.Caption = "Purpose";
             this.gridColumn8.FieldName = "Purpose";
             this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.OptionsColumn.AllowEdit = false;
+            this.gridColumn8.OptionsColumn.AllowFocus = false;
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 10;
             this.gridColumn8.Width = 234;
             // 
-            // gridColumn9
+            // colDelete
             // 
-            this.gridColumn9.ColumnEdit = this.btnDelete;
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.FixedWidth = true;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            this.gridColumn9.Width = 31;
+            this.colDelete.ColumnEdit = this.btnDelete;
+            this.colDelete.Name = "colDelete";
+            this.colDelete.OptionsColumn.FixedWidth = true;
+            this.colDelete.Visible = true;
+            this.colDelete.VisibleIndex = 1;
+            this.colDelete.Width = 31;
             // 
             // btnDelete
             // 
@@ -338,7 +354,7 @@
             this.btnAddTS.Location = new System.Drawing.Point(2, 2);
             this.btnAddTS.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddTS.Name = "btnAddTS";
-            this.btnAddTS.Size = new System.Drawing.Size(130, 28);
+            this.btnAddTS.Size = new System.Drawing.Size(121, 20);
             this.btnAddTS.TabIndex = 90;
             this.btnAddTS.Text = "Add Specs";
             this.btnAddTS.Click += new System.EventHandler(this.btnAddTS_Click);
@@ -371,7 +387,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Views.Grid.GridView gridICTSpecs;
-        private DevExpress.XtraGrid.Columns.GridColumn gridEditBtn;
+        private DevExpress.XtraGrid.Columns.GridColumn colEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEditData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -383,10 +399,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn colAddSpecs;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnAddSpecs;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn colDelete;
     }
 }

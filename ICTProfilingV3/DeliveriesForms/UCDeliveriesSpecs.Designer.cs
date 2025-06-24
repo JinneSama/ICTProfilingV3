@@ -56,7 +56,7 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcEquipmentSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridEquipmentSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridEditBtn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colEdit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnEditData = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -70,11 +70,11 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddSpecs = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
+            this.colDelete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipmentSpecs)).BeginInit();
@@ -133,7 +133,7 @@
             gridLevelNode1.RelationName = "Specifications";
             this.gcEquipmentSpecs.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 35);
+            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 24);
             this.gcEquipmentSpecs.MainView = this.gridEquipmentSpecs;
             this.gcEquipmentSpecs.Name = "gcEquipmentSpecs";
             this.gcEquipmentSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -141,7 +141,7 @@
             this.btnEditData,
             this.btnAddSpecs,
             this.btnDelete});
-            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1110, 353);
+            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1110, 364);
             this.gcEquipmentSpecs.TabIndex = 84;
             this.gcEquipmentSpecs.UseEmbeddedNavigator = true;
             this.gcEquipmentSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -151,7 +151,7 @@
             // gridEquipmentSpecs
             // 
             this.gridEquipmentSpecs.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridEditBtn,
+            this.colEdit,
             this.gridColumn2,
             this.gridColumn3,
             this.gridColumn4,
@@ -163,22 +163,22 @@
             this.gridColumn9,
             this.gridColumn20,
             this.gridColumn21,
-            this.gridColumn13,
-            this.gridColumn14});
+            this.colAddSpecs,
+            this.colDelete});
             this.gridEquipmentSpecs.GridControl = this.gcEquipmentSpecs;
             this.gridEquipmentSpecs.Name = "gridEquipmentSpecs";
             this.gridEquipmentSpecs.OptionsView.ShowDetailButtons = false;
             this.gridEquipmentSpecs.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridEquipmentSpecs.OptionsView.ShowGroupPanel = false;
             // 
-            // gridEditBtn
+            // colEdit
             // 
-            this.gridEditBtn.ColumnEdit = this.btnEditData;
-            this.gridEditBtn.Name = "gridEditBtn";
-            this.gridEditBtn.OptionsColumn.FixedWidth = true;
-            this.gridEditBtn.Visible = true;
-            this.gridEditBtn.VisibleIndex = 2;
-            this.gridEditBtn.Width = 37;
+            this.colEdit.ColumnEdit = this.btnEditData;
+            this.colEdit.Name = "colEdit";
+            this.colEdit.OptionsColumn.FixedWidth = true;
+            this.colEdit.Visible = true;
+            this.colEdit.VisibleIndex = 2;
+            this.colEdit.Width = 37;
             // 
             // btnEditData
             // 
@@ -317,14 +317,14 @@
             this.gridColumn21.VisibleIndex = 11;
             this.gridColumn21.Width = 138;
             // 
-            // gridColumn13
+            // colAddSpecs
             // 
-            this.gridColumn13.ColumnEdit = this.btnAddSpecs;
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.OptionsColumn.FixedWidth = true;
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 12;
-            this.gridColumn13.Width = 33;
+            this.colAddSpecs.ColumnEdit = this.btnAddSpecs;
+            this.colAddSpecs.Name = "colAddSpecs";
+            this.colAddSpecs.OptionsColumn.FixedWidth = true;
+            this.colAddSpecs.Visible = true;
+            this.colAddSpecs.VisibleIndex = 12;
+            this.colAddSpecs.Width = 33;
             // 
             // btnAddSpecs
             // 
@@ -337,20 +337,14 @@
             this.btnAddSpecs.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnAddSpecs.Click += new System.EventHandler(this.btnAddSpecs_Click);
             // 
-            // btnAddEquipment
+            // colDelete
             // 
-            this.btnAddEquipment.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnAddEquipment.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAddEquipment.Appearance.Options.UseBackColor = true;
-            this.btnAddEquipment.Appearance.Options.UseForeColor = true;
-            this.btnAddEquipment.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEquipment.ImageOptions.Image")));
-            this.btnAddEquipment.Location = new System.Drawing.Point(2, 2);
-            this.btnAddEquipment.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddEquipment.Name = "btnAddEquipment";
-            this.btnAddEquipment.Size = new System.Drawing.Size(130, 28);
-            this.btnAddEquipment.TabIndex = 88;
-            this.btnAddEquipment.Text = "Add Equipment";
-            this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
+            this.colDelete.ColumnEdit = this.btnDelete;
+            this.colDelete.Name = "colDelete";
+            this.colDelete.OptionsColumn.FixedWidth = true;
+            this.colDelete.Visible = true;
+            this.colDelete.VisibleIndex = 0;
+            this.colDelete.Width = 34;
             // 
             // btnDelete
             // 
@@ -363,13 +357,20 @@
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // gridColumn14
+            // btnAddEquipment
             // 
-            this.gridColumn14.ColumnEdit = this.btnDelete;
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
-            this.gridColumn14.Width = 34;
+            this.btnAddEquipment.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAddEquipment.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddEquipment.Appearance.Options.UseBackColor = true;
+            this.btnAddEquipment.Appearance.Options.UseForeColor = true;
+            this.btnAddEquipment.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEquipment.ImageOptions.Image")));
+            this.btnAddEquipment.Location = new System.Drawing.Point(2, 2);
+            this.btnAddEquipment.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddEquipment.Name = "btnAddEquipment";
+            this.btnAddEquipment.Size = new System.Drawing.Size(130, 20);
+            this.btnAddEquipment.TabIndex = 88;
+            this.btnAddEquipment.Text = "Add Equipment";
+            this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
             // 
             // UCDeliveriesSpecs
             // 
@@ -395,7 +396,7 @@
 
         private DevExpress.XtraGrid.GridControl gcEquipmentSpecs;
         private DevExpress.XtraGrid.Views.Grid.GridView gridEquipmentSpecs;
-        private DevExpress.XtraGrid.Columns.GridColumn gridEditBtn;
+        private DevExpress.XtraGrid.Columns.GridColumn colEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEditData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -414,9 +415,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn colAddSpecs;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnAddSpecs;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn colDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
     }
 }

@@ -77,7 +77,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(11, 81);
+            this.txtPassword.Location = new System.Drawing.Point(11, 78);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -112,7 +112,7 @@
             // 
             // chkRemember
             // 
-            this.chkRemember.Location = new System.Drawing.Point(114, 114);
+            this.chkRemember.Location = new System.Drawing.Point(11, 274);
             this.chkRemember.Name = "chkRemember";
             this.chkRemember.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.chkRemember.Properties.Appearance.Options.UseForeColor = true;
@@ -129,31 +129,31 @@
             this.groupControl1.Controls.Add(this.txtUsername);
             this.groupControl1.Controls.Add(this.chkRemember);
             this.groupControl1.Controls.Add(this.txtPassword);
-            this.groupControl1.Location = new System.Drawing.Point(14, 262);
+            this.groupControl1.Location = new System.Drawing.Point(14, 261);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(353, 341);
             this.groupControl1.TabIndex = 94;
             // 
             // ceTerms
             // 
-            this.ceTerms.Location = new System.Drawing.Point(114, 274);
+            this.ceTerms.Location = new System.Drawing.Point(244, 274);
             this.ceTerms.Name = "ceTerms";
             this.ceTerms.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.ceTerms.Properties.Appearance.Options.UseForeColor = true;
             this.ceTerms.Properties.Caption = "Accept Terms?";
-            this.ceTerms.Size = new System.Drawing.Size(113, 19);
+            this.ceTerms.Size = new System.Drawing.Size(98, 19);
             this.ceTerms.TabIndex = 97;
             // 
             // memoTerms
             // 
             this.memoTerms.EditValue = resources.GetString("memoTerms.EditValue");
-            this.memoTerms.Location = new System.Drawing.Point(11, 139);
+            this.memoTerms.Location = new System.Drawing.Point(11, 107);
             this.memoTerms.Name = "memoTerms";
             this.memoTerms.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.memoTerms.Properties.Appearance.Options.UseFont = true;
             this.memoTerms.Properties.ReadOnly = true;
             this.memoTerms.Properties.Spin += new DevExpress.XtraEditors.Controls.SpinEventHandler(this.memoEdit1_Properties_Spin);
-            this.memoTerms.Size = new System.Drawing.Size(331, 129);
+            this.memoTerms.Size = new System.Drawing.Size(331, 161);
             this.memoTerms.TabIndex = 96;
             // 
             // btnLogin

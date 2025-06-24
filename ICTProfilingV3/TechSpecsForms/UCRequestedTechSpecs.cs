@@ -11,11 +11,20 @@ namespace ICTProfilingV3.TechSpecsForms
     {
         private readonly TechSpecs _techSpecs;
 
-        public UCRequestedTechSpecs(TechSpecs techSpecs)
+        public UCRequestedTechSpecs(TechSpecs techSpecs, bool forViewing = true)
         {
             InitializeComponent();
             _techSpecs = techSpecs;
             LoadTSEquipments();
+            SetHiddenButtons(!forViewing);
+        }
+
+        private void SetHiddenButtons(bool forViewing)
+        {
+            colDelete.Visible = forViewing;
+            colEdit.Visible = forViewing;
+            btnAddTS.Visible = forViewing;
+            colAddSpecs.Visible = forViewing;
         }
 
         private async void LoadTSEquipments()

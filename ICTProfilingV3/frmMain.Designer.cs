@@ -79,14 +79,16 @@
             this.btnNavigateForward = new DevExpress.XtraBars.BarButtonItem();
             this.btnRefreshControl = new DevExpress.XtraBars.BarButtonItem();
             this.btnLogs = new DevExpress.XtraBars.BarButtonItem();
+            this.btnClientRequests = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup12 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup16 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup18 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -159,9 +161,10 @@
             this.btnNavigateBack,
             this.btnNavigateForward,
             this.btnRefreshControl,
-            this.btnLogs});
+            this.btnLogs,
+            this.btnClientRequests});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 46;
+            this.ribbon.MaxItemId = 47;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
@@ -225,7 +228,7 @@
             // 
             // btnDashboard
             // 
-            this.btnDashboard.Caption = "Dashboard";
+            this.btnDashboard.Caption = "Analytics";
             this.btnDashboard.Id = 1;
             this.btnDashboard.ImageOptions.SvgImage = global::ICTProfilingV3.Properties.Resources.chart;
             this.btnDashboard.Name = "btnDashboard";
@@ -617,16 +620,27 @@
             this.btnLogs.Name = "btnLogs";
             this.btnLogs.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLogs_ItemClick);
             // 
+            // btnClientRequests
+            // 
+            this.btnClientRequests.Caption = "Client Requests";
+            this.btnClientRequests.Id = 46;
+            this.btnClientRequests.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnClientRequests.ImageOptions.Image")));
+            this.btnClientRequests.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnClientRequests.ImageOptions.LargeImage")));
+            this.btnClientRequests.Name = "btnClientRequests";
+            this.btnClientRequests.Tag = "Client";
+            this.btnClientRequests.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClientRequests_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup2,
+            this.ribbonPageGroup7,
             this.ribbonPageGroup1,
             this.ribbonPageGroup3,
             this.ribbonPageGroup12,
             this.ribbonPageGroup4,
-            this.ribbonPageGroup7,
-            this.ribbonPageGroup16});
+            this.ribbonPageGroup16,
+            this.ribbonPageGroup18});
             this.ribbonPage1.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.home_16x16;
             this.ribbonPage1.Name = "ribbonPage1";
             this.ribbonPage1.Text = "Home";
@@ -638,10 +652,15 @@
             this.ribbonPageGroup2.Tag = "TicketContainer";
             this.ribbonPageGroup2.Text = "Ticket";
             // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.btnPPE);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Tag = "InventoryContainer";
+            this.ribbonPageGroup7.Text = "Inventory";
+            // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnDashboard);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnQueue);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnUserTasks);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnRoutedActions);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
@@ -670,19 +689,19 @@
             this.ribbonPageGroup4.Name = "ribbonPageGroup4";
             this.ribbonPageGroup4.Tag = "PRCASContainer";
             // 
-            // ribbonPageGroup7
-            // 
-            this.ribbonPageGroup7.ItemLinks.Add(this.btnPPE);
-            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
-            this.ribbonPageGroup7.Tag = "InventoryContainer";
-            this.ribbonPageGroup7.Text = "Inventory";
-            // 
             // ribbonPageGroup16
             // 
             this.ribbonPageGroup16.ItemLinks.Add(this.btnMOAccounts);
             this.ribbonPageGroup16.Name = "ribbonPageGroup16";
             this.ribbonPageGroup16.Tag = "M365Container";
             this.ribbonPageGroup16.Text = "Softwares";
+            // 
+            // ribbonPageGroup18
+            // 
+            this.ribbonPageGroup18.ItemLinks.Add(this.btnClientRequests);
+            this.ribbonPageGroup18.Name = "ribbonPageGroup18";
+            this.ribbonPageGroup18.Tag = "Client";
+            this.ribbonPageGroup18.Text = "Client Dashboard";
             // 
             // ribbonPage2
             // 
@@ -779,6 +798,7 @@
             // 
             this.ribbonPageGroup11.ItemLinks.Add(this.btnReport);
             this.ribbonPageGroup11.ItemLinks.Add(this.btnQuarterlyReport);
+            this.ribbonPageGroup11.ItemLinks.Add(this.btnDashboard);
             this.ribbonPageGroup11.Name = "ribbonPageGroup11";
             // 
             // ribbonPage5
@@ -787,7 +807,7 @@
             this.ribbonPageGroup17});
             this.ribbonPage5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPage5.ImageOptions.Image")));
             this.ribbonPage5.Name = "ribbonPage5";
-            this.ribbonPage5.Tag = "Tools";
+            this.ribbonPage5.Tag = "Removed";
             this.ribbonPage5.Text = "DB Tools";
             // 
             // ribbonPageGroup17
@@ -917,5 +937,7 @@
         private DevExpress.XtraBars.BarButtonItem btnLogs;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup17;
+        private DevExpress.XtraBars.BarButtonItem btnClientRequests;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup18;
     }
 }

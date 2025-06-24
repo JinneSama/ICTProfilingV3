@@ -33,7 +33,7 @@ namespace Models.Service
             response.EnsureSuccessStatusCode();
 
             var json = await response.Content.ReadAsStringAsync();
-            var employees = System.Text.Json.JsonSerializer.Deserialize<List<HRMISEmployeesDto>>(json, new JsonSerializerOptions
+            var employees = JsonSerializer.Deserialize<List<HRMISEmployeesDto>>(json, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });

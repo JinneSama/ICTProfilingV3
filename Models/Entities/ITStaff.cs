@@ -10,6 +10,7 @@ namespace Models.Entities
     {
         [Key]
         public int Id { get; set; }
+        [MaxLength(128)]
         public string ImagePath { get; set; }
         public Sections Section { get; set; }
         public string UserId { get; set; }

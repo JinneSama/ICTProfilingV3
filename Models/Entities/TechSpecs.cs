@@ -19,6 +19,7 @@ namespace Models.Entities
         public long ReqByChiefId { get; set; }
         //----HRIS Data----
         public Gender ReqByGender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
         public bool? RequestBasedApprovedPR { get; set; }
         public bool? RequestBasedApprovedAPP { get; set; }

@@ -4,6 +4,7 @@ using Models.HRMISEntites;
 using System.ComponentModel;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using System.Net.Sockets;
 
 namespace Models.ViewModels
 {
@@ -51,44 +52,40 @@ namespace Models.ViewModels
                 chief = HRMISEmployees.GetEmployeeById(reqyByChief);
             };
         }
-
-        private TicketInfo TicketInfo()
+        private string Equipment()
         {
-            if(employee == null) return null;
+            string equipment = string.Empty;
+            if (_ticketRequest.RequestType == Enums.RequestType.Deliveries)
+                equipment = string.Join(",", _ticketRequest.Deliveries.DeliveriesSpecs.Select(x => $"{x.Quantity} {x?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName}"));
+            if (_ticketRequest.RequestType == Enums.RequestType.TechSpecs)
+                equipment = string.Join(",", _ticketRequest.TechSpecs.TechSpecsICTSpecs.Select(x => $"{x.Quantity} {x?.EquipmentSpecs?.Equipment?.EquipmentName}"));
+            if (_ticketRequest.RequestType == Enums.RequestType.Repairs)
+                equipment = string.Join(",", _ticketRequest.Repairs.PPEs.PPEsSpecs.Select(x => $"{x.Quantity} {x?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName}"));
+            return equipment;
+        }
+        public string Equipments => Equipment();
+        public string Supplier => GetSupplier();
 
-            var staff = new StaffViewModel
-            {
-                Staff = TicketRequest?.ITStaff
-            };
-            var actions = GetActions();
-
-            var actionsVM = new RoutedActionsViewModel
-            {
-                ActionDate = actions?.ActionDate,
-                Remarks = actions?.Remarks,
-                Actions = actions,
-                From = actions?.CreatedBy?.UserName
-            };
-
-            var ticketInfo = new TicketInfo
-            {
-                Chief = chief,
-                ITStaff = staff
-            };
-            return ticketInfo;
+        private string GetSupplier()
+        {
+            return TicketRequest?.Deliveries?.Supplier?.SupplierName ?? "";
         }
 
-        private Actions GetActions()
+        public string DeliveredBy => GetDeliveredBy();
+        private string GetDeliveredBy()
         {
+            long? reqById = null;
             if (TicketRequest.RequestType == RequestType.TechSpecs)
-                return TicketRequest.TechSpecs?.Actions?.LastOrDefault() ?? null;
+                reqById = TicketRequest.TechSpecs?.ReqById ?? null;
             if (TicketRequest.RequestType == RequestType.Deliveries)
-                return TicketRequest.Deliveries?.Actions?.LastOrDefault() ?? null;
+                reqById = TicketRequest.Deliveries?.DeliveredById ?? null;
             if (TicketRequest.RequestType == RequestType.Repairs)
-                return TicketRequest.Repairs?.Actions?.LastOrDefault() ?? null;
-            return null;
-        }
+                reqById = TicketRequest.Repairs?.DeliveredById ?? null;
 
-        public BindingList<TicketInfo> Info => new BindingList<TicketInfo>() { TicketInfo() };
+            if (reqById != null)
+                return HRMISEmployees.GetEmployeeById(reqById).Employee;
+            else
+                return "";
+        }
     }
 }

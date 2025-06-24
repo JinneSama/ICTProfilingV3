@@ -120,13 +120,6 @@ namespace ICTProfilingV3.RepairForms
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
                 x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
-            if (repair == null) return;
-
-            txtEquipment.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model.Brand?.EquipmentSpecs?.Equipment?.EquipmentName;
-            txtBrand.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model?.Brand?.BrandName;
-            txtModel.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Model?.ModelName;
-            txtDescription.Text = repair.PPEs.PPEsSpecs.FirstOrDefault()?.Description;
-            txtSerialNo.Text = repair.PPEs.SerialNo;
 
             spbTicketStatus.SelectedItemIndex = ((int)repair.TicketRequest.TicketStatus) - 1;
             var employee = HRMISEmployees.GetEmployeeById(repair.RequestedById);
@@ -175,10 +168,6 @@ namespace ICTProfilingV3.RepairForms
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
             LoadPPEEquipment(ppe);
-            if (ppe == null) return;
-            txtPropertyNo.Text = ppe.PropertyNo;   
-            txtIssuedTo.Text = HRMISEmployees.GetEmployeeById(ppe.IssuedToId)?.Employee;
-            txtStatus.Text = ppe.Status.ToString();
 
             if (ppeSpecs == null) return;
             var specs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == ppeSpecs.Id,
@@ -186,12 +175,6 @@ namespace ICTProfilingV3.RepairForms
                 x => x.Model.Brand.EquipmentSpecs,
                 x => x.Model.Brand.EquipmentSpecs.Equipment);
 
-            if(specs == null) return;
-            txtEquipment.Text = specs.Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
-            txtDescription.Text = specs.Model.Brand.EquipmentSpecs.Description;
-            txtBrand.Text = specs.Model.Brand.BrandName;
-            txtModel.Text = specs.Model.ModelName;
-            txtSerialNo.Text = specs.SerialNo;
         }
 
         private void LoadPPEEquipment(PPEs specs)

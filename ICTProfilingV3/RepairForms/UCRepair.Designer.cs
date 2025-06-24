@@ -95,29 +95,8 @@
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
             this.txtChief = new DevExpress.XtraEditors.TextEdit();
             this.txtOffice = new DevExpress.XtraEditors.TextEdit();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.txtRequestProblem = new DevExpress.XtraEditors.MemoEdit();
-            this.txtAccessories = new DevExpress.XtraEditors.TextEdit();
-            this.txtPassword = new DevExpress.XtraEditors.TextEdit();
-            this.txtStatus = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl18 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl17 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl19 = new DevExpress.XtraEditors.LabelControl();
-            this.txtSerialNo = new DevExpress.XtraEditors.TextEdit();
-            this.txtModel = new DevExpress.XtraEditors.TextEdit();
-            this.txtBrand = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
-            this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
-            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            this.txtEquipment = new DevExpress.XtraEditors.TextEdit();
-            this.txtIssuedTo = new DevExpress.XtraEditors.TextEdit();
-            this.txtPropertyNo = new DevExpress.XtraEditors.TextEdit();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
@@ -132,13 +111,14 @@
             this.labelControl24 = new DevExpress.XtraEditors.LabelControl();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
-            this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.spbTicketStatus = new DevExpress.XtraEditors.StepProgressBar();
             this.stepAssigned = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepForRelease = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepCompleted = new DevExpress.XtraEditors.StepProgressBarItem();
-            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.tabEquipmentSpecs = new DevExpress.XtraTab.XtraTabPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
@@ -165,19 +145,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtChief.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestProblem.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAccessories.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModel.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEquipment.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIssuedTo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPropertyNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRecommendation.Properties)).BeginInit();
@@ -190,6 +158,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // colStatus
@@ -254,8 +224,8 @@
             // 
             this.pnlDeliveries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlDeliveries.Controls.Add(this.panel2);
             this.pnlDeliveries.Controls.Add(this.gcRepair);
+            this.pnlDeliveries.Controls.Add(this.panel2);
             this.pnlDeliveries.Location = new System.Drawing.Point(0, 39);
             this.pnlDeliveries.Name = "pnlDeliveries";
             this.pnlDeliveries.Size = new System.Drawing.Size(578, 760);
@@ -437,14 +407,14 @@
             this.gcRepair.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcRepair.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcRepair.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcRepair.Location = new System.Drawing.Point(2, 66);
+            this.gcRepair.Location = new System.Drawing.Point(2, 0);
             this.gcRepair.MainView = this.gridRepair;
             this.gcRepair.Name = "gcRepair";
             this.gcRepair.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete,
             this.hplTicket,
             this.hplPPE});
-            this.gcRepair.Size = new System.Drawing.Size(574, 692);
+            this.gcRepair.Size = new System.Drawing.Size(574, 758);
             this.gcRepair.TabIndex = 0;
             this.gcRepair.UseEmbeddedNavigator = true;
             this.gcRepair.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -781,7 +751,7 @@
             this.groupControl1.Controls.Add(this.txtOffice);
             this.groupControl1.Location = new System.Drawing.Point(582, 95);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1208, 118);
+            this.groupControl1.Size = new System.Drawing.Size(1208, 81);
             this.groupControl1.TabIndex = 88;
             this.groupControl1.Text = "Requesting Office";
             // 
@@ -789,7 +759,7 @@
             // 
             this.labelControl10.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.Location = new System.Drawing.Point(411, 55);
+            this.labelControl10.Location = new System.Drawing.Point(721, 27);
             this.labelControl10.Name = "labelControl10";
             this.labelControl10.Size = new System.Drawing.Size(100, 15);
             this.labelControl10.TabIndex = 6;
@@ -797,31 +767,31 @@
             // 
             // txtDeliveredBy
             // 
-            this.txtDeliveredBy.Location = new System.Drawing.Point(523, 52);
+            this.txtDeliveredBy.Location = new System.Drawing.Point(827, 24);
             this.txtDeliveredBy.Name = "txtDeliveredBy";
             this.txtDeliveredBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtDeliveredBy.Properties.Appearance.Options.UseFont = true;
             this.txtDeliveredBy.Properties.ReadOnly = true;
             this.txtDeliveredBy.Properties.UseReadOnlyAppearance = false;
-            this.txtDeliveredBy.Size = new System.Drawing.Size(285, 22);
+            this.txtDeliveredBy.Size = new System.Drawing.Size(250, 22);
             this.txtDeliveredBy.TabIndex = 5;
             // 
             // txtReqBy
             // 
-            this.txtReqBy.Location = new System.Drawing.Point(101, 80);
+            this.txtReqBy.Location = new System.Drawing.Point(454, 24);
             this.txtReqBy.Name = "txtReqBy";
             this.txtReqBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtReqBy.Properties.Appearance.Options.UseFont = true;
             this.txtReqBy.Properties.ReadOnly = true;
             this.txtReqBy.Properties.UseReadOnlyAppearance = false;
-            this.txtReqBy.Size = new System.Drawing.Size(286, 22);
+            this.txtReqBy.Size = new System.Drawing.Size(250, 22);
             this.txtReqBy.TabIndex = 4;
             // 
             // labelControl9
             // 
             this.labelControl9.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.Location = new System.Drawing.Point(11, 83);
+            this.labelControl9.Location = new System.Drawing.Point(366, 27);
             this.labelControl9.Name = "labelControl9";
             this.labelControl9.Size = new System.Drawing.Size(71, 15);
             this.labelControl9.TabIndex = 3;
@@ -831,7 +801,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(412, 27);
+            this.labelControl2.Location = new System.Drawing.Point(366, 50);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(84, 15);
             this.labelControl2.TabIndex = 0;
@@ -841,7 +811,7 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(11, 55);
+            this.labelControl3.Location = new System.Drawing.Point(11, 50);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(28, 15);
             this.labelControl3.TabIndex = 0;
@@ -859,307 +829,57 @@
             // 
             // txtContactNo
             // 
-            this.txtContactNo.Location = new System.Drawing.Point(524, 24);
+            this.txtContactNo.Location = new System.Drawing.Point(454, 47);
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtContactNo.Properties.Appearance.Options.UseFont = true;
             this.txtContactNo.Properties.ReadOnly = true;
             this.txtContactNo.Properties.UseReadOnlyAppearance = false;
-            this.txtContactNo.Size = new System.Drawing.Size(284, 22);
+            this.txtContactNo.Size = new System.Drawing.Size(250, 22);
             this.txtContactNo.TabIndex = 2;
             // 
             // txtChief
             // 
-            this.txtChief.Location = new System.Drawing.Point(101, 52);
+            this.txtChief.Location = new System.Drawing.Point(82, 47);
             this.txtChief.Name = "txtChief";
             this.txtChief.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtChief.Properties.Appearance.Options.UseFont = true;
             this.txtChief.Properties.ReadOnly = true;
             this.txtChief.Properties.UseReadOnlyAppearance = false;
-            this.txtChief.Size = new System.Drawing.Size(286, 22);
+            this.txtChief.Size = new System.Drawing.Size(250, 22);
             this.txtChief.TabIndex = 1;
             // 
             // txtOffice
             // 
             this.txtOffice.EditValue = "";
-            this.txtOffice.Location = new System.Drawing.Point(101, 24);
+            this.txtOffice.Location = new System.Drawing.Point(82, 24);
             this.txtOffice.Name = "txtOffice";
             this.txtOffice.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtOffice.Properties.Appearance.Options.UseFont = true;
             this.txtOffice.Properties.ReadOnly = true;
             this.txtOffice.Properties.UseReadOnlyAppearance = false;
-            this.txtOffice.Size = new System.Drawing.Size(286, 22);
+            this.txtOffice.Size = new System.Drawing.Size(250, 22);
             this.txtOffice.TabIndex = 0;
-            // 
-            // groupControl2
-            // 
-            this.groupControl2.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
-            this.groupControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.groupControl2.Appearance.Options.UseFont = true;
-            this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.Controls.Add(this.txtRequestProblem);
-            this.groupControl2.Controls.Add(this.txtAccessories);
-            this.groupControl2.Controls.Add(this.txtPassword);
-            this.groupControl2.Controls.Add(this.txtStatus);
-            this.groupControl2.Controls.Add(this.labelControl18);
-            this.groupControl2.Controls.Add(this.labelControl17);
-            this.groupControl2.Controls.Add(this.labelControl19);
-            this.groupControl2.Controls.Add(this.txtSerialNo);
-            this.groupControl2.Controls.Add(this.txtModel);
-            this.groupControl2.Controls.Add(this.txtBrand);
-            this.groupControl2.Controls.Add(this.labelControl15);
-            this.groupControl2.Controls.Add(this.labelControl14);
-            this.groupControl2.Controls.Add(this.labelControl13);
-            this.groupControl2.Controls.Add(this.labelControl16);
-            this.groupControl2.Controls.Add(this.txtDescription);
-            this.groupControl2.Controls.Add(this.labelControl11);
-            this.groupControl2.Controls.Add(this.labelControl5);
-            this.groupControl2.Controls.Add(this.labelControl12);
-            this.groupControl2.Controls.Add(this.labelControl6);
-            this.groupControl2.Controls.Add(this.txtEquipment);
-            this.groupControl2.Controls.Add(this.txtIssuedTo);
-            this.groupControl2.Controls.Add(this.txtPropertyNo);
-            this.groupControl2.Location = new System.Drawing.Point(584, 219);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(1206, 166);
-            this.groupControl2.TabIndex = 89;
-            this.groupControl2.Text = "ICT Equipment Details";
             // 
             // txtRequestProblem
             // 
-            this.txtRequestProblem.Location = new System.Drawing.Point(902, 47);
+            this.txtRequestProblem.Location = new System.Drawing.Point(829, 22);
             this.txtRequestProblem.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestProblem.Name = "txtRequestProblem";
             this.txtRequestProblem.Properties.ReadOnly = true;
             this.txtRequestProblem.Properties.UseReadOnlyAppearance = false;
-            this.txtRequestProblem.Size = new System.Drawing.Size(250, 67);
+            this.txtRequestProblem.Size = new System.Drawing.Size(250, 54);
             this.txtRequestProblem.TabIndex = 86;
-            // 
-            // txtAccessories
-            // 
-            this.txtAccessories.Location = new System.Drawing.Point(902, 20);
-            this.txtAccessories.Name = "txtAccessories";
-            this.txtAccessories.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtAccessories.Properties.Appearance.Options.UseFont = true;
-            this.txtAccessories.Properties.ReadOnly = true;
-            this.txtAccessories.Properties.UseReadOnlyAppearance = false;
-            this.txtAccessories.Size = new System.Drawing.Size(250, 22);
-            this.txtAccessories.TabIndex = 85;
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(520, 133);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtPassword.Properties.Appearance.Options.UseFont = true;
-            this.txtPassword.Properties.ReadOnly = true;
-            this.txtPassword.Properties.UseReadOnlyAppearance = false;
-            this.txtPassword.Size = new System.Drawing.Size(285, 22);
-            this.txtPassword.TabIndex = 84;
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(521, 106);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtStatus.Properties.Appearance.Options.UseFont = true;
-            this.txtStatus.Properties.ReadOnly = true;
-            this.txtStatus.Properties.UseReadOnlyAppearance = false;
-            this.txtStatus.Size = new System.Drawing.Size(285, 22);
-            this.txtStatus.TabIndex = 83;
-            // 
-            // labelControl18
-            // 
-            this.labelControl18.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl18.Appearance.Options.UseFont = true;
-            this.labelControl18.Location = new System.Drawing.Point(835, 27);
-            this.labelControl18.Name = "labelControl18";
-            this.labelControl18.Size = new System.Drawing.Size(61, 15);
-            this.labelControl18.TabIndex = 82;
-            this.labelControl18.Text = "Accessories";
             // 
             // labelControl17
             // 
             this.labelControl17.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl17.Appearance.Options.UseFont = true;
-            this.labelControl17.Location = new System.Drawing.Point(835, 53);
+            this.labelControl17.Location = new System.Drawing.Point(737, 25);
             this.labelControl17.Name = "labelControl17";
             this.labelControl17.Size = new System.Drawing.Size(47, 30);
             this.labelControl17.TabIndex = 81;
             this.labelControl17.Text = "Request/\r\nProblem";
-            // 
-            // labelControl19
-            // 
-            this.labelControl19.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl19.Appearance.Options.UseFont = true;
-            this.labelControl19.Location = new System.Drawing.Point(409, 136);
-            this.labelControl19.Name = "labelControl19";
-            this.labelControl19.Size = new System.Drawing.Size(50, 15);
-            this.labelControl19.TabIndex = 80;
-            this.labelControl19.Text = "Password";
-            // 
-            // txtSerialNo
-            // 
-            this.txtSerialNo.Location = new System.Drawing.Point(521, 76);
-            this.txtSerialNo.Name = "txtSerialNo";
-            this.txtSerialNo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSerialNo.Properties.Appearance.Options.UseFont = true;
-            this.txtSerialNo.Properties.ReadOnly = true;
-            this.txtSerialNo.Properties.UseReadOnlyAppearance = false;
-            this.txtSerialNo.Size = new System.Drawing.Size(285, 22);
-            this.txtSerialNo.TabIndex = 76;
-            // 
-            // txtModel
-            // 
-            this.txtModel.Location = new System.Drawing.Point(520, 48);
-            this.txtModel.Name = "txtModel";
-            this.txtModel.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtModel.Properties.Appearance.Options.UseFont = true;
-            this.txtModel.Properties.ReadOnly = true;
-            this.txtModel.Properties.UseReadOnlyAppearance = false;
-            this.txtModel.Size = new System.Drawing.Size(286, 22);
-            this.txtModel.TabIndex = 75;
-            // 
-            // txtBrand
-            // 
-            this.txtBrand.EditValue = "";
-            this.txtBrand.Location = new System.Drawing.Point(520, 20);
-            this.txtBrand.Name = "txtBrand";
-            this.txtBrand.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtBrand.Properties.Appearance.Options.UseFont = true;
-            this.txtBrand.Properties.NullText = "[EditValue is null]";
-            this.txtBrand.Properties.ReadOnly = true;
-            this.txtBrand.Properties.UseReadOnlyAppearance = false;
-            this.txtBrand.Size = new System.Drawing.Size(286, 22);
-            this.txtBrand.TabIndex = 74;
-            // 
-            // labelControl15
-            // 
-            this.labelControl15.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl15.Appearance.Options.UseFont = true;
-            this.labelControl15.Location = new System.Drawing.Point(411, 108);
-            this.labelControl15.Name = "labelControl15";
-            this.labelControl15.Size = new System.Drawing.Size(32, 15);
-            this.labelControl15.TabIndex = 73;
-            this.labelControl15.Text = "Status";
-            // 
-            // labelControl14
-            // 
-            this.labelControl14.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl14.Appearance.Options.UseFont = true;
-            this.labelControl14.Location = new System.Drawing.Point(409, 80);
-            this.labelControl14.Name = "labelControl14";
-            this.labelControl14.Size = new System.Drawing.Size(50, 15);
-            this.labelControl14.TabIndex = 72;
-            this.labelControl14.Text = "Serial No.";
-            // 
-            // labelControl13
-            // 
-            this.labelControl13.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.Location = new System.Drawing.Point(409, 53);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(34, 15);
-            this.labelControl13.TabIndex = 71;
-            this.labelControl13.Text = "Model";
-            // 
-            // labelControl16
-            // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Location = new System.Drawing.Point(409, 28);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(31, 15);
-            this.labelControl16.TabIndex = 70;
-            this.labelControl16.Text = "Brand";
-            // 
-            // txtDescription
-            // 
-            this.txtDescription.Location = new System.Drawing.Point(98, 103);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Properties.ReadOnly = true;
-            this.txtDescription.Properties.UseReadOnlyAppearance = false;
-            this.txtDescription.Size = new System.Drawing.Size(286, 44);
-            this.txtDescription.TabIndex = 64;
-            // 
-            // labelControl11
-            // 
-            this.labelControl11.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl11.Appearance.Options.UseFont = true;
-            this.labelControl11.Location = new System.Drawing.Point(11, 112);
-            this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(60, 15);
-            this.labelControl11.TabIndex = 63;
-            this.labelControl11.Text = "Description";
-            // 
-            // labelControl5
-            // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(11, 83);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(58, 15);
-            this.labelControl5.TabIndex = 61;
-            this.labelControl5.Text = "Equipment";
-            // 
-            // labelControl12
-            // 
-            this.labelControl12.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(11, 55);
-            this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(49, 15);
-            this.labelControl12.TabIndex = 57;
-            this.labelControl12.Text = "Issued To";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(11, 27);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(67, 15);
-            this.labelControl6.TabIndex = 46;
-            this.labelControl6.Text = "Property No.";
-            // 
-            // txtEquipment
-            // 
-            this.txtEquipment.Location = new System.Drawing.Point(98, 76);
-            this.txtEquipment.Name = "txtEquipment";
-            this.txtEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtEquipment.Properties.Appearance.Options.UseFont = true;
-            this.txtEquipment.Properties.ReadOnly = true;
-            this.txtEquipment.Properties.UseReadOnlyAppearance = false;
-            this.txtEquipment.Size = new System.Drawing.Size(286, 22);
-            this.txtEquipment.TabIndex = 2;
-            // 
-            // txtIssuedTo
-            // 
-            this.txtIssuedTo.Location = new System.Drawing.Point(98, 48);
-            this.txtIssuedTo.Name = "txtIssuedTo";
-            this.txtIssuedTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtIssuedTo.Properties.Appearance.Options.UseFont = true;
-            this.txtIssuedTo.Properties.ReadOnly = true;
-            this.txtIssuedTo.Properties.UseReadOnlyAppearance = false;
-            this.txtIssuedTo.Size = new System.Drawing.Size(286, 22);
-            this.txtIssuedTo.TabIndex = 1;
-            // 
-            // txtPropertyNo
-            // 
-            this.txtPropertyNo.EditValue = "";
-            this.txtPropertyNo.Location = new System.Drawing.Point(98, 20);
-            this.txtPropertyNo.Name = "txtPropertyNo";
-            this.txtPropertyNo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtPropertyNo.Properties.Appearance.Options.UseFont = true;
-            this.txtPropertyNo.Properties.NullText = "[EditValue is null]";
-            this.txtPropertyNo.Properties.ReadOnly = true;
-            this.txtPropertyNo.Properties.UseReadOnlyAppearance = false;
-            this.txtPropertyNo.Size = new System.Drawing.Size(286, 22);
-            this.txtPropertyNo.TabIndex = 0;
             // 
             // groupControl3
             // 
@@ -1169,21 +889,23 @@
             this.groupControl3.Appearance.Options.UseFont = true;
             this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupControl3.AppearanceCaption.Options.UseFont = true;
+            this.groupControl3.Controls.Add(this.txtRequestProblem);
             this.groupControl3.Controls.Add(this.labelControl7);
             this.groupControl3.Controls.Add(this.labelControl21);
             this.groupControl3.Controls.Add(this.txtRecommendation);
             this.groupControl3.Controls.Add(this.txtFindings);
-            this.groupControl3.Location = new System.Drawing.Point(584, 391);
+            this.groupControl3.Controls.Add(this.labelControl17);
+            this.groupControl3.Location = new System.Drawing.Point(580, 182);
             this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(1206, 84);
+            this.groupControl3.Size = new System.Drawing.Size(1210, 93);
             this.groupControl3.TabIndex = 87;
-            this.groupControl3.Text = "Solutions";
+            this.groupControl3.Text = "Problem/Solutions";
             // 
             // labelControl7
             // 
             this.labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(411, 23);
+            this.labelControl7.Location = new System.Drawing.Point(347, 26);
             this.labelControl7.Name = "labelControl7";
             this.labelControl7.Size = new System.Drawing.Size(105, 15);
             this.labelControl7.TabIndex = 11;
@@ -1201,24 +923,24 @@
             // 
             // txtRecommendation
             // 
-            this.txtRecommendation.Location = new System.Drawing.Point(522, 24);
+            this.txtRecommendation.Location = new System.Drawing.Point(456, 22);
             this.txtRecommendation.Name = "txtRecommendation";
             this.txtRecommendation.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtRecommendation.Properties.Appearance.Options.UseFont = true;
             this.txtRecommendation.Properties.ReadOnly = true;
             this.txtRecommendation.Properties.UseReadOnlyAppearance = false;
-            this.txtRecommendation.Size = new System.Drawing.Size(286, 55);
+            this.txtRecommendation.Size = new System.Drawing.Size(250, 55);
             this.txtRecommendation.TabIndex = 7;
             // 
             // txtFindings
             // 
-            this.txtFindings.Location = new System.Drawing.Point(101, 24);
+            this.txtFindings.Location = new System.Drawing.Point(84, 26);
             this.txtFindings.Name = "txtFindings";
             this.txtFindings.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtFindings.Properties.Appearance.Options.UseFont = true;
             this.txtFindings.Properties.ReadOnly = true;
             this.txtFindings.Properties.UseReadOnlyAppearance = false;
-            this.txtFindings.Size = new System.Drawing.Size(286, 53);
+            this.txtFindings.Size = new System.Drawing.Size(250, 53);
             this.txtFindings.TabIndex = 7;
             // 
             // groupControl4
@@ -1235,41 +957,41 @@
             this.groupControl4.Controls.Add(this.txtPreparedBy);
             this.groupControl4.Controls.Add(this.labelControl23);
             this.groupControl4.Controls.Add(this.labelControl24);
-            this.groupControl4.Location = new System.Drawing.Point(584, 481);
+            this.groupControl4.Location = new System.Drawing.Point(582, 281);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(1206, 83);
+            this.groupControl4.Size = new System.Drawing.Size(1208, 52);
             this.groupControl4.TabIndex = 90;
             this.groupControl4.Text = "Signatories";
             // 
             // txtNotedBy
             // 
             this.txtNotedBy.EditValue = "";
-            this.txtNotedBy.Location = new System.Drawing.Point(522, 19);
+            this.txtNotedBy.Location = new System.Drawing.Point(454, 19);
             this.txtNotedBy.Name = "txtNotedBy";
             this.txtNotedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtNotedBy.Properties.Appearance.Options.UseFont = true;
             this.txtNotedBy.Properties.ReadOnly = true;
             this.txtNotedBy.Properties.UseReadOnlyAppearance = false;
-            this.txtNotedBy.Size = new System.Drawing.Size(286, 22);
+            this.txtNotedBy.Size = new System.Drawing.Size(250, 22);
             this.txtNotedBy.TabIndex = 15;
             // 
             // txtAssessedBy
             // 
             this.txtAssessedBy.EditValue = "";
-            this.txtAssessedBy.Location = new System.Drawing.Point(103, 47);
+            this.txtAssessedBy.Location = new System.Drawing.Point(827, 19);
             this.txtAssessedBy.Name = "txtAssessedBy";
             this.txtAssessedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtAssessedBy.Properties.Appearance.Options.UseFont = true;
             this.txtAssessedBy.Properties.ReadOnly = true;
             this.txtAssessedBy.Properties.UseReadOnlyAppearance = false;
-            this.txtAssessedBy.Size = new System.Drawing.Size(286, 22);
+            this.txtAssessedBy.Size = new System.Drawing.Size(250, 22);
             this.txtAssessedBy.TabIndex = 14;
             // 
             // labelControl22
             // 
             this.labelControl22.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl22.Appearance.Options.UseFont = true;
-            this.labelControl22.Location = new System.Drawing.Point(13, 50);
+            this.labelControl22.Location = new System.Drawing.Point(735, 22);
             this.labelControl22.Name = "labelControl22";
             this.labelControl22.Size = new System.Drawing.Size(63, 15);
             this.labelControl22.TabIndex = 13;
@@ -1278,20 +1000,20 @@
             // txtPreparedBy
             // 
             this.txtPreparedBy.EditValue = "";
-            this.txtPreparedBy.Location = new System.Drawing.Point(103, 19);
+            this.txtPreparedBy.Location = new System.Drawing.Point(82, 19);
             this.txtPreparedBy.Name = "txtPreparedBy";
             this.txtPreparedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPreparedBy.Properties.Appearance.Options.UseFont = true;
             this.txtPreparedBy.Properties.ReadOnly = true;
             this.txtPreparedBy.Properties.UseReadOnlyAppearance = false;
-            this.txtPreparedBy.Size = new System.Drawing.Size(286, 22);
+            this.txtPreparedBy.Size = new System.Drawing.Size(250, 22);
             this.txtPreparedBy.TabIndex = 12;
             // 
             // labelControl23
             // 
             this.labelControl23.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl23.Appearance.Options.UseFont = true;
-            this.labelControl23.Location = new System.Drawing.Point(411, 22);
+            this.labelControl23.Location = new System.Drawing.Point(388, 22);
             this.labelControl23.Name = "labelControl23";
             this.labelControl23.Size = new System.Drawing.Size(49, 15);
             this.labelControl23.TabIndex = 11;
@@ -1312,27 +1034,26 @@
             this.tabDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabDetails.Location = new System.Drawing.Point(584, 570);
+            this.tabDetails.Location = new System.Drawing.Point(584, 584);
             this.tabDetails.Name = "tabDetails";
             this.tabDetails.SelectedTabPage = this.tabAction;
-            this.tabDetails.Size = new System.Drawing.Size(1370, 229);
+            this.tabDetails.Size = new System.Drawing.Size(1370, 215);
             this.tabDetails.TabIndex = 91;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabAction,
-            this.tabEquipmentSpecs,
             this.tabEvaluation});
             // 
             // tabAction
             // 
             this.tabAction.Name = "tabAction";
-            this.tabAction.Size = new System.Drawing.Size(1368, 204);
+            this.tabAction.Size = new System.Drawing.Size(1368, 190);
             this.tabAction.Text = "Action";
             // 
-            // tabEquipmentSpecs
+            // tabEvaluation
             // 
-            this.tabEquipmentSpecs.Name = "tabEquipmentSpecs";
-            this.tabEquipmentSpecs.Size = new System.Drawing.Size(1368, 204);
-            this.tabEquipmentSpecs.Text = "Equipment Specs";
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(1368, 190);
+            this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // spbTicketStatus
             // 
@@ -1382,20 +1103,32 @@
             this.stepCompleted.ContentBlock2.Caption = "Completed";
             this.stepCompleted.Name = "stepCompleted";
             // 
-            // tabEvaluation
+            // xtraTabControl1
             // 
-            this.tabEvaluation.Name = "tabEvaluation";
-            this.tabEvaluation.Size = new System.Drawing.Size(1368, 204);
-            this.tabEvaluation.Text = "Evaluation Sheet";
+            this.xtraTabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.xtraTabControl1.Location = new System.Drawing.Point(582, 339);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.tabEquipmentSpecs;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1208, 239);
+            this.xtraTabControl1.TabIndex = 93;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabEquipmentSpecs});
+            // 
+            // tabEquipmentSpecs
+            // 
+            this.tabEquipmentSpecs.Name = "tabEquipmentSpecs";
+            this.tabEquipmentSpecs.Size = new System.Drawing.Size(1206, 214);
+            this.tabEquipmentSpecs.Text = "PPE Inventory Specs";
             // 
             // UCRepair
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.spbTicketStatus);
             this.Controls.Add(this.tabDetails);
             this.Controls.Add(this.groupControl1);
-            this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.pnlDeliveries);
             this.Controls.Add(this.groupControl3);
@@ -1434,20 +1167,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtChief.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            this.groupControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestProblem.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAccessories.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtModel.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBrand.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtEquipment.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtIssuedTo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPropertyNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
@@ -1462,6 +1182,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).EndInit();
             this.tabDetails.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1498,29 +1220,8 @@
         private DevExpress.XtraEditors.TextEdit txtContactNo;
         private DevExpress.XtraEditors.TextEdit txtChief;
         private DevExpress.XtraEditors.TextEdit txtOffice;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.MemoEdit txtRequestProblem;
-        private DevExpress.XtraEditors.TextEdit txtAccessories;
-        private DevExpress.XtraEditors.TextEdit txtPassword;
-        private DevExpress.XtraEditors.TextEdit txtStatus;
-        private DevExpress.XtraEditors.LabelControl labelControl18;
         private DevExpress.XtraEditors.LabelControl labelControl17;
-        private DevExpress.XtraEditors.LabelControl labelControl19;
-        private DevExpress.XtraEditors.TextEdit txtSerialNo;
-        private DevExpress.XtraEditors.TextEdit txtModel;
-        private DevExpress.XtraEditors.TextEdit txtBrand;
-        private DevExpress.XtraEditors.LabelControl labelControl15;
-        private DevExpress.XtraEditors.LabelControl labelControl14;
-        private DevExpress.XtraEditors.LabelControl labelControl13;
-        private DevExpress.XtraEditors.LabelControl labelControl16;
-        private DevExpress.XtraEditors.MemoEdit txtDescription;
-        private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.LabelControl labelControl12;
-        private DevExpress.XtraEditors.LabelControl labelControl6;
-        private DevExpress.XtraEditors.TextEdit txtEquipment;
-        private DevExpress.XtraEditors.TextEdit txtIssuedTo;
-        private DevExpress.XtraEditors.TextEdit txtPropertyNo;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl21;
@@ -1534,8 +1235,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl23;
         private DevExpress.XtraEditors.LabelControl labelControl24;
         private DevExpress.XtraTab.XtraTabControl tabDetails;
-        private DevExpress.XtraTab.XtraTabPage tabEquipmentSpecs;
-        private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.SimpleButton btnFindings;
         private DevExpress.XtraEditors.SimpleButton btnSignatories;
@@ -1564,5 +1263,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraTab.XtraTabPage tabEvaluation;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraTab.XtraTabPage tabEquipmentSpecs;
+        private DevExpress.XtraTab.XtraTabPage tabAction;
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System.Data.Entity;
-using System.Security.Permissions;
 using Models.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Models.Migrations;
 
 namespace EntityManager.Context
 {

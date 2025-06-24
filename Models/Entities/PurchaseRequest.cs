@@ -12,7 +12,8 @@ namespace Models.Entities
         public int Id { get; set; }
         public DateTime? DateCreated { get; set; }
         public long? ReqById { get; set; }
-        public long? ChiefId { get; set; }  
+        public long? ChiefId { get; set; }
+        [MaxLength(128)]
         public string PRNo { get; set; }
         public PRQuarter? Quarter { get; set; }
         public TicketStatus? Status { get; set; }

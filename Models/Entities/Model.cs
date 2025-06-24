@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Models.Entities
     public class Model
     {
         public int Id { get; set; }
+        [MaxLength(1024)]
         public string ModelName { get; set; }
         public int BrandId { get; set; }
         public int OldPK { get; set; }

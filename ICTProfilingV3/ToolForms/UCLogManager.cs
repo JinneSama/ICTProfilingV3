@@ -23,10 +23,10 @@ namespace ICTProfilingV3.ToolForms
         private async Task LoadData()
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
-            var data = unitOfWork.LogEntriesRepo.GetAll(x => x.CreatedByUser).OrderByDescending(x => x.Date);
-            splashScreenLoad.ShowWaitForm();
-            gcLogs.DataSource = await data.ToListAsync();
-            splashScreenLoad.CloseWaitForm();
+            //var data = unitOfWork.LogEntriesRepo.GetAll(x => x.CreatedByUser).OrderByDescending(x => x.Date);
+            //splashScreenLoad.ShowWaitForm();
+            //gcLogs.DataSource = await data.ToListAsync();
+            //splashScreenLoad.CloseWaitForm();
         }
 
         private async void UCLogManager_Load(object sender, System.EventArgs e)
@@ -39,6 +39,7 @@ namespace ICTProfilingV3.ToolForms
             splashScreenLoad.ShowWaitForm();
             IUnitOfWork unitOfWork = new UnitOfWork();
             var data = unitOfWork.LogEntriesRepo.GetAll(x => x.CreatedByUser).OrderByDescending(x => x.Date).ToList();
+
             var settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,

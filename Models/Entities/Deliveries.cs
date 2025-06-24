@@ -21,14 +21,19 @@ namespace Models.Entities
         //----HRIS Data----
 
         public Gender Gender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
+        [MaxLength(128)]
         public string PONo { get; set; }
+        [MaxLength(128)]
         public string ReceiptNo { get; set; }
         public int? SupplierId { get; set; }
         public bool? IsDeleted { get; set; }
         public long? FindingsRequestedById { get; set; }
         public DateTime? POServed { get; set; }
+        [MaxLength(128)]
         public string FindingsStatus { get; set; }
+        [MaxLength(128)]
         public string FindingsActionTaken { get; set; }
         public int OldPK { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraSplashScreen;
+using EntityManager.Context;
 using Helpers.Interfaces;
 using Helpers.Security;
 using Helpers.Utility;
@@ -6,8 +7,11 @@ using ICTMigration.Files;
 using ICTMigration.ModelMigrations;
 using ICTMigration.PPEMigration;
 using ICTMigration.TicketStatusFix;
+using ICTProfilingV3.Services;
+using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using Infrastructure.Cleaner;
+using Microsoft.Extensions.DependencyInjection;
 using Models.FDTSEntities;
 using Models.HRMISEntites;
 using Models.Managers.User;
@@ -17,6 +21,7 @@ using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,6 +35,14 @@ namespace ICTProfilingV3
         [STAThread]
         static void Main()
         {
+            var services = new ServiceCollection();
+            LoadAssemblies();
+
+            services.AddTransient(typeof(ApplicationDbContext));
+            services.AddTransient(typeof(frmMain));
+            services.AddTransient(typeof(UCTARequestDashboard));
+
+            DependencyRegistrar.RegisterServices(services);
             ISingleInstance instanceGuard = new SingelInstance("EpisV3");
 
             if (!instanceGuard.IsSingleInstance())
@@ -43,7 +56,7 @@ namespace ICTProfilingV3
             {
                 string json = File.ReadAllText(filePath);
                 var credentials = JsonConvert.DeserializeObject<ArgumentCredentialsDto>(json);
-                UserStore.ArugmentCredentialsDto = credentials;
+                //UserStore.ArugmentCredentialsDto = credentials;
                 //File.Delete(filePath);
             }
 
@@ -51,9 +64,25 @@ namespace ICTProfilingV3
             MainAsync().GetAwaiter().GetResult();
             SplashScreenManager.CloseForm();
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            using (ServiceProvider provider = services.BuildServiceProvider())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                var mainForm = provider.GetRequiredService<frmMain>();
+                Application.Run(mainForm);
+            }
+        }
+        private static void LoadAssemblies()
+        {
+            //Assembly.Load("EntityManager");
+            Assembly.Load("Helpers");
+            Assembly.Load("ICTMigration");
+            Assembly.Load("ICTProfilingV3");
+            //Assembly.Load("ICTProfilingV3.Interfaces");
+            //Assembly.Load("ICTProfilingV3.Services");
+            Assembly.Load("Infrastructure");
+            Assembly.Load("Mapper");
         }
 
         private static async Task MainAsync()
@@ -62,62 +91,6 @@ namespace ICTProfilingV3
             await HRMISEmployees.InitContext();
             await OFMISEmployees.InitEmployees();
             OFMISUsers.InitUsers();
-
-            if(ConfigurationManager.AppSettings["Run_Migration"] == "run")
-            {
-                ILogCleaner cleaner = new LogCleaner();
-                await cleaner.CleanLogs();
-            }
-
-            if (ConfigurationManager.AppSettings["Run_Migration"] == "run")
-            {
-                LookUpMigration lookup = new LookUpMigration();
-                await lookup.MigrateActionDropdowns();
-                await lookup.MigrateActionList();
-                await lookup.MigrateEquipments();
-                await lookup.MigrateStandardPR();
-                await lookup.MigrateTSBasis();
-
-                UsersMigration usersMigration = new UsersMigration();
-                await usersMigration.MigrateUsers();
-
-                TicketMigration ticketMigration = new TicketMigration();
-                await ticketMigration.MigrateTickets();
-                await ticketMigration.MigrateDeliveries();
-                await ticketMigration.MigrateTechSpecs();
-                await ticketMigration.MigratePPE();
-                await ticketMigration.MigrateRepairs();
-
-                RecordProcessesMigration recordProcessesMigration = new RecordProcessesMigration();
-                await recordProcessesMigration.MigrateCAS();
-                await recordProcessesMigration.MigratePR();
-
-                ActionMigration actionMigration = new ActionMigration();
-                await actionMigration.MigrateTSActions();
-                await actionMigration.MigrateDeliveriesActions();
-                await actionMigration.MigrateRepairActions();
-                await actionMigration.MigrateCASActions();
-                await actionMigration.MigratePGNActions();
-
-                AssignedStaffMigration assignedStaffMigration = new AssignedStaffMigration();
-                await assignedStaffMigration.GetAssignedUsersDeliveries();
-                await assignedStaffMigration.GetAssignedUsersRepair();
-                await assignedStaffMigration.GetAssignedUsersTS();
-
-                PGNMigration pgnMigration = new PGNMigration();
-                await pgnMigration.MigrateNonEmployee();
-                await pgnMigration.MigratePGNAccounts();
-
-                MigratePPE ppe = new MigratePPE();
-                await ppe.FixMigratedPPEEmployee();
-
-                FilesMigration filesMigration = new FilesMigration();
-                await filesMigration.MigratePGNImages();
-
-                RecordsStatusFix recordsStatusFix = new RecordsStatusFix();
-                await recordsStatusFix.CASFix();
-                await recordsStatusFix.PRFix();
-            }
         }
     }
 }

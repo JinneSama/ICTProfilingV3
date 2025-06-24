@@ -113,7 +113,7 @@
             this.btnAddAction.Location = new System.Drawing.Point(2, 2);
             this.btnAddAction.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddAction.Name = "btnAddAction";
-            this.btnAddAction.Size = new System.Drawing.Size(97, 28);
+            this.btnAddAction.Size = new System.Drawing.Size(97, 20);
             this.btnAddAction.TabIndex = 97;
             this.btnAddAction.Text = "Add Action";
             this.btnAddAction.Click += new System.EventHandler(this.btnAddAction_Click);
@@ -128,14 +128,14 @@
             this.gcActions.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcActions.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcActions.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcActions.Location = new System.Drawing.Point(0, 35);
+            this.gcActions.Location = new System.Drawing.Point(0, 24);
             this.gcActions.MainView = this.gridActions;
             this.gcActions.Name = "gcActions";
             this.gcActions.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete,
             this.btnEdit,
             this.btnImages});
-            this.gcActions.Size = new System.Drawing.Size(1271, 318);
+            this.gcActions.Size = new System.Drawing.Size(1271, 329);
             this.gcActions.TabIndex = 98;
             this.gcActions.UseEmbeddedNavigator = true;
             this.gcActions.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {

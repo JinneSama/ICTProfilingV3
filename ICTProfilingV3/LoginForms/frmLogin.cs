@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.CodeParser;
+using DevExpress.XtraEditors;
 using EntityManager.Managers.User;
 using Helpers.Security;
 using ICTProfilingV3.BaseClasses;
@@ -76,8 +77,9 @@ namespace ICTProfilingV3.LoginForms
             }
             Users user = null;
             bool logged = true;
-            var ofmisUser = await PointToSystemAccount(username, password);
-            if(ofmisUser == null)
+            (var systemUser, var ofmisUser)  = await PointToSystemAccount(username, password);
+
+            if(systemUser == null)
             {
                 var res = await userManager.Login(username, password);
                 if(!res.success) logged = false;
@@ -85,7 +87,7 @@ namespace ICTProfilingV3.LoginForms
             }
             else
             {
-                user = ofmisUser;
+                user = systemUser;
             }
 
             if (logged)
@@ -102,7 +104,21 @@ namespace ICTProfilingV3.LoginForms
 
                 if (UserStore.ArugmentCredentialsDto == null) this.Close();
             }
-            else MessageBox.Show("Wrong Username and Password!");
+            else
+            {
+                if(ofmisUser != null) UseExternalAccount(ofmisUser, password);
+                else MessageBox.Show("Wrong Username and Password!");
+            }
+        }
+
+        private void UseExternalAccount(OFMISUsersDto ofmisUser, string password)
+        {
+            Logged = true;
+            UserStore.Username = ofmisUser.Username;
+            UserStore.Fullname = password;
+            frmMain.setClientDesignation();
+            frmMain.SetUser(ofmisUser.Username, "Client");
+            this.Close();
         }
 
         private async Task<OFMISUsersDto> CheckOFMIS(string username, string password)
@@ -115,14 +131,14 @@ namespace ICTProfilingV3.LoginForms
             else return null;
         }
 
-        private async Task<Users> PointToSystemAccount(string username, string password)
+        private async Task<(Users, OFMISUsersDto)> PointToSystemAccount(string username, string password)
         {
             var user = await CheckOFMIS(username, password);
-            if (user == null) return null;
+            if (user == null) return (null, null);
 
             var systemUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.Username);
-            if (systemUser == null) return null;
-            return systemUser;
+            if (systemUser == null) return (null, user);
+            return (systemUser, user);
         }
         private void ClearLoginDetails()
         {
@@ -150,8 +166,6 @@ namespace ICTProfilingV3.LoginForms
         {
             if(!Logged) Application.Exit();
         }
-
-        private async void frmLogin_Load(object sender, EventArgs e) {}
 
         private void memoEdit1_Properties_Spin(object sender, DevExpress.XtraEditors.Controls.SpinEventArgs e)
         {  

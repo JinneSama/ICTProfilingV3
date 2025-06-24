@@ -227,6 +227,10 @@
     <Compile Include="Migrations\202502110604180_AddedLogs.Designer.cs">
       <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506100228282_DBLimitFix.cs" />
+    <Compile Include="Migrations\202506100228282_DBLimitFix.Designer.cs">
+      <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActionImage.cs" />
     <Compile Include="Models\ActionType.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="ViewModels\BrandViewModel.cs" />
     <Compile Include="ViewModels\CASViewModel.cs" />
     <Compile Include="ViewModels\ChangelogsViewModel.cs" />
+    <Compile Include="ViewModels\ClientRequestViewModel.cs" />
     <Compile Include="ViewModels\ComparisonReportViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
     <Compile Include="ViewModels\DeliveriesViewModel.cs" />
@@ -292,6 +297,7 @@
     <Compile Include="ViewModels\RepairViewModel.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
+    <Compile Include="ViewModels\SampleViewModel.cs" />
     <Compile Include="ViewModels\StaffViewModel.cs" />
     <Compile Include="ViewModels\StandardPRViewModel.cs" />
     <Compile Include="ViewModels\TasksViewModel.cs" />
@@ -308,6 +314,15 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mapper\Mapper.csproj">
+      <Project>{3355023c-3f1b-48ba-b112-91fa9840cac1}</Project>
+      <Name>Mapper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\DestModels\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202501130535154_NewDatabaseEntries.resx">
@@ -346,15 +361,9 @@
     <EmbeddedResource Include="Migrations\202502110604180_AddedLogs.resx">
       <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mapper\Mapper.csproj">
-      <Project>{3355023c-3f1b-48ba-b112-91fa9840cac1}</Project>
-      <Name>Mapper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\DestModels\" />
+    <EmbeddedResource Include="Migrations\202506100228282_DBLimitFix.resx">
+      <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

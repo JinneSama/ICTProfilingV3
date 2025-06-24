@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -74,6 +75,7 @@
     <Compile Include="ICTv2Models\DeliveriesQuotation.cs">
       <DependentUpon>ICTv2Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="MigrateEntities.cs" />
     <Compile Include="ModelMigrations\ActionMigration.cs" />
     <Compile Include="ModelMigrations\AssignedStaffMigration.cs" />
     <Compile Include="ModelMigrations\LookUpMigration.cs" />
@@ -386,6 +388,10 @@
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{3F290CC6-23E6-4500-8CFA-9DF3C75C4013}</Project>
       <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{8456DF15-DACC-4A96-9799-25DFD6478159}</Project>
+      <Name>Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\EntityManager.csproj">
       <Project>{d30cdbb1-d049-45ed-9700-30003c0db0a8}</Project>

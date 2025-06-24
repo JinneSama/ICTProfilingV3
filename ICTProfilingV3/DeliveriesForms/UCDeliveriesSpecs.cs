@@ -11,11 +11,21 @@ namespace ICTProfilingV3.DeliveriesForms
     {
         private readonly Deliveries _deliveries;
 
-        public UCDeliveriesSpecs(Deliveries deliveries)
+        public UCDeliveriesSpecs(Deliveries deliveries, bool forViewing = true)
         {
             InitializeComponent();
             _deliveries = deliveries;
+            SetHiddenButtons(!forViewing);
         }
+
+        private void SetHiddenButtons(bool forViewing)
+        {
+            colDelete.Visible = forViewing;
+            colEdit.Visible = forViewing;
+            btnAddEquipment.Visible = forViewing;
+            colAddSpecs.Visible = forViewing;
+        }
+
 
         private void LoadEquipmentSpecs()
         {

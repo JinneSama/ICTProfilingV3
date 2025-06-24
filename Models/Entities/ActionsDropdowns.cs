@@ -1,6 +1,7 @@
 ﻿using Models.Enums;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models.Entities
 {
@@ -15,6 +16,7 @@ namespace Models.Entities
         }
         public int? Id { get; set; }
         public ActionCategory? ActionCategory { get; set; }
+        [MaxLength(128)]
         public string Value { get; set; }
         public int? ParentId { get; set; }
         public int? Order { get; set; }

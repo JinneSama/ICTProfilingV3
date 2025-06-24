@@ -17,14 +17,12 @@ namespace ICTProfilingV3.RepairForms
     public partial class frmEditSignatories : BaseForm
     {
         private readonly IICTUserManager usermanager;
-        private readonly IUnitOfWork unitOfWork;
         private readonly int repairId;
 
         public frmEditSignatories(int repairId)
         {
             InitializeComponent();
             usermanager = new ICTUserManager();
-            unitOfWork = new UnitOfWork();
             this.repairId = repairId;
             LoadDropdowns();
         }
@@ -50,6 +48,7 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task Save()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);
             repair.PreparedById = (string)sluePreparedBy.EditValue;
             repair.ReviewedById = (string)slueAssesedBy.EditValue;
@@ -60,6 +59,7 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task LoadDetails()
         {
+            IUnitOfWork unitOfWork = new UnitOfWork();
             var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);
 
             slueAssesedBy.EditValue = repair.ReviewedById;

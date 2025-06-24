@@ -3,6 +3,7 @@ using Helpers.NetworkFolder;
 using ICTProfilingV3.BaseClasses;
 using Models.Repository;
 using Models.ViewModels;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,10 +26,14 @@ namespace ICTProfilingV3.ToolForms
 
         private async void LoadDetails()
         {
+            var now = DateTime.Now;
+            var firstDayOfLastMonth = new DateTime(now.Year, now.Month, 1).AddMonths(-1);
+
             btnClose.Enabled = false;
             lblVersion.Text = "Current Version: " + version;
             var changes = await Task.WhenAll(
                 unitOfWork.ChangeLogsRepo.GetAll()
+                .Where(x => x.DateCreated >= firstDayOfLastMonth)
                     .OrderByDescending(x => x.DateCreated)
                     .ToList()
                     .Select(async s => new ChangelogsViewModel

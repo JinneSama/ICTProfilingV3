@@ -12,7 +12,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 
 namespace Models.Repository
@@ -35,7 +34,7 @@ namespace Models.Repository
             TEntity oldValues = entity;
             if (dbContext.Entry(entity).State == EntityState.Detached) dbSet.Attach(entity);
             dbSet.Remove(entity);
-            LogChangeAsync(typeof(TEntity).Name, "Delete", oldValues, null);
+            //LogChangeAsync(typeof(TEntity).Name, "Delete", oldValues, null);
         }
 
         public void DeleteByEx(Expression<Func<TEntity, bool>> expression)
@@ -89,7 +88,7 @@ namespace Models.Repository
         public void Insert(TEntity entity)
         {
             dbSet.Add(entity);
-            LogChangeAsync(typeof(TEntity).Name, "Insert", null, entity);
+            //LogChangeAsync(typeof(TEntity).Name, "Insert", null, entity);
         }
 
         public void LogChangeAsync(string tableName, string actionType, object oldValues, object newValues)
@@ -144,7 +143,7 @@ namespace Models.Repository
             var oldValues = dbContext.Entry(existingEntity).CurrentValues.Clone();
 
             dbContext.Entry(entity).State = EntityState.Modified;
-            LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
+            //LogChangeAsync(typeof(TEntity).Name, "Update", oldValues.ToObject(), entity);
         }
 
         public void TruncateEntity()

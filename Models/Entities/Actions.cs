@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -14,9 +15,11 @@ namespace Models.Entities
             ActionDocuments = new HashSet<ActionDocuments>();
         }
         public int Id { get; set; }
+        [MaxLength(512)]
         public string ActionTaken { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? ActionDate { get; set; }
+        [MaxLength(1024)]
         public string Remarks { get; set; }
         public bool? IsSend { get; set; }
         public RequestType RequestType { get; set; }

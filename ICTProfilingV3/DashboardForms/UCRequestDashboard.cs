@@ -3,6 +3,7 @@ using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Native;
 using EntityManager.Managers.User;
 using Helpers.Interfaces;
+using ICTProfilingV3.DashboardForms.TicketToolForms;
 using ICTProfilingV3.UsersForms;
 using Models.Entities;
 using Models.Enums;
@@ -260,6 +261,15 @@ namespace ICTProfilingV3.DashboardForms
             deTo.EditValue = null;
 
             LoadData();
+        }
+
+        private void chartReqActed_ObjectSelected(object sender, HotTrackEventArgs e)
+        {
+            if (e.HitInfo.Series == null) return;
+            var res = (TicketStatus)Enum.Parse(typeof(TicketStatus), e.HitInfo.Series.ToString(), true);
+
+            var frm = new frmShowTickets(res);
+            frm.ShowDialog();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -20,6 +21,7 @@ namespace Models.Entities
         public DateTime? RequestDate { get; set; }
         public CommunicationType CommunicationType { get; set; }
         public long? SignatoryId { get; set; }
+        [MaxLength(1024)]
         public string Subject { get; set; }
         public TicketStatus? Status { get; set; }
         public string CreatedById { get; set; }

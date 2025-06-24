@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
@@ -11,7 +12,9 @@ namespace Models.Entities
     {
         public int Id { get; set; }
         public int? ItemNo { get; set; }
+        [MaxLength(1024)]
         public string Description { get; set; }
+        [MaxLength(1024)]
         public string Remarks { get; set; }
         public int? Quantity { get; set; }
         public Unit Unit { get; set; }
@@ -20,6 +23,7 @@ namespace Models.Entities
         public decimal? ProposedBudget { get; set; }
         public string Purpose { get; set; }
         public bool? IsActive { get; set; }
+        [MaxLength(128)]
         public string SerialNo { get; set; }
         public int? ModelId { get; set; }
 

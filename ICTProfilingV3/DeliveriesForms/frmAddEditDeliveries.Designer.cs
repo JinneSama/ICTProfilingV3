@@ -35,11 +35,6 @@
             this.txtPONo = new DevExpress.XtraEditors.TextEdit();
             this.slueDeliveredBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
@@ -51,11 +46,6 @@
             this.txtRequestedBy = new DevExpress.XtraEditors.TextEdit();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -67,12 +57,28 @@
             this.txtDeliveryReceipt = new DevExpress.XtraEditors.TextEdit();
             this.slueSupplierName = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.panelEquipmentSpecs = new DevExpress.XtraEditors.PanelControl();
+            this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPONo.Properties)).BeginInit();
@@ -94,6 +100,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.slueSupplierName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelEquipmentSpecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
+            this.pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -114,9 +124,9 @@
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.txtRequestedBy);
             this.groupControl1.Controls.Add(this.slueEmployee);
-            this.groupControl1.Location = new System.Drawing.Point(12, 43);
+            this.groupControl1.Location = new System.Drawing.Point(12, 80);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(488, 222);
+            this.groupControl1.Size = new System.Drawing.Size(488, 169);
             this.groupControl1.TabIndex = 84;
             this.groupControl1.Text = "Requesting Office";
             // 
@@ -128,7 +138,7 @@
             this.btnOFMIS.Appearance.Options.UseBackColor = true;
             this.btnOFMIS.Appearance.Options.UseForeColor = true;
             this.btnOFMIS.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.bodetails_16x162;
-            this.btnOFMIS.Location = new System.Drawing.Point(411, 51);
+            this.btnOFMIS.Location = new System.Drawing.Point(411, 48);
             this.btnOFMIS.Margin = new System.Windows.Forms.Padding(2);
             this.btnOFMIS.Name = "btnOFMIS";
             this.btnOFMIS.Size = new System.Drawing.Size(63, 20);
@@ -140,7 +150,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 125);
+            this.labelControl1.Location = new System.Drawing.Point(12, 117);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(38, 15);
             this.labelControl1.TabIndex = 70;
@@ -148,7 +158,7 @@
             // 
             // txtPONo
             // 
-            this.txtPONo.Location = new System.Drawing.Point(120, 121);
+            this.txtPONo.Location = new System.Drawing.Point(120, 115);
             this.txtPONo.Margin = new System.Windows.Forms.Padding(2);
             this.txtPONo.Name = "txtPONo";
             this.txtPONo.Size = new System.Drawing.Size(286, 20);
@@ -156,7 +166,7 @@
             // 
             // slueDeliveredBy
             // 
-            this.slueDeliveredBy.Location = new System.Drawing.Point(120, 145);
+            this.slueDeliveredBy.Location = new System.Drawing.Point(120, 136);
             this.slueDeliveredBy.Name = "slueDeliveredBy";
             this.slueDeliveredBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.slueDeliveredBy.Properties.Appearance.Options.UseFont = true;
@@ -182,6 +192,421 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // labelControl11
+            // 
+            this.labelControl11.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl11.Appearance.Options.UseFont = true;
+            this.labelControl11.Location = new System.Drawing.Point(11, 51);
+            this.labelControl11.Name = "labelControl11";
+            this.labelControl11.Size = new System.Drawing.Size(71, 15);
+            this.labelControl11.TabIndex = 65;
+            this.labelControl11.Text = "Requested by";
+            // 
+            // rdbtnGender
+            // 
+            this.rdbtnGender.Location = new System.Drawing.Point(120, 72);
+            this.rdbtnGender.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbtnGender.Name = "rdbtnGender";
+            this.rdbtnGender.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.rdbtnGender.Properties.Appearance.Options.UseBackColor = true;
+            this.rdbtnGender.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.rdbtnGender.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Male", "Male", true, null, "rdbtnMale"),
+            new DevExpress.XtraEditors.Controls.RadioGroupItem("Female", "Female", true, null, "rdbtnFemale")});
+            this.rdbtnGender.Size = new System.Drawing.Size(153, 18);
+            this.rdbtnGender.TabIndex = 62;
+            // 
+            // txtDate
+            // 
+            this.txtDate.EditValue = null;
+            this.txtDate.Location = new System.Drawing.Point(120, 24);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDate.Properties.Appearance.Options.UseFont = true;
+            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDate.Properties.UseReadOnlyAppearance = false;
+            this.txtDate.Size = new System.Drawing.Size(286, 22);
+            this.txtDate.TabIndex = 60;
+            // 
+            // txtContactNo
+            // 
+            this.txtContactNo.Location = new System.Drawing.Point(120, 94);
+            this.txtContactNo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtContactNo.Name = "txtContactNo";
+            this.txtContactNo.Size = new System.Drawing.Size(286, 20);
+            this.txtContactNo.TabIndex = 61;
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(12, 74);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(38, 15);
+            this.labelControl5.TabIndex = 59;
+            this.labelControl5.Text = "Gender";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Location = new System.Drawing.Point(12, 26);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(24, 15);
+            this.labelControl4.TabIndex = 58;
+            this.labelControl4.Text = "Date";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(12, 96);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(64, 15);
+            this.labelControl2.TabIndex = 57;
+            this.labelControl2.Text = "Contact No.";
+            // 
+            // labelControl6
+            // 
+            this.labelControl6.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl6.Appearance.Options.UseFont = true;
+            this.labelControl6.Location = new System.Drawing.Point(11, 139);
+            this.labelControl6.Name = "labelControl6";
+            this.labelControl6.Size = new System.Drawing.Size(96, 15);
+            this.labelControl6.TabIndex = 63;
+            this.labelControl6.Text = "Items delivered by";
+            // 
+            // txtRequestedBy
+            // 
+            this.txtRequestedBy.Location = new System.Drawing.Point(120, 47);
+            this.txtRequestedBy.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRequestedBy.Name = "txtRequestedBy";
+            this.txtRequestedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRequestedBy.Properties.Appearance.Options.UseFont = true;
+            this.txtRequestedBy.Size = new System.Drawing.Size(269, 22);
+            this.txtRequestedBy.TabIndex = 132;
+            // 
+            // slueEmployee
+            // 
+            this.slueEmployee.EditValue = "";
+            this.slueEmployee.Location = new System.Drawing.Point(120, 47);
+            this.slueEmployee.Name = "slueEmployee";
+            this.slueEmployee.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueEmployee.Properties.Appearance.Options.UseFont = true;
+            this.slueEmployee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueEmployee.Properties.DisplayMember = "Employee";
+            this.slueEmployee.Properties.NullText = "";
+            this.slueEmployee.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
+            this.slueEmployee.Properties.PopupView = this.gridView6;
+            this.slueEmployee.Properties.UseReadOnlyAppearance = false;
+            this.slueEmployee.Properties.ValueMember = "Id";
+            this.slueEmployee.Size = new System.Drawing.Size(286, 22);
+            this.slueEmployee.TabIndex = 66;
+            this.slueEmployee.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
+            // 
+            // gridView6
+            // 
+            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn15,
+            this.gridColumn16,
+            this.gridColumn17,
+            this.gridColumn18,
+            this.gridColumn19});
+            this.gridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView6.Name = "gridView6";
+            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView6.OptionsView.ShowGroupPanel = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.panel1.Controls.Add(this.labelControl16);
+            this.panel1.Controls.Add(this.lblEpisNo);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1213, 37);
+            this.panel1.TabIndex = 85;
+            // 
+            // labelControl16
+            // 
+            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControl16.Appearance.Options.UseFont = true;
+            this.labelControl16.Appearance.Options.UseForeColor = true;
+            this.labelControl16.Location = new System.Drawing.Point(24, 4);
+            this.labelControl16.Name = "labelControl16";
+            this.labelControl16.Size = new System.Drawing.Size(89, 30);
+            this.labelControl16.TabIndex = 2;
+            this.labelControl16.Text = "Deliveries";
+            // 
+            // lblEpisNo
+            // 
+            this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblEpisNo.Appearance.Options.UseFont = true;
+            this.lblEpisNo.Appearance.Options.UseForeColor = true;
+            this.lblEpisNo.Location = new System.Drawing.Point(24, 3);
+            this.lblEpisNo.Name = "lblEpisNo";
+            this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
+            this.lblEpisNo.TabIndex = 1;
+            // 
+            // groupControl2
+            // 
+            this.groupControl2.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
+            this.groupControl2.AppearanceCaption.Options.UseFont = true;
+            this.groupControl2.Controls.Add(this.labelControl12);
+            this.groupControl2.Controls.Add(this.txtDateofDelivery);
+            this.groupControl2.Controls.Add(this.labelControl7);
+            this.groupControl2.Controls.Add(this.btnAddSupplier);
+            this.groupControl2.Controls.Add(this.txtDeliveryReceipt);
+            this.groupControl2.Controls.Add(this.slueSupplierName);
+            this.groupControl2.Controls.Add(this.labelControl3);
+            this.groupControl2.Location = new System.Drawing.Point(506, 80);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(443, 169);
+            this.groupControl2.TabIndex = 86;
+            this.groupControl2.Text = "Supplier";
+            // 
+            // labelControl12
+            // 
+            this.labelControl12.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl12.Appearance.Options.UseFont = true;
+            this.labelControl12.Location = new System.Drawing.Point(12, 26);
+            this.labelControl12.Name = "labelControl12";
+            this.labelControl12.Size = new System.Drawing.Size(43, 15);
+            this.labelControl12.TabIndex = 48;
+            this.labelControl12.Text = "Supplier";
+            // 
+            // txtDateofDelivery
+            // 
+            this.txtDateofDelivery.EditValue = null;
+            this.txtDateofDelivery.Location = new System.Drawing.Point(129, 47);
+            this.txtDateofDelivery.Name = "txtDateofDelivery";
+            this.txtDateofDelivery.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateofDelivery.Properties.Appearance.Options.UseFont = true;
+            this.txtDateofDelivery.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateofDelivery.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtDateofDelivery.Size = new System.Drawing.Size(281, 22);
+            this.txtDateofDelivery.TabIndex = 51;
+            // 
+            // labelControl7
+            // 
+            this.labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl7.Appearance.Options.UseFont = true;
+            this.labelControl7.Location = new System.Drawing.Point(12, 72);
+            this.labelControl7.Name = "labelControl7";
+            this.labelControl7.Size = new System.Drawing.Size(106, 15);
+            this.labelControl7.TabIndex = 47;
+            this.labelControl7.Text = "Delivery Receipt No.";
+            // 
+            // btnAddSupplier
+            // 
+            this.btnAddSupplier.AutoSize = true;
+            this.btnAddSupplier.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.btnAddSupplier.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddSupplier.ImageOptions.Image")));
+            this.btnAddSupplier.Location = new System.Drawing.Point(415, 26);
+            this.btnAddSupplier.Name = "btnAddSupplier";
+            this.btnAddSupplier.Size = new System.Drawing.Size(18, 20);
+            this.btnAddSupplier.TabIndex = 52;
+            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
+            // 
+            // txtDeliveryReceipt
+            // 
+            this.txtDeliveryReceipt.Location = new System.Drawing.Point(129, 70);
+            this.txtDeliveryReceipt.Margin = new System.Windows.Forms.Padding(2);
+            this.txtDeliveryReceipt.Name = "txtDeliveryReceipt";
+            this.txtDeliveryReceipt.Size = new System.Drawing.Size(281, 20);
+            this.txtDeliveryReceipt.TabIndex = 46;
+            // 
+            // slueSupplierName
+            // 
+            this.slueSupplierName.Location = new System.Drawing.Point(129, 24);
+            this.slueSupplierName.Name = "slueSupplierName";
+            this.slueSupplierName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueSupplierName.Properties.Appearance.Options.UseFont = true;
+            this.slueSupplierName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueSupplierName.Properties.DisplayMember = "SupplierName";
+            this.slueSupplierName.Properties.NullText = "";
+            this.slueSupplierName.Properties.PopupView = this.gridView5;
+            this.slueSupplierName.Properties.ValueMember = "Id";
+            this.slueSupplierName.Size = new System.Drawing.Size(281, 22);
+            this.slueSupplierName.TabIndex = 49;
+            // 
+            // gridView5
+            // 
+            this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colSupplier,
+            this.colAddress});
+            this.gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView5.Name = "gridView5";
+            this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView5.OptionsView.ShowGroupPanel = false;
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(12, 48);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(83, 15);
+            this.labelControl3.TabIndex = 50;
+            this.labelControl3.Text = "Date of Delivery";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnSave.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnSave.Appearance.Options.UseBackColor = true;
+            this.btnSave.Appearance.Options.UseForeColor = true;
+            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
+            this.btnSave.Location = new System.Drawing.Point(1000, 4);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(98, 28);
+            this.btnSave.TabIndex = 88;
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnCancel.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnCancel.Appearance.Options.UseBackColor = true;
+            this.btnCancel.Appearance.Options.UseForeColor = true;
+            this.btnCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageOptions.Image")));
+            this.btnCancel.Location = new System.Drawing.Point(1102, 4);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.TabIndex = 89;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // panelEquipmentSpecs
+            // 
+            this.panelEquipmentSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelEquipmentSpecs.Location = new System.Drawing.Point(0, 309);
+            this.panelEquipmentSpecs.Name = "panelEquipmentSpecs";
+            this.panelEquipmentSpecs.Size = new System.Drawing.Size(1213, 325);
+            this.panelEquipmentSpecs.TabIndex = 90;
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BackColor2 = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BorderColor = System.Drawing.Color.Black;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.Appearance.Options.UseBorderColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnCancel);
+            this.pnlButtons.Controls.Add(this.btnSave);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 38);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(1213, 37);
+            this.pnlButtons.TabIndex = 124;
+            // 
+            // labelControl8
+            // 
+            this.labelControl8.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl8.Appearance.Options.UseFont = true;
+            this.labelControl8.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControl8.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl8.ImageOptions.Image")));
+            this.labelControl8.LineVisible = true;
+            this.labelControl8.Location = new System.Drawing.Point(15, 24);
+            this.labelControl8.Name = "labelControl8";
+            this.labelControl8.Size = new System.Drawing.Size(121, 16);
+            this.labelControl8.TabIndex = 125;
+            this.labelControl8.Text = "         Edit Equipment";
+            this.labelControl8.UseMnemonic = false;
+            // 
+            // labelControl9
+            // 
+            this.labelControl9.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl9.Appearance.Options.UseFont = true;
+            this.labelControl9.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControl9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl9.ImageOptions.Image")));
+            this.labelControl9.LineVisible = true;
+            this.labelControl9.Location = new System.Drawing.Point(165, 24);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(136, 16);
+            this.labelControl9.TabIndex = 126;
+            this.labelControl9.Text = "         Delete Equipment";
+            this.labelControl9.UseMnemonic = false;
+            // 
+            // labelControl10
+            // 
+            this.labelControl10.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl10.Appearance.Options.UseFont = true;
+            this.labelControl10.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControl10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl10.ImageOptions.Image")));
+            this.labelControl10.LineVisible = true;
+            this.labelControl10.Location = new System.Drawing.Point(330, 24);
+            this.labelControl10.Name = "labelControl10";
+            this.labelControl10.Size = new System.Drawing.Size(170, 16);
+            this.labelControl10.TabIndex = 127;
+            this.labelControl10.Text = "         Add/Edit Specifications";
+            this.labelControl10.UseMnemonic = false;
+            // 
+            // labelControl13
+            // 
+            this.labelControl13.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControl13.Appearance.Options.UseFont = true;
+            this.labelControl13.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControl13.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl13.ImageOptions.Image")));
+            this.labelControl13.LineVisible = true;
+            this.labelControl13.Location = new System.Drawing.Point(527, 24);
+            this.labelControl13.Name = "labelControl13";
+            this.labelControl13.Size = new System.Drawing.Size(183, 16);
+            this.labelControl13.TabIndex = 128;
+            this.labelControl13.Text = "         Show/Hide Specifications";
+            this.labelControl13.UseMnemonic = false;
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupControl3.AppearanceCaption.Options.UseFont = true;
+            this.groupControl3.Controls.Add(this.labelControl8);
+            this.groupControl3.Controls.Add(this.labelControl13);
+            this.groupControl3.Controls.Add(this.labelControl9);
+            this.groupControl3.Controls.Add(this.labelControl10);
+            this.groupControl3.Location = new System.Drawing.Point(0, 255);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(1213, 51);
+            this.groupControl3.TabIndex = 129;
+            this.groupControl3.Text = "Legend";
+            // 
+            // colSupplier
+            // 
+            this.colSupplier.Caption = "Supplier Name";
+            this.colSupplier.FieldName = "SupplierName";
+            this.colSupplier.Name = "colSupplier";
+            this.colSupplier.Visible = true;
+            this.colSupplier.VisibleIndex = 0;
+            // 
+            // colAddress
+            // 
+            this.colAddress.Caption = "Address";
+            this.colAddress.FieldName = "Address";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.Visible = true;
+            this.colAddress.VisibleIndex = 1;
             // 
             // gridColumn10
             // 
@@ -231,135 +656,6 @@
             this.gridColumn14.VisibleIndex = 3;
             this.gridColumn14.Width = 412;
             // 
-            // labelControl11
-            // 
-            this.labelControl11.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl11.Appearance.Options.UseFont = true;
-            this.labelControl11.Location = new System.Drawing.Point(11, 54);
-            this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(71, 15);
-            this.labelControl11.TabIndex = 65;
-            this.labelControl11.Text = "Requested by";
-            // 
-            // rdbtnGender
-            // 
-            this.rdbtnGender.Location = new System.Drawing.Point(120, 75);
-            this.rdbtnGender.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbtnGender.Name = "rdbtnGender";
-            this.rdbtnGender.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.rdbtnGender.Properties.Appearance.Options.UseBackColor = true;
-            this.rdbtnGender.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.rdbtnGender.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Male", "Male", true, null, "rdbtnMale"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Female", "Female", true, null, "rdbtnFemale")});
-            this.rdbtnGender.Size = new System.Drawing.Size(153, 18);
-            this.rdbtnGender.TabIndex = 62;
-            // 
-            // txtDate
-            // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(120, 24);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.UseReadOnlyAppearance = false;
-            this.txtDate.Size = new System.Drawing.Size(286, 22);
-            this.txtDate.TabIndex = 60;
-            // 
-            // txtContactNo
-            // 
-            this.txtContactNo.Location = new System.Drawing.Point(120, 97);
-            this.txtContactNo.Margin = new System.Windows.Forms.Padding(2);
-            this.txtContactNo.Name = "txtContactNo";
-            this.txtContactNo.Size = new System.Drawing.Size(286, 20);
-            this.txtContactNo.TabIndex = 61;
-            // 
-            // labelControl5
-            // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(12, 77);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(38, 15);
-            this.labelControl5.TabIndex = 59;
-            this.labelControl5.Text = "Gender";
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(12, 26);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(24, 15);
-            this.labelControl4.TabIndex = 58;
-            this.labelControl4.Text = "Date";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(12, 101);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(64, 15);
-            this.labelControl2.TabIndex = 57;
-            this.labelControl2.Text = "Contact No.";
-            // 
-            // labelControl6
-            // 
-            this.labelControl6.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(12, 148);
-            this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(96, 15);
-            this.labelControl6.TabIndex = 63;
-            this.labelControl6.Text = "Items delivered by";
-            // 
-            // txtRequestedBy
-            // 
-            this.txtRequestedBy.Location = new System.Drawing.Point(120, 50);
-            this.txtRequestedBy.Margin = new System.Windows.Forms.Padding(2);
-            this.txtRequestedBy.Name = "txtRequestedBy";
-            this.txtRequestedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRequestedBy.Properties.Appearance.Options.UseFont = true;
-            this.txtRequestedBy.Size = new System.Drawing.Size(269, 22);
-            this.txtRequestedBy.TabIndex = 132;
-            // 
-            // slueEmployee
-            // 
-            this.slueEmployee.EditValue = "";
-            this.slueEmployee.Location = new System.Drawing.Point(120, 50);
-            this.slueEmployee.Name = "slueEmployee";
-            this.slueEmployee.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueEmployee.Properties.Appearance.Options.UseFont = true;
-            this.slueEmployee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEmployee.Properties.DisplayMember = "Employee";
-            this.slueEmployee.Properties.NullText = "";
-            this.slueEmployee.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
-            this.slueEmployee.Properties.PopupView = this.gridView6;
-            this.slueEmployee.Properties.UseReadOnlyAppearance = false;
-            this.slueEmployee.Properties.ValueMember = "Id";
-            this.slueEmployee.Size = new System.Drawing.Size(286, 22);
-            this.slueEmployee.TabIndex = 66;
-            this.slueEmployee.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
-            // 
-            // gridView6
-            // 
-            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn15,
-            this.gridColumn16,
-            this.gridColumn17,
-            this.gridColumn18,
-            this.gridColumn19});
-            this.gridView6.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView6.Name = "gridView6";
-            this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView6.OptionsView.ShowGroupPanel = false;
-            // 
             // gridColumn15
             // 
             this.gridColumn15.Caption = "Id";
@@ -408,217 +704,21 @@
             this.gridColumn19.VisibleIndex = 3;
             this.gridColumn19.Width = 382;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.panel1.Controls.Add(this.labelControl16);
-            this.panel1.Controls.Add(this.lblEpisNo);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1213, 37);
-            this.panel1.TabIndex = 85;
-            // 
-            // labelControl16
-            // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Appearance.Options.UseForeColor = true;
-            this.labelControl16.Location = new System.Drawing.Point(24, 4);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(89, 30);
-            this.labelControl16.TabIndex = 2;
-            this.labelControl16.Text = "Deliveries";
-            // 
-            // lblEpisNo
-            // 
-            this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblEpisNo.Appearance.Options.UseFont = true;
-            this.lblEpisNo.Appearance.Options.UseForeColor = true;
-            this.lblEpisNo.Location = new System.Drawing.Point(24, 3);
-            this.lblEpisNo.Name = "lblEpisNo";
-            this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
-            this.lblEpisNo.TabIndex = 1;
-            // 
-            // groupControl2
-            // 
-            this.groupControl2.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
-            this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.Controls.Add(this.labelControl12);
-            this.groupControl2.Controls.Add(this.txtDateofDelivery);
-            this.groupControl2.Controls.Add(this.labelControl7);
-            this.groupControl2.Controls.Add(this.btnAddSupplier);
-            this.groupControl2.Controls.Add(this.txtDeliveryReceipt);
-            this.groupControl2.Controls.Add(this.slueSupplierName);
-            this.groupControl2.Controls.Add(this.labelControl3);
-            this.groupControl2.Location = new System.Drawing.Point(506, 43);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(443, 222);
-            this.groupControl2.TabIndex = 86;
-            this.groupControl2.Text = "Supplier";
-            // 
-            // labelControl12
-            // 
-            this.labelControl12.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl12.Appearance.Options.UseFont = true;
-            this.labelControl12.Location = new System.Drawing.Point(12, 26);
-            this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(43, 15);
-            this.labelControl12.TabIndex = 48;
-            this.labelControl12.Text = "Supplier";
-            // 
-            // txtDateofDelivery
-            // 
-            this.txtDateofDelivery.EditValue = null;
-            this.txtDateofDelivery.Location = new System.Drawing.Point(129, 53);
-            this.txtDateofDelivery.Name = "txtDateofDelivery";
-            this.txtDateofDelivery.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDateofDelivery.Properties.Appearance.Options.UseFont = true;
-            this.txtDateofDelivery.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateofDelivery.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateofDelivery.Size = new System.Drawing.Size(281, 22);
-            this.txtDateofDelivery.TabIndex = 51;
-            // 
-            // labelControl7
-            // 
-            this.labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl7.Appearance.Options.UseFont = true;
-            this.labelControl7.Location = new System.Drawing.Point(12, 83);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(106, 15);
-            this.labelControl7.TabIndex = 47;
-            this.labelControl7.Text = "Delivery Receipt No.";
-            // 
-            // btnAddSupplier
-            // 
-            this.btnAddSupplier.AutoSize = true;
-            this.btnAddSupplier.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.btnAddSupplier.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddSupplier.ImageOptions.Image")));
-            this.btnAddSupplier.Location = new System.Drawing.Point(396, 25);
-            this.btnAddSupplier.Name = "btnAddSupplier";
-            this.btnAddSupplier.Size = new System.Drawing.Size(18, 20);
-            this.btnAddSupplier.TabIndex = 52;
-            this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
-            // 
-            // txtDeliveryReceipt
-            // 
-            this.txtDeliveryReceipt.Location = new System.Drawing.Point(129, 81);
-            this.txtDeliveryReceipt.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDeliveryReceipt.Name = "txtDeliveryReceipt";
-            this.txtDeliveryReceipt.Size = new System.Drawing.Size(281, 20);
-            this.txtDeliveryReceipt.TabIndex = 46;
-            // 
-            // slueSupplierName
-            // 
-            this.slueSupplierName.Location = new System.Drawing.Point(129, 24);
-            this.slueSupplierName.Name = "slueSupplierName";
-            this.slueSupplierName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueSupplierName.Properties.Appearance.Options.UseFont = true;
-            this.slueSupplierName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueSupplierName.Properties.DisplayMember = "SupplierName";
-            this.slueSupplierName.Properties.NullText = "";
-            this.slueSupplierName.Properties.PopupView = this.gridView5;
-            this.slueSupplierName.Properties.ValueMember = "Id";
-            this.slueSupplierName.Size = new System.Drawing.Size(260, 22);
-            this.slueSupplierName.TabIndex = 49;
-            // 
-            // gridView5
-            // 
-            this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colSupplier,
-            this.colAddress});
-            this.gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView5.Name = "gridView5";
-            this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView5.OptionsView.ShowGroupPanel = false;
-            // 
-            // colSupplier
-            // 
-            this.colSupplier.Caption = "Supplier Name";
-            this.colSupplier.FieldName = "SupplierName";
-            this.colSupplier.Name = "colSupplier";
-            this.colSupplier.Visible = true;
-            this.colSupplier.VisibleIndex = 0;
-            // 
-            // colAddress
-            // 
-            this.colAddress.Caption = "Address";
-            this.colAddress.FieldName = "Address";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.Visible = true;
-            this.colAddress.VisibleIndex = 1;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(12, 54);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(83, 15);
-            this.labelControl3.TabIndex = 50;
-            this.labelControl3.Text = "Date of Delivery";
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnSave.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnSave.Appearance.Options.UseBackColor = true;
-            this.btnSave.Appearance.Options.UseForeColor = true;
-            this.btnSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.ImageOptions.Image")));
-            this.btnSave.Location = new System.Drawing.Point(999, 278);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(98, 28);
-            this.btnSave.TabIndex = 88;
-            this.btnSave.Text = "Save";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnCancel.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnCancel.Appearance.Options.UseBackColor = true;
-            this.btnCancel.Appearance.Options.UseForeColor = true;
-            this.btnCancel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.ImageOptions.Image")));
-            this.btnCancel.Location = new System.Drawing.Point(1101, 278);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
-            this.btnCancel.TabIndex = 89;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // panelEquipmentSpecs
-            // 
-            this.panelEquipmentSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelEquipmentSpecs.Location = new System.Drawing.Point(0, 311);
-            this.panelEquipmentSpecs.Name = "panelEquipmentSpecs";
-            this.panelEquipmentSpecs.Size = new System.Drawing.Size(1213, 324);
-            this.panelEquipmentSpecs.TabIndex = 90;
-            // 
             // frmAddEditDeliveries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 634);
+            this.Controls.Add(this.groupControl3);
+            this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.panelEquipmentSpecs);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupControl1);
             this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditDeliveries.IconOptions.Icon")));
             this.Name = "frmAddEditDeliveries";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditDeliveries_FormClosing);
             this.Load += new System.EventHandler(this.frmAddEditDeliveries_Load);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
@@ -645,6 +745,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.slueSupplierName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelEquipmentSpecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
+            this.pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            this.groupControl3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -694,5 +799,11 @@
         private DevExpress.XtraEditors.PanelControl panelEquipmentSpecs;
         private DevExpress.XtraEditors.SimpleButton btnOFMIS;
         private DevExpress.XtraEditors.TextEdit txtRequestedBy;
+        private DevExpress.XtraEditors.PanelControl pnlButtons;
+        private DevExpress.XtraEditors.LabelControl labelControl8;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
+        private DevExpress.XtraEditors.LabelControl labelControl10;
+        private DevExpress.XtraEditors.LabelControl labelControl13;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
     }
 }

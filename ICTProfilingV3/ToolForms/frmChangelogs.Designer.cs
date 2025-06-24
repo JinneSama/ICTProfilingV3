@@ -37,6 +37,7 @@
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement2 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement3 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement4 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChangelogs));
             this.colDateCreated = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.colChanges = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.rteChanges = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
@@ -233,6 +234,7 @@
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.gcChangelogs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmChangelogs.IconOptions.Icon")));
             this.Name = "frmChangelogs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.rteChanges)).EndInit();
