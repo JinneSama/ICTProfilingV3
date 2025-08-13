@@ -1,46 +1,50 @@
 ﻿using Helpers.Interfaces;
-using Helpers.NetworkFolder;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class frmAssignTicket : BaseClasses.BaseForm, IModifyTicketStatus
+    public partial class frmAssignTicket : BaseForm, IModifyTicketStatus
     {
+        private readonly IStaffService _staffService;
+        private readonly ITicketRequestService _ticketService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork unitOfWork;
-        private HTTPNetworkFolder networkFolder;
-        private readonly TicketRequest ticket;
-        public frmAssignTicket(TicketRequest ticket)
+        private readonly UserStore _userStore;
+
+        private int _ticketId;
+        private RequestType _requestType;
+        public frmAssignTicket(IStaffService staffService, ITicketRequestService ticketService, UserStore userStore, IServiceProvider serviceProvider)
         {
-            InitializeComponent();
+            _staffService = staffService;
+            _ticketService = ticketService;
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
             unitOfWork = new UnitOfWork();
-            networkFolder = new HTTPNetworkFolder();
-            this.ticket = ticket;
+            InitializeComponent();
+        }
+
+        public void SetTicket(int ticketId, RequestType requestType)
+        {
+            _ticketId = ticketId;
+            _requestType = requestType;
         }
         private async Task LoadStaff()
         {
-            var staffList = unitOfWork.ITStaffRepo.FindAllAsync(x => x.Users.IsDeleted == false, x => x.TicketRequests, x => x.Users).ToList().OrderBy(x => x.Users.FullName);
-            var staffViewModels = new List<StaffViewModel>();
-            foreach (var staff in staffList)
-            {
-                //var image = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
-                staffViewModels.Add(new StaffViewModel
-                {
-                    Staff = staff,
-                    UserId = staff.UserId
-                    //Image = image
-                });
-            }
-            gcStaff.DataSource = staffViewModels.ToList();
+            var staffDTM = _staffService.GetStaffDTM();
+            gcStaff.DataSource = staffDTM;
         }
         private async void frmAssignTicket_Load(object sender, System.EventArgs e)
         {
@@ -69,19 +73,20 @@ namespace ICTProfilingV3.TicketRequestForms
             await UpdateTicket(row);
             this.Close();
 
-            var actionType = new Models.Models.ActionType
+            var actionType = new ActionType
             {
-                Id = ticket.Id,
-                RequestType = ticket.RequestType
+                Id = _ticketId,
+                RequestType = _requestType
             };
 
-            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, row.Users);
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
             frm.ShowDialog();
         }
 
         private async Task UpdateTicket(StaffViewModel staffViewModel)
         {
-            var _ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == ticket.Id);
+            var _ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == _ticketId);
             if (_ticket == null) return;
 
             _ticket.StaffId = staffViewModel.Staff.Id;
@@ -127,7 +132,7 @@ namespace ICTProfilingV3.TicketRequestForms
             {
                 Status = status,
                 DateStatusChanged = DateTime.Now,
-                ChangedByUserId = UserStore.UserId,
+                ChangedByUserId = _userStore.UserId,
                 TicketRequestId = Id
             };
             unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);

@@ -1,16 +1,17 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraRichEdit.Layout;
 using Helpers.Interfaces;
 using Helpers.Utility;
-using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.ReportForms;
-using ICTProfilingV3.TicketRequestForms;
+using ICTProfilingV3.TechSpecsForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.HRMISEntites;
-using Models.Managers.User;
-using Models.ReportViewModel;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,12 +22,15 @@ namespace ICTProfilingV3.MOForms
 {
     public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
-        private readonly IUCManager<Control> _ucManager;
-        public UCMOAccounts()
+        private readonly IUCManager _ucManager;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly UserStore _userStore;
+        public UCMOAccounts(IUCManager ucManager, IServiceProvider serviceProvider, UserStore userStore)
         {
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = main._ucManager;
+            _ucManager = ucManager;
             LoadData();
         }
 
@@ -78,7 +82,8 @@ namespace ICTProfilingV3.MOForms
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
-            var frm = new frmAddEditAccountUsers(row.MOAccount);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditAccountUsers>();
+            frm.InitForm(row.MOAccount, null);
             frm.ShowDialog();
 
             LoadData();
@@ -92,10 +97,9 @@ namespace ICTProfilingV3.MOForms
 
         private void btnUserRequest_Click(object sender, EventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(btnUserRequest.Name, new UCMOAccountUserRequests()
-            {
-                Dock = DockStyle.Fill
-            },null);
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCMOAccountUserRequests>>();
+            navigation.NavigateTo(mainForm.mainPanel);
         }
 
         private void hplRedirect_Click(object sender, EventArgs e)
@@ -105,11 +109,9 @@ namespace ICTProfilingV3.MOForms
             var row = gridLogs.GetDetailView(masterRowHandle, 0) as GridView;
             var detailRow = (AccountUsers)row.GetRow(rowHandle);
 
-            _ucManager.ShowUCSystemDetails(hplRedirect.Name, new UCMOAccountUserRequests()
-            {
-                Dock = DockStyle.Fill,
-                filterText = detailRow.MOAccountUser.Id.ToString()
-            }, new string[] {"filterText"});
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCMOAccountUserRequests>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = detailRow.MOAccountUser.Id.ToString());
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -127,7 +129,7 @@ namespace ICTProfilingV3.MOForms
             {
                 MOAccountsViewModel = accounts,
                 DatePrinted = DateTime.Now,
-                PrintedBy = UserStore.Username
+                PrintedBy = _userStore.Username
             };
 
             var rptM365 = new rptM365

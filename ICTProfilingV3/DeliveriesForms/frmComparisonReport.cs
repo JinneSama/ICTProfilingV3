@@ -1,37 +1,43 @@
 ﻿using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
-using EntityManager.Managers.User;
 using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using DevExpress.XtraGrid.Views.Base;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Models.HRMISEntites;
 using ICTProfilingV3.ReportForms;
 using System.Collections.Generic;
-using Models.ReportViewModel;
-using Models.Managers.User;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.Services.Employees;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
     public partial class frmComparisonReport : BaseForm
     {
+        private readonly UserStore _userStore;
         private Deliveries deliveries;
         private IICTUserManager userManager;
         private IUnitOfWork unitOfWork;
 
         private bool IsDetail = false;
-        public frmComparisonReport(Deliveries deliveries)
+        public frmComparisonReport(UserStore userStore)
         {
             InitializeComponent();
             userManager = new ICTUserManager();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
+        }
+
+        public void InitForm(Deliveries deliveries = null)
+        {
             this.deliveries = deliveries;
         }
 
@@ -289,11 +295,11 @@ namespace ICTProfilingV3.DeliveriesForms
                 EpisNo = "EPiS-" + deliveries.TicketRequest.Id.ToString(),
                 TechInspectedDate = txtInspectedDate.DateTime,
                 ComparisonReportSpecs = cr.ComparisonReportSpecs,
-                PreparedBy = cr.PreparedByUser,
-                ReviewedBy = cr.ReviewedByUser,
-                NotedBy = cr.NotedByUser,
+                PreparedBy = cr?.PreparedByUser,
+                ReviewedBy = cr?.ReviewedByUser,
+                NotedBy = cr?.NotedByUser,
                 DatePrinted = DateTime.Now,
-                PrintedBy = UserStore.Username
+                PrintedBy = _userStore?.Username
             };
 
             var rptCR = new rptComparisonReport

@@ -1,6 +1,6 @@
 ﻿using ICTProfilingV3.BaseClasses;
-using Models.HRMISEntites;
-using Models.ViewModels;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 using System.Linq;
 
 namespace ICTProfilingV3.PGNForms

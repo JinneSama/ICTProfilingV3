@@ -39,16 +39,27 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.slueNotedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slueReviewedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.sluePreparedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.lblNotedBy = new DevExpress.XtraEditors.LabelControl();
             this.lblReviewedBy = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtRequestedByDivision = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChiefPos = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChief = new DevExpress.XtraEditors.TextEdit();
@@ -73,22 +84,6 @@
             this.checkEditForReplacement = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
-            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -122,8 +117,6 @@
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -267,6 +260,22 @@
             this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView5.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "Employee";
+            this.gridColumn18.FieldName = "FullName";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 0;
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "Position";
+            this.gridColumn19.FieldName = "Position";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 1;
+            // 
             // slueReviewedBy
             // 
             this.slueReviewedBy.EditValue = "0";
@@ -293,6 +302,22 @@
             this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Employee";
+            this.gridColumn16.FieldName = "FullName";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 0;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "Position";
+            this.gridColumn17.FieldName = "Position";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 1;
+            // 
             // sluePreparedBy
             // 
             this.sluePreparedBy.Location = new System.Drawing.Point(97, 25);
@@ -317,6 +342,22 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "Employee";
+            this.gridColumn14.FieldName = "FullName";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 0;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "Position";
+            this.gridColumn15.FieldName = "Position";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 1;
             // 
             // lblNotedBy
             // 
@@ -406,6 +447,54 @@
             this.gridView6.Name = "gridView6";
             this.gridView6.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView6.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Id";
+            this.gridColumn1.FieldName = "EmpId";
+            this.gridColumn1.MinWidth = 15;
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Width = 56;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Employee";
+            this.gridColumn2.FieldName = "Employee";
+            this.gridColumn2.MinWidth = 225;
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 0;
+            this.gridColumn2.Width = 225;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Position";
+            this.gridColumn3.FieldName = "Position";
+            this.gridColumn3.MinWidth = 202;
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 1;
+            this.gridColumn3.Width = 202;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "Office";
+            this.gridColumn4.FieldName = "Office";
+            this.gridColumn4.MinWidth = 67;
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 2;
+            this.gridColumn4.Width = 67;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Division";
+            this.gridColumn5.FieldName = "Division";
+            this.gridColumn5.MinWidth = 382;
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 3;
+            this.gridColumn5.Width = 382;
             // 
             // txtRequestedByDivision
             // 
@@ -554,10 +643,10 @@
             this.groupRequestedSpecs.Appearance.Options.UseFont = true;
             this.groupRequestedSpecs.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupRequestedSpecs.AppearanceCaption.Options.UseFont = true;
-            this.groupRequestedSpecs.Location = new System.Drawing.Point(0, 373);
+            this.groupRequestedSpecs.Location = new System.Drawing.Point(0, 316);
             this.groupRequestedSpecs.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupRequestedSpecs.Name = "groupRequestedSpecs";
-            this.groupRequestedSpecs.Size = new System.Drawing.Size(1134, 316);
+            this.groupRequestedSpecs.Size = new System.Drawing.Size(1134, 373);
             this.groupRequestedSpecs.TabIndex = 119;
             this.groupRequestedSpecs.Text = "Summary of Requested Specs";
             // 
@@ -672,180 +761,11 @@
             this.pnlButtons.Size = new System.Drawing.Size(1134, 37);
             this.pnlButtons.TabIndex = 123;
             // 
-            // gridColumn18
-            // 
-            this.gridColumn18.Caption = "Employee";
-            this.gridColumn18.FieldName = "FullName";
-            this.gridColumn18.Name = "gridColumn18";
-            this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 0;
-            // 
-            // gridColumn19
-            // 
-            this.gridColumn19.Caption = "Position";
-            this.gridColumn19.FieldName = "Position";
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 1;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Employee";
-            this.gridColumn16.FieldName = "FullName";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 0;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Position";
-            this.gridColumn17.FieldName = "Position";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 1;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "Employee";
-            this.gridColumn14.FieldName = "FullName";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 0;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "Position";
-            this.gridColumn15.FieldName = "Position";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 1;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Id";
-            this.gridColumn1.FieldName = "EmpId";
-            this.gridColumn1.MinWidth = 15;
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Width = 56;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Employee";
-            this.gridColumn2.FieldName = "Employee";
-            this.gridColumn2.MinWidth = 225;
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 0;
-            this.gridColumn2.Width = 225;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Position";
-            this.gridColumn3.FieldName = "Position";
-            this.gridColumn3.MinWidth = 202;
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 1;
-            this.gridColumn3.Width = 202;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.Caption = "Office";
-            this.gridColumn4.FieldName = "Office";
-            this.gridColumn4.MinWidth = 67;
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 2;
-            this.gridColumn4.Width = 67;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Division";
-            this.gridColumn5.FieldName = "Division";
-            this.gridColumn5.MinWidth = 382;
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 3;
-            this.gridColumn5.Width = 382;
-            // 
-            // groupControl4
-            // 
-            this.groupControl4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl4.AppearanceCaption.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupControl4.AppearanceCaption.Options.UseFont = true;
-            this.groupControl4.Controls.Add(this.labelControl2);
-            this.groupControl4.Controls.Add(this.labelControl13);
-            this.groupControl4.Controls.Add(this.labelControl9);
-            this.groupControl4.Controls.Add(this.labelControl10);
-            this.groupControl4.Location = new System.Drawing.Point(0, 316);
-            this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(1134, 51);
-            this.groupControl4.TabIndex = 130;
-            this.groupControl4.Text = "Legend";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelControl2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl2.ImageOptions.Image")));
-            this.labelControl2.LineVisible = true;
-            this.labelControl2.Location = new System.Drawing.Point(15, 24);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(121, 16);
-            this.labelControl2.TabIndex = 125;
-            this.labelControl2.Text = "         Edit Equipment";
-            this.labelControl2.UseMnemonic = false;
-            // 
-            // labelControl13
-            // 
-            this.labelControl13.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl13.Appearance.Options.UseFont = true;
-            this.labelControl13.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelControl13.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl13.ImageOptions.Image")));
-            this.labelControl13.LineVisible = true;
-            this.labelControl13.Location = new System.Drawing.Point(527, 24);
-            this.labelControl13.Name = "labelControl13";
-            this.labelControl13.Size = new System.Drawing.Size(183, 16);
-            this.labelControl13.TabIndex = 128;
-            this.labelControl13.Text = "         Show/Hide Specifications";
-            this.labelControl13.UseMnemonic = false;
-            // 
-            // labelControl9
-            // 
-            this.labelControl9.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl9.Appearance.Options.UseFont = true;
-            this.labelControl9.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelControl9.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl9.ImageOptions.Image")));
-            this.labelControl9.LineVisible = true;
-            this.labelControl9.Location = new System.Drawing.Point(165, 24);
-            this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(136, 16);
-            this.labelControl9.TabIndex = 126;
-            this.labelControl9.Text = "         Delete Equipment";
-            this.labelControl9.UseMnemonic = false;
-            // 
-            // labelControl10
-            // 
-            this.labelControl10.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl10.Appearance.Options.UseFont = true;
-            this.labelControl10.ImageOptions.Alignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelControl10.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("labelControl10.ImageOptions.Image")));
-            this.labelControl10.LineVisible = true;
-            this.labelControl10.Location = new System.Drawing.Point(330, 24);
-            this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(170, 16);
-            this.labelControl10.TabIndex = 127;
-            this.labelControl10.Text = "         Add/Edit Specifications";
-            this.labelControl10.UseMnemonic = false;
-            // 
             // frmAddEditTechSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 689);
-            this.Controls.Add(this.groupControl4);
             this.Controls.Add(this.pnlButtons);
             this.Controls.Add(this.groupControl3);
             this.Controls.Add(this.groupRequestedSpecs);
@@ -894,9 +814,6 @@
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            this.groupControl4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -958,10 +875,5 @@
         private DevExpress.XtraEditors.CheckEdit checkEditForReplacement;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.PanelControl pnlButtons;
-        private DevExpress.XtraEditors.GroupControl groupControl4;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl labelControl13;
-        private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.LabelControl labelControl10;
     }
 }

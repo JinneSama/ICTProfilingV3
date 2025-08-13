@@ -38,11 +38,11 @@
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions5 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject17 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject18 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject19 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject20 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.staffPanel = new DevExpress.XtraEditors.PanelControl();
@@ -55,19 +55,6 @@
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
-            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
-            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.slueTaskOf = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.deTo = new DevExpress.XtraEditors.DateEdit();
-            this.label4 = new System.Windows.Forms.Label();
-            this.deFrom = new DevExpress.XtraEditors.DateEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.gcTechSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridTechSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTicket = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -85,18 +72,12 @@
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
             this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.checkEditForReplacement = new DevExpress.XtraEditors.CheckEdit();
             this.txtRequestedByDivision = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChiefPos = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChief = new DevExpress.XtraEditors.TextEdit();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.txtRequestedByEmployeeName = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestedByOffice = new DevExpress.XtraEditors.TextEdit();
-            this.checkEditRequestLetter = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPR = new DevExpress.XtraEditors.CheckEdit();
             this.txtRequestedByPos = new DevExpress.XtraEditors.TextEdit();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
@@ -105,6 +86,12 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.checkEditForReplacement = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditRequestLetter = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditApprovedPR = new DevExpress.XtraEditors.CheckEdit();
             this.spbTicketStatus = new DevExpress.XtraEditors.StepProgressBar();
             this.stepAssigned = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
@@ -129,20 +116,29 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabRequestedSpecs = new DevExpress.XtraTab.XtraTabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.slueEquipment = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ceCompleted = new DevExpress.XtraEditors.CheckEdit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
+            this.slueTaskOf = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
+            this.deTo = new DevExpress.XtraEditors.DateEdit();
+            this.label4 = new System.Windows.Forms.Label();
+            this.deFrom = new DevExpress.XtraEditors.DateEdit();
+            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
@@ -152,22 +148,22 @@
             this.tabDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByDivision.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChiefPos.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChief.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByEmployeeName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
@@ -181,6 +177,16 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // colStatus
@@ -333,178 +339,12 @@
             // 
             this.pnlDeliveries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.pnlDeliveries.Controls.Add(this.gcTechSpecs);
             this.pnlDeliveries.Controls.Add(this.panel2);
+            this.pnlDeliveries.Controls.Add(this.gcTechSpecs);
             this.pnlDeliveries.Location = new System.Drawing.Point(0, 39);
             this.pnlDeliveries.Name = "pnlDeliveries";
             this.pnlDeliveries.Size = new System.Drawing.Size(578, 675);
             this.pnlDeliveries.TabIndex = 110;
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.Controls.Add(this.btnFilterbyDate);
-            this.panel2.Controls.Add(this.btnRefresh);
-            this.panel2.Controls.Add(this.radioGroup1);
-            this.panel2.Controls.Add(this.slueTaskOf);
-            this.panel2.Controls.Add(this.deTo);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.deFrom);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(2, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(576, 64);
-            this.panel2.TabIndex = 86;
-            // 
-            // btnFilterbyDate
-            // 
-            this.btnFilterbyDate.Appearance.BackColor = System.Drawing.Color.Turquoise;
-            this.btnFilterbyDate.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnFilterbyDate.Appearance.Options.UseBackColor = true;
-            this.btnFilterbyDate.Appearance.Options.UseForeColor = true;
-            this.btnFilterbyDate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.adateoccurring_16x161;
-            this.btnFilterbyDate.Location = new System.Drawing.Point(478, 32);
-            this.btnFilterbyDate.Margin = new System.Windows.Forms.Padding(2);
-            this.btnFilterbyDate.Name = "btnFilterbyDate";
-            this.btnFilterbyDate.Size = new System.Drawing.Size(91, 28);
-            this.btnFilterbyDate.TabIndex = 119;
-            this.btnFilterbyDate.Text = "Filter By Date";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Appearance.BackColor = System.Drawing.Color.Turquoise;
-            this.btnRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnRefresh.Appearance.Options.UseBackColor = true;
-            this.btnRefresh.Appearance.Options.UseForeColor = true;
-            this.btnRefresh.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.refresh2_16x161;
-            this.btnRefresh.Location = new System.Drawing.Point(478, 3);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(91, 28);
-            this.btnRefresh.TabIndex = 118;
-            this.btnRefresh.Text = "Refresh";
-            // 
-            // radioGroup1
-            // 
-            this.radioGroup1.Location = new System.Drawing.Point(245, 11);
-            this.radioGroup1.Margin = new System.Windows.Forms.Padding(2);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.radioGroup1.Properties.Appearance.Options.UseBackColor = true;
-            this.radioGroup1.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Released", "Released", true, null, "rdbtnReleased"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("Recorded", "Recorded", true, null, "rdbtnRecorded"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem("All", "(All)", true, null, "rdbtnAll")});
-            this.radioGroup1.Size = new System.Drawing.Size(273, 18);
-            this.radioGroup1.TabIndex = 110;
-            // 
-            // slueTaskOf
-            // 
-            this.slueTaskOf.Location = new System.Drawing.Point(52, 10);
-            this.slueTaskOf.Name = "slueTaskOf";
-            this.slueTaskOf.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueTaskOf.Properties.Appearance.Options.UseFont = true;
-            this.slueTaskOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueTaskOf.Properties.DisplayMember = "FullName";
-            this.slueTaskOf.Properties.NullText = "(All)";
-            this.slueTaskOf.Properties.PopupView = this.gridView1;
-            this.slueTaskOf.Properties.ValueMember = "Id";
-            this.slueTaskOf.Size = new System.Drawing.Size(185, 22);
-            this.slueTaskOf.TabIndex = 109;
-            // 
-            // gridView1
-            // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn2,
-            this.gridColumn9});
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Employee";
-            this.gridColumn2.FieldName = "FullName";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 0;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "Position";
-            this.gridColumn9.FieldName = "Position";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            // 
-            // deTo
-            // 
-            this.deTo.EditValue = null;
-            this.deTo.Location = new System.Drawing.Point(279, 33);
-            this.deTo.Name = "deTo";
-            this.deTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deTo.Properties.Appearance.Options.UseFont = true;
-            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTo.Properties.NullText = "(All)";
-            this.deTo.Size = new System.Drawing.Size(185, 22);
-            this.deTo.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(251, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "To:";
-            // 
-            // deFrom
-            // 
-            this.deFrom.EditValue = null;
-            this.deFrom.Location = new System.Drawing.Point(52, 33);
-            this.deFrom.Name = "deFrom";
-            this.deFrom.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deFrom.Properties.Appearance.Options.UseFont = true;
-            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.NullText = "(All)";
-            this.deFrom.Size = new System.Drawing.Size(185, 22);
-            this.deFrom.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(8, 36);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "From:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(8, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Staff:";
             // 
             // gcTechSpecs
             // 
@@ -516,14 +356,14 @@
             this.gcTechSpecs.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcTechSpecs.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcTechSpecs.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            this.gcTechSpecs.Location = new System.Drawing.Point(2, 2);
+            this.gcTechSpecs.Location = new System.Drawing.Point(0, 87);
             this.gcTechSpecs.MainView = this.gridTechSpecs;
             this.gcTechSpecs.Name = "gcTechSpecs";
             this.gcTechSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDelete,
             this.hplTicket,
             this.hplRepair});
-            this.gcTechSpecs.Size = new System.Drawing.Size(574, 671);
+            this.gcTechSpecs.Size = new System.Drawing.Size(576, 586);
             this.gcTechSpecs.TabIndex = 0;
             this.gcTechSpecs.UseEmbeddedNavigator = true;
             this.gcTechSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -589,6 +429,7 @@
             this.gridTechSpecs.GridControl = this.gcTechSpecs;
             this.gridTechSpecs.Name = "gridTechSpecs";
             this.gridTechSpecs.OptionsFind.AlwaysVisible = true;
+            this.gridTechSpecs.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gridTechSpecs.OptionsView.ShowGroupPanel = false;
             this.gridTechSpecs.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridTechSpecs_FocusedRowObjectChanged);
             // 
@@ -658,9 +499,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions5.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions5, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject17, serializableAppearanceObject18, serializableAppearanceObject19, serializableAppearanceObject20, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -714,7 +555,7 @@
             // tabEvaluation
             // 
             this.tabEvaluation.Name = "tabEvaluation";
-            this.tabEvaluation.Size = new System.Drawing.Size(1147, 277);
+            this.tabEvaluation.Size = new System.Drawing.Size(1147, 122);
             this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // groupControl3
@@ -743,15 +584,6 @@
             this.groupControl3.Size = new System.Drawing.Size(412, 218);
             this.groupControl3.TabIndex = 112;
             this.groupControl3.Text = "Requesting Office";
-            // 
-            // checkEditForReplacement
-            // 
-            this.checkEditForReplacement.Location = new System.Drawing.Point(117, 71);
-            this.checkEditForReplacement.Name = "checkEditForReplacement";
-            this.checkEditForReplacement.Properties.Caption = "For Replacement";
-            this.checkEditForReplacement.Properties.ReadOnly = true;
-            this.checkEditForReplacement.Size = new System.Drawing.Size(107, 19);
-            this.checkEditForReplacement.TabIndex = 109;
             // 
             // txtRequestedByDivision
             // 
@@ -812,51 +644,6 @@
             this.txtRequestedByOffice.Properties.UseReadOnlyAppearance = false;
             this.txtRequestedByOffice.Size = new System.Drawing.Size(53, 20);
             this.txtRequestedByOffice.TabIndex = 93;
-            // 
-            // checkEditRequestLetter
-            // 
-            this.checkEditRequestLetter.Location = new System.Drawing.Point(117, 47);
-            this.checkEditRequestLetter.Name = "checkEditRequestLetter";
-            this.checkEditRequestLetter.Properties.Caption = "Request Letter";
-            this.checkEditRequestLetter.Properties.ReadOnly = true;
-            this.checkEditRequestLetter.Size = new System.Drawing.Size(107, 19);
-            this.checkEditRequestLetter.TabIndex = 92;
-            // 
-            // checkEditApprovedPPMP
-            // 
-            this.checkEditApprovedPPMP.Location = new System.Drawing.Point(117, 21);
-            this.checkEditApprovedPPMP.Name = "checkEditApprovedPPMP";
-            this.checkEditApprovedPPMP.Properties.Caption = "Approved PPMP";
-            this.checkEditApprovedPPMP.Properties.ReadOnly = true;
-            this.checkEditApprovedPPMP.Size = new System.Drawing.Size(107, 19);
-            this.checkEditApprovedPPMP.TabIndex = 91;
-            // 
-            // checkEditApprovedAIP
-            // 
-            this.checkEditApprovedAIP.Location = new System.Drawing.Point(16, 71);
-            this.checkEditApprovedAIP.Name = "checkEditApprovedAIP";
-            this.checkEditApprovedAIP.Properties.Caption = "Approved AIP";
-            this.checkEditApprovedAIP.Properties.ReadOnly = true;
-            this.checkEditApprovedAIP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAIP.TabIndex = 90;
-            // 
-            // checkEditApprovedAPP
-            // 
-            this.checkEditApprovedAPP.Location = new System.Drawing.Point(16, 46);
-            this.checkEditApprovedAPP.Name = "checkEditApprovedAPP";
-            this.checkEditApprovedAPP.Properties.Caption = "Approved APP";
-            this.checkEditApprovedAPP.Properties.ReadOnly = true;
-            this.checkEditApprovedAPP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAPP.TabIndex = 89;
-            // 
-            // checkEditApprovedPR
-            // 
-            this.checkEditApprovedPR.Location = new System.Drawing.Point(16, 21);
-            this.checkEditApprovedPR.Name = "checkEditApprovedPR";
-            this.checkEditApprovedPR.Properties.Caption = "Approved PR";
-            this.checkEditApprovedPR.Properties.ReadOnly = true;
-            this.checkEditApprovedPR.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedPR.TabIndex = 88;
             // 
             // txtRequestedByPos
             // 
@@ -948,6 +735,60 @@
             this.labelControl2.Size = new System.Drawing.Size(64, 15);
             this.labelControl2.TabIndex = 80;
             this.labelControl2.Text = "Contact No.";
+            // 
+            // checkEditForReplacement
+            // 
+            this.checkEditForReplacement.Location = new System.Drawing.Point(117, 71);
+            this.checkEditForReplacement.Name = "checkEditForReplacement";
+            this.checkEditForReplacement.Properties.Caption = "For Replacement";
+            this.checkEditForReplacement.Properties.ReadOnly = true;
+            this.checkEditForReplacement.Size = new System.Drawing.Size(107, 19);
+            this.checkEditForReplacement.TabIndex = 109;
+            // 
+            // checkEditRequestLetter
+            // 
+            this.checkEditRequestLetter.Location = new System.Drawing.Point(117, 47);
+            this.checkEditRequestLetter.Name = "checkEditRequestLetter";
+            this.checkEditRequestLetter.Properties.Caption = "Request Letter";
+            this.checkEditRequestLetter.Properties.ReadOnly = true;
+            this.checkEditRequestLetter.Size = new System.Drawing.Size(107, 19);
+            this.checkEditRequestLetter.TabIndex = 92;
+            // 
+            // checkEditApprovedPPMP
+            // 
+            this.checkEditApprovedPPMP.Location = new System.Drawing.Point(117, 21);
+            this.checkEditApprovedPPMP.Name = "checkEditApprovedPPMP";
+            this.checkEditApprovedPPMP.Properties.Caption = "Approved PPMP";
+            this.checkEditApprovedPPMP.Properties.ReadOnly = true;
+            this.checkEditApprovedPPMP.Size = new System.Drawing.Size(107, 19);
+            this.checkEditApprovedPPMP.TabIndex = 91;
+            // 
+            // checkEditApprovedAIP
+            // 
+            this.checkEditApprovedAIP.Location = new System.Drawing.Point(16, 71);
+            this.checkEditApprovedAIP.Name = "checkEditApprovedAIP";
+            this.checkEditApprovedAIP.Properties.Caption = "Approved AIP";
+            this.checkEditApprovedAIP.Properties.ReadOnly = true;
+            this.checkEditApprovedAIP.Size = new System.Drawing.Size(95, 19);
+            this.checkEditApprovedAIP.TabIndex = 90;
+            // 
+            // checkEditApprovedAPP
+            // 
+            this.checkEditApprovedAPP.Location = new System.Drawing.Point(16, 46);
+            this.checkEditApprovedAPP.Name = "checkEditApprovedAPP";
+            this.checkEditApprovedAPP.Properties.Caption = "Approved APP";
+            this.checkEditApprovedAPP.Properties.ReadOnly = true;
+            this.checkEditApprovedAPP.Size = new System.Drawing.Size(95, 19);
+            this.checkEditApprovedAPP.TabIndex = 89;
+            // 
+            // checkEditApprovedPR
+            // 
+            this.checkEditApprovedPR.Location = new System.Drawing.Point(16, 21);
+            this.checkEditApprovedPR.Name = "checkEditApprovedPR";
+            this.checkEditApprovedPR.Properties.Caption = "Approved PR";
+            this.checkEditApprovedPR.Properties.ReadOnly = true;
+            this.checkEditApprovedPR.Size = new System.Drawing.Size(95, 19);
+            this.checkEditApprovedPR.TabIndex = 88;
             // 
             // spbTicketStatus
             // 
@@ -1202,6 +1043,218 @@
             this.tabRequestedSpecs.Size = new System.Drawing.Size(1147, 220);
             this.tabRequestedSpecs.Text = "Specifications";
             // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel2.Controls.Add(this.slueEquipment);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.ceCompleted);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btnFilterbyDate);
+            this.panel2.Controls.Add(this.slueTaskOf);
+            this.panel2.Controls.Add(this.btnRefresh);
+            this.panel2.Controls.Add(this.deTo);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.deFrom);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Location = new System.Drawing.Point(0, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(578, 79);
+            this.panel2.TabIndex = 88;
+            // 
+            // slueEquipment
+            // 
+            this.slueEquipment.Location = new System.Drawing.Point(79, 28);
+            this.slueEquipment.Name = "slueEquipment";
+            this.slueEquipment.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.slueEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.slueEquipment.Properties.Appearance.Options.UseFont = true;
+            this.slueEquipment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueEquipment.Properties.DisplayMember = "EquipmentName";
+            this.slueEquipment.Properties.NullText = "(All)";
+            this.slueEquipment.Properties.PopupView = this.searchLookUpEdit1View;
+            this.slueEquipment.Properties.ValueMember = "EquipmentName";
+            this.slueEquipment.Size = new System.Drawing.Size(185, 22);
+            this.slueEquipment.TabIndex = 125;
+            this.slueEquipment.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn13});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "Equipment";
+            this.gridColumn13.FieldName = "EquipmentName";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(5, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 15);
+            this.label7.TabIndex = 124;
+            this.label7.Text = "Equipment:";
+            // 
+            // ceCompleted
+            // 
+            this.ceCompleted.Location = new System.Drawing.Point(296, 30);
+            this.ceCompleted.Name = "ceCompleted";
+            this.ceCompleted.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.ceCompleted.Properties.Appearance.Options.UseForeColor = true;
+            this.ceCompleted.Properties.Caption = "Show Completed";
+            this.ceCompleted.Size = new System.Drawing.Size(118, 19);
+            this.ceCompleted.TabIndex = 126;
+            this.ceCompleted.CheckedChanged += new System.EventHandler(this.ceCompleted_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(35, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Staff:";
+            // 
+            // btnFilterbyDate
+            // 
+            this.btnFilterbyDate.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnFilterbyDate.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnFilterbyDate.Appearance.Options.UseBackColor = true;
+            this.btnFilterbyDate.Appearance.Options.UseForeColor = true;
+            this.btnFilterbyDate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.adateoccurring_16x161;
+            this.btnFilterbyDate.Location = new System.Drawing.Point(482, 5);
+            this.btnFilterbyDate.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFilterbyDate.Name = "btnFilterbyDate";
+            this.btnFilterbyDate.Size = new System.Drawing.Size(89, 22);
+            this.btnFilterbyDate.TabIndex = 119;
+            this.btnFilterbyDate.Text = "Filter By Date";
+            this.btnFilterbyDate.Click += new System.EventHandler(this.btnFilterbyDate_Click);
+            // 
+            // slueTaskOf
+            // 
+            this.slueTaskOf.Location = new System.Drawing.Point(79, 51);
+            this.slueTaskOf.Name = "slueTaskOf";
+            this.slueTaskOf.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueTaskOf.Properties.Appearance.Options.UseFont = true;
+            this.slueTaskOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueTaskOf.Properties.DisplayMember = "FullName";
+            this.slueTaskOf.Properties.NullText = "(All)";
+            this.slueTaskOf.Properties.PopupView = this.gridView1;
+            this.slueTaskOf.Properties.ValueMember = "Id";
+            this.slueTaskOf.Size = new System.Drawing.Size(185, 22);
+            this.slueTaskOf.TabIndex = 109;
+            this.slueTaskOf.EditValueChanged += new System.EventHandler(this.slueTaskOf_EditValueChanged);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Employee";
+            this.gridColumn1.FieldName = "FullName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Position";
+            this.gridColumn2.FieldName = "Position";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnRefresh.Appearance.Options.UseBackColor = true;
+            this.btnRefresh.Appearance.Options.UseForeColor = true;
+            this.btnRefresh.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.refresh2_16x161;
+            this.btnRefresh.Location = new System.Drawing.Point(482, 28);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(89, 22);
+            this.btnRefresh.TabIndex = 118;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // deTo
+            // 
+            this.deTo.EditValue = null;
+            this.deTo.Location = new System.Drawing.Point(296, 5);
+            this.deTo.Name = "deTo";
+            this.deTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deTo.Properties.Appearance.Options.UseFont = true;
+            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTo.Properties.NullText = "(All)";
+            this.deTo.Size = new System.Drawing.Size(185, 22);
+            this.deTo.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(268, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(22, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "To:";
+            // 
+            // deFrom
+            // 
+            this.deFrom.EditValue = null;
+            this.deFrom.Location = new System.Drawing.Point(79, 5);
+            this.deFrom.Name = "deFrom";
+            this.deFrom.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deFrom.Properties.Appearance.Options.UseFont = true;
+            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.NullText = "(All)";
+            this.deFrom.Size = new System.Drawing.Size(185, 22);
+            this.deFrom.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(35, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "From:";
+            // 
             // UCTechSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1226,15 +1279,6 @@
             this.pnlButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).EndInit();
             this.pnlDeliveries.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
@@ -1245,22 +1289,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             this.groupControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByDivision.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChiefPos.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChief.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByEmployeeName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
@@ -1275,6 +1319,17 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1334,19 +1389,6 @@
         private DevExpress.XtraEditors.StepProgressBarItem stepForRelease;
         private DevExpress.XtraEditors.StepProgressBarItem stepCompleted;
         private DevExpress.XtraEditors.PanelControl staffPanel;
-        private System.Windows.Forms.Panel panel2;
-        private DevExpress.XtraEditors.SimpleButton btnFilterbyDate;
-        private DevExpress.XtraEditors.SimpleButton btnRefresh;
-        private DevExpress.XtraEditors.RadioGroup radioGroup1;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueTaskOf;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraEditors.DateEdit deTo;
-        private System.Windows.Forms.Label label4;
-        private DevExpress.XtraEditors.DateEdit deFrom;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private DevExpress.XtraTab.XtraTabPage tabEvaluation;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.SearchLookUpEdit slueNotedBy;
@@ -1367,5 +1409,22 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage tabRequestedSpecs;
+        private System.Windows.Forms.Panel panel2;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueEquipment;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private System.Windows.Forms.Label label7;
+        private DevExpress.XtraEditors.CheckEdit ceCompleted;
+        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.SimpleButton btnFilterbyDate;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueTaskOf;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.SimpleButton btnRefresh;
+        private DevExpress.XtraEditors.DateEdit deTo;
+        private System.Windows.Forms.Label label4;
+        private DevExpress.XtraEditors.DateEdit deFrom;
+        private System.Windows.Forms.Label label3;
     }
 }

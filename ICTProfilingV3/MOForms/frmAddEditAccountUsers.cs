@@ -1,13 +1,13 @@
 ﻿using DevExpress.Utils.Drawing;
 using DevExpress.XtraRichEdit.Model.History;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.Services.Employees;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,26 +17,32 @@ namespace ICTProfilingV3.MOForms
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;
-        private readonly MOAccountUsers moAccountUser;
-        private readonly MOAccounts mOAccount;
+        private MOAccountUsers moAccountUser;
+        private MOAccounts mOAccount;
+        private readonly UserStore _userStore;
+        private readonly UserStore userStore;
 
-        public frmAddEditAccountUsers(MOAccounts mOAccount)
+        public frmAddEditAccountUsers(UserStore userStoer)
         {
+            _userStore = userStoer;
             InitializeComponent();
-            saveType = SaveType.Insert;
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            this.mOAccount = mOAccount;
         }
 
-        public frmAddEditAccountUsers(MOAccountUsers moAccountUser)
+        public void InitForm(MOAccounts mOAccount = null, MOAccountUsers moAccountUser = null)
         {
-            InitializeComponent();
-            this.moAccountUser = moAccountUser;
-            saveType = SaveType.Update;
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
-            LoadDetails();
+            if(mOAccount == null)
+            {
+                saveType = SaveType.Update;
+                this.moAccountUser = moAccountUser;
+                LoadDetails();
+            }
+            else
+            {
+                saveType = SaveType.Insert;
+                this.mOAccount = mOAccount;
+            }
         }
 
         private void LoadDetails()
@@ -110,7 +116,7 @@ namespace ICTProfilingV3.MOForms
                 AccountUser = (long)slueUser.EditValue,
                 Description = txtDescription.Text,
                 MOAccountId = mOAccount.Id,
-                CreatedById = UserStore.UserId
+                CreatedById = _userStore.UserId
             };
             unitOfWork.MOAccountUserRepo.Insert(user);
             unitOfWork.Save();
@@ -121,7 +127,7 @@ namespace ICTProfilingV3.MOForms
             var user = await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == moAccountUser.Id);
             if (user == null) return;
 
-            user.DateCreated = DateTime.Now;
+          
             user.DateOfInstallation = deInstallationDate.DateTime;
             user.ProcuredDate = deProcuredDate.DateTime;
             user.DeviceNo = (int)spinDeviceNo.Value;

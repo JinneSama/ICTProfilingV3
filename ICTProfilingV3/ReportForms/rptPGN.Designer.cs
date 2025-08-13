@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.ReportViewModel;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptPGN
     {
@@ -445,7 +447,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.ReportViewModel.PGNReportViewModel);
+            this.objectDataSource1.DataSource = typeof(PGNReportViewModel);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // GroupFooter1

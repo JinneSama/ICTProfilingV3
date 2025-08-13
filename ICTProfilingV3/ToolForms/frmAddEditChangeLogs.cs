@@ -1,8 +1,8 @@
-﻿using Helpers.NetworkFolder;
+﻿using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
 using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
 using Models.Repository;
 using System;
 using System.Linq;
@@ -14,32 +14,30 @@ namespace ICTProfilingV3.ToolForms
     {
         private IUnitOfWork unitOfWork;
         private SaveType saveType;
-        private readonly ChangeLogs changelogs;
+        private ChangeLogs changelogs;
         private readonly HTTPNetworkFolder httpNetworkFolder;
+        private readonly UserStore _userStore;
 
-        public frmAddEditChangeLogs()
+        public frmAddEditChangeLogs(UserStore userStore)
         {
+            _userStore = userStore;
             InitializeComponent();
             httpNetworkFolder = new HTTPNetworkFolder();
             unitOfWork = new UnitOfWork();
-            saveType = SaveType.Insert;
-            LoadInsertDetails();
         }
 
-        public frmAddEditChangeLogs(ChangeLogs changelogs)
+        public void InitForm(ChangeLogs changelogs = null)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            httpNetworkFolder = new HTTPNetworkFolder();
             saveType = SaveType.Update;
             this.changelogs = changelogs;
-            LoadDetails();
+            if (changelogs == null) LoadInsertDetails(); 
+            else LoadDetails();
         }
 
         private void LoadInsertDetails()
         {
             var lastVersion = unitOfWork.ChangeLogsRepo.GetAll().ToList()?.LastOrDefault() ?? null;
-
+            saveType = SaveType.Insert;
             string version;
             if (lastVersion == null) version = "1.0.0.1";
             else version = GetVersion(lastVersion.Version);
@@ -57,6 +55,7 @@ namespace ICTProfilingV3.ToolForms
 
         private async void LoadDetails()
         {
+            saveType = SaveType.Insert;
             txtVersion.Text = changelogs.Version;
             memoChanges.Text = changelogs.Changelogs;
             var img = await httpNetworkFolder.DownloadFile(changelogs.ImageName);
@@ -77,7 +76,7 @@ namespace ICTProfilingV3.ToolForms
             {
                 Version = txtVersion.Text,
                 DateCreated = DateTime.Now,
-                UserId = UserStore.UserId,
+                UserId = _userStore.UserId,
                 Changelogs = memoChanges.Text,
                 ImageName = txtVersion.Text + ".jpeg",
             };

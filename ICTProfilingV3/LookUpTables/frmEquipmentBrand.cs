@@ -2,10 +2,10 @@
 using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.Equipments;
 using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

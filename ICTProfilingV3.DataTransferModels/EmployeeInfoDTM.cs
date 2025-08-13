@@ -1,4 +1,4 @@
-﻿using Models.ViewModels;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
 
 namespace ICTProfilingV3.DataTransferModels
 {
@@ -6,5 +6,6 @@ namespace ICTProfilingV3.DataTransferModels
     {
         public EmployeesViewModel Requestor { get; set; }
         public EmployeesViewModel Chief { get; set; }
+        public EmployeesViewModel DeliveredBy { get; set; }
     }
 }

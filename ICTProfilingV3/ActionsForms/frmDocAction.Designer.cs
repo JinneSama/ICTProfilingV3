@@ -41,9 +41,6 @@
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-            this.btnAttach = new DevExpress.XtraEditors.SimpleButton();
-            this.txtAttachFiles = new DevExpress.XtraEditors.TextEdit();
             this.lueTicketStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.btnNewActionTaken = new DevExpress.XtraEditors.SimpleButton();
             this.btnRouteTo = new DevExpress.XtraEditors.SimpleButton();
@@ -58,8 +55,8 @@
             this.deActionDate = new DevExpress.XtraEditors.DateEdit();
             this.lueActionTaken = new DevExpress.XtraEditors.LookUpEdit();
             this.txtRoutedTo = new DevExpress.XtraEditors.TextEdit();
+            this.btnLastAction = new DevExpress.XtraEditors.SimpleButton();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAttachFiles.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueTicketStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueProgram.Properties)).BeginInit();
@@ -118,7 +115,7 @@
             // 
             this.labelControl2.Location = new System.Drawing.Point(11, 102);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(61, 13);
+            this.labelControl2.Size = new System.Drawing.Size(60, 13);
             this.labelControl2.TabIndex = 85;
             this.labelControl2.Text = "Main Activity";
             // 
@@ -126,7 +123,7 @@
             // 
             this.labelControl3.Location = new System.Drawing.Point(11, 123);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(36, 13);
+            this.labelControl3.Size = new System.Drawing.Size(34, 13);
             this.labelControl3.TabIndex = 87;
             this.labelControl3.Text = "Activity";
             // 
@@ -134,7 +131,7 @@
             // 
             this.labelControl4.Location = new System.Drawing.Point(11, 144);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(57, 13);
+            this.labelControl4.Size = new System.Drawing.Size(56, 13);
             this.labelControl4.TabIndex = 89;
             this.labelControl4.Text = "Sub Activity";
             // 
@@ -142,7 +139,7 @@
             // 
             this.labelControl5.Location = new System.Drawing.Point(11, 81);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(40, 13);
+            this.labelControl5.Size = new System.Drawing.Size(39, 13);
             this.labelControl5.TabIndex = 91;
             this.labelControl5.Text = "Program";
             // 
@@ -150,7 +147,7 @@
             // 
             this.labelControl6.Location = new System.Drawing.Point(11, 173);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(62, 13);
+            this.labelControl6.Size = new System.Drawing.Size(64, 13);
             this.labelControl6.TabIndex = 93;
             this.labelControl6.Text = "Action Taken";
             // 
@@ -158,62 +155,29 @@
             // 
             this.labelControl7.Location = new System.Drawing.Point(11, 214);
             this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(44, 13);
+            this.labelControl7.Size = new System.Drawing.Size(45, 13);
             this.labelControl7.TabIndex = 95;
             this.labelControl7.Text = "Route To";
             // 
             // labelControl8
             // 
-            this.labelControl8.Location = new System.Drawing.Point(11, 297);
+            this.labelControl8.Location = new System.Drawing.Point(11, 258);
             this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(57, 26);
+            this.labelControl8.Size = new System.Drawing.Size(54, 26);
             this.labelControl8.TabIndex = 97;
             this.labelControl8.Text = "Remarks/\r\nInstructions";
             // 
             // labelControl9
             // 
-            this.labelControl9.Location = new System.Drawing.Point(11, 335);
+            this.labelControl9.Location = new System.Drawing.Point(11, 296);
             this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(62, 13);
+            this.labelControl9.Size = new System.Drawing.Size(63, 13);
             this.labelControl9.TabIndex = 99;
             this.labelControl9.Text = "Ticket Status";
             // 
-            // labelControl10
-            // 
-            this.labelControl10.Location = new System.Drawing.Point(12, 253);
-            this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(56, 13);
-            this.labelControl10.TabIndex = 101;
-            this.labelControl10.Text = "Attach Files";
-            // 
-            // btnAttach
-            // 
-            this.btnAttach.Appearance.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAttach.Appearance.Options.UseFont = true;
-            this.btnAttach.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-            this.btnAttach.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.attachment_16x16;
-            this.btnAttach.Location = new System.Drawing.Point(555, 240);
-            this.btnAttach.Name = "btnAttach";
-            this.btnAttach.Size = new System.Drawing.Size(63, 38);
-            this.btnAttach.TabIndex = 102;
-            this.btnAttach.Text = "Attach";
-            this.btnAttach.Click += new System.EventHandler(this.btnAttach_Click);
-            // 
-            // txtAttachFiles
-            // 
-            this.txtAttachFiles.Location = new System.Drawing.Point(101, 240);
-            this.txtAttachFiles.Name = "txtAttachFiles";
-            this.txtAttachFiles.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.txtAttachFiles.Properties.Appearance.Options.UseFont = true;
-            this.txtAttachFiles.Properties.AutoHeight = false;
-            this.txtAttachFiles.Properties.ReadOnly = true;
-            this.txtAttachFiles.Properties.UseReadOnlyAppearance = false;
-            this.txtAttachFiles.Size = new System.Drawing.Size(453, 38);
-            this.txtAttachFiles.TabIndex = 100;
-            // 
             // lueTicketStatus
             // 
-            this.lueTicketStatus.Location = new System.Drawing.Point(101, 332);
+            this.lueTicketStatus.Location = new System.Drawing.Point(101, 293);
             this.lueTicketStatus.Name = "lueTicketStatus";
             this.lueTicketStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -260,7 +224,7 @@
             this.btnSaveAndSend.Appearance.Options.UseBackColor = true;
             this.btnSaveAndSend.Appearance.Options.UseForeColor = true;
             this.btnSaveAndSend.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.export_16x16;
-            this.btnSaveAndSend.Location = new System.Drawing.Point(237, 354);
+            this.btnSaveAndSend.Location = new System.Drawing.Point(237, 315);
             this.btnSaveAndSend.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveAndSend.Name = "btnSaveAndSend";
             this.btnSaveAndSend.Size = new System.Drawing.Size(139, 28);
@@ -276,7 +240,7 @@
             this.btnSaveAndClose.Appearance.Options.UseBackColor = true;
             this.btnSaveAndClose.Appearance.Options.UseForeColor = true;
             this.btnSaveAndClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.saveandclose_16x16;
-            this.btnSaveAndClose.Location = new System.Drawing.Point(380, 354);
+            this.btnSaveAndClose.Location = new System.Drawing.Point(380, 315);
             this.btnSaveAndClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnSaveAndClose.Name = "btnSaveAndClose";
             this.btnSaveAndClose.Size = new System.Drawing.Size(137, 28);
@@ -291,8 +255,8 @@
             this.btnClose.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnClose.Appearance.Options.UseBackColor = true;
             this.btnClose.Appearance.Options.UseForeColor = true;
-            this.btnClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
-            this.btnClose.Location = new System.Drawing.Point(521, 354);
+            this.btnClose.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.ImageOptions.Image")));
+            this.btnClose.Location = new System.Drawing.Point(521, 315);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(97, 28);
@@ -302,7 +266,7 @@
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(101, 279);
+            this.txtRemarks.Location = new System.Drawing.Point(101, 240);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtRemarks.Properties.Appearance.Options.UseFont = true;
@@ -417,14 +381,28 @@
             this.txtRoutedTo.Size = new System.Drawing.Size(453, 38);
             this.txtRoutedTo.TabIndex = 6;
             // 
+            // btnLastAction
+            // 
+            this.btnLastAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLastAction.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnLastAction.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnLastAction.Appearance.Options.UseBackColor = true;
+            this.btnLastAction.Appearance.Options.UseForeColor = true;
+            this.btnLastAction.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnLastAction.ImageOptions.Image")));
+            this.btnLastAction.Location = new System.Drawing.Point(442, 55);
+            this.btnLastAction.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLastAction.Name = "btnLastAction";
+            this.btnLastAction.Size = new System.Drawing.Size(176, 22);
+            this.btnLastAction.TabIndex = 100;
+            this.btnLastAction.Text = "Last Action";
+            this.btnLastAction.Click += new System.EventHandler(this.btnLastAction_Click);
+            // 
             // frmDocAction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 391);
-            this.Controls.Add(this.btnAttach);
-            this.Controls.Add(this.labelControl10);
-            this.Controls.Add(this.txtAttachFiles);
+            this.ClientSize = new System.Drawing.Size(630, 355);
+            this.Controls.Add(this.btnLastAction);
             this.Controls.Add(this.labelControl9);
             this.Controls.Add(this.lueTicketStatus);
             this.Controls.Add(this.btnNewActionTaken);
@@ -449,13 +427,12 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lueActionTaken);
             this.Controls.Add(this.txtRoutedTo);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmDocAction.IconOptions.Icon")));
             this.Name = "frmDocAction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDocAction_FormClosing);
             this.Load += new System.EventHandler(this.frmDocAction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAttachFiles.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueTicketStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueProgram.Properties)).EndInit();
@@ -499,8 +476,6 @@
         private DevExpress.XtraEditors.SimpleButton btnRouteTo;
         private DevExpress.XtraEditors.LookUpEdit lueTicketStatus;
         private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.TextEdit txtAttachFiles;
-        private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraEditors.SimpleButton btnAttach;
+        private DevExpress.XtraEditors.SimpleButton btnLastAction;
     }
 }

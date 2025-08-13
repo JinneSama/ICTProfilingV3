@@ -1,7 +1,7 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
 using System.Drawing;
 using System.Linq;
 

@@ -1,12 +1,11 @@
-﻿using EntityManager.Managers.User;
-using Helpers.Interfaces;
-using Helpers.NetworkFolder;
-using Helpers.Security;
+﻿using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Data;
 using System.IO;

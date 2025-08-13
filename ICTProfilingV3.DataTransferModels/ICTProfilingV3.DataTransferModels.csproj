@@ -31,8 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,10 +46,86 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionDTM.cs" />
+    <Compile Include="ActionsDTM.cs" />
+    <Compile Include="ActionTreeDTM.cs" />
+    <Compile Include="CASDetailDTM.cs" />
+    <Compile Include="CASDTM.cs" />
     <Compile Include="EmployeeInfoDTM.cs" />
+    <Compile Include="EmployeeProviderAccessor.cs" />
     <Compile Include="EmployeesDTM.cs" />
+    <Compile Include="HRMISEmployeesDTO.cs" />
+    <Compile Include="IEmployeeProvider.cs" />
+    <Compile Include="Models\ActionImage.cs" />
+    <Compile Include="Models\ActionType.cs" />
+    <Compile Include="Models\BrandCount.cs" />
+    <Compile Include="Models\ChiefOfOffices.cs" />
+    <Compile Include="Models\EvaluationRating.cs" />
+    <Compile Include="Models\OFMISEmployeesModel.cs" />
+    <Compile Include="Models\QuarterlyReport.cs" />
+    <Compile Include="Models\RepairStatusCount.cs" />
+    <Compile Include="Models\RequestCount.cs" />
+    <Compile Include="Models\StaffModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="OFMISEmployeesDTO.cs" />
+    <Compile Include="PGNAccountDTM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
+    <Compile Include="ReportViewModel\ComparisonReportPrintViewModel.cs" />
+    <Compile Include="ReportViewModel\MOAccountReportViewModel.cs" />
+    <Compile Include="ReportViewModel\PGNReportViewModel.cs" />
+    <Compile Include="ReportViewModel\RepairTRViewModel.cs" />
+    <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />
+    <Compile Include="ReportViewModel\TechSpecsReportViewModel.cs" />
+    <Compile Include="ServiceModels\AuthModels\LoginRequest.cs" />
+    <Compile Include="ServiceModels\AuthModels\TokenResponse.cs" />
+    <Compile Include="ServiceModels\DTOModels\ArgumentCredentialsDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\DocumentActionsDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\FDTSPRDetailsDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\HRMISDivisionDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\HRMISEmployeesDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\HRMISOfficeDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\OFMISEmployeesDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\OFMISUsersDto.cs" />
+    <Compile Include="ServiceModels\DTOModels\PRDetailsDto.cs" />
+    <Compile Include="StaffDTM.cs" />
     <Compile Include="TicketRequestDTM.cs" />
+    <Compile Include="UsersDTM.cs" />
+    <Compile Include="ViewModels\ActionsViewModel.cs" />
+    <Compile Include="ViewModels\ActionTreeViewModel.cs" />
+    <Compile Include="ViewModels\BrandModelViewModel.cs" />
+    <Compile Include="ViewModels\BrandViewModel.cs" />
+    <Compile Include="ViewModels\CASViewModel.cs" />
+    <Compile Include="ViewModels\ChangelogsViewModel.cs" />
+    <Compile Include="ViewModels\ClientRequestViewModel.cs" />
+    <Compile Include="ViewModels\ComparisonReportViewModel.cs" />
+    <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
+    <Compile Include="ViewModels\DeliveriesViewModel.cs" />
+    <Compile Include="ViewModels\EmployeesViewModel.cs" />
+    <Compile Include="ViewModels\EquipmentSpecsViewModel.cs" />
+    <Compile Include="ViewModels\MOAccountsViewModel.cs" />
+    <Compile Include="ViewModels\PGNAccountsViewModel.cs" />
+    <Compile Include="ViewModels\PGNRequestViewModel.cs" />
+    <Compile Include="ViewModels\PPEsSpecsViewModel.cs" />
+    <Compile Include="ViewModels\PPEsViewModel.cs" />
+    <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
+    <Compile Include="ViewModels\PRViewModel.cs" />
+    <Compile Include="ViewModels\QueueViewModel.cs" />
+    <Compile Include="ViewModels\RepairViewModel.cs" />
+    <Compile Include="ViewModels\RolesViewModel.cs" />
+    <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
+    <Compile Include="ViewModels\SampleViewModel.cs" />
+    <Compile Include="ViewModels\StaffViewModel.cs" />
+    <Compile Include="ViewModels\StandardPRViewModel.cs" />
+    <Compile Include="ViewModels\TasksViewModel.cs" />
+    <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
+    <Compile Include="ViewModels\TechSpecsViewModel.cs" />
+    <Compile Include="ViewModels\TicketInfo.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\EntityManager.csproj">

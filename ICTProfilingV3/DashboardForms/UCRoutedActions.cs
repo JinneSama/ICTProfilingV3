@@ -1,20 +1,23 @@
 ﻿using DevExpress.Data.Filtering;
-using EntityManager.Managers.User;
 using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.CustomerActionSheetForms;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.MOForms;
 using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.Services.ApiUsers;
 using ICTProfilingV3.TechSpecsForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
 using Models.Models;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Data;
 using System.Linq;
@@ -26,11 +29,15 @@ namespace ICTProfilingV3.DashboardForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
-        public UCRoutedActions()
+        private readonly IServiceProvider _serviceProvider;
+        private readonly UserStore _userStore;
+        public UCRoutedActions(IServiceProvider serviceProvider, UserStore userStore)
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             userManager = new ICTUserManager();
+            _serviceProvider = serviceProvider;
+            _userStore = userStore;
             LoadDropdowns();
             LoadRoutedActions();
         }
@@ -49,7 +56,7 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadRoutedActions()
         {
-            var actions = unitOfWork.ActionsRepo.FindAllAsync(x => x.RoutedUsers.Any(r => r.Id == UserStore.UserId) && x.IsSend == true,
+            var actions = unitOfWork.ActionsRepo.FindAllAsync(x => x.RoutedUsers.Any(r => r.Id == _userStore.UserId) && x.IsSend == true,
                 x => x.Repairs,
                 x => x.Repairs.TicketRequest,
                 x => x.Deliveries.TicketRequest,
@@ -73,66 +80,62 @@ namespace ICTProfilingV3.DashboardForms
 
         private void hplControlNo_Click(object sender, EventArgs e)
         {
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
             var row = (RoutedActionsViewModel)gridRoutedActions.GetFocusedRow();
-            if (row.Actions.RequestType == RequestType.TechSpecs) NavigateToProcess(new UCTechSpecs()
+            if (row.Actions.RequestType == RequestType.TechSpecs)
             {
-                IsTechSpecs = true,
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.TechSpecsId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+                navigation.NavigateTo(mainForm.mainPanel, act =>
+                {
+                    act.filterText = row.Actions.DeliveriesId.ToString();
+                    act.IsTechSpecs = true;
+                });
+            }
 
-            if (row.Actions.RequestType == RequestType.Deliveries) NavigateToProcess(new UCDeliveries()
+            if (row.Actions.RequestType == RequestType.Deliveries)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.DeliveriesId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveries>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.DeliveriesId.ToString());
+            }
 
-            if (row.Actions.RequestType == RequestType.Repairs) NavigateToProcess(new UCRepair()
+            if (row.Actions.RequestType == RequestType.Repairs) 
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.RepairId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.RepairId.ToString());
+            };
 
-            if (row.Actions.RequestType == RequestType.CAS) NavigateToProcess(new UCCAS()
+            if (row.Actions.RequestType == RequestType.CAS)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.CustomerActionSheetId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCCAS>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.CustomerActionSheetId.ToString());
+            }
 
-            if (row.Actions.RequestType == RequestType.PR) NavigateToProcess(new UCPR()
+            if (row.Actions.RequestType == RequestType.PR)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.PurchaseRequestId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPR>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.PurchaseRequestId.ToString());
+            }
 
-            if (row.Actions.RequestType == RequestType.PGN) NavigateToProcess(new UCPGNRequests()
+            if (row.Actions.RequestType == RequestType.PGN)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.PGNRequestId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPGNRequests>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.PGNRequestId.ToString());
+            }
 
-            if (row.Actions.RequestType == RequestType.M365) NavigateToProcess(new UCMOAccountUserRequests()
+            if (row.Actions.RequestType == RequestType.M365)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.Actions.MOAccountUserId.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCMOAccountUserRequests>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Actions.MOAccountUserId.ToString());
+            }
         }
 
         private void LoadActions(ActionType actionType)
         {
             gcActions.Controls.Clear();
-            gcActions.Controls.Add(new UCActions(actionType)
-            {
-                Dock = DockStyle.Fill
-            });
-        }
-
-        private void NavigateToProcess(Control uc)
-        {
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            DisposeUC(main.mainPanel);
-
-            main.mainPanel.Controls.Add(uc);
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(actionType);
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            gcActions.Controls.Add(uc);
         }
 
         private void gridRoutedActions_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)

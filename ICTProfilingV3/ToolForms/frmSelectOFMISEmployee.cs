@@ -1,7 +1,6 @@
 ﻿using ICTProfilingV3.BaseClasses;
-using Models.Models;
-using Models.OFMISEntities;
-using Models.ViewModels;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 
 namespace ICTProfilingV3.ToolForms
 {

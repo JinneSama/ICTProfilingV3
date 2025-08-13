@@ -1,13 +1,14 @@
 ﻿using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading;
@@ -18,33 +19,37 @@ namespace ICTProfilingV3.TechSpecsForms
     public partial class frmAddEditTechSpecs : BaseForm
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly UserStore _userStore;
+        private readonly IServiceProvider _serviceProvider;
+
         private TechSpecs _techSpecs;
         private bool IsSave = false; 
         private SaveType SaveType;
         public TechSpecs RepairTechSpecs { get; set; }
-        public frmAddEditTechSpecs()
+        public frmAddEditTechSpecs(UserStore userStore, IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+            _userStore = userStore;
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            CreateTicket();
         }
-        public frmAddEditTechSpecs(Repairs repair)
+
+        public void InitForRepairForm(Repairs repair = null)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
             CreateRepairTicket(repair);
         }
 
-        public frmAddEditTechSpecs(TechSpecs ts)
+        public void InitForTSForm(TechSpecs ts = null)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            _techSpecs = ts;
-            SaveType = SaveType.Update;
-            LoadDropdowns();
-            LoadTechSpecs();
+            if (ts == null)
+                CreateTicket();
+            else
+            {
+                _techSpecs = ts;
+                SaveType = SaveType.Update;
+                LoadTechSpecs();
+            }
         }
 
         private void LoadDropdowns()
@@ -84,7 +89,7 @@ namespace ICTProfilingV3.TechSpecsForms
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.TechSpecs,
                 IsRepairTechSpecs = true,
-                CreatedBy = UserStore.UserId
+                CreatedBy = _userStore.UserId
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();
@@ -110,7 +115,8 @@ namespace ICTProfilingV3.TechSpecsForms
             {
                 DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.TechSpecs
+                RequestType = RequestType.TechSpecs,
+                CreatedBy = _userStore.UserId
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();
@@ -149,6 +155,7 @@ namespace ICTProfilingV3.TechSpecsForms
         private async Task DeleteTechSpecs()
         {
             unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
+            await unitOfWork.SaveChangesAsync();
             unitOfWork.TechSpecsRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
             await unitOfWork.SaveChangesAsync();
         }
@@ -160,13 +167,14 @@ namespace ICTProfilingV3.TechSpecsForms
             await SaveTechSpecs();
             this.Close();
             if (SaveType == SaveType.Update) return;
-            var actionType = new Models.Models.ActionType
+            var actionType = new ActionType
             {
                 Id = _techSpecs.Id,
                 RequestType = RequestType.TechSpecs
             };
 
-            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, null);
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
             frm.ShowDialog();
         }
 

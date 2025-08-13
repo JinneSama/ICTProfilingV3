@@ -1,5 +1,4 @@
-﻿using ICTMigration.ICTv2Models;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
 using Models.Repository;
@@ -24,8 +23,8 @@ namespace ICTProfilingV3.DeliveriesForms
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             _specs = specs;
-            lblEquipment.Text = specs.Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
-            lblDescription.Text = specs.Model.Brand.EquipmentSpecs.Description;
+            lblEquipment.Text = specs?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName ?? "";
+            lblDescription.Text = specs?.Model?.Brand?.EquipmentSpecs?.Description ?? "";
             LoadSpecs();
         }
         private void LoadSpecs()

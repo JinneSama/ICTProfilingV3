@@ -37,7 +37,6 @@
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement1 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement2 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
             DevExpress.XtraGrid.Views.Tile.TileViewItemElement tileViewItemElement3 = new DevExpress.XtraGrid.Views.Tile.TileViewItemElement();
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
@@ -97,6 +96,7 @@
             this.tileViewColumn1 = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.tileViewColumn2 = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.tileViewColumn3 = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tvRequestInfo = new DevExpress.XtraGrid.Views.Tile.TileView();
             this.tileViewColumn4 = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.tileViewColumn5 = new DevExpress.XtraGrid.Columns.TileViewColumn();
@@ -118,7 +118,6 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnInfo = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -227,6 +226,18 @@
             this.tileViewColumn3.Name = "tileViewColumn3";
             this.tileViewColumn3.Visible = true;
             this.tileViewColumn3.VisibleIndex = 2;
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.OptionsColumn.AllowEdit = false;
+            this.colStatus.OptionsColumn.AllowFocus = false;
+            this.colStatus.OptionsColumn.FixedWidth = true;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 0;
+            this.colStatus.Width = 103;
             // 
             // tvRequestInfo
             // 
@@ -359,10 +370,6 @@
             this.gcTARequests.EmbeddedNavigator.Buttons.Edit.Visible = false;
             this.gcTARequests.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
             this.gcTARequests.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.tvRequestInfo;
-            gridLevelNode1.RelationName = "Info";
-            this.gcTARequests.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
             this.gcTARequests.Location = new System.Drawing.Point(0, 99);
             this.gcTARequests.MainView = this.gridRequest;
             this.gcTARequests.Name = "gcTARequests";
@@ -551,18 +558,6 @@
             this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 133;
             // 
-            // colStatus
-            // 
-            this.colStatus.Caption = "Status";
-            this.colStatus.FieldName = "Status";
-            this.colStatus.Name = "colStatus";
-            this.colStatus.OptionsColumn.AllowEdit = false;
-            this.colStatus.OptionsColumn.AllowFocus = false;
-            this.colStatus.OptionsColumn.FixedWidth = true;
-            this.colStatus.Visible = true;
-            this.colStatus.VisibleIndex = 0;
-            this.colStatus.Width = 103;
-            // 
             // gridColumn8
             // 
             this.gridColumn8.ColumnEdit = this.btnDelete;
@@ -637,6 +632,7 @@
             // 
             // gridColumn12
             // 
+            this.gridColumn12.Caption = "Equipment";
             this.gridColumn12.FieldName = "Equipments";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.OptionsColumn.AllowEdit = false;

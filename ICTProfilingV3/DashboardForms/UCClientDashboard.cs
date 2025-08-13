@@ -1,4 +1,5 @@
 ﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DataTransferModels.Models;
 using Models.Entities;
 using Models.Models;
 using Models.Repository;
@@ -56,11 +57,6 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadActions(ActionType actionType)
         {
-            gcActions.Controls.Clear();
-            gcActions.Controls.Add(new UCActions(actionType)
-            {
-                Dock = DockStyle.Fill
-            });
         }
     }
 

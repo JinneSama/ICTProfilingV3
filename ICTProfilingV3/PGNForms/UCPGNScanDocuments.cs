@@ -2,9 +2,9 @@
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using Helpers.Interfaces;
-using Helpers.NetworkFolder;
 using Helpers.Scanner;
-using Helpers.Security;
+using ICTProfilingV3.API.FilesApi;
+using ICTProfilingV3.Utility.Security;
 using Models.Entities;
 using Models.Repository;
 using System;
@@ -33,6 +33,7 @@ namespace ICTProfilingV3.PGNForms
 
         private void LoadData()
         {
+            if (request == null) return;
             var docs = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id);
             gcScanDocs.DataSource = docs.ToList();
         }

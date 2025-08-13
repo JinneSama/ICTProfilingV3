@@ -101,8 +101,6 @@
             this.ribbonPageGroup13 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage3 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup11 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPage5 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup17 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.mainPanel = new DevExpress.XtraEditors.PanelControl();
             this.UpdateThread = new System.ComponentModel.BackgroundWorker();
@@ -172,8 +170,7 @@
             this.ribbonPage1,
             this.ribbonPage2,
             this.ribbonPage4,
-            this.ribbonPage3,
-            this.ribbonPage5});
+            this.ribbonPage3});
             this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateBack);
             this.ribbon.QuickToolbarItemLinks.Add(this.btnNavigateForward);
             this.ribbon.QuickToolbarItemLinks.Add(this.btnRefreshControl);
@@ -801,20 +798,6 @@
             this.ribbonPageGroup11.ItemLinks.Add(this.btnDashboard);
             this.ribbonPageGroup11.Name = "ribbonPageGroup11";
             // 
-            // ribbonPage5
-            // 
-            this.ribbonPage5.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup17});
-            this.ribbonPage5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("ribbonPage5.ImageOptions.Image")));
-            this.ribbonPage5.Name = "ribbonPage5";
-            this.ribbonPage5.Tag = "Removed";
-            this.ribbonPage5.Text = "DB Tools";
-            // 
-            // ribbonPageGroup17
-            // 
-            this.ribbonPageGroup17.ItemLinks.Add(this.btnLogs);
-            this.ribbonPageGroup17.Name = "ribbonPageGroup17";
-            // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.lblUpdate);
@@ -935,8 +918,6 @@
         private DevExpress.XtraBars.BarButtonItem btnNavigateForward;
         private DevExpress.XtraBars.BarButtonItem btnRefreshControl;
         private DevExpress.XtraBars.BarButtonItem btnLogs;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup17;
         private DevExpress.XtraBars.BarButtonItem btnClientRequests;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup18;
     }

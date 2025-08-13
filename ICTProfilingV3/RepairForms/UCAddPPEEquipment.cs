@@ -1,9 +1,6 @@
-﻿using DevExpress.Data.Linq.Helpers;
-using DevExpress.XtraEditors;
-using ICTProfilingV3.PPEInventoryForms;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
 using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,6 +70,9 @@ namespace ICTProfilingV3.RepairForms
             });
 
             gcEquipmentSpecs.DataSource = new BindingList<PPEsSpecsViewModel>(data.ToList());
+
+            var focusedRow = gridEquipmentSpecs.FocusedRowHandle;
+            gridEquipmentSpecs.SetMasterRowExpanded(focusedRow, true);
         }
 
         private void btnInfo_Click(object sender, EventArgs e)

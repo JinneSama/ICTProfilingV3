@@ -1,11 +1,11 @@
 ﻿using Models.Repository;
 using System.Linq;
 using System;
-using Models.ViewModels;
 using Models.Enums;
 using Models.Entities;
 using System.Threading.Tasks;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 
 namespace ICTProfilingV3.StandardPRForms
 {

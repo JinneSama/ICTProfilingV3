@@ -1,8 +1,7 @@
-﻿using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
-using ICTProfilingV3.BaseClasses;
-using Models.ViewModels;
-using System.Collections.Generic;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using System.ComponentModel;
 using System.Linq;
 using System.Security.AccessControl;

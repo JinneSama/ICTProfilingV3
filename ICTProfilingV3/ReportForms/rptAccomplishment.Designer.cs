@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.ReportViewModel;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptAccomplishment
     {
@@ -638,7 +640,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.ReportViewModel.AccomplishmentReportViewModel);
+            this.objectDataSource1.DataSource = typeof(AccomplishmentReportViewModel);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // rptAccomplishment

@@ -1,6 +1,8 @@
 ﻿using DevExpress.XtraEditors;
-using EntityManager.Managers.User;
+
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Repository;
 using System;
 using System.Collections.Generic;
@@ -17,16 +19,19 @@ namespace ICTProfilingV3.RepairForms
     public partial class frmEditSignatories : BaseForm
     {
         private readonly IICTUserManager usermanager;
-        private readonly int repairId;
+        private int repairId;
 
-        public frmEditSignatories(int repairId)
+        public frmEditSignatories()
         {
             InitializeComponent();
             usermanager = new ICTUserManager();
-            this.repairId = repairId;
             LoadDropdowns();
         }
-
+        
+        public void InitForm(int repairId)
+        {
+            this.repairId = repairId;
+        }
         private void LoadDropdowns()
         {
             var users = usermanager.GetUsers();

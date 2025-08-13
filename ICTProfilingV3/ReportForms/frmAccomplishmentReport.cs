@@ -1,9 +1,9 @@
-﻿using DevExpress.PivotGrid.OLAP.AdoWrappers;
-using EntityManager.Managers.User;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Entities;
-using Models.Managers.User;
-using Models.ReportViewModel;
 using Models.Repository;
 using System;
 using System.Collections.Generic;
@@ -16,11 +16,13 @@ namespace ICTProfilingV3.ReportForms
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IICTUserManager userManager;
-        public frmAccomplishmentReport()
+        private readonly UserStore _userStore;
+        public frmAccomplishmentReport(UserStore userStore)
         {
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             userManager = new ICTUserManager();
+            _userStore = userStore;
         }
 
         private void LoadDropdowns()
@@ -57,7 +59,7 @@ namespace ICTProfilingV3.ReportForms
             var data = new AccomplishmentReportViewModel
             {
                 AccomplishmentPeriod = dateFrom.ToShortDateString() + " - " + dateTo.ToShortDateString(),
-                PrintedBy = UserStore.Username,
+                PrintedBy = _userStore.Username,
                 Staff = await userManager.FindUserAsync((string)slueStaff.EditValue),
                 StartDate = dateFrom,
                 EndDate = dateTo,
@@ -81,8 +83,8 @@ namespace ICTProfilingV3.ReportForms
         private void frmAccomplishmentReport_Load(object sender, EventArgs e)
         {
             LoadDropdowns();
-            sluePreparedBy.EditValue = UserStore.UserId;
-            slueStaff.EditValue = UserStore.UserId;
+            sluePreparedBy.EditValue = _userStore.UserId;
+            slueStaff.EditValue = _userStore.UserId;
         }
 
         private async void sluePreparedBy_EditValueChanged(object sender, EventArgs e)
@@ -90,7 +92,7 @@ namespace ICTProfilingV3.ReportForms
             var row = (Users)sluePreparedBy.Properties.View.GetFocusedRow();
             if (row == null)
             {
-                var usr = await unitOfWork.UsersRepo.FindAsync(x => x.Id == UserStore.UserId);
+                var usr = await unitOfWork.UsersRepo.FindAsync(x => x.Id == _userStore.UserId);
                 txtPreparedByPos.Text = usr.Position;
             }else txtPreparedByPos.Text = row.Position;
         }

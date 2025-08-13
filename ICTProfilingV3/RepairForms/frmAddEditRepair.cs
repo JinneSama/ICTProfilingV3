@@ -1,18 +1,16 @@
-﻿using DevExpress.Utils.Drawing;
-using Helpers.Interfaces;
+﻿using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
-using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,29 +21,37 @@ namespace ICTProfilingV3.RepairForms
     public partial class frmAddEditRepair : BaseForm, IModifyTicketStatus
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly SaveType saveType;
+        private SaveType saveType;
+        private readonly UserStore _userStore;
+        private readonly IServiceProvider _serviceProvider;
+
         private Repairs _Repairs;
-        private readonly int repairId;
+        private int repairId;
         private bool IsSave = false;
         private UCAddPPEEquipment UCAddPPEEquipment;
 
-        public frmAddEditRepair()
+        public frmAddEditRepair(UserStore userStore, IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
             _unitOfWork = new UnitOfWork();
-            saveType = SaveType.Insert;
-            CreateTicket();
             LoadDropdowns();
         }
 
-        public frmAddEditRepair(int repair)
+        public void InitForm(int? repair = null)
         {
-            InitializeComponent();
-            saveType = SaveType.Update;
-            IsSave = true;
-            _unitOfWork = new UnitOfWork();
-            repairId = repair;
-            LoadDropdowns();
+            if(repair == null)
+            {
+                saveType = SaveType.Insert;
+                CreateTicket();
+            }
+            else
+            {
+                saveType = SaveType.Update;
+                IsSave = true;
+                repairId = repair.Value;
+            }
         }
 
         private async Task LoadDetails()
@@ -70,7 +76,7 @@ namespace ICTProfilingV3.RepairForms
                 DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.Repairs,
-                CreatedBy = UserStore.UserId
+                CreatedBy = _userStore.UserId
             };
             _unitOfWork.TicketRequestRepo.Insert(ticket);
             _unitOfWork.Save();
@@ -91,6 +97,9 @@ namespace ICTProfilingV3.RepairForms
             var employees = HRMISEmployees.GetEmployees();
             slueEmployee.Properties.DataSource = employees;
             slueDeliveredBy.Properties.DataSource = employees;
+
+            txtDate.DateTime = DateTime.Now;
+            txtDateofDelivery.DateTime = DateTime.Now;
         }
         private async Task LoadPPEs()
         {
@@ -151,13 +160,14 @@ namespace ICTProfilingV3.RepairForms
             IsSave = true;
             this.Close();
             if (saveType == SaveType.Update) return;
-            var actionType = new Models.Models.ActionType
+            var actionType = new ActionType
             {
                 Id = _Repairs.Id,
                 RequestType = RequestType.Repairs
             };
 
-            var frm = new frmDocAction(actionType, SaveType.Insert, null, _unitOfWork, null);
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
             frm.ShowDialog();
         }
         private async Task Save()
@@ -208,11 +218,16 @@ namespace ICTProfilingV3.RepairForms
             {
                 Status = status,
                 DateStatusChanged = DateTime.Now,
-                ChangedByUserId = UserStore.UserId,
+                ChangedByUserId = _userStore.UserId,
                 TicketRequestId = Id
             };
             _unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

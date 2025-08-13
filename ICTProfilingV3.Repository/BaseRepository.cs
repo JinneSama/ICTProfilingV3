@@ -17,24 +17,45 @@ namespace ICTProfilingV3.Repository
             _context = context;
             _dbSet = _context.Set<T>();
         }
-        public Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new System.NotImplementedException();
+            if (entity == null)
+                return;
+            _dbSet.Add(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public void Delete(TKey Id)
+        {
+            var entity = _dbSet.Find(Id);
+            if (_context.Entry(entity).State == EntityState.Detached) _dbSet.Attach(entity);
+            _dbSet.Remove(entity);
+        }
+
+        public void DeleteRange(Expression<Func<T, bool>> filter)
+        {
+            var entities = _dbSet.Where(filter);
+            _dbSet.RemoveRange(entities);
         }
 
         public IQueryable<T> Fetch(Expression<Func<T, bool>> filter)
         {
-            throw new System.NotImplementedException();
+            return _dbSet.Where(filter);
         }
 
         public IQueryable<T> GetAll()
         {
-            return _dbSet.AsNoTracking();
+            return _dbSet;
         }
 
-        public Task<T> GetById(int id)
+        public async Task<T> GetById(TKey id)
         {
-            throw new System.NotImplementedException();
+            return await _dbSet.FindAsync(id);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

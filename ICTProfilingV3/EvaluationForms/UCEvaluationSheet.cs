@@ -1,6 +1,7 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
 using Models.Models;
 using Models.Repository;
 using System;
@@ -12,14 +13,19 @@ namespace ICTProfilingV3.EvaluationForms
 {
     public partial class UCEvaluationSheet : DevExpress.XtraEditors.XtraUserControl
     {
-        public readonly ActionType _evalType;
-        public UCEvaluationSheet(ActionType evalType)
+        private readonly UserStore _userStore;
+        private ActionType _evalType;
+        public UCEvaluationSheet(UserStore userStore)
         {
+            _userStore = userStore;
             InitializeComponent();
+        }
+
+        public void InitForm(ActionType evalType)
+        {
             _evalType = evalType;
             LoadEvaluation();
         }
-
         public void LoadEvaluation()
         {
             var uow = new UnitOfWork();
@@ -54,7 +60,7 @@ namespace ICTProfilingV3.EvaluationForms
                 {
                     ItemOrder = order,
                     Service = item,
-                    CreatedById = UserStore.UserId
+                    CreatedById = _userStore.UserId
                 };
                 SetProcess(sheet);
                 uow.EvaluationSheetRepo.Insert(sheet);

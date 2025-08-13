@@ -1,10 +1,11 @@
 ﻿using DevExpress.Data.Filtering;
-using ICTMigration.ICTv2Models;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
 using Models.Models;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace ICTProfilingV3.PGNForms
 {
     public partial class UCPGNRequests : DevExpress.XtraEditors.XtraUserControl
     {
+        private readonly IServiceProvider _serviceProvider;
         private IUnitOfWork unitOfWork;
         public string filterText { get; set; }
-        public UCPGNRequests()
+        public UCPGNRequests(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             LoadData();
@@ -56,14 +59,14 @@ namespace ICTProfilingV3.PGNForms
             tabAction.Controls.Clear();
 
             if (row == null) return;
-            tabAction.Controls.Add(new UCActions(new ActionType
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType
             {
                 Id = row.PGNRequest.Id,
                 RequestType = RequestType.PGN
-            })
-            {
-                Dock = DockStyle.Fill
             });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
 
         private void LoadRequestAccounts()
@@ -80,7 +83,8 @@ namespace ICTProfilingV3.PGNForms
 
         private void btnNewRequest_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditRequest();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditRequest>();
+            frm.InitForm();
             frm.ShowDialog();
 
             LoadData();
@@ -115,7 +119,8 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
             if (row == null) return;
 
-            var frm = new frmAddEditRequest(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditRequest>();
+            frm.InitForm(row);
             frm.ShowDialog();
 
             LoadData();
@@ -126,7 +131,8 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
             if (row == null) return;
 
-            var frm = new frmSelectNotee(row);
+            var frm = _serviceProvider.GetRequiredService<frmSelectNotee>();
+            frm.InitForm(row);
             frm.ShowDialog();
         }
     }

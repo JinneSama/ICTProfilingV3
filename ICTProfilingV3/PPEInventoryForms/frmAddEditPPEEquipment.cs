@@ -1,11 +1,11 @@
 ﻿using DevExpress.XtraEditors;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -3,21 +3,21 @@ using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Tile;
 using DevExpress.XtraGrid.Views.Tile.ViewInfo;
-using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.TechSpecsForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
 using Models.Models;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -29,17 +29,22 @@ namespace ICTProfilingV3.DashboardForms
     public partial class UCUserTasks : DevExpress.XtraEditors.XtraUserControl
     {
         private IUnitOfWork unitOfWork;
-        private readonly IICTUserManager userManager;
-        private readonly IICTRoleManager roleManager;
+        private readonly IICTUserManager _userManager;
+        private readonly IICTRoleManager _roleManager;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly UserStore _userStore;
         public bool FromQueue { get; set; } = false;
-        public UCUserTasks()
+        public UCUserTasks(IServiceProvider serviceProvider, UserStore userStore, IICTRoleManager roleManager,
+            IICTUserManager userManager)
         {
             InitializeComponent();
-            userManager = new ICTUserManager();
-            roleManager = new ICTRoleManager();
+            _userStore = userStore;
+            _userManager = userManager;
+            _roleManager = roleManager;
             unitOfWork = new UnitOfWork();
             InitKanban();
             LoadDropdowns();
+            _serviceProvider = serviceProvider;
         }
 
         private void LoadDropdowns()
@@ -60,10 +65,10 @@ namespace ICTProfilingV3.DashboardForms
         private void LoadActions(ActionType actionType)
         {
             fpActions.Controls.Clear();
-            fpActions.Controls.Add(new UCActions(actionType)
-            {
-                Dock = DockStyle.Fill
-            });
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(actionType);
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            fpActions.Controls.Add(uc);
         }
         private async Task CheckRole()
         {
@@ -75,16 +80,16 @@ namespace ICTProfilingV3.DashboardForms
             }
             tileTasks.OptionsDragDrop.AllowDrag = true;
 
-            var user = await userManager.FindUserAsync(UserStore.UserId);
+            var user = await _userManager.FindUserAsync(_userStore.UserId);
             if (user.Roles == null)
-                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == _userStore.UserId);
 
-            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
+            var role = await _roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
             if (role == null)
-                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+                await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == _userStore.UserId);
 
             if (role.Select(x => x.Designation).ToList().Contains(Designation.TaskAdmin)) await LoadData(true,null);
-            else await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == UserStore.UserId);
+            else await LoadData(false, x => x.IsRepairTechSpecs == null && x.ITStaff.UserId == _userStore.UserId);
         }
 
         void InitKanban()
@@ -126,7 +131,7 @@ namespace ICTProfilingV3.DashboardForms
         {
             Expression<Func<TicketRequest, bool>> filterExpression = expression ?? (x => true);
             Expression<Func<TicketRequest, bool>> filterAdminExpression = (x  => true);
-            var section = await UserStore.Section();
+            var section = await _userStore.Section();
 
             if (section == null && taskAdmin) filterAdminExpression = (x => true);
             if (taskAdmin && section != null) filterAdminExpression = x => x.ITStaff.Section == section;
@@ -190,13 +195,14 @@ namespace ICTProfilingV3.DashboardForms
             var newGroup = (TicketStatus)e.NewGroupColumnValue;
             await UpdateTicketStatus(task,newGroup);
 
-            var actionType = new Models.Models.ActionType
+            var actionType = new ActionType
             {
                 Id = task.Ticket.Id,
                 RequestType = task.Ticket.RequestType
             };
 
-            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, null);
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
             frm.ShowDialog();
         }
 
@@ -216,34 +222,29 @@ namespace ICTProfilingV3.DashboardForms
         private void btnNavigate_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var task = (TasksViewModel)tileTasks.GetFocusedRow();
-            if (task.Ticket.RequestType == RequestType.TechSpecs) NavigateToProcess(new UCTechSpecs()
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            if (task.Ticket.RequestType == RequestType.TechSpecs)
             {
-                IsTechSpecs = true,
-                Dock = DockStyle.Fill,
-                filterText = task.Ticket.Id.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+                navigation.NavigateTo(mainForm.mainPanel, act =>
+                {
+                    act.filterText = task.Ticket.Id.ToString();
+                    act.IsTechSpecs = true;
+                });
+            }
 
-            if (task.Ticket.RequestType == RequestType.Deliveries) NavigateToProcess(new UCDeliveries()
+            if (task.Ticket.RequestType == RequestType.Deliveries)
             {
-                Dock = DockStyle.Fill,
-                filterText = task.Ticket.Id.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveries>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = task.Ticket.Id.ToString());
+            };
 
-            if (task.Ticket.RequestType == RequestType.Repairs) NavigateToProcess(new UCRepair()
+            if (task.Ticket.RequestType == RequestType.Repairs)
             {
-                Dock = DockStyle.Fill,
-                filterText = task.Ticket.Id.ToString()
-            });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = task.Ticket.Id.ToString());
+            };
         }
-
-        private void NavigateToProcess(Control uc)
-        {
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            main.mainPanel.Controls.Clear();
-
-            main.mainPanel.Controls.Add(uc);
-        }
-
         private void tileTasks_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (FromQueue) return;

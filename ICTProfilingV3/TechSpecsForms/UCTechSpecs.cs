@@ -1,28 +1,26 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.Utils.Html.Internal;
-using EntityManager.Managers.User;
 using Helpers.Interfaces;
-using Helpers.NetworkFolder;
-using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.API.FilesApi;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.EvaluationForms;
-using ICTProfilingV3.PurchaseRequestForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.Services;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers.User;
-using Models.Models;
-using Models.ReportViewModel;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,20 +30,39 @@ namespace ICTProfilingV3.TechSpecsForms
 {
     public partial class UCTechSpecs : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
-        private readonly IICTUserManager userManager;
-        private readonly IUCManager<Control> _ucManager;
+        private readonly IICTUserManager _userManager;
+        private readonly IUCManager _ucManager;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IStaffService _staffService;
+        private readonly IEquipmentService _equipmentService;
+        private readonly UserStore _userStore;
         private HTTPNetworkFolder networkFolder;
         public string filterText { get; set; }
         public bool IsTechSpecs { get; set; }
-        public UCTechSpecs()
+        public UCTechSpecs(IUCManager ucManager, IServiceProvider serviceProvider, UserStore userStore,
+            IICTUserManager userManager, IStaffService staffService, IEquipmentService equipmentService)
         {
             InitializeComponent();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = new UCManager<Control>(main.mainPanel);
+            _userStore = userStore;
+            _staffService = staffService;
+            _equipmentService = equipmentService;
+            _ucManager = ucManager;
+            _serviceProvider = serviceProvider;
             networkFolder = new HTTPNetworkFolder();
-            userManager = new ICTUserManager();
-        }
+            _userManager = userManager;
+            _userStore = userStore;
 
+            LoadFilterDropdowns();
+        }
+        private void LoadFilterDropdowns()
+        {
+            var users = _staffService.GetAllStaff().
+                Select(x => x.Users).ToList();
+            slueTaskOf.Properties.DataSource = users;
+
+            slueEquipment.Properties.DataSource = _equipmentService.GetAllEquipment().ToList();
+            FilterGrid();
+        }
         private void LoadAll()
         {
             LoadTechSpecs();
@@ -53,7 +70,7 @@ namespace ICTProfilingV3.TechSpecsForms
         }
         private void LoadDropdowns()
         {
-            var users = userManager.GetUsers();
+            var users = _userManager.GetUsers();
             sluePreparedBy.Properties.DataSource = users;
             slueReviewedBy.Properties.DataSource = users;
             slueNotedBy.Properties.DataSource = users;
@@ -107,7 +124,12 @@ namespace ICTProfilingV3.TechSpecsForms
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
             var res = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.TicketRequest.StaffId != null,
-                x => x.TicketRequest, x => x.Repairs).OrderByDescending(x => x.DateRequested).ToList();
+                x => x.TicketRequest, x => x.Repairs,
+                x => x.TicketRequest.ITStaff.Users,
+                x => x.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment))
+                .OrderByDescending(x => x.DateRequested)
+                .ToList();
+
             if(IsTechSpecs) res = res.Where(x => x.TicketRequest.IsRepairTechSpecs != true).ToList();
             else res = res.Where(x => x.TicketRequest.IsRepairTechSpecs == true).ToList();
             var ts = res.Select(x => new TechSpecsViewModel
@@ -120,7 +142,9 @@ namespace ICTProfilingV3.TechSpecsForms
                 Division = HRMISEmployees.GetEmployeeById(x.ReqById)?.Division,
                 TicketId = x.TicketRequest.Id,
                 RepairId = x.Repairs.Count == 0 ? 0 : x.Repairs.FirstOrDefault().Id,
-                TechSpecs = x
+                TechSpecs = x,
+                AssignedTo = x.TicketRequest.ITStaff.Users.FullName,
+                Equipment = x.TechSpecsICTSpecs.Count == 0 ? "N/A" : string.Join(", ", x.TechSpecsICTSpecs?.Select(s => s?.EquipmentSpecs?.Equipment?.EquipmentName ?? ""))
             });
             gcTechSpecs.DataSource = new BindingList<TechSpecsViewModel>(ts.ToList());
         }
@@ -142,11 +166,9 @@ namespace ICTProfilingV3.TechSpecsForms
         private void LoadEvaluationSheet()
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
-            tabEvaluation.Controls.Clear();
-            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.TechSpecs })
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            if (row == null) return;
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCEvaluationSheet>>();
+            navigation.NavigateTo(tabEvaluation, act => act.InitForm(new ActionType { Id = row.Id, RequestType = RequestType.TechSpecs }));
         }
 
         private async void LoadStaff()
@@ -177,10 +199,10 @@ namespace ICTProfilingV3.TechSpecsForms
             tabAction.Controls.Clear();
             if (row == null) return;
 
-            tabAction.Controls.Add(new UCActions(new ActionType { Id = row.Id, RequestType = Models.Enums.RequestType.TechSpecs})
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType { Id = row.Id, RequestType = Models.Enums.RequestType.TechSpecs });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
 
         private async void btnEdit_Click(object sender, System.EventArgs e)
@@ -188,7 +210,8 @@ namespace ICTProfilingV3.TechSpecsForms
             IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
             var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.Id);
-            var frm = new frmAddEditTechSpecs(ts);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditTechSpecs>();
+            frm.InitForTSForm(ts);
             frm.ShowDialog();
         }
 
@@ -222,11 +245,9 @@ namespace ICTProfilingV3.TechSpecsForms
             var uow = new UnitOfWork();
             var pr = await uow.PurchaseRequestRepo.FindAsync(x => x.TechSpecsId == row.Id);
 
-            _ucManager.ShowUCSystemDetails(btnVerifyPR.Name + "Goto", new UCPR()
-            {
-                Dock = DockStyle.Fill,
-                filterText = pr.Id.ToString()
-            }, new string[]{ "filterText"});
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = pr.Id.ToString());
         }
 
         private async Task CreatePR(TechSpecsViewModel row)
@@ -242,18 +263,16 @@ namespace ICTProfilingV3.TechSpecsForms
                 ChiefId = res.ReqByChiefId,
                 TechSpecsId = res.Id,
                 ReqById = res.ReqById,
-                CreatedById = UserStore.UserId,
+                CreatedById = _userStore.UserId,
                 DateCreated = DateTime.Now
             };
 
             unitOfWork.PurchaseRequestRepo.Insert(pr);
             await unitOfWork.SaveChangesAsync();
 
-            _ucManager.ShowUCSystemDetails(btnVerifyPR.Name + "Create", new UCPR()
-            {
-                Dock = DockStyle.Fill,
-                filterText = pr.Id.ToString()
-            }, new string[] { "filterText" });
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = pr.Id.ToString());
         }
 
         private async void gridTechSpecs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
@@ -270,11 +289,9 @@ namespace ICTProfilingV3.TechSpecsForms
         private void hplTicket_Click(object sender, EventArgs e)
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
-            _ucManager.ShowUCSystemDetails(hplTicket.Name, new UCTARequestDashboard()
-            {
-                Dock = DockStyle.Fill,
-                filterText = row.Id.ToString()
-            }, new string[] { "filterText" });
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTARequestDashboard>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Id.ToString());
         }
 
         private async void btnPreview_Click(object sender, EventArgs e)
@@ -297,7 +314,7 @@ namespace ICTProfilingV3.TechSpecsForms
             var staff = HRMISEmployees.GetEmployeeById(ts.ReqById);
             var data = new TechSpecsReportViewModel()
             {
-                PrintedBy = UserStore.Username,
+                PrintedBy = _userStore.Username,
                 DatePrinted = DateTime.Now,
                 Office = string.Join(" ", staff?.Office, staff?.Division),
                 Chief = chief.Employee,
@@ -305,9 +322,9 @@ namespace ICTProfilingV3.TechSpecsForms
                 Staff = staff?.Employee,
                 StaffPosition = staff?.Position,
                 TechSpecs = ts,
-                PreparedBy = await userManager.FindUserAsync(ts.PreparedById),
-                ReviewedBy = await userManager.FindUserAsync(ts.ReviewedById),
-                NotedBy = await userManager.FindUserAsync(ts.NotedById),
+                PreparedBy = await _userManager.FindUserAsync(ts.PreparedById),
+                ReviewedBy = await _userManager.FindUserAsync(ts.ReviewedById),
+                NotedBy = await _userManager.FindUserAsync(ts.NotedById),
                 RepairId = ts.Repairs.Count == 0 ? 0 : ts.Repairs.FirstOrDefault().Id
             };
 
@@ -323,11 +340,9 @@ namespace ICTProfilingV3.TechSpecsForms
         private void hplRepair_Click(object sender, EventArgs e)
         {
             var row = (TechSpecsViewModel)gridTechSpecs.GetFocusedRow();
-            _ucManager.ShowUCSystemDetails(hplRepair.Name, new UCRepair()
-            {
-                Dock = DockStyle.Fill,
-                filterText = row.RepairId.ToString()
-            }, new string[] {"filterText"});
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.RepairId.ToString());
         }
 
         public void DisposeUC(Control parent)
@@ -338,6 +353,73 @@ namespace ICTProfilingV3.TechSpecsForms
                 GC.Collect();
             }
             parent.Controls.Clear();
+        }
+
+        private void slueEquipment_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void ceCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void btnFilterbyDate_Click(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            deFrom.EditValue = null;
+            deTo.EditValue = null;
+            slueEquipment.EditValue = null;
+            slueTaskOf.EditValue = null;
+            ceCompleted.Checked = false;
+
+            FilterGrid();
+        }
+        private void FilterGrid()
+        {
+            gridTechSpecs.ActiveFilterCriteria = null;
+
+            var dateFrom = deFrom.DateTime;
+            var dateTo = deTo.DateTime;
+            var equipment = (string)slueEquipment.EditValue;
+            var isCompleted = ceCompleted.Checked;
+            var row = slueTaskOf.EditValue;
+
+            var criteria = gridTechSpecs.ActiveFilterCriteria;
+
+            if (isCompleted)
+                foreach (var status in Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>())
+                    criteria = GroupOperator.Or(criteria, new BinaryOperator("Status", status));
+            else
+                foreach (var status in Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>())
+                {
+                    if (status == TicketStatus.Completed) continue;
+                    criteria = GroupOperator.Or(criteria, new BinaryOperator("Status", status));
+                }
+
+            if (slueTaskOf.EditValue != null)
+                criteria = GroupOperator.And(criteria, new BinaryOperator("AssignedTo", row));
+            if (slueEquipment.EditValue != null)
+                criteria = GroupOperator.And(criteria, new FunctionOperator(FunctionOperatorType.Contains, new OperandProperty("Equipment"), new OperandValue(equipment)));
+
+            if (deFrom.EditValue != null && deTo.EditValue != null)
+            {
+                var fromFilter = new BinaryOperator("DateCreated", dateFrom, BinaryOperatorType.GreaterOrEqual);
+                var toFilter = new BinaryOperator("DateCreated", dateTo, BinaryOperatorType.LessOrEqual);
+                criteria = GroupOperator.And(criteria, GroupOperator.And(fromFilter, toFilter));
+            }
+
+            gridTechSpecs.ActiveFilterCriteria = criteria;
         }
     }
 }

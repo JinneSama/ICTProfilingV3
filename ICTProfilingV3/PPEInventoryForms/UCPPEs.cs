@@ -1,10 +1,12 @@
 ﻿using DevExpress.Data.Filtering;
 using Helpers.Interfaces;
 using Helpers.Inventory;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
-using Models.HRMISEntites;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -15,17 +17,19 @@ namespace ICTProfilingV3.PPEInventoryForms
 {
     public partial class UCPPEs : DevExpress.XtraEditors.XtraUserControl
     {
+        private readonly IServiceProvider _serviceProvider;
         public string filterText { get; set; }
-        public UCPPEs()
+        public UCPPEs(IServiceProvider serviceProvider)
         {
             InitializeComponent();
+            _serviceProvider = serviceProvider;
             LoadDropdowns();
         }
 
         private async Task LoadPPEs()
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
-            var ppe = await unitOfWork.PPesRepo.GetAll().ToListAsync();
+            var ppe = await unitOfWork.PPesRepo.GetAll().Include(i => i.Repairs).ToListAsync();
             
             var ppeModel = ppe.Select(x => new PPEsViewModel
             {
@@ -35,7 +39,8 @@ namespace ICTProfilingV3.PPEInventoryForms
                 DateCreated = x.AquisitionDate,
                 Office = HRMISEmployees.GetEmployeeById(x.IssuedToId)?.Office,
                 Status = x?.Status,
-                IsResigned = HRMISEmployees.GetEmployeeById(x.IssuedToId)?.IsResigned ?? false
+                IsResigned = HRMISEmployees.GetEmployeeById(x.IssuedToId)?.IsResigned ?? false,
+                RepairCount = x.Repairs.Count
             });
 
             gcPPEs.DataSource = ppeModel;
@@ -48,10 +53,12 @@ namespace ICTProfilingV3.PPEInventoryForms
             gcHistory.Controls.Clear();
             if (row == null) return;
             var ppe = await unitOfWork.PPesRepo.FindAsync(x => x.Id == row.Id);
-            gcHistory.Controls.Add(new UCRepairHistory(ppe)
-            {
-                Dock = DockStyle.Fill
-            });
+
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var ucRepairHistory = _serviceProvider.GetRequiredService<UCRepairHistory>();
+            ucRepairHistory.Dock = DockStyle.Fill;
+            ucRepairHistory.SetPPE(ppe);
+            gcHistory.Controls.Add(ucRepairHistory);
         }
         private async Task LoadEquipmentSpecs()
         {
@@ -69,14 +76,6 @@ namespace ICTProfilingV3.PPEInventoryForms
         }
         private void LoadDropdowns()
         {
-            var employees = HRMISEmployees.GetEmployees();
-            slueEmployee.Properties.DataSource = employees;
-
-            cboUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
-            {
-                Unit = x
-            });
-
             cboStatus.Properties.DataSource = Enum.GetValues(typeof(PPEStatus)).Cast<PPEStatus>().Select(x => new
             {
                 Status = x
@@ -90,17 +89,13 @@ namespace ICTProfilingV3.PPEInventoryForms
             if (row == null) return;
             lblPropertyNo.Text = row.PropertyNo;
             var ppe = await uow.PPesRepo.FindAsync(x => x.Id == row.Id);
-            slueEmployee.EditValue = (long?)ppe?.IssuedToId;
+            txtEmployee.Text = HRMISEmployees.GetEmployeeById(ppe?.IssuedToId)?.Employee ?? "";
             txtContactNo.Text = ppe.ContactNo;
             rdbtnGender.SelectedIndex = (int)(ppe?.Gender ?? 0);
             txtPropertyNo.Text = ppe.PropertyNo;
             txtInvoiceDate.DateTime = ppe.AquisitionDate ?? DateTime.MinValue;
             cboStatus.EditValue = ppe.Status;
             txtRemarks.Text = ppe.Remarks;
-            spinQty.Value = (decimal)ppe.Quantity;
-            cboUnit.EditValue = (Unit)ppe.Unit;
-            spinUnitCost.Value = (decimal?)ppe.UnitValue ?? 0;
-            spintTotal.Value = (decimal?)ppe.TotalValue ?? 0;
         }
 
         private async void btnAdd_Click(object sender, System.EventArgs e)
@@ -154,11 +149,6 @@ namespace ICTProfilingV3.PPEInventoryForms
 
             await LoadPPEs();
             gridPPEs.FocusedRowHandle = handle;
-        }
-
-        private void btnCopy_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

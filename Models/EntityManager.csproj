@@ -76,8 +76,8 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.9.0.1\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Text.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Json.9.0.0\lib\net462\System.Text.Json.dll</HintPath>
@@ -167,18 +167,7 @@
     <Compile Include="Enums\TicketStatus.cs" />
     <Compile Include="Enums\Unit.cs" />
     <Compile Include="Enums\Year.cs" />
-    <Compile Include="FDTSEntities\FDTSData.cs" />
-    <Compile Include="HRMISEntites\HRMISEmployees.cs" />
     <Compile Include="Interfaces\IMachineCredentials.cs" />
-    <Compile Include="Managers\CustomTokenProvider.cs" />
-    <Compile Include="Managers\RoleManager.cs" />
-    <Compile Include="Managers\Role\ICTRoleManager.cs" />
-    <Compile Include="Interfaces\IICTRoleManager.cs" />
-    <Compile Include="Managers\UserManager.cs" />
-    <Compile Include="Managers\User\ICTUserManager.cs" />
-    <Compile Include="Interfaces\IICTUserManager.cs" />
-    <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="MappingConfigurations\MappingConfig.cs" />
     <Compile Include="Migrations\202501130535154_NewDatabaseEntries.cs" />
     <Compile Include="Migrations\202501130535154_NewDatabaseEntries.Designer.cs">
       <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
@@ -231,81 +220,17 @@
     <Compile Include="Migrations\202506100228282_DBLimitFix.Designer.cs">
       <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.cs" />
+    <Compile Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.Designer.cs">
+      <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ActionImage.cs" />
-    <Compile Include="Models\ActionType.cs" />
-    <Compile Include="Models\BrandCount.cs" />
-    <Compile Include="Models\ChiefOfOffices.cs" />
-    <Compile Include="Models\EvaluationRating.cs" />
-    <Compile Include="Models\OFMISEmployeesModel.cs" />
-    <Compile Include="Models\QuarterlyReport.cs" />
-    <Compile Include="Models\RepairStatusCount.cs" />
-    <Compile Include="Models\RequestCount.cs" />
-    <Compile Include="Models\StaffModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="OFMISEntities\OFMISEmployees.cs" />
-    <Compile Include="OFMISEntities\OFMISUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
-    <Compile Include="ReportViewModel\ComparisonReportPrintViewModel.cs" />
-    <Compile Include="ReportViewModel\MOAccountReportViewModel.cs" />
-    <Compile Include="ReportViewModel\PGNReportViewModel.cs" />
-    <Compile Include="ReportViewModel\RepairTRViewModel.cs" />
-    <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />
-    <Compile Include="ReportViewModel\TechSpecsReportViewModel.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Repository\UnitOfWork.cs" />
-    <Compile Include="Service\AuthEPiSBackend.cs" />
-    <Compile Include="Service\AuthModels\LoginRequest.cs" />
-    <Compile Include="Service\AuthModels\TokenResponse.cs" />
-    <Compile Include="Service\DTOModels\ArgumentCredentialsDto.cs" />
-    <Compile Include="Service\DTOModels\DocumentActionsDto.cs" />
-    <Compile Include="Service\DTOModels\FDTSPRDetailsDto.cs" />
-    <Compile Include="Service\DTOModels\HRMISDivisionDto.cs" />
-    <Compile Include="Service\DTOModels\HRMISEmployeesDto.cs" />
-    <Compile Include="Service\DTOModels\HRMISOfficeDto.cs" />
-    <Compile Include="Service\DTOModels\OFMISEmployeesDto.cs" />
-    <Compile Include="Service\DTOModels\OFMISUsersDto.cs" />
-    <Compile Include="Service\DTOModels\PRDetailsDto.cs" />
-    <Compile Include="Service\FDTSService.cs" />
-    <Compile Include="Service\HRMISService.cs" />
-    <Compile Include="Service\OFMISService.cs" />
-    <Compile Include="Service\TokenCache.cs" />
     <Compile Include="Utility\MachineCredentials.cs" />
-    <Compile Include="ViewModels\ActionsViewModel.cs" />
-    <Compile Include="ViewModels\ActionTreeViewModel.cs" />
-    <Compile Include="ViewModels\BrandModelViewModel.cs" />
-    <Compile Include="ViewModels\BrandViewModel.cs" />
-    <Compile Include="ViewModels\CASViewModel.cs" />
-    <Compile Include="ViewModels\ChangelogsViewModel.cs" />
-    <Compile Include="ViewModels\ClientRequestViewModel.cs" />
-    <Compile Include="ViewModels\ComparisonReportViewModel.cs" />
-    <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
-    <Compile Include="ViewModels\DeliveriesViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\EquipmentSpecsViewModel.cs" />
-    <Compile Include="ViewModels\MOAccountsViewModel.cs" />
-    <Compile Include="ViewModels\PGNAccountsViewModel.cs" />
-    <Compile Include="ViewModels\PGNRequestViewModel.cs" />
-    <Compile Include="ViewModels\PPEsSpecsViewModel.cs" />
-    <Compile Include="ViewModels\PPEsViewModel.cs" />
-    <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
-    <Compile Include="ViewModels\PRViewModel.cs" />
-    <Compile Include="ViewModels\QueueViewModel.cs" />
-    <Compile Include="ViewModels\RepairViewModel.cs" />
-    <Compile Include="ViewModels\RolesViewModel.cs" />
-    <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
-    <Compile Include="ViewModels\SampleViewModel.cs" />
-    <Compile Include="ViewModels\StaffViewModel.cs" />
-    <Compile Include="ViewModels\StandardPRViewModel.cs" />
-    <Compile Include="ViewModels\TasksViewModel.cs" />
-    <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
-    <Compile Include="ViewModels\TechSpecsViewModel.cs" />
-    <Compile Include="ViewModels\TicketInfo.cs" />
-    <Compile Include="ViewModels\TicketRequestViewModel.cs" />
-    <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -315,15 +240,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mapper\Mapper.csproj">
-      <Project>{3355023c-3f1b-48ba-b112-91fa9840cac1}</Project>
-      <Name>Mapper</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\DestModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202501130535154_NewDatabaseEntries.resx">
       <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
@@ -363,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506100228282_DBLimitFix.resx">
       <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.resx">
+      <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

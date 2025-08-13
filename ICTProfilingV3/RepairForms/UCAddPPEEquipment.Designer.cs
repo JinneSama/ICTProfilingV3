@@ -259,6 +259,8 @@
             // gridColumn20
             // 
             this.gridColumn20.Caption = "Unit Cost";
+            this.gridColumn20.DisplayFormat.FormatString = "n";
+            this.gridColumn20.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn20.FieldName = "UnitCost";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.OptionsColumn.AllowEdit = false;
@@ -270,6 +272,8 @@
             // gridColumn21
             // 
             this.gridColumn21.Caption = "Total Cost";
+            this.gridColumn21.DisplayFormat.FormatString = "n";
+            this.gridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn21.FieldName = "TotalCost";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.OptionsColumn.AllowEdit = false;

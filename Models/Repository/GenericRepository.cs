@@ -2,7 +2,6 @@
 using EntityManager.Interfaces;
 using EntityManager.Utility;
 using Models.Entities;
-using Models.Managers.User;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -107,7 +106,7 @@ namespace Models.Repository
                 NewValues = cleanedNewValues != null
                     ? JsonConvert.SerializeObject(cleanedNewValues, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
                     : null,
-                CreatedById = UserStore.UserId,
+                //CreatedById = UserStore.UserId,
                 MacAddress = _machineCredentials.GetMacAddress(),
                 PCName = _machineCredentials.GetPCName()
             };

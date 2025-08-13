@@ -2,8 +2,9 @@
 using DevExpress.Pdf.Native.BouncyCastle.Ocsp;
 using DevExpress.XtraCharts;
 using DevExpress.XtraRichEdit.API.Native;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Services.Employees;
 using Models.Entities;
-using Models.HRMISEntites;
 using Models.Models;
 using Models.Repository;
 using System;

@@ -1,8 +1,13 @@
 ﻿using DevExpress.Charts.Native;
+using DevExpress.ClipboardSource.SpreadsheetML;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.ReportForms;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -80,7 +85,41 @@ namespace ICTProfilingV3.PGNForms
 
         private void btnPreview_Click(object sender, System.EventArgs e)
         {
+            var res = unitOfWork.PGNAccountsRepo.GetAll(x => x.PGNGroupOffices,
+                x => x.PGNNonEmployee).Where(x => x.Username.StartsWith("sp.")).ToList().Select(x => new PGNAccountsViewModel
+                {
+                    PGNAccount = x
+                }).ToList();
 
+            var data = res.Select(x => new PGNAccountDTM
+            {
+                Id = x.PGNAccount.Id,
+                Name = x.Name,
+                Position = x.Position,
+                Username = x.PGNAccount.Username,
+                UserType = x.PGNAccount.UserType?.ToString(),
+                OfficeAcr = x.PGNAccount.PGNGroupOffices?.OfficeAcr,
+                Status = x.PGNAccount.Status?.ToString(),
+                SignInCount = x.PGNAccount.SignInCount ?? 0,
+                TrafficSpeed = Models.Enums.EnumHelper.GetEnumDescription(x.PGNAccount.TrafficSpeed),
+                Designation = x.PGNAccount.Designation.ToString(),
+                Password = x.PGNAccount.Password,
+                Remarks = x.PGNAccount.Remarks,
+                MacAddresses = unitOfWork.PGNMacAddressesRepo.FindAllAsync(m => m.PGNAccountId == x.PGNAccount.Id).ToList()
+            }).ToList();
+
+            var report = new PGNReportDTM
+            {
+                PGNAccounts = data
+            };
+
+            var rpt = new rptPGNUsers
+            {
+                DataSource = new List<PGNReportDTM> { report }
+            };
+
+            var frm = new frmReportViewer(rpt);
+            frm.ShowDialog();
         }
     }
 }

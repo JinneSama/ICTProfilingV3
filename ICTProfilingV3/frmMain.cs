@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using DevExpress.Xpo;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
 using Helpers.Interfaces;
 using Helpers.Update;
-using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.LoginForms;
 using ICTProfilingV3.LookUpTables;
 using ICTProfilingV3.MOForms;
@@ -29,24 +27,31 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using ICTProfilingV3.UsersForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
-using Models.Managers.User;
+
 namespace ICTProfilingV3
 {
     public partial class frmMain : BaseRibbonForm , IDisposeUC
     {
         private readonly IServiceProvider _serviceProvider;
-        private IICTUserManager userManager;
-        private IICTRoleManager roleManager;
-        public readonly IUCManager<Control> _ucManager;
+        private readonly IUCManager _ucManager;
+        private readonly IICTUserManager _userManager;
+        private readonly IICTRoleManager _roleManager;
+        private readonly frmMain _mainForm;
+        private readonly UserStore _userStore;
+
         private string Version = "";
-        public frmMain(IServiceProvider serviceProvider)
+        public frmMain(IServiceProvider serviceProvider, IUCManager ucManager, IICTUserManager userManager, IICTRoleManager roleManager, UserStore userStore)
         {
-            InitializeComponent();
             _serviceProvider = serviceProvider;
-            userManager = new ICTUserManager();
-            roleManager = new ICTRoleManager();
-            _ucManager = new UCManager<Control>(mainPanel);
+            _ucManager = ucManager;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _userStore = userStore;
+            _mainForm = this;
+
+            InitializeComponent();
             ForceUserUpdate();
 
             if (!UpdateThread.IsBusy)
@@ -100,9 +105,9 @@ namespace ICTProfilingV3
 
         public async void setRoleDesignations()
         {
-            var user = await userManager.FindUserAsync(UserStore.UserId);
+            var user = await _userManager.FindUserAsync(_userStore.UserId);
             if (user.Roles == null) return;
-            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
+            var role = await _roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
             if(role == null) return;    
 
             foreach (RibbonPage page in ribbon.Pages)
@@ -143,11 +148,8 @@ namespace ICTProfilingV3
 
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            //DisposeUC(mainPanel);
-            var ucManager = (UCTARequestDashboard)_serviceProvider.GetService(typeof(UCTARequestDashboard));
-            ucManager.Dock = DockStyle.Fill;
-            mainPanel.Controls.Add(ucManager);
-            //_ucManager.ShowUCSystemDetails(e.Item.Name, new UCTARequestDashboard { Dock = DockStyle.Fill }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTARequestDashboard>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnSuppliers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -182,7 +184,9 @@ namespace ICTProfilingV3
 
         private void btnDeliveries_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCDeliveries { Dock = DockStyle.Fill }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveries>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnUsers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -199,13 +203,13 @@ namespace ICTProfilingV3
 
         private void btnActionTree_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmActionTree();
+            var frm = _serviceProvider.GetRequiredService<frmActionTree>();
             frm.ShowDialog();
         }
 
         private void btnActionList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmActionList();
+            var frm = _serviceProvider.GetRequiredService<frmActionList>();
             frm.ShowDialog();
         }
 
@@ -223,35 +227,29 @@ namespace ICTProfilingV3
 
         private void btnTechSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTechSpecs()
-            {
-                Dock = DockStyle.Fill,
-                IsTechSpecs = true
-            }, new string[] { "IsTechSpecs" });
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+            navigation.NavigateTo(_mainForm.mainPanel, act => act.IsTechSpecs = true);
         }
 
         private void btnPPE_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPPEs()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPPEs>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnRepair_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCRepair()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnCAS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCCAS()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCCAS>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnStandardPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -262,23 +260,21 @@ namespace ICTProfilingV3
 
         private void btnVPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPR()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPR>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnRoutedActions_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCRoutedActions()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRoutedActions>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnReport_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmAccomplishmentReport();
+            var frm = _serviceProvider.GetRequiredService<frmAccomplishmentReport>();
             frm.ShowDialog();
         }
 
@@ -288,25 +284,22 @@ namespace ICTProfilingV3
             lblEmployee.Caption = string.Empty;
             lblPosition.Caption = string.Empty;
             DisposeUC(mainPanel);
-            var frm = new frmLogin(this);
+            var frm = _serviceProvider.GetRequiredService<frmLogin>();
             frm.ShowDialog();
         }
 
         private void btnRepairSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCTechSpecs()
-            {
-                IsTechSpecs = false,
-                Dock = DockStyle.Fill
-            }, new string[] { "IsTechSpecs" });
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+            navigation.NavigateTo(_mainForm.mainPanel, act => act.IsTechSpecs = false);
         }
 
         private void btnPGNAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPGNAccounts()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPGNAccounts>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnPGNOffices_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -317,10 +310,9 @@ namespace ICTProfilingV3
 
         private void btnRequests_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCPGNRequests()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+             
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPGNRequests>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void UpdateThread_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -353,24 +345,19 @@ namespace ICTProfilingV3
 
         private void btnQueue_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCUserTasks()
-            {
-                Dock = DockStyle.Fill,
-                FromQueue = true
-            }, new string[] {"FromQueue"});
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCUserTasks>>();
+            navigation.NavigateTo(_mainForm.mainPanel, act => act.FromQueue = true);
         }
 
         private void btnUserTasks_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCUserTasks()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCUserTasks>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnChanges_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmViewChangeLogs();
+            var frm = _serviceProvider.GetRequiredService<frmViewChangeLogs>();
             frm.ShowDialog();
         }
 
@@ -388,18 +375,14 @@ namespace ICTProfilingV3
 
         private void btnMOAccounts_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCMOAccounts()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCMOAccounts>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCDashboard()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDashboard>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         public void DisposeUC(Control parent)
@@ -414,7 +397,7 @@ namespace ICTProfilingV3
 
         private void btnQuarterlyReport_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var frm = new frmQuarterlyReport();
+            var frm = _serviceProvider.GetRequiredService<frmQuarterlyReport>();
             frm.ShowDialog();
         }
 
@@ -435,19 +418,17 @@ namespace ICTProfilingV3
 
         private async void frmMain_Load(object sender, EventArgs e)
         {
-            var frm = new frmLogin(this);
+            var frm = _serviceProvider.GetRequiredService<frmLogin>();
 
-            if (UserStore.ArugmentCredentialsDto == null) frm.ShowDialog(this);
-            else await frm.Login(UserStore.ArugmentCredentialsDto.Username, UserStore.ArugmentCredentialsDto.Password);
+            if (_userStore.ArugmentCredentialsDto == null) frm.ShowDialog(this);
+            else await frm.Login(_userStore.ArugmentCredentialsDto.Username, _userStore.ArugmentCredentialsDto.Password);
 
         }
 
         private void btnLogs_ItemClick(object sender, ItemClickEventArgs e)
         {
-            _ucManager.ShowUCSystemDetails(e.Item.Name, new UCLogManager()
-            {
-                Dock = DockStyle.Fill
-            }, null);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCLogManager>>();
+            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnClientRequests_ItemClick(object sender, ItemClickEventArgs e)

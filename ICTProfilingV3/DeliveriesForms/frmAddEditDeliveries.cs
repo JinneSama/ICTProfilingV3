@@ -1,14 +1,15 @@
 ﻿using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.LookUpTables;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.ToolForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,28 +20,36 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class frmAddEditDeliveries : BaseForm
     {
         private IUnitOfWork unitOfWork;
-        private Models.Entities.Deliveries _deliveries;
+        private Deliveries _deliveries;
         private bool IsSave = false;
         private SaveType SaveType;
         private EmployeesViewModel ofmisEmployee;
 
-        public frmAddEditDeliveries()
+        private readonly UserStore _userStore;
+        private readonly IServiceProvider _serviceProvider;
+
+        public frmAddEditDeliveries(UserStore userStore, IServiceProvider serviceProvider)
         {
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            SaveType = SaveType.Insert;
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            CreateTicket();
         }
-        public frmAddEditDeliveries(Deliveries deliveries)
+
+        public void InitForm(Deliveries deliveries = null)
         {
-            InitializeComponent();
-            SaveType = SaveType.Update;
-            _deliveries = deliveries;
-            IsSave = true;
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
-            LoadEquipmentSpecs();
+            if (deliveries == null)
+            {
+                SaveType = SaveType.Insert;
+                CreateTicket();
+            }
+            else
+            {
+                SaveType = SaveType.Update;
+                _deliveries = deliveries;
+                LoadEquipmentSpecs();
+            }
         }
 
         private void LoadDetails()
@@ -65,7 +74,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 DateCreated = DateTime.Now,
                 TicketStatus = TicketStatus.Accepted,
                 RequestType = RequestType.Deliveries,
-                CreatedBy = UserStore.UserId
+                CreatedBy = _userStore.UserId
             };
             unitOfWork.TicketRequestRepo.Insert(ticket);
             unitOfWork.Save();
@@ -100,7 +109,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void frmAddEditDeliveries_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            if (!IsSave) await DeleteDeliveries();
+            if (!IsSave && SaveType == SaveType.Insert) 
+                await DeleteDeliveries();
         }
 
         private async Task DeleteDeliveries()
@@ -122,13 +132,14 @@ namespace ICTProfilingV3.DeliveriesForms
             this.Close();
 
             if (SaveType == SaveType.Update) return;
-            var actionType = new Models.Models.ActionType
+            var actionType = new ActionType
             {
                 Id = _deliveries.Id,
                 RequestType = RequestType.Deliveries
             };
 
-            var frm = new frmDocAction(actionType, SaveType.Insert, null, unitOfWork, null);
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
             frm.ShowDialog();
         }
 
@@ -172,7 +183,8 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var frm = new frmSelectOFMISEmployee();
             frm.ShowDialog();
-
+            if (frm.OFMISEmployee == null)
+                return;
             txtRequestedBy.Text = frm.OFMISEmployee.Employee;
             ofmisEmployee = frm.OFMISEmployee;
         }

@@ -1,7 +1,7 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Linq;

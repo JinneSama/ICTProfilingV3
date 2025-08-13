@@ -1,14 +1,16 @@
 ﻿using DevExpress.Charts.Native;
 using DevExpress.XtraCharts;
 using DevExpress.XtraCharts.Native;
-using EntityManager.Managers.User;
+
 using Helpers.Interfaces;
 using ICTProfilingV3.DashboardForms.TicketToolForms;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.UsersForms;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Models;
 using Models.Repository;
 using System;
 using System.Collections.Generic;

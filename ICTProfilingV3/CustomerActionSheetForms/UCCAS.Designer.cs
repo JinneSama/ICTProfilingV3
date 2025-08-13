@@ -55,7 +55,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.gcDetails = new DevExpress.XtraEditors.GroupControl();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
@@ -64,14 +64,14 @@
             this.txtActionTaken = new DevExpress.XtraEditors.MemoEdit();
             this.txtClientRequest = new DevExpress.XtraEditors.MemoEdit();
             this.txtOffice = new DevExpress.XtraEditors.TextEdit();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.txtDateCreated = new DevExpress.XtraEditors.DateEdit();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.txtAssistedBy = new DevExpress.XtraEditors.TextEdit();
+            this.txtClientName = new DevExpress.XtraEditors.TextEdit();
+            this.txtAssistedByName = new DevExpress.XtraEditors.TextEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.lblCASNo = new DevExpress.XtraEditors.LabelControl();
@@ -79,26 +79,26 @@
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
-            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).BeginInit();
+            this.gcDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtActionTaken.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClientRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedByName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
@@ -290,35 +290,35 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             // 
-            // groupControl3
+            // gcDetails
             // 
-            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gcDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.groupControl3.Appearance.Options.UseFont = true;
-            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupControl3.AppearanceCaption.Options.UseFont = true;
-            this.groupControl3.Controls.Add(this.rdbtnGender);
-            this.groupControl3.Controls.Add(this.labelControl10);
-            this.groupControl3.Controls.Add(this.labelControl8);
-            this.groupControl3.Controls.Add(this.labelControl7);
-            this.groupControl3.Controls.Add(this.labelControl6);
-            this.groupControl3.Controls.Add(this.txtActionTaken);
-            this.groupControl3.Controls.Add(this.txtClientRequest);
-            this.groupControl3.Controls.Add(this.txtOffice);
-            this.groupControl3.Controls.Add(this.txtDate);
-            this.groupControl3.Controls.Add(this.labelControl20);
-            this.groupControl3.Controls.Add(this.labelControl21);
-            this.groupControl3.Controls.Add(this.labelControl22);
-            this.groupControl3.Controls.Add(this.labelControl23);
-            this.groupControl3.Controls.Add(this.txtContactNo);
-            this.groupControl3.Controls.Add(this.txtName);
-            this.groupControl3.Controls.Add(this.txtAssistedBy);
-            this.groupControl3.Location = new System.Drawing.Point(581, 97);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(820, 359);
-            this.groupControl3.TabIndex = 88;
-            this.groupControl3.Text = "Repair Request Details";
+            this.gcDetails.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gcDetails.Appearance.Options.UseFont = true;
+            this.gcDetails.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.gcDetails.AppearanceCaption.Options.UseFont = true;
+            this.gcDetails.Controls.Add(this.rdbtnGender);
+            this.gcDetails.Controls.Add(this.labelControl10);
+            this.gcDetails.Controls.Add(this.labelControl8);
+            this.gcDetails.Controls.Add(this.labelControl7);
+            this.gcDetails.Controls.Add(this.labelControl6);
+            this.gcDetails.Controls.Add(this.txtActionTaken);
+            this.gcDetails.Controls.Add(this.txtClientRequest);
+            this.gcDetails.Controls.Add(this.txtOffice);
+            this.gcDetails.Controls.Add(this.txtDateCreated);
+            this.gcDetails.Controls.Add(this.labelControl20);
+            this.gcDetails.Controls.Add(this.labelControl21);
+            this.gcDetails.Controls.Add(this.labelControl22);
+            this.gcDetails.Controls.Add(this.labelControl23);
+            this.gcDetails.Controls.Add(this.txtContactNo);
+            this.gcDetails.Controls.Add(this.txtClientName);
+            this.gcDetails.Controls.Add(this.txtAssistedByName);
+            this.gcDetails.Location = new System.Drawing.Point(581, 97);
+            this.gcDetails.Name = "gcDetails";
+            this.gcDetails.Size = new System.Drawing.Size(820, 359);
+            this.gcDetails.TabIndex = 88;
+            this.gcDetails.Text = "Repair Request Details";
             // 
             // rdbtnGender
             // 
@@ -400,21 +400,21 @@
             this.txtOffice.Size = new System.Drawing.Size(367, 22);
             this.txtOffice.TabIndex = 124;
             // 
-            // txtDate
+            // txtDateCreated
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(105, 24);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.EditValue = null;
+            this.txtDateCreated.Location = new System.Drawing.Point(105, 24);
+            this.txtDateCreated.Name = "txtDateCreated";
+            this.txtDateCreated.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateCreated.Properties.Appearance.Options.UseFont = true;
+            this.txtDateCreated.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.MaskSettings.Set("mask", "G");
-            this.txtDate.Properties.UseMaskAsDisplayFormat = true;
-            this.txtDate.Size = new System.Drawing.Size(368, 22);
-            this.txtDate.TabIndex = 1;
+            this.txtDateCreated.Properties.MaskSettings.Set("mask", "G");
+            this.txtDateCreated.Properties.UseMaskAsDisplayFormat = true;
+            this.txtDateCreated.Size = new System.Drawing.Size(368, 22);
+            this.txtDateCreated.TabIndex = 1;
             // 
             // labelControl20
             // 
@@ -466,25 +466,25 @@
             this.txtContactNo.Size = new System.Drawing.Size(368, 22);
             this.txtContactNo.TabIndex = 4;
             // 
-            // txtName
+            // txtClientName
             // 
-            this.txtName.EditValue = "";
-            this.txtName.Location = new System.Drawing.Point(105, 52);
-            this.txtName.Name = "txtName";
-            this.txtName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtName.Properties.Appearance.Options.UseFont = true;
-            this.txtName.Properties.UseReadOnlyAppearance = false;
-            this.txtName.Size = new System.Drawing.Size(368, 22);
-            this.txtName.TabIndex = 125;
+            this.txtClientName.EditValue = "";
+            this.txtClientName.Location = new System.Drawing.Point(105, 52);
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtClientName.Properties.Appearance.Options.UseFont = true;
+            this.txtClientName.Properties.UseReadOnlyAppearance = false;
+            this.txtClientName.Size = new System.Drawing.Size(368, 22);
+            this.txtClientName.TabIndex = 125;
             // 
-            // txtAssistedBy
+            // txtAssistedByName
             // 
-            this.txtAssistedBy.Location = new System.Drawing.Point(104, 329);
-            this.txtAssistedBy.Name = "txtAssistedBy";
-            this.txtAssistedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtAssistedBy.Properties.Appearance.Options.UseFont = true;
-            this.txtAssistedBy.Size = new System.Drawing.Size(368, 22);
-            this.txtAssistedBy.TabIndex = 133;
+            this.txtAssistedByName.Location = new System.Drawing.Point(104, 329);
+            this.txtAssistedByName.Name = "txtAssistedByName";
+            this.txtAssistedByName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtAssistedByName.Properties.Appearance.Options.UseFont = true;
+            this.txtAssistedByName.Size = new System.Drawing.Size(368, 22);
+            this.txtAssistedByName.TabIndex = 133;
             // 
             // pnlButtons
             // 
@@ -577,6 +577,12 @@
             this.tabAction.Size = new System.Drawing.Size(818, 171);
             this.tabAction.Text = "Action";
             // 
+            // tabEvaluation
+            // 
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(818, 171);
+            this.tabEvaluation.Text = "Evaluation Sheet";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -611,12 +617,6 @@
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
             // 
-            // tabEvaluation
-            // 
-            this.tabEvaluation.Name = "tabEvaluation";
-            this.tabEvaluation.Size = new System.Drawing.Size(818, 171);
-            this.tabEvaluation.Text = "Evaluation Sheet";
-            // 
             // UCCAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,7 +624,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabDetails);
             this.Controls.Add(this.pnlButtons);
-            this.Controls.Add(this.groupControl3);
+            this.Controls.Add(this.gcDetails);
             this.Controls.Add(this.pnlDeliveries);
             this.Name = "UCCAS";
             this.Size = new System.Drawing.Size(1405, 658);
@@ -634,18 +634,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).EndInit();
+            this.gcDetails.ResumeLayout(false);
+            this.gcDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtActionTaken.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClientRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedByName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
@@ -670,7 +670,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.GroupControl gcDetails;
         private DevExpress.XtraEditors.RadioGroup rdbtnGender;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl8;
@@ -679,7 +679,7 @@
         private DevExpress.XtraEditors.MemoEdit txtActionTaken;
         private DevExpress.XtraEditors.MemoEdit txtClientRequest;
         private DevExpress.XtraEditors.TextEdit txtOffice;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit txtDateCreated;
         private DevExpress.XtraEditors.LabelControl labelControl20;
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl22;
@@ -692,8 +692,8 @@
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraTab.XtraTabControl tabDetails;
         private DevExpress.XtraTab.XtraTabPage tabAction;
-        private DevExpress.XtraEditors.TextEdit txtName;
-        private DevExpress.XtraEditors.TextEdit txtAssistedBy;
+        private DevExpress.XtraEditors.TextEdit txtClientName;
+        private DevExpress.XtraEditors.TextEdit txtAssistedByName;
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;

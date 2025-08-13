@@ -32,7 +32,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.gcDetails = new DevExpress.XtraEditors.GroupControl();
+            this.txtClientName = new DevExpress.XtraEditors.TextEdit();
             this.slueAssistedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,7 +53,7 @@
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.txtOffice = new DevExpress.XtraEditors.TextEdit();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.txtDateCreated = new DevExpress.XtraEditors.DateEdit();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
@@ -60,10 +61,10 @@
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).BeginInit();
+            this.gcDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueAssistedBy.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
@@ -72,10 +73,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -112,34 +112,44 @@
             this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
             this.lblEpisNo.TabIndex = 1;
             // 
-            // groupControl3
+            // gcDetails
             // 
-            this.groupControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.groupControl3.Appearance.Options.UseFont = true;
-            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupControl3.AppearanceCaption.Options.UseFont = true;
-            this.groupControl3.Controls.Add(this.txtName);
-            this.groupControl3.Controls.Add(this.slueAssistedBy);
-            this.groupControl3.Controls.Add(this.rdbtnGender);
-            this.groupControl3.Controls.Add(this.labelControl10);
-            this.groupControl3.Controls.Add(this.labelControl8);
-            this.groupControl3.Controls.Add(this.labelControl7);
-            this.groupControl3.Controls.Add(this.labelControl6);
-            this.groupControl3.Controls.Add(this.txtActionTaken);
-            this.groupControl3.Controls.Add(this.txtClientRequest);
-            this.groupControl3.Controls.Add(this.slueEmployee);
-            this.groupControl3.Controls.Add(this.txtOffice);
-            this.groupControl3.Controls.Add(this.txtDate);
-            this.groupControl3.Controls.Add(this.labelControl20);
-            this.groupControl3.Controls.Add(this.labelControl21);
-            this.groupControl3.Controls.Add(this.labelControl22);
-            this.groupControl3.Controls.Add(this.labelControl23);
-            this.groupControl3.Controls.Add(this.txtContactNo);
-            this.groupControl3.Location = new System.Drawing.Point(12, 43);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(401, 368);
-            this.groupControl3.TabIndex = 87;
-            this.groupControl3.Text = "Repair Request Details";
+            this.gcDetails.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gcDetails.Appearance.Options.UseFont = true;
+            this.gcDetails.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.gcDetails.AppearanceCaption.Options.UseFont = true;
+            this.gcDetails.Controls.Add(this.txtClientName);
+            this.gcDetails.Controls.Add(this.slueAssistedBy);
+            this.gcDetails.Controls.Add(this.rdbtnGender);
+            this.gcDetails.Controls.Add(this.labelControl10);
+            this.gcDetails.Controls.Add(this.labelControl8);
+            this.gcDetails.Controls.Add(this.labelControl7);
+            this.gcDetails.Controls.Add(this.labelControl6);
+            this.gcDetails.Controls.Add(this.txtActionTaken);
+            this.gcDetails.Controls.Add(this.txtClientRequest);
+            this.gcDetails.Controls.Add(this.slueEmployee);
+            this.gcDetails.Controls.Add(this.txtOffice);
+            this.gcDetails.Controls.Add(this.txtDateCreated);
+            this.gcDetails.Controls.Add(this.labelControl20);
+            this.gcDetails.Controls.Add(this.labelControl21);
+            this.gcDetails.Controls.Add(this.labelControl22);
+            this.gcDetails.Controls.Add(this.labelControl23);
+            this.gcDetails.Controls.Add(this.txtContactNo);
+            this.gcDetails.Location = new System.Drawing.Point(12, 43);
+            this.gcDetails.Name = "gcDetails";
+            this.gcDetails.Size = new System.Drawing.Size(401, 368);
+            this.gcDetails.TabIndex = 87;
+            this.gcDetails.Text = "Repair Request Details";
+            // 
+            // txtClientName
+            // 
+            this.txtClientName.Location = new System.Drawing.Point(104, 52);
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtClientName.Properties.Appearance.Options.UseFont = true;
+            this.txtClientName.Properties.UseReadOnlyAppearance = false;
+            this.txtClientName.Size = new System.Drawing.Size(269, 22);
+            this.txtClientName.TabIndex = 134;
             // 
             // slueAssistedBy
             // 
@@ -342,21 +352,21 @@
             this.txtOffice.Size = new System.Drawing.Size(285, 22);
             this.txtOffice.TabIndex = 124;
             // 
-            // txtDate
+            // txtDateCreated
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(105, 24);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.EditValue = null;
+            this.txtDateCreated.Location = new System.Drawing.Point(105, 24);
+            this.txtDateCreated.Name = "txtDateCreated";
+            this.txtDateCreated.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateCreated.Properties.Appearance.Options.UseFont = true;
+            this.txtDateCreated.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.MaskSettings.Set("mask", "G");
-            this.txtDate.Properties.UseMaskAsDisplayFormat = true;
-            this.txtDate.Size = new System.Drawing.Size(286, 22);
-            this.txtDate.TabIndex = 1;
+            this.txtDateCreated.Properties.MaskSettings.Set("mask", "G");
+            this.txtDateCreated.Properties.UseMaskAsDisplayFormat = true;
+            this.txtDateCreated.Size = new System.Drawing.Size(286, 22);
+            this.txtDateCreated.TabIndex = 1;
             // 
             // labelControl20
             // 
@@ -440,16 +450,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(104, 52);
-            this.txtName.Name = "txtName";
-            this.txtName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtName.Properties.Appearance.Options.UseFont = true;
-            this.txtName.Properties.UseReadOnlyAppearance = false;
-            this.txtName.Size = new System.Drawing.Size(269, 22);
-            this.txtName.TabIndex = 134;
-            // 
             // frmAddEditCAS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,15 +457,17 @@
             this.ClientSize = new System.Drawing.Size(426, 458);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.groupControl3);
+            this.Controls.Add(this.gcDetails);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditCAS.IconOptions.Icon")));
             this.Name = "frmAddEditCAS";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).EndInit();
+            this.gcDetails.ResumeLayout(false);
+            this.gcDetails.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueAssistedBy.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
@@ -474,10 +476,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -487,9 +488,9 @@
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.GroupControl gcDetails;
         private DevExpress.XtraEditors.TextEdit txtOffice;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit txtDateCreated;
         private DevExpress.XtraEditors.LabelControl labelControl20;
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl22;
@@ -515,6 +516,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.TextEdit txtName;
+        private DevExpress.XtraEditors.TextEdit txtClientName;
     }
 }

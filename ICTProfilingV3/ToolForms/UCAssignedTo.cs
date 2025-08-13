@@ -1,4 +1,4 @@
-﻿using Models.Models;
+﻿using ICTProfilingV3.DataTransferModels.Models;
 using System.Collections.Generic;
 
 namespace ICTProfilingV3.ToolForms

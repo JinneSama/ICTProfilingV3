@@ -1,19 +1,13 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraLayout.Helpers;
-using EntityManager.Managers.Role;
-using ICTProfilingV3.BaseClasses;
-using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Enums;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {

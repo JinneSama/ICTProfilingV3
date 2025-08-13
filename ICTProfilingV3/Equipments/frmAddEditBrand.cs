@@ -1,8 +1,8 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Data;
 using System.Linq;

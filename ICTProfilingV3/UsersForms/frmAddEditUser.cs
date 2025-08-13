@@ -1,14 +1,12 @@
-﻿using DevExpress.XtraSpellChecker.Parser;
-using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Entities;
 using Models.Enums;
-using Models.Models;
 using System;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ICTProfilingV3.UsersForms
 {

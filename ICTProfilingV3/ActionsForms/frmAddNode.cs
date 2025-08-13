@@ -1,45 +1,46 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
-using Models.ViewModels;
 using System.Linq;
 
 namespace ICTProfilingV3.ActionsForms
 {
     public partial class frmAddNode : BaseForm
     {
-        private readonly SaveType saveType;
-        private readonly ActionTreeViewModel actionTreeViewModel;
-        private readonly IUnitOfWork unitOfWork;
+        private ActionTreeDTM _actionTree;
+        private readonly IRepository<int, ActionsDropdowns> _actionTreeRepo;
 
-        public frmAddNode(SaveType saveType , ActionTreeViewModel actionTreeViewModel)
+        public frmAddNode(IRepository<int, ActionsDropdowns> actionTreeRepo)
         {
+            _actionTreeRepo = actionTreeRepo;
             InitializeComponent();
-            this.saveType = saveType;
-            this.actionTreeViewModel = actionTreeViewModel;
-            unitOfWork = new UnitOfWork();
             LoadDropdown();
+        }
+
+        public void SetAddNode(ActionTreeDTM actionTree)
+        {
+            _actionTree = actionTree;
         }
 
         private void LoadDropdown()
         {
-            actionsDropdownsBindingSource.DataSource = unitOfWork.ActionsDropdownsRepo.GetAll().ToList();
-            lueParentNode.EditValue = actionTreeViewModel.ActionTree.Id;
+            actionsDropdownsBindingSource.DataSource = _actionTreeRepo.GetAll().ToList();
+            lueParentNode.EditValue = _actionTree.ActionTree.Id;
         }
 
-        private void btnSave_Click(object sender, System.EventArgs e)
+        private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            var nodeCategory = ((int)actionTreeViewModel.ActionTree.ActionCategory) + 1;
+            var nodeCategory = ((int)_actionTree.ActionTree.ActionCategory) + 1;
             var node = new ActionsDropdowns
             {
-                ParentId = actionTreeViewModel.ActionTree.Id ?? 0,
+                ParentId = _actionTree.ActionTree.Id ?? 0,
                 ActionCategory = (ActionCategory)nodeCategory,
                 Order = (int)spinOrder.Value,
                 Value = txtValue.Text
             };
-            unitOfWork.ActionsDropdownsRepo.Insert(node);
-            unitOfWork.Save();
+            await _actionTreeRepo.AddAsync(node);
             this.Close();
         }
 

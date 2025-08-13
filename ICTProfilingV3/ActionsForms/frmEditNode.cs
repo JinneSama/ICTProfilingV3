@@ -1,25 +1,29 @@
 ﻿using ICTProfilingV3.BaseClasses;
-using Models.Repository;
-using Models.ViewModels;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.Interfaces;
+using Models.Entities;
 
 namespace ICTProfilingV3.ActionsForms
 {
     public partial class frmEditNode : BaseForm
     {
-        private readonly ActionTreeViewModel actionTree;
-        private IUnitOfWork unitOfOfWork;
-        public frmEditNode(ActionTreeViewModel actionTree)
+        private ActionTreeDTM _actionTree;
+        private IRepository<int, ActionsDropdowns> _actionTreeRepo;
+        public frmEditNode(IRepository<int, ActionsDropdowns> actionTreeRepo)
         {
+            _actionTreeRepo = actionTreeRepo;
             InitializeComponent();
-            this.actionTree = actionTree;
-            unitOfOfWork = new UnitOfWork();
             LoadDetails();
         }
 
+        public void SetEditNode(ActionTreeDTM actionTree)
+        {
+            _actionTree = actionTree;
+        }
         private void LoadDetails()
         {
-            spinOrder.Value = (decimal)actionTree.ActionTree.Order;
-            txtValue.Text = actionTree.ActionTree.Value;
+            spinOrder.Value = (decimal)_actionTree.ActionTree.Order;
+            txtValue.Text = _actionTree.ActionTree.Value;
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)
@@ -29,13 +33,12 @@ namespace ICTProfilingV3.ActionsForms
 
         private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            var res = await unitOfOfWork.ActionsDropdownsRepo.FindAsync(x => x.Id == actionTree.ActionTree.Id);
+            var res = await _actionTreeRepo.GetById(_actionTree.ActionTree.Id.Value);
             if (res == null) return;
             res.Value = txtValue.Text;
             res.Order = (int)spinOrder.Value;
-            unitOfOfWork.ActionsDropdownsRepo.Update(res);
-            await unitOfOfWork.SaveChangesAsync();
 
+            await _actionTreeRepo.SaveChangesAsync();
             this.Close();
         }
     }

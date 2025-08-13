@@ -1,15 +1,15 @@
-﻿using DevExpress.CodeParser;
-using DevExpress.XtraEditors;
-using EntityManager.Managers.User;
-using Helpers.Security;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ServiceModels.DTOModels;
 using ICTProfilingV3.DebugTools;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.ToolForms;
+using ICTProfilingV3.Utility.Security;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Managers.User;
-using Models.OFMISEntities;
 using Models.Repository;
-using Models.Service.DTOModels;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,16 +19,21 @@ namespace ICTProfilingV3.LoginForms
     public partial class frmLogin : BaseForm
     {
         private readonly IICTUserManager userManager;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IUnitOfWork unitOfWork;
+        private readonly UserStore _userStore;
+
         private readonly frmMain frmMain;
         private bool Logged = false;
         private bool isLoggingIn = false;
-        public frmLogin(frmMain _frmMain)
+        public frmLogin(IServiceProvider serviceProvider, UserStore userStore)
         {
             InitializeComponent();
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
             userManager = new ICTUserManager();
             unitOfWork = new UnitOfWork();
-            frmMain = _frmMain;
+            frmMain = _serviceProvider.GetRequiredService<frmMain>();
             RetrieveLoginDetails();
 
             LoadChangelogs();
@@ -93,16 +98,16 @@ namespace ICTProfilingV3.LoginForms
             if (logged)
             {
                 Logged = true;
-                UserStore.UserId = user.Id;
-                UserStore.Username = user.UserName;
-                UserStore.Fullname = user.FullName;
+                _userStore.UserId = user.Id;
+                _userStore.Username = user.UserName;
+                _userStore.Fullname = user.FullName;
 
                 frmMain.setRoleDesignations();
                 frmMain.SetUser(user.FullName,user.Position);
                 if (chkRemember.Checked) SetLoginDetails();
                 else ClearLoginDetails();
 
-                if (UserStore.ArugmentCredentialsDto == null) this.Close();
+                if (_userStore.ArugmentCredentialsDto == null) this.Close();
             }
             else
             {
@@ -114,8 +119,8 @@ namespace ICTProfilingV3.LoginForms
         private void UseExternalAccount(OFMISUsersDto ofmisUser, string password)
         {
             Logged = true;
-            UserStore.Username = ofmisUser.Username;
-            UserStore.Fullname = password;
+            _userStore.Username = ofmisUser.Username;
+            _userStore.Fullname = password;
             frmMain.setClientDesignation();
             frmMain.SetUser(ofmisUser.Username, "Client");
             this.Close();

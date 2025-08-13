@@ -1,21 +1,27 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.XtraRichEdit.Model;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DataTransferModels.Models;
 using ICTProfilingV3.EvaluationForms;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
 using Models.Models;
 using Models.Repository;
-using Models.ViewModels;
+using System;
 using System.Linq;
 
 namespace ICTProfilingV3.MOForms
 {
     public partial class UCMOAccountUserRequests : DevExpress.XtraEditors.XtraUserControl
     {
+        private readonly IServiceProvider _serviceProvider;
         public string filterText { get; set; }
-        public UCMOAccountUserRequests()
+        public UCMOAccountUserRequests(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             LoadData();
         }
@@ -53,7 +59,8 @@ namespace ICTProfilingV3.MOForms
         {
             var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
             
-            var frm = new frmAddEditAccountUsers(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditAccountUsers>();
+            frm.InitForm(null, row);
             frm.ShowDialog();
             LoadData();
         }
@@ -61,19 +68,16 @@ namespace ICTProfilingV3.MOForms
         {
             var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
             tabAction.Controls.Clear();
-            tabAction.Controls.Add(new UCActions(new ActionType { Id = row.Id, RequestType = RequestType.M365 })
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType { Id = row.Id, RequestType = RequestType.M365 });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
         private void LoadEvaluationSheet()
         {
             var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
-            tabEvaluation.Controls.Clear();
-            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.M365 })
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCEvaluationSheet>>();
+            navigation.NavigateTo(tabEvaluation, act => act.InitForm(new ActionType { Id = row.Id, RequestType = RequestType.M365 }));
         }
         private void gridMOAccountUsers_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {

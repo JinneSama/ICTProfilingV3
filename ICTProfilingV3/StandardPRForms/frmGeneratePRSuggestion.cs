@@ -1,8 +1,8 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 using Models.Enums;
-using Models.FDTSEntities;
 using Models.Repository;
-using Models.ViewModels;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;

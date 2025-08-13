@@ -1,10 +1,8 @@
-﻿using DevExpress.Utils.Extensions;
-using DevExpress.XtraEditors;
-using Helpers.Interfaces;
-using Helpers.NetworkFolder;
+﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;

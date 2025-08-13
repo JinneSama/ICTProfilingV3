@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Helpers.Interfaces
+﻿namespace Helpers.Interfaces
 {
     public interface IEncryptFile
     {

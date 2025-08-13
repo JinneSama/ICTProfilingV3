@@ -1,32 +1,36 @@
-﻿using EntityManager.Managers.User;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Entities;
-using Models.HRMISEntites;
-using Models.Managers.User;
-using Models.ReportViewModel;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Security.Principal;
 
 namespace ICTProfilingV3.PGNForms
 {
     public partial class frmSelectNotee : BaseForm
     {
         private IICTUserManager usermanager;
-        private readonly PGNRequestViewModel request;
+        private PGNRequestViewModel request;
         private IUnitOfWork unitOfWork;
+        private readonly UserStore _userStore;
 
-        public frmSelectNotee(PGNRequestViewModel request)
+        public frmSelectNotee(UserStore userStore)
         {
+            _userStore = userStore;
             InitializeComponent();
             usermanager = new ICTUserManager();
             unitOfWork = new UnitOfWork();
             LoadDropdowns();
+        }
+
+        public void InitForm(PGNRequestViewModel request)
+        {
             this.request = request;
         }
 
@@ -51,9 +55,9 @@ namespace ICTProfilingV3.PGNForms
             {
                 ReqNo = request.ReqNo,
                 Office = request.Employee.Office + " " + request.Employee.Division,
-                PrintedBy = UserStore.Username,
+                PrintedBy = _userStore.Username,
                 DatePrinted = DateTime.Now.ToShortDateString(),
-                PreparedBy = await usermanager.FindUserAsync(UserStore.UserId),
+                PreparedBy = await usermanager.FindUserAsync(_userStore.UserId),
                 NotedBy = row,
                 PGNAccounts = res
             };

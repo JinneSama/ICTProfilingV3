@@ -1,10 +1,10 @@
 ﻿using DevExpress.XtraEditors;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.LookUpTables;
 using Models.Entities;
 using Models.Enums;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -61,18 +61,22 @@ namespace ICTProfilingV3.DeliveriesForms
             spinItemNo.Value = (decimal)_deliveriesSpecs.ItemNo;
             txtSerialNo.Text = _deliveriesSpecs.SerialNo;
 
-            slueEquipment.EditValue = _deliveriesSpecs.Model.Brand.EquipmenSpecsId;
+            slueEquipment.EditValue = _deliveriesSpecs?.Model?.Brand?.EquipmenSpecsId;
             txtDescription.Text = _deliveriesSpecs.Description;
+            if(!(_deliveriesSpecs?.Model?.Brand?.EquipmenSpecsId == null))
+            {
+                var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == _deliveriesSpecs.Model.Brand.EquipmenSpecsId);
+                slueBrand.Properties.DataSource = brand.ToList();
+                slueBrand.EditValue = _deliveriesSpecs?.Model?.BrandId;
+            }
 
-            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == _deliveriesSpecs.Model.Brand.EquipmenSpecsId);
-            slueBrand.Properties.DataSource = brand.ToList();
+            if (!(_deliveriesSpecs?.Model?.BrandId == null))
+            {
+                var model = unitOfWork.ModelRepo.FindAllAsync(x => x.BrandId == _deliveriesSpecs.Model.BrandId);
+                slueModel.Properties.DataSource = model.ToList();
 
-            slueBrand.EditValue = _deliveriesSpecs.Model.BrandId;
-
-            var model = unitOfWork.ModelRepo.FindAllAsync(x => x.BrandId == _deliveriesSpecs.Model.BrandId);
-            slueModel.Properties.DataSource = model.ToList();
-
-            slueModel.EditValue = _deliveriesSpecs.ModelId;
+                slueModel.EditValue = _deliveriesSpecs?.ModelId;
+            }
         }
 
         private void LoadDropdowns()

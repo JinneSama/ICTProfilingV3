@@ -1,6 +1,4 @@
 ﻿using Models.Entities;
-using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -12,64 +10,43 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using DevExpress.Data.Filtering;
-using EntityManager.Managers.User;
 using Helpers.Interfaces;
-using EntityManager.Managers.Role;
-using Models.Managers.User;
 using ICTProfilingV3.ActionsForms;
-using Models.Models;
-using Models.HRMISEntites;
-using System.Data.Entity;
 using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.DataTransferModels;
+using Microsoft.Extensions.DependencyInjection;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Services.Employees;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
     public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
-        private IUnitOfWork unitOfWork;
-        private readonly IUCManager<Control> _ucManager;
-        private readonly IICTUserManager userManager;
-        private readonly IICTRoleManager roleManager;
+        private readonly IUCManager _ucManager;
         private readonly ITicketRequestService _ticketService;
+        private readonly IStaffService _staffService;
+        private readonly IEquipmentService _equipmentService;
+        private readonly IServiceProvider _serviceProvider;
+
         public string filterText { get; set; }
-        public UCTARequestDashboard()
-        {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            userManager = new ICTUserManager();
-            roleManager = new ICTRoleManager();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = main._ucManager;
-            LoadDropdowns();
-            FilterGrid();
-        }
-        public UCTARequestDashboard(ITicketRequestService ticketService)
+
+        public UCTARequestDashboard(ITicketRequestService ticketService, IUCManager ucManager, 
+            IServiceProvider serviceProvider, IStaffService staffService, IEquipmentService equipmentService)
         {
             InitializeComponent();
             _ticketService = ticketService;
-            unitOfWork = new UnitOfWork();
-            userManager = new ICTUserManager();
-            roleManager = new ICTRoleManager();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = main._ucManager;
+            _equipmentService = equipmentService;
+            _serviceProvider = serviceProvider;
+            _staffService = staffService;
+            _ucManager = ucManager;
             LoadDropdowns();
             FilterGrid();
-        }
-        private async Task<bool> CanAssign()
-        {
-            var user = await userManager.FindUserAsync(UserStore.UserId);
-            if (user.Roles == null) return false;
-            var role = await roleManager.GetRoleDesignations(user.Roles.FirstOrDefault().RoleId);
-            if (role == null) return false;
-
-            return role.Select(x => x.Designation).ToList().Contains(Designation.AssignTo);
         }
 
         private void LoadDropdowns()
         {
-            var users = unitOfWork.ITStaffRepo.GetAll().
-                Select(x => x.Users).ToList();
+            var users = _staffService.GetAllStaff().ToList().
+                Select(x => x.Users);
             slueTaskOf.Properties.DataSource = users;
 
             lueProcessType.Properties.DataSource = Enum.GetValues(typeof(RequestType)).Cast<RequestType>().Select(x => new
@@ -85,7 +62,7 @@ namespace ICTProfilingV3.TicketRequestForms
                 Full = $"{x.Office} {x.Division}"
             });
 
-            slueEquipment.Properties.DataSource = unitOfWork.EquipmentRepo.GetAll().ToList();
+            slueEquipment.Properties.DataSource = _equipmentService.GetAllEquipment().ToList();
             lueStatus.Properties.DataSource = Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>().Select(x => new
             {
                 Id = x,
@@ -95,85 +72,56 @@ namespace ICTProfilingV3.TicketRequestForms
 
         private async Task LoadTickets()
         {
-            //var res = await unitOfWork.TicketRequestRepo.GetAll(
-            //    x => x.Repairs,
-            //    x => x.Repairs.PPEs,
-            //    x => x.Repairs.PPEs.PPEsSpecs,
-            //    x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model),
-            //    x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand),
-            //    x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
-            //    x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
-            //    x => x.TechSpecs,
-            //    x => x.TechSpecs.TechSpecsICTSpecs,
-            //    x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs),
-            //    x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment),
-            //    x => x.Deliveries,
-            //    x => x.Deliveries.Supplier,
-            //    x => x.Deliveries.DeliveriesSpecs,
-            //    x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model),
-            //    x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand),
-            //    x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
-            //    x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
-            //    x => x.ITStaff,
-            //    x => x.ITStaff.Users).Where(w => w.IsRepairTechSpecs != true).OrderBy(x => x.DateCreated).ToListAsync();
-
-            //var tickets = res.Select(x => new TicketRequestViewModel
-            //{
-            //    TicketRequest = x
-            //}).ToList();
-
-            //gcTARequests.DataSource = new BindingList<TicketRequestViewModel>(tickets);
             var tickets = await _ticketService.GetTicketRequests();
             gcTARequests.DataSource = new BindingList<TicketRequestDTM>(tickets.ToList());
         }
 
         private async void btnNewRequest_Click(object sender, EventArgs e)
         {
-            var frm = new frmTypeOfRequest();
+            var frm = _serviceProvider.GetRequiredService<frmTypeOfRequest>();
             frm.ShowDialog();
 
-            unitOfWork = new UnitOfWork();
             await LoadTickets();
         }
 
+        #region NavigateToProcess
         private void hplProcess_Click(object sender, EventArgs e)
         {
-            if(checkStatus())
+            var row = (TicketRequestDTM)gridRequest.GetFocusedRow();
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            if (checkStatus(row))
             {
                 MessageBox.Show("Please Assign the Ticket First!", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 return;
             }
-            var row = (TicketRequestViewModel)gridRequest.GetFocusedRow();
-            if (row.TicketRequest.RequestType == RequestType.TechSpecs) NavigateToProcess(new UCTechSpecs() {
-                IsTechSpecs = true,
-                Dock = DockStyle.Fill,
-                filterText = row.TicketRequest.Id.ToString() 
-            }, new string[] {"IsTechSpecs", "filterText"});
-
-            if (row.TicketRequest.RequestType == RequestType.Deliveries) NavigateToProcess(new UCDeliveries()
+            if (row.TypeOfRequest == RequestType.TechSpecs)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.TicketRequest.Id.ToString()
-            }, new string[] { "filterText" });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+                navigation.NavigateTo(mainForm.mainPanel, act =>
+                {
+                    act.IsTechSpecs = true;
+                    act.filterText = row.Id.ToString();
+                });
+            }
 
-            if (row.TicketRequest.RequestType == RequestType.Repairs) NavigateToProcess(new UCRepair()
+            if (row.TypeOfRequest == RequestType.Deliveries)
             {
-                Dock = DockStyle.Fill,
-                filterText = row.TicketRequest.Id.ToString()
-            }, new string[] { "filterText" });
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveries>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Id.ToString());
+            }
+
+            if (row.TypeOfRequest == RequestType.Repairs)
+            {
+                var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRepair>>();
+                navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Id.ToString());
+            }
         }
 
-        private bool checkStatus()
+        private bool checkStatus(TicketRequestDTM row)
         {
-            var row = (TicketRequestViewModel)gridRequest.GetFocusedRow();
-            if (row.TicketRequest.TicketStatus == TicketStatus.Accepted) return true;
-            return false;
+            return row.EnumStatus == TicketStatus.Accepted;
         }
-
-        private void NavigateToProcess(Control uc, string[] propertiesToCopy)
-        {
-            _ucManager.ShowUCSystemDetails(uc.Name, uc , propertiesToCopy);
-        }
+        #endregion
 
         private async void UCTARequestDashboard_Load(object sender, EventArgs e)
         {
@@ -181,29 +129,26 @@ namespace ICTProfilingV3.TicketRequestForms
             ApplyFilterText();
         }
 
-        public void ApplyFilterText()
-        {
-            if (filterText != null) gridRequest.ActiveFilterCriteria = new BinaryOperator("TicketRequest.Id", filterText);
-        }
-
         private async void btnAssignTo_Click(object sender, EventArgs e)
         {
-            var canAssign = await CanAssign();
+            var canAssign = await _ticketService.CanAssignTicket();
             if (!canAssign)
             {
                 MessageBox.Show("You do not have Permission to Perform this Action, Please Contact Receiving/Helpdesk/Administrator", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            var row = (TicketRequestViewModel)gridRequest.GetFocusedRow();
 
-            var frm2 = new frmAssignTicket(row.TicketRequest);
-            frm2.ShowDialog();
+            var row = (TicketRequestDTM)gridRequest.GetFocusedRow();
+            var frm = _serviceProvider.GetRequiredService<frmAssignTicket>();
+            frm.SetTicket(row.Id, row.TypeOfRequest);
+            frm.ShowDialog();
 
-            unitOfWork = new UnitOfWork();
             await LoadTickets();
-
-            //var frm = new frmAssignTo(row.TicketRequest);
-            //frm.ShowDialog();
+        }
+        #region Filters
+        public void ApplyFilterText()
+        {
+            if (filterText != null) gridRequest.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
         private void FilterGrid()
         {
@@ -233,26 +178,24 @@ namespace ICTProfilingV3.TicketRequestForms
 
             if (lueStatus.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("Status", EnumHelper.GetEnumDescription((TicketStatus)ticketStatus)));
             if (lueProcessType.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("TypeOfRequest", EnumHelper.GetEnumDescription((RequestType)process)));
-            if (slueTaskOf.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("TicketRequest.ITStaff.Users.UserName", row.UserName));
+            if (slueTaskOf.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("AssignedTo", row.UserName));
             if (lueOffice.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("Office", office));
-            if (ctrlNo != 0) criteria = GroupOperator.And(criteria, new BinaryOperator("TicketRequest.Id", ctrlNo));
+            if (ctrlNo != 0) criteria = GroupOperator.And(criteria, new BinaryOperator("Id", ctrlNo));
             if (slueEquipment.EditValue != null) criteria = GroupOperator.And(criteria, new FunctionOperator(FunctionOperatorType.Contains, new OperandProperty("Equipments"), new OperandValue(equipment)));
 
             if (deFrom.EditValue != null && deTo.EditValue != null)
             {
-                var fromFilter = new BinaryOperator("TicketRequest.DateCreated", dateFrom, BinaryOperatorType.GreaterOrEqual);
-                var toFilter = new BinaryOperator("TicketRequest.DateCreated", dateTo, BinaryOperatorType.LessOrEqual);
+                var fromFilter = new BinaryOperator("DateRequested", dateFrom, BinaryOperatorType.GreaterOrEqual);
+                var toFilter = new BinaryOperator("DateRequested", dateTo, BinaryOperatorType.LessOrEqual);
                 criteria = GroupOperator.And(criteria, GroupOperator.And(fromFilter, toFilter));
             }
 
             gridRequest.ActiveFilterCriteria = criteria;
         }
-
         private void btnFilterbyDate_Click(object sender, EventArgs e)
         {
             FilterGrid();
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             lueOffice.EditValue = null;
@@ -266,47 +209,43 @@ namespace ICTProfilingV3.TicketRequestForms
             lueStatus.EditValue = null;
             ceShowCompleted.Checked = false;
         }
-
         private void lueProcessType_EditValueChanged(object sender, EventArgs e)
         {
             FilterGrid();
         }
-
         private void spinCtrlNo_EditValueChanged(object sender, EventArgs e)
         {
             FilterGrid();
         }
-
+        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void ceShowCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void lueOffice_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void slueEquipment_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void lueStatus_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
         private void spinCtrlNo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) FilterGrid();
         }
 
-        private void btnInfo_Click(object sender, EventArgs e)
-        {
-            var focusedRow = gridRequest.FocusedRowHandle;
-            gridRequest.SetMasterRowExpanded(focusedRow, !gridRequest.GetMasterRowExpanded(focusedRow));
-        }
-
-        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
-        }
-
-        public void DisposeUC(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                ctrl.Dispose();
-                GC.Collect();
-            }
-            parent.Controls.Clear();
-        }
-
+        #endregion
         private void gridRequest_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
             var row = (TicketRequestDTM)gridRequest.GetFocusedRow();
-            //var row = (TicketRequestViewModel)gridRequest.GetFocusedRow();
             if (row == null)
             {
                 tabAction.Controls.Clear();
@@ -323,31 +262,20 @@ namespace ICTProfilingV3.TicketRequestForms
 
         private void LoadActions(ActionType actionType)
         {
-            tabAction.Controls.Clear();
-            tabAction.Controls.Add(new UCActions(actionType)
+            tabAction.Controls.Clear(); 
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(actionType);
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
+        }
+        public void DisposeUC(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
             {
-                Dock = DockStyle.Fill
-            });
-        }
-
-        private void ceShowCompleted_CheckedChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
-        }
-
-        private void lueOffice_EditValueChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
-        }
-
-        private void slueEquipment_EditValueChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
-        }
-
-        private void lueStatus_EditValueChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
+                ctrl.Dispose();
+                GC.Collect();
+            }
+            parent.Controls.Clear();
         }
     }
 }

@@ -7,5 +7,6 @@ namespace ICTProfilingV3.Interfaces
     public interface ITicketRequestService
     {
         Task<IEnumerable<TicketRequestDTM>> GetTicketRequests();
+        Task<bool> CanAssignTicket();
     }
 }

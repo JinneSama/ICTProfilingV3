@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.ReportViewModel;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptStandardPR
     {
@@ -883,7 +885,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.ReportViewModel.StandardPRReportViewModel);
+            this.objectDataSource1.DataSource = typeof(StandardPRReportViewModel);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // rptStandardPR

@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ActionsForms
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+
+namespace ICTProfilingV3.ActionsForms
 {
     partial class frmActionTree
     {
@@ -107,7 +109,7 @@
             // 
             // bsActionTree
             // 
-            this.bsActionTree.DataSource = typeof(Models.ViewModels.ActionTreeViewModel);
+            this.bsActionTree.DataSource = typeof(ActionTreeViewModel);
             // 
             // NodeImages
             // 

@@ -1,10 +1,9 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Data.Entity;

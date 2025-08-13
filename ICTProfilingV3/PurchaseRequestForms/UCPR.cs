@@ -4,13 +4,17 @@ using DevExpress.XtraEditors;
 using Helpers.Interfaces;
 using Helpers.Utility;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.Equipments;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.RepairForms;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
-using Models.HRMISEntites;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Models;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,13 +29,14 @@ namespace ICTProfilingV3.PurchaseRequestForms
 {
     public partial class UCPR : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUCManager<Control> _ucManager;
+        private readonly IUCManager _ucManager;
+        private readonly IServiceProvider _serviceProvider;
         public string filterText { get; set; }
-        public UCPR()
+        public UCPR(IUCManager ucManager, IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = main._ucManager;
+            _serviceProvider = serviceProvider;
+            _ucManager = ucManager;
             LoadPR();
         }
 
@@ -104,10 +109,10 @@ namespace ICTProfilingV3.PurchaseRequestForms
             var row = (PRViewModel)gridPR.GetFocusedRow();
             if (row == null) return;
             tabAction.Controls.Clear();
-            tabAction.Controls.Add(new UCActions(new ActionType { Id = row.PurchaseRequest.Id, RequestType = Models.Enums.RequestType.PR })
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType { Id = row.PurchaseRequest.Id, RequestType = Models.Enums.RequestType.PR });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
 
         private void LoadPRSpecs(PRViewModel row)
@@ -172,12 +177,10 @@ namespace ICTProfilingV3.PurchaseRequestForms
         private void hplTechSpecs_Click(object sender, EventArgs e)
         {
             var pr = (PRViewModel)gridPR.GetFocusedRow();
-            _ucManager.ShowUCSystemDetails(hplTechSpecs.Name, new UCTechSpecs()
-            {
-                IsTechSpecs = true,
-                Dock = DockStyle.Fill,
-                filterText = pr.PurchaseRequest.TechSpecsId.ToString()
-            }, new string[] {"IsTechSpecs", "filterText"});
+
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = pr.PurchaseRequest.TechSpecsId.ToString());
         }
 
         private void btnFDTS_Click(object sender, EventArgs e)

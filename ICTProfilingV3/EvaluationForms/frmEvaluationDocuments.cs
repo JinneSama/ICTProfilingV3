@@ -1,7 +1,4 @@
-﻿using Helpers.NetworkFolder;
-using ICTProfilingV3.BaseClasses;
-using Models.Entities;
-using Models.Repository;
+﻿using ICTProfilingV3.BaseClasses;
 
 namespace ICTProfilingV3.EvaluationForms
 {

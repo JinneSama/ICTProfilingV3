@@ -2,12 +2,12 @@
 using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.ReportForms;
 using Models.Entities;
 using Models.Enums;
-using Models.ReportViewModel;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

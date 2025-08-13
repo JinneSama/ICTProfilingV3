@@ -1,4 +1,7 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptM365
     {
@@ -595,7 +598,7 @@
             // 
             // objectDataSource2
             // 
-            this.objectDataSource2.DataSource = typeof(Models.ReportViewModel.MOAccountReportViewModel);
+            this.objectDataSource2.DataSource = typeof(MOAccountReportViewModel);
             this.objectDataSource2.Name = "objectDataSource2";
             // 
             // PageFooter
@@ -668,7 +671,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.ViewModels.MOAccountsViewModel);
+            this.objectDataSource1.DataSource = typeof(MOAccountsViewModel);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // GroupFooter2

@@ -1,11 +1,10 @@
-﻿using DevExpress.XtraEditors.Controls;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers.User;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,28 +16,35 @@ namespace ICTProfilingV3.PGNForms
         private IUnitOfWork unitOfWork;
         private PGNRequests request;
         private bool IsSave = false;
-        public frmAddEditRequest()
+        private readonly UserStore _userStore;
+        public frmAddEditRequest(UserStore userStore)
         {
+            _userStore = userStore;
             InitializeComponent();
             unitOfWork = new UnitOfWork();
-            CreateRequest();
-            LoadDropdowns();
+            
             LoadScanDocs();
         }
-        public frmAddEditRequest(PGNRequestViewModel request)
+
+        public void InitForm(PGNRequestViewModel request = null)
         {
-            InitializeComponent();
-            IsSave = true;
-            unitOfWork = new UnitOfWork();
-            this.request = request.PGNRequest;
-            LoadDropdowns();
-            LoadDetails(request);
-            LoadScanDocs();
+            if(request == null)
+            {
+                CreateRequest();
+                LoadDropdowns();
+            }
+            else
+            {
+                IsSave = true;
+                this.request = request.PGNRequest;
+                LoadDetails(request);
+                LoadDropdowns();
+            }
         }
 
         private void CreateRequest()
         {
-            var req = new PGNRequests { CreatedById = UserStore.UserId , DateCreated = DateTime.Now };
+            var req = new PGNRequests { CreatedById = _userStore.UserId , DateCreated = DateTime.Now };
             unitOfWork.PGNRequestsRepo.Insert(req); 
             unitOfWork.Save();
             request = req;

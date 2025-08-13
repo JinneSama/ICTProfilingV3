@@ -4,19 +4,20 @@ using System;
 using Models.Enums;
 using Models.Repository;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 
 namespace ICTProfilingV3.ActionsForms
 {
     public partial class frmAddEditProgram : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        public frmAddEditProgram()
+        private readonly IRepository<int, ActionsDropdowns> _actionTreeRepo;
+        public frmAddEditProgram(IRepository<int, ActionsDropdowns> actionTreeRepo)
         {
+            _actionTreeRepo = actionTreeRepo;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             var program = new ActionsDropdowns
             {
@@ -24,8 +25,7 @@ namespace ICTProfilingV3.ActionsForms
                 Order = (int)spinOrder.Value,
                 Value = txtProgram.Text
             };
-            unitOfWork.ActionsDropdownsRepo.Insert(program);
-            unitOfWork.Save();
+            await _actionTreeRepo.AddAsync(program);
             this.Close();
         }
 

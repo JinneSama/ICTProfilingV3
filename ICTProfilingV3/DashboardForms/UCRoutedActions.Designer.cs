@@ -43,6 +43,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ceCompleted = new DevExpress.XtraEditors.CheckEdit();
             this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
@@ -61,7 +62,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gcActions = new DevExpress.XtraEditors.GroupControl();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.hplControlNo)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcRoutedActions)).BeginInit();
@@ -250,6 +250,12 @@
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 7;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "gridColumn9";
+            this.gridColumn9.FieldName = "Completed";
+            this.gridColumn9.Name = "gridColumn9";
             // 
             // panel2
             // 
@@ -497,12 +503,6 @@
             this.gcActions.Size = new System.Drawing.Size(1435, 206);
             this.gcActions.TabIndex = 89;
             this.gcActions.Text = "Actions";
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "gridColumn9";
-            this.gridColumn9.FieldName = "Completed";
-            this.gridColumn9.Name = "gridColumn9";
             // 
             // UCRoutedActions
             // 

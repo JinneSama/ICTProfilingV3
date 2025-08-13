@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using ICTProfilingV3.BaseClasses;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Repository;
 using System;
@@ -11,8 +12,10 @@ namespace ICTProfilingV3.ToolForms
     public partial class frmViewChangeLogs : BaseForm
     {
         private IUnitOfWork unitOfWork;
-        public frmViewChangeLogs()
+        private readonly IServiceProvider _serviceProvider;
+        public frmViewChangeLogs(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             unitOfWork = new UnitOfWork();
             LoadDetails();
@@ -38,7 +41,8 @@ namespace ICTProfilingV3.ToolForms
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var row = (ChangeLogs)gridChangelogs.GetFocusedRow();
-            var frm = new frmAddEditChangeLogs(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditChangeLogs>();
+            frm.InitForm(row);
             frm.ShowDialog();
 
             LoadDetails();
@@ -51,7 +55,8 @@ namespace ICTProfilingV3.ToolForms
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditChangeLogs();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditChangeLogs>();
+            frm.InitForm();
             frm.ShowDialog();
 
             LoadDetails();

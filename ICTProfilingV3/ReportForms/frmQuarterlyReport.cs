@@ -1,21 +1,25 @@
-﻿using Helpers.Utility;
+﻿using DevExpress.XtraRichEdit.Import.Html;
+using Helpers.Utility;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
 using Models.Enums;
-using Models.Managers.User;
-using Models.Models;
-using Models.ReportViewModel;
 using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.ReportForms
 {
     public partial class frmQuarterlyReport : BaseForm
     {
-        public frmQuarterlyReport()
+        private readonly UserStore _userStore;
+        public frmQuarterlyReport(UserStore userStore)
         {
+            _userStore = userStore;
             InitializeComponent();
             LoadDropdowns();
         }
@@ -78,13 +82,15 @@ namespace ICTProfilingV3.ReportForms
             QuarterlyReport quaterReport = new QuarterlyReport();
             if (requestType == RequestType.CAS)
             {
-                var cas = unitOfWork.CustomerActionSheetRepo.FindAllAsync(x => x.DateCreated >= quarterDate.start && x.DateCreated <= quarterDate.end && x.Status == TicketStatus.Completed,
+                var cas = unitOfWork.CustomerActionSheetRepo.FindAllAsync(x => x.RecordsRequestStatus
+                    .OrderByDescending(s => s.DateStatusChanged).FirstOrDefault().DateStatusChanged >= quarterDate.start && x.RecordsRequestStatus
+                    .OrderByDescending(s => s.DateStatusChanged).FirstOrDefault().DateStatusChanged <= quarterDate.end && x.Status == TicketStatus.Completed,
                     x => x.EvaluationSheets,
                     x => x.AssistedBy).ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
-                    Rating = (decimal)(x.EvaluationSheets?.Average(s => s?.RatingValue ?? 0) ?? 0),
+                    Rating = (decimal)(x.EvaluationSheets.Count == 0 ? 0 : x.EvaluationSheets?.Average(s => s?.RatingValue ?? 0) ?? 0),
                     Staff = x.AssistedBy.FullName,
                     Requested = 1, 
                     Items = 1,
@@ -99,13 +105,17 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.Deliveries)
             {
-                var cas = unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate >= quarterDate.start &&
-                x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
+                var cas = unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
                 && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
                     x => x.EvaluationSheets,
                     x => x.TicketRequest,
                     x => x.TicketRequest.ITStaff,
                     x => x.TicketRequest.ITStaff.Users,
+                    x => x.TicketRequest.TicketRequestStatus,
                     x => x.DeliveriesSpecs).ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
@@ -125,14 +135,17 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.TechSpecs)
             {
-                var cas = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released recommended")).ActionDate >= quarterDate.start &&
-                x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released recommended")).ActionDate <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
+                var cas = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
                 && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
                     x => x.EvaluationSheets,
                     x => x.TicketRequest,
                     x => x.TicketRequest.ITStaff,
                     x => x.TicketRequest.ITStaff.Users,
-                    x => x.TechSpecsICTSpecs).ToList();
+                    x => x.TicketRequest.TicketRequestStatus).ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
@@ -151,15 +164,19 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.Repairs)
             {
-                var cas = unitOfWork.RepairsRepo.FindAllAsync(x => x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate >= quarterDate.start &&
-                x.Actions.OrderByDescending(s => s.ActionDate).FirstOrDefault(s => s.ActionTaken.ToLower().Contains("released inspected")).ActionDate <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
+                var repair = unitOfWork.RepairsRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
+                            .OrderByDescending(s => s.DateStatusChanged)
+                            .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
                 && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
                     x => x.EvaluationSheets,
                     x => x.TicketRequest,
                     x => x.TicketRequest.ITStaff,
-                    x => x.TicketRequest.ITStaff.Users).ToList();
+                    x => x.TicketRequest.ITStaff.Users,
+                    x => x.TicketRequest.TicketRequestStatus).ToList();
 
-                var rating = cas.Select(x => new EvaluationRating
+                var rating = repair.Select(x => new EvaluationRating
                 {
                     Rating = (decimal)(x.EvaluationSheets.Count() == 0 ? 0 : x.EvaluationSheets?.Average(s => s?.RatingValue ?? 0) ?? 0),
                     Staff = x.TicketRequest.ITStaff.Users.FullName,
@@ -184,7 +201,7 @@ namespace ICTProfilingV3.ReportForms
                 Staff = StringHelper.GetInitials(s.Key),
                 Requested = s.Count(),
                 Items = s.Count(),
-                Quantity = s.Count(),
+                Quantity = s.Sum(o => o.Quantity),
                 Rating = s.Average(o => o.Rating),
                 Male = s.Sum(o => o.Male),
                 Female = s.Sum(o => o.Female)
@@ -205,7 +222,7 @@ namespace ICTProfilingV3.ReportForms
             {
                 Process = EnumHelper.GetEnumDescription(requestType),
                 Quarter = EnumHelper.GetEnumDescription(quaterDesc),
-                PrintedBy = UserStore.Username,
+                PrintedBy = _userStore.Username,
                 DatePrinted = DateTime.Now.ToShortDateString(),
                 EvaluationRating = ratingByUser,
                 RequestedByFemale = femaleRating == null ? 0 : femaleRating.Requested,
@@ -220,10 +237,10 @@ namespace ICTProfilingV3.ReportForms
         {
             switch (quarter)
             {
-                case 1: return (new DateTime(year, 1, 1), new DateTime(year, 3, 31));
-                case 2: return (new DateTime(year, 4, 1), new DateTime(year, 6, 30));
-                case 3: return (new DateTime(year, 7, 1), new DateTime(year, 9, 30));
-                case 4: return (new DateTime(year, 10, 1), new DateTime(year, 12, 31));
+                case 1: return (new DateTime(year, 1, 1), new DateTime(year, 3, 31,23,0,0));
+                case 2: return (new DateTime(year, 4, 1), new DateTime(year, 6, 30,23,0,0));
+                case 3: return (new DateTime(year, 7, 1), new DateTime(year, 9, 30,23,0,0));
+                case 4: return (new DateTime(year, 10, 1), new DateTime(year, 12, 30, 23, 0, 0));
                 default: throw new ArgumentException("Quarter must be between 1 and 4");
             }
         }

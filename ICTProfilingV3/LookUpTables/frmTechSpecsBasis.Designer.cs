@@ -243,6 +243,8 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Price Range";
+            this.gridColumn4.DisplayFormat.FormatString = "n";
+            this.gridColumn4.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn4.FieldName = "PriceRange";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;

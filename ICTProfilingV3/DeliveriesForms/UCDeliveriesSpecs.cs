@@ -1,6 +1,6 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -67,7 +67,9 @@ namespace ICTProfilingV3.DeliveriesForms
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
             var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
                 x => x.Model ,
-                x => x.Model.Brand);
+                x => x.Model.Brand,
+                x => x.Model.Brand.EquipmentSpecs.Equipment,
+                x => x.Model.Brand.EquipmentSpecs);
             var frm = new frmAddEquipment(delSpecs);
             frm.ShowDialog();
 

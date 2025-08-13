@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.ReportViewModel;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptRepairTR
     {
@@ -43,6 +45,7 @@
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.SubBand1 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrLabel108 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
@@ -103,6 +106,7 @@
             this.xrLabel39 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel40 = new DevExpress.XtraReports.UI.XRLabel();
             this.SubBand2 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrLabel109 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLine2 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLine4 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLabel41 = new DevExpress.XtraReports.UI.XRLabel();
@@ -172,7 +176,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.ReportViewModel.RepairTRViewModel);
+            this.objectDataSource1.DataSource = typeof(ICTProfilingV3.DataTransferModels.ReportViewModel.RepairTRViewModel);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // GroupHeader2
@@ -280,6 +284,7 @@
             // SubBand1
             // 
             this.SubBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel108,
             this.xrLabel1,
             this.xrLabel2,
             this.xrLabel8,
@@ -331,6 +336,23 @@
             this.xrLine3});
             this.SubBand1.HeightF = 423.9518F;
             this.SubBand1.Name = "SubBand1";
+            // 
+            // xrLabel108
+            // 
+            this.xrLabel108.BorderColor = System.Drawing.Color.Silver;
+            this.xrLabel108.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabel108.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel108.LocationFloat = new DevExpress.Utils.PointFloat(20.82068F, 224.5417F);
+            this.xrLabel108.Multiline = true;
+            this.xrLabel108.Name = "xrLabel108";
+            this.xrLabel108.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel108.SizeF = new System.Drawing.SizeF(381.7154F, 35.35945F);
+            this.xrLabel108.StylePriority.UseBorderColor = false;
+            this.xrLabel108.StylePriority.UseBorders = false;
+            this.xrLabel108.StylePriority.UseFont = false;
+            this.xrLabel108.StylePriority.UseTextAlignment = false;
+            this.xrLabel108.Text = " ";
+            this.xrLabel108.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLabel1
             // 
@@ -832,6 +854,7 @@
             this.xrLabel82.StylePriority.UseTextAlignment = false;
             this.xrLabel82.Text = "xrLabel13";
             this.xrLabel82.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel82.TextFormatString = "{0:MM/dd/yyyy hh:mm tt}";
             // 
             // xrLabel83
             // 
@@ -965,6 +988,7 @@
             this.xrLabel99.StylePriority.UseTextAlignment = false;
             this.xrLabel99.Text = "xrLabel13";
             this.xrLabel99.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel99.TextFormatString = "{0:MM/dd/yyyy hh:mm tt}";
             // 
             // xrLabel100
             // 
@@ -1182,6 +1206,7 @@
             // SubBand2
             // 
             this.SubBand2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel109,
             this.xrLine2,
             this.xrLine4,
             this.xrLabel41,
@@ -1233,6 +1258,23 @@
             this.xrLabel103});
             this.SubBand2.HeightF = 423.9518F;
             this.SubBand2.Name = "SubBand2";
+            // 
+            // xrLabel109
+            // 
+            this.xrLabel109.BorderColor = System.Drawing.Color.Silver;
+            this.xrLabel109.Borders = DevExpress.XtraPrinting.BorderSide.None;
+            this.xrLabel109.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel109.LocationFloat = new DevExpress.Utils.PointFloat(20.85122F, 224.5417F);
+            this.xrLabel109.Multiline = true;
+            this.xrLabel109.Name = "xrLabel109";
+            this.xrLabel109.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel109.SizeF = new System.Drawing.SizeF(381.6848F, 35.35945F);
+            this.xrLabel109.StylePriority.UseBorderColor = false;
+            this.xrLabel109.StylePriority.UseBorders = false;
+            this.xrLabel109.StylePriority.UseFont = false;
+            this.xrLabel109.StylePriority.UseTextAlignment = false;
+            this.xrLabel109.Text = " ";
+            this.xrLabel109.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLine2
             // 
@@ -1329,6 +1371,7 @@
             this.xrLabel46.StylePriority.UseTextAlignment = false;
             this.xrLabel46.Text = "xrLabel13";
             this.xrLabel46.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel46.TextFormatString = "{0:MM/dd/yyyy hh:mm tt}";
             // 
             // xrLabel47
             // 
@@ -1462,6 +1505,7 @@
             this.xrLabel55.StylePriority.UseTextAlignment = false;
             this.xrLabel55.Text = "xrLabel13";
             this.xrLabel55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel55.TextFormatString = "{0:MM/dd/yyyy hh:mm tt}";
             // 
             // xrLabel56
             // 
@@ -1528,7 +1572,7 @@
             this.xrLabel60.Multiline = true;
             this.xrLabel60.Name = "xrLabel60";
             this.xrLabel60.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel60.SizeF = new System.Drawing.SizeF(268.35F, 15F);
+            this.xrLabel60.SizeF = new System.Drawing.SizeF(268.305F, 15F);
             this.xrLabel60.StylePriority.UseFont = false;
             this.xrLabel60.Text = "xrLabel13";
             // 
@@ -1561,11 +1605,11 @@
             this.xrLabel62.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Repair].[Recommendations]")});
             this.xrLabel62.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel62.LocationFloat = new DevExpress.Utils.PointFloat(134.2311F, 204.5417F);
+            this.xrLabel62.LocationFloat = new DevExpress.Utils.PointFloat(134.2262F, 204.5417F);
             this.xrLabel62.Multiline = true;
             this.xrLabel62.Name = "xrLabel62";
             this.xrLabel62.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel62.SizeF = new System.Drawing.SizeF(268.35F, 20F);
+            this.xrLabel62.SizeF = new System.Drawing.SizeF(268.35F, 19.99998F);
             this.xrLabel62.StylePriority.UseBorderColor = false;
             this.xrLabel62.StylePriority.UseBorders = false;
             this.xrLabel62.StylePriority.UseFont = false;
@@ -2096,5 +2140,7 @@
         private DevExpress.XtraReports.UI.XRLabel xrLabel7;
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel108;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel109;
     }
 }

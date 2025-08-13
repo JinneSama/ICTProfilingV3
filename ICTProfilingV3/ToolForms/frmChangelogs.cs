@@ -1,8 +1,8 @@
 ﻿using DevExpress.XtraEditors;
-using Helpers.NetworkFolder;
+using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

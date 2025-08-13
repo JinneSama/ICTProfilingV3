@@ -1,4 +1,4 @@
-﻿using Helpers.NetworkFolder;
+﻿using ICTProfilingV3.API.FilesApi;
 using Models.Entities;
 using Models.Repository;
 using Newtonsoft.Json;

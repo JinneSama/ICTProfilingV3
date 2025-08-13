@@ -1,8 +1,8 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Services.Employees;
 using Models.Entities;
-using Models.HRMISEntites;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Threading.Tasks;
 

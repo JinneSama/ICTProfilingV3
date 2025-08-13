@@ -1,22 +1,22 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.XtraRichEdit.Import.OpenXml;
 using Helpers.Interfaces;
-using Helpers.NetworkFolder;
-using Helpers.Utility;
-using ICTMigration.ICTv2Models;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.API.FilesApi;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.EvaluationForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.ReportForms;
+using ICTProfilingV3.Services;
+using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers.User;
-using Models.Models;
-using Models.ReportViewModel;
 using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,15 +31,25 @@ namespace ICTProfilingV3.DeliveriesForms
     public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
     {
         private HTTPNetworkFolder networkFolder;
-        private IUCManager<Control> _ucManager;
+        private readonly IUCManager _ucManager;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IStaffService _staffService;
+        private readonly IEquipmentService _equipmentService;
+        private UserStore _userStore;
 
         public string filterText { get; set; }
-        public UCDeliveries()
+        public UCDeliveries(IUCManager ucManager, IServiceProvider serviceProvider, UserStore userStore,
+            IStaffService staffService, IEquipmentService equipmentService)
         {
             InitializeComponent();
-            var main = Application.OpenForms["frmMain"] as frmMain;
-            _ucManager = main._ucManager;
+            _ucManager = ucManager;
+            _serviceProvider = serviceProvider;
             networkFolder = new HTTPNetworkFolder();
+            _userStore = userStore;
+            _staffService = staffService;
+            _equipmentService = equipmentService;
+
+            LoadFilterDropdowns();
         }
 
         private void LoadDropdown()
@@ -47,17 +57,27 @@ namespace ICTProfilingV3.DeliveriesForms
             IUnitOfWork unitOfWork = new UnitOfWork();
             var staff = unitOfWork.UsersRepo.GetAll().ToList();
             var res = staff.OrderBy(o => o.FullName);
-
-            slueTaskOf.Properties.DataSource = res.ToList();
         }
+        private void LoadFilterDropdowns()
+        {
+            var users = _staffService.GetAllStaff().
+                Select(x => x.Users).ToList();
+            slueTaskOf.Properties.DataSource = users;
 
+            slueEquipment.Properties.DataSource = _equipmentService.GetAllEquipment().ToList();
+            FilterGrid();
+        }
         private async Task LoadDeliveries()
         {
             IUnitOfWork unitOfWork = new UnitOfWork();
             var deliveries = await unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
                 x => x.Supplier,
                 x => x.TicketRequest,
-                x => x.TicketRequest.ITStaff).OrderByDescending(x => x.DateRequested).ToListAsync();
+                x => x.TicketRequest.ITStaff,
+                x => x.TicketRequest.ITStaff.Users,
+                x => x.DeliveriesSpecs,
+                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment))
+                .OrderByDescending(x => x.DateRequested).ToListAsync();
 
             var delData = deliveries.Select(x => new DeliveriesViewModel
             {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
@@ -68,7 +88,10 @@ namespace ICTProfilingV3.DeliveriesForms
                 Supplier = x.Supplier.SupplierName,
                 DeliveryId = "EPiS-" + x.Id,
                 PONo = x.PONo,
-                Deliveries = x
+                Deliveries = x,
+                DateCreated = x.DateRequested.Value,
+                AssignedTo = x.TicketRequest.ITStaff?.Users?.FullName,
+                Equipment = x.DeliveriesSpecs.Count() > 0 ? string.Join(", ", x.DeliveriesSpecs?.Select(s => s.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName ?? "")) : "N/A",
             });
             gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(delData.ToList());
         }
@@ -107,7 +130,8 @@ namespace ICTProfilingV3.DeliveriesForms
             spbTicketStatus.SelectedItemIndex = ((int)row.Status) - 1;
             var deliveriesDetails = row.Deliveries;
             var requestingEmployee = HRMISEmployees.GetEmployeeById(deliveriesDetails.RequestedById);
-            txtChief.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.ReqByChiefId)?.Employee;
+            var chiefID = HRMISEmployees.GetChief(requestingEmployee.Office, requestingEmployee.Division, deliveriesDetails.ReqByChiefId)?.ChiefId;
+            txtChief.Text = HRMISEmployees.GetEmployeeById(chiefID)?.Employee;
             lblEpisNo.Text = deliveriesDetails.Id.ToString();
             txtOffice.Text = string.Join(" ", requestingEmployee?.Office, requestingEmployee?.Division);
             txtReqBy.Text = requestingEmployee?.Employee;
@@ -121,13 +145,9 @@ namespace ICTProfilingV3.DeliveriesForms
         private void LoadEvaluationSheet()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            tabEvaluation.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
-            GC.Collect();
-            tabEvaluation.Controls.Clear();
-            tabEvaluation.Controls.Add(new UCEvaluationSheet(new ActionType { Id = row.Id, RequestType = RequestType.Deliveries })
-            {
-                Dock = DockStyle.Fill
-            });
+            if (row == null) return;
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCEvaluationSheet>>();
+            navigation.NavigateTo(tabEvaluation, act => act.InitForm(new ActionType { Id = row.Id, RequestType = RequestType.Deliveries }));
         }
         private async Task LoadEquipmentSpecs()
         {
@@ -156,14 +176,14 @@ namespace ICTProfilingV3.DeliveriesForms
             if (row == null) return;
             tabAction.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
             GC.Collect();
-            tabAction.Controls.Add(new UCActions(new ActionType
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType
             {
                 Id = row.Id,
                 RequestType = RequestType.Deliveries
-            })
-            {
-                Dock = DockStyle.Fill
             });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
 
         private async void btnEdit_Click(object sender, System.EventArgs e)
@@ -172,7 +192,8 @@ namespace ICTProfilingV3.DeliveriesForms
             var rowHandle = gridDeliveries.FocusedRowHandle;
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             var deliveries = await uow.DeliveriesRepo.FindAsync(x => x.Id == row.Id);
-            var frm = new frmAddEditDeliveries(deliveries);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditDeliveries>();
+            frm.InitForm(deliveries);
             frm.ShowDialog();
 
             await LoadDeliveries();
@@ -238,7 +259,7 @@ namespace ICTProfilingV3.DeliveriesForms
                 ReviewedBy = cr?.ReviewedByUser,
                 NotedBy = cr?.NotedByUser,
                 DatePrinted = DateTime.Now,
-                PrintedBy = UserStore.Username
+                PrintedBy = _userStore.Username
             };
 
             var rptCR = new rptComparisonReport
@@ -275,12 +296,9 @@ namespace ICTProfilingV3.DeliveriesForms
         private void hplTicket_Click(object sender, EventArgs e)
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-
-            _ucManager.ShowUCSystemDetails(hplTicket.Name, new UCTARequestDashboard()
-            {
-                Dock = DockStyle.Fill,
-                filterText = row.Id.ToString()
-            }, new string[] {"filterText"});
+            var mainForm = _serviceProvider.GetRequiredService<frmMain>();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTARequestDashboard>>();
+            navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = row.Id.ToString());
         }
 
         private async void btnCompReport_Click(object sender, EventArgs e)
@@ -306,42 +324,15 @@ namespace ICTProfilingV3.DeliveriesForms
                 return;
             }
 
-            if(UserStore.UserId != del.TicketRequest.ITStaff.UserId)
+            if(_userStore.UserId != del.TicketRequest.ITStaff.UserId)
             {
                 await PrintComparisonReport();
                 return;
             }
 
-            var frm = new frmComparisonReport(del);    
+            var frm = _serviceProvider.GetRequiredService<frmComparisonReport>();
+            frm.InitForm(del);
             frm.ShowDialog();
-        }
-
-        private void FilterGrid()
-        {
-            gridDeliveries.ActiveFilterCriteria = null;
-            var row = (Users)slueTaskOf.Properties.View.GetFocusedRow();
-            var dateFrom = deFrom.DateTime;
-            var dateTo = deTo.DateTime;
-
-            var criteria = gridDeliveries.ActiveFilterCriteria;
-            if (slueTaskOf.EditValue != null) criteria = GroupOperator.And(criteria, new BinaryOperator("Deliveries.TicketRequest.ITStaff.UserId", row.Id));
-            if (deFrom.EditValue != null && deTo.EditValue != null)
-            {
-                var fromFilter = new BinaryOperator("Deliveries.DateRequested", dateFrom, BinaryOperatorType.GreaterOrEqual);
-                var toFilter = new BinaryOperator("Deliveries.DateRequested", dateTo, BinaryOperatorType.LessOrEqual);
-                criteria = GroupOperator.And(criteria, GroupOperator.And(fromFilter, toFilter));
-            }
-            gridDeliveries.ActiveFilterCriteria = criteria;
-        }
-
-        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
-        {
-            FilterGrid();
-        }
-
-        private void btnFilterbyDate_Click(object sender, EventArgs e)
-        {
-            FilterGrid();
         }
 
         public void DisposeUC(Control parent)
@@ -361,6 +352,72 @@ namespace ICTProfilingV3.DeliveriesForms
             frm.ShowDialog();
 
             await LoadDeliveries();
+        }
+
+        private void slueEquipment_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void slueTaskOf_EditValueChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+
+        private void ceCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void btnFilterbyDate_Click(object sender, EventArgs e)
+        {
+            FilterGrid();
+        }
+        private void FilterGrid()
+        {
+            gridDeliveries.ActiveFilterCriteria = null;
+
+            var dateFrom = deFrom.DateTime;
+            var dateTo = deTo.DateTime;
+            var equipment = (string)slueEquipment.EditValue;
+            var isCompleted = ceCompleted.Checked;
+            var row = slueTaskOf.EditValue;
+
+            var criteria = gridDeliveries.ActiveFilterCriteria;
+
+            if (isCompleted)
+                foreach (var status in Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>())
+                    criteria = GroupOperator.Or(criteria, new BinaryOperator("Status", status));
+            else
+                foreach (var status in Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>())
+                {
+                    if (status == TicketStatus.Completed) continue;
+                    criteria = GroupOperator.Or(criteria, new BinaryOperator("Status", status));
+                }
+
+            if (slueTaskOf.EditValue != null)
+                criteria = GroupOperator.And(criteria, new BinaryOperator("AssignedTo", row));
+            if (slueEquipment.EditValue != null)
+                criteria = GroupOperator.And(criteria, new FunctionOperator(FunctionOperatorType.Contains, new OperandProperty("Equipment"), new OperandValue(equipment)));
+
+            if (deFrom.EditValue != null && deTo.EditValue != null)
+            {
+                var fromFilter = new BinaryOperator("DateCreated", dateFrom, BinaryOperatorType.GreaterOrEqual);
+                var toFilter = new BinaryOperator("DateCreated", dateTo, BinaryOperatorType.LessOrEqual);
+                criteria = GroupOperator.And(criteria, GroupOperator.And(fromFilter, toFilter));
+            }
+
+            gridDeliveries.ActiveFilterCriteria = criteria;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            deFrom.EditValue = null;
+            deTo.EditValue = null;
+            slueEquipment.EditValue = null;
+            slueTaskOf.EditValue = null;
+            ceCompleted.Checked = false;
+
+            FilterGrid();
         }
     }
 }

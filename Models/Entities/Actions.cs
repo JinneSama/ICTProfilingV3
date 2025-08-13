@@ -67,6 +67,11 @@ namespace Models.Entities
         [ForeignKey("CreatedById")]
         [InverseProperty("CreatedActions")]
         public virtual Users CreatedBy { get; set; }
+        public bool WithDiscrepancy { get; set; } = false;
+        [MaxLength(512)]
+        public string DiscrepancyRemarks { get; set; }
+        public bool IsReadByRoutee { get; set; } = false;
+        public bool IsReadByRouter { get; set; } = false;
         [JsonIgnore]
         public virtual ICollection<Users> RoutedUsers { get; set; }
         [JsonIgnore]

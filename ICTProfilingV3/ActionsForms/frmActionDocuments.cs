@@ -1,47 +1,41 @@
 ﻿using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Camera;
-using Helpers.Interfaces;
-using Helpers.NetworkFolder;
 using Helpers.Scanner;
-using Helpers.Security;
+using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Managers.User;
 using Models.Repository;
-using System;
 using System.Drawing;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmActionDocuments : BaseForm, IEncryptFile
+    public partial class frmActionDocuments : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private HTTPNetworkFolder networkFolder;
-        private readonly Actions action;
+        private readonly IDocActionsService _docActService;
+        private readonly HTTPNetworkFolder _networkFolder;
+        private readonly UserStore _userStore;
+        private Actions _action;
 
-        public frmActionDocuments(Actions action)
+        public frmActionDocuments(HTTPNetworkFolder networkFolder, IDocActionsService docActionsService, UserStore userStore)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();  
-            networkFolder = new HTTPNetworkFolder();
-            this.action = action;
+            _docActService = docActionsService;
+            _userStore = userStore;
             LoadData();
         }
-        public frmActionDocuments()
+        public void SetAction(Actions action)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            networkFolder = new HTTPNetworkFolder();
-            LoadData();
+            _action = action;
         }
 
         private void LoadData()
         {
-            int? actionId = action?.Id ?? null;
-            var data = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == actionId).OrderBy(o => o.DocOrder).ToList();
+            int? actionId = _action?.Id ?? null;
+            var data = _docActService.GetActionDocuments(actionId);
             gcScanDocs.DataSource = data;
         }
 
@@ -64,7 +58,7 @@ namespace ICTProfilingV3.ActionsForms
 
             LoadData();
         }
-
+        #region CameraCapture
         private async void btnFile_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (!CheckUser()) return;
@@ -100,7 +94,7 @@ namespace ICTProfilingV3.ActionsForms
             var row = (ActionDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
 
-            Image img = await networkFolder.DownloadFile(row.DocumentName);
+            Image img = await _networkFolder.DownloadFile(row.DocumentName);
             XtraForm xtraForm = new XtraForm()
             {
                 WindowState = FormWindowState.Maximized,
@@ -116,7 +110,7 @@ namespace ICTProfilingV3.ActionsForms
             xtraForm.Controls.Add(pictureEdit);
             xtraForm.ShowDialog();
         }
-
+        #endregion
         private async void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (!CheckUser()) return;
@@ -125,53 +119,18 @@ namespace ICTProfilingV3.ActionsForms
 
             var row = (ActionDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
+            await _networkFolder.DeleteFile(row.DocumentName);
+            _docActService.DeleteDocument(row.Id);
 
-            await networkFolder.DeleteFile(row.DocumentName);
-            unitOfWork.ActionDocumentsRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
-
-            int? actionId = action?.Id ?? null;
-            var res = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == actionId);
-
-            int order = 1;
-            foreach (var doc in res)
-            {
-                doc.DocOrder = order;
-                order++;
-            }
-
-            unitOfWork.Save();
+            _docActService.ReorderDocument(_action?.Id ?? null);
             LoadData();
         }
 
         private async Task SaveImage(Image image)
         {
-            int? actionId = action?.Id ?? null;
-
-            int DocOrder = 1;
-            var docs = unitOfWork.ActionDocumentsRepo.FindAllAsync(x => x.ActionId == actionId).ToList().OrderBy(o => o.DocOrder);
-            if (docs.LastOrDefault() != null) DocOrder = docs.LastOrDefault().DocOrder + 1;
-
-            var actionDocs = new ActionDocuments
-            {
-                ActionId = actionId,
-                DocOrder = DocOrder
-            };
-
-            unitOfWork.ActionDocumentsRepo.Insert(actionDocs);
-            unitOfWork.Save();
-
-            var actionDocsRes = await unitOfWork.ActionDocumentsRepo.FindAsync(x => x.Id == actionDocs.Id);
-            var documentData = EncryptFile("Action_Document_" + actionDocsRes.Id);
-
-            if (actionDocsRes != null) 
-            {
-                actionDocsRes.SecurityStamp = documentData.securityStamp;
-                actionDocsRes.DocumentName = documentData.filename + ".jpeg";
-                unitOfWork.Save();
-            }
-
-            await networkFolder.UploadFile(image, actionDocsRes.DocumentName);
+            int? actionId = _action?.Id ?? null;
+            string docName = await _docActService.AddActionDocument(actionId);
+            await _networkFolder.UploadFile(image, docName);
         }
 
         private async void gridDocs_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -179,24 +138,18 @@ namespace ICTProfilingV3.ActionsForms
             var row = (ActionDocuments)gridDocs.GetFocusedRow();
             if(row == null) return;
 
-            Image image = await networkFolder.DownloadFile(row.DocumentName);
+            Image image = await _networkFolder.DownloadFile(row.DocumentName);
             picDocImage.Image = image;
         }
 
         private bool CheckUser()
         {
-            if (action.CreatedById != UserStore.UserId)
+            if (_action.CreatedById != _userStore.UserId)
             {
                 MessageBox.Show("This Option is not Available!");
                 return false;
             }
             return true;
-        }
-
-        public EncryptionData EncryptFile(string filename)
-        {
-            var securityStamp = Guid.NewGuid().ToString();
-            return new EncryptionData(Cryptography.Encrypt(filename, securityStamp) , securityStamp);
         }
     }
 }

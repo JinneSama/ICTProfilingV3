@@ -1,11 +1,9 @@
-﻿using DevExpress.XtraEditors;
-using EntityManager.Managers.User;
-using ICTProfilingV3.BaseClasses;
-using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Threading.Tasks;
 
@@ -13,47 +11,43 @@ namespace ICTProfilingV3.CustomerActionSheetForms
 {
     public partial class frmAddEditCAS : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly CASViewModel cas;
-        private readonly IICTUserManager userManager;
-        private readonly SaveType saveType;
+        private CASDTM _casDTM;
+        private SaveType _saveType;
 
-        public frmAddEditCAS()
+        private readonly IControlMapper<CASDetailDTM> _controlMapper;
+        private readonly IICTUserManager _userManager;
+        private readonly ICASService _casService;
+
+        public frmAddEditCAS(IICTUserManager userManager, IControlMapper<CASDetailDTM> controlMapper,
+            ICASService casService)
         {
+            _userManager = userManager;
+            _controlMapper = controlMapper;
+            _casService = casService;
             InitializeComponent();
-            saveType = SaveType.Insert;
-            this.unitOfWork = new UnitOfWork();
-            this.userManager = new ICTUserManager();
             LoadDropdowns();
         }
-        public frmAddEditCAS(CASViewModel cas)
-        {
-            InitializeComponent();
-            saveType = SaveType.Update;
-            this.unitOfWork = new UnitOfWork();
-            this.cas = cas;
-            this.userManager = new ICTUserManager();
-            LoadDropdowns();
-            LoadDetails();
-        }
 
-        private void LoadDetails()
+        public async void InitForm(SaveType saveType, CASDTM cas = null)
         {
-            txtDate.DateTime = cas.DateCreated;
-            txtName.Text = cas.CustomerActionSheet.ClientName;
-            slueEmployee.EditValue = cas.CustomerActionSheet.ClientId;
-            txtOffice.Text = cas.Office;
-            txtContactNo.Text = cas.CustomerActionSheet.ContactNo;
-            rdbtnGender.SelectedIndex = (int)cas.CustomerActionSheet.Gender;
-            txtClientRequest.Text = cas.CustomerActionSheet.ClientRequest;
-            txtActionTaken.Text = cas.CustomerActionSheet.ActionTaken;
-            slueAssistedBy.Text = cas.CustomerActionSheet.AssistedById;
+            LoadDropdowns();
+            _saveType = saveType;
+            if (saveType == SaveType.Update && cas != null)
+            {
+                _casDTM = cas;
+                var casDetails = await _casService.GetCASDetail(_casDTM.Id);
+                _controlMapper.MapControl(casDetails, gcDetails);
+            }
+            else
+            {
+                _casDTM = new CASDTM();
+            }
         }
 
         private void LoadDropdowns()
         {
             slueEmployee.Properties.DataSource = HRMISEmployees.GetEmployees();
-            slueAssistedBy.Properties.DataSource = userManager.GetUsers();
+            slueAssistedBy.Properties.DataSource = _userManager.GetUsers();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -63,56 +57,32 @@ namespace ICTProfilingV3.CustomerActionSheetForms
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (saveType == SaveType.Insert) await Insert();
+            if (_saveType == SaveType.Insert) await Insert();
             else await UpdateCAS();
             this.Close();
         }
 
         private async Task UpdateCAS()
         {
-            var selectedEmployee = string.IsNullOrWhiteSpace(txtName.Text) ? slueEmployee.EditValue : null;
-
-            var casUpdate = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == cas.Id);
-            casUpdate.DateCreated = txtDate.DateTime;
-            casUpdate.ClientName = txtName.Text;
-            casUpdate.ClientId = (long?)selectedEmployee;
-            casUpdate.Office = txtOffice.Text;
-            casUpdate.ContactNo = txtContactNo.Text;
-            casUpdate.Gender = (Gender)rdbtnGender.SelectedIndex;
-            casUpdate.ClientRequest = txtClientRequest.Text;
-            casUpdate.ActionTaken = txtActionTaken.Text;
-            casUpdate.AssistedById = (string)slueAssistedBy.EditValue;
-            unitOfWork.CustomerActionSheetRepo.Update(casUpdate);
-
-            await unitOfWork.SaveChangesAsync();
+            var casDTM = new CASDetailDTM();
+            _controlMapper.MapToEntity(casDTM, gcDetails);
+            await _casService.UpdateCAS(casDTM, _casDTM.Id);
         }
 
         private async Task Insert()
         {
-            var selectedEmployee = string.IsNullOrWhiteSpace(txtName.Text) ? slueEmployee.EditValue : null;
-            var cas = new CustomerActionSheet
-            {
-                DateCreated = txtDate.DateTime,
-                ClientName = txtName.Text,
-                ClientId = (long?)selectedEmployee,
-                Office = txtOffice.Text,
-                ContactNo = txtContactNo.Text,
-                Gender = (Gender)rdbtnGender.SelectedIndex,
-                ClientRequest = txtClientRequest.Text,
-                ActionTaken = txtActionTaken.Text,
-                AssistedById = (string)slueAssistedBy.EditValue
-            };
-            unitOfWork.CustomerActionSheetRepo.Insert(cas);
-            await unitOfWork.SaveChangesAsync();
+            var casDTM = new CASDetailDTM();
+            _controlMapper.MapToEntity(casDTM, gcDetails);
+            await _casService.AddCAS(casDTM);
         }
 
         private void slueEmployee_EditValueChanged(object sender, EventArgs e)
         {
             var emp = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
-            
-            if(emp == null) emp = HRMISEmployees.GetEmployeeById(cas.CustomerActionSheet.ClientId);
+
+            if (emp == null) emp = HRMISEmployees.GetEmployeeById(_casDTM.CustomerActionSheet.ClientId);
             if (emp == null) return;
-            txtName.Text = emp.Employee;
+            txtClientName.Text = emp.Employee;
             txtOffice.Text = emp.Office;
         }
     }

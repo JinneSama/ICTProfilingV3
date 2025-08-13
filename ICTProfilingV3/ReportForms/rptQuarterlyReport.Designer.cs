@@ -1,4 +1,6 @@
-﻿namespace ICTProfilingV3.ReportForms
+﻿using ICTProfilingV3.DataTransferModels.Models;
+
+namespace ICTProfilingV3.ReportForms
 {
     partial class rptQuarterlyReport
     {
@@ -942,12 +944,12 @@
             // 
             // objectDataSource2
             // 
-            this.objectDataSource2.DataSource = typeof(Models.Models.QuarterlyReport);
+            this.objectDataSource2.DataSource = typeof(QuarterlyReport);
             this.objectDataSource2.Name = "objectDataSource2";
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Models.Models.EvaluationRating);
+            this.objectDataSource1.DataSource = typeof(EvaluationRating);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // GroupFooter2

@@ -1,6 +1,6 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using Models.Entities;
 using Models.Repository;
-using Models.ViewModels;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
