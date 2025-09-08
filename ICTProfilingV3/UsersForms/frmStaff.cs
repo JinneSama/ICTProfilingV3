@@ -1,26 +1,29 @@
-﻿using DevExpress.Utils.Extensions;
-using DevExpress.XtraEditors;
-using Models.Repository;
-using Models.ViewModels;
+﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.API.FilesApi;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmStaff : DevExpress.XtraEditors.XtraForm
+    public partial class frmStaff : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        public frmStaff()
+        private readonly IStaffService _staffService;
+        private readonly IServiceProvider _serviceProvider;
+        private HTTPNetworkFolder _networkFolder;
+
+        public frmStaff(IStaffService staffService, HTTPNetworkFolder networkFolder, IServiceProvider serviceProvider)
         {
+            _staffService = staffService;
+            _networkFolder = networkFolder;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+
             LoadStaff();
         }
 
@@ -48,19 +51,28 @@ namespace ICTProfilingV3.UsersForms
                 }).ToList();
         }
 
-        private void LoadStaff()
+        private async void LoadStaff()
         {
-            var res = unitOfWork.ITStaffRepo.GetAll(x => x.TicketRequests).Select(x => new StaffViewModel
+            var staffList = _staffService.FetchStaff(x => x.Users.IsDeleted == false)
+                .Include(x => x.TicketRequests)
+                .Include(x => x.Users);
+
+            var staffViewModels = new List<StaffViewModel>();
+            foreach (var staff in staffList)
             {
-                Users = x.Users,
-                Staff = x
-            });
-            gcStaff.DataSource = res.ToList();  
+                var image = await _networkFolder.DownloadFile(staff.UserId + ".jpeg");
+                staffViewModels.Add(new StaffViewModel
+                {
+                    Staff = staff,
+                    Image = image
+                });
+            }
+            gcStaff.DataSource = staffViewModels.ToList();  
         }
 
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditStaff();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditStaff>();
             frm.ShowDialog();
 
             LoadStaff();
@@ -78,6 +90,16 @@ namespace ICTProfilingV3.UsersForms
             var row = (StaffViewModel)tvStaff.GetRow(e.RowHandle);
             LoadAssignedTo(row);
             LoadProcessCount(row);
+        }
+
+        private void btnEditStaff_Click(object sender, EventArgs e)
+        {
+            var row = (StaffViewModel)tvStaff.GetFocusedRow();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditStaff>();
+            frm.InitForm(row);
+            frm.ShowDialog();
+
+            LoadStaff();
         }
     }
 }

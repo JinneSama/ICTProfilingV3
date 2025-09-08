@@ -1,15 +1,15 @@
-﻿using DevExpress.Utils.Drawing;
-using ICTProfilingV3.DeliveriesForms;
+﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.PPEInventoryForms;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers;
-using Models.Managers.User;
-using Models.Repository;
-using Models.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,38 +17,51 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
-    public partial class frmAddEditRepair : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAddEditRepair : BaseForm
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly SaveType saveType;
-        private Repairs _Repairs;
-        private readonly int repairId;
-        private bool IsSave = false;
-        private UCAddPPEEquipment UCAddPPEEquipment;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IRepairService _repairService;
+        private readonly IPPEInventoryService _ppeInventoryService;
+        private readonly IProcessService _processService;
+        private readonly UserStore _userStore;
 
-        public frmAddEditRepair()
+        private SaveType _saveType;
+        private Repairs _repair;
+        private int _repairId;
+        private bool _isSave = false;
+
+        public frmAddEditRepair(UserStore userStore, IServiceProvider serviceProvider, IRepairService repairService, 
+            IPPEInventoryService ppeInventoryService, IProcessService processService)
         {
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
+            _ppeInventoryService = ppeInventoryService;
+            _repairService = repairService;
+            _processService = processService;
+
             InitializeComponent();
-            _unitOfWork = new UnitOfWork();
-            saveType = SaveType.Insert;
-            CreateTicket();
             LoadDropdowns();
         }
 
-        public frmAddEditRepair(IUnitOfWork uow, int repair)
+        public async Task InitForm(int? repair = null)
         {
-            InitializeComponent();
-            saveType = SaveType.Update;
-            IsSave = true;
-            _unitOfWork = uow;
-            repairId = repair;
-            LoadDropdowns();
+            if(repair == null)
+            {
+                _saveType = SaveType.Insert;
+                await CreateTicket();
+            }
+            else
+            {
+                _saveType = SaveType.Update;
+                _isSave = true;
+                _repairId = repair.Value;
+            }
         }
 
         private async Task LoadDetails()
         {
-            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);    
-            _Repairs = repair;
+            var repair = await _repairService.GetByIdAsync(_repairId);    
+            _repair = repair;
 
             if(repair.DateCreated != null) txtDate.DateTime = (DateTime)repair.DateCreated;
             slueEmployee.EditValue = repair.RequestedById;
@@ -60,26 +73,10 @@ namespace ICTProfilingV3.RepairForms
             txtRequestProblem.Text = repair.Problems;
         }
 
-        private void CreateTicket()
+        private async Task CreateTicket()
         {
-            var ticket = new TicketRequest()
-            {
-                DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.Repairs
-            };
-            _unitOfWork.TicketRequestRepo.Insert(ticket);
-            _unitOfWork.Save();
-
-            var repairs = new Repairs()
-            {
-                Id = ticket.Id
-            };
-
-            _unitOfWork.RepairsRepo.Insert(repairs);
-            _unitOfWork.Save();
-
-            _Repairs = repairs;
+            var repair = await _repairService.AddAsync(new Repairs());
+            _repair = repair;
         }
 
         private void LoadDropdowns()
@@ -87,11 +84,13 @@ namespace ICTProfilingV3.RepairForms
             var employees = HRMISEmployees.GetEmployees();
             slueEmployee.Properties.DataSource = employees;
             slueDeliveredBy.Properties.DataSource = employees;
+
+            txtDate.DateTime = DateTime.Now;
+            txtDateofDelivery.DateTime = DateTime.Now;
         }
         private async Task LoadPPEs()
         {
-            var ppe = await _unitOfWork.PPesRepo.GetAll().ToListAsync();
-
+            var ppe = await _ppeInventoryService.GetAll().ToListAsync();
             var ppeModel = ppe.Select(x => new PPEsViewModel
             {
                 Id = x.Id,
@@ -107,7 +106,8 @@ namespace ICTProfilingV3.RepairForms
 
         private async void btnAddPPE_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditPPEs(SaveType.Insert , null);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditPPEs>();
+            await frm.InitForm(SaveType.Insert, null);
             frm.ShowDialog();
 
             await LoadPPEs();
@@ -123,19 +123,13 @@ namespace ICTProfilingV3.RepairForms
             var row = (PPEsViewModel)sluePropertyNo.Properties.View.GetFocusedRow();
 
             int repId;
-            if (row == null) repId = (int)_Repairs.PPEsId;
+            if (row == null) repId = (int)_repair.PPEsId;
             else repId = row.Id;
 
-            var ppe = await _unitOfWork.PPesRepo.FindAsync(x => x.Id == repId);
-            gcEquipmentSpecs.Controls.Clear();
+            var ppe = await _ppeInventoryService.GetByIdAsync(repId);
 
-            var equipmentSpecsForm = new UCAddPPEEquipment(ppe, _unitOfWork , false)
-            {
-                Dock = DockStyle.Fill
-            };
-            UCAddPPEEquipment = equipmentSpecsForm;
-
-            gcEquipmentSpecs.Controls.Add(equipmentSpecsForm);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPPEsSpecs>>();
+            navigation.NavigateTo(gcEquipmentSpecs, act => act.InitUC(ppe, forViewing: true));
 
             txtIssuedTo.Text = HRMISEmployees.GetEmployeeById(ppe.IssuedToId)?.Employee;
             txtOffAcr.Text = HRMISEmployees.GetEmployeeById(ppe.IssuedToId)?.Office;
@@ -144,15 +138,25 @@ namespace ICTProfilingV3.RepairForms
         private async void btnSave_Click(object sender, EventArgs e)
         {
             await Save();
-            IsSave = true;
+            _isSave = true;
             this.Close();
+            if (_saveType == SaveType.Update) return;
+            var actionType = new ActionType
+            {
+                Id = _repair.Id,
+                RequestType = RequestType.Repairs
+            };
+
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
+            frm.ShowDialog();
         }
         private async Task Save()
         {
             var reqEmployee = HRMISEmployees.GetEmployeeById((long?)slueEmployee.EditValue);
-            var repair = await _unitOfWork.RepairsRepo.FindAsync(x => x.Id == _Repairs.Id);
+            var repair = await _repairService.GetByIdAsync(_repair.Id);
             repair.RequestedById = (long)slueEmployee.EditValue;
-            repair.ReqByChiefId = HRMISEmployees.GetChief(reqEmployee.Office, reqEmployee.Division).ChiefId;
+            repair.ReqByChiefId = HRMISEmployees.GetChief(reqEmployee.Office, reqEmployee.Division, (long?)slueEmployee.EditValue).ChiefId;
             repair.DeliveredById = (long)slueDeliveredBy.EditValue;
             repair.Problems = txtRequestProblem.Text;
             repair.Gender = (Gender)rdbtnGender.SelectedIndex;
@@ -160,28 +164,24 @@ namespace ICTProfilingV3.RepairForms
             repair.PPEsId = (int?)sluePropertyNo.EditValue;
             repair.DateCreated = txtDate.DateTime;
             repair.DateDelivered = txtDateofDelivery.DateTime;
-
-            await _unitOfWork.SaveChangesAsync();
-            await ModifyStatus(TicketStatus.Accepted, repair.Id);
+            await _repairService.SaveChangesAsync();
+            await ModifyTicketStatusStatus(TicketStatus.Accepted, repair.Id);
         }
 
         private async void frmAddEditRepair_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!IsSave) await DeleteRepair();
+            if (!_isSave) await DeleteRepair();
         }
 
         private async Task DeleteRepair()
         {
-            _unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _Repairs.Id);
-            await _unitOfWork.SaveChangesAsync();
-            _unitOfWork.RepairsRepo.DeleteByEx(x => x.Id == _Repairs.Id);
-            await _unitOfWork.SaveChangesAsync();
+            await _repairService.DeleteAsync(_repair.Id);
         }
 
         private async void frmAddEditRepair_Load(object sender, EventArgs e)
         {
             await LoadPPEs();
-            if (saveType == SaveType.Update) await LoadDetails();
+            if (_saveType == SaveType.Update) await LoadDetails();
         }
 
         private void groupControl3_Paint(object sender, PaintEventArgs e)
@@ -189,17 +189,14 @@ namespace ICTProfilingV3.RepairForms
 
         }
 
-        public async Task ModifyStatus(TicketStatus status, int ticketId)
+        public async Task ModifyTicketStatusStatus(TicketStatus status, int Id)
         {
-            var ticketStatus = new TicketRequestStatus
-            {
-                Status = status,
-                DateStatusChanged = DateTime.UtcNow,
-                ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
-            };
-            _unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await _unitOfWork.SaveChangesAsync();
+            await _processService.AddProcessLog(Id, RequestType.Repairs, status);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

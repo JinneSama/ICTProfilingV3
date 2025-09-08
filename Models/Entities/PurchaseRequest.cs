@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,10 +11,12 @@ namespace Models.Entities
     {
         public int Id { get; set; }
         public DateTime? DateCreated { get; set; }
-        public long? ChiefId { get; set; }
         public long? ReqById { get; set; }
+        public long? ChiefId { get; set; }
+        [MaxLength(128)]
         public string PRNo { get; set; }
-        public PRQuarter Quarter { get; set; }
+        public PRQuarter? Quarter { get; set; }
+        public TicketStatus? Status { get; set; }
         public bool? IsDeleted { get; set; }
 
         public int? TechSpecsId { get; set; }
@@ -24,13 +27,16 @@ namespace Models.Entities
 
         [ForeignKey("CreatedById")]
         public Users CreatedByUser { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<PRStandardPRSpecs> PRStandardPRSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<RecordsRequestStatus> RecordsRequestStatus { get; set; }
         public PurchaseRequest()
         {
             PRStandardPRSpecs = new HashSet<PRStandardPRSpecs>();
-            Actions = new HashSet<Actions>();   
+            Actions = new HashSet<Actions>();
+            RecordsRequestStatus = new HashSet<RecordsRequestStatus>();
         }
     }
 }

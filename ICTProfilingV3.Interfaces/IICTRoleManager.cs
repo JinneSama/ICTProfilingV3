@@ -1,0 +1,21 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Models.Entities;
+using Models.Enums;
+
+namespace ICTProfilingV3.Interfaces
+{
+    public interface IICTRoleManager
+    {
+        Task CreateRole(string role , string Designation);
+        Task DeleteRole(string roleId);
+        Task UpdateRole(string roleId , string Designation);
+        Task AssignRoleToUser(string userId, string role);
+        Task RemoveRoleFromUser(string userId, string role);
+        Task<IdentityRole> FindById(string id);
+        Task<IEnumerable<RoleDesignation>> GetRoleDesignations(string roleId);
+        IEnumerable<Roles> GetRoles();
+        Task<bool> HasDesignation(Designation designation, string roleId);
+    }
+}

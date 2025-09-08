@@ -28,21 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditTechSpecs));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblRepairNo = new DevExpress.XtraEditors.LabelControl();
+            this.lblRepair = new DevExpress.XtraEditors.LabelControl();
             this.lblRequestNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.slueNotedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueNotedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.slueReviewedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueReviewedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.sluePreparedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.sluePreparedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,28 +53,21 @@
             this.lblReviewedBy = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueReqById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.checkEditForReplacement = new DevExpress.XtraEditors.CheckEdit();
             this.txtRequestedByDivision = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChiefPos = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestingOfficeChief = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtRequestedByOffice = new DevExpress.XtraEditors.TextEdit();
-            this.checkEditRequestLetter = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPR = new DevExpress.XtraEditors.CheckEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.txtRequestedByPos = new DevExpress.XtraEditors.TextEdit();
-            this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.rdbtnReqByGender = new DevExpress.XtraEditors.RadioGroup();
+            this.txtDateRequested = new DevExpress.XtraEditors.DateEdit();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -80,37 +76,47 @@
             this.groupRequestedSpecs = new DevExpress.XtraEditors.GroupControl();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
-            this.lblRepairNo = new DevExpress.XtraEditors.LabelControl();
-            this.lblRepair = new DevExpress.XtraEditors.LabelControl();
+            this.ceRequestBasedApprovedPR = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedRequestLetter = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedForReplacement = new DevExpress.XtraEditors.CheckEdit();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueNotedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReqById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByDivision.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChiefPos.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChief.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdbtnReqByGender.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupRequestedSpecs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPR.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAPP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAIP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPPMP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedRequestLetter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedForReplacement.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
+            this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -127,6 +133,36 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1134, 37);
             this.panel1.TabIndex = 90;
+            // 
+            // lblRepairNo
+            // 
+            this.lblRepairNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRepairNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblRepairNo.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblRepairNo.Appearance.Options.UseFont = true;
+            this.lblRepairNo.Appearance.Options.UseForeColor = true;
+            this.lblRepairNo.LineVisible = true;
+            this.lblRepairNo.Location = new System.Drawing.Point(575, 3);
+            this.lblRepairNo.Name = "lblRepairNo";
+            this.lblRepairNo.Size = new System.Drawing.Size(33, 30);
+            this.lblRepairNo.TabIndex = 6;
+            this.lblRepairNo.Text = "100";
+            this.lblRepairNo.Visible = false;
+            // 
+            // lblRepair
+            // 
+            this.lblRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRepair.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblRepair.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblRepair.Appearance.Options.UseFont = true;
+            this.lblRepair.Appearance.Options.UseForeColor = true;
+            this.lblRepair.LineVisible = true;
+            this.lblRepair.Location = new System.Drawing.Point(466, 3);
+            this.lblRepair.Name = "lblRepair";
+            this.lblRepair.Size = new System.Drawing.Size(103, 30);
+            this.lblRepair.TabIndex = 5;
+            this.lblRepair.Text = "Repair No.:";
+            this.lblRepair.Visible = false;
             // 
             // lblRequestNo
             // 
@@ -186,33 +222,33 @@
             this.groupControl2.Appearance.Options.UseFont = true;
             this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.Controls.Add(this.slueNotedBy);
-            this.groupControl2.Controls.Add(this.slueReviewedBy);
-            this.groupControl2.Controls.Add(this.sluePreparedBy);
+            this.groupControl2.Controls.Add(this.slueNotedById);
+            this.groupControl2.Controls.Add(this.slueReviewedById);
+            this.groupControl2.Controls.Add(this.sluePreparedById);
             this.groupControl2.Controls.Add(this.lblNotedBy);
             this.groupControl2.Controls.Add(this.lblReviewedBy);
             this.groupControl2.Controls.Add(this.labelControl8);
-            this.groupControl2.Location = new System.Drawing.Point(593, 44);
+            this.groupControl2.Location = new System.Drawing.Point(595, 81);
             this.groupControl2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(529, 124);
+            this.groupControl2.Size = new System.Drawing.Size(529, 111);
             this.groupControl2.TabIndex = 117;
             this.groupControl2.Text = "Signatories";
             // 
-            // slueNotedBy
+            // slueNotedById
             // 
-            this.slueNotedBy.Location = new System.Drawing.Point(97, 81);
-            this.slueNotedBy.Name = "slueNotedBy";
-            this.slueNotedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueNotedBy.Properties.Appearance.Options.UseFont = true;
-            this.slueNotedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueNotedById.Location = new System.Drawing.Point(97, 71);
+            this.slueNotedById.Name = "slueNotedById";
+            this.slueNotedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueNotedById.Properties.Appearance.Options.UseFont = true;
+            this.slueNotedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueNotedBy.Properties.DisplayMember = "FullName";
-            this.slueNotedBy.Properties.NullText = "";
-            this.slueNotedBy.Properties.PopupView = this.gridView5;
-            this.slueNotedBy.Properties.ValueMember = "Id";
-            this.slueNotedBy.Size = new System.Drawing.Size(383, 22);
-            this.slueNotedBy.TabIndex = 110;
+            this.slueNotedById.Properties.DisplayMember = "FullName";
+            this.slueNotedById.Properties.NullText = "";
+            this.slueNotedById.Properties.PopupView = this.gridView5;
+            this.slueNotedById.Properties.ValueMember = "Id";
+            this.slueNotedById.Size = new System.Drawing.Size(383, 22);
+            this.slueNotedById.TabIndex = 110;
             // 
             // gridView5
             // 
@@ -240,20 +276,21 @@
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 1;
             // 
-            // slueReviewedBy
+            // slueReviewedById
             // 
-            this.slueReviewedBy.Location = new System.Drawing.Point(97, 53);
-            this.slueReviewedBy.Name = "slueReviewedBy";
-            this.slueReviewedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueReviewedBy.Properties.Appearance.Options.UseFont = true;
-            this.slueReviewedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueReviewedById.EditValue = "0";
+            this.slueReviewedById.Location = new System.Drawing.Point(97, 48);
+            this.slueReviewedById.Name = "slueReviewedById";
+            this.slueReviewedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueReviewedById.Properties.Appearance.Options.UseFont = true;
+            this.slueReviewedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueReviewedBy.Properties.DisplayMember = "FullName";
-            this.slueReviewedBy.Properties.NullText = "";
-            this.slueReviewedBy.Properties.PopupView = this.gridView4;
-            this.slueReviewedBy.Properties.ValueMember = "Id";
-            this.slueReviewedBy.Size = new System.Drawing.Size(383, 22);
-            this.slueReviewedBy.TabIndex = 109;
+            this.slueReviewedById.Properties.DisplayMember = "FullName";
+            this.slueReviewedById.Properties.NullText = "";
+            this.slueReviewedById.Properties.PopupView = this.gridView4;
+            this.slueReviewedById.Properties.ValueMember = "Id";
+            this.slueReviewedById.Size = new System.Drawing.Size(383, 22);
+            this.slueReviewedById.TabIndex = 109;
             // 
             // gridView4
             // 
@@ -281,20 +318,20 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 1;
             // 
-            // sluePreparedBy
+            // sluePreparedById
             // 
-            this.sluePreparedBy.Location = new System.Drawing.Point(97, 25);
-            this.sluePreparedBy.Name = "sluePreparedBy";
-            this.sluePreparedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.sluePreparedBy.Properties.Appearance.Options.UseFont = true;
-            this.sluePreparedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.sluePreparedById.Location = new System.Drawing.Point(97, 25);
+            this.sluePreparedById.Name = "sluePreparedById";
+            this.sluePreparedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.sluePreparedById.Properties.Appearance.Options.UseFont = true;
+            this.sluePreparedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.sluePreparedBy.Properties.DisplayMember = "FullName";
-            this.sluePreparedBy.Properties.NullText = "";
-            this.sluePreparedBy.Properties.PopupView = this.gridView2;
-            this.sluePreparedBy.Properties.ValueMember = "Id";
-            this.sluePreparedBy.Size = new System.Drawing.Size(383, 22);
-            this.sluePreparedBy.TabIndex = 108;
+            this.sluePreparedById.Properties.DisplayMember = "FullName";
+            this.sluePreparedById.Properties.NullText = "";
+            this.sluePreparedById.Properties.PopupView = this.gridView2;
+            this.sluePreparedById.Properties.ValueMember = "Id";
+            this.sluePreparedById.Size = new System.Drawing.Size(383, 22);
+            this.sluePreparedById.TabIndex = 108;
             // 
             // gridView2
             // 
@@ -326,7 +363,7 @@
             // 
             this.lblNotedBy.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblNotedBy.Appearance.Options.UseFont = true;
-            this.lblNotedBy.Location = new System.Drawing.Point(11, 84);
+            this.lblNotedBy.Location = new System.Drawing.Point(11, 74);
             this.lblNotedBy.Name = "lblNotedBy";
             this.lblNotedBy.Size = new System.Drawing.Size(49, 15);
             this.lblNotedBy.TabIndex = 106;
@@ -336,7 +373,7 @@
             // 
             this.lblReviewedBy.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lblReviewedBy.Appearance.Options.UseFont = true;
-            this.lblReviewedBy.Location = new System.Drawing.Point(11, 56);
+            this.lblReviewedBy.Location = new System.Drawing.Point(11, 51);
             this.lblReviewedBy.Name = "lblReviewedBy";
             this.lblReviewedBy.Size = new System.Drawing.Size(66, 15);
             this.lblReviewedBy.TabIndex = 104;
@@ -358,52 +395,45 @@
             this.groupControl1.Appearance.Options.UseFont = true;
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
-            this.groupControl1.Controls.Add(this.slueEmployee);
-            this.groupControl1.Controls.Add(this.checkEditForReplacement);
+            this.groupControl1.Controls.Add(this.slueReqById);
             this.groupControl1.Controls.Add(this.txtRequestedByDivision);
             this.groupControl1.Controls.Add(this.txtRequestingOfficeChiefPos);
             this.groupControl1.Controls.Add(this.txtRequestingOfficeChief);
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Controls.Add(this.txtRequestedByOffice);
-            this.groupControl1.Controls.Add(this.checkEditRequestLetter);
-            this.groupControl1.Controls.Add(this.checkEditApprovedPPMP);
-            this.groupControl1.Controls.Add(this.checkEditApprovedAIP);
-            this.groupControl1.Controls.Add(this.checkEditApprovedAPP);
-            this.groupControl1.Controls.Add(this.checkEditApprovedPR);
-            this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.txtRequestedByPos);
-            this.groupControl1.Controls.Add(this.rdbtnGender);
-            this.groupControl1.Controls.Add(this.txtDate);
+            this.groupControl1.Controls.Add(this.rdbtnReqByGender);
+            this.groupControl1.Controls.Add(this.txtDateRequested);
             this.groupControl1.Controls.Add(this.txtContactNo);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.labelControl6);
-            this.groupControl1.Location = new System.Drawing.Point(8, 44);
+            this.groupControl1.Location = new System.Drawing.Point(10, 81);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(577, 317);
+            this.groupControl1.Size = new System.Drawing.Size(577, 229);
             this.groupControl1.TabIndex = 116;
             this.groupControl1.Text = "Requested By";
             // 
-            // slueEmployee
+            // slueReqById
             // 
-            this.slueEmployee.EditValue = "";
-            this.slueEmployee.Location = new System.Drawing.Point(97, 53);
-            this.slueEmployee.Name = "slueEmployee";
-            this.slueEmployee.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueEmployee.Properties.Appearance.Options.UseFont = true;
-            this.slueEmployee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueReqById.EditValue = "";
+            this.slueReqById.Location = new System.Drawing.Point(97, 93);
+            this.slueReqById.Name = "slueReqById";
+            this.slueReqById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueReqById.Properties.Appearance.Options.UseFont = true;
+            this.slueReqById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEmployee.Properties.DisplayMember = "Employee";
-            this.slueEmployee.Properties.NullText = "";
-            this.slueEmployee.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
-            this.slueEmployee.Properties.PopupView = this.gridView6;
-            this.slueEmployee.Properties.UseReadOnlyAppearance = false;
-            this.slueEmployee.Properties.ValueMember = "Id";
-            this.slueEmployee.Size = new System.Drawing.Size(352, 22);
-            this.slueEmployee.TabIndex = 148;
-            this.slueEmployee.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
+            this.slueReqById.Properties.DisplayMember = "Employee";
+            this.slueReqById.Properties.NullText = "";
+            this.slueReqById.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
+            this.slueReqById.Properties.PopupView = this.gridView6;
+            this.slueReqById.Properties.UseReadOnlyAppearance = false;
+            this.slueReqById.Properties.ValueMember = "Id";
+            this.slueReqById.Size = new System.Drawing.Size(352, 22);
+            this.slueReqById.TabIndex = 148;
+            this.slueReqById.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
             // 
             // gridView6
             // 
@@ -466,17 +496,9 @@
             this.gridColumn5.VisibleIndex = 3;
             this.gridColumn5.Width = 382;
             // 
-            // checkEditForReplacement
-            // 
-            this.checkEditForReplacement.Location = new System.Drawing.Point(198, 289);
-            this.checkEditForReplacement.Name = "checkEditForReplacement";
-            this.checkEditForReplacement.Properties.Caption = "For Replacement";
-            this.checkEditForReplacement.Size = new System.Drawing.Size(107, 19);
-            this.checkEditForReplacement.TabIndex = 147;
-            // 
             // txtRequestedByDivision
             // 
-            this.txtRequestedByDivision.Location = new System.Drawing.Point(154, 102);
+            this.txtRequestedByDivision.Location = new System.Drawing.Point(154, 137);
             this.txtRequestedByDivision.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestedByDivision.Name = "txtRequestedByDivision";
             this.txtRequestedByDivision.Properties.ReadOnly = true;
@@ -486,7 +508,7 @@
             // 
             // txtRequestingOfficeChiefPos
             // 
-            this.txtRequestingOfficeChiefPos.Location = new System.Drawing.Point(97, 212);
+            this.txtRequestingOfficeChiefPos.Location = new System.Drawing.Point(97, 72);
             this.txtRequestingOfficeChiefPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestingOfficeChiefPos.Name = "txtRequestingOfficeChiefPos";
             this.txtRequestingOfficeChiefPos.Properties.ReadOnly = true;
@@ -496,7 +518,7 @@
             // 
             // txtRequestingOfficeChief
             // 
-            this.txtRequestingOfficeChief.Location = new System.Drawing.Point(97, 188);
+            this.txtRequestingOfficeChief.Location = new System.Drawing.Point(97, 51);
             this.txtRequestingOfficeChief.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestingOfficeChief.Name = "txtRequestingOfficeChief";
             this.txtRequestingOfficeChief.Properties.ReadOnly = true;
@@ -508,7 +530,7 @@
             // 
             this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(11, 190);
+            this.labelControl1.Location = new System.Drawing.Point(11, 53);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(28, 15);
             this.labelControl1.TabIndex = 122;
@@ -516,7 +538,7 @@
             // 
             // txtRequestedByOffice
             // 
-            this.txtRequestedByOffice.Location = new System.Drawing.Point(97, 102);
+            this.txtRequestedByOffice.Location = new System.Drawing.Point(97, 137);
             this.txtRequestedByOffice.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestedByOffice.Name = "txtRequestedByOffice";
             this.txtRequestedByOffice.Properties.ReadOnly = true;
@@ -524,59 +546,9 @@
             this.txtRequestedByOffice.Size = new System.Drawing.Size(53, 20);
             this.txtRequestedByOffice.TabIndex = 119;
             // 
-            // checkEditRequestLetter
-            // 
-            this.checkEditRequestLetter.Location = new System.Drawing.Point(198, 265);
-            this.checkEditRequestLetter.Name = "checkEditRequestLetter";
-            this.checkEditRequestLetter.Properties.Caption = "Request Letter";
-            this.checkEditRequestLetter.Size = new System.Drawing.Size(107, 19);
-            this.checkEditRequestLetter.TabIndex = 118;
-            // 
-            // checkEditApprovedPPMP
-            // 
-            this.checkEditApprovedPPMP.Location = new System.Drawing.Point(198, 239);
-            this.checkEditApprovedPPMP.Name = "checkEditApprovedPPMP";
-            this.checkEditApprovedPPMP.Properties.Caption = "Approved PPMP";
-            this.checkEditApprovedPPMP.Size = new System.Drawing.Size(107, 19);
-            this.checkEditApprovedPPMP.TabIndex = 117;
-            // 
-            // checkEditApprovedAIP
-            // 
-            this.checkEditApprovedAIP.Location = new System.Drawing.Point(97, 289);
-            this.checkEditApprovedAIP.Name = "checkEditApprovedAIP";
-            this.checkEditApprovedAIP.Properties.Caption = "Approved AIP";
-            this.checkEditApprovedAIP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAIP.TabIndex = 116;
-            // 
-            // checkEditApprovedAPP
-            // 
-            this.checkEditApprovedAPP.Location = new System.Drawing.Point(97, 264);
-            this.checkEditApprovedAPP.Name = "checkEditApprovedAPP";
-            this.checkEditApprovedAPP.Properties.Caption = "Approved APP";
-            this.checkEditApprovedAPP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAPP.TabIndex = 115;
-            // 
-            // checkEditApprovedPR
-            // 
-            this.checkEditApprovedPR.Location = new System.Drawing.Point(97, 239);
-            this.checkEditApprovedPR.Name = "checkEditApprovedPR";
-            this.checkEditApprovedPR.Properties.Caption = "Approved PR";
-            this.checkEditApprovedPR.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedPR.TabIndex = 114;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(11, 240);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(48, 15);
-            this.labelControl2.TabIndex = 113;
-            this.labelControl2.Text = "Based on";
-            // 
             // txtRequestedByPos
             // 
-            this.txtRequestedByPos.Location = new System.Drawing.Point(97, 78);
+            this.txtRequestedByPos.Location = new System.Drawing.Point(97, 116);
             this.txtRequestedByPos.Margin = new System.Windows.Forms.Padding(2);
             this.txtRequestedByPos.Name = "txtRequestedByPos";
             this.txtRequestedByPos.Properties.ReadOnly = true;
@@ -584,38 +556,38 @@
             this.txtRequestedByPos.Size = new System.Drawing.Size(352, 20);
             this.txtRequestedByPos.TabIndex = 112;
             // 
-            // rdbtnGender
+            // rdbtnReqByGender
             // 
-            this.rdbtnGender.Location = new System.Drawing.Point(97, 126);
-            this.rdbtnGender.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbtnGender.Name = "rdbtnGender";
-            this.rdbtnGender.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.rdbtnGender.Properties.Appearance.Options.UseBackColor = true;
-            this.rdbtnGender.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.rdbtnGender.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
+            this.rdbtnReqByGender.Location = new System.Drawing.Point(97, 159);
+            this.rdbtnReqByGender.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbtnReqByGender.Name = "rdbtnReqByGender";
+            this.rdbtnReqByGender.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.rdbtnReqByGender.Properties.Appearance.Options.UseBackColor = true;
+            this.rdbtnReqByGender.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.rdbtnReqByGender.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Male", "Male", true, null, "rdbtnMale"),
             new DevExpress.XtraEditors.Controls.RadioGroupItem("Female", "Female", true, null, "rdbtnFemale")});
-            this.rdbtnGender.Size = new System.Drawing.Size(153, 18);
-            this.rdbtnGender.TabIndex = 110;
+            this.rdbtnReqByGender.Size = new System.Drawing.Size(153, 18);
+            this.rdbtnReqByGender.TabIndex = 110;
             // 
-            // txtDate
+            // txtDateRequested
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(97, 28);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateRequested.EditValue = null;
+            this.txtDateRequested.Location = new System.Drawing.Point(97, 28);
+            this.txtDateRequested.Name = "txtDateRequested";
+            this.txtDateRequested.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateRequested.Properties.Appearance.Options.UseFont = true;
+            this.txtDateRequested.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateRequested.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.UseReadOnlyAppearance = false;
-            this.txtDate.Size = new System.Drawing.Size(352, 22);
-            this.txtDate.TabIndex = 104;
+            this.txtDateRequested.Properties.UseReadOnlyAppearance = false;
+            this.txtDateRequested.Size = new System.Drawing.Size(352, 22);
+            this.txtDateRequested.TabIndex = 104;
             // 
             // txtContactNo
             // 
-            this.txtContactNo.Location = new System.Drawing.Point(97, 148);
+            this.txtContactNo.Location = new System.Drawing.Point(97, 182);
             this.txtContactNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtContactNo.Name = "txtContactNo";
             this.txtContactNo.Properties.UseReadOnlyAppearance = false;
@@ -626,7 +598,7 @@
             // 
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(11, 128);
+            this.labelControl5.Location = new System.Drawing.Point(11, 162);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(38, 15);
             this.labelControl5.TabIndex = 111;
@@ -646,7 +618,7 @@
             // 
             this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(11, 56);
+            this.labelControl3.Location = new System.Drawing.Point(11, 96);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(71, 15);
             this.labelControl3.TabIndex = 107;
@@ -656,7 +628,7 @@
             // 
             this.labelControl6.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.labelControl6.Appearance.Options.UseFont = true;
-            this.labelControl6.Location = new System.Drawing.Point(11, 150);
+            this.labelControl6.Location = new System.Drawing.Point(11, 183);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(64, 15);
             this.labelControl6.TabIndex = 106;
@@ -664,26 +636,29 @@
             // 
             // groupRequestedSpecs
             // 
+            this.groupRequestedSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupRequestedSpecs.Appearance.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.groupRequestedSpecs.Appearance.Options.UseFont = true;
             this.groupRequestedSpecs.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupRequestedSpecs.AppearanceCaption.Options.UseFont = true;
-            this.groupRequestedSpecs.Location = new System.Drawing.Point(0, 367);
+            this.groupRequestedSpecs.Location = new System.Drawing.Point(0, 316);
             this.groupRequestedSpecs.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupRequestedSpecs.Name = "groupRequestedSpecs";
-            this.groupRequestedSpecs.Size = new System.Drawing.Size(1134, 322);
+            this.groupRequestedSpecs.Size = new System.Drawing.Size(1134, 373);
             this.groupRequestedSpecs.TabIndex = 119;
             this.groupRequestedSpecs.Text = "Summary of Requested Specs";
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnSave.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnSave.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnSave.Appearance.Options.UseBackColor = true;
             this.btnSave.Appearance.Options.UseForeColor = true;
             this.btnSave.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.save_16x164;
-            this.btnSave.Location = new System.Drawing.Point(926, 336);
+            this.btnSave.Location = new System.Drawing.Point(927, 4);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 28);
@@ -694,12 +669,12 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnClose.Appearance.BackColor = System.Drawing.Color.Turquoise;
             this.btnClose.Appearance.ForeColor = System.Drawing.Color.Black;
             this.btnClose.Appearance.Options.UseBackColor = true;
             this.btnClose.Appearance.Options.UseForeColor = true;
             this.btnClose.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
-            this.btnClose.Location = new System.Drawing.Point(1025, 336);
+            this.btnClose.Location = new System.Drawing.Point(1026, 4);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(97, 28);
@@ -707,49 +682,100 @@
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblRepairNo
+            // ceRequestBasedApprovedPR
             // 
-            this.lblRepairNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblRepairNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblRepairNo.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblRepairNo.Appearance.Options.UseFont = true;
-            this.lblRepairNo.Appearance.Options.UseForeColor = true;
-            this.lblRepairNo.LineVisible = true;
-            this.lblRepairNo.Location = new System.Drawing.Point(575, 3);
-            this.lblRepairNo.Name = "lblRepairNo";
-            this.lblRepairNo.Size = new System.Drawing.Size(33, 30);
-            this.lblRepairNo.TabIndex = 6;
-            this.lblRepairNo.Text = "100";
-            this.lblRepairNo.Visible = false;
+            this.ceRequestBasedApprovedPR.Location = new System.Drawing.Point(12, 26);
+            this.ceRequestBasedApprovedPR.Name = "ceRequestBasedApprovedPR";
+            this.ceRequestBasedApprovedPR.Properties.Caption = "Approved PR";
+            this.ceRequestBasedApprovedPR.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedPR.TabIndex = 114;
             // 
-            // lblRepair
+            // ceRequestBasedApprovedAPP
             // 
-            this.lblRepair.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblRepair.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblRepair.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblRepair.Appearance.Options.UseFont = true;
-            this.lblRepair.Appearance.Options.UseForeColor = true;
-            this.lblRepair.LineVisible = true;
-            this.lblRepair.Location = new System.Drawing.Point(466, 3);
-            this.lblRepair.Name = "lblRepair";
-            this.lblRepair.Size = new System.Drawing.Size(103, 30);
-            this.lblRepair.TabIndex = 5;
-            this.lblRepair.Text = "Repair No.:";
-            this.lblRepair.Visible = false;
+            this.ceRequestBasedApprovedAPP.Location = new System.Drawing.Point(12, 51);
+            this.ceRequestBasedApprovedAPP.Name = "ceRequestBasedApprovedAPP";
+            this.ceRequestBasedApprovedAPP.Properties.Caption = "Approved APP";
+            this.ceRequestBasedApprovedAPP.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedAPP.TabIndex = 115;
+            // 
+            // ceRequestBasedApprovedAIP
+            // 
+            this.ceRequestBasedApprovedAIP.Location = new System.Drawing.Point(12, 76);
+            this.ceRequestBasedApprovedAIP.Name = "ceRequestBasedApprovedAIP";
+            this.ceRequestBasedApprovedAIP.Properties.Caption = "Approved AIP";
+            this.ceRequestBasedApprovedAIP.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedAIP.TabIndex = 116;
+            // 
+            // ceRequestBasedApprovedPPMP
+            // 
+            this.ceRequestBasedApprovedPPMP.Location = new System.Drawing.Point(113, 26);
+            this.ceRequestBasedApprovedPPMP.Name = "ceRequestBasedApprovedPPMP";
+            this.ceRequestBasedApprovedPPMP.Properties.Caption = "Approved PPMP";
+            this.ceRequestBasedApprovedPPMP.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedApprovedPPMP.TabIndex = 117;
+            // 
+            // ceRequestBasedRequestLetter
+            // 
+            this.ceRequestBasedRequestLetter.Location = new System.Drawing.Point(113, 52);
+            this.ceRequestBasedRequestLetter.Name = "ceRequestBasedRequestLetter";
+            this.ceRequestBasedRequestLetter.Properties.Caption = "Request Letter";
+            this.ceRequestBasedRequestLetter.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedRequestLetter.TabIndex = 118;
+            // 
+            // ceRequestBasedForReplacement
+            // 
+            this.ceRequestBasedForReplacement.Location = new System.Drawing.Point(113, 76);
+            this.ceRequestBasedForReplacement.Name = "ceRequestBasedForReplacement";
+            this.ceRequestBasedForReplacement.Properties.Caption = "For Replacement";
+            this.ceRequestBasedForReplacement.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedForReplacement.TabIndex = 147;
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.ceRequestBasedApprovedAIP);
+            this.groupControl3.Controls.Add(this.ceRequestBasedForReplacement);
+            this.groupControl3.Controls.Add(this.ceRequestBasedApprovedPR);
+            this.groupControl3.Controls.Add(this.ceRequestBasedApprovedAPP);
+            this.groupControl3.Controls.Add(this.ceRequestBasedApprovedPPMP);
+            this.groupControl3.Controls.Add(this.ceRequestBasedRequestLetter);
+            this.groupControl3.Location = new System.Drawing.Point(594, 198);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(530, 112);
+            this.groupControl3.TabIndex = 122;
+            this.groupControl3.Text = "Based On";
+            // 
+            // pnlButtons
+            // 
+            this.pnlButtons.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlButtons.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BackColor2 = System.Drawing.Color.RoyalBlue;
+            this.pnlButtons.Appearance.BorderColor = System.Drawing.Color.Black;
+            this.pnlButtons.Appearance.Options.UseBackColor = true;
+            this.pnlButtons.Appearance.Options.UseBorderColor = true;
+            this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnClose);
+            this.pnlButtons.Controls.Add(this.btnSave);
+            this.pnlButtons.Location = new System.Drawing.Point(0, 38);
+            this.pnlButtons.Name = "pnlButtons";
+            this.pnlButtons.Size = new System.Drawing.Size(1134, 37);
+            this.pnlButtons.TabIndex = 123;
             // 
             // frmAddEditTechSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1134, 689);
-            this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.pnlButtons);
+            this.Controls.Add(this.groupControl3);
             this.Controls.Add(this.groupRequestedSpecs);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditTechSpecs.IconOptions.Icon")));
             this.Name = "frmAddEditTechSpecs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditTechSpecs_FormClosing);
             this.Load += new System.EventHandler(this.frmAddEditTechSpecs_Load);
             this.panel1.ResumeLayout(false);
@@ -757,33 +783,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueNotedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReqById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByDivision.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChiefPos.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestingOfficeChief.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rdbtnReqByGender.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupRequestedSpecs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPR.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAPP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAIP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPPMP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedRequestLetter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedForReplacement.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
+            this.pnlButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -794,15 +824,15 @@
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueNotedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueNotedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueReviewedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueReviewedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
-        private DevExpress.XtraEditors.SearchLookUpEdit sluePreparedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit sluePreparedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
@@ -810,21 +840,14 @@
         private DevExpress.XtraEditors.LabelControl lblReviewedBy;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.CheckEdit checkEditForReplacement;
         private DevExpress.XtraEditors.TextEdit txtRequestedByDivision;
         private DevExpress.XtraEditors.TextEdit txtRequestingOfficeChiefPos;
         private DevExpress.XtraEditors.TextEdit txtRequestingOfficeChief;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtRequestedByOffice;
-        private DevExpress.XtraEditors.CheckEdit checkEditRequestLetter;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedPPMP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedAIP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedAPP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedPR;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.TextEdit txtRequestedByPos;
-        private DevExpress.XtraEditors.RadioGroup rdbtnGender;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.RadioGroup rdbtnReqByGender;
+        private DevExpress.XtraEditors.DateEdit txtDateRequested;
         private DevExpress.XtraEditors.TextEdit txtContactNo;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl4;
@@ -835,7 +858,7 @@
         private DevExpress.XtraEditors.SimpleButton btnClose;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl lblRequestNo;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueEmployee;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueReqById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
@@ -844,5 +867,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraEditors.LabelControl lblRepairNo;
         private DevExpress.XtraEditors.LabelControl lblRepair;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedPR;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedAPP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedAIP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedPPMP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedRequestLetter;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedForReplacement;
+        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.PanelControl pnlButtons;
     }
 }

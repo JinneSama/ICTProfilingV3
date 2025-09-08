@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.pictureEdit2 = new DevExpress.XtraEditors.PictureEdit();
             this.pictureEdit1 = new DevExpress.XtraEditors.PictureEdit();
             this.txtPassword = new DevExpress.XtraEditors.TextEdit();
@@ -35,8 +36,10 @@
             this.lblversion = new DevExpress.XtraEditors.LabelControl();
             this.chkRemember = new DevExpress.XtraEditors.CheckEdit();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.ceTerms = new DevExpress.XtraEditors.CheckEdit();
+            this.memoTerms = new DevExpress.XtraEditors.MemoEdit();
             this.btnLogin = new DevExpress.XtraEditors.SimpleButton();
+            this.lblDate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -44,6 +47,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ceTerms.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTerms.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEdit2
@@ -72,7 +77,7 @@
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(11, 81);
+            this.txtPassword.Location = new System.Drawing.Point(11, 78);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -80,6 +85,7 @@
             this.txtPassword.Properties.UseSystemPasswordChar = true;
             this.txtPassword.Size = new System.Drawing.Size(331, 28);
             this.txtPassword.TabIndex = 73;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
             // 
             // txtUsername
             // 
@@ -90,6 +96,7 @@
             this.txtUsername.Properties.Appearance.Options.UseFont = true;
             this.txtUsername.Size = new System.Drawing.Size(331, 28);
             this.txtUsername.TabIndex = 72;
+            this.txtUsername.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyUp);
             // 
             // lblversion
             // 
@@ -107,7 +114,7 @@
             // 
             // chkRemember
             // 
-            this.chkRemember.Location = new System.Drawing.Point(11, 114);
+            this.chkRemember.Location = new System.Drawing.Point(11, 274);
             this.chkRemember.Name = "chkRemember";
             this.chkRemember.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
             this.chkRemember.Properties.Appearance.Options.UseForeColor = true;
@@ -117,29 +124,38 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.ceTerms);
+            this.groupControl1.Controls.Add(this.memoTerms);
             this.groupControl1.Controls.Add(this.btnLogin);
-            this.groupControl1.Controls.Add(this.labelControl1);
+            this.groupControl1.Controls.Add(this.lblDate);
             this.groupControl1.Controls.Add(this.txtUsername);
             this.groupControl1.Controls.Add(this.chkRemember);
             this.groupControl1.Controls.Add(this.txtPassword);
-            this.groupControl1.Location = new System.Drawing.Point(14, 262);
+            this.groupControl1.Location = new System.Drawing.Point(14, 261);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(353, 180);
+            this.groupControl1.Size = new System.Drawing.Size(353, 341);
             this.groupControl1.TabIndex = 94;
             // 
-            // labelControl1
+            // ceTerms
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Appearance.Options.UseTextOptions = true;
-            this.labelControl1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.labelControl1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.labelControl1.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControl1.Location = new System.Drawing.Point(11, 17);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(331, 27);
-            this.labelControl1.TabIndex = 94;
-            this.labelControl1.Text = "Date";
+            this.ceTerms.Location = new System.Drawing.Point(244, 274);
+            this.ceTerms.Name = "ceTerms";
+            this.ceTerms.Properties.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.ceTerms.Properties.Appearance.Options.UseForeColor = true;
+            this.ceTerms.Properties.Caption = "Accept Terms?";
+            this.ceTerms.Size = new System.Drawing.Size(98, 19);
+            this.ceTerms.TabIndex = 97;
+            // 
+            // memoTerms
+            // 
+            this.memoTerms.EditValue = resources.GetString("memoTerms.EditValue");
+            this.memoTerms.Location = new System.Drawing.Point(11, 107);
+            this.memoTerms.Name = "memoTerms";
+            this.memoTerms.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memoTerms.Properties.Appearance.Options.UseFont = true;
+            this.memoTerms.Properties.ReadOnly = true;
+            this.memoTerms.Size = new System.Drawing.Size(331, 161);
+            this.memoTerms.TabIndex = 96;
             // 
             // btnLogin
             // 
@@ -149,22 +165,37 @@
             this.btnLogin.Appearance.Options.UseBackColor = true;
             this.btnLogin.Appearance.Options.UseBorderColor = true;
             this.btnLogin.Appearance.Options.UseFont = true;
-            this.btnLogin.Location = new System.Drawing.Point(11, 139);
+            this.btnLogin.Location = new System.Drawing.Point(11, 299);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(331, 30);
             this.btnLogin.TabIndex = 95;
             this.btnLogin.Text = "Login";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
+            // lblDate
+            // 
+            this.lblDate.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Appearance.Options.UseFont = true;
+            this.lblDate.Appearance.Options.UseTextOptions = true;
+            this.lblDate.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblDate.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.lblDate.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblDate.Location = new System.Drawing.Point(11, 17);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(331, 27);
+            this.lblDate.TabIndex = 94;
+            this.lblDate.Text = "Date";
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(379, 466);
+            this.ClientSize = new System.Drawing.Size(379, 610);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.lblversion);
             this.Controls.Add(this.pictureEdit2);
             this.Controls.Add(this.pictureEdit1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmLogin.IconOptions.Icon")));
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmLogin_FormClosing);
@@ -175,6 +206,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chkRemember.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ceTerms.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoTerms.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -188,6 +221,8 @@
         private DevExpress.XtraEditors.CheckEdit chkRemember;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.SimpleButton btnLogin;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.LabelControl lblDate;
+        private DevExpress.XtraEditors.CheckEdit ceTerms;
+        private DevExpress.XtraEditors.MemoEdit memoTerms;
     }
 }

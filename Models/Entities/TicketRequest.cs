@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace Models.Entities
         public TechSpecs TechSpecs { get; set; }
         public Repairs Repairs { get; set; }
         public bool? IsRepairTechSpecs{ get; set; }
+        [JsonIgnore]
         public ICollection<TicketRequestStatus> TicketRequestStatus { get; set; }
         public TicketRequest()
         {

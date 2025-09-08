@@ -1,30 +1,34 @@
-﻿using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
-using Models.ViewModels;
-using System.Collections.Generic;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Security.AccessControl;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmUsers : DevExpress.XtraEditors.XtraForm
+    public partial class frmUsers : BaseForm
     {
-        private IICTUserManager userManager;
-        private IICTRoleManager roleManager;
-        public frmUsers()
+        private readonly IICTUserManager _userManager;
+        private readonly IICTRoleManager _roleManager;
+        private readonly IServiceProvider _serviceProvider;
+        public frmUsers(IICTUserManager userManager, IICTRoleManager roleManager, IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            userManager = new ICTUserManager();
-            roleManager = new ICTRoleManager();
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _serviceProvider = serviceProvider;
+
             LoadDropdowns();
             LoadUsers();
         }
 
         private void LoadDropdowns()
         {
-            bsUserRoles.DataSource = roleManager.GetRoles().Select(x => new
+            bsUserRoles.DataSource = _roleManager.GetRoles().Select(x => new
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -33,7 +37,7 @@ namespace ICTProfilingV3.UsersForms
 
         private void LoadUsers()
         {
-            var users = userManager.GetUsers().ToList();
+            var users = _userManager.GetUsers().Where(x => x.IsDeleted == false).ToList();
             var userViewModel = users.Select(x => new UsersViewModel
             {
                 Id = x.Id,
@@ -47,7 +51,7 @@ namespace ICTProfilingV3.UsersForms
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditUser(userManager);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditUser>();
             frm.ShowDialog();
             LoadUsers();
         }
@@ -57,15 +61,16 @@ namespace ICTProfilingV3.UsersForms
             if (MessageBox.Show("Delete this User?", "Confirmation!",
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
             var row = (UsersViewModel)gridUsers.GetFocusedRow();
-            userManager.DeleteUser(row.Id);
+            _userManager.DeleteUser(row.Id);
             LoadUsers();
         }
 
         private async void btnEdit_Click(object sender, System.EventArgs e)
         {
             var row = (UsersViewModel)gridUsers.GetFocusedRow();
-            var user = await userManager.FindUserAsync(row.Id);
-            var frm = new frmAddEditUser(user,userManager);
+            var user = await _userManager.FindUserAsync(row.Id);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditUser>();
+            frm.InitForm(user);
             frm.ShowDialog();
             LoadUsers();
         }

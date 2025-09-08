@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.XtraEditors.TableLayout.TableColumnDefinition tableColumnDefinition1 = new DevExpress.XtraEditors.TableLayout.TableColumnDefinition();
             DevExpress.XtraEditors.TableLayout.TableColumnDefinition tableColumnDefinition2 = new DevExpress.XtraEditors.TableLayout.TableColumnDefinition();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStaff));
@@ -55,6 +55,7 @@
             this.UsernameColumn = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.PositionColumn = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.tileViewColumn2 = new DevExpress.XtraGrid.Columns.TileViewColumn();
+            this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tileViewColumn1 = new DevExpress.XtraGrid.Columns.TileViewColumn();
             this.btnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -77,10 +78,9 @@
             this.gcTickets = new DevExpress.XtraGrid.GridControl();
             this.gridTickets = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colTotal = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.btnEditStaff = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcStaff)).BeginInit();
@@ -93,7 +93,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridAssigned)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTickets)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTickets)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
@@ -140,6 +139,17 @@
             this.tileViewColumn2.Visible = true;
             this.tileViewColumn2.VisibleIndex = 5;
             // 
+            // colTotal
+            // 
+            this.colTotal.Caption = "Total";
+            this.colTotal.FieldName = "count";
+            this.colTotal.Name = "colTotal";
+            this.colTotal.OptionsColumn.AllowEdit = false;
+            this.colTotal.OptionsColumn.AllowFocus = false;
+            this.colTotal.Visible = true;
+            this.colTotal.VisibleIndex = 1;
+            this.colTotal.Width = 389;
+            // 
             // tileViewColumn1
             // 
             this.tileViewColumn1.Caption = "tileViewColumn1";
@@ -151,9 +161,9 @@
             // btnEdit
             // 
             this.btnEdit.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x1610;
+            editorButtonImageOptions3.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x1610;
             this.btnEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnEdit.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x169;
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -166,7 +176,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(901, 37);
+            this.panel1.Size = new System.Drawing.Size(1144, 37);
             this.panel1.TabIndex = 82;
             // 
             // labelControl16
@@ -200,7 +210,7 @@
             this.gcStaff.Name = "gcStaff";
             this.gcStaff.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnEdit});
-            this.gcStaff.Size = new System.Drawing.Size(342, 559);
+            this.gcStaff.Size = new System.Drawing.Size(391, 559);
             this.gcStaff.TabIndex = 83;
             this.gcStaff.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.tvStaff});
@@ -307,7 +317,7 @@
             this.btnAddStaff.Appearance.Options.UseBackColor = true;
             this.btnAddStaff.Appearance.Options.UseForeColor = true;
             this.btnAddStaff.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x162;
-            this.btnAddStaff.Location = new System.Drawing.Point(792, 5);
+            this.btnAddStaff.Location = new System.Drawing.Point(1035, 5);
             this.btnAddStaff.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddStaff.Name = "btnAddStaff";
             this.btnAddStaff.Size = new System.Drawing.Size(98, 28);
@@ -318,23 +328,25 @@
             // panelControl1
             // 
             this.panelControl1.Controls.Add(this.groupControl2);
-            this.panelControl1.Controls.Add(this.groupControl1);
             this.panelControl1.Location = new System.Drawing.Point(348, 81);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(553, 563);
+            this.panelControl1.Size = new System.Drawing.Size(796, 563);
             this.panelControl1.TabIndex = 111;
             // 
             // groupControl2
             // 
+            this.groupControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControl2.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
             this.groupControl2.Controls.Add(this.labelControl2);
             this.groupControl2.Controls.Add(this.gcAssigned);
             this.groupControl2.Controls.Add(this.labelControl1);
             this.groupControl2.Controls.Add(this.gcTickets);
-            this.groupControl2.Location = new System.Drawing.Point(2, 116);
+            this.groupControl2.Location = new System.Drawing.Point(48, 5);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(546, 447);
+            this.groupControl2.Size = new System.Drawing.Size(748, 558);
             this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "Other Data";
             // 
@@ -348,6 +360,9 @@
             // 
             // gcAssigned
             // 
+            this.gcAssigned.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcAssigned.EmbeddedNavigator.Buttons.Append.Visible = false;
             this.gcAssigned.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
             this.gcAssigned.EmbeddedNavigator.Buttons.Edit.Visible = false;
@@ -356,7 +371,7 @@
             this.gcAssigned.Location = new System.Drawing.Point(2, 207);
             this.gcAssigned.MainView = this.gridAssigned;
             this.gcAssigned.Name = "gcAssigned";
-            this.gcAssigned.Size = new System.Drawing.Size(544, 238);
+            this.gcAssigned.Size = new System.Drawing.Size(741, 341);
             this.gcAssigned.TabIndex = 2;
             this.gcAssigned.UseEmbeddedNavigator = true;
             this.gcAssigned.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -415,10 +430,13 @@
             // 
             // gcTickets
             // 
+            this.gcTickets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gcTickets.Location = new System.Drawing.Point(0, 46);
             this.gcTickets.MainView = this.gridTickets;
             this.gcTickets.Name = "gcTickets";
-            this.gcTickets.Size = new System.Drawing.Size(546, 126);
+            this.gcTickets.Size = new System.Drawing.Size(743, 126);
             this.gcTickets.TabIndex = 0;
             this.gcTickets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridTickets});
@@ -449,33 +467,12 @@
             this.gridColumn1.VisibleIndex = 0;
             this.gridColumn1.Width = 131;
             // 
-            // colTotal
-            // 
-            this.colTotal.Caption = "Total";
-            this.colTotal.FieldName = "count";
-            this.colTotal.Name = "colTotal";
-            this.colTotal.OptionsColumn.AllowEdit = false;
-            this.colTotal.OptionsColumn.AllowFocus = false;
-            this.colTotal.Visible = true;
-            this.colTotal.VisibleIndex = 1;
-            this.colTotal.Width = 389;
-            // 
-            // groupControl1
-            // 
-            this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupControl1.AppearanceCaption.Options.UseFont = true;
-            this.groupControl1.Location = new System.Drawing.Point(2, 3);
-            this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(546, 107);
-            this.groupControl1.TabIndex = 0;
-            this.groupControl1.Text = "Staff Details";
-            // 
             // panelControl2
             // 
             this.panelControl2.Controls.Add(this.gcStaff);
             this.panelControl2.Location = new System.Drawing.Point(0, 81);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(346, 563);
+            this.panelControl2.Size = new System.Drawing.Size(395, 563);
             this.panelControl2.TabIndex = 112;
             // 
             // panelControl3
@@ -483,17 +480,34 @@
             this.panelControl3.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
             this.panelControl3.Appearance.Options.UseBackColor = true;
             this.panelControl3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.panelControl3.Controls.Add(this.btnEditStaff);
             this.panelControl3.Controls.Add(this.btnAddStaff);
             this.panelControl3.Location = new System.Drawing.Point(0, 38);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(901, 40);
+            this.panelControl3.Size = new System.Drawing.Size(1144, 40);
             this.panelControl3.TabIndex = 113;
+            // 
+            // btnEditStaff
+            // 
+            this.btnEditStaff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditStaff.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnEditStaff.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnEditStaff.Appearance.Options.UseBackColor = true;
+            this.btnEditStaff.Appearance.Options.UseForeColor = true;
+            this.btnEditStaff.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x1610;
+            this.btnEditStaff.Location = new System.Drawing.Point(933, 5);
+            this.btnEditStaff.Margin = new System.Windows.Forms.Padding(2);
+            this.btnEditStaff.Name = "btnEditStaff";
+            this.btnEditStaff.Size = new System.Drawing.Size(98, 28);
+            this.btnEditStaff.TabIndex = 111;
+            this.btnEditStaff.Text = "Edit Staff";
+            this.btnEditStaff.Click += new System.EventHandler(this.btnEditStaff_Click);
             // 
             // frmStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(901, 646);
+            this.ClientSize = new System.Drawing.Size(1144, 646);
             this.Controls.Add(this.panelControl3);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
@@ -514,7 +528,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridAssigned)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTickets)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTickets)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
@@ -541,7 +554,6 @@
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraGrid.GridControl gcTickets;
         private DevExpress.XtraGrid.Views.Grid.GridView gridTickets;
@@ -556,5 +568,6 @@
         private DevExpress.XtraGrid.Columns.TileViewColumn tileViewColumn2;
         private DevExpress.Utils.Html.HtmlTemplate Image;
         private DevExpress.Utils.Html.HtmlTemplate Initials;
+        private DevExpress.XtraEditors.SimpleButton btnEditStaff;
     }
 }

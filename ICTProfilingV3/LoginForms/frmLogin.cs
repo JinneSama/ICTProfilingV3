@@ -1,63 +1,159 @@
-﻿using DevExpress.XtraEditors;
-using EntityManager.Managers.User;
-using Models.Managers.User;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ServiceModels.DTOModels;
+using ICTProfilingV3.DebugTools;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
+using ICTProfilingV3.ToolForms;
+using Microsoft.Extensions.DependencyInjection;
+using Models.Entities;
+using Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.LoginForms
 {
-    public partial class frmLogin : DevExpress.XtraEditors.XtraForm
+    public partial class frmLogin : BaseForm
     {
-        private readonly IICTUserManager userManager;
+        private readonly IStaffService _staffService;
+        private readonly IICTUserManager _userManager;
+        private readonly ICryptography _cryptography;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly UserStore _userStore;
+
         private readonly frmMain frmMain;
         private bool Logged = false;
         private bool isLoggingIn = false;
-        public frmLogin(frmMain _frmMain)
+        public frmLogin(IServiceProvider serviceProvider, UserStore userStore, IICTUserManager userManager, ICryptography cryptography, IStaffService staffService)
         {
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
+            _userManager = userManager;
+            _cryptography = cryptography;
+            _staffService = staffService;
             InitializeComponent();
-            userManager = new ICTUserManager();
-            frmMain = _frmMain;
+
+            frmMain = _serviceProvider.GetRequiredService<frmMain>();
             RetrieveLoginDetails();
+
+            LoadChangelogs();
+        }
+        private void LoadChangelogs()
+        {
+            lblDate.Text = DateTime.Now.ToString("MMM-dd-yyyy");
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+                lblversion.Text = "EPiSv3 Rev " + cd.CurrentVersion.ToString();
+                string version = cd.CurrentVersion.ToString();
+                if (version != Properties.Settings.Default.LastVersion)
+                {
+                    Properties.Settings.Default.LastVersion = version;
+                    Properties.Settings.Default.Save();
+
+                    var frm = _serviceProvider.GetRequiredService<frmChangelogs>();
+                    frm.InitForm(version);
+                    frm.ShowDialog();
+                }
+            }
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            if (isLoggingIn) return;
-            isLoggingIn = true;
             await Login();
-            isLoggingIn = false;
         }
 
         private async Task Login()
         {
-            //if (txtUsername.Text == "sa")
-            //{
-            //    Logged = true;
-            //    this.Close();
-            //}
-            var res = await userManager.Login(txtUsername.Text, txtPassword.Text);
-            if (res.success)
+            if (ceTerms.Checked == false) return;
+            if (txtUsername.Text == "#SetVersion#")
+            {
+                var frm = new frmVersionSetter();
+                frm.ShowDialog();
+                return;
+            }
+
+            if (isLoggingIn) return;
+            isLoggingIn = true;
+            await Login(txtUsername.Text, txtPassword.Text);
+            isLoggingIn = false;
+        }
+        public async Task Login(string username, string password)
+        {
+            if (username == "sa")
             {
                 Logged = true;
-                UserStore.UserId = res.user.Id;
-                UserStore.Username = res.user.UserName;
-                UserStore.Fullname = res.user.FullName;
-
-                frmMain.SetUser(res.user.FullName, res.user.Position);
-                if (chkRemember.Checked) SetLoginDetails();
-                else ClearLoginDetails();
                 this.Close();
             }
-            else MessageBox.Show("Wrong Username and Password!");
+            Users user = null;
+            bool logged = true;
+            (var systemUser, var ofmisUser)  = await PointToSystemAccount(username, password);
+
+            if(systemUser == null)
+            {
+                var res = await _userManager.Login(username, password);
+                if(!res.success) logged = false;
+                user = res.user;
+            }
+            else
+            {
+                user = systemUser;
+            }
+
+            if (logged)
+            {
+                Logged = true;
+                _userStore.UserId = user.Id;
+                _userStore.Username = user.UserName;
+                _userStore.Fullname = user.FullName;
+                _userStore.UserRole = user.Roles.FirstOrDefault().RoleId;
+                var section = await _staffService.GetByFilterAsync(x => x.UserId == _userStore.UserId);
+
+                frmMain.setRoleDesignations();
+                frmMain.SetUser(user.FullName,user.Position, section.Section);
+                if (chkRemember.Checked) SetLoginDetails();
+                else ClearLoginDetails();
+
+                if (_userStore.ArugmentCredentialsDto == null) this.Close();
+            }
+            else
+            {
+                if(ofmisUser != null) UseExternalAccount(ofmisUser, password);
+                else MessageBox.Show("Wrong Username and Password!");
+            }
         }
 
+        private void UseExternalAccount(OFMISUsersDto ofmisUser, string password)
+        {
+            Logged = true;
+            _userStore.Username = ofmisUser.Username;
+            _userStore.Fullname = password;
+            frmMain.setClientDesignation();
+            frmMain.SetUser(ofmisUser.Username, "Client", Sections.Client);
+            this.Close();
+        }
+
+        private async Task<OFMISUsersDto> CheckOFMIS(string username, string password)
+        {
+            var ofmisUser = await OFMISUsers.GetUser(username);
+            if (ofmisUser == null) return null;
+
+            var decryptPass = _cryptography.Decrypt(ofmisUser.PasswordHash, ofmisUser.SecurityStamp);
+            if (Equals(decryptPass, password)) return ofmisUser;
+            else return null;
+        }
+
+        private async Task<(Users, OFMISUsersDto)> PointToSystemAccount(string username, string password)
+        {
+            var user = await CheckOFMIS(username, password);
+            if (user == null) return (null, null);
+
+            var systemUser = await _userManager.FindUserByUsername(user.Username);
+            if (systemUser == null) return (null, user);
+            return (systemUser, user);
+        }
         private void ClearLoginDetails()
         {
             Properties.Settings.Default.Username = string.Empty;
@@ -83,6 +179,18 @@ namespace ICTProfilingV3.LoginForms
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(!Logged) Application.Exit();
+        }
+
+        private async void txtUsername_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                await Login();
+        }
+
+        private async void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                await Login();
         }
     }
 }

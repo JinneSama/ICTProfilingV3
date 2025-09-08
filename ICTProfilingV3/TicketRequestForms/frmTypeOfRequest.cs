@@ -1,43 +1,42 @@
 ﻿using DevExpress.XtraEditors;
+using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.TechSpecsForms;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class frmTypeOfRequest : DevExpress.XtraEditors.XtraForm
+    public partial class frmTypeOfRequest : BaseForm
     {
-        public frmTypeOfRequest()
+        private readonly IServiceProvider _serviceProvider;
+        public frmTypeOfRequest(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
-        private void btnDeliveries_Click(object sender, EventArgs e)
+        private async void btnDeliveries_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditDeliveries();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditDeliveries>();
+            await frm.InitForm();
             frm.ShowDialog();
             this.Close();   
         }
 
-        private void btnTechSpecs_Click(object sender, EventArgs e)
+        private async void btnTechSpecs_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditTechSpecs();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditTechSpecs>();
+            await frm.InitForTSForm();
             frm.ShowDialog();
             this.Close();
         }
 
-        private void btnRepair_Click(object sender, EventArgs e)
+        private async void btnRepair_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditRepair();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditRepair>();
+            await frm.InitForm();
             frm.ShowDialog();
             this.Close();
         }

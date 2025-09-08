@@ -1,12 +1,10 @@
 ﻿using DevExpress.Data.ODataLinq.Helpers;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using Helpers.NetworkFolder;
 using Helpers.Scanner;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -14,25 +12,25 @@ namespace ICTProfilingV3.PGNForms
 {
     public partial class UCPGNScanDocuments : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
-        private readonly PGNRequests request;
-        private DocumentHandler documentHandler;
+        private readonly IPGNService _pgnService;
+        private PGNRequests _request;
 
-        public UCPGNScanDocuments(PGNRequests request)
+        public UCPGNScanDocuments(IPGNService pgnService)
         {
+            _pgnService = pgnService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            this.request = request;
-            documentHandler = new DocumentHandler(Properties.Settings.Default.NetworkPath,
-                Properties.Settings.Default.NetworkUsername,
-                Properties.Settings.Default.NetworkPassword);
-
             LoadData();
+        }
+
+        public void InitUC(PGNRequests request)
+        {
+            _request = request;
         }
 
         private void LoadData()
         {
-            var docs = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id);
+            if (_request == null) return;
+            var docs = _pgnService.PGNDocumentService.GetAll().Where(x => x.PGNRequestId == _request.Id);
             gcScanDocs.DataSource = docs.ToList();
         }
 
@@ -42,7 +40,7 @@ namespace ICTProfilingV3.PGNForms
                 ImageMenu.ShowPopup(MousePosition);
         }
 
-        private void btnDelete_ItemClick(object sender, ItemClickEventArgs e)
+        private async void btnDelete_ItemClick(object sender, ItemClickEventArgs e)
         {
             var msgRes = MessageBox.Show("Delete this Document?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
@@ -50,29 +48,17 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
 
-            documentHandler.DeleteImage(row.FileName);
-            unitOfWork.PGNDocumentsRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
-
-            var res = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id);
-
-            int order = 1;
-            foreach (var doc in res)
-            {
-                doc.DocOrder = order;
-                order++;
-            }
-
-            unitOfWork.Save();
+            await _pgnService.PGNDocumentService.DeleteImage(row.FileName, row.Id, _request.Id);
             LoadData();
         }
 
-        private void btnPreview_ItemClick(object sender, ItemClickEventArgs e)
+        private async void btnPreview_ItemClick(object sender, ItemClickEventArgs e)
         {
+            splashScreenDownload.ShowWaitForm();
             var row = (PGNDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
 
-            Image img = documentHandler.GetImage(row.FileName);
+            Image img = await _pgnService.PGNDocumentService.DownloadFile(row.FileName);
             XtraForm xtraForm = new XtraForm()
             {
                 WindowState = FormWindowState.Maximized,
@@ -86,41 +72,29 @@ namespace ICTProfilingV3.PGNForms
             };
             pictureEdit.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
             xtraForm.Controls.Add(pictureEdit);
+            splashScreenDownload.CloseWaitForm();
             xtraForm.ShowDialog();
         }
 
-        private void btnScan_ItemClick(object sender, ItemClickEventArgs e)
+        private async void btnScan_ItemClick(object sender, ItemClickEventArgs e)
         {
             var scannedDocs = ScanDocument.ScanImages();
             if (scannedDocs == null) return;
 
-            int DocOrder = 1;
-            var docs = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id).ToList().OrderBy(o => o.DocOrder);
-            if (docs.LastOrDefault() != null) DocOrder = docs.LastOrDefault().DocOrder + 1;
-            
-            foreach (Image image in scannedDocs)
-            {
-                var doc = new PGNDocuments
-                {
-                    FileName = string.Join("-","PGN" , request.Id , DocOrder, ".jpeg"),
-                    DocOrder = DocOrder,
-                    PGNRequestId = request.Id
-                };
-                documentHandler.SaveImage(image , Path.Combine(Application.StartupPath, doc.FileName) , doc.FileName);
-                unitOfWork.PGNDocumentsRepo.Insert(doc);
-                DocOrder += 1;
-            }
-            unitOfWork.Save();
+            await _pgnService.PGNDocumentService.ScanFile("PGN", _request.Id);
             LoadData();
+            splashScreenUpload.CloseWaitForm();
         }
 
-        private void gridDocs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        private async void gridDocs_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
             var row = (PGNDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
+            picDocImage.Image = null;
+            progressDownload.Visible = true;
 
-            Image img = documentHandler.GetImage(row.FileName);
-            picDocImage.Image = img;
+            picDocImage.Image = await _pgnService.PGNDocumentService.DownloadFile(row.FileName);
+            progressDownload.Visible = false;               
         }
     }
 }

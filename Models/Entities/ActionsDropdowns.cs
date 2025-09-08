@@ -1,5 +1,7 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Models.Entities
 {
@@ -13,13 +15,18 @@ namespace Models.Entities
             SubActivityActions = new HashSet<Actions>();
         }
         public int? Id { get; set; }
-        public ActionCategory ActionCategory { get; set; }
+        public ActionCategory? ActionCategory { get; set; }
+        [MaxLength(128)]
         public string Value { get; set; }
-        public int ParentId { get; set; }
-        public int Order { get; set; }
+        public int? ParentId { get; set; }
+        public int? Order { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Actions> ProgramActions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Actions> MainActActions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Actions> ActivityActions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Actions> SubActivityActions { get; set; }
     }
 }

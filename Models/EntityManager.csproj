@@ -46,12 +46,48 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.4\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.1\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Pipelines, Version=9.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Pipelines.9.0.1\lib\net462\System.IO.Pipelines.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.9.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.9.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,7 +96,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\EquipmentConfiguration.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Entities\ActionDocuments.cs" />
+    <Compile Include="Entities\ChangeLogs.cs" />
+    <Compile Include="Entities\ComparisonReport.cs" />
+    <Compile Include="Entities\ComparisonReportFiles.cs" />
+    <Compile Include="Entities\ComparisonReportSpecs.cs" />
+    <Compile Include="Entities\ComparisonReportSpecsDetails.cs" />
     <Compile Include="Entities\CustomerActionSheet.cs" />
     <Compile Include="Entities\Actions.cs" />
     <Compile Include="Entities\ActionsDropdowns.cs" />
@@ -70,9 +113,17 @@
     <Compile Include="Entities\DeliveriesSpecs.cs" />
     <Compile Include="Entities\DeliveriesSpecsDetails.cs" />
     <Compile Include="Entities\Equipment.cs" />
+    <Compile Include="Entities\EquipmentBrand.cs" />
+    <Compile Include="Entities\EquipmentCategory.cs" />
+    <Compile Include="Entities\EquipmentCategoryBrand.cs" />
     <Compile Include="Entities\EquipmentSpecs.cs" />
     <Compile Include="Entities\EquipmentSpecsDetails.cs" />
+    <Compile Include="Entities\EvaluationSheet.cs" />
+    <Compile Include="Entities\EvaluationSheetDocument.cs" />
     <Compile Include="Entities\ITStaff.cs" />
+    <Compile Include="Entities\LogEntry.cs" />
+    <Compile Include="Entities\MOAccounts.cs" />
+    <Compile Include="Entities\MOAccountUsers.cs" />
     <Compile Include="Entities\Model.cs" />
     <Compile Include="Entities\PGNAccounts.cs" />
     <Compile Include="Entities\PGNDocuments.cs" />
@@ -85,6 +136,7 @@
     <Compile Include="Entities\PPEsSpecsDetails.cs" />
     <Compile Include="Entities\PRStandardPRSpecs.cs" />
     <Compile Include="Entities\PurchaseRequest.cs" />
+    <Compile Include="Entities\RecordsRequestStatus.cs" />
     <Compile Include="Entities\Repairs.cs" />
     <Compile Include="Entities\RoleDesignation.cs" />
     <Compile Include="Entities\Roles.cs" />
@@ -93,6 +145,7 @@
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\TechSpecs.cs" />
     <Compile Include="Entities\TechSpecsBasis.cs" />
+    <Compile Include="Entities\TechSpecsBasisDetails.cs" />
     <Compile Include="Entities\TechSpecsICTSpecs.cs" />
     <Compile Include="Entities\TechSpecsICTSpecsDetails.cs" />
     <Compile Include="Entities\TicketRequest.cs" />
@@ -114,94 +167,84 @@
     <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Enums\SaveType.cs" />
     <Compile Include="Enums\Sections.cs" />
+    <Compile Include="Enums\SheetRating.cs" />
+    <Compile Include="Enums\SheetService.cs" />
     <Compile Include="Enums\TicketStatus.cs" />
     <Compile Include="Enums\Unit.cs" />
-    <Compile Include="HRMISEntites\Division.cs">
-      <DependentUpon>HRMISv2Entities.tt</DependentUpon>
+    <Compile Include="Enums\Year.cs" />
+    <Compile Include="Migrations\202501130535154_NewDatabaseEntries.cs" />
+    <Compile Include="Migrations\202501130535154_NewDatabaseEntries.Designer.cs">
+      <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
     </Compile>
-    <Compile Include="HRMISEntites\Employee.cs">
-      <DependentUpon>HRMISv2Entities.tt</DependentUpon>
+    <Compile Include="Migrations\202501150712284_PGNNullables.cs" />
+    <Compile Include="Migrations\202501150712284_PGNNullables.Designer.cs">
+      <DependentUpon>202501150712284_PGNNullables.cs</DependentUpon>
     </Compile>
-    <Compile Include="HRMISEntites\HRMISEmployees.cs" />
-    <Compile Include="HRMISEntites\HRMISv2Entities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMISv2Entities.Context.tt</DependentUpon>
+    <Compile Include="Migrations\202501150814496_M365Nullables.cs" />
+    <Compile Include="Migrations\202501150814496_M365Nullables.Designer.cs">
+      <DependentUpon>202501150814496_M365Nullables.cs</DependentUpon>
     </Compile>
-    <Compile Include="HRMISEntites\HRMISv2Entities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMISv2Entities.tt</DependentUpon>
+    <Compile Include="Migrations\202501200618012_UsersIsDeletedProp.cs" />
+    <Compile Include="Migrations\202501200618012_UsersIsDeletedProp.Designer.cs">
+      <DependentUpon>202501200618012_UsersIsDeletedProp.cs</DependentUpon>
     </Compile>
-    <Compile Include="HRMISEntites\HRMISv2Entities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
+    <Compile Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.cs" />
+    <Compile Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.Designer.cs">
+      <DependentUpon>202501240300233_RecordsProcessStatusToDatabase.cs</DependentUpon>
     </Compile>
-    <Compile Include="HRMISEntites\Office.cs">
-      <DependentUpon>HRMISv2Entities.tt</DependentUpon>
+    <Compile Include="Migrations\202501280842181_DeliveriesInitialFindings.cs" />
+    <Compile Include="Migrations\202501280842181_DeliveriesInitialFindings.Designer.cs">
+      <DependentUpon>202501280842181_DeliveriesInitialFindings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Managers\ITicketStatus.cs" />
-    <Compile Include="Managers\RoleManager.cs" />
-    <Compile Include="Managers\Role\ICTRoleManager.cs" />
-    <Compile Include="Managers\Role\IICTRoleManager.cs" />
-    <Compile Include="Managers\UserManager.cs" />
-    <Compile Include="Managers\User\ICTUserManager.cs" />
-    <Compile Include="Managers\User\IICTUserManager.cs" />
-    <Compile Include="Managers\User\UserStore.cs" />
-    <Compile Include="Migrations\202412020214178_Initial-Create.cs" />
-    <Compile Include="Migrations\202412020214178_Initial-Create.Designer.cs">
-      <DependentUpon>202412020214178_Initial-Create.cs</DependentUpon>
+    <Compile Include="Migrations\202501310309012_EvaluationSheetDB.cs" />
+    <Compile Include="Migrations\202501310309012_EvaluationSheetDB.Designer.cs">
+      <DependentUpon>202501310309012_EvaluationSheetDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.cs" />
+    <Compile Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.Designer.cs">
+      <DependentUpon>202501310559264_AllCostsToDecimalandNullabletoUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502030203331_NullableTSQuantity.cs" />
+    <Compile Include="Migrations\202502030203331_NullableTSQuantity.Designer.cs">
+      <DependentUpon>202502030203331_NullableTSQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502030626467_EvaluationSheetRatingValue.cs" />
+    <Compile Include="Migrations\202502030626467_EvaluationSheetRatingValue.Designer.cs">
+      <DependentUpon>202502030626467_EvaluationSheetRatingValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.cs" />
+    <Compile Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.Designer.cs">
+      <DependentUpon>202502070219457_TSBasisSpecsDetailsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202502110604180_AddedLogs.cs" />
+    <Compile Include="Migrations\202502110604180_AddedLogs.Designer.cs">
+      <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506100228282_DBLimitFix.cs" />
+    <Compile Include="Migrations\202506100228282_DBLimitFix.Designer.cs">
+      <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.cs" />
+    <Compile Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.Designer.cs">
+      <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202508200220413_comparisonFilesAdd.cs" />
+    <Compile Include="Migrations\202508200220413_comparisonFilesAdd.Designer.cs">
+      <DependentUpon>202508200220413_comparisonFilesAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.cs" />
+    <Compile Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.Designer.cs">
+      <DependentUpon>202509070159446_AddEquipmentModelBrandCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202509080352102_AddDescriptionForModel.cs" />
+    <Compile Include="Migrations\202509080352102_AddDescriptionForModel.Designer.cs">
+      <DependentUpon>202509080352102_AddDescriptionForModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ActionType.cs" />
-    <Compile Include="Models\ChiefOfOffices.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportViewModel\AccomplishmentReportViewModel.cs" />
-    <Compile Include="ReportViewModel\PGNReportViewModel.cs" />
-    <Compile Include="ReportViewModel\RepairTRViewModel.cs" />
-    <Compile Include="ReportViewModel\StandardPRReportViewModel.cs" />
-    <Compile Include="ReportViewModel\TechSpecsReportViewModel.cs" />
-    <Compile Include="Repository\GenericRepository.cs" />
-    <Compile Include="Repository\IGenericRepository.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\UnitOfWork.cs" />
-    <Compile Include="ViewModels\ActionsViewModel.cs" />
-    <Compile Include="ViewModels\ActionTreeViewModel.cs" />
-    <Compile Include="ViewModels\BrandModelViewModel.cs" />
-    <Compile Include="ViewModels\BrandViewModel.cs" />
-    <Compile Include="ViewModels\CASViewModel.cs" />
-    <Compile Include="ViewModels\DeliveriesSpecsViewModel.cs" />
-    <Compile Include="ViewModels\DeliveriesViewModel.cs" />
-    <Compile Include="ViewModels\EmployeesViewModel.cs" />
-    <Compile Include="ViewModels\EquipmentSpecsViewModel.cs" />
-    <Compile Include="ViewModels\PGNAccountsViewModel.cs" />
-    <Compile Include="ViewModels\PGNRequestViewModel.cs" />
-    <Compile Include="ViewModels\PPEsSpecsViewModel.cs" />
-    <Compile Include="ViewModels\PPEsViewModel.cs" />
-    <Compile Include="ViewModels\PRStandardPRSpecsViewModel.cs" />
-    <Compile Include="ViewModels\PRViewModel.cs" />
-    <Compile Include="ViewModels\RepairViewModel.cs" />
-    <Compile Include="ViewModels\RolesViewModel.cs" />
-    <Compile Include="ViewModels\RoutedActionsViewModel.cs" />
-    <Compile Include="ViewModels\StaffViewModel.cs" />
-    <Compile Include="ViewModels\StandardPRViewModel.cs" />
-    <Compile Include="ViewModels\TechSpecsICTSpecsViewModel.cs" />
-    <Compile Include="ViewModels\TechSpecsViewModel.cs" />
-    <Compile Include="ViewModels\TicketInfo.cs" />
-    <Compile Include="ViewModels\TicketRequestViewModel.cs" />
-    <Compile Include="ViewModels\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="HRMISEntites\HRMISv2Entities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HRMISv2Entities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="HRMISEntites\HRMISv2Entities.edmx.diagram">
-      <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Models.Entities.EquipmentSpecs.datasource" />
   </ItemGroup>
@@ -209,20 +252,61 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HRMISEntites\HRMISv2Entities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
-      <LastGenOutput>HRMISv2Entities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="HRMISEntites\HRMISv2Entities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HRMISv2Entities.edmx</DependentUpon>
-      <LastGenOutput>HRMISv2Entities.cs</LastGenOutput>
-    </Content>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Utility\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202412020214178_Initial-Create.resx">
-      <DependentUpon>202412020214178_Initial-Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202501130535154_NewDatabaseEntries.resx">
+      <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501150712284_PGNNullables.resx">
+      <DependentUpon>202501150712284_PGNNullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501150814496_M365Nullables.resx">
+      <DependentUpon>202501150814496_M365Nullables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501200618012_UsersIsDeletedProp.resx">
+      <DependentUpon>202501200618012_UsersIsDeletedProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501240300233_RecordsProcessStatusToDatabase.resx">
+      <DependentUpon>202501240300233_RecordsProcessStatusToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501280842181_DeliveriesInitialFindings.resx">
+      <DependentUpon>202501280842181_DeliveriesInitialFindings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501310309012_EvaluationSheetDB.resx">
+      <DependentUpon>202501310309012_EvaluationSheetDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202501310559264_AllCostsToDecimalandNullabletoUnit.resx">
+      <DependentUpon>202501310559264_AllCostsToDecimalandNullabletoUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502030203331_NullableTSQuantity.resx">
+      <DependentUpon>202502030203331_NullableTSQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502030626467_EvaluationSheetRatingValue.resx">
+      <DependentUpon>202502030626467_EvaluationSheetRatingValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502070219457_TSBasisSpecsDetailsTable.resx">
+      <DependentUpon>202502070219457_TSBasisSpecsDetailsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202502110604180_AddedLogs.resx">
+      <DependentUpon>202502110604180_AddedLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506100228282_DBLimitFix.resx">
+      <DependentUpon>202506100228282_DBLimitFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.resx">
+      <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202508200220413_comparisonFilesAdd.resx">
+      <DependentUpon>202508200220413_comparisonFilesAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.resx">
+      <DependentUpon>202509070159446_AddEquipmentModelBrandCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509080352102_AddDescriptionForModel.resx">
+      <DependentUpon>202509080352102_AddDescriptionForModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

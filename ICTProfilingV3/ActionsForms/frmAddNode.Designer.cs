@@ -33,16 +33,16 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.txtValue = new DevExpress.XtraEditors.TextEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             this.spinOrder = new DevExpress.XtraEditors.SpinEdit();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.txtValue = new DevExpress.XtraEditors.TextEdit();
             this.lueParentNode = new DevExpress.XtraEditors.LookUpEdit();
             this.actionsDropdownsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinOrder.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtValue.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinOrder.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueParentNode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.actionsDropdownsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -81,9 +81,24 @@
             this.labelControl16.Appearance.Options.UseForeColor = true;
             this.labelControl16.Location = new System.Drawing.Point(24, 5);
             this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(138, 30);
+            this.labelControl16.Size = new System.Drawing.Size(95, 30);
             this.labelControl16.TabIndex = 1;
-            this.labelControl16.Text = "Add/Edit Node";
+            this.labelControl16.Text = "Add Node";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Location = new System.Drawing.Point(9, 114);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(25, 13);
+            this.labelControl3.TabIndex = 115;
+            this.labelControl3.Text = "Node";
+            // 
+            // txtValue
+            // 
+            this.txtValue.Location = new System.Drawing.Point(87, 111);
+            this.txtValue.Name = "txtValue";
+            this.txtValue.Size = new System.Drawing.Size(353, 20);
+            this.txtValue.TabIndex = 114;
             // 
             // btnSave
             // 
@@ -115,6 +130,7 @@
             this.btnClose.Size = new System.Drawing.Size(97, 28);
             this.btnClose.TabIndex = 108;
             this.btnClose.Text = "Close";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // spinOrder
             // 
@@ -130,21 +146,6 @@
             this.spinOrder.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
             this.spinOrder.Size = new System.Drawing.Size(353, 20);
             this.spinOrder.TabIndex = 112;
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Location = new System.Drawing.Point(9, 114);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(25, 13);
-            this.labelControl3.TabIndex = 115;
-            this.labelControl3.Text = "Node";
-            // 
-            // txtValue
-            // 
-            this.txtValue.Location = new System.Drawing.Point(87, 111);
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(353, 20);
-            this.txtValue.TabIndex = 114;
             // 
             // lueParentNode
             // 
@@ -184,8 +185,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinOrder.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtValue.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinOrder.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueParentNode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.actionsDropdownsBindingSource)).EndInit();
             this.ResumeLayout(false);

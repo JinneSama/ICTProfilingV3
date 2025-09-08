@@ -50,9 +50,9 @@
             this.btnAddModel = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddBrand = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
-            this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
+            this.lueUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
-            this.spintTotal = new DevExpress.XtraEditors.SpinEdit();
+            this.spinTotalCost = new DevExpress.XtraEditors.SpinEdit();
             this.spinUnitCost = new DevExpress.XtraEditors.SpinEdit();
             this.slueModel = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -64,13 +64,13 @@
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.spinQty = new DevExpress.XtraEditors.SpinEdit();
+            this.spinQuantity = new DevExpress.XtraEditors.SpinEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinTotalCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueModel.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -78,7 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQty.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControl10
@@ -249,6 +249,7 @@
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 136;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -318,20 +319,20 @@
             this.btnAddEquipment.TabIndex = 128;
             this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
             // 
-            // cboUnit
+            // lueUnit
             // 
-            this.cboUnit.Location = new System.Drawing.Point(117, 90);
-            this.cboUnit.Margin = new System.Windows.Forms.Padding(2);
-            this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lueUnit.Location = new System.Drawing.Point(117, 90);
+            this.lueUnit.Margin = new System.Windows.Forms.Padding(2);
+            this.lueUnit.Name = "lueUnit";
+            this.lueUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboUnit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.lueUnit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Unit", "Unit Type", 15, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.cboUnit.Properties.DisplayMember = "Unit";
-            this.cboUnit.Properties.NullText = "";
-            this.cboUnit.Properties.ValueMember = "Unit";
-            this.cboUnit.Size = new System.Drawing.Size(138, 20);
-            this.cboUnit.TabIndex = 127;
+            this.lueUnit.Properties.DisplayMember = "Unit";
+            this.lueUnit.Properties.NullText = "";
+            this.lueUnit.Properties.ValueMember = "Unit";
+            this.lueUnit.Size = new System.Drawing.Size(138, 20);
+            this.lueUnit.TabIndex = 127;
             // 
             // txtDescription
             // 
@@ -341,25 +342,25 @@
             this.txtDescription.Size = new System.Drawing.Size(360, 64);
             this.txtDescription.TabIndex = 126;
             // 
-            // spintTotal
+            // spinTotalCost
             // 
-            this.spintTotal.EditValue = new decimal(new int[] {
+            this.spinTotalCost.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spintTotal.Location = new System.Drawing.Point(117, 293);
-            this.spintTotal.Margin = new System.Windows.Forms.Padding(2);
-            this.spintTotal.Name = "spintTotal";
-            this.spintTotal.Properties.Appearance.Options.UseTextOptions = true;
-            this.spintTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spinTotalCost.Location = new System.Drawing.Point(117, 293);
+            this.spinTotalCost.Margin = new System.Windows.Forms.Padding(2);
+            this.spinTotalCost.Name = "spinTotalCost";
+            this.spinTotalCost.Properties.Appearance.Options.UseTextOptions = true;
+            this.spinTotalCost.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.spinTotalCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spintTotal.Properties.MaskSettings.Set("mask", "n");
-            this.spintTotal.Properties.ReadOnly = true;
-            this.spintTotal.Properties.UseMaskAsDisplayFormat = true;
-            this.spintTotal.Size = new System.Drawing.Size(138, 20);
-            this.spintTotal.TabIndex = 125;
+            this.spinTotalCost.Properties.MaskSettings.Set("mask", "n");
+            this.spinTotalCost.Properties.ReadOnly = true;
+            this.spinTotalCost.Properties.UseMaskAsDisplayFormat = true;
+            this.spinTotalCost.Size = new System.Drawing.Size(138, 20);
+            this.spinTotalCost.TabIndex = 125;
             // 
             // spinUnitCost
             // 
@@ -488,26 +489,26 @@
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 1;
             // 
-            // spinQty
+            // spinQuantity
             // 
-            this.spinQty.EditValue = new decimal(new int[] {
+            this.spinQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinQty.Location = new System.Drawing.Point(117, 66);
-            this.spinQty.Margin = new System.Windows.Forms.Padding(2);
-            this.spinQty.Name = "spinQty";
-            this.spinQty.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinQty.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinQty.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spinQuantity.Location = new System.Drawing.Point(117, 66);
+            this.spinQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.spinQuantity.Name = "spinQuantity";
+            this.spinQuantity.Properties.Appearance.Options.UseTextOptions = true;
+            this.spinQuantity.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.spinQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinQty.Properties.MaskSettings.Set("mask", "d");
-            this.spinQty.Properties.MaskSettings.Set("hideInsignificantZeros", true);
-            this.spinQty.Properties.UseMaskAsDisplayFormat = true;
-            this.spinQty.Size = new System.Drawing.Size(138, 20);
-            this.spinQty.TabIndex = 120;
-            this.spinQty.EditValueChanged += new System.EventHandler(this.spinQty_EditValueChanged);
+            this.spinQuantity.Properties.MaskSettings.Set("mask", "d");
+            this.spinQuantity.Properties.MaskSettings.Set("hideInsignificantZeros", true);
+            this.spinQuantity.Properties.UseMaskAsDisplayFormat = true;
+            this.spinQuantity.Size = new System.Drawing.Size(138, 20);
+            this.spinQuantity.TabIndex = 120;
+            this.spinQuantity.EditValueChanged += new System.EventHandler(this.spinQty_EditValueChanged);
             // 
             // frmAddEditPPEEquipment
             // 
@@ -525,14 +526,14 @@
             this.Controls.Add(this.btnAddModel);
             this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.btnAddEquipment);
-            this.Controls.Add(this.cboUnit);
+            this.Controls.Add(this.lueUnit);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.spintTotal);
+            this.Controls.Add(this.spinTotalCost);
             this.Controls.Add(this.spinUnitCost);
             this.Controls.Add(this.slueModel);
             this.Controls.Add(this.slueBrand);
             this.Controls.Add(this.slueEquipment);
-            this.Controls.Add(this.spinQty);
+            this.Controls.Add(this.spinQuantity);
             this.Controls.Add(this.labelControl8);
             this.Controls.Add(this.labelControl7);
             this.Controls.Add(this.labelControl6);
@@ -541,15 +542,16 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelControl4);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditPPEEquipment.IconOptions.Icon")));
             this.Name = "frmAddEditPPEEquipment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinTotalCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueModel.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
@@ -557,7 +559,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQty.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -578,9 +580,9 @@
         private DevExpress.XtraEditors.SimpleButton btnAddModel;
         private DevExpress.XtraEditors.SimpleButton btnAddBrand;
         private DevExpress.XtraEditors.SimpleButton btnAddEquipment;
-        private DevExpress.XtraEditors.LookUpEdit cboUnit;
+        private DevExpress.XtraEditors.LookUpEdit lueUnit;
         private DevExpress.XtraEditors.MemoEdit txtDescription;
-        private DevExpress.XtraEditors.SpinEdit spintTotal;
+        private DevExpress.XtraEditors.SpinEdit spinTotalCost;
         private DevExpress.XtraEditors.SpinEdit spinUnitCost;
         private DevExpress.XtraEditors.SearchLookUpEdit slueModel;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
@@ -592,7 +594,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraEditors.SpinEdit spinQty;
+        private DevExpress.XtraEditors.SpinEdit spinQuantity;
         private DevExpress.XtraEditors.LabelControl labelControl8;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.LabelControl labelControl6;

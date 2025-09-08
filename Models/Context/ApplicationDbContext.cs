@@ -1,8 +1,7 @@
 ﻿using System.Data.Entity;
-using System.Security.Permissions;
 using Models.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Models.Migrations;
+using Models.Configurations;
 
 namespace EntityManager.Context
 {
@@ -19,6 +18,7 @@ namespace EntityManager.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new EquipmentConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
@@ -52,5 +52,17 @@ namespace EntityManager.Context
         public DbSet<PGNNonEmployee> PGNNonEmployees { get; set; }
         public DbSet<PGNRequests> PGNRequests { get; set; }
         public DbSet<PGNGroupOffices> PGNGroupOffices { get; set; }
+        public DbSet<ComparisonReport> ComparisonReports { get; set; }
+        public DbSet<ComparisonReportSpecs> ComparisonReportSpecs { get; set; }
+        public DbSet<ComparisonReportSpecsDetails> ComparisonReportSpecsDetails { get; set; }
+        public DbSet<ChangeLogs> ChangeLogs { get; set; }
+        public DbSet<MOAccounts> MOAccounts { get; set; }
+        public DbSet<MOAccountUsers> MOAccountUsers { get; set; }
+        public DbSet<ActionDocuments> ActionDocuments { get; set; }
+        public DbSet<EvaluationSheet> EvaluationSheet { get; set; }
+        public DbSet<EvaluationSheetDocument> EvaluationSheetDocument { get; set; }
+        public DbSet<TechSpecsBasisDetails> TechSpecsBasisDetails { get; set; }
+        public DbSet<EquipmentCategory> EquipmentCategories { get; set; }
+        public DbSet<EquipmentBrand> EquipmentBrands { get; set; }
     }
 }

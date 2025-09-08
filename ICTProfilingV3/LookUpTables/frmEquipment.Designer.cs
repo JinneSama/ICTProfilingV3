@@ -28,16 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions3 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions4 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.components = new System.ComponentModel.Container();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEquipment));
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
@@ -47,19 +49,24 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDeleteEquipment = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lueEquipmentCategory = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.bsEquipmentCategory = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentCategory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsEquipmentCategory)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions3.Image = global::ICTProfilingV3.Properties.Resources.close_16x161;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x161;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions3, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, serializableAppearanceObject10, serializableAppearanceObject11, serializableAppearanceObject12, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x16;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -72,7 +79,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(519, 37);
+            this.panel1.Size = new System.Drawing.Size(697, 37);
             this.panel1.TabIndex = 86;
             // 
             // labelControl16
@@ -112,8 +119,9 @@
             this.gcEquipment.MainView = this.gridEquipment;
             this.gcEquipment.Name = "gcEquipment";
             this.gcEquipment.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnDeleteEquipment});
-            this.gcEquipment.Size = new System.Drawing.Size(519, 493);
+            this.btnDeleteEquipment,
+            this.lueEquipmentCategory});
+            this.gcEquipment.Size = new System.Drawing.Size(697, 493);
             this.gcEquipment.TabIndex = 87;
             this.gcEquipment.UseEmbeddedNavigator = true;
             this.gcEquipment.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -123,10 +131,12 @@
             // 
             this.gridEquipment.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
-            this.gridColumn3});
+            this.gridColumn3,
+            this.gridColumn2});
             this.gridEquipment.GridControl = this.gcEquipment;
             this.gridEquipment.Name = "gridEquipment";
             this.gridEquipment.NewItemRowText = "Click here to add a new Equipment";
+            this.gridEquipment.OptionsFind.AlwaysVisible = true;
             this.gridEquipment.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridEquipment.OptionsView.ShowGroupPanel = false;
             this.gridEquipment.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridEquipment_RowUpdated);
@@ -137,8 +147,8 @@
             this.gridColumn1.FieldName = "EquipmentName";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
-            this.gridColumn1.Width = 270;
+            this.gridColumn1.VisibleIndex = 2;
+            this.gridColumn1.Width = 344;
             // 
             // gridColumn3
             // 
@@ -152,21 +162,45 @@
             // btnDeleteEquipment
             // 
             this.btnDeleteEquipment.AutoHeight = false;
-            editorButtonImageOptions4.Image = global::ICTProfilingV3.Properties.Resources.close_16x165;
+            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x165;
             this.btnDeleteEquipment.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions4, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, serializableAppearanceObject14, serializableAppearanceObject15, serializableAppearanceObject16, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDeleteEquipment.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x164;
             this.btnDeleteEquipment.Name = "btnDeleteEquipment";
             this.btnDeleteEquipment.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnDeleteEquipment.Click += new System.EventHandler(this.btnDeleteEquipment_Click);
             // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Category";
+            this.gridColumn2.ColumnEdit = this.lueEquipmentCategory;
+            this.gridColumn2.FieldName = "EquipmentCategoryId";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            this.gridColumn2.Width = 296;
+            // 
+            // lueEquipmentCategory
+            // 
+            this.lueEquipmentCategory.AutoHeight = false;
+            this.lueEquipmentCategory.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueEquipmentCategory.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Category")});
+            this.lueEquipmentCategory.DataSource = this.bsEquipmentCategory;
+            this.lueEquipmentCategory.DisplayMember = "Name";
+            this.lueEquipmentCategory.Name = "lueEquipmentCategory";
+            this.lueEquipmentCategory.NullText = "";
+            this.lueEquipmentCategory.ValueMember = "Id";
+            // 
             // frmEquipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 533);
+            this.ClientSize = new System.Drawing.Size(697, 533);
             this.Controls.Add(this.gcEquipment);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmEquipment.IconOptions.Icon")));
             this.Name = "frmEquipment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
@@ -175,6 +209,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipment)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentCategory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsEquipmentCategory)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -190,5 +226,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDeleteEquipment;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueEquipmentCategory;
+        private System.Windows.Forms.BindingSource bsEquipmentCategory;
     }
 }

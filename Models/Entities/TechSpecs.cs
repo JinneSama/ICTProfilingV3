@@ -1,4 +1,5 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,7 @@ namespace Models.Entities
         public long ReqByChiefId { get; set; }
         //----HRIS Data----
         public Gender ReqByGender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
         public bool? RequestBasedApprovedPR { get; set; }
         public bool? RequestBasedApprovedAPP { get; set; }
@@ -39,14 +41,19 @@ namespace Models.Entities
 
         [ForeignKey("NotedById")]
         private Users NotedByUsers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<TechSpecsICTSpecs> TechSpecsICTSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Repairs> Repairs { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
         public TechSpecs()
         {
             TechSpecsICTSpecs = new HashSet<TechSpecsICTSpecs>();
             Actions = new HashSet<Actions>();
             Repairs = new HashSet<Repairs>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

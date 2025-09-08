@@ -12,9 +12,8 @@ namespace Models.Enums
         OnProcess = 2,
         [Description("For Release")]
         ForRelease = 3,
-        [Description("Released")]
-        Released = 4,
         [Description("Completed")]
-        Completed = 5
+        Completed = 4,
+        Deleted = 5
     }
 }

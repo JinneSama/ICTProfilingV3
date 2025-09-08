@@ -1,7 +1,9 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
+using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Repository;
 using System;
 using System.Data;
 using System.Linq;
@@ -10,68 +12,72 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.PPEInventoryForms
 {
-    public partial class frmAddEditPPEs : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditPPEs : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        private PPEs _PPEs;
-        private readonly SaveType _SaveType;
-        private bool IsSave = false;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IPPEInventoryService _ppeService;
+        private readonly IControlMapper<PPEs> _ppeControlMapper;
+        private PPEs _ppe;
+        private SaveType _saveType;
+        private bool _isSave = false;
 
-        public frmAddEditPPEs(SaveType saveType , PPEs ppe)
+        public frmAddEditPPEs(IServiceProvider serviceProvider, IPPEInventoryService ppeService,
+            IControlMapper<PPEs> ppeControlMapper)
         {
+            _serviceProvider = serviceProvider;
+            _ppeService = ppeService;
+            _ppeControlMapper = ppeControlMapper;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
-            _SaveType = saveType;
+        }
 
-            if (saveType == SaveType.Insert) CreatePPE();
+        public async Task InitForm(SaveType saveType, PPEs ppe)
+        {
+            LoadDropdowns();
+            _saveType = saveType;
+            if (saveType == SaveType.Insert) await CreatePPE();
             else
             {
-                _PPEs = ppe;
-                IsSave = true;
+                _ppe = ppe;
+                _isSave = true;
             }
             LoadDetails();
         }
-
-        private void CreatePPE()
+        private async Task CreatePPE()
         {
-            var newPPE = new PPEs();
-            unitOfWork.PPesRepo.Insert(newPPE);
-            unitOfWork.Save();
-
-            _PPEs = newPPE;
-
-            LoadEquipmentSpecs();
+            var ppe = await _ppeService.AddAsync(new PPEs());
+            _ppe = ppe;
         }
 
         private void LoadDetails()
         {
-            if (_SaveType == SaveType.Insert) return;
-            
-            slueEmployee.EditValue = _PPEs.IssuedToId;
-            txtContactNo.Text = _PPEs.ContactNo;
-            rdbtnGender.SelectedIndex = (int)(_PPEs?.Gender ?? 0);
-            txtPropertyNo.Text = _PPEs.PropertyNo;
-            spinQty.Value = _PPEs.Quantity;
-            spinUnitCost.Value = (decimal)(_PPEs.UnitValue ?? 0);
-            spintTotal.Value = (decimal)(_PPEs.TotalValue ?? 0);
-            cboUnit.EditValue = _PPEs.Unit;
-            txtInvoiceDate.DateTime = _PPEs?.DateCreated ?? DateTime.UtcNow;
-            cboStatus.EditValue = _PPEs.Status;
-            txtRemarks.Text = _PPEs.Remarks;    
+            LoadEquipmentSpecs();
+            if (_saveType == SaveType.Insert) return;
+            _ppeControlMapper.MapControl(_ppe, groupControl2);
+
+            //slueEmployee.EditValue = _PPEs.IssuedToId;
+            //txtContactNo.Text = _PPEs.ContactNo;
+            //rdbtnGender.SelectedIndex = (int)(_PPEs?.Gender ?? 0);
+            //txtPropertyNo.Text = _PPEs.PropertyNo;
+            //spinQty.Value = _PPEs.Quantity;
+            //spinUnitCost.Value = (decimal)(_PPEs.UnitValue ?? 0);
+            //spintTotal.Value = (decimal)(_PPEs.TotalValue ?? 0);
+            //cboUnit.EditValue = _PPEs.Unit;
+            //txtInvoiceDate.DateTime = _PPEs?.DateCreated ?? DateTime.Now;
+            //cboStatus.EditValue = _PPEs.Status;
+            //txtRemarks.Text = _PPEs.Remarks;    
         }
 
         private void LoadDropdowns()
         {
             var employees = HRMISEmployees.GetEmployees();
-            slueEmployee.Properties.DataSource = employees;
+            slueIssuedToId.Properties.DataSource = employees;
 
-            cboUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
+            lueUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
             {
                 Unit = x
             });
 
-            cboStatus.Properties.DataSource = Enum.GetValues(typeof(PPEStatus)).Cast<PPEStatus>().Select(x => new
+            lueStatus.Properties.DataSource = Enum.GetValues(typeof(PPEStatus)).Cast<PPEStatus>().Select(x => new
             {
                 Status = x
             });
@@ -79,31 +85,17 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void LoadEquipmentSpecs()
         {
-            gcEquipmentSpecs.Controls.Clear();
-            gcEquipmentSpecs.Controls.Add(new UCPPEsSpecs(_PPEs, unitOfWork)
-            {
-                Dock = DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPPEsSpecs>>();
+            navigation.NavigateTo(gcEquipmentSpecs, act => act.InitUC(_ppe));
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            var editPPE = await unitOfWork.PPesRepo.FindAsync(x => x.Id == _PPEs.Id);
-            editPPE.IssuedToId = (long?)slueEmployee.EditValue;
-            editPPE.ContactNo = txtContactNo.Text;
-            editPPE.Gender = (Gender)rdbtnGender.SelectedIndex;
-            editPPE.PropertyNo = txtPropertyNo.Text;
-            editPPE.AquisitionDate = txtInvoiceDate.DateTime;
-            editPPE.Status = (PPEStatus)cboStatus.EditValue;
-            editPPE.Remarks = txtRemarks.Text;
-            editPPE.Quantity = (int)spinQty.Value;
-            editPPE.Unit = (Unit)cboUnit.EditValue;
-            editPPE.UnitValue = (long?)spinUnitCost.Value;
-            editPPE.TotalValue = (long?)spintTotal.Value;
-            editPPE.DateCreated = DateTime.UtcNow;
+            var editPPE = await _ppeService.GetByIdAsync(_ppe.Id);
+            _ppeControlMapper.MapToEntity(editPPE, groupControl2);
+            await _ppeService.SaveChangesAsync();
 
-            unitOfWork.Save();
-            IsSave = true;
+            _isSave = true;
             this.Close();
         }
 
@@ -114,14 +106,26 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private async void frmAddEditPPEs_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!IsSave) await DeletePPE();
+            if (!_isSave) await DeletePPE();
         }
 
         private async Task DeletePPE()
         {
-            unitOfWork.PPEsSpecsRepo.DeleteRange(x => x.PPEsId == _PPEs.Id);
-            unitOfWork.PPesRepo.DeleteByEx(x => x.Id == _PPEs.Id);
-            await unitOfWork.SaveChangesAsync();
+            await _ppeService.DeleteAsync(_ppe.Id);
+        }
+        private void CalcTotalValue()
+        {
+            spintTotalValue.Value = spinUnitValue.Value * spinQuantity.Value;
+        }
+
+        private void spinUnitCost_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTotalValue();
+        }
+
+        private void spinQty_EditValueChanged(object sender, EventArgs e)
+        {
+            CalcTotalValue();
         }
     }
 }

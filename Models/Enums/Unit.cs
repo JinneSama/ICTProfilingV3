@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Models.Enums
         box = 2,
         set = 3,
         lot = 4,
-        meter = 5,
+        mtr = 5,
         reel = 6
     }
 }

@@ -61,21 +61,21 @@
             this.lblPassword = new DevExpress.XtraEditors.LabelControl();
             this.txtRemarks = new DevExpress.XtraEditors.MemoEdit();
             this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.txtCategory = new DevExpress.XtraEditors.TextEdit();
+            this.txtDesignation = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtTS = new DevExpress.XtraEditors.TextEdit();
+            this.txtTrafficSpeed = new DevExpress.XtraEditors.TextEdit();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.txtSignCount = new DevExpress.XtraEditors.TextEdit();
+            this.txtSignInCount = new DevExpress.XtraEditors.TextEdit();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtStatus = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.txtOffice = new DevExpress.XtraEditors.TextEdit();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.txtType = new DevExpress.XtraEditors.TextEdit();
+            this.UserType = new DevExpress.XtraEditors.TextEdit();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.txtUsername = new DevExpress.XtraEditors.TextEdit();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.txtPos = new DevExpress.XtraEditors.TextEdit();
+            this.txtPosition = new DevExpress.XtraEditors.TextEdit();
             this.txtName = new DevExpress.XtraEditors.TextEdit();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.groupMacAddress = new DevExpress.XtraEditors.GroupControl();
@@ -93,14 +93,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnAccountType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategory.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTS.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignCount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDesignation.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTrafficSpeed.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignInCount.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPos.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupMacAddress)).BeginInit();
             this.SuspendLayout();
@@ -189,6 +189,8 @@
             this.gridColumn2.Caption = "Username";
             this.gridColumn2.FieldName = "PGNAccount.Username";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsColumn.AllowEdit = false;
+            this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 136;
@@ -255,6 +257,7 @@
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // hplTicket
             // 
@@ -367,21 +370,21 @@
             this.groupControl1.Controls.Add(this.lblPassword);
             this.groupControl1.Controls.Add(this.txtRemarks);
             this.groupControl1.Controls.Add(this.labelControl9);
-            this.groupControl1.Controls.Add(this.txtCategory);
+            this.groupControl1.Controls.Add(this.txtDesignation);
             this.groupControl1.Controls.Add(this.labelControl1);
-            this.groupControl1.Controls.Add(this.txtTS);
+            this.groupControl1.Controls.Add(this.txtTrafficSpeed);
             this.groupControl1.Controls.Add(this.labelControl7);
-            this.groupControl1.Controls.Add(this.txtSignCount);
+            this.groupControl1.Controls.Add(this.txtSignInCount);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.txtStatus);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.txtOffice);
             this.groupControl1.Controls.Add(this.labelControl4);
-            this.groupControl1.Controls.Add(this.txtType);
+            this.groupControl1.Controls.Add(this.UserType);
             this.groupControl1.Controls.Add(this.labelControl3);
             this.groupControl1.Controls.Add(this.txtUsername);
             this.groupControl1.Controls.Add(this.labelControl2);
-            this.groupControl1.Controls.Add(this.txtPos);
+            this.groupControl1.Controls.Add(this.txtPosition);
             this.groupControl1.Controls.Add(this.txtName);
             this.groupControl1.Controls.Add(this.labelControl11);
             this.groupControl1.Location = new System.Drawing.Point(582, 99);
@@ -463,14 +466,14 @@
             this.labelControl9.TabIndex = 20;
             this.labelControl9.Text = "Remarks";
             // 
-            // txtCategory
+            // txtDesignation
             // 
-            this.txtCategory.Location = new System.Drawing.Point(158, 244);
-            this.txtCategory.Name = "txtCategory";
-            this.txtCategory.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCategory.Properties.Appearance.Options.UseFont = true;
-            this.txtCategory.Size = new System.Drawing.Size(278, 22);
-            this.txtCategory.TabIndex = 19;
+            this.txtDesignation.Location = new System.Drawing.Point(158, 244);
+            this.txtDesignation.Name = "txtDesignation";
+            this.txtDesignation.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDesignation.Properties.Appearance.Options.UseFont = true;
+            this.txtDesignation.Size = new System.Drawing.Size(278, 22);
+            this.txtDesignation.TabIndex = 19;
             // 
             // labelControl1
             // 
@@ -482,14 +485,14 @@
             this.labelControl1.TabIndex = 18;
             this.labelControl1.Text = "Category";
             // 
-            // txtTS
+            // txtTrafficSpeed
             // 
-            this.txtTS.Location = new System.Drawing.Point(158, 218);
-            this.txtTS.Name = "txtTS";
-            this.txtTS.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTS.Properties.Appearance.Options.UseFont = true;
-            this.txtTS.Size = new System.Drawing.Size(278, 22);
-            this.txtTS.TabIndex = 17;
+            this.txtTrafficSpeed.Location = new System.Drawing.Point(158, 218);
+            this.txtTrafficSpeed.Name = "txtTrafficSpeed";
+            this.txtTrafficSpeed.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTrafficSpeed.Properties.Appearance.Options.UseFont = true;
+            this.txtTrafficSpeed.Size = new System.Drawing.Size(278, 22);
+            this.txtTrafficSpeed.TabIndex = 17;
             // 
             // labelControl7
             // 
@@ -501,14 +504,14 @@
             this.labelControl7.TabIndex = 16;
             this.labelControl7.Text = "Traffic Shaping";
             // 
-            // txtSignCount
+            // txtSignInCount
             // 
-            this.txtSignCount.Location = new System.Drawing.Point(158, 192);
-            this.txtSignCount.Name = "txtSignCount";
-            this.txtSignCount.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSignCount.Properties.Appearance.Options.UseFont = true;
-            this.txtSignCount.Size = new System.Drawing.Size(278, 22);
-            this.txtSignCount.TabIndex = 15;
+            this.txtSignInCount.Location = new System.Drawing.Point(158, 192);
+            this.txtSignInCount.Name = "txtSignInCount";
+            this.txtSignInCount.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSignInCount.Properties.Appearance.Options.UseFont = true;
+            this.txtSignInCount.Size = new System.Drawing.Size(278, 22);
+            this.txtSignInCount.TabIndex = 15;
             // 
             // labelControl6
             // 
@@ -558,14 +561,14 @@
             this.labelControl4.TabIndex = 10;
             this.labelControl4.Text = "Office/Group";
             // 
-            // txtType
+            // UserType
             // 
-            this.txtType.Location = new System.Drawing.Point(158, 114);
-            this.txtType.Name = "txtType";
-            this.txtType.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtType.Properties.Appearance.Options.UseFont = true;
-            this.txtType.Size = new System.Drawing.Size(278, 22);
-            this.txtType.TabIndex = 9;
+            this.UserType.Location = new System.Drawing.Point(158, 114);
+            this.UserType.Name = "UserType";
+            this.UserType.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UserType.Properties.Appearance.Options.UseFont = true;
+            this.UserType.Size = new System.Drawing.Size(278, 22);
+            this.UserType.TabIndex = 9;
             // 
             // labelControl3
             // 
@@ -596,14 +599,14 @@
             this.labelControl2.TabIndex = 6;
             this.labelControl2.Text = "Username";
             // 
-            // txtPos
+            // txtPosition
             // 
-            this.txtPos.Location = new System.Drawing.Point(158, 60);
-            this.txtPos.Name = "txtPos";
-            this.txtPos.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPos.Properties.Appearance.Options.UseFont = true;
-            this.txtPos.Size = new System.Drawing.Size(278, 22);
-            this.txtPos.TabIndex = 5;
+            this.txtPosition.Location = new System.Drawing.Point(158, 60);
+            this.txtPosition.Name = "txtPosition";
+            this.txtPosition.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPosition.Properties.Appearance.Options.UseFont = true;
+            this.txtPosition.Size = new System.Drawing.Size(278, 22);
+            this.txtPosition.TabIndex = 5;
             // 
             // txtName
             // 
@@ -667,14 +670,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnAccountType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtCategory.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTS.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtSignCount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDesignation.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTrafficSpeed.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSignInCount.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtType.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UserType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPos.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupMacAddress)).EndInit();
             this.ResumeLayout(false);
@@ -709,21 +712,21 @@
         private DevExpress.XtraEditors.LabelControl lblPassword;
         private DevExpress.XtraEditors.MemoEdit txtRemarks;
         private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.TextEdit txtCategory;
+        private DevExpress.XtraEditors.TextEdit txtDesignation;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtTS;
+        private DevExpress.XtraEditors.TextEdit txtTrafficSpeed;
         private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.TextEdit txtSignCount;
+        private DevExpress.XtraEditors.TextEdit txtSignInCount;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.TextEdit txtStatus;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.TextEdit txtOffice;
         private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.TextEdit txtType;
+        private DevExpress.XtraEditors.TextEdit UserType;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.TextEdit txtUsername;
         private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.TextEdit txtPos;
+        private DevExpress.XtraEditors.TextEdit txtPosition;
         private DevExpress.XtraEditors.TextEdit txtName;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.GroupControl groupMacAddress;

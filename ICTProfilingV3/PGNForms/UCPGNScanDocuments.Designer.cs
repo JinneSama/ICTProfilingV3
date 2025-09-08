@@ -62,6 +62,9 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.splashScreenDownload = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ICTProfilingV3.PGNForms.WFDownloadImage), true, true, typeof(System.Windows.Forms.UserControl));
+            this.progressDownload = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.splashScreenUpload = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::ICTProfilingV3.PGNForms.WaitFormUpload), true, true, typeof(System.Windows.Forms.UserControl));
             ((System.ComponentModel.ISupportInitialize)(this.gcScanDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridDocs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit1)).BeginInit();
@@ -297,10 +300,31 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 298);
             // 
+            // splashScreenDownload
+            // 
+            this.splashScreenDownload.ClosingDelay = 500;
+            // 
+            // progressDownload
+            // 
+            this.progressDownload.Appearance.BackColor = System.Drawing.Color.White;
+            this.progressDownload.Appearance.Options.UseBackColor = true;
+            this.progressDownload.Caption = "Downloading Image";
+            this.progressDownload.Description = "Please wait";
+            this.progressDownload.Location = new System.Drawing.Point(43, 117);
+            this.progressDownload.Name = "progressDownload";
+            this.progressDownload.Size = new System.Drawing.Size(205, 66);
+            this.progressDownload.TabIndex = 66;
+            this.progressDownload.Text = "progressPanel1";
+            // 
+            // splashScreenUpload
+            // 
+            this.splashScreenUpload.ClosingDelay = 500;
+            // 
             // UCPGNScanDocuments
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.progressDownload);
             this.Controls.Add(this.gcScanDocs);
             this.Controls.Add(this.picDocImage);
             this.Controls.Add(this.barDockControlLeft);
@@ -350,5 +374,8 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenDownload;
+        private DevExpress.XtraWaitForm.ProgressPanel progressDownload;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenUpload;
     }
 }

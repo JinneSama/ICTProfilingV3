@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d1ef24cb72740c79115faf34b4b5485" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="ICTv2Model.ActionList" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Action" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Article" Width="1.5" PointX="3.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.CustomerActionSheet" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Delivery" Width="1.5" PointX="3" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.DeliveriesICTSpec" Width="1.5" PointX="8.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.DeliveriesICTSpecsDetail" Width="1.5" PointX="10.5" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.DocAction" Width="1.5" PointX="7.5" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Document" Width="1.5" PointX="13" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Dropdown" Width="1.5" PointX="15.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Employee" Width="1.5" PointX="3" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.EquipmentProblem" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.EquipmentProfile" Width="1.5" PointX="18.25" PointY="34.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.EquipmentType" Width="1.5" PointX="3" PointY="42" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.EvaluationSheet" Width="1.5" PointX="15" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.EvaluationSheet1" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Log" Width="1.5" PointX="13" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.ME" Width="1.5" PointX="5.25" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Office" Width="1.5" PointX="0.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNAccountHistory" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNAccount" Width="1.5" PointX="15.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNAcc" Width="1.5" PointX="17.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNActivity" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNMacAdderess" Width="1.5" PointX="18" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNNonEmployee" Width="1.5" PointX="18.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequest" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequestAccount" Width="1.5" PointX="19.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequestImage" Width="1.5" PointX="19.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequestStatu" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGN" Width="1.5" PointX="8.25" PointY="33.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PITDService" Width="1.5" PointX="12.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PPELog" Width="1.5" PointX="20.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PPE" Width="1.5" PointX="5.25" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PPEsNew" Width="1.5" PointX="11.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PPEsNewSpec" Width="1.5" PointX="13.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PREquipment" Width="1.5" PointX="18.25" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Province" Width="1.5" PointX="5.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PRStandardQuarter" Width="1.5" PointX="16" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PurchaseOrder" Width="1.5" PointX="6" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PurchaseReq" Width="1.5" PointX="16" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PurchaseReqStandardEquipment" Width="1.5" PointX="20.5" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Remark" Width="1.5" PointX="20.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Repair" Width="1.5" PointX="13.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Setting" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.SophosPGNAccount" Width="1.5" PointX="21.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.StandardPRSpec" Width="1.5" PointX="20.5" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Status" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Supplier" Width="1.5" PointX="3.75" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.sysdiagram" Width="1.5" PointX="22.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblBarangay" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblFWTUActivity" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblFWTUActivityDropdown" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblFWTUEquipmentInstallation" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblFWTUObservation" Width="1.5" PointX="13" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechnicalEvaluationSheet" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecEquipmentProfile" Width="1.5" PointX="20.5" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecRequest" Width="1.5" PointX="18.25" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpec" Width="1.5" PointX="16" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecsBasi" Width="1.5" PointX="6" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecsBasisDetail" Width="1.5" PointX="8.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecsICTSpec" Width="1.5" PointX="18.25" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TechSpecsICTSpecsDetail" Width="1.5" PointX="20.5" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketAction" Width="1.5" PointX="13" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketEquipment" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketEquipmentBrand" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketEquipmentModel" Width="1.5" PointX="6" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketICTSpec" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketICTSpecsDetail" Width="1.5" PointX="6" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketReqDetail" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketReqICTSpec" Width="1.5" PointX="8.25" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketReqICTSpecsDetail" Width="1.5" PointX="10.5" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketRequest" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketStatu" Width="1.5" PointX="10.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.TicketType" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Town" Width="1.5" PointX="8" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.UnitType" Width="1.5" PointX="16" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.UserClaim" Width="1.5" PointX="13" PointY="54.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.UserLogin" Width="1.5" PointX="13" PointY="56.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.UserRole" Width="1.5" PointX="8.5" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.UserRolesInAction" Width="1.5" PointX="10.75" PointY="47.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.User" Width="1.5" PointX="10.75" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.WorkOrder" Width="1.5" PointX="13" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNAccsHistory" Width="1.5" PointX="22.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNAction" Width="1.5" PointX="22.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNDropdown" Width="1.5" PointX="22.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequestAction" Width="1.5" PointX="23.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.PGNRequestIncomingType" Width="1.5" PointX="23.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.Software" Width="1.5" PointX="24.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.SoftwareProfile" Width="1.5" PointX="24.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblBarangayStaff" Width="1.5" PointX="24.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblBrgyPosition" Width="1.5" PointX="24.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblFWSchedule" Width="1.5" PointX="24.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblTown" Width="1.5" PointX="22.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ICTv2Model.tblVisit" Width="1.5" PointX="24.75" PointY="23.75" IsExpanded="true" />
+        <AssociationConnector Association="ICTv2Model.FK_Deliveries_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Deliveries_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Deliveries_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesICTSpecs_Deliveries" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesICTSpecs_TicketEquipmentBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesICTSpecs_TicketEquipmentModel" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesICTSpecs_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesICTSpecsDetails_DeliveriesICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DocActions_DocActions" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DocActions_PPEs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DocActions_TechSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DocActions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_DocActions_Users1" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_WOActions_WorkOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Documents_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Employees_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_MES_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PGNs_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEs_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecs_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_WorkOrders_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EquipmentProfiles_EquipmentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EquipmentProfiles_PPEs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EquipmentProfiles_PurchaseOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EquipmentProfiles_TechSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EquipmentProfiles_UnitTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecEquipmentProfiles_EquipmentProfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEs_EquipmentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecs_EquipmentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_EvaluationSheet_PITDServices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechnicalEvaluationSheet_EvaluationSheets" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Logs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_MES_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PGNs_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEs_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PurchaseOrders_Offices" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PGNMacAdderesses_PGNAccounts" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_WorkOrders_PPEs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEsNew_TicketEquipmentBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEsNew_TicketEquipmentModel" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEsNew_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PPEsNewSpecs_PPEsNew" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Repair_PPEsNew" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PREquipment_PRStandardQuarter" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PREquipment_PurchaseReq" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PREquipment_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PREquipment_UnitTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PurchaseReqStandardEquipment_PREquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_StandardPRSpecs_PREquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_Towns_Towns" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PurchaseReq_PRStandardQuarter" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PurchaseOrders_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_PurchaseReqStandardEquipment_PurchaseReq" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_tblFWTUEquipmentInstallation_tblBarangay" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_tblFWTUActivity_tblFWTUEquipmentInstallation" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_tblFWTUObservation_tblFWTUActivityDropdown1" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecRequests_TechSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecs_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecs_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecs_WorkOrders" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecsICTSpecs_TechSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecsBasis_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecsBasisDetails_TechSpecsBasis" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TechSpecsICTSpecsDetails_TechSpecsICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketAction_TicketAction" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketAction_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketICTSpecs_TicketEquipment" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketEquipmentBrand_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketEquipmentModel_TicketEquipmentBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqICTSpecs_TicketEquipmentBrand" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqICTSpecs_TicketEquipmentModel" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketICTSpecsDetails_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqICTSpecs_TicketICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqDetails_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqICTSpecs_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketReqICTSpecsDetails_TicketReqICTSpecs" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_TicketRequest_TicketRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_UserClaims_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_UserLogins_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_UserRolesInActions_UserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.FK_WorkOrders_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.UsersInDocuments" ManuallyRouted="false" />
+        <AssociationConnector Association="ICTv2Model.UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ICTv2Model.ActionLog" Width="1.5" PointX="26.375" PointY="6.75" />
+        <EntityTypeShape EntityType="ICTv2Model.DeliveriesActualDelivery" Width="1.5" PointX="10.5" PointY="31.25" />
+        <EntityTypeShape EntityType="ICTv2Model.DeliveriesPO" Width="1.5" PointX="10.5" PointY="50.625" />
+        <EntityTypeShape EntityType="ICTv2Model.DeliveriesQuotation" Width="1.5" PointX="10.5" PointY="53.5" />
+        <AssociationConnector Association="ICTv2Model.FK_Deliveries_PurchaseReq" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesActualDelivery_DeliveriesICTSpecs" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesPO_DeliveriesICTSpecs" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesQuotation_DeliveriesICTSpecs" />
+        <AssociationConnector Association="ICTv2Model.FK_Deliveries_PurchaseReq" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesActualDelivery_DeliveriesICTSpecs" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesPO_DeliveriesICTSpecs" />
+        <AssociationConnector Association="ICTv2Model.FK_DeliveriesQuotation_DeliveriesICTSpecs" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

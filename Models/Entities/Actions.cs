@@ -1,6 +1,8 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -10,11 +12,14 @@ namespace Models.Entities
         public Actions()
         {
             RoutedUsers = new HashSet<Users>();
+            ActionDocuments = new HashSet<ActionDocuments>();
         }
         public int Id { get; set; }
+        [MaxLength(512)]
         public string ActionTaken { get; set; }
         public DateTime? DateCreated { get; set; }
         public DateTime? ActionDate { get; set; }
+        [MaxLength(1024)]
         public string Remarks { get; set; }
         public bool? IsSend { get; set; }
         public RequestType RequestType { get; set; }
@@ -53,12 +58,23 @@ namespace Models.Entities
         public int? PGNRequestId { get; set; }
         [ForeignKey("PGNRequestId")]
         public PGNRequests PGNRequests { get; set; }
+        public int? MOAccountUserId { get; set; }
+        [ForeignKey("MOAccountUserId")]
+        public MOAccountUsers MOAccountUsers { get; set; }
 
         public string CreatedById { get; set; }
 
         [ForeignKey("CreatedById")]
         [InverseProperty("CreatedActions")]
         public virtual Users CreatedBy { get; set; }
+        public bool WithDiscrepancy { get; set; } = false;
+        [MaxLength(512)]
+        public string DiscrepancyRemarks { get; set; }
+        public bool IsReadByRoutee { get; set; } = false;
+        public bool IsReadByRouter { get; set; } = false;
+        [JsonIgnore]
         public virtual ICollection<Users> RoutedUsers { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ActionDocuments> ActionDocuments { get; set; }   
     }
 }

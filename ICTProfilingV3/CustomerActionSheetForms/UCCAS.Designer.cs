@@ -28,11 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
             this.gcCAS = new DevExpress.XtraGrid.GridControl();
             this.gridCAS = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -44,7 +55,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnDelete = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.gcDetails = new DevExpress.XtraEditors.GroupControl();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
@@ -53,14 +64,14 @@
             this.txtActionTaken = new DevExpress.XtraEditors.MemoEdit();
             this.txtClientRequest = new DevExpress.XtraEditors.MemoEdit();
             this.txtOffice = new DevExpress.XtraEditors.TextEdit();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.txtDateCreated = new DevExpress.XtraEditors.DateEdit();
             this.labelControl20 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl21 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl22 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl23 = new DevExpress.XtraEditors.LabelControl();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
-            this.txtName = new DevExpress.XtraEditors.TextEdit();
-            this.txtAssistedBy = new DevExpress.XtraEditors.TextEdit();
+            this.txtClientName = new DevExpress.XtraEditors.TextEdit();
+            this.txtAssistedByName = new DevExpress.XtraEditors.TextEdit();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
             this.btnAdd = new DevExpress.XtraEditors.SimpleButton();
             this.lblCASNo = new DevExpress.XtraEditors.LabelControl();
@@ -68,6 +79,7 @@
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.tabDetails = new DevExpress.XtraTab.XtraTabControl();
             this.tabAction = new DevExpress.XtraTab.XtraTabPage();
+            this.tabEvaluation = new DevExpress.XtraTab.XtraTabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -76,23 +88,33 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).BeginInit();
+            this.gcDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtActionTaken.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClientRequest.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedByName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabDetails)).BeginInit();
             this.tabDetails.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Status";
+            this.colStatus.FieldName = "CustomerActionSheet.Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.OptionsColumn.AllowEdit = false;
+            this.colStatus.OptionsColumn.AllowFocus = false;
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 1;
             // 
             // pnlDeliveries
             // 
@@ -132,12 +154,58 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.colStatus});
+            gridFormatRule1.Column = this.colStatus;
+            gridFormatRule1.ColumnApplyTo = this.colStatus;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Coral;
+            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression1.Expression = "[CustomerActionSheet].[Status] = 0";
+            gridFormatRule1.Rule = formatConditionRuleExpression1;
+            gridFormatRule2.Column = this.colStatus;
+            gridFormatRule2.ColumnApplyTo = this.colStatus;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Pink;
+            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression2.Expression = "[CustomerActionSheet].[Status] = 1";
+            gridFormatRule2.Rule = formatConditionRuleExpression2;
+            gridFormatRule3.Column = this.colStatus;
+            gridFormatRule3.ColumnApplyTo = this.colStatus;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression3.Expression = "[CustomerActionSheet].[Status] = 2";
+            gridFormatRule3.Rule = formatConditionRuleExpression3;
+            gridFormatRule4.Column = this.colStatus;
+            gridFormatRule4.ColumnApplyTo = this.colStatus;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
+            formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression4.Expression = "[CustomerActionSheet].[Status] = 3";
+            gridFormatRule4.Rule = formatConditionRuleExpression4;
+            gridFormatRule5.Column = this.colStatus;
+            gridFormatRule5.ColumnApplyTo = this.colStatus;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression5.Expression = "[CustomerActionSheet].[Status] = 4";
+            gridFormatRule5.Rule = formatConditionRuleExpression5;
+            this.gridCAS.FormatRules.Add(gridFormatRule1);
+            this.gridCAS.FormatRules.Add(gridFormatRule2);
+            this.gridCAS.FormatRules.Add(gridFormatRule3);
+            this.gridCAS.FormatRules.Add(gridFormatRule4);
+            this.gridCAS.FormatRules.Add(gridFormatRule5);
             this.gridCAS.GridControl = this.gcCAS;
             this.gridCAS.Name = "gridCAS";
             this.gridCAS.OptionsFind.AlwaysVisible = true;
             this.gridCAS.OptionsView.ShowGroupPanel = false;
-            this.gridCAS.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridCAS_FocusedRowChanged);
+            this.gridCAS.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridCAS_FocusedRowObjectChanged);
             // 
             // gridColumn1
             // 
@@ -147,7 +215,7 @@
             this.gridColumn1.OptionsColumn.AllowEdit = false;
             this.gridColumn1.OptionsColumn.AllowFocus = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 1;
+            this.gridColumn1.VisibleIndex = 2;
             this.gridColumn1.Width = 76;
             // 
             // gridColumn2
@@ -158,7 +226,7 @@
             this.gridColumn2.OptionsColumn.AllowEdit = false;
             this.gridColumn2.OptionsColumn.AllowFocus = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.VisibleIndex = 3;
             this.gridColumn2.Width = 109;
             // 
             // gridColumn3
@@ -169,7 +237,7 @@
             this.gridColumn3.OptionsColumn.AllowEdit = false;
             this.gridColumn3.OptionsColumn.AllowFocus = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 4;
             this.gridColumn3.Width = 109;
             // 
             // gridColumn4
@@ -180,7 +248,7 @@
             this.gridColumn4.OptionsColumn.AllowEdit = false;
             this.gridColumn4.OptionsColumn.AllowFocus = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.VisibleIndex = 5;
             this.gridColumn4.Width = 109;
             // 
             // gridColumn5
@@ -200,7 +268,7 @@
             this.gridColumn6.OptionsColumn.AllowEdit = false;
             this.gridColumn6.OptionsColumn.AllowFocus = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
+            this.gridColumn6.VisibleIndex = 6;
             this.gridColumn6.Width = 122;
             // 
             // gridColumn7
@@ -215,42 +283,43 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // groupControl3
+            // gcDetails
             // 
-            this.groupControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gcDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.groupControl3.Appearance.Options.UseFont = true;
-            this.groupControl3.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.groupControl3.AppearanceCaption.Options.UseFont = true;
-            this.groupControl3.Controls.Add(this.rdbtnGender);
-            this.groupControl3.Controls.Add(this.labelControl10);
-            this.groupControl3.Controls.Add(this.labelControl8);
-            this.groupControl3.Controls.Add(this.labelControl7);
-            this.groupControl3.Controls.Add(this.labelControl6);
-            this.groupControl3.Controls.Add(this.txtActionTaken);
-            this.groupControl3.Controls.Add(this.txtClientRequest);
-            this.groupControl3.Controls.Add(this.txtOffice);
-            this.groupControl3.Controls.Add(this.txtDate);
-            this.groupControl3.Controls.Add(this.labelControl20);
-            this.groupControl3.Controls.Add(this.labelControl21);
-            this.groupControl3.Controls.Add(this.labelControl22);
-            this.groupControl3.Controls.Add(this.labelControl23);
-            this.groupControl3.Controls.Add(this.txtContactNo);
-            this.groupControl3.Controls.Add(this.txtName);
-            this.groupControl3.Controls.Add(this.txtAssistedBy);
-            this.groupControl3.Location = new System.Drawing.Point(581, 97);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(820, 359);
-            this.groupControl3.TabIndex = 88;
-            this.groupControl3.Text = "Repair Request Details";
+            this.gcDetails.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gcDetails.Appearance.Options.UseFont = true;
+            this.gcDetails.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.gcDetails.AppearanceCaption.Options.UseFont = true;
+            this.gcDetails.Controls.Add(this.rdbtnGender);
+            this.gcDetails.Controls.Add(this.labelControl10);
+            this.gcDetails.Controls.Add(this.labelControl8);
+            this.gcDetails.Controls.Add(this.labelControl7);
+            this.gcDetails.Controls.Add(this.labelControl6);
+            this.gcDetails.Controls.Add(this.txtActionTaken);
+            this.gcDetails.Controls.Add(this.txtClientRequest);
+            this.gcDetails.Controls.Add(this.txtOffice);
+            this.gcDetails.Controls.Add(this.txtDateCreated);
+            this.gcDetails.Controls.Add(this.labelControl20);
+            this.gcDetails.Controls.Add(this.labelControl21);
+            this.gcDetails.Controls.Add(this.labelControl22);
+            this.gcDetails.Controls.Add(this.labelControl23);
+            this.gcDetails.Controls.Add(this.txtContactNo);
+            this.gcDetails.Controls.Add(this.txtClientName);
+            this.gcDetails.Controls.Add(this.txtAssistedByName);
+            this.gcDetails.Location = new System.Drawing.Point(581, 97);
+            this.gcDetails.Name = "gcDetails";
+            this.gcDetails.Size = new System.Drawing.Size(820, 359);
+            this.gcDetails.TabIndex = 88;
+            this.gcDetails.Text = "Repair Request Details";
             // 
             // rdbtnGender
             // 
@@ -332,21 +401,21 @@
             this.txtOffice.Size = new System.Drawing.Size(367, 22);
             this.txtOffice.TabIndex = 124;
             // 
-            // txtDate
+            // txtDateCreated
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(105, 24);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.EditValue = null;
+            this.txtDateCreated.Location = new System.Drawing.Point(105, 24);
+            this.txtDateCreated.Name = "txtDateCreated";
+            this.txtDateCreated.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateCreated.Properties.Appearance.Options.UseFont = true;
+            this.txtDateCreated.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.MaskSettings.Set("mask", "G");
-            this.txtDate.Properties.UseMaskAsDisplayFormat = true;
-            this.txtDate.Size = new System.Drawing.Size(368, 22);
-            this.txtDate.TabIndex = 1;
+            this.txtDateCreated.Properties.MaskSettings.Set("mask", "G");
+            this.txtDateCreated.Properties.UseMaskAsDisplayFormat = true;
+            this.txtDateCreated.Size = new System.Drawing.Size(368, 22);
+            this.txtDateCreated.TabIndex = 1;
             // 
             // labelControl20
             // 
@@ -398,25 +467,25 @@
             this.txtContactNo.Size = new System.Drawing.Size(368, 22);
             this.txtContactNo.TabIndex = 4;
             // 
-            // txtName
+            // txtClientName
             // 
-            this.txtName.EditValue = "";
-            this.txtName.Location = new System.Drawing.Point(105, 52);
-            this.txtName.Name = "txtName";
-            this.txtName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtName.Properties.Appearance.Options.UseFont = true;
-            this.txtName.Properties.UseReadOnlyAppearance = false;
-            this.txtName.Size = new System.Drawing.Size(368, 22);
-            this.txtName.TabIndex = 125;
+            this.txtClientName.EditValue = "";
+            this.txtClientName.Location = new System.Drawing.Point(105, 52);
+            this.txtClientName.Name = "txtClientName";
+            this.txtClientName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtClientName.Properties.Appearance.Options.UseFont = true;
+            this.txtClientName.Properties.UseReadOnlyAppearance = false;
+            this.txtClientName.Size = new System.Drawing.Size(368, 22);
+            this.txtClientName.TabIndex = 125;
             // 
-            // txtAssistedBy
+            // txtAssistedByName
             // 
-            this.txtAssistedBy.Location = new System.Drawing.Point(104, 329);
-            this.txtAssistedBy.Name = "txtAssistedBy";
-            this.txtAssistedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtAssistedBy.Properties.Appearance.Options.UseFont = true;
-            this.txtAssistedBy.Size = new System.Drawing.Size(368, 22);
-            this.txtAssistedBy.TabIndex = 133;
+            this.txtAssistedByName.Location = new System.Drawing.Point(104, 329);
+            this.txtAssistedByName.Name = "txtAssistedByName";
+            this.txtAssistedByName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtAssistedByName.Properties.Appearance.Options.UseFont = true;
+            this.txtAssistedByName.Size = new System.Drawing.Size(368, 22);
+            this.txtAssistedByName.TabIndex = 133;
             // 
             // pnlButtons
             // 
@@ -500,13 +569,20 @@
             this.tabDetails.Size = new System.Drawing.Size(820, 196);
             this.tabDetails.TabIndex = 90;
             this.tabDetails.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.tabAction});
+            this.tabAction,
+            this.tabEvaluation});
             // 
             // tabAction
             // 
             this.tabAction.Name = "tabAction";
             this.tabAction.Size = new System.Drawing.Size(818, 171);
             this.tabAction.Text = "Action";
+            // 
+            // tabEvaluation
+            // 
+            this.tabEvaluation.Name = "tabEvaluation";
+            this.tabEvaluation.Size = new System.Drawing.Size(818, 171);
+            this.tabEvaluation.Text = "Evaluation Sheet";
             // 
             // panel1
             // 
@@ -549,7 +625,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabDetails);
             this.Controls.Add(this.pnlButtons);
-            this.Controls.Add(this.groupControl3);
+            this.Controls.Add(this.gcDetails);
             this.Controls.Add(this.pnlDeliveries);
             this.Name = "UCCAS";
             this.Size = new System.Drawing.Size(1405, 658);
@@ -559,18 +635,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDelete)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcDetails)).EndInit();
+            this.gcDetails.ResumeLayout(false);
+            this.gcDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtActionTaken.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtClientRequest.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOffice.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateCreated.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtName.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtClientName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAssistedByName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
             this.pnlButtons.ResumeLayout(false);
             this.pnlButtons.PerformLayout();
@@ -595,7 +671,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
-        private DevExpress.XtraEditors.GroupControl groupControl3;
+        private DevExpress.XtraEditors.GroupControl gcDetails;
         private DevExpress.XtraEditors.RadioGroup rdbtnGender;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl8;
@@ -604,7 +680,7 @@
         private DevExpress.XtraEditors.MemoEdit txtActionTaken;
         private DevExpress.XtraEditors.MemoEdit txtClientRequest;
         private DevExpress.XtraEditors.TextEdit txtOffice;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit txtDateCreated;
         private DevExpress.XtraEditors.LabelControl labelControl20;
         private DevExpress.XtraEditors.LabelControl labelControl21;
         private DevExpress.XtraEditors.LabelControl labelControl22;
@@ -617,10 +693,12 @@
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraTab.XtraTabControl tabDetails;
         private DevExpress.XtraTab.XtraTabPage tabAction;
-        private DevExpress.XtraEditors.TextEdit txtName;
-        private DevExpress.XtraEditors.TextEdit txtAssistedBy;
+        private DevExpress.XtraEditors.TextEdit txtClientName;
+        private DevExpress.XtraEditors.TextEdit txtAssistedByName;
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private DevExpress.XtraTab.XtraTabPage tabEvaluation;
     }
 }

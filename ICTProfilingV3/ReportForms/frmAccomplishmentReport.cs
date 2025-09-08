@@ -1,30 +1,34 @@
-﻿using DevExpress.PivotGrid.OLAP.AdoWrappers;
-using EntityManager.Managers.User;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Managers.User;
-using Models.ReportViewModel;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ICTProfilingV3.ReportForms
 {
-    public partial class frmAccomplishmentReport : DevExpress.XtraEditors.XtraForm
+    public partial class frmAccomplishmentReport : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IICTUserManager userManager;
-        public frmAccomplishmentReport()
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IDocActionsService _actionsService;
+        private readonly IICTUserManager _userManager;
+        private readonly UserStore _userStore;
+        public frmAccomplishmentReport(IDocActionsService actionsService, IICTUserManager userManager, 
+            IServiceProvider serviceProvider, UserStore userStore)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            userManager = new ICTUserManager();
+            _userManager = userManager;
+            _actionsService = actionsService;
+            _serviceProvider = serviceProvider;
+            _userStore = userStore;
         }
 
         private void LoadDropdowns()
         {
-            var users = userManager.GetUsers();
+            var users = _userManager.GetUsers();
             slueStaff.Properties.DataSource = users;
             sluePreparedBy.Properties.DataSource = users;
             slueReviewedBy.Properties.DataSource = users;
@@ -41,29 +45,20 @@ namespace ICTProfilingV3.ReportForms
             string StaffId = (string)slueStaff.EditValue;
             DateTime dateFrom = deDateFrom.DateTime;
             DateTime dateTo = deDateTo.DateTime;
-
-            var actions = unitOfWork.ActionsRepo.FindAllAsync(x => x.CreatedById == StaffId &&
-                (x.ActionDate >= dateFrom && x.ActionDate <= dateTo) && x.SubActivityId != null)
-                .GroupBy(g => g.SubActivityId)
-                .Select(s => new ActionReport
-                {
-                    MainActivity = s.FirstOrDefault().MainActDropdowns.Value,
-                    SubActivity = s.FirstOrDefault().SubActivityDropdowns.Value,
-                    Count = s.Count(),
-                    SubActivityId = (int)s.Key
-                }).ToList();
-
+            var actions = _actionsService.GetActionReport(StaffId, dateFrom, dateTo);
             var data = new AccomplishmentReportViewModel
             {
                 AccomplishmentPeriod = dateFrom.ToShortDateString() + " - " + dateTo.ToShortDateString(),
-                PrintedBy = UserStore.Username,
-                Staff = await userManager.FindUserAsync((string)slueStaff.EditValue),
+                PrintedBy = _userStore.Username,
+                Staff = await _userManager.FindUserAsync((string)slueStaff.EditValue),
                 StartDate = dateFrom,
                 EndDate = dateTo,
-                PreparedBy = await userManager.FindUserAsync((string)sluePreparedBy.EditValue),
-                ReviewedBy = await userManager.FindUserAsync((string)slueReviewedBy.EditValue),
-                ApprovedBy = await userManager.FindUserAsync((string)slueApprovedBy.EditValue),
-                ActionReport = actions
+                PreparedBy = await _userManager.FindUserAsync((string)sluePreparedBy.EditValue),
+                ReviewedBy = await _userManager.FindUserAsync((string)slueReviewedBy.EditValue),
+                ApprovedBy = await _userManager.FindUserAsync((string)slueApprovedBy.EditValue),
+                ActionReport = actions,
+                AOPosition = txtReviewedByPos.Text,
+                ApprovedPosition = txtApprovedByPos.Text
             };
 
             var rpt = new rptAccomplishment
@@ -71,19 +66,26 @@ namespace ICTProfilingV3.ReportForms
                 DataSource = new List<AccomplishmentReportViewModel> { data }
             };
 
-            var frm = new frmReportViewer(rpt);
+            var frm = _serviceProvider.GetRequiredService<frmReportViewer>();
+            frm.InitForm(rpt);
             frm.ShowDialog();
         }
 
         private void frmAccomplishmentReport_Load(object sender, EventArgs e)
         {
             LoadDropdowns();
+            sluePreparedBy.EditValue = _userStore.UserId;
+            slueStaff.EditValue = _userStore.UserId;
         }
 
-        private void sluePreparedBy_EditValueChanged(object sender, EventArgs e)
+        private async void sluePreparedBy_EditValueChanged(object sender, EventArgs e)
         {
             var row = (Users)sluePreparedBy.Properties.View.GetFocusedRow();
-            txtPreparedByPos.Text = row.Position;
+            if (row == null)
+            {
+                var usr = await _userManager.FindUserAsync(_userStore.UserId);
+                txtPreparedByPos.Text = usr.Position;
+            }else txtPreparedByPos.Text = row.Position;
         }
 
         private void slueReviewedBy_EditValueChanged(object sender, EventArgs e)

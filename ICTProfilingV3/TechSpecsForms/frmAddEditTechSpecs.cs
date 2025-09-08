@@ -1,124 +1,93 @@
-﻿using Models.Entities;
+﻿using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
+using Models.Entities;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Managers;
-using Models.Managers.User;
-using Models.Repository;
-using Models.ViewModels;
 using System;
-using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ICTProfilingV3.TechSpecsForms
 {
-    public partial class frmAddEditTechSpecs : DevExpress.XtraEditors.XtraForm, ITicketStatus
+    public partial class frmAddEditTechSpecs : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IICTUserManager _userManager;
+        private readonly ITechSpecsService _tsService;
+        private readonly IControlMapper<TechSpecs> _tsMapper;
+        private readonly UserStore _userStore;
+        private readonly IServiceProvider _serviceProvider;
+
         private TechSpecs _techSpecs;
-        private bool IsSave = false; 
-        private SaveType SaveType;
-        public TechSpecs RepairTechSpecs { get; set; }
-        public frmAddEditTechSpecs()
+        private bool _isSave = false; 
+        private SaveType _saveType;
+        public TechSpecs _repairTechSpecs { get; set; }
+        public frmAddEditTechSpecs(ITechSpecsService tsService, UserStore userStore, IServiceProvider serviceProvider, IControlMapper<TechSpecs> tsMapper,
+            IICTUserManager userManager)
         {
+            _serviceProvider = serviceProvider;
+            _tsMapper = tsMapper;
+            _userStore = userStore;
+            _tsService = tsService;
+            _userManager = userManager;
+
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadDropdowns();
-            CreateTicket();
-        }
-        public frmAddEditTechSpecs(Repairs repair)
-        {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
-            CreateRepairTicket(repair);
         }
 
-        public frmAddEditTechSpecs(TechSpecs ts, IUnitOfWork uow)
+        public async Task InitForRepairForm(Repairs repair = null)
         {
-            InitializeComponent();
-            unitOfWork = uow;
-            _techSpecs = ts;
-            SaveType = SaveType.Update;
-            LoadDropdowns();
-            LoadTechSpecs();
+            await CreateRepairTicket(repair);
+        }
+
+        public async Task InitForTSForm(TechSpecs ts = null)
+        {
+            if (ts == null)
+                await CreateTicket();
+            else
+            {
+                _techSpecs = ts;
+                _saveType = SaveType.Update;
+                LoadTechSpecs();
+            }
         }
 
         private void LoadDropdowns()
         {
             var res = HRMISEmployees.GetEmployees();
-            slueEmployee.Properties.DataSource = res;
+            slueReqById.Properties.DataSource = res;
 
-            var users = unitOfWork.UsersRepo.GetAll().ToList();
-            sluePreparedBy.Properties.DataSource = users;
-            slueReviewedBy.Properties.DataSource = users;
-            slueNotedBy.Properties.DataSource = users;
+            var users = _userManager.GetUsers();
+            sluePreparedById.Properties.DataSource = users;
+            slueReviewedById.Properties.DataSource = users;
+            slueNotedById.Properties.DataSource = users;
         }
 
         private void LoadDetails()
         {
-            if (!(SaveType == SaveType.Update)) return;
+            if (!(_saveType == SaveType.Update)) return;
 
-            txtDate.DateTime = _techSpecs.DateRequested ?? DateTime.MinValue;
-            rdbtnGender.SelectedIndex = (int)_techSpecs.ReqByGender;
-            txtContactNo.Text = _techSpecs.ContactNo;
-            checkEditApprovedPR.Checked = _techSpecs.RequestBasedApprovedPR ?? false;
-            checkEditApprovedAPP.Checked = _techSpecs.RequestBasedApprovedAPP ?? false;
-            checkEditApprovedAIP.Checked = _techSpecs.RequestBasedApprovedAIP ?? false;
-            checkEditApprovedPPMP.Checked = _techSpecs.RequestBasedApprovedPPMP ?? false;
-            checkEditRequestLetter.Checked = _techSpecs.RequestBasedRequestLetter ?? false;
-            checkEditForReplacement.Checked = _techSpecs.RequestBasedForReplacement ?? false;
-            sluePreparedBy.EditValue = (string)_techSpecs.PreparedById;
-            slueReviewedBy.EditValue = (string)_techSpecs.ReviewedById;
-            slueNotedBy.EditValue = (string)_techSpecs.NotedById;
-            slueEmployee.EditValue = _techSpecs.ReqById;
+            _tsMapper.MapControl(_techSpecs, groupControl1, groupControl2, groupControl3);
         }
-        private void CreateRepairTicket(Repairs repair)
+        private async Task CreateRepairTicket(Repairs repair)
         {
-            var ticket = new TicketRequest()
-            {
-                DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.TechSpecs,
-                IsRepairTechSpecs = true
-            };
-            unitOfWork.TicketRequestRepo.Insert(ticket);
-            unitOfWork.Save();
+            var ts = await _tsService.AddRepairTechSpecsAsync(new TechSpecs());
 
-            var techSpecs = new TechSpecs()
-            {
-                Id = ticket.Id
-            };
-
-            unitOfWork.TechSpecsRepo.Insert(techSpecs);
-            unitOfWork.Save();
-
-            _techSpecs = techSpecs;
+            _techSpecs = ts;
             lblRepair.Visible = true;
             lblRepairNo.Visible = true;
             lblRepairNo.Text = repair.Id.ToString();
             LoadTechSpecs();
         }
 
-        private void CreateTicket()
+        private async Task CreateTicket()
         {
-            var ticket = new TicketRequest()
-            {
-                DateCreated = DateTime.UtcNow,
-                TicketStatus = TicketStatus.Accepted,
-                RequestType = RequestType.TechSpecs
-            };
-            unitOfWork.TicketRequestRepo.Insert(ticket);
-            unitOfWork.Save();
+            var ts = await _tsService.AddAsync(new TechSpecs());
 
-            var techSpecs = new TechSpecs()
-            {
-                Id = ticket.Id
-            };
-            unitOfWork.TechSpecsRepo.Insert(techSpecs);
-            unitOfWork.Save();
-
-            _techSpecs = techSpecs;
+            _techSpecs = ts;
             LoadTechSpecs();
         }
 
@@ -130,57 +99,47 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private void LoadTechSpecsICTSpecs()
         {
-            groupRequestedSpecs.Controls.Clear();
-            groupRequestedSpecs.Controls.Add(new UCRequestedTechSpecs(_techSpecs)
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRequestedTechSpecs>>();
+            navigation.NavigateTo(groupRequestedSpecs, act => act.InitUC(_techSpecs, false));
         }
 
         private async void frmAddEditTechSpecs_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            if (!IsSave) await DeleteTechSpecs();
+            if (_isSave && _saveType == SaveType.Insert) await DeleteTechSpecs();
         }
 
         private async Task DeleteTechSpecs()
         {
-            unitOfWork.TicketRequestRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
-            unitOfWork.TechSpecsRepo.DeleteByEx(x => x.Id == _techSpecs.Id);
-            await unitOfWork.SaveChangesAsync();
+            await _tsService.DeleteAsync(_techSpecs.Id);
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            IsSave = true;
-            RepairTechSpecs = _techSpecs;
+            _isSave = true;
+            _repairTechSpecs = _techSpecs;
             await SaveTechSpecs();
-            this.Close();
+            Close();
+
+            if (_saveType == SaveType.Update) return;
+            var actionType = new ActionType
+            {
+                Id = _techSpecs.Id,
+                RequestType = RequestType.TechSpecs
+            };
+
+            var frm = _serviceProvider.GetRequiredService<frmDocAction>();
+            frm.SetActionBehavior(actionType, SaveType.Insert, null, null);
+            frm.ShowDialog();
         }
 
         private async Task SaveTechSpecs()
         {
-            var clickedEmployee = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
+            var clickedEmployee = (EmployeesViewModel)slueReqById.Properties.View.GetFocusedRow();
             if (clickedEmployee == null) clickedEmployee = HRMISEmployees.GetEmployeeById(_techSpecs.ReqById);
 
-            var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == _techSpecs.Id);
-            ts.DateAccepted = DateTime.UtcNow;
-            ts.DateRequested = txtDate.DateTime;
-            ts.ReqById = (long)slueEmployee.EditValue;
-            ts.ReqByChiefId = HRMISEmployees.GetChief(clickedEmployee.Office , clickedEmployee.Division).ChiefId;
-            ts.ReqByGender = (Gender)rdbtnGender.SelectedIndex;
-            ts.ContactNo = txtContactNo.Text;
-            ts.RequestBasedApprovedPR = checkEditApprovedPR.Checked;
-            ts.RequestBasedApprovedAPP = checkEditApprovedAPP.Checked;
-            ts.RequestBasedApprovedAIP = checkEditApprovedAIP.Checked;
-            ts.RequestBasedApprovedPPMP = checkEditApprovedPPMP.Checked;
-            ts.RequestBasedRequestLetter = checkEditRequestLetter.Checked;
-            ts.RequestBasedForReplacement = checkEditForReplacement.Checked;
-            ts.PreparedById = (string)sluePreparedBy.EditValue;
-            ts.ReviewedById = (string)slueReviewedBy.EditValue;
-            ts.NotedById = (string)slueNotedBy.EditValue;
-
-            await unitOfWork.SaveChangesAsync();
-            await ModifyStatus(TicketStatus.Accepted, ts.Id);
+            var ts = await _tsService.GetByIdAsync(_techSpecs.Id);
+            ts.ReqByChiefId = (long)HRMISEmployees.GetChief(clickedEmployee.Office, clickedEmployee.Division, (long)slueReqById.EditValue).ChiefId;
+            _tsMapper.MapToEntity(ts, groupControl1, groupControl2, groupControl3);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -190,34 +149,21 @@ namespace ICTProfilingV3.TechSpecsForms
 
         private void slueEmployee_EditValueChanged(object sender, EventArgs e)
         {
-            var clickedEmployee = (EmployeesViewModel)slueEmployee.Properties.View.GetFocusedRow();
+            var clickedEmployee = (EmployeesViewModel)slueReqById.Properties.View.GetFocusedRow();
             if (clickedEmployee == null) clickedEmployee = HRMISEmployees.GetEmployeeById(_techSpecs.ReqById);
-            var chief = HRMISEmployees.GetChief(clickedEmployee.Office, clickedEmployee.Division);
-            var ChiefDetails = HRMISEmployees.GetEmployeeById(chief.ChiefId);
-            txtRequestingOfficeChief.Text = ChiefDetails.Employee;
-            txtRequestingOfficeChiefPos.Text = ChiefDetails.Position;
+            var chief = HRMISEmployees.GetChief(clickedEmployee?.Office, clickedEmployee?.Division, _techSpecs.ReqById);
+            var ChiefDetails = HRMISEmployees.GetEmployeeById(chief?.ChiefId);
+            txtRequestingOfficeChief.Text = ChiefDetails?.Employee;
+            txtRequestingOfficeChiefPos.Text = ChiefDetails?.Position;
 
-            txtRequestedByPos.Text = clickedEmployee.Position;
-            txtRequestedByOffice.Text = clickedEmployee.Office;
-            txtRequestedByDivision.Text = clickedEmployee.Division;
+            txtRequestedByPos.Text = clickedEmployee?.Position;
+            txtRequestedByOffice.Text = clickedEmployee?.Office;
+            txtRequestedByDivision.Text = clickedEmployee?.Division;
         }
 
         private void frmAddEditTechSpecs_Load(object sender, EventArgs e)
         {
-            if (SaveType == SaveType.Update) LoadDetails();
-        }
-
-        public async Task ModifyStatus(TicketStatus status, int ticketId)
-        {
-            var ticketStatus = new TicketRequestStatus
-            {
-                Status = status,
-                DateStatusChanged = DateTime.UtcNow,
-                ChangedByUserId = UserStore.UserId,
-                TicketRequestId = ticketId
-            };
-            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await unitOfWork.SaveChangesAsync();
+            if (_saveType == SaveType.Update) LoadDetails();
         }
     }
 }

@@ -42,24 +42,24 @@
             this.txtRemarks = new DevExpress.XtraEditors.MemoEdit();
             this.labelControl15 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl14 = new DevExpress.XtraEditors.LabelControl();
-            this.txtInvoiceDate = new DevExpress.XtraEditors.DateEdit();
+            this.deDateCreated = new DevExpress.XtraEditors.DateEdit();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.spintTotal = new DevExpress.XtraEditors.SpinEdit();
-            this.spinUnitCost = new DevExpress.XtraEditors.SpinEdit();
-            this.cboUnit = new DevExpress.XtraEditors.LookUpEdit();
-            this.spinQty = new DevExpress.XtraEditors.SpinEdit();
+            this.spintTotalValue = new DevExpress.XtraEditors.SpinEdit();
+            this.spinUnitValue = new DevExpress.XtraEditors.SpinEdit();
+            this.lueUnit = new DevExpress.XtraEditors.LookUpEdit();
+            this.spinQuantity = new DevExpress.XtraEditors.SpinEdit();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl13 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueIssuedToId = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.cboStatus = new DevExpress.XtraEditors.LookUpEdit();
+            this.lueStatus = new DevExpress.XtraEditors.LookUpEdit();
             this.gcEquipmentSpecs = new DevExpress.XtraEditors.GroupControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
@@ -68,17 +68,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateCreated.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateCreated.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQty.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spintTotalValue.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinUnitValue.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueUnit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueIssuedToId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboStatus.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueStatus.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,33 +214,33 @@
             this.labelControl14.TabIndex = 88;
             this.labelControl14.Text = "Acquisition Date *";
             // 
-            // txtInvoiceDate
+            // deDateCreated
             // 
-            this.txtInvoiceDate.EditValue = null;
-            this.txtInvoiceDate.Location = new System.Drawing.Point(130, 225);
-            this.txtInvoiceDate.Name = "txtInvoiceDate";
-            this.txtInvoiceDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtInvoiceDate.Properties.Appearance.Options.UseFont = true;
-            this.txtInvoiceDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateCreated.EditValue = null;
+            this.deDateCreated.Location = new System.Drawing.Point(130, 225);
+            this.deDateCreated.Name = "deDateCreated";
+            this.deDateCreated.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.deDateCreated.Properties.Appearance.Options.UseFont = true;
+            this.deDateCreated.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtInvoiceDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateCreated.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtInvoiceDate.Size = new System.Drawing.Size(302, 22);
-            this.txtInvoiceDate.TabIndex = 95;
+            this.deDateCreated.Size = new System.Drawing.Size(302, 22);
+            this.deDateCreated.TabIndex = 95;
             // 
             // groupControl2
             // 
             this.groupControl2.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
-            this.groupControl2.Controls.Add(this.spintTotal);
-            this.groupControl2.Controls.Add(this.spinUnitCost);
-            this.groupControl2.Controls.Add(this.cboUnit);
-            this.groupControl2.Controls.Add(this.spinQty);
+            this.groupControl2.Controls.Add(this.spintTotalValue);
+            this.groupControl2.Controls.Add(this.spinUnitValue);
+            this.groupControl2.Controls.Add(this.lueUnit);
+            this.groupControl2.Controls.Add(this.spinQuantity);
             this.groupControl2.Controls.Add(this.labelControl10);
             this.groupControl2.Controls.Add(this.labelControl11);
             this.groupControl2.Controls.Add(this.labelControl13);
             this.groupControl2.Controls.Add(this.labelControl12);
-            this.groupControl2.Controls.Add(this.slueEmployee);
+            this.groupControl2.Controls.Add(this.slueIssuedToId);
             this.groupControl2.Controls.Add(this.labelControl22);
             this.groupControl2.Controls.Add(this.labelControl8);
             this.groupControl2.Controls.Add(this.txtRemarks);
@@ -250,89 +250,91 @@
             this.groupControl2.Controls.Add(this.txtContactNo);
             this.groupControl2.Controls.Add(this.rdbtnGender);
             this.groupControl2.Controls.Add(this.txtPropertyNo);
-            this.groupControl2.Controls.Add(this.txtInvoiceDate);
+            this.groupControl2.Controls.Add(this.deDateCreated);
             this.groupControl2.Controls.Add(this.labelControl15);
             this.groupControl2.Controls.Add(this.labelControl14);
-            this.groupControl2.Controls.Add(this.cboStatus);
+            this.groupControl2.Controls.Add(this.lueStatus);
             this.groupControl2.Location = new System.Drawing.Point(12, 47);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(451, 420);
             this.groupControl2.TabIndex = 100;
             this.groupControl2.Text = "PPE Details";
             // 
-            // spintTotal
+            // spintTotalValue
             // 
-            this.spintTotal.EditValue = new decimal(new int[] {
+            this.spintTotalValue.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spintTotal.Location = new System.Drawing.Point(130, 200);
-            this.spintTotal.Margin = new System.Windows.Forms.Padding(2);
-            this.spintTotal.Name = "spintTotal";
-            this.spintTotal.Properties.Appearance.Options.UseTextOptions = true;
-            this.spintTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spintTotalValue.Location = new System.Drawing.Point(130, 200);
+            this.spintTotalValue.Margin = new System.Windows.Forms.Padding(2);
+            this.spintTotalValue.Name = "spintTotalValue";
+            this.spintTotalValue.Properties.Appearance.Options.UseTextOptions = true;
+            this.spintTotalValue.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.spintTotalValue.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spintTotal.Properties.MaskSettings.Set("mask", "n");
-            this.spintTotal.Properties.ReadOnly = true;
-            this.spintTotal.Properties.UseMaskAsDisplayFormat = true;
-            this.spintTotal.Size = new System.Drawing.Size(138, 20);
-            this.spintTotal.TabIndex = 109;
+            this.spintTotalValue.Properties.MaskSettings.Set("mask", "n");
+            this.spintTotalValue.Properties.ReadOnly = true;
+            this.spintTotalValue.Properties.UseMaskAsDisplayFormat = true;
+            this.spintTotalValue.Size = new System.Drawing.Size(138, 20);
+            this.spintTotalValue.TabIndex = 109;
             // 
-            // spinUnitCost
+            // spinUnitValue
             // 
-            this.spinUnitCost.EditValue = new decimal(new int[] {
+            this.spinUnitValue.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinUnitCost.Location = new System.Drawing.Point(130, 177);
-            this.spinUnitCost.Margin = new System.Windows.Forms.Padding(2);
-            this.spinUnitCost.Name = "spinUnitCost";
-            this.spinUnitCost.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinUnitCost.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinUnitCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spinUnitValue.Location = new System.Drawing.Point(130, 177);
+            this.spinUnitValue.Margin = new System.Windows.Forms.Padding(2);
+            this.spinUnitValue.Name = "spinUnitValue";
+            this.spinUnitValue.Properties.Appearance.Options.UseTextOptions = true;
+            this.spinUnitValue.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.spinUnitValue.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinUnitCost.Properties.MaskSettings.Set("mask", "n");
-            this.spinUnitCost.Properties.UseMaskAsDisplayFormat = true;
-            this.spinUnitCost.Size = new System.Drawing.Size(138, 20);
-            this.spinUnitCost.TabIndex = 107;
+            this.spinUnitValue.Properties.MaskSettings.Set("mask", "n");
+            this.spinUnitValue.Properties.UseMaskAsDisplayFormat = true;
+            this.spinUnitValue.Size = new System.Drawing.Size(138, 20);
+            this.spinUnitValue.TabIndex = 107;
+            this.spinUnitValue.EditValueChanged += new System.EventHandler(this.spinUnitCost_EditValueChanged);
             // 
-            // cboUnit
+            // lueUnit
             // 
-            this.cboUnit.Location = new System.Drawing.Point(130, 154);
-            this.cboUnit.Margin = new System.Windows.Forms.Padding(2);
-            this.cboUnit.Name = "cboUnit";
-            this.cboUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lueUnit.Location = new System.Drawing.Point(130, 154);
+            this.lueUnit.Margin = new System.Windows.Forms.Padding(2);
+            this.lueUnit.Name = "lueUnit";
+            this.lueUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboUnit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.lueUnit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Unit", "Unit Type", 15, DevExpress.Utils.FormatType.None, "", true, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default)});
-            this.cboUnit.Properties.DisplayMember = "Unit";
-            this.cboUnit.Properties.NullText = "";
-            this.cboUnit.Properties.ValueMember = "Unit";
-            this.cboUnit.Size = new System.Drawing.Size(138, 20);
-            this.cboUnit.TabIndex = 106;
+            this.lueUnit.Properties.DisplayMember = "Unit";
+            this.lueUnit.Properties.NullText = "";
+            this.lueUnit.Properties.ValueMember = "Unit";
+            this.lueUnit.Size = new System.Drawing.Size(138, 20);
+            this.lueUnit.TabIndex = 106;
             // 
-            // spinQty
+            // spinQuantity
             // 
-            this.spinQty.EditValue = new decimal(new int[] {
+            this.spinQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinQty.Location = new System.Drawing.Point(130, 131);
-            this.spinQty.Margin = new System.Windows.Forms.Padding(2);
-            this.spinQty.Name = "spinQty";
-            this.spinQty.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinQty.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinQty.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.spinQuantity.Location = new System.Drawing.Point(130, 131);
+            this.spinQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.spinQuantity.Name = "spinQuantity";
+            this.spinQuantity.Properties.Appearance.Options.UseTextOptions = true;
+            this.spinQuantity.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.spinQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinQty.Properties.MaskSettings.Set("mask", "d");
-            this.spinQty.Properties.MaskSettings.Set("hideInsignificantZeros", true);
-            this.spinQty.Properties.UseMaskAsDisplayFormat = true;
-            this.spinQty.Size = new System.Drawing.Size(138, 20);
-            this.spinQty.TabIndex = 105;
+            this.spinQuantity.Properties.MaskSettings.Set("mask", "d");
+            this.spinQuantity.Properties.MaskSettings.Set("hideInsignificantZeros", true);
+            this.spinQuantity.Properties.UseMaskAsDisplayFormat = true;
+            this.spinQuantity.Size = new System.Drawing.Size(138, 20);
+            this.spinQuantity.TabIndex = 105;
+            this.spinQuantity.EditValueChanged += new System.EventHandler(this.spinQty_EditValueChanged);
             // 
             // labelControl10
             // 
@@ -374,23 +376,23 @@
             this.labelControl12.TabIndex = 103;
             this.labelControl12.Text = "Unit Value";
             // 
-            // slueEmployee
+            // slueIssuedToId
             // 
-            this.slueEmployee.EditValue = "";
-            this.slueEmployee.Location = new System.Drawing.Point(130, 34);
-            this.slueEmployee.Name = "slueEmployee";
-            this.slueEmployee.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueEmployee.Properties.Appearance.Options.UseFont = true;
-            this.slueEmployee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueIssuedToId.EditValue = "";
+            this.slueIssuedToId.Location = new System.Drawing.Point(130, 34);
+            this.slueIssuedToId.Name = "slueIssuedToId";
+            this.slueIssuedToId.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueIssuedToId.Properties.Appearance.Options.UseFont = true;
+            this.slueIssuedToId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEmployee.Properties.DisplayMember = "Employee";
-            this.slueEmployee.Properties.NullText = "";
-            this.slueEmployee.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
-            this.slueEmployee.Properties.PopupView = this.gridView6;
-            this.slueEmployee.Properties.UseReadOnlyAppearance = false;
-            this.slueEmployee.Properties.ValueMember = "Id";
-            this.slueEmployee.Size = new System.Drawing.Size(302, 22);
-            this.slueEmployee.TabIndex = 100;
+            this.slueIssuedToId.Properties.DisplayMember = "Employee";
+            this.slueIssuedToId.Properties.NullText = "";
+            this.slueIssuedToId.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
+            this.slueIssuedToId.Properties.PopupView = this.gridView6;
+            this.slueIssuedToId.Properties.UseReadOnlyAppearance = false;
+            this.slueIssuedToId.Properties.ValueMember = "Id";
+            this.slueIssuedToId.Size = new System.Drawing.Size(302, 22);
+            this.slueIssuedToId.TabIndex = 100;
             // 
             // gridView6
             // 
@@ -453,21 +455,21 @@
             this.gridColumn19.VisibleIndex = 3;
             this.gridColumn19.Width = 382;
             // 
-            // cboStatus
+            // lueStatus
             // 
-            this.cboStatus.Location = new System.Drawing.Point(130, 250);
-            this.cboStatus.Margin = new System.Windows.Forms.Padding(2);
-            this.cboStatus.Name = "cboStatus";
-            this.cboStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.lueStatus.Location = new System.Drawing.Point(130, 250);
+            this.lueStatus.Margin = new System.Windows.Forms.Padding(2);
+            this.lueStatus.Name = "lueStatus";
+            this.lueStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            this.lueStatus.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
             new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Status", "Status")});
-            this.cboStatus.Properties.DisplayMember = "Status";
-            this.cboStatus.Properties.NullText = "";
-            this.cboStatus.Properties.PopupSizeable = false;
-            this.cboStatus.Properties.ValueMember = "Status";
-            this.cboStatus.Size = new System.Drawing.Size(302, 20);
-            this.cboStatus.TabIndex = 96;
+            this.lueStatus.Properties.DisplayMember = "Status";
+            this.lueStatus.Properties.NullText = "";
+            this.lueStatus.Properties.PopupSizeable = false;
+            this.lueStatus.Properties.ValueMember = "Status";
+            this.lueStatus.Size = new System.Drawing.Size(302, 20);
+            this.lueStatus.TabIndex = 96;
             // 
             // gcEquipmentSpecs
             // 
@@ -524,6 +526,7 @@
             this.Controls.Add(this.gcEquipmentSpecs);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditPPEs.IconOptions.Icon")));
             this.Name = "frmAddEditPPEs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditPPEs_FormClosing);
@@ -533,18 +536,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRemarks.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtInvoiceDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateCreated.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateCreated.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQty.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spintTotalValue.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinUnitValue.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueUnit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueIssuedToId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cboStatus.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueStatus.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).EndInit();
             this.ResumeLayout(false);
 
@@ -565,9 +568,9 @@
         private DevExpress.XtraEditors.MemoEdit txtRemarks;
         private DevExpress.XtraEditors.LabelControl labelControl15;
         private DevExpress.XtraEditors.LabelControl labelControl14;
-        private DevExpress.XtraEditors.DateEdit txtInvoiceDate;
+        private DevExpress.XtraEditors.DateEdit deDateCreated;
         private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueEmployee;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueIssuedToId;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
@@ -577,11 +580,11 @@
         private DevExpress.XtraEditors.GroupControl gcEquipmentSpecs;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.LookUpEdit cboStatus;
-        private DevExpress.XtraEditors.SpinEdit spintTotal;
-        private DevExpress.XtraEditors.SpinEdit spinUnitCost;
-        private DevExpress.XtraEditors.LookUpEdit cboUnit;
-        private DevExpress.XtraEditors.SpinEdit spinQty;
+        private DevExpress.XtraEditors.LookUpEdit lueStatus;
+        private DevExpress.XtraEditors.SpinEdit spintTotalValue;
+        private DevExpress.XtraEditors.SpinEdit spinUnitValue;
+        private DevExpress.XtraEditors.LookUpEdit lueUnit;
+        private DevExpress.XtraEditors.SpinEdit spinQuantity;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.LabelControl labelControl13;

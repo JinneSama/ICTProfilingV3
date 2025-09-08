@@ -649,6 +649,7 @@
             this.btnCancel.Size = new System.Drawing.Size(100, 28);
             this.btnCancel.TabIndex = 111;
             this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -677,6 +678,7 @@
             this.Controls.Add(this.gcEquipmentSpecs);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.groupControl3);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditRepair.IconOptions.Icon")));
             this.Name = "frmAddEditRepair";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditRepair_FormClosing);

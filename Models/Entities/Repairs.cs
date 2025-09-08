@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models.Enums;
+using Newtonsoft.Json;
 
 namespace Models.Entities
 {
@@ -14,15 +15,18 @@ namespace Models.Entities
         [Key, ForeignKey("TicketRequest")]
         public int Id { get; set; }
         //----HRIS Data----
-        public long RequestedById { get; set; }
-        public long ReqByChiefId { get; set; }
-        public long DeliveredById { get; set; }
+        public long? RequestedById { get; set; }
+        public long? ReqByChiefId { get; set; }
+        public long? DeliveredById { get; set; }
         //----HRIS Data----
 
         public DateTime? DateCreated { get; set; }
         public DateTime? DateDelivered { get; set; }
+        [MaxLength(1024)]
         public string Problems { get; set; }
+        [MaxLength(1024)]
         public string Findings { get; set; }
+        [MaxLength(1024)]
         public string Recommendations { get; set; }
         public string PreparedById { get; set; }
         public bool? IsDeleted { get; set; }
@@ -38,6 +42,7 @@ namespace Models.Entities
         [ForeignKey("NotedById")]
         private Users NotedByUsers { get; set; }
         public Gender Gender { get; set; }
+        [MaxLength(128)]
         public string ContactNo { get; set; }
         public TicketRequest TicketRequest { get; set; }
         public int? PPEsId { get; set; }
@@ -54,10 +59,13 @@ namespace Models.Entities
         [ForeignKey("TechSpecsId")]
         public TechSpecs TechSpecs { get; set; }
         public virtual ICollection<Actions> Actions { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
 
         public Repairs()
         {
             Actions = new HashSet<Actions>();
+            EvaluationSheets = new HashSet<EvaluationSheet>();
         }
     }
 }

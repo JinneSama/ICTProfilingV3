@@ -1,24 +1,28 @@
-﻿using DevExpress.Utils.Html.Internal;
+﻿using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ICTProfilingV3.PGNForms
 {
     public partial class UCMacAdresses : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
-        private readonly PGNAccounts account;
-        public UCMacAdresses(PGNAccounts _account)
+        private readonly IPGNService _pgnService;
+        private PGNAccounts _account;
+        public UCMacAdresses(IPGNService pgnService)
         {
+            _pgnService = pgnService;
             InitializeComponent();
-            account = _account;
-            unitOfWork = new UnitOfWork();
-            LoadData();
             LoadDropdowns();
+        }
+
+        public void InitUC(PGNAccounts account)
+        {
+            _account = account;
+            LoadData();
         }
 
         private void LoadDropdowns()
@@ -36,23 +40,22 @@ namespace ICTProfilingV3.PGNForms
 
         private void LoadData()
         {
-            var res = unitOfWork.PGNMacAddressesRepo.FindAllAsync(x => x.PGNAccountId == account.Id);
-            gcMacAddress.DataSource = new BindingList<PGNMacAddresses>(res.ToList());
+            var res = _pgnService.PGNMacAddressService.GetAll().Where(x => x.PGNAccountId == _account.Id).ToList();
+            gcMacAddress.DataSource = new BindingList<PGNMacAddresses>(res);
         }
 
         private async void gridMacAddress_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (PGNMacAddresses)gridMacAddress.GetFocusedRow();
-            var res = await unitOfWork.PGNMacAddressesRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertMacAddress(row);
+            var res = await _pgnService.PGNMacAddressService.GetByIdAsync(row.Id);
+            if (res == null) await InsertMacAddress(row);
             else UpdateMacAddress(row,res);
         }
 
-        private void InsertMacAddress(PGNMacAddresses row)
+        private async Task InsertMacAddress(PGNMacAddresses row)
         {
-            row.PGNAccountId = account.Id;
-            unitOfWork.PGNMacAddressesRepo.Insert(row);
-            unitOfWork.Save();
+            row.PGNAccountId = _account.Id;
+            await _pgnService.PGNMacAddressService.AddAsync(row);
         }
 
         private void UpdateMacAddress(PGNMacAddresses row, PGNMacAddresses res)
@@ -60,7 +63,7 @@ namespace ICTProfilingV3.PGNForms
             res.MacAddress = row.MacAddress;
             res.Device = row.Device;
             res.Connection = row.Connection;
-            unitOfWork.Save();
+            _pgnService.PGNMacAddressService.SaveChangesAsync();
         }
     }
 }

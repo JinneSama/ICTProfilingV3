@@ -43,6 +43,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEquipmentBrand));
             this.btnDeleteEquipment = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
@@ -56,13 +57,18 @@
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lueEquipmentCategory = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddBrand = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcBrand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridBrand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentCategory)).BeginInit();
             this.SuspendLayout();
             // 
             // btnDeleteEquipment
@@ -83,7 +89,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(734, 37);
+            this.panel1.Size = new System.Drawing.Size(921, 37);
             this.panel1.TabIndex = 88;
             // 
             // labelControl16
@@ -124,8 +130,9 @@
             this.gcBrand.Name = "gcBrand";
             this.gcBrand.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDeleteEquip,
-            this.btnEdit});
-            this.gcBrand.Size = new System.Drawing.Size(734, 466);
+            this.btnEdit,
+            this.lueEquipmentCategory});
+            this.gcBrand.Size = new System.Drawing.Size(921, 466);
             this.gcBrand.TabIndex = 89;
             this.gcBrand.UseEmbeddedNavigator = true;
             this.gcBrand.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -138,12 +145,14 @@
             this.gridColumn3,
             this.gridColumn2,
             this.gridColumn4,
-            this.gridColumn5});
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8});
             this.gridBrand.GridControl = this.gcBrand;
             this.gridBrand.Name = "gridBrand";
             this.gridBrand.NewItemRowText = "Click here to add a new Brand";
-            this.gridBrand.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
-            this.gridBrand.OptionsView.ShowGroupPanel = false;
+            this.gridBrand.OptionsFind.AlwaysVisible = true;
             // 
             // gridColumn1
             // 
@@ -151,8 +160,8 @@
             this.gridColumn1.FieldName = "Equipment";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
-            this.gridColumn1.Width = 164;
+            this.gridColumn1.VisibleIndex = 4;
+            this.gridColumn1.Width = 118;
             // 
             // gridColumn3
             // 
@@ -180,8 +189,8 @@
             this.gridColumn2.FieldName = "Description";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
-            this.gridColumn2.Width = 224;
+            this.gridColumn2.VisibleIndex = 5;
+            this.gridColumn2.Width = 123;
             // 
             // gridColumn4
             // 
@@ -189,8 +198,8 @@
             this.gridColumn4.FieldName = "BrandName";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
-            this.gridColumn4.Width = 252;
+            this.gridColumn4.VisibleIndex = 6;
+            this.gridColumn4.Width = 156;
             // 
             // gridColumn5
             // 
@@ -212,6 +221,33 @@
             this.btnEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "Category";
+            this.gridColumn6.ColumnEdit = this.lueEquipmentCategory;
+            this.gridColumn6.FieldName = "EquipmentCategoryId";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 2;
+            this.gridColumn6.Width = 129;
+            // 
+            // lueEquipmentCategory
+            // 
+            this.lueEquipmentCategory.AutoHeight = false;
+            this.lueEquipmentCategory.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueEquipmentCategory.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Name", "Name")});
+            this.lueEquipmentCategory.DisplayMember = "Name";
+            this.lueEquipmentCategory.Name = "lueEquipmentCategory";
+            this.lueEquipmentCategory.ValueMember = "Id";
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.FieldName = "EquipmentName";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Width = 137;
+            // 
             // btnAddBrand
             // 
             this.btnAddBrand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -220,7 +256,7 @@
             this.btnAddBrand.Appearance.Options.UseBackColor = true;
             this.btnAddBrand.Appearance.Options.UseForeColor = true;
             this.btnAddBrand.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x161;
-            this.btnAddBrand.Location = new System.Drawing.Point(606, 42);
+            this.btnAddBrand.Location = new System.Drawing.Point(793, 42);
             this.btnAddBrand.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddBrand.Name = "btnAddBrand";
             this.btnAddBrand.Size = new System.Drawing.Size(117, 28);
@@ -228,14 +264,23 @@
             this.btnAddBrand.Text = "Add Brand";
             this.btnAddBrand.Click += new System.EventHandler(this.btnAddBrand_Click);
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.FieldName = "EquipmentCategory";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.Width = 114;
+            // 
             // frmEquipmentBrand
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 541);
+            this.ClientSize = new System.Drawing.Size(921, 541);
             this.Controls.Add(this.btnAddBrand);
             this.Controls.Add(this.gcBrand);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmEquipmentBrand.IconOptions.Icon")));
             this.Name = "frmEquipmentBrand";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).EndInit();
@@ -245,6 +290,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridBrand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentCategory)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -265,6 +311,9 @@
         private DevExpress.XtraEditors.SimpleButton btnAddBrand;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEdit;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private System.Windows.Forms.BindingSource brandBindingSource;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueEquipmentCategory;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
     }
 }

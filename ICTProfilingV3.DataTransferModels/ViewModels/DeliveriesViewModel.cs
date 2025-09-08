@@ -1,0 +1,22 @@
+﻿using Models.Entities;
+using Models.Enums;
+using System;
+
+namespace ICTProfilingV3.DataTransferModels.ViewModels
+{
+    public class DeliveriesViewModel
+    {
+        public int Id { get; set; }
+        public TicketStatus Status { get; set; }
+        public DateTime DateCreated { get; set; }
+        public int TicketNo { get; set; }
+        public string Office { get; set; }
+        public string PONo { get; set; }
+        public string Supplier { get; set; }
+        public string DeliveryId { get; set; }
+        public string RecordedBy { get; set; }
+        public Deliveries Deliveries { get; set; }
+        public string AssignedTo { get; set; }
+        public string Equipment { get; set; }
+    }
+}

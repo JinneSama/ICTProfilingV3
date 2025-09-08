@@ -1,57 +1,57 @@
-﻿using Models.Entities;
-using Models.Repository;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using Models.Entities;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmPGNOffices : DevExpress.XtraEditors.XtraForm
+    public partial class frmPGNOffices : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        public frmPGNOffices()
+        private readonly IPGNService _pgnService;
+        public frmPGNOffices(IPGNService pgnService)
         {
+            _pgnService = pgnService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadData();
         }
 
         private void LoadData()
         {
-            var res = unitOfWork.PGNGroupOfficesRepo.GetAll();
+            var res = _pgnService.PGNGroupOfficeService.GetAll();
             gcOffice.DataSource = new BindingList<PGNGroupOffices>(res.ToList());
         }
 
         private async void gridOffice_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (PGNGroupOffices)gridOffice.GetFocusedRow();
-            var res = await unitOfWork.PGNGroupOfficesRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertOffice(row);
-            else UpdateOffice(row, res);
+            var res = await _pgnService.PGNGroupOfficeService.GetByIdAsync(row.Id);
+            if (res == null) await InsertOffice(row);
+            else await UpdateOffice(row, res);
         }
 
-        private void InsertOffice(PGNGroupOffices row)
+        private async Task InsertOffice(PGNGroupOffices row)
         {
-            unitOfWork.PGNGroupOfficesRepo.Insert(row);
-            unitOfWork.Save();
+            await _pgnService.PGNGroupOfficeService.AddAsync(row);
         }
 
-        private void UpdateOffice(PGNGroupOffices row, PGNGroupOffices res)
+        private async Task UpdateOffice(PGNGroupOffices row, PGNGroupOffices res)
         {
             res.Office = row.Office;
             res.OfficeAcr = row.OfficeAcr;
-            unitOfWork.Save();
+            await _pgnService.PGNGroupOfficeService.SaveChangesAsync();
         }
 
-        private void btnDeleteEquipment_Click(object sender, EventArgs e)
+        private async void btnDeleteEquipment_Click(object sender, EventArgs e)
         {
             var msgRes = MessageBox.Show("Delete Office/Group?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
 
             var row = (PGNGroupOffices)gridOffice.GetFocusedRow();
-            unitOfWork.PGNGroupOfficesRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
+            await _pgnService.PGNGroupOfficeService.DeleteAsync(row.Id);
 
             LoadData();
         }

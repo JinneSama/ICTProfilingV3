@@ -1,28 +1,23 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraLayout.Helpers;
-using EntityManager.Managers.Role;
-using Models.Entities;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.ApiUsers;
 using Models.Enums;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmUserRoles : DevExpress.XtraEditors.XtraForm
+    public partial class frmUserRoles : BaseForm
     {
-        private IICTRoleManager _ICTRoleManager;
-        public frmUserRoles()
+        private IICTRoleManager _roleManager;
+        public frmUserRoles(IICTRoleManager roleManager)
         {
             InitializeComponent();
-            _ICTRoleManager = new ICTRoleManager();
+            _roleManager = roleManager;
             populateDropdows();
             populateGrid();
         }
@@ -38,7 +33,7 @@ namespace ICTProfilingV3.UsersForms
 
         private void populateGrid()
         {
-            var roles = _ICTRoleManager.GetRoles().ToList();
+            var roles = _roleManager.GetRoles().ToList();
             var res = roles.Select(x => new RolesViewModel
             {
                 Id = x.Id,
@@ -57,18 +52,18 @@ namespace ICTProfilingV3.UsersForms
 
         private async void UpdateRole(RolesViewModel row)
         {
-            await _ICTRoleManager.UpdateRole(row.Id, row.Designations);
+            await _roleManager.UpdateRole(row.Id, row.Designations);
         }
 
         private async void InsertRole(RolesViewModel row)
         {
-            await _ICTRoleManager.CreateRole(row.Name, row.Designations);
+            await _roleManager.CreateRole(row.Name, row.Designations);
         }
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             var row = (RolesViewModel)gridRoles.GetFocusedRow();
-            await _ICTRoleManager.DeleteRole(row.Id);
+            await _roleManager.DeleteRole(row.Id);
         }
     }
 }

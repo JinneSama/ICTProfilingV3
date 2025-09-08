@@ -1,117 +1,106 @@
-﻿using EntityManager.Managers.User;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Managers.User;
-using Models.Models;
-using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmDocAction : DevExpress.XtraEditors.XtraForm
+    public partial class frmDocAction : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly ActionType actionType;
-        private readonly SaveType saveType;
-        private readonly ActionsViewModel _actions;
-        private List<UsersViewModel> _routedUsers;
-        public frmDocAction(ActionType _actionType, SaveType saveType, ActionsViewModel actions, IUnitOfWork uow)
-        {
-            InitializeComponent();
-            if(uow == null) unitOfWork = new UnitOfWork();
-            else unitOfWork = uow;
+        private ActionType _actionType;
+        private SaveType _saveType;
+        private ActionsDTM _actions;
+        private List<UsersDTM> _routedUsers;
 
-            actionType = _actionType;
-            this.saveType = saveType;
+        private readonly IDocActionsService _docActService;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IProcessService _processService;
+        private readonly IControlMapper<ActionDTM> _controlMapper;
+
+        private bool saveImages = false;
+
+        public frmDocAction(IServiceProvider serviceProvider, IDocActionsService doctActService, IControlMapper<ActionDTM> controlMapper,
+            IProcessService processService)
+        {
+            _serviceProvider = serviceProvider;
+            _docActService = doctActService;
+            _controlMapper = controlMapper;
+            _processService = processService;
+
+            InitializeComponent();
+        }
+
+        public void SetActionBehavior(ActionType actionType, SaveType saveType, ActionsDTM actions, Users user)
+        {
+            _actionType = actionType;
+            _saveType = saveType;
             _actions = actions;
             LoadDropdown();
-            LoadActionList();
         }
 
-        private void LoadDetails(ActionsViewModel actions)
+        private async Task LoadDetails(int actionId)
         {
-            deActionDate.DateTime = actions.ActionDate.Value;
-            lueProgram.EditValue = actions.Actions.ProgramId;
-            lueMainActivity.EditValue = actions.Actions.MainActId;
-            lueActivity.EditValue = actions.Actions.ActivityId;
-            lueSubActivity.EditValue = actions.Actions.SubActivityId;
-            lueActionTaken.EditValue = actions.Actions.ActionTaken;
-            txtRoutedTo.Text = actions.RoutedTo;
-            txtRemarks.Text = actions.Remarks;
-
-            List<UsersViewModel> users = actions.Actions.RoutedUsers.Select(x => new UsersViewModel
-            {
-                Id = x.Id,
-                Username = x.UserName,
-                Fullname = x.FullName
-            }).ToList();
-            _routedUsers = users;
+            var data = await _docActService.GetDocAction(actionId);
+            _controlMapper.MapControl(data, this);
+            _routedUsers = data.RoutedUsersObject;
         }
 
-        private void LoadActionList()
+        private async Task LoadActionList()
         {
-            lueActionTaken.Properties.DataSource = unitOfWork.ActionTakenRepo.GetAll().ToList();
+            var data = _docActService.GetActionTakenList().ToList();
+            lueActionTaken.Properties.DataSource = data;
+            await LoadTicketStatus();
         }
+        #region TreeDropdowns
         private void LoadDropdown()
         {
-            deActionDate.DateTime = DateTime.UtcNow;
-            var dropdown = unitOfWork.ActionsDropdownsRepo.FindAllAsync(x => x.ActionCategory == ActionCategory.Programs).Select(s => new ActionTreeViewModel
-            {
-                ActionTree = s,
-                NodeValue = s.Order + "." + s.Value
-            }).OrderBy(o => o.ActionTree.Order);
-            lueProgram.Properties.DataSource = new BindingList<ActionTreeViewModel>(dropdown.ToList());
+            deActionDate.DateTime = DateTime.Now;
+            lueProgram.Properties.DataSource = _docActService.GetActionTree(null);
+            lueTicketStatus.Properties.DataSource = Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>().Select(x => new { Type = x, TypeView = EnumHelper.GetEnumDescription(x) });
         }
 
         private void lueProgram_EditValueChanged(object sender, EventArgs e)
         {
-            var row = (ActionTreeViewModel)lueProgram.GetSelectedDataRow();
-            var dropdown = unitOfWork.ActionsDropdownsRepo.FindAllAsync(x => x.ParentId == row.ActionTree.Id).Select(s => new ActionTreeViewModel
-            {
-                ActionTree = s,
-                NodeValue = s.Order + "." + s.Value
-            }).OrderBy(o => o.ActionTree.Order);
-            lueMainActivity.Properties.DataSource = new BindingList<ActionTreeViewModel>(dropdown.ToList());
+            var row = (ActionTreeDTM)lueProgram.GetSelectedDataRow();
+            if (row == null) return;
+            lueMainActivity.Properties.DataSource = _docActService.GetActionTree(row.ActionTree.Id);
         }
 
         private void lueActivity_EditValueChanged(object sender, EventArgs e)
         {
-            var row = (ActionTreeViewModel)lueActivity.GetSelectedDataRow();
-            var dropdown = unitOfWork.ActionsDropdownsRepo.FindAllAsync(x => x.ParentId == row.ActionTree.Id).Select(s => new ActionTreeViewModel
-            {
-                ActionTree = s,
-                NodeValue = s.Order + "." + s.Value
-            }).OrderBy(o => o.ActionTree.Order);
-            lueSubActivity.Properties.DataSource = new BindingList<ActionTreeViewModel>(dropdown.ToList());
+            var row = (ActionTreeDTM)lueActivity.GetSelectedDataRow();
+            if (row == null) return;
+            lueSubActivity.Properties.DataSource = _docActService.GetActionTree(row.ActionTree.Id);
         }
 
         private void lueMainActivity_EditValueChanged(object sender, EventArgs e)
         {
-            var row = (ActionTreeViewModel)lueMainActivity.GetSelectedDataRow();
-            var dropdown = unitOfWork.ActionsDropdownsRepo.FindAllAsync(x => x.ParentId == row.ActionTree.Id).Select(s => new ActionTreeViewModel
-            {
-                ActionTree = s,
-                NodeValue = s.Order + "." + s.Value
-            }).OrderBy(o => o.ActionTree.Order);
-            lueActivity.Properties.DataSource = new BindingList<ActionTreeViewModel>(dropdown.ToList());
+            var row = (ActionTreeDTM)lueMainActivity.GetSelectedDataRow();
+            if (row == null) return;
+            lueActivity.Properties.DataSource = _docActService.GetActionTree(row.ActionTree.Id);
         }
+        #endregion
 
-        private void btnNewActionTaken_Click(object sender, EventArgs e)
+        private async void btnNewActionTaken_Click(object sender, EventArgs e)
         {
-            var frm = new frmActionList();
+            var frm = _serviceProvider.GetService<frmActionList>();
             frm.ShowDialog();
-            LoadActionList();
+            await LoadActionList();
         }
 
         private void btnRouteTo_Click(object sender, EventArgs e)
         {
-            var row = (ActionTreeViewModel)lueMainActivity.GetSelectedDataRow();
-            var frm = new frmRouteToUsers(row , SaveType.Insert , _routedUsers);
+            var row = (ActionTreeDTM)lueMainActivity.GetSelectedDataRow();
+            var frm = _serviceProvider.GetRequiredService<frmRouteToUsers>();
+            frm.SetActionDetails(row, _saveType, _routedUsers);
             frm.ShowDialog();
 
             var routedUsers = frm._routedUsers;
@@ -124,126 +113,74 @@ namespace ICTProfilingV3.ActionsForms
             this.Close();
         }
 
-        private void btnSaveAndClose_Click(object sender, EventArgs e)
+        private async void btnSaveAndClose_Click(object sender, EventArgs e)
         {
-            Save(false);
-        }
-
-        private void btnSaveAndSend_Click(object sender, EventArgs e)
-        {
-            Save(true);
-        }
-
-        private async void Save(bool send)
-        {
-            if (saveType == SaveType.Insert) InsertDocAction(send);
+            var routedCount = _routedUsers?.Count ?? 0;
+            if (routedCount == 0)
+            {
+                await Save(false);
+            }
             else
             {
-                await UpdateDocAction(send);
-                this.Close();
+                if (MessageBox.Show("This action has been routed and will now be sent.", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                    await Save(true);
             }
         }
 
-        private async Task UpdateDocAction(bool send)
+        private async void btnSaveAndSend_Click(object sender, EventArgs e)
         {
-            var updateAction = await unitOfWork.ActionsRepo.FindAsync(x => x.Id == _actions.Id);
-            updateAction.ActionTaken = lueActionTaken.Text;
-            updateAction.DateCreated = DateTime.UtcNow;
-            updateAction.ActionDate = deActionDate.DateTime;
-            updateAction.Remarks = txtRemarks.Text;
-            updateAction.IsSend = send;
-            updateAction.CreatedBy = await unitOfWork.UsersRepo.FindAsync(x => x.Id == UserStore.UserId);
-            updateAction.ProgramId = (int?)lueProgram.EditValue;
-            updateAction.MainActId = (int?)lueMainActivity.EditValue;
-            updateAction.ActivityId = (int?)lueActivity.EditValue;
-            updateAction.SubActivityId = (int?)lueSubActivity.EditValue;
-            updateAction.RequestType = actionType.RequestType;
-            updateAction.RoutedUsers.Clear();
-
-            if (_routedUsers == null) _routedUsers = new List<UsersViewModel>();
-            foreach (var user in _routedUsers)
-            {
-                var rUser = await unitOfWork.UsersRepo.FindAsync(x => x.Id == user.Id);
-                updateAction.RoutedUsers.Add(rUser);
-            }
-            unitOfWork.Save();
+            await Save(true);
         }
 
-        private async void InsertDocAction(bool send)
+        private async Task Save(bool send)
         {
-            var docAction = new Actions
-            {
-                ActionTaken = lueActionTaken.Text,
-                DateCreated = DateTime.UtcNow,
-                ActionDate = deActionDate.DateTime,
-                Remarks = txtRemarks.Text,
-                IsSend = send,
-                CreatedBy = await unitOfWork.UsersRepo.FindAsync(x => x.Id == UserStore.UserId),
-                ProgramId = (int?)lueProgram.EditValue,
-                MainActId = (int?)lueMainActivity.EditValue,
-                ActivityId = (int?)lueActivity.EditValue,
-                SubActivityId = (int?)lueSubActivity.EditValue,
-                RequestType = actionType.RequestType
-            };
+            if (_routedUsers == null) send = false;
+            var actionDTM = new ActionDTM();
+            _controlMapper.MapToEntity(actionDTM, this);
 
-            if (_routedUsers == null) _routedUsers = new List<UsersViewModel>();
-            foreach (var user in _routedUsers)
+            if (_saveType == SaveType.Insert)
             {
-                var rUser = await unitOfWork.UsersRepo.FindAsync(x => x.Id == user.Id);
-                docAction.RoutedUsers.Add(rUser);
+                await _docActService.AddDocAction(send, _actionType.RequestType, actionDTM,
+                    _routedUsers, _actionType.Id);
             }
-            await SaveToProcess(docAction);
-            this.Close();
+            else
+            {
+                await _docActService.UpdateDocAction(_actions.Id, send, _actionType.RequestType, actionDTM,
+                    _routedUsers, _actionType.Id);
+            }
+            await UpdateTicketStatus();
+            Close();
         }
 
-        private async Task SaveToProcess(Actions Action)
+        private async Task UpdateTicketStatus()
         {
-            if (actionType.RequestType == RequestType.Deliveries)
-            {
-                var deliveries = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
-                unitOfWork.Save();
-            }
-
-            if (actionType.RequestType == RequestType.Repairs)
-            {
-                var deliveries = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
-                unitOfWork.Save();
-            }
-
-            if (actionType.RequestType == RequestType.TechSpecs)
-            {
-                var techSpecs = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == actionType.Id);
-                techSpecs.Actions.Add(Action);
-                unitOfWork.Save();
-            }
-
-            if (actionType.RequestType == RequestType.CAS)
-            {
-                var deliveries = await unitOfWork.CustomerActionSheetRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
-                unitOfWork.Save();
-            }
-
-            if (actionType.RequestType == RequestType.PR)
-            {
-                var deliveries = await unitOfWork.PurchaseRequestRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
-                unitOfWork.Save();
-            }
-
-            if (actionType.RequestType == RequestType.PGN)
-            {
-                var deliveries = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == actionType.Id);
-                deliveries.Actions.Add(Action);
-                unitOfWork.Save();
-            }
+            await _processService.UpdateProcessStatus(_actionType.Id, _actionType.RequestType, (TicketStatus)lueTicketStatus.EditValue);
+            await _processService.AddProcessLog(_actionType.Id, _actionType.RequestType, (TicketStatus)lueTicketStatus.EditValue);
         }
 
-        private void frmDocAction_Load(object sender, EventArgs e)
+        private async Task LoadTicketStatus()
         {
-            if (saveType == SaveType.Update) LoadDetails(_actions);
+            var status = await _processService.GetProcessStatus(_actionType.Id, _actionType.RequestType);
+            if (status == null) return;
+            lueTicketStatus.EditValue = status;
+        }
+
+        private async void frmDocAction_Load(object sender, EventArgs e)
+        {
+            await LoadActionList();
+
+            if (_actions != null)
+                await LoadDetails(_actions.Id);
+        }
+
+        private async void btnLastAction_Click(object sender, EventArgs e)
+        {
+            var action = await _docActService.GetLastAction(_actionType.Id);
+            lueProgram.EditValue = action.ProgramId;
+            lueMainActivity.EditValue = action.MainActId;
+            lueActivity.EditValue = action.ActivityId;
+            lueSubActivity.EditValue = action.SubActivityId;
+            lueActionTaken.Text = action.ActionTaken;
         }
     }
 }

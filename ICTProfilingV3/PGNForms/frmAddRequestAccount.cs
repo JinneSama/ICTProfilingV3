@@ -1,30 +1,37 @@
-﻿using Models.Entities;
-using Models.Repository;
-using Models.ViewModels;
-using System;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Models.Entities;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class frmAddRequestAccount : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddRequestAccount : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private readonly PGNRequests request;
+        private readonly IPGNService _pgnService;
+        private PGNRequests _request;
 
-        public frmAddRequestAccount(PGNRequests request)
+        public frmAddRequestAccount(IPGNService pgnService)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            this.request = request;
+        }
+
+        public void InitForm(PGNRequests request)
+        {
+            _request = request;
             LoadData();
         }
 
         private void LoadData()
         {
-            var res = unitOfWork.PGNAccountsRepo.FindAllAsync(x => x.PGNRequestId == null, x => x.PGNGroupOffices,
-                x => x.PGNNonEmployee).ToList().Select(x => new PGNAccountsViewModel
+            var res = _pgnService.GetAll().Where(x => x.PGNRequestId == null)
+                .Include(x => x.PGNGroupOffices)
+                .Include(x => x.PGNNonEmployee)
+                .ToList()
+                .Select(x => new PGNAccountsViewModel
                 {
                     PGNAccount = x
                 });
@@ -33,18 +40,17 @@ namespace ICTProfilingV3.PGNForms
         private async void btnProceed_Click(object sender, System.EventArgs e)
         {
             await AddToRequest();
-
             this.Close();
         }
 
         private async Task AddToRequest()
         {
             var row = (PGNAccountsViewModel)gridAccount.GetFocusedRow();
-            var _request = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == request.Id);
-            if (_request == null) return;
+            var requests = await _pgnService.PGNRequestsService.GetByIdAsync(_request.Id);
+            if (requests == null) return;
 
-            _request.PGNAccounts.Add(row.PGNAccount);
-            await unitOfWork.SaveChangesAsync();
+            requests.PGNAccounts.Add(row.PGNAccount);
+            await _pgnService.PGNRequestsService.SaveChangesAsync();
         }
     }
 }

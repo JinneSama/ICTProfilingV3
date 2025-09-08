@@ -1,19 +1,26 @@
-﻿using Models.Entities;
-using Models.Repository;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using Models.Entities;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.PPEInventoryForms
 {
-    public partial class frmAddEditPPEsSpecsDetails : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditPPEsSpecsDetails : BaseForm
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IPPEInventoryService _ppeService;
         private PPEsSpecs _specs;
-        public frmAddEditPPEsSpecsDetails(PPEsSpecs specs, IUnitOfWork uow)
+        public frmAddEditPPEsSpecsDetails(IPPEInventoryService ppeService)
         {
-            InitializeComponent(); unitOfWork = uow;
+            _ppeService = ppeService;
+            InitializeComponent();
+        }
+
+        public void InitForm(PPEsSpecs specs)
+        {
             _specs = specs;
             lblEquipment.Text = specs.Model.Brand.EquipmentSpecs.Equipment.EquipmentName;
             lblDescription.Text = specs.Model.Brand.EquipmentSpecs.Description;
@@ -21,20 +28,20 @@ namespace ICTProfilingV3.PPEInventoryForms
         }
         private void LoadSpecs()
         {
-            var data = unitOfWork.PPEsSpecsDetailsRepo.FindAllAsync(x => x.PPEsSpecsId == _specs.Id);
+            var data = _ppeService.PPESpecsDetailsBaseService.GetAll().Where(x => x.PPEsSpecsId == _specs.Id);
             gcEquipmentDetails.DataSource = new BindingList<PPEsSpecsDetails>(data.ToList());
         }
 
-        private async void UpdateSpecs(PPEsSpecsDetails row)
+        private async Task UpdateSpecs(PPEsSpecsDetails row)
         {
-            var specs = await unitOfWork.PPEsSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
+            var specs = await _ppeService.PPESpecsDetailsBaseService.GetByIdAsync(row.Id);
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
-            unitOfWork.Save();
+            await _ppeService.PPESpecsDetailsBaseService.SaveChangesAsync();
         }
 
-        private void InsertSpecs(PPEsSpecsDetails row)
+        private async Task InsertSpecs(PPEsSpecsDetails row)
         {
             var equipmentDetail = new PPEsSpecsDetails
             {
@@ -43,8 +50,7 @@ namespace ICTProfilingV3.PPEInventoryForms
                 Description = row.Description,
                 PPEsSpecsId = _specs.Id
             };
-            unitOfWork.PPEsSpecsDetailsRepo.Insert(equipmentDetail);
-            unitOfWork.Save();
+            await _ppeService.PPESpecsDetailsBaseService.AddAsync(equipmentDetail);
             LoadSpecs();
         }
 
@@ -54,10 +60,9 @@ namespace ICTProfilingV3.PPEInventoryForms
             if (msgRes == DialogResult.Cancel) return;
 
             var equipment = (PPEsSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.PPEsSpecsDetailsRepo.FindAsync(x => x.Id == equipment.Id);
+            var res = await _ppeService.PPESpecsDetailsBaseService.GetByIdAsync(equipment.Id);
             if (res == null) return;
-            unitOfWork.PPEsSpecsDetailsRepo.Delete(equipment);
-            unitOfWork.Save();
+            await _ppeService.PPESpecsDetailsBaseService.DeleteAsync(equipment.Id);
 
             LoadSpecs();
         }
@@ -65,9 +70,9 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async void gridEquipmentDetails_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (PPEsSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.PPEsSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertSpecs(row);
-            else UpdateSpecs(row);
+            var res = await _ppeService.PPESpecsDetailsBaseService.GetByIdAsync(row.Id);
+            if (res == null) await InsertSpecs(row);
+            else await UpdateSpecs(row);
         }
     }
 }

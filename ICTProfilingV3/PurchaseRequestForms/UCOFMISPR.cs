@@ -1,0 +1,32 @@
+﻿using ICTProfilingV3.Services.Employees;
+using System.Threading.Tasks;
+
+namespace ICTProfilingV3.PurchaseRequestForms
+{
+    public partial class UCOFMISPR : DevExpress.XtraEditors.XtraUserControl
+    {
+        private string _controlNo;
+        public UCOFMISPR()
+        {
+            InitializeComponent();
+        }
+
+        public void InitUC(string controlNo)
+        {
+            _controlNo = controlNo;
+        }
+
+        private async Task LoadDetails()
+        {
+            var data = await FDTSData.GetData(_controlNo);
+            if (data == null) return;
+
+            gcPRDetails.DataSource = data.PRDetails;
+        }
+
+        private async void UCOFMISPR_Load(object sender, System.EventArgs e)
+        {
+            await LoadDetails();
+        }
+    }
+}

@@ -1,48 +1,45 @@
-﻿using Models.Entities;
-using Models.Repository;
-using System;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using Models.Entities;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmActionList : DevExpress.XtraEditors.XtraForm
+    public partial class frmActionList : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        public frmActionList()
+        private readonly IDocActionsService _doctActService;
+        private readonly IRepository<int, ActionTaken> _actionTakenService;
+        public frmActionList(IDocActionsService doctActService, IRepository<int, ActionTaken> actionTakenService)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            _doctActService = doctActService;
+            _actionTakenService = actionTakenService;
             LoadActionLists();
         }
 
         private void LoadActionLists()
         {
-            var res = unitOfWork.ActionTakenRepo.GetAll().ToList();
+            var res = _doctActService.GetActionTakenList().ToList();
             gcActionTaken.DataSource = new BindingList<ActionTaken>(res);
         }
 
         private async void gridActionTaken_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (ActionTaken)gridActionTaken.GetFocusedRow();
-            var res = await unitOfWork.ActionsRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertAction(row);
-            else UpdateAction(row);
+            var res = await _actionTakenService.GetById(row.Id);
+            if (res == null)
+                await _actionTakenService.AddAsync(row);
+            else 
+                await UpdateAction(row, res);
             LoadActionLists();
         }
 
-        private async void UpdateAction(ActionTaken row)
+        private async Task UpdateAction(ActionTaken row, ActionTaken res)
         {
-            var res = await unitOfWork.ActionTakenRepo.FindAsync(x => x.Id == row.Id);
             res.Action = row.Action;
-            unitOfWork.Save();
-        }
-
-        private void InsertAction(ActionTaken row)
-        {
-            unitOfWork.ActionTakenRepo.Insert(row);
-            unitOfWork.Save();
+            await _actionTakenService.SaveChangesAsync();
         }
     }
 }

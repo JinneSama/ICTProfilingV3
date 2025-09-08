@@ -1,7 +1,9 @@
-﻿using Models.Entities;
-using Models.Repository;
-using Models.ViewModels;
-using System.Data.Entity;
+﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Models.Entities;
+using Models.Enums;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,43 +11,43 @@ namespace ICTProfilingV3.TechSpecsForms
 {
     public partial class UCRequestedTechSpecs : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly TechSpecs _techSpecs;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ITechSpecsService _tsService;
+        private TechSpecs _techSpecs;
 
-        public UCRequestedTechSpecs(TechSpecs techSpecs)
+        public UCRequestedTechSpecs(IServiceProvider serviceProvider, ITechSpecsService techSpecsService)
         {
+            _serviceProvider = serviceProvider;
+            _tsService = techSpecsService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+        }
+
+        public void InitUC(TechSpecs techSpecs, bool forViewing = true)
+        {
             _techSpecs = techSpecs;
+            SetHiddenButtons(!forViewing);
             LoadTSEquipments();
         }
 
-        private async void LoadTSEquipments()
+        private void SetHiddenButtons(bool forViewing)
         {
-            var res = unitOfWork.TechSpecsICTSpecsRepo.FindAllAsync(x => x.TechSpecsId == _techSpecs.Id,
-                x => x.EquipmentSpecs.Equipment);
-            var TSSpecsViewModel = res.Select(x => new TechSpecsICTSpecsViewModel
-            {
-                Id = x.Id,
-                ItemNo = x.ItemNo,
-                Quantity = x.Quantity,
-                Unit = x.Unit,
-                Equipment = x.EquipmentSpecs.Equipment.EquipmentName,
-                EquipmentSpecsId = x.EquipmentSpecsId,
-                Description = x.Description,
-                UnitCost = x.UnitCost,
-                TotalCost = x.TotalCost,
-                Purpose = x.Purpose,
-                TechSpecsICTSpecsDetails = x.TechSpecsICTSpecsDetails,
-                TechSpecsId = x.TechSpecsId
-            });
-            gcICTSpecs.DataSource = await TSSpecsViewModel.ToListAsync();
+            colDelete.Visible = forViewing;
+            colEdit.Visible = forViewing;
+            btnAddTS.Visible = forViewing;
+            colAddSpecs.Visible = forViewing;
+        }
+
+        private void LoadTSEquipments()
+        {
+            var ictSpecs = _tsService.GetTSICTSpecs(_techSpecs.Id);
+            gcICTSpecs.DataSource = ictSpecs.ToList();
         }
 
         private void btnAddTS_Click(object sender, System.EventArgs e)
         {
             var row = new TechSpecsICTSpecsViewModel { TechSpecsId = _techSpecs.Id };
-            var frm = new frmAddEditTechSpecsICTSpecs(unitOfWork, row , Models.Enums.SaveType.Insert);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditTechSpecsICTSpecs>();
+            frm.InitForm(row, SaveType.Insert);
             frm.ShowDialog();
             
             LoadTSEquipments();
@@ -60,7 +62,8 @@ namespace ICTProfilingV3.TechSpecsForms
         private void btnEditData_Click(object sender, System.EventArgs e)
         {
             var row = (TechSpecsICTSpecsViewModel)gridICTSpecs.GetFocusedRow();
-            var frm = new frmAddEditTechSpecsICTSpecs(unitOfWork, row, Models.Enums.SaveType.Update);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditTechSpecsICTSpecs>();
+            frm.InitForm(row, SaveType.Update);
             frm.ShowDialog();
 
             LoadTSEquipments();
@@ -69,10 +72,12 @@ namespace ICTProfilingV3.TechSpecsForms
         private async void btnAddSpecs_Click(object sender, System.EventArgs e)
         {
             var row = (TechSpecsICTSpecsViewModel)gridICTSpecs.GetFocusedRow();
-            var ictSpecs = await unitOfWork.TechSpecsICTSpecsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.EquipmentSpecs.Equipment);
+            //var ictSpecs = await unitOfWork.TechSpecsICTSpecsRepo.FindAsync(x => x.Id == row.Id,
+            //    x => x.EquipmentSpecs.Equipment);
 
-            var frm = new frmAddEditTSICTSpecsDetails(ictSpecs, unitOfWork);
+            var ictSpecs = await _tsService.GetTSICTSpecsById(row.Id);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditTSICTSpecsDetails>();
+            frm.InitForm(ictSpecs);
             frm.ShowDialog();
 
             LoadTSEquipments();
@@ -84,8 +89,7 @@ namespace ICTProfilingV3.TechSpecsForms
                     MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
 
             var row = (TechSpecsICTSpecsViewModel)gridICTSpecs.GetFocusedRow();
-            unitOfWork.TechSpecsICTSpecsRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
+            _tsService.DeleteTechSpecsICTSpecsById(row.Id);
         }
     }
 }

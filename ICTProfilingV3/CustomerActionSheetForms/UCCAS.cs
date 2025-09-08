@@ -1,94 +1,126 @@
 ﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.EvaluationForms;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
-using Models.HRMISEntites;
-using Models.Models;
-using Models.Repository;
-using Models.ViewModels;
+using System;
 using System.ComponentModel;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.CustomerActionSheetForms
 {
     public partial class UCCAS : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IControlMapper<CASDetailDTM> _controlMapper;
+        private readonly ICASService _casService;
+        private readonly IICTRoleManager _roleManager;
+        private readonly UserStore _userStore;
+
         public string filterText { get; set; }
-        public UCCAS()
+        public UCCAS(IServiceProvider serviceProvider, IControlMapper<CASDetailDTM> controlMapper, ICASService casService,
+            IICTRoleManager roleManager, UserStore userStore)
         {
+            _casService = casService;
+            _controlMapper = controlMapper;
+            _serviceProvider = serviceProvider;
+            _roleManager = roleManager;
+            _userStore = userStore;
             InitializeComponent();
-            this._unitOfWork = new UnitOfWork();
             LoadCAS();
         }
 
         private void LoadCAS()
         {
-            var res = _unitOfWork.CustomerActionSheetRepo.GetAll(x => x.AssistedBy).ToList();
-            var cas = res.Select(x => new CASViewModel
-            {
-                Id = x.Id,
-                DateCreated = x.DateCreated ?? System.DateTime.MinValue,
-                Office = x.ClientId == null ? x.Office : HRMISEmployees.GetEmployeeById(x.ClientId).Office,
-                Request = x.ClientRequest,
-                AssistedBy = x.AssistedBy?.FullName,
-                CustomerActionSheet = x
-            }).ToList();
-            gcCAS.DataSource = new BindingList<CASViewModel>(cas);
+            var cas = _casService.GetCASDTM();
+            gcCAS.DataSource = new BindingList<CASDTM>(cas.ToList());
         }
 
         private void UCCAS_Load(object sender, System.EventArgs e)
         {
-            if(filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
+            ApplyFilterText();
         }
 
-        private void gridCAS_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        public void ApplyFilterText()
         {
-            var row = (CASViewModel)gridCAS.GetFocusedRow();
-            if(row != null) lblCASNo.Text = row.Id.ToString();
-            LoadDetails();
-            LoadActions();
+            if (filterText != null) gridCAS.ActiveFilterCriteria = new BinaryOperator("Id", filterText);
         }
 
-        private void LoadDetails()
+        private async Task LoadDetails()
         {
-            var row = (CASViewModel)gridCAS.GetFocusedRow();
-            txtDate.DateTime = row.DateCreated;
-            txtName.Text = row.CustomerActionSheet.ClientName;
-            txtOffice.Text = row.Office;
-            txtContactNo.Text = row.CustomerActionSheet.ContactNo;
-            rdbtnGender.SelectedIndex = (int)row.CustomerActionSheet.Gender;
-            txtClientRequest.Text = row.CustomerActionSheet.ClientRequest;
-            txtActionTaken.Text = row.CustomerActionSheet.ActionTaken;
-            txtAssistedBy.Text = row.CustomerActionSheet.AssistedBy.FullName;
+            var row = (CASDTM)gridCAS.GetFocusedRow();
+            var casDetail = await _casService.GetCASDetail(row.Id);
+            _controlMapper.MapControl(casDetail, gcDetails);
         }
 
         private void LoadActions()
         {
-            var row = (CASViewModel)gridCAS.GetFocusedRow();
+            var row = (CASDTM)gridCAS.GetFocusedRow();
             tabAction.Controls.Clear();
-            tabAction.Controls.Add(new UCActions(new ActionType { Id = row.Id, RequestType = RequestType.CAS })
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+
+            var uc = _serviceProvider.GetRequiredService<UCActions>();
+            uc.setActions(new ActionType { Id = row.Id, RequestType = RequestType.CAS });
+            uc.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabAction.Controls.Add(uc);
         }
 
-        private void btnEdit_Click(object sender, System.EventArgs e)
+        private void LoadEvaluationSheet()
         {
-            var row = (CASViewModel)gridCAS.GetFocusedRow();
-            var frm = new frmAddEditCAS(_unitOfWork,row);
+            var row = (CASDTM)gridCAS.GetFocusedRow();
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCEvaluationSheet>>();
+            navigation.NavigateTo(tabEvaluation, act => act.InitForm(new ActionType { Id = row.Id, RequestType = RequestType.CAS }));
+        }
+        private async void btnEdit_Click(object sender, System.EventArgs e)
+        {
+            var row = (CASDTM)gridCAS.GetFocusedRow();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditCAS>();
+            frm.InitForm(SaveType.Update, row);
             frm.ShowDialog();
 
             LoadCAS();
-            LoadDetails();
+            await LoadDetails();
         }
 
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditCAS(_unitOfWork);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditCAS>();
+            frm.InitForm(SaveType.Insert);
             frm.ShowDialog();
 
+            LoadCAS();
+        }
+
+        private async void gridCAS_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        {
+            var row = (CASDTM)gridCAS.GetFocusedRow();
+            if (row == null) return;
+
+            lblCASNo.Text = row.Id.ToString();
+            await LoadDetails();
+            LoadActions();
+            LoadEvaluationSheet();
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var res = await _roleManager.HasDesignation(Designation.CASAdmin, _userStore.UserRole);
+            if (!res)
+            {
+                MessageBox.Show("You don't have permission to delete CAS.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Delete this CAS?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
+
+            var cas = (CASDTM)gridCAS.GetFocusedRow();
+            await _casService.DeleteAsync(cas.Id);
             LoadCAS();
         }
     }

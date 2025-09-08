@@ -1,11 +1,13 @@
 ﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
-using Models.Models;
-using Models.Repository;
-using Models.ViewModels;
 using System;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,21 +15,28 @@ namespace ICTProfilingV3.PGNForms
 {
     public partial class UCPGNRequests : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IPGNService _pgnService;
         public string filterText { get; set; }
-        public UCPGNRequests()
+        public UCPGNRequests(IServiceProvider serviceProvider, IPGNService pgnService)
         {
+            _serviceProvider = serviceProvider;
+            _pgnService = pgnService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadData();
         }
 
         private void LoadData()
         {
-            var req = unitOfWork.PGNRequestsRepo.GetAll(x => x.CreatedByUser).ToList().Select(x => new PGNRequestViewModel
-            {
-                PGNRequest = x
-            });
+            var req = _pgnService.PGNRequestsService.GetAll()
+                .Include(x => x.CreatedByUser)
+                .OrderByDescending(x => x.DateCreated)
+                .ToList()
+                .Select(x => new PGNRequestViewModel
+                {
+                    PGNRequest = x
+                });
+
             gcPGNRequest.DataSource = new BindingList<PGNRequestViewModel>(req.ToList());
         }
 
@@ -45,39 +54,36 @@ namespace ICTProfilingV3.PGNForms
             txtSubject.Text = row.PGNRequest?.Subject;
             txtCreatedBy.Text = row.PGNRequest?.CreatedByUser?.FullName;
             lblEpisNo.Text = row.ReqNo;
+
+            spbTicketStatus.SelectedItemIndex = ((int)(row.PGNRequest?.Status ?? TicketStatus.Assigned)) - 1;
         }
 
         private void LoadActions()
         {
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
-            tabAction.Controls.Clear();
 
             if (row == null) return;
-            tabAction.Controls.Add(new UCActions(new ActionType
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(tabAction, act => act.setActions(new ActionType
             {
                 Id = row.PGNRequest.Id,
                 RequestType = RequestType.PGN
-            })
-            {
-                Dock = DockStyle.Fill
-            });
+            }));
         }
 
         private void LoadRequestAccounts()
         {
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
-            tabAccounts.Controls.Clear();
 
             if (row == null) return;
-            tabAccounts.Controls.Add(new UCRequestAccount(row.PGNRequest)
-            {
-                Dock = DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRequestAccount>>();
+            navigation.NavigateTo(tabAccounts, act => act.InitUC(row.PGNRequest));
         }
 
-        private void btnNewRequest_Click(object sender, System.EventArgs e)
+        private async void btnNewRequest_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditRequest();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditRequest>();
+            await frm.InitForm();
             frm.ShowDialog();
 
             LoadData();
@@ -96,10 +102,8 @@ namespace ICTProfilingV3.PGNForms
             gcScanDocs.Controls.Clear();
             if(row == null) return;
 
-            gcScanDocs.Controls.Add(new UCPGNScanDocuments(row.PGNRequest)
-            {
-                Dock = System.Windows.Forms.DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPGNScanDocuments>>();
+            navigation.NavigateTo(gcScanDocs, act => act.InitUC(row.PGNRequest));
         }
 
         private void UCPGNRequests_Load(object sender, System.EventArgs e)
@@ -107,12 +111,13 @@ namespace ICTProfilingV3.PGNForms
             if (filterText != null) gridPGNRequest.ActiveFilterCriteria = new BinaryOperator("PGNRequest.Id", filterText);
         }
 
-        private void btnEditRequest_Click(object sender, EventArgs e)
+        private async void btnEditRequest_Click(object sender, EventArgs e)
         {
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
             if (row == null) return;
 
-            var frm = new frmAddEditRequest(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditRequest>();
+            await frm.InitForm(row);
             frm.ShowDialog();
 
             LoadData();
@@ -123,7 +128,8 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNRequestViewModel)gridPGNRequest.GetFocusedRow();
             if (row == null) return;
 
-            var frm = new frmSelectNotee(row);
+            var frm = _serviceProvider.GetRequiredService<frmSelectNotee>();
+            frm.InitForm(row);
             frm.ShowDialog();
         }
     }

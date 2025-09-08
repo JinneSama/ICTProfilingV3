@@ -1,8 +1,4 @@
-﻿using DevExpress.XtraEditors;
-using EntityManager.Managers.User;
-using Models.Repository;
-using Models.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,34 +9,40 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models.Enums;
 using Models.Entities;
+using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Services.ApiUsers;
+using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.DataTransferModels;
 
 namespace ICTProfilingV3.ActionsForms
 {
-    public partial class frmRouteToUsers : DevExpress.XtraEditors.XtraForm
+    public partial class frmRouteToUsers : BaseForm
     {
-        private readonly IICTUserManager _userManager;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ActionTreeViewModel _actionTreeViewModel;
-        private readonly SaveType saveType;
-        private bool isSave = false;
-        public List<UsersViewModel> _routedUsers { get; set; }
+        private ActionTreeDTM _actionTreeViewModel;
+        private SaveType _saveType;
+        private bool _isSave = false;
+        public List<UsersDTM> _routedUsers { get; set; }
 
-        public frmRouteToUsers(ActionTreeViewModel actionTreeViewModel, SaveType saveType, List<UsersViewModel> routedUsers)
+        private readonly IICTUserManager _userManager;
+
+        public frmRouteToUsers(IICTUserManager userManager)
         {
+            _userManager = userManager;
             InitializeComponent();
-            _userManager = new ICTUserManager();
-            _unitOfWork = new UnitOfWork();
+        }
+        public void SetActionDetails(ActionTreeDTM actionTreeViewModel, SaveType saveType, List<UsersDTM> routedUsers)
+        {
             _routedUsers = routedUsers;
-            LoadUsers();
             _actionTreeViewModel = actionTreeViewModel;
-            this.saveType = saveType;
+            _saveType = saveType;
+            LoadUsers();
         }
 
         private void LoadUsers()
         {
-            if(_routedUsers == null) _routedUsers = new List<UsersViewModel>();
-            var users = _userManager.GetUsers();
-            var userViewModel = users.Select(x => new UsersViewModel
+            if(_routedUsers == null) _routedUsers = new List<UsersDTM>();
+            var users = _userManager.GetUsers().Where(x => x.IsDeleted == false);
+            var userViewModel = users.Select(x => new UsersDTM
             {
                 Id = x.Id,
                 Username = x.UserName,
@@ -52,24 +54,22 @@ namespace ICTProfilingV3.ActionsForms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            isSave = true;
+            _isSave = true;
             this.Close();
         }
 
         private void frmRouteToUsers_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isSave) InsertRoutedUsers();
-        }
-
-        private void InsertRoutedUsers()
-        {
-            List<UsersViewModel> users = new List<UsersViewModel>();
-            for (int i = 0; i < gridUsers.RowCount; i++)
+            if (_isSave)
             {
-                var row = (UsersViewModel)gridUsers.GetRow(i);
-                if (row.Mark) users.Add(row);
+                List<UsersDTM> users = new List<UsersDTM>();
+                for (int i = 0; i < gridUsers.RowCount; i++)
+                {
+                    var row = (UsersDTM)gridUsers.GetRow(i);
+                    if (row.Mark) users.Add(row);
+                }
+                _routedUsers = users;
             }
-            _routedUsers = users;
         }
     }
 }

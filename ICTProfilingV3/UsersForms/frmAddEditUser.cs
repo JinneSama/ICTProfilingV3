@@ -1,43 +1,48 @@
-﻿using DevExpress.XtraSpellChecker.Parser;
-using EntityManager.Managers.Role;
-using EntityManager.Managers.User;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ICTProfilingV3.UsersForms
 {
-    public partial class frmAddEditUser : DevExpress.XtraEditors.XtraForm
+    public partial class frmAddEditUser : BaseForm
     {
-        private readonly Users _users;
         private readonly IICTUserManager _userManager;
-        private IICTRoleManager roleManager;
+        private readonly IICTRoleManager _roleManager;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IControlMapper<Users> _userMapper;
+        private readonly IControlMapper<UserModel> _userModelMapper;
+
         private SaveType _saveType;
-        public frmAddEditUser(IICTUserManager userManager)
+        private Users _users;
+        public frmAddEditUser(IICTUserManager userManager, IICTRoleManager roleManager, IControlMapper<Users> userMapper, IServiceProvider serviceProvider,
+            IControlMapper<UserModel> userModelMapper)
         {
             InitializeComponent();
             _userManager = userManager;
-            roleManager = new ICTRoleManager();
+            _roleManager = roleManager;
+            _userMapper = userMapper;
+            _userModelMapper = userModelMapper;
+            _serviceProvider = serviceProvider;
+
             _saveType = SaveType.Insert;
             LoadDropdowns();
         }
-        public frmAddEditUser(Users users, IICTUserManager userManager)
+
+        public void InitForm(Users users)
         {
-            InitializeComponent();
             _users = users;
-            _userManager = userManager;
-            roleManager = new ICTRoleManager();
             _saveType = SaveType.Update;
-            LoadDropdowns();
             LoadUser();
         }
         private void LoadDropdowns()
         {
-            lueUserRole.Properties.DataSource = roleManager.GetRoles().Select(x => new
+            lueUserRole.Properties.DataSource = _roleManager.GetRoles().Select(x => new
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -46,48 +51,43 @@ namespace ICTProfilingV3.UsersForms
 
         private async void LoadUser()
         {
-            txtUsername.Text = _users.UserName;
-            txtFullname.Text = _users.FullName;
-            var role = await roleManager.FindById(_users.Roles.FirstOrDefault().RoleId);
-            lueUserRole.EditValue = role.Name;
-            txtPosition.Text = _users.Position;
+            _userMapper.MapControl(_users, this);
+            var role = await _roleManager.FindById(_users.Roles?.FirstOrDefault()?.RoleId);
+            lueUserRole.EditValue = role?.Name;
         }
 
-        private void btnSave_Click(object sender, System.EventArgs e)
+        private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            if (_saveType == SaveType.Insert) InsertUser();
-            else UpdateUser();
+            if (_saveType == SaveType.Insert) await InsertUser();
+            else await UpdateUser();
         }
 
-        private async void UpdateUser()
+        private async Task UpdateUser()
         {
-            var userModel = new UserModel
-            {
-                UserId = _users.Id,
-                Username = txtUsername.Text,
-                Fullname = txtFullname.Text,
-                Position = txtPosition.Text,
-                role = (string)lueUserRole.EditValue
-            };
+            var userModel = new UserModel();
+            userModel.UserId = _users.Id;
+            userModel.role = (string)lueUserRole.EditValue;
+
+            _userModelMapper.MapToEntity(userModel, this);
+
             await _userManager.UpdateUser(userModel);
             this.Close();
         }
 
-        private async void InsertUser()
+        private async Task InsertUser()
         {
-            var user = new Users
-            {
-                UserName = txtUsername.Text,
-                FullName = txtFullname.Text,
-                Position = txtPosition.Text,
-                Email = txtUsername.Text + "@gmail.com"
-            };
+            var user = new Users();
+            _userMapper.MapToEntity(user, this);
+            user.Email = txtUserName.Text + "@gmail.com";
 
             var res = await _userManager.CreateUser(user, txtPassword.Text);
             string id = res.userId;
-            await roleManager.AssignRoleToUser(id, (string)lueUserRole.EditValue);
-            if (res.result.Succeeded) this.Close();
-            else MessageBox.Show(string.Join(Environment.NewLine,res.result.Errors));
+            await _roleManager.AssignRoleToUser(id, (string)lueUserRole.EditValue);
+
+            if (res.result.Succeeded) 
+                this.Close();
+            else 
+                MessageBox.Show(string.Join(Environment.NewLine,res.result.Errors));
         }
 
         private void btnCancel_Click(object sender, System.EventArgs e)

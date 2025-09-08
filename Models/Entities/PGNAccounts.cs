@@ -1,5 +1,7 @@
 ﻿using Models.Enums;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Entities
@@ -12,13 +14,18 @@ namespace Models.Entities
         }
         public int Id { get; set; }
         public long? HRMISEmpId { get; set; }
+        [MaxLength(128)]
         public string Username { get; set; }
-        public PGNUserType UserType { get; set; }
-        public PGNStatus Status { get; set; }
+        public PGNUserType? UserType { get; set; }
+        public PGNStatus? Status { get; set; }
+        [MaxLength(128)]
+        public string IPAddress { get; set; }
         public int? SignInCount { get; set; }
-        public PGNTrafficSpeed TrafficSpeed { get; set; }
-        public PGNDesignations Designation { get; set; }
+        public PGNTrafficSpeed? TrafficSpeed { get; set; }
+        public PGNDesignations? Designation { get; set; }
+        [MaxLength(128)]
         public string Remarks { get; set; }
+        [MaxLength(128)]
         public string Password { get; set; }
         public int? PGNGroupOfficesId { get; set; }
         [ForeignKey("PGNGroupOfficesId")]
@@ -29,6 +36,7 @@ namespace Models.Entities
         public int? PGNRequestId { get; set; }
         [ForeignKey("PGNRequestId")]
         public PGNRequests PGNRequests { get; set; }
+        [JsonIgnore]
         public virtual ICollection<PGNMacAddresses> MacAddresses { get; set; }
     }
 }

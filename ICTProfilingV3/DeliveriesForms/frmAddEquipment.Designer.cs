@@ -42,7 +42,7 @@
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-            this.spinItemNo = new DevExpress.XtraEditors.SpinEdit();
+            this.seItemNo = new DevExpress.XtraEditors.SpinEdit();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddICTSpecs = new DevExpress.XtraEditors.SimpleButton();
@@ -56,17 +56,17 @@
             this.spinUnitCost = new DevExpress.XtraEditors.SpinEdit();
             this.slueModel = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slueBrand = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.slueEquipment = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.spinQty = new DevExpress.XtraEditors.SpinEdit();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.spinQty = new DevExpress.XtraEditors.SpinEdit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
@@ -117,9 +117,9 @@
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Location = new System.Drawing.Point(18, 99);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(22, 15);
+            this.labelControl6.Size = new System.Drawing.Size(28, 15);
             this.labelControl6.TabIndex = 88;
-            this.labelControl6.Text = "Unit";
+            this.labelControl6.Text = "UOM";
             // 
             // labelControl5
             // 
@@ -157,9 +157,9 @@
             this.labelControl1.Appearance.Options.UseFont = true;
             this.labelControl1.Location = new System.Drawing.Point(18, 149);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(60, 15);
+            this.labelControl1.Size = new System.Drawing.Size(87, 15);
             this.labelControl1.TabIndex = 84;
-            this.labelControl1.Text = "Description";
+            this.labelControl1.Text = "Item Description";
             // 
             // labelControl4
             // 
@@ -167,9 +167,9 @@
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.Location = new System.Drawing.Point(18, 124);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(58, 15);
+            this.labelControl4.Size = new System.Drawing.Size(86, 15);
             this.labelControl4.TabIndex = 83;
-            this.labelControl4.Text = "Equipment";
+            this.labelControl4.Text = "Equipment Type";
             // 
             // panel1
             // 
@@ -215,25 +215,25 @@
             this.labelControl10.TabIndex = 110;
             this.labelControl10.Text = "ItemNo";
             // 
-            // spinItemNo
+            // seItemNo
             // 
-            this.spinItemNo.EditValue = new decimal(new int[] {
+            this.seItemNo.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinItemNo.Location = new System.Drawing.Point(125, 48);
-            this.spinItemNo.Margin = new System.Windows.Forms.Padding(2);
-            this.spinItemNo.Name = "spinItemNo";
-            this.spinItemNo.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinItemNo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.seItemNo.Location = new System.Drawing.Point(125, 48);
+            this.seItemNo.Margin = new System.Windows.Forms.Padding(2);
+            this.seItemNo.Name = "seItemNo";
+            this.seItemNo.Properties.Appearance.Options.UseTextOptions = true;
+            this.seItemNo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.seItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinItemNo.Properties.MaskSettings.Set("mask", "d");
-            this.spinItemNo.Properties.MaskSettings.Set("hideInsignificantZeros", true);
-            this.spinItemNo.Properties.UseMaskAsDisplayFormat = true;
-            this.spinItemNo.Size = new System.Drawing.Size(138, 20);
-            this.spinItemNo.TabIndex = 111;
+            this.seItemNo.Properties.MaskSettings.Set("mask", "d");
+            this.seItemNo.Properties.MaskSettings.Set("hideInsignificantZeros", true);
+            this.seItemNo.Properties.UseMaskAsDisplayFormat = true;
+            this.seItemNo.Size = new System.Drawing.Size(138, 20);
+            this.seItemNo.TabIndex = 111;
             // 
             // btnCancel
             // 
@@ -279,7 +279,7 @@
             // 
             // txtSerialNo
             // 
-            this.txtSerialNo.Location = new System.Drawing.Point(125, 330);
+            this.txtSerialNo.Location = new System.Drawing.Point(125, 326);
             this.txtSerialNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtSerialNo.Name = "txtSerialNo";
             this.txtSerialNo.Size = new System.Drawing.Size(357, 20);
@@ -405,6 +405,14 @@
             this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Model";
+            this.gridColumn3.FieldName = "ModelName";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
             // slueBrand
             // 
             this.slueBrand.Location = new System.Drawing.Point(125, 217);
@@ -429,6 +437,14 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Brand";
+            this.gridColumn1.FieldName = "BrandName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
             // 
             // slueEquipment
             // 
@@ -456,6 +472,22 @@
             this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "Equipment";
+            this.gridColumn5.FieldName = "Equipment";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 0;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "Description";
+            this.gridColumn6.FieldName = "Description";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            // 
             // spinQty
             // 
             this.spinQty.EditValue = new decimal(new int[] {
@@ -477,44 +509,12 @@
             this.spinQty.TabIndex = 91;
             this.spinQty.EditValueChanged += new System.EventHandler(this.spinQty_EditValueChanged);
             // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Model";
-            this.gridColumn3.FieldName = "ModelName";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Brand";
-            this.gridColumn1.FieldName = "BrandName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "Equipment";
-            this.gridColumn5.FieldName = "Equipment";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 0;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "Description";
-            this.gridColumn6.FieldName = "Description";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
-            // 
             // frmAddEquipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 405);
-            this.Controls.Add(this.spinItemNo);
+            this.Controls.Add(this.seItemNo);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -541,11 +541,12 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelControl4);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEquipment.IconOptions.Icon")));
             this.Name = "frmAddEquipment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -599,7 +600,7 @@
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.SpinEdit spinItemNo;
+        private DevExpress.XtraEditors.SpinEdit seItemNo;
         private DevExpress.XtraEditors.LabelControl labelControl10;
     }
 }

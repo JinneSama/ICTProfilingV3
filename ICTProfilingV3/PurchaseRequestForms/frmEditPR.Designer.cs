@@ -30,9 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditPR));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
+            this.lblModifyType = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.lblPRNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -52,7 +53,6 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
-            this.lblPRNo = new DevExpress.XtraEditors.LabelControl();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -71,7 +71,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.panel1.Controls.Add(this.labelControl16);
+            this.panel1.Controls.Add(this.lblModifyType);
             this.panel1.Controls.Add(this.lblEpisNo);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -79,17 +79,17 @@
             this.panel1.Size = new System.Drawing.Size(550, 37);
             this.panel1.TabIndex = 108;
             // 
-            // labelControl16
+            // lblModifyType
             // 
-            this.labelControl16.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.labelControl16.Appearance.ForeColor = System.Drawing.Color.White;
-            this.labelControl16.Appearance.Options.UseFont = true;
-            this.labelControl16.Appearance.Options.UseForeColor = true;
-            this.labelControl16.Location = new System.Drawing.Point(20, 3);
-            this.labelControl16.Name = "labelControl16";
-            this.labelControl16.Size = new System.Drawing.Size(66, 30);
-            this.labelControl16.TabIndex = 2;
-            this.labelControl16.Text = "Edit PR";
+            this.lblModifyType.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblModifyType.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblModifyType.Appearance.Options.UseFont = true;
+            this.lblModifyType.Appearance.Options.UseForeColor = true;
+            this.lblModifyType.Location = new System.Drawing.Point(20, 3);
+            this.lblModifyType.Name = "lblModifyType";
+            this.lblModifyType.Size = new System.Drawing.Size(66, 30);
+            this.lblModifyType.TabIndex = 2;
+            this.lblModifyType.Text = "Edit PR";
             // 
             // lblEpisNo
             // 
@@ -111,6 +111,15 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(550, 36);
             this.panelControl1.TabIndex = 118;
+            // 
+            // lblPRNo
+            // 
+            this.lblPRNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblPRNo.Appearance.Options.UseFont = true;
+            this.lblPRNo.Location = new System.Drawing.Point(91, 3);
+            this.lblPRNo.Name = "lblPRNo";
+            this.lblPRNo.Size = new System.Drawing.Size(0, 30);
+            this.lblPRNo.TabIndex = 8;
             // 
             // labelControl1
             // 
@@ -340,15 +349,6 @@
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // lblPRNo
-            // 
-            this.lblPRNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblPRNo.Appearance.Options.UseFont = true;
-            this.lblPRNo.Location = new System.Drawing.Point(91, 3);
-            this.lblPRNo.Name = "lblPRNo";
-            this.lblPRNo.Size = new System.Drawing.Size(0, 30);
-            this.lblPRNo.TabIndex = 8;
-            // 
             // frmEditPR
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,9 +359,9 @@
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmEditPR.IconOptions.Icon")));
             this.Name = "frmEditPR";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.frmEditPR_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
@@ -385,7 +385,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private DevExpress.XtraEditors.LabelControl labelControl16;
+        private DevExpress.XtraEditors.LabelControl lblModifyType;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl1;

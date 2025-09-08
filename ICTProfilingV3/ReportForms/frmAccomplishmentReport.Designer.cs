@@ -179,7 +179,6 @@
             this.txtApprovedByPos.Name = "txtApprovedByPos";
             this.txtApprovedByPos.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtApprovedByPos.Properties.Appearance.Options.UseFont = true;
-            this.txtApprovedByPos.Properties.ReadOnly = true;
             this.txtApprovedByPos.Size = new System.Drawing.Size(360, 22);
             this.txtApprovedByPos.TabIndex = 137;
             // 
@@ -189,7 +188,6 @@
             this.txtReviewedByPos.Name = "txtReviewedByPos";
             this.txtReviewedByPos.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtReviewedByPos.Properties.Appearance.Options.UseFont = true;
-            this.txtReviewedByPos.Properties.ReadOnly = true;
             this.txtReviewedByPos.Size = new System.Drawing.Size(360, 22);
             this.txtReviewedByPos.TabIndex = 136;
             // 

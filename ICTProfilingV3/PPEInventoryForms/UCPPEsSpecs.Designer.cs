@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCPPEsSpecs));
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCPPEsSpecs));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -45,12 +45,11 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
-            this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
-            this.gcEquipmentSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridSpecsDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcEquipmentSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridEquipmentSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridEditBtn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnEditData = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -68,56 +67,14 @@
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnAddSpecs = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
+            this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEditData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnAddSpecs)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAddEquipment
-            // 
-            this.btnAddEquipment.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
-            this.btnAddEquipment.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnAddEquipment.Appearance.Options.UseBackColor = true;
-            this.btnAddEquipment.Appearance.Options.UseForeColor = true;
-            this.btnAddEquipment.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEquipment.ImageOptions.Image")));
-            this.btnAddEquipment.Location = new System.Drawing.Point(2, 2);
-            this.btnAddEquipment.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAddEquipment.Name = "btnAddEquipment";
-            this.btnAddEquipment.Size = new System.Drawing.Size(130, 28);
-            this.btnAddEquipment.TabIndex = 90;
-            this.btnAddEquipment.Text = "Add Equipment";
-            this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
-            // 
-            // gcEquipmentSpecs
-            // 
-            this.gcEquipmentSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Append.Visible = false;
-            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
-            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Edit.Visible = false;
-            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
-            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Remove.Visible = false;
-            gridLevelNode1.LevelTemplate = this.gridSpecsDetails;
-            gridLevelNode1.RelationName = "Specifications";
-            this.gcEquipmentSpecs.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 35);
-            this.gcEquipmentSpecs.MainView = this.gridEquipmentSpecs;
-            this.gcEquipmentSpecs.Name = "gcEquipmentSpecs";
-            this.gcEquipmentSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.btnInfo,
-            this.btnEditData,
-            this.btnAddSpecs});
-            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1184, 333);
-            this.gcEquipmentSpecs.TabIndex = 89;
-            this.gcEquipmentSpecs.UseEmbeddedNavigator = true;
-            this.gcEquipmentSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridSpecsDetails,
-            this.gridEquipmentSpecs});
             // 
             // gridSpecsDetails
             // 
@@ -153,6 +110,34 @@
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 2;
             this.gridColumn12.Width = 574;
+            // 
+            // gcEquipmentSpecs
+            // 
+            this.gcEquipmentSpecs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Append.Visible = false;
+            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.CancelEdit.Visible = false;
+            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Edit.Visible = false;
+            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.EndEdit.Visible = false;
+            this.gcEquipmentSpecs.EmbeddedNavigator.Buttons.Remove.Visible = false;
+            gridLevelNode1.LevelTemplate = this.gridSpecsDetails;
+            gridLevelNode1.RelationName = "Specifications";
+            this.gcEquipmentSpecs.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 23);
+            this.gcEquipmentSpecs.MainView = this.gridEquipmentSpecs;
+            this.gcEquipmentSpecs.Name = "gcEquipmentSpecs";
+            this.gcEquipmentSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.btnInfo,
+            this.btnEditData,
+            this.btnAddSpecs});
+            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1184, 345);
+            this.gcEquipmentSpecs.TabIndex = 89;
+            this.gcEquipmentSpecs.UseEmbeddedNavigator = true;
+            this.gcEquipmentSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridEquipmentSpecs,
+            this.gridSpecsDetails});
             // 
             // gridEquipmentSpecs
             // 
@@ -303,6 +288,8 @@
             // gridColumn20
             // 
             this.gridColumn20.Caption = "Unit Cost";
+            this.gridColumn20.DisplayFormat.FormatString = "n";
+            this.gridColumn20.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn20.FieldName = "UnitCost";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.OptionsColumn.AllowEdit = false;
@@ -314,6 +301,8 @@
             // gridColumn21
             // 
             this.gridColumn21.Caption = "Total Cost";
+            this.gridColumn21.DisplayFormat.FormatString = "n";
+            this.gridColumn21.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.gridColumn21.FieldName = "TotalCost";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.OptionsColumn.AllowEdit = false;
@@ -342,6 +331,21 @@
             this.btnAddSpecs.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.btnAddSpecs.Click += new System.EventHandler(this.btnAddSpecs_Click);
             // 
+            // btnAddEquipment
+            // 
+            this.btnAddEquipment.Appearance.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnAddEquipment.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnAddEquipment.Appearance.Options.UseBackColor = true;
+            this.btnAddEquipment.Appearance.Options.UseForeColor = true;
+            this.btnAddEquipment.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEquipment.ImageOptions.Image")));
+            this.btnAddEquipment.Location = new System.Drawing.Point(1, 1);
+            this.btnAddEquipment.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAddEquipment.Name = "btnAddEquipment";
+            this.btnAddEquipment.Size = new System.Drawing.Size(130, 20);
+            this.btnAddEquipment.TabIndex = 90;
+            this.btnAddEquipment.Text = "Add Equipment";
+            this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);
+            // 
             // UCPPEsSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,8 +354,8 @@
             this.Controls.Add(this.gcEquipmentSpecs);
             this.Name = "UCPPEsSpecs";
             this.Size = new System.Drawing.Size(1184, 368);
-            ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridSpecsDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcEquipmentSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEquipmentSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEditData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnInfo)).EndInit();
