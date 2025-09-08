@@ -13,6 +13,7 @@ namespace Models.Enums
         [Description("For Release")]
         ForRelease = 3,
         [Description("Completed")]
-        Completed = 4
+        Completed = 4,
+        Deleted = 5
     }
 }

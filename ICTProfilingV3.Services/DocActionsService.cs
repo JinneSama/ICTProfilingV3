@@ -1,6 +1,8 @@
 ﻿using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
 using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Base;
 using Models.Entities;
 using Models.Enums;
 using System;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.Services
 {
-    public class DocActionsService : IDocActionsService
+    public class DocActionsService : BaseDataService<Actions, int>, IDocActionsService
     {
         private readonly IRepository<int, Actions> _actionsRepo;
         private readonly IRepository<int, ActionsDropdowns> _actionTreeRepo;
@@ -21,9 +23,9 @@ namespace ICTProfilingV3.Services
         private readonly IEncryptFile _encryptFile;
         private readonly UserStore _userStore;
 
-        public DocActionsService(IRepository<int, Actions> actionsRepo, IRepository<int, ActionTaken> actionTakenRepo,
-            IRepository<int, ActionsDropdowns> actionTreeRepo, IRepository<string, Users> usersRepo, 
-            UserStore userStore, IRepository<int, ActionDocuments> actionDocumentsRepo, IEncryptFile encryptFile)
+        public DocActionsService(IRepository<int, Actions> baseRepo, IRepository<int, Actions> actionsRepo, IRepository<int, ActionTaken> actionTakenRepo,
+            IRepository<int, ActionsDropdowns> actionTreeRepo, IRepository<string, Users> usersRepo,
+            UserStore userStore, IRepository<int, ActionDocuments> actionDocumentsRepo, IEncryptFile encryptFile, IICTUserManager userManager) : base(baseRepo)
         {
             _actionsRepo = actionsRepo;
             _usersRepo = usersRepo;
@@ -166,7 +168,7 @@ namespace ICTProfilingV3.Services
 
         public IEnumerable<ActionDocuments> GetActionDocuments(int? actionId)
         {
-            return _actionDocumentsRepo.Fetch(x => x.ActionId == actionId).OrderBy(x => x.DocOrder).ToList();
+            return _actionDocumentsRepo.Fetch(x => x.ActionId == actionId).ToList().OrderBy(x => x.DocOrder).ToList();
         }
 
         public void DeleteDocument(int documentId)
@@ -174,7 +176,7 @@ namespace ICTProfilingV3.Services
             _actionDocumentsRepo.Delete(documentId);
         }
 
-        public void ReorderDocument(int? actionId)
+        public async Task ReorderDocument(int? actionId)
         {
             var docs = _actionDocumentsRepo.Fetch(x => x.ActionId == actionId);
             int order = 1;
@@ -183,7 +185,7 @@ namespace ICTProfilingV3.Services
                 doc.DocOrder = order;
                 order++;
             }
-            _actionDocumentsRepo.SaveChangesAsync();
+            await _actionDocumentsRepo.SaveChangesAsync();
         }
 
         public async Task<string> AddActionDocument(int? actionId)
@@ -297,6 +299,22 @@ namespace ICTProfilingV3.Services
             action.WithDiscrepancy = hasDiscrepancy;
             action.DiscrepancyRemarks = remarks;
             await _actionsRepo.SaveChangesAsync();
+        }
+
+        public IEnumerable<ActionReport> GetActionReport(string staffId, DateTime dateFrom, DateTime dateTo)
+        {
+            var actions = _actionsRepo.GetAll().Where(x => x.CreatedById == staffId &&
+                (x.ActionDate >= dateFrom && x.ActionDate <= dateTo) && x.SubActivityId != null)
+                .GroupBy(g => g.SubActivityId)
+                .Select(s => new ActionReport
+                {
+                    MainActivity = s.FirstOrDefault().MainActDropdowns.Value,
+                    SubActivity = s.FirstOrDefault().SubActivityDropdowns.Value,
+                    Count = s.Count(),
+                    SubActivityId = (int)s.Key
+                }).ToList();
+
+            return actions;
         }
     }
 }

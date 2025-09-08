@@ -8,6 +8,7 @@ namespace ICTProfilingV3.Interfaces
 {
     public interface IICTUserManager
     {
+        Task<Users> FindUserByUsername(string username);
         Task<Users> FindUserAsync(string userId);
         Task<(IdentityResult result, string userId)> CreateUser(Users user , string password);
         Task UpdateUser(UserModel users);

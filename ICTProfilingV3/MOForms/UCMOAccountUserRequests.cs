@@ -8,30 +8,31 @@ using ICTProfilingV3.Services.Employees;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Models;
-using Models.Repository;
 using System;
+using System.Data.Entity;
 using System.Linq;
 
 namespace ICTProfilingV3.MOForms
 {
     public partial class UCMOAccountUserRequests : DevExpress.XtraEditors.XtraUserControl
     {
+        private readonly IMOService _moService;
         private readonly IServiceProvider _serviceProvider;
         public string filterText { get; set; }
-        public UCMOAccountUserRequests(IServiceProvider serviceProvider)
+        public UCMOAccountUserRequests(IServiceProvider serviceProvider, IMOService moService)
         {
             _serviceProvider = serviceProvider;
+            _moService = moService;
             InitializeComponent();
             LoadData();
         }
 
         private void LoadData()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var users = unitOfWork.MOAccountUserRepo.GetAll(x => x.MOAccount,
-                x => x.MOAccount.Office,
-                x => x.PPE);
+            var users = _moService.MOAccountUserBaseService.GetAll()
+                .Include(x => x.MOAccount)
+                .Include(x => x.MOAccount.Office)
+                .Include(x => x.PPE);
             gcMOAccountUsers.DataSource = users.ToList();
         }
 
@@ -67,11 +68,8 @@ namespace ICTProfilingV3.MOForms
         private void LoadActions()
         {
             var row = (MOAccountUsers)gridMOAccountUsers.GetFocusedRow();
-            tabAction.Controls.Clear();
-            var uc = _serviceProvider.GetRequiredService<UCActions>();
-            uc.setActions(new ActionType { Id = row.Id, RequestType = RequestType.M365 });
-            uc.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabAction.Controls.Add(uc);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(tabAction, act => act.setActions(new ActionType { Id = row.Id, RequestType = RequestType.M365 }));
         }
         private void LoadEvaluationSheet()
         {

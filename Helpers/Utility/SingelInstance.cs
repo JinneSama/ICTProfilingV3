@@ -1,5 +1,4 @@
 ﻿using Helpers.Interfaces;
-using System;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -7,7 +6,7 @@ namespace Helpers.Utility
 {
     public class SingelInstance : ISingleInstance
     {
-        private static Mutex mutex;
+        private static Mutex _mutex;
         private readonly string _appId;
         public SingelInstance(string appId)
         {
@@ -15,14 +14,14 @@ namespace Helpers.Utility
         }
         public void ReleaseInstance()
         {
-            mutex.ReleaseMutex();
-            mutex.Dispose();
+            _mutex.ReleaseMutex();
+            _mutex.Dispose();
         }
 
         public bool IsSingleInstance()
         {
             bool createdNew;
-            mutex = new Mutex(true, _appId, out createdNew);
+            _mutex = new Mutex(true, _appId, out createdNew);
             return createdNew;
         }
         public void ShowDuplicateInstanceWarning()

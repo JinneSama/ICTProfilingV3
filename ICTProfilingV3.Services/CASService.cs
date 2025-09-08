@@ -1,5 +1,6 @@
 ﻿using ICTProfilingV3.DataTransferModels;
 using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.Services.Base;
 using ICTProfilingV3.Services.Employees;
 using Models.Entities;
 using Models.Enums;
@@ -10,15 +11,27 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.Services
 {
-    public class CASService : ICASService
+    public class CASService : BaseDataService<CustomerActionSheet, int>, ICASService
     {
-        private readonly IRepository<int, CustomerActionSheet> _casRepo;
-
-        public CASService(IRepository<int, CustomerActionSheet> casRepo)
+        private readonly IEvaluationService _evaluationService;
+        private readonly IDocActionsService _actionService;
+        private readonly IRepository<int, RecordsRequestStatus> _recordRequestService;
+        public CASService(IRepository<int, CustomerActionSheet> baseRepo, IDocActionsService actionService, 
+            IEvaluationService evaluationService, IRepository<int, RecordsRequestStatus> recordRequestService) : base(baseRepo)
         {
-            _casRepo = casRepo;
+            _actionService = actionService;
+            _evaluationService = evaluationService;
+            _recordRequestService = recordRequestService;
         }
 
+        public override async Task DeleteAsync(int id)
+        {
+            await _actionService.DeleteRangeAsync(x => x.CustomerActionSheetId == id);
+            await _evaluationService.DeleteRangeAsync(x => x.CustomerActionSheetId == id);
+            _recordRequestService.DeleteRange(x => x.CASId == id);
+            await _recordRequestService.SaveChangesAsync();
+            await base.DeleteAsync(id);
+        }
         public async Task AddCAS(CASDetailDTM cas)
         {
             var newCAS = new CustomerActionSheet
@@ -33,12 +46,12 @@ namespace ICTProfilingV3.Services
                 ActionTaken = cas.ActionTaken,
                 AssistedById = cas.AssistedBy
             };
-            await _casRepo.AddAsync(newCAS);
+            await base.AddAsync(newCAS);
         }
 
         public async Task<CASDetailDTM> GetCASDetail(int casId)
         {
-            var cas = await _casRepo.GetById(casId);
+            var cas = await base.GetByIdAsync(casId);
             var data = new CASDetailDTM()
             {
                 DateCreated = cas.DateCreated,
@@ -57,7 +70,7 @@ namespace ICTProfilingV3.Services
 
         public IEnumerable<CASDTM> GetCASDTM()
         {
-            var res = _casRepo.GetAll()
+            var res = base.GetAll()
                 .Include(x => x.AssistedBy)
                 .OrderByDescending(x => x.DateCreated).ToList();
 
@@ -76,7 +89,7 @@ namespace ICTProfilingV3.Services
 
         public async Task UpdateCAS(CASDetailDTM cas, int casId)
         {
-            var casToUpdate = await _casRepo.GetById(casId);
+            var casToUpdate = await base.GetByIdAsync(casId);
             casToUpdate.DateCreated = cas.DateCreated;
             casToUpdate.ClientName = cas.ClientName;
             //casToUpdate.ClientId = cas.Employee;
@@ -87,7 +100,7 @@ namespace ICTProfilingV3.Services
             casToUpdate.ActionTaken = cas.ActionTaken;
             casToUpdate.AssistedById = cas.AssistedBy;
 
-            await _casRepo.SaveChangesAsync();
+            await base.SaveChangesAsync();
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿using DevExpress.Data.ODataLinq.Helpers;
-using DevExpress.Pdf.Native.BouncyCastle.Ocsp;
 using DevExpress.XtraCharts;
-using DevExpress.XtraRichEdit.API.Native;
 using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.Services.Employees;
 using Models.Entities;
 using Models.Models;
-using Models.Repository;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -15,20 +14,21 @@ namespace ICTProfilingV3.DashboardForms
 {
     public partial class UCRepairDashboard : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork unitOfWork;
-        public UCRepairDashboard()
+        private readonly IRepairService _repairService;
+        public UCRepairDashboard(IRepairService repairService)
         {
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            _repairService = repairService;
             LoadData(null);
         }
 
         private void LoadData(Expression<Func<Repairs,bool>> expression)
         {
-            var repairData = unitOfWork.RepairsRepo.GetAll(x => x.PPEs,
-                x => x.PPEs.PPEsSpecs,
-                x => x.PPEs.PPEsSpecs.Select(s => s.Model),
-                x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand));
+            var repairData = _repairService.GetAll()
+                .Include(x => x.PPEs)
+                .Include(x => x.PPEs.PPEsSpecs)
+                .Include(x => x.PPEs.PPEsSpecs.Select(s => s.Model))
+                .Include(x => x.PPEs.PPEsSpecs.Select(s => s.Model.Brand));
 
             if(expression != null) repairData = repairData.Where(expression);
 

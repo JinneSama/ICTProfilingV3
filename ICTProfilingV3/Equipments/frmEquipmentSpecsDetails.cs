@@ -1,26 +1,26 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.Equipments
 {
     public partial class frmEquipmentSpecsDetails : BaseForm
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IEquipmentService _equipmentService;
         private EquipmentSpecs _specs;
-        public frmEquipmentSpecsDetails()
+        public frmEquipmentSpecsDetails(IEquipmentService equipmentService)
         {
+            _equipmentService = equipmentService;
             InitializeComponent();
         }
 
-        public frmEquipmentSpecsDetails(EquipmentSpecs specs , IUnitOfWork uow)
+        public void InitForm(EquipmentSpecs specs)
         {
-            InitializeComponent();
-            unitOfWork = uow;
             _specs = specs;
             lblEquipment.Text = specs.Equipment.EquipmentName;
             lblDescription.Text = specs.Description;
@@ -29,29 +29,28 @@ namespace ICTProfilingV3.Equipments
 
         private void LoadSpecs()
         {
-            var data = unitOfWork.EquipmentSpecsDetailsRepo.FindAllAsync(x => x.EquipmentSpecsId == _specs.Id).OrderBy(o => o.ItemNo); 
+            var data = _equipmentService.EquipmentSpecsDetailsBaseService.GetAll().Where(x => x.EquipmentSpecsId == _specs.Id).OrderBy(o => o.ItemNo); 
             gcEquipmentDetails.DataSource = new BindingList<EquipmentSpecsDetails>(data.ToList());  
         }
 
         private async void gridEquipmentDetails_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (EquipmentSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.EquipmentSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertSpecs(row);
-            else UpdateSpecs(row);
+            var res = await _equipmentService.EquipmentSpecsDetailsBaseService.GetByIdAsync(row.Id);
+            if (res == null) await InsertSpecs(row);
+            else await UpdateSpecs(row);
         }
 
-        private async void UpdateSpecs(EquipmentSpecsDetails row)
+        private async Task UpdateSpecs(EquipmentSpecsDetails row)
         {
-            var specs = await unitOfWork.EquipmentSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);    
+            var specs = await _equipmentService.EquipmentSpecsDetailsBaseService.GetByIdAsync(row.Id);    
             specs.ItemNo = row.ItemNo;
             specs.DetailSpecs = row.DetailSpecs;
-            specs.DetailDescription = row.DetailDescription;    
-            unitOfWork.EquipmentSpecsDetailsRepo.Update(specs);
-            unitOfWork.Save();
+            specs.DetailDescription = row.DetailDescription;
+            await _equipmentService.EquipmentSpecsDetailsBaseService.SaveChangesAsync();
         }
 
-        private void InsertSpecs(EquipmentSpecsDetails row)
+        private async Task InsertSpecs(EquipmentSpecsDetails row)
         {
             var equipmentDetail = new EquipmentSpecsDetails
             {
@@ -60,8 +59,7 @@ namespace ICTProfilingV3.Equipments
                 DetailDescription = row.DetailDescription,
                 EquipmentSpecsId = _specs.Id
             };
-            unitOfWork.EquipmentSpecsDetailsRepo.Insert(equipmentDetail);
-            unitOfWork.Save();
+            await _equipmentService.EquipmentSpecsDetailsBaseService.AddAsync(equipmentDetail);
             LoadSpecs();
         }
 
@@ -71,10 +69,9 @@ namespace ICTProfilingV3.Equipments
             if (msgRes == DialogResult.Cancel) return;
 
             var equipment = (EquipmentSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.EquipmentSpecsDetailsRepo.FindAsync(x => x.Id == equipment.Id);
+            var res = await _equipmentService.EquipmentSpecsDetailsBaseService.GetByIdAsync(equipment.Id);
             if (res == null) return;
-            unitOfWork.EquipmentSpecsDetailsRepo.Delete(equipment);
-            unitOfWork.Save();
+            await _equipmentService.EquipmentSpecsDetailsBaseService.DeleteAsync(equipment.Id);
 
             LoadSpecs();
         }

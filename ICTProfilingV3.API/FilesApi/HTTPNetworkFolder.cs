@@ -1,7 +1,10 @@
 ﻿using ICTProfilingV3.API.ApiModels;
+using ICTProfilingV3.Core.Enums;
+using ICTProfilingV3.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,10 +12,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.API.FilesApi
 {
-    public class HTTPNetworkFolder
+    public class HTTPNetworkFolder : IHTTPNetworkFolder
     {
         private static readonly HttpClient httpClient = new HttpClient
         {
@@ -35,47 +39,106 @@ namespace ICTProfilingV3.API.FilesApi
             return files.ToList();
         }
 
-        public async Task UploadFile(Image img, string fileName)
+        public async Task UploadFile(object fileData, string fileName, FileType? fileType = null)
         {
             string jwtToken = await CheckAuthentication();
+
             using (var content = new MultipartFormDataContent())
             {
-                using (var memoryStream = new MemoryStream())
+                StreamContent fileContent;
+
+                if (fileData is Image img)
                 {
+                    var memoryStream = new MemoryStream();
                     img.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Jpeg);
                     memoryStream.Seek(0, SeekOrigin.Begin);
 
-                    var imageContent = new StreamContent(memoryStream);
-                    imageContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
-                    content.Add(imageContent, "file", fileName);
-
-                    httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
-
-                    var response = await httpClient.PostAsync("upload/", content); 
-                    response.EnsureSuccessStatusCode();
+                    fileContent = new StreamContent(memoryStream);
+                    fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/jpeg");
                 }
+                else if (fileData is byte[] bytes)
+                {
+                    var memoryStream = new MemoryStream(bytes);
+                    fileContent = new StreamContent(memoryStream);
+
+                    fileContent.Headers.ContentType =
+                        new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                }
+                else if (fileData is Stream stream)
+                {
+                    fileContent = new StreamContent(stream);
+                    fileContent.Headers.ContentType =
+                        new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                }
+                else
+                {
+                    throw new ArgumentException("Unsupported file type. Use Image, byte[], or Stream.");
+                }
+
+                content.Add(fileContent, "file", fileName);
+
+                httpClient.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+
+                var url = (fileType == null) ? "upload/" : "uploadcomparison/";
+                var response = await httpClient.PostAsync(url, content);
+                response.EnsureSuccessStatusCode();
             }
         }
 
-        public async Task<Image> DownloadFile(string fileName)
+
+        public async Task<Image> DownloadFile(string fileName, FileType? fileType = null)
         {
             string jwtToken = await CheckAuthentication();
             if (string.IsNullOrEmpty(jwtToken)) return null;
-            var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + "download/" + fileName);
-            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
-            var response = await httpClient.SendAsync(request);
 
-            Image img = null;
-            if (response.IsSuccessStatusCode)
+            string filePathURL = string.Empty;
+            if (fileType == null)
+                filePathURL = "download/";
+            else
+                filePathURL = "downloadcomparison/";
+
+            var request = new HttpRequestMessage(HttpMethod.Get, httpClient.BaseAddress + filePathURL + fileName);
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jwtToken);
+
+            var response = await httpClient.SendAsync(request);
+            if (!response.IsSuccessStatusCode) return null;
+
+            if (fileType == FileType.Excel)
+            {
+                byte[] fileBytes = await response.Content.ReadAsByteArrayAsync();
+
+                using (var saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+                    saveFileDialog.FileName = fileName;
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllBytes(saveFileDialog.FileName, fileBytes);
+                        var result = MessageBox.Show(
+                            "File downloaded successfully. Do you want to open it?",
+                            "Open File",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question
+                        );
+
+                        if (result == DialogResult.Yes)
+                        {
+                            Process.Start(new ProcessStartInfo(saveFileDialog.FileName) { UseShellExecute = true });
+                        }
+                    }
+                }
+
+                return null;
+            }
+            else
             {
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 {
-                    img = Image.FromStream(stream);
+                    return Image.FromStream(stream);
                 }
             }
-            else return null;
-
-            return img;
         }
 
         public async Task DeleteFile(string fileName)

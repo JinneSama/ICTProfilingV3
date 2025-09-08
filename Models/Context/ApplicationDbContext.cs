@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using Models.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Models.Configurations;
 
 namespace EntityManager.Context
 {
@@ -17,6 +18,7 @@ namespace EntityManager.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new EquipmentConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 
@@ -60,5 +62,7 @@ namespace EntityManager.Context
         public DbSet<EvaluationSheet> EvaluationSheet { get; set; }
         public DbSet<EvaluationSheetDocument> EvaluationSheetDocument { get; set; }
         public DbSet<TechSpecsBasisDetails> TechSpecsBasisDetails { get; set; }
+        public DbSet<EquipmentCategory> EquipmentCategories { get; set; }
+        public DbSet<EquipmentBrand> EquipmentBrands { get; set; }
     }
 }

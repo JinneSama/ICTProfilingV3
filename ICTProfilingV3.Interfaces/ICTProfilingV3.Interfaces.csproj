@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -59,23 +60,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBaseDataService.cs" />
     <Compile Include="ICASService.cs" />
+    <Compile Include="IChangeLogService.cs" />
+    <Compile Include="IComparisonReportService.cs" />
+    <Compile Include="IComparisonService.cs" />
     <Compile Include="IControlMapper.cs" />
     <Compile Include="IControlNavigator.cs" />
+    <Compile Include="ICryptography.cs" />
+    <Compile Include="IDeliveriesService.cs" />
     <Compile Include="IDocActionsService.cs" />
+    <Compile Include="IDocumentService.cs" />
     <Compile Include="IEncryptFile.cs" />
     <Compile Include="IEquipmentService.cs" />
+    <Compile Include="IEvaluationService.cs" />
+    <Compile Include="IHTTPNetworkFolder.cs" />
     <Compile Include="IICTRoleManager.cs" />
     <Compile Include="IICTUserManager.cs" />
+    <Compile Include="ILookUpService.cs" />
+    <Compile Include="IMachineCredentials.cs" />
+    <Compile Include="IMOService.cs" />
+    <Compile Include="IParseInventory.cs" />
+    <Compile Include="IPGNService.cs" />
+    <Compile Include="IPPEInventoryService.cs" />
     <Compile Include="IProcessService.cs" />
+    <Compile Include="IPurchaseReqService.cs" />
     <Compile Include="IRepairService.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IScanDocument.cs" />
     <Compile Include="IStaffService.cs" />
+    <Compile Include="ITechSpecsService.cs" />
     <Compile Include="ITicketRequestService.cs" />
     <Compile Include="IUCManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ICTProfilingV3.Core\ICTProfilingV3.Core.csproj">
+      <Project>{CF3B483A-2AB1-4EA9-AFCE-E29FDD09648B}</Project>
+      <Name>ICTProfilingV3.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ICTProfilingV3.DataTransferModels\ICTProfilingV3.DataTransferModels.csproj">
       <Project>{648F1A78-C08E-4F19-B0A4-2A66F06B2DED}</Project>
       <Name>ICTProfilingV3.DataTransferModels</Name>

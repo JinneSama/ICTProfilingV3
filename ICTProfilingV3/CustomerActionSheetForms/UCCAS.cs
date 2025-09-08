@@ -1,5 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels;
 using ICTProfilingV3.DataTransferModels.Models;
 using ICTProfilingV3.DataTransferModels.ViewModels;
@@ -11,6 +12,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ICTProfilingV3.CustomerActionSheetForms
 {
@@ -19,13 +21,19 @@ namespace ICTProfilingV3.CustomerActionSheetForms
         private readonly IServiceProvider _serviceProvider;
         private readonly IControlMapper<CASDetailDTM> _controlMapper;
         private readonly ICASService _casService;
+        private readonly IICTRoleManager _roleManager;
+        private readonly UserStore _userStore;
+
         public string filterText { get; set; }
-        public UCCAS(IServiceProvider serviceProvider, IControlMapper<CASDetailDTM> controlMapper, ICASService casService)
+        public UCCAS(IServiceProvider serviceProvider, IControlMapper<CASDetailDTM> controlMapper, ICASService casService,
+            IICTRoleManager roleManager, UserStore userStore)
         {
-            InitializeComponent();
             _casService = casService;
             _controlMapper = controlMapper;
             _serviceProvider = serviceProvider;
+            _roleManager = roleManager;
+            _userStore = userStore;
+            InitializeComponent();
             LoadCAS();
         }
 
@@ -98,6 +106,22 @@ namespace ICTProfilingV3.CustomerActionSheetForms
             await LoadDetails();
             LoadActions();
             LoadEvaluationSheet();
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            var res = await _roleManager.HasDesignation(Designation.CASAdmin, _userStore.UserRole);
+            if (!res)
+            {
+                MessageBox.Show("You don't have permission to delete CAS.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Delete this CAS?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
+
+            var cas = (CASDTM)gridCAS.GetFocusedRow();
+            await _casService.DeleteAsync(cas.Id);
+            LoadCAS();
         }
     }
 }

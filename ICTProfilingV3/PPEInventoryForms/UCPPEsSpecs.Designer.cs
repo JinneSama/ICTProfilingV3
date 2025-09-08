@@ -125,14 +125,14 @@
             gridLevelNode1.RelationName = "Specifications";
             this.gcEquipmentSpecs.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
             gridLevelNode1});
-            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 35);
+            this.gcEquipmentSpecs.Location = new System.Drawing.Point(0, 23);
             this.gcEquipmentSpecs.MainView = this.gridEquipmentSpecs;
             this.gcEquipmentSpecs.Name = "gcEquipmentSpecs";
             this.gcEquipmentSpecs.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnInfo,
             this.btnEditData,
             this.btnAddSpecs});
-            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1184, 333);
+            this.gcEquipmentSpecs.Size = new System.Drawing.Size(1184, 345);
             this.gcEquipmentSpecs.TabIndex = 89;
             this.gcEquipmentSpecs.UseEmbeddedNavigator = true;
             this.gcEquipmentSpecs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -338,10 +338,10 @@
             this.btnAddEquipment.Appearance.Options.UseBackColor = true;
             this.btnAddEquipment.Appearance.Options.UseForeColor = true;
             this.btnAddEquipment.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEquipment.ImageOptions.Image")));
-            this.btnAddEquipment.Location = new System.Drawing.Point(2, 2);
+            this.btnAddEquipment.Location = new System.Drawing.Point(1, 1);
             this.btnAddEquipment.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddEquipment.Name = "btnAddEquipment";
-            this.btnAddEquipment.Size = new System.Drawing.Size(130, 28);
+            this.btnAddEquipment.Size = new System.Drawing.Size(130, 20);
             this.btnAddEquipment.TabIndex = 90;
             this.btnAddEquipment.Text = "Add Equipment";
             this.btnAddEquipment.Click += new System.EventHandler(this.btnAddEquipment_Click);

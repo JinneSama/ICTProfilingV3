@@ -33,7 +33,7 @@
             this.btnOFMIS = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.txtPONo = new DevExpress.XtraEditors.TextEdit();
-            this.slueDeliveredBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueDeliveredById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,14 +42,14 @@
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.txtDateRequested = new DevExpress.XtraEditors.DateEdit();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.txtRequestedBy = new DevExpress.XtraEditors.TextEdit();
-            this.slueEmployee = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueRequestedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,11 +61,11 @@
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
-            this.txtDateofDelivery = new DevExpress.XtraEditors.DateEdit();
+            this.txtDeliveredDate = new DevExpress.XtraEditors.DateEdit();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
             this.btnAddSupplier = new DevExpress.XtraEditors.SimpleButton();
-            this.txtDeliveryReceipt = new DevExpress.XtraEditors.TextEdit();
-            this.slueSupplierName = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.txtReceiptNo = new DevExpress.XtraEditors.TextEdit();
+            this.slueSupplierId = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSupplier = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -77,22 +77,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPONo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueDeliveredBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueDeliveredById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedBy.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueRequestedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateofDelivery.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateofDelivery.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveryReceipt.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueSupplierName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveredDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveredDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReceiptNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueSupplierId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelEquipmentSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
@@ -106,17 +106,17 @@
             this.groupControl1.Controls.Add(this.btnOFMIS);
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Controls.Add(this.txtPONo);
-            this.groupControl1.Controls.Add(this.slueDeliveredBy);
+            this.groupControl1.Controls.Add(this.slueDeliveredById);
             this.groupControl1.Controls.Add(this.labelControl11);
             this.groupControl1.Controls.Add(this.rdbtnGender);
-            this.groupControl1.Controls.Add(this.txtDate);
+            this.groupControl1.Controls.Add(this.txtDateRequested);
             this.groupControl1.Controls.Add(this.txtContactNo);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.labelControl6);
             this.groupControl1.Controls.Add(this.txtRequestedBy);
-            this.groupControl1.Controls.Add(this.slueEmployee);
+            this.groupControl1.Controls.Add(this.slueRequestedById);
             this.groupControl1.Location = new System.Drawing.Point(12, 80);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.Size = new System.Drawing.Size(488, 169);
@@ -157,21 +157,21 @@
             this.txtPONo.Size = new System.Drawing.Size(286, 20);
             this.txtPONo.TabIndex = 69;
             // 
-            // slueDeliveredBy
+            // slueDeliveredById
             // 
-            this.slueDeliveredBy.Location = new System.Drawing.Point(120, 136);
-            this.slueDeliveredBy.Name = "slueDeliveredBy";
-            this.slueDeliveredBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueDeliveredBy.Properties.Appearance.Options.UseFont = true;
-            this.slueDeliveredBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueDeliveredById.Location = new System.Drawing.Point(120, 136);
+            this.slueDeliveredById.Name = "slueDeliveredById";
+            this.slueDeliveredById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueDeliveredById.Properties.Appearance.Options.UseFont = true;
+            this.slueDeliveredById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueDeliveredBy.Properties.DisplayMember = "Employee";
-            this.slueDeliveredBy.Properties.NullText = "";
-            this.slueDeliveredBy.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
-            this.slueDeliveredBy.Properties.PopupView = this.gridView2;
-            this.slueDeliveredBy.Properties.ValueMember = "Id";
-            this.slueDeliveredBy.Size = new System.Drawing.Size(286, 22);
-            this.slueDeliveredBy.TabIndex = 68;
+            this.slueDeliveredById.Properties.DisplayMember = "Employee";
+            this.slueDeliveredById.Properties.NullText = "";
+            this.slueDeliveredById.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
+            this.slueDeliveredById.Properties.PopupView = this.gridView2;
+            this.slueDeliveredById.Properties.ValueMember = "Id";
+            this.slueDeliveredById.Size = new System.Drawing.Size(286, 22);
+            this.slueDeliveredById.TabIndex = 68;
             // 
             // gridView2
             // 
@@ -258,20 +258,20 @@
             this.rdbtnGender.Size = new System.Drawing.Size(153, 18);
             this.rdbtnGender.TabIndex = 62;
             // 
-            // txtDate
+            // txtDateRequested
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(120, 24);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateRequested.EditValue = null;
+            this.txtDateRequested.Location = new System.Drawing.Point(120, 24);
+            this.txtDateRequested.Name = "txtDateRequested";
+            this.txtDateRequested.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDateRequested.Properties.Appearance.Options.UseFont = true;
+            this.txtDateRequested.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDateRequested.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.UseReadOnlyAppearance = false;
-            this.txtDate.Size = new System.Drawing.Size(286, 22);
-            this.txtDate.TabIndex = 60;
+            this.txtDateRequested.Properties.UseReadOnlyAppearance = false;
+            this.txtDateRequested.Size = new System.Drawing.Size(286, 22);
+            this.txtDateRequested.TabIndex = 60;
             // 
             // txtContactNo
             // 
@@ -331,24 +331,24 @@
             this.txtRequestedBy.Size = new System.Drawing.Size(269, 22);
             this.txtRequestedBy.TabIndex = 132;
             // 
-            // slueEmployee
+            // slueRequestedById
             // 
-            this.slueEmployee.EditValue = "";
-            this.slueEmployee.Location = new System.Drawing.Point(120, 47);
-            this.slueEmployee.Name = "slueEmployee";
-            this.slueEmployee.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueEmployee.Properties.Appearance.Options.UseFont = true;
-            this.slueEmployee.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueRequestedById.EditValue = "";
+            this.slueRequestedById.Location = new System.Drawing.Point(120, 47);
+            this.slueRequestedById.Name = "slueRequestedById";
+            this.slueRequestedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueRequestedById.Properties.Appearance.Options.UseFont = true;
+            this.slueRequestedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEmployee.Properties.DisplayMember = "Employee";
-            this.slueEmployee.Properties.NullText = "";
-            this.slueEmployee.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
-            this.slueEmployee.Properties.PopupView = this.gridView6;
-            this.slueEmployee.Properties.UseReadOnlyAppearance = false;
-            this.slueEmployee.Properties.ValueMember = "Id";
-            this.slueEmployee.Size = new System.Drawing.Size(286, 22);
-            this.slueEmployee.TabIndex = 66;
-            this.slueEmployee.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
+            this.slueRequestedById.Properties.DisplayMember = "Employee";
+            this.slueRequestedById.Properties.NullText = "";
+            this.slueRequestedById.Properties.PopupFormSize = new System.Drawing.Size(975, 0);
+            this.slueRequestedById.Properties.PopupView = this.gridView6;
+            this.slueRequestedById.Properties.UseReadOnlyAppearance = false;
+            this.slueRequestedById.Properties.ValueMember = "Id";
+            this.slueRequestedById.Size = new System.Drawing.Size(286, 22);
+            this.slueRequestedById.TabIndex = 66;
+            this.slueRequestedById.EditValueChanged += new System.EventHandler(this.slueEmployee_EditValueChanged);
             // 
             // gridView6
             // 
@@ -450,11 +450,11 @@
             this.groupControl2.AppearanceCaption.FontStyleDelta = System.Drawing.FontStyle.Bold;
             this.groupControl2.AppearanceCaption.Options.UseFont = true;
             this.groupControl2.Controls.Add(this.labelControl12);
-            this.groupControl2.Controls.Add(this.txtDateofDelivery);
+            this.groupControl2.Controls.Add(this.txtDeliveredDate);
             this.groupControl2.Controls.Add(this.labelControl7);
             this.groupControl2.Controls.Add(this.btnAddSupplier);
-            this.groupControl2.Controls.Add(this.txtDeliveryReceipt);
-            this.groupControl2.Controls.Add(this.slueSupplierName);
+            this.groupControl2.Controls.Add(this.txtReceiptNo);
+            this.groupControl2.Controls.Add(this.slueSupplierId);
             this.groupControl2.Controls.Add(this.labelControl3);
             this.groupControl2.Location = new System.Drawing.Point(506, 80);
             this.groupControl2.Name = "groupControl2";
@@ -472,19 +472,19 @@
             this.labelControl12.TabIndex = 48;
             this.labelControl12.Text = "Supplier";
             // 
-            // txtDateofDelivery
+            // txtDeliveredDate
             // 
-            this.txtDateofDelivery.EditValue = null;
-            this.txtDateofDelivery.Location = new System.Drawing.Point(129, 47);
-            this.txtDateofDelivery.Name = "txtDateofDelivery";
-            this.txtDateofDelivery.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDateofDelivery.Properties.Appearance.Options.UseFont = true;
-            this.txtDateofDelivery.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDeliveredDate.EditValue = null;
+            this.txtDeliveredDate.Location = new System.Drawing.Point(129, 47);
+            this.txtDeliveredDate.Name = "txtDeliveredDate";
+            this.txtDeliveredDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtDeliveredDate.Properties.Appearance.Options.UseFont = true;
+            this.txtDeliveredDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateofDelivery.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtDeliveredDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDateofDelivery.Size = new System.Drawing.Size(281, 22);
-            this.txtDateofDelivery.TabIndex = 51;
+            this.txtDeliveredDate.Size = new System.Drawing.Size(281, 22);
+            this.txtDeliveredDate.TabIndex = 51;
             // 
             // labelControl7
             // 
@@ -507,28 +507,28 @@
             this.btnAddSupplier.TabIndex = 52;
             this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
             // 
-            // txtDeliveryReceipt
+            // txtReceiptNo
             // 
-            this.txtDeliveryReceipt.Location = new System.Drawing.Point(129, 70);
-            this.txtDeliveryReceipt.Margin = new System.Windows.Forms.Padding(2);
-            this.txtDeliveryReceipt.Name = "txtDeliveryReceipt";
-            this.txtDeliveryReceipt.Size = new System.Drawing.Size(281, 20);
-            this.txtDeliveryReceipt.TabIndex = 46;
+            this.txtReceiptNo.Location = new System.Drawing.Point(129, 70);
+            this.txtReceiptNo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtReceiptNo.Name = "txtReceiptNo";
+            this.txtReceiptNo.Size = new System.Drawing.Size(281, 20);
+            this.txtReceiptNo.TabIndex = 46;
             // 
-            // slueSupplierName
+            // slueSupplierId
             // 
-            this.slueSupplierName.Location = new System.Drawing.Point(129, 24);
-            this.slueSupplierName.Name = "slueSupplierName";
-            this.slueSupplierName.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueSupplierName.Properties.Appearance.Options.UseFont = true;
-            this.slueSupplierName.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueSupplierId.Location = new System.Drawing.Point(129, 24);
+            this.slueSupplierId.Name = "slueSupplierId";
+            this.slueSupplierId.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueSupplierId.Properties.Appearance.Options.UseFont = true;
+            this.slueSupplierId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueSupplierName.Properties.DisplayMember = "SupplierName";
-            this.slueSupplierName.Properties.NullText = "";
-            this.slueSupplierName.Properties.PopupView = this.gridView5;
-            this.slueSupplierName.Properties.ValueMember = "Id";
-            this.slueSupplierName.Size = new System.Drawing.Size(281, 22);
-            this.slueSupplierName.TabIndex = 49;
+            this.slueSupplierId.Properties.DisplayMember = "SupplierName";
+            this.slueSupplierId.Properties.NullText = "";
+            this.slueSupplierId.Properties.PopupView = this.gridView5;
+            this.slueSupplierId.Properties.ValueMember = "Id";
+            this.slueSupplierId.Size = new System.Drawing.Size(281, 22);
+            this.slueSupplierId.TabIndex = 49;
             // 
             // gridView5
             // 
@@ -645,24 +645,24 @@
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPONo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueDeliveredBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueDeliveredById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDateRequested.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedBy.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEmployee.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueRequestedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateofDelivery.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDateofDelivery.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveryReceipt.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueSupplierName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveredDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDeliveredDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtReceiptNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueSupplierId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelEquipmentSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
@@ -679,14 +679,14 @@
         private DevExpress.XtraEditors.GroupControl groupControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.TextEdit txtPONo;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueDeliveredBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueDeliveredById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueEmployee;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueRequestedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
@@ -695,18 +695,18 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private DevExpress.XtraEditors.LabelControl labelControl11;
         private DevExpress.XtraEditors.RadioGroup rdbtnGender;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit txtDateRequested;
         private DevExpress.XtraEditors.TextEdit txtContactNo;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl6;
         private DevExpress.XtraEditors.LabelControl labelControl12;
-        private DevExpress.XtraEditors.DateEdit txtDateofDelivery;
+        private DevExpress.XtraEditors.DateEdit txtDeliveredDate;
         private DevExpress.XtraEditors.LabelControl labelControl7;
         private DevExpress.XtraEditors.SimpleButton btnAddSupplier;
-        private DevExpress.XtraEditors.TextEdit txtDeliveryReceipt;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueSupplierName;
+        private DevExpress.XtraEditors.TextEdit txtReceiptNo;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueSupplierId;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Columns.GridColumn colSupplier;
         private DevExpress.XtraGrid.Columns.GridColumn colAddress;

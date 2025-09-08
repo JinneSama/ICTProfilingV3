@@ -64,9 +64,14 @@ namespace ICTProfilingV3.Utility.Controls
                 textBox.Text = value?.ToString() ?? string.Empty;
             }
 
-            if (control is LabelControl label)
+            if(control is Label label)
             {
                 label.Text = value?.ToString() ?? string.Empty;
+            }
+
+            if (control is LabelControl labelControl)
+            {
+                labelControl.Text = value?.ToString() ?? string.Empty;
             }
 
             if (control is SearchLookUpEdit searchLookUpEdit)
@@ -94,7 +99,7 @@ namespace ICTProfilingV3.Utility.Controls
             if (control is SpinEdit spinEdit)
             {
                 if (value == null) spinEdit.Value = 0;
-                else spinEdit.Value = (decimal)value;
+                else spinEdit.Value = Convert.ToDecimal(value);
             }
         }
         private void SetPropertyValue(PropertyInfo property, Control control, T entity)
@@ -102,9 +107,17 @@ namespace ICTProfilingV3.Utility.Controls
             if(control is RadioGroup radioGroup)
             {
                 int? selectedIndex = radioGroup.SelectedIndex;
-                //Type targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
-                //var convertedValue = selectedIndex == null ? null : Convert.ChangeType(selectedIndex, targetType);
-                property.SetValue(entity, selectedIndex);
+                Type targetType = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                object convertedValue = null;
+
+                if (selectedIndex != null && selectedIndex >= 0)
+                    if (targetType.IsEnum)
+                        convertedValue = Enum.ToObject(targetType, selectedIndex);
+                    else
+                        convertedValue = Convert.ChangeType(selectedIndex, targetType);
+
+                property.SetValue(entity, convertedValue);
+
                 return;
             }
 

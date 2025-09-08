@@ -1,20 +1,32 @@
 ﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
+using System;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
     public partial class UCDeliveriesSpecs : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly Deliveries _deliveries;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IDeliveriesService _deliveriesService;
+        private int _deliveriesId;
 
-        public UCDeliveriesSpecs(Deliveries deliveries, bool forViewing = true)
+        public UCDeliveriesSpecs(IServiceProvider serviceProvider, IDeliveriesService deliveriesService)
         {
+            _serviceProvider = serviceProvider;
+            _deliveriesService = deliveriesService;
             InitializeComponent();
-            _deliveries = deliveries;
+        }
+
+        public void InitUC(int deliveriesId, bool forViewing = true)
+        {
+            _deliveriesId = deliveriesId;
             SetHiddenButtons(!forViewing);
         }
 
@@ -26,11 +38,16 @@ namespace ICTProfilingV3.DeliveriesForms
             colAddSpecs.Visible = forViewing;
         }
 
-
         private void LoadEquipmentSpecs()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var res = unitOfWork.DeliveriesSpecsRepo.FindAllAsync(x => x.DeliveriesId == _deliveries.Id).Select(x => new DeliveriesSpecsViewModel
+            var res = _deliveriesService.DeliveriesSpecsBaseService.GetAll()
+                .Include(x => x.Model)
+                .Include(x => x.Model.Brand)
+                .Include(x => x.Model.Brand.EquipmentSpecs)
+                .Include(x => x.Model.Brand.EquipmentSpecs.Equipment)
+                .Where(x => x.DeliveriesId == _deliveriesId)
+                .ToList();
+            var specs = res.Select(x => new DeliveriesSpecsViewModel
             {
                 Id = x.Id,
                 ItemNo = (int)x.ItemNo,
@@ -44,12 +61,15 @@ namespace ICTProfilingV3.DeliveriesForms
                 TotalCost = (long)x.TotalCost,
                 DeliveriesSpecsDetails = x.DeliveriesSpecsDetails.OrderBy(o => o.ItemNo).ToList()
             });
-            gcEquipmentSpecs.DataSource = new BindingList<DeliveriesSpecsViewModel>(res.ToList());
+            gcEquipmentSpecs.DataSource = new BindingList<DeliveriesSpecsViewModel>(specs.ToList());
         }
 
-        private void btnAddEquipment_Click(object sender, System.EventArgs e)
+        private async void btnAddEquipment_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEquipment(_deliveries);
+
+            var deliveries = await _deliveriesService.GetByFilterAsync(x => x.Id == _deliveriesId, x => x.DeliveriesSpecs);
+            var frm = _serviceProvider.GetRequiredService<frmAddEquipment>();
+            frm.InitForm(deliveries);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -63,14 +83,10 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnEditData_Click(object sender, System.EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.Model ,
-                x => x.Model.Brand,
-                x => x.Model.Brand.EquipmentSpecs.Equipment,
-                x => x.Model.Brand.EquipmentSpecs);
-            var frm = new frmAddEquipment(delSpecs);
+            var delSpecs = await _deliveriesService.DeliveriesSpecsBaseService.GetByIdAsync(row.Id);
+            var frm = _serviceProvider.GetRequiredService<frmAddEquipment>();
+            frm.InitForm(delSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -78,33 +94,28 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnAddSpecs_Click(object sender, System.EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            var delSpecs = await unitOfWork.DeliveriesSpecsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.Model.Brand,
-                x => x.Model.Brand.EquipmentSpecs,
-                x => x.Model.Brand.EquipmentSpecs.Equipment);
-            var frm = new frmAddEditDeliveriesSpecsDetails(delSpecs);
+            var delSpecs = await _deliveriesService.DeliveriesSpecsBaseService.GetByIdAsync(row.Id);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditDeliveriesSpecsDetails>();
+            frm.InitForm(delSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
         }
 
-        private void UCDeliveriesSpecs_Load(object sender, System.EventArgs e)
+        private async void UCDeliveriesSpecs_Load(object sender, System.EventArgs e)
         {
             LoadEquipmentSpecs();
         }
 
-        private void btnDelete_Click(object sender, System.EventArgs e)
+        private async void btnDelete_Click(object sender, System.EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             
             if (MessageBox.Show("Delete this Specs?", "Confirmation", MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
 
             var row = (DeliveriesSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            unitOfWork.DeliveriesSpecsRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
+            await _deliveriesService.DeliveriesSpecsBaseService.DeleteAsync(row.Id);
         }
     }
 }

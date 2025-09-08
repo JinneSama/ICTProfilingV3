@@ -1,7 +1,7 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,45 +10,46 @@ namespace ICTProfilingV3.MOForms
 {
     public partial class frmAddEditMOAccount : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private SaveType saveType;
-        private readonly MOAccounts account;
+        private readonly IPGNService _pgnService;
+        private readonly IMOService _moService;
+        private SaveType _saveType;
+        private MOAccounts _account;
 
-        public frmAddEditMOAccount()
+        public frmAddEditMOAccount(IMOService moService)
         {
+            _moService = moService;
             InitializeComponent();
-            saveType = SaveType.Insert;
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
         }
 
-        public frmAddEditMOAccount(MOAccounts account)
+        public void InitForm(MOAccounts account = null)
         {
-            InitializeComponent();
-            saveType = SaveType.Update;
-            unitOfWork = new UnitOfWork();
-            this.account = account;
             LoadDropdowns();
-            LoadDetails();
+            if (account == null) _saveType = SaveType.Insert;
+            else
+            {
+                _saveType = SaveType.Update;
+                _account = account;
+                LoadDetails();
+            }
         }
 
         private void LoadDetails()
         {
-            txtPrincipalName.Text = account.PrincipalName;
-            txtPassword.Text = account.Password;
-            deDateCreated.DateTime = (DateTime)account.DateCreated;
-            lueOffice.EditValue = account.OfficeId;
+            txtPrincipalName.Text = _account.PrincipalName;
+            txtPassword.Text = _account.Password;
+            deDateCreated.DateTime = (DateTime)_account.DateCreated;
+            lueOffice.EditValue = _account.OfficeId;
         }
 
         private void LoadDropdowns()
         {
-            var res = unitOfWork.PGNGroupOfficesRepo.GetAll();
+            var res = _pgnService.PGNGroupOfficeService.GetAll();
             lueOffice.Properties.DataSource = res.ToList();
         }
 
         private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            if (saveType == SaveType.Insert) InsertAccount();
+            if (_saveType == SaveType.Insert) await InsertAccount();
             else await UpdateAccount();
 
             this.Close();
@@ -56,16 +57,15 @@ namespace ICTProfilingV3.MOForms
 
         private async Task UpdateAccount()
         {
-            var moAccount = await unitOfWork.MOAccountRepo.FindAsync(x => x.Id == account.Id);
+            var moAccount = await _moService.GetByIdAsync(_account.Id);
             moAccount.PrincipalName = txtPrincipalName.Text;
             moAccount.Password = txtPassword.Text;
             moAccount.DateCreated = deDateCreated.DateTime;
             moAccount.OfficeId = (int?)lueOffice.EditValue;
-            unitOfWork.MOAccountRepo.Update(moAccount);
-            unitOfWork.Save();
+            await _moService.SaveChangesAsync();
         }
 
-        private void InsertAccount()
+        private async Task InsertAccount()
         {
             var account = new MOAccounts
             {
@@ -74,8 +74,7 @@ namespace ICTProfilingV3.MOForms
                 DateCreated = deDateCreated.DateTime,
                 OfficeId = (int?)lueOffice.EditValue
             };
-            unitOfWork.MOAccountRepo.Insert(account);
-            unitOfWork.Save();
+            await _moService.AddAsync(account);
         }
     }
 }

@@ -1,48 +1,44 @@
-﻿using DevExpress.Charts.Native;
-using DevExpress.XtraCharts;
-using DevExpress.XtraCharts.Native;
-
-using Helpers.Interfaces;
+﻿using DevExpress.XtraCharts;
 using ICTProfilingV3.DashboardForms.TicketToolForms;
 using ICTProfilingV3.DataTransferModels.Models;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.Services.ApiUsers;
 using ICTProfilingV3.Services.Employees;
-using ICTProfilingV3.UsersForms;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-
 namespace ICTProfilingV3.DashboardForms
 {
     public partial class UCRequestDashboard : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IICTUserManager userManager;
-        private IUnitOfWork unitOfWork;
+        private readonly IICTUserManager _userManager;
+        private readonly IStaffService _staffService;
+        private readonly ITicketRequestService _ticketService;
 
         private Expression<Func<TicketRequest, bool>> dateFilter;
         private Expression<Func<TicketRequest, bool>> statusFilter;
         private Expression<Func<TicketRequest, bool>> staffFilter;
 
-        public UCRequestDashboard()
+        public UCRequestDashboard(IICTUserManager userManager)
         {
+            _userManager = userManager;
             InitializeComponent();
-            userManager = new ICTUserManager();
-            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 
         private void LoadData()
         {
-            var data = unitOfWork.TicketRequestRepo.GetAll(x => x.TechSpecs, x => x.TechSpecs.TechSpecsICTSpecs,
-                x => x.Repairs, x => x.Repairs.PPEs, x => x.Repairs.PPEs.PPEsSpecs,
-                x => x.Deliveries, x => x.Deliveries.DeliveriesSpecs);
+            var data = _ticketService.GetAll()
+                .Include(x => x.TechSpecs)
+                .Include(x => x.TechSpecs.TechSpecsICTSpecs)
+                .Include(x => x.Repairs)
+                .Include(x => x.Repairs.PPEs)
+                .Include(x => x.Repairs.PPEs.PPEsSpecs)
+                .Include(x => x.Deliveries)
+                .Include(x => x.Deliveries.DeliveriesSpecs);
 
             if(dateFilter != null) data = data.Where(dateFilter);
             if (statusFilter != null) data = data.Where(statusFilter);
@@ -207,7 +203,9 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadDropdowns()
         {
-            var staff = unitOfWork.ITStaffRepo.GetAll(x => x.Users).ToList();
+            var staff = _staffService.GetAll()
+                .Include(x => x.Users)
+                .ToList();
             staff.Add(new ITStaff() { Users = new Users() { FullName = "#Unassigned", Position = "#Unassigned" } });
             var res = staff.OrderBy(o => o.Users.FullName);
             slueTaskOf.Properties.DataSource = res.ToList();

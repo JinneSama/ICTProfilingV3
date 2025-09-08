@@ -34,13 +34,6 @@
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
             this.txtOfficeContronNo = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.txtPRDesc = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.txtBudgetPR = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.txtPurpose = new DevExpress.XtraEditors.MemoEdit();
             this.gcPRDetails = new DevExpress.XtraGrid.GridControl();
             this.gridPRDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -64,19 +57,26 @@
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            this.txtBudgetPR = new DevExpress.XtraEditors.TextEdit();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.txtPurpose = new DevExpress.XtraEditors.MemoEdit();
             this.txtTotalAmount = new DevExpress.XtraEditors.SpinEdit();
+            this.txtPRDesc = new DevExpress.XtraEditors.TextEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOfficeContronNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPRDesc.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBudgetPR.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPRDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPRDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcAction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridAction)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBudgetPR.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPRDesc.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -140,76 +140,6 @@
             this.labelControl1.Size = new System.Drawing.Size(85, 15);
             this.labelControl1.TabIndex = 106;
             this.labelControl1.Text = "Office Control #";
-            // 
-            // txtPRDesc
-            // 
-            this.txtPRDesc.Location = new System.Drawing.Point(120, 106);
-            this.txtPRDesc.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPRDesc.Name = "txtPRDesc";
-            this.txtPRDesc.Properties.ReadOnly = true;
-            this.txtPRDesc.Properties.UseReadOnlyAppearance = false;
-            this.txtPRDesc.Size = new System.Drawing.Size(273, 20);
-            this.txtPRDesc.TabIndex = 109;
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(24, 111);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(77, 15);
-            this.labelControl2.TabIndex = 108;
-            this.labelControl2.Text = "PR Description";
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.Location = new System.Drawing.Point(24, 135);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(73, 15);
-            this.labelControl3.TabIndex = 110;
-            this.labelControl3.Text = "Total Amount";
-            // 
-            // labelControl4
-            // 
-            this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl4.Appearance.Options.UseFont = true;
-            this.labelControl4.Location = new System.Drawing.Point(515, 63);
-            this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(43, 15);
-            this.labelControl4.TabIndex = 112;
-            this.labelControl4.Text = "Purpose";
-            // 
-            // txtBudgetPR
-            // 
-            this.txtBudgetPR.Location = new System.Drawing.Point(595, 128);
-            this.txtBudgetPR.Margin = new System.Windows.Forms.Padding(2);
-            this.txtBudgetPR.Name = "txtBudgetPR";
-            this.txtBudgetPR.Properties.ReadOnly = true;
-            this.txtBudgetPR.Properties.UseReadOnlyAppearance = false;
-            this.txtBudgetPR.Size = new System.Drawing.Size(358, 20);
-            this.txtBudgetPR.TabIndex = 115;
-            // 
-            // labelControl5
-            // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(515, 132);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(65, 15);
-            this.labelControl5.TabIndex = 114;
-            this.labelControl5.Text = "Budget PR #";
-            // 
-            // txtPurpose
-            // 
-            this.txtPurpose.Location = new System.Drawing.Point(595, 59);
-            this.txtPurpose.Margin = new System.Windows.Forms.Padding(2);
-            this.txtPurpose.Name = "txtPurpose";
-            this.txtPurpose.Properties.ReadOnly = true;
-            this.txtPurpose.Properties.UseReadOnlyAppearance = false;
-            this.txtPurpose.Size = new System.Drawing.Size(358, 65);
-            this.txtPurpose.TabIndex = 113;
             // 
             // gcPRDetails
             // 
@@ -487,6 +417,66 @@
             this.labelControl7.TabIndex = 119;
             this.labelControl7.Text = "Document Action List";
             // 
+            // txtBudgetPR
+            // 
+            this.txtBudgetPR.Location = new System.Drawing.Point(595, 128);
+            this.txtBudgetPR.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBudgetPR.Name = "txtBudgetPR";
+            this.txtBudgetPR.Properties.ReadOnly = true;
+            this.txtBudgetPR.Properties.UseReadOnlyAppearance = false;
+            this.txtBudgetPR.Size = new System.Drawing.Size(358, 20);
+            this.txtBudgetPR.TabIndex = 115;
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(515, 132);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(65, 15);
+            this.labelControl5.TabIndex = 114;
+            this.labelControl5.Text = "Budget PR #";
+            // 
+            // labelControl4
+            // 
+            this.labelControl4.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl4.Appearance.Options.UseFont = true;
+            this.labelControl4.Location = new System.Drawing.Point(515, 63);
+            this.labelControl4.Name = "labelControl4";
+            this.labelControl4.Size = new System.Drawing.Size(43, 15);
+            this.labelControl4.TabIndex = 112;
+            this.labelControl4.Text = "Purpose";
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.Location = new System.Drawing.Point(24, 135);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(73, 15);
+            this.labelControl3.TabIndex = 110;
+            this.labelControl3.Text = "Total Amount";
+            // 
+            // labelControl2
+            // 
+            this.labelControl2.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.labelControl2.Appearance.Options.UseFont = true;
+            this.labelControl2.Location = new System.Drawing.Point(24, 111);
+            this.labelControl2.Name = "labelControl2";
+            this.labelControl2.Size = new System.Drawing.Size(77, 15);
+            this.labelControl2.TabIndex = 108;
+            this.labelControl2.Text = "PR Description";
+            // 
+            // txtPurpose
+            // 
+            this.txtPurpose.Location = new System.Drawing.Point(595, 59);
+            this.txtPurpose.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPurpose.Name = "txtPurpose";
+            this.txtPurpose.Properties.ReadOnly = true;
+            this.txtPurpose.Properties.UseReadOnlyAppearance = false;
+            this.txtPurpose.Size = new System.Drawing.Size(358, 65);
+            this.txtPurpose.TabIndex = 113;
+            // 
             // txtTotalAmount
             // 
             this.txtTotalAmount.EditValue = new decimal(new int[] {
@@ -505,6 +495,16 @@
             this.txtTotalAmount.Properties.UseReadOnlyAppearance = false;
             this.txtTotalAmount.Size = new System.Drawing.Size(273, 20);
             this.txtTotalAmount.TabIndex = 111;
+            // 
+            // txtPRDesc
+            // 
+            this.txtPRDesc.Location = new System.Drawing.Point(120, 106);
+            this.txtPRDesc.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPRDesc.Name = "txtPRDesc";
+            this.txtPRDesc.Properties.ReadOnly = true;
+            this.txtPRDesc.Properties.UseReadOnlyAppearance = false;
+            this.txtPRDesc.Size = new System.Drawing.Size(273, 20);
+            this.txtPRDesc.TabIndex = 109;
             // 
             // UCFDTS
             // 
@@ -534,15 +534,15 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOfficeContronNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPRDesc.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtBudgetPR.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPRDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridPRDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichTextEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcAction)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridAction)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtBudgetPR.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTotalAmount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPRDesc.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -556,13 +556,6 @@
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.TextEdit txtOfficeContronNo;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtPRDesc;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.TextEdit txtBudgetPR;
-        private DevExpress.XtraEditors.LabelControl labelControl5;
-        private DevExpress.XtraEditors.MemoEdit txtPurpose;
         private DevExpress.XtraGrid.GridControl gcPRDetails;
         private DevExpress.XtraGrid.Views.Grid.GridView gridPRDetails;
         private DevExpress.XtraEditors.LabelControl labelControl6;
@@ -585,7 +578,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraEditors.SpinEdit txtTotalAmount;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEdit1;
+        private DevExpress.XtraEditors.TextEdit txtBudgetPR;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private DevExpress.XtraEditors.LabelControl labelControl2;
+        private DevExpress.XtraEditors.MemoEdit txtPurpose;
+        private DevExpress.XtraEditors.SpinEdit txtTotalAmount;
+        private DevExpress.XtraEditors.TextEdit txtPRDesc;
     }
 }

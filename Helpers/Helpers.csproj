@@ -82,13 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IDisposeUC.cs" />
-    <Compile Include="Interfaces\IEncryptFile.cs" />
-    <Compile Include="Interfaces\IModifyRecordStatus.cs" />
-    <Compile Include="Interfaces\IModifyTicketStatus.cs" />
-    <Compile Include="Interfaces\IParseInventory.cs" />
     <Compile Include="Interfaces\ISingleInstance.cs" />
-    <Compile Include="Inventory\ParseInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner\ScanDocument.cs" />
     <Compile Include="Scanner\WIAScanner.cs" />
@@ -117,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Abstract\" />
+    <Folder Include="Inventory\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>

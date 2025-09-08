@@ -1,6 +1,7 @@
 ﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -10,20 +11,26 @@ namespace ICTProfilingV3.PPEInventoryForms
 {
     public partial class UCPPEsSpecs : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly PPEs _ppe;
-        private IUnitOfWork unitOfWork;
-        public UCPPEsSpecs(PPEs ppe)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IPPEInventoryService _ppeInventoryService;
+        private PPEs _ppe;
+        public UCPPEsSpecs(IServiceProvider serviceProvider, IPPEInventoryService ppeInventoryService)
         {
+            _serviceProvider = serviceProvider;
+            _ppeInventoryService = ppeInventoryService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+        }
+
+        public void InitUC(PPEs ppe, bool forViewing = true)
+        {
             _ppe = ppe;
             LoadEquipmentSpecs();
+            btnAddEquipment.Visible = !forViewing;
         }
 
         private void LoadEquipmentSpecs()
         {
-            var uow = new UnitOfWork();
-            var res = uow.PPEsSpecsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id).Select(x => new PPEsSpecsViewModel
+            var res = _ppeInventoryService.PPESpecsBaseService.GetAll().Where(x => x.PPEsId == _ppe.Id).Select(x => new PPEsSpecsViewModel
             {
                 Id = x.Id,
                 ItemNo = x.ItemNo,
@@ -42,7 +49,7 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditPPEEquipment(_ppe);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditPPEEquipment>();
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -57,13 +64,10 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async void btnEditData_Click(object sender, EventArgs e)
         {
             var row = (PPEsSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.Model,
-                x => x.Model.Brand,
-                x => x.Model.Brand.EquipmentSpecs,
-                x => x.Model.Brand.EquipmentSpecs.Equipment);
+            var ppeSpecs = await _ppeInventoryService.PPESpecsBaseService.GetByIdAsync(row.Id);
             if (ppeSpecs == null) return;
-            var frm = new frmAddEditPPEEquipment(ppeSpecs);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditPPEEquipment>();
+            frm.InitForm(ppeSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();
@@ -72,11 +76,9 @@ namespace ICTProfilingV3.PPEInventoryForms
         private async void btnAddSpecs_Click(object sender, EventArgs e)
         {
             var row = (PPEsSpecsViewModel)gridEquipmentSpecs.GetFocusedRow();
-            var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == row.Id,
-                x => x.Model.Brand,
-                x => x.Model.Brand.EquipmentSpecs,
-                x => x.Model.Brand.EquipmentSpecs.Equipment);
-            var frm = new frmAddEditPPEsSpecsDetails(ppeSpecs);
+            var ppeSpecs = await _ppeInventoryService.PPESpecsBaseService.GetByIdAsync(row.Id);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditPPEsSpecsDetails>();
+            frm.InitForm(ppeSpecs);
             frm.ShowDialog();
 
             LoadEquipmentSpecs();

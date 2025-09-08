@@ -48,12 +48,15 @@ namespace Models.Entities
         public virtual ICollection<ComparisonReport> ComparisonReports { get; set; }
         [JsonIgnore]
         public virtual ICollection<EvaluationSheet> EvaluationSheets { get; set; }
+        public virtual ICollection<ComparisonReportFiles> ComparisonReportFiles { get; set; }
         public Deliveries()
         {
             DeliveriesSpecs = new HashSet<DeliveriesSpecs>();
             Actions = new HashSet<Actions>();
             ComparisonReports = new HashSet<ComparisonReport>();
             EvaluationSheets = new HashSet<EvaluationSheet>();
+            ComparisonReportFiles = new HashSet<ComparisonReportFiles>();
         }
+
     }
 }

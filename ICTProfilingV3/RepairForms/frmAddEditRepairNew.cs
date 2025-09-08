@@ -1,10 +1,11 @@
 ﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Interfaces;
+using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
@@ -12,11 +13,13 @@ namespace ICTProfilingV3.RepairForms
     {
         private readonly IRepairService _repairService;
         private readonly IControlMapper<Repairs> _repairCMapper;
+        private readonly IServiceProvider _serviceProvider;
         private int _repairId;
-        public frmAddEditRepairNew(IRepairService repairService, IControlMapper<Repairs> repairCMapper)
+        public frmAddEditRepairNew(IRepairService repairService, IControlMapper<Repairs> repairCMapper, IServiceProvider serviceProvider)
         {
             _repairService = repairService;
             _repairCMapper = repairCMapper;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
             LoadDropdowns();
         }
@@ -31,7 +34,7 @@ namespace ICTProfilingV3.RepairForms
         public async void InitForm(int? repairId = null)
         {
             _repairId = repairId.Value;
-            var data = await _repairService.GetRepair(repairId.Value);
+            var data = await _repairService.GetByIdAsync(repairId.Value);
             _repairCMapper.MapControl(data, gcDetails, gcProblems, gcReqDetails);
         }
         private async void sluePropertyNo_EditValueChanged(object sender, System.EventArgs e)
@@ -41,15 +44,12 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task LoadPPESpecs()
         {
-            gcEquipmentSpecs.Controls.Clear();
             var ppeId = Convert.ToInt32(sluePPEsId.EditValue);
             var ppe = await _repairService.GetPPE(ppeId);
-            var equipmentSpecsForm = new UCAddPPEEquipment(ppe, false)
-            {
-                Dock = DockStyle.Fill
-            };
-            gcEquipmentSpecs.Controls.Add(equipmentSpecsForm);
-            
+
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCPPEsSpecs>>();
+            navigation.NavigateTo(gcEquipmentSpecs, act => act.InitUC(ppe, forViewing: true));
+
             var employee = HRMISEmployees.GetEmployeeById(ppe.IssuedToId);
             txtIssuedTo.Text = employee?.Employee;
             txtOffAcr.Text = employee?.Office;
@@ -62,9 +62,9 @@ namespace ICTProfilingV3.RepairForms
 
         private async void btnSave_ClickAsync(object sender, EventArgs e)
         {
-            var data = await _repairService.GetRepair(_repairId);
+            var data = await _repairService.GetByIdAsync(_repairId);
             _repairCMapper.MapToEntity(data, gcDetails, gcProblems, gcReqDetails);
-            await _repairService.SaveRepairChangesAsync();
+            await _repairService.SaveChangesAsync();
             Close();
         }
     }

@@ -5,10 +5,14 @@ namespace ICTProfilingV3.PurchaseRequestForms
 {
     public partial class UCFDTS : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly string _controlNo;
-        public UCFDTS(string controlNo)
+        private string _controlNo;
+        public UCFDTS()
         {
             InitializeComponent();
+        }
+
+        public void InitUC(string controlNo)
+        {
             _controlNo = controlNo;
         }
 

@@ -165,6 +165,7 @@
             this.colDelete});
             this.gridICTSpecs.GridControl = this.gcICTSpecs;
             this.gridICTSpecs.Name = "gridICTSpecs";
+            this.gridICTSpecs.OptionsMenu.ShowSummaryItemMode = DevExpress.Utils.DefaultBoolean.True;
             this.gridICTSpecs.OptionsView.ShowDetailButtons = false;
             this.gridICTSpecs.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridICTSpecs.OptionsView.ShowGroupPanel = false;

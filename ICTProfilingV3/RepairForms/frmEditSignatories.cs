@@ -1,40 +1,31 @@
-﻿using DevExpress.XtraEditors;
-
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.Services.ApiUsers;
-using Models.Repository;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.RepairForms
 {
     public partial class frmEditSignatories : BaseForm
     {
-        private readonly IICTUserManager usermanager;
-        private int repairId;
+        private readonly IICTUserManager _usermanager;
+        private readonly IRepairService _repairService;
+        private int _repairId;
 
-        public frmEditSignatories()
+        public frmEditSignatories(IICTUserManager userManager, IRepairService repairService)
         {
+            _usermanager = userManager;
+            _repairService = repairService;
             InitializeComponent();
-            usermanager = new ICTUserManager();
             LoadDropdowns();
         }
         
         public void InitForm(int repairId)
         {
-            this.repairId = repairId;
+            _repairId = repairId;
         }
         private void LoadDropdowns()
         {
-            var users = usermanager.GetUsers();
+            var users = _usermanager.GetUsers();
             sluePreparedBy.Properties.DataSource = users;
             slueAssesedBy.Properties.DataSource = users;
             slueNotedBy.Properties.DataSource = users;
@@ -53,19 +44,16 @@ namespace ICTProfilingV3.RepairForms
 
         private async Task Save()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);
+            var repair = await _repairService.GetByIdAsync(_repairId);
             repair.PreparedById = (string)sluePreparedBy.EditValue;
             repair.ReviewedById = (string)slueAssesedBy.EditValue;
             repair.NotedById = (string)slueNotedBy.EditValue;
-            unitOfWork.RepairsRepo.Update(repair);
-            await unitOfWork.SaveChangesAsync();
+            await _repairService.SaveChangesAsync();
         }
 
         private async Task LoadDetails()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var repair = await unitOfWork.RepairsRepo.FindAsync(x => x.Id == repairId);
+            var repair = await _repairService.GetByIdAsync(_repairId);
 
             slueAssesedBy.EditValue = repair.ReviewedById;
             slueNotedBy.EditValue= repair.NotedById;

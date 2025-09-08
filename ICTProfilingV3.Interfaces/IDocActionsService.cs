@@ -1,13 +1,15 @@
 ﻿using ICTProfilingV3.DataTransferModels;
+using ICTProfilingV3.DataTransferModels.ReportViewModel;
 using Models.Entities;
 using Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ICTProfilingV3.Interfaces
 {
-    public interface IDocActionsService
+    public interface IDocActionsService : IBaseDataService<Actions, int>
     {
         IQueryable<Actions> GetActions(RequestType requestType, int id);
         Task DeleteDocAction(int actionId);
@@ -20,10 +22,12 @@ namespace ICTProfilingV3.Interfaces
         Task<ActionDTM> GetDocAction(int actionId);
         IEnumerable<ActionDocuments> GetActionDocuments(int? actionId);
         void DeleteDocument(int documentId);
-        void ReorderDocument(int? actionId);
+        Task ReorderDocument(int? actionId);
         IEnumerable<ActionsDTM> GetActionsByDTM(RequestType requestType, int id);
         Task<string> AddActionDocument(int? actionId);
         Task<Actions> GetLastAction(int actionId);
         Task UpdateDiscrepancy(int actionId, bool hasDiscrepancy, string remarks);
+        IEnumerable<ActionReport> GetActionReport(string staffId,
+            DateTime dateFrom, DateTime dateTo);
     }
 }

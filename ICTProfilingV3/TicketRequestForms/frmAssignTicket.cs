@@ -8,7 +8,6 @@ using ICTProfilingV3.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,12 +15,11 @@ using System.Windows.Forms;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class frmAssignTicket : BaseForm, IModifyTicketStatus
+    public partial class frmAssignTicket : BaseForm
     {
         private readonly IStaffService _staffService;
         private readonly ITicketRequestService _ticketService;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IUnitOfWork unitOfWork;
         private readonly UserStore _userStore;
 
         private int _ticketId;
@@ -32,7 +30,6 @@ namespace ICTProfilingV3.TicketRequestForms
             _ticketService = ticketService;
             _userStore = userStore;
             _serviceProvider = serviceProvider;
-            unitOfWork = new UnitOfWork();
             InitializeComponent();
         }
 
@@ -41,14 +38,14 @@ namespace ICTProfilingV3.TicketRequestForms
             _ticketId = ticketId;
             _requestType = requestType;
         }
-        private async Task LoadStaff()
+        private void LoadStaff()
         {
             var staffDTM = _staffService.GetStaffDTM();
             gcStaff.DataSource = staffDTM;
         }
-        private async void frmAssignTicket_Load(object sender, System.EventArgs e)
+        private void frmAssignTicket_Load(object sender, System.EventArgs e)
         {
-            await LoadStaff();
+            LoadStaff();
         }
 
         private async void btnAssign_Click(object sender, System.EventArgs e)
@@ -86,14 +83,13 @@ namespace ICTProfilingV3.TicketRequestForms
 
         private async Task UpdateTicket(StaffViewModel staffViewModel)
         {
-            var _ticket = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == _ticketId);
+            var _ticket = await _ticketService.GetByIdAsync(_ticketId);
             if (_ticket == null) return;
 
             _ticket.StaffId = staffViewModel.Staff.Id;
             _ticket.TicketStatus = TicketStatus.Assigned;
-            unitOfWork.TicketRequestRepo.Update(_ticket);
             await ModifyTicketStatusStatus(TicketStatus.Assigned, _ticket.Id);
-            await unitOfWork.SaveChangesAsync();
+            await _ticketService.SaveChangesAsync();
         }
 
         private void tvStaff_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
@@ -105,7 +101,7 @@ namespace ICTProfilingV3.TicketRequestForms
         {
             var row = (StaffViewModel)tvStaff.GetFocusedRow();
             if (row == null) return 0;
-            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.ITStaff.UserId == row.UserId && x.TicketStatus == Models.Enums.TicketStatus.OnProcess).ToList().Count;
+            var tickets = _ticketService.GetAll().Where(x => x.ITStaff.UserId == row.UserId && x.TicketStatus == Models.Enums.TicketStatus.OnProcess).ToList().Count;
             return tickets;
         }
 
@@ -113,7 +109,7 @@ namespace ICTProfilingV3.TicketRequestForms
         {
             var row = (StaffViewModel)tvStaff.GetFocusedRow();
             if(row == null) return;
-            var tickets = unitOfWork.TicketRequestRepo.FindAllAsync(x => x.ITStaff.UserId == row.UserId && x.TicketStatus != Models.Enums.TicketStatus.Completed).ToList();
+            var tickets = _ticketService.GetAll().Where(x => x.ITStaff.UserId == row.UserId && x.TicketStatus != Models.Enums.TicketStatus.Completed).ToList();
             gcAssigned.DataSource = tickets;
 
             var requestTypeCounts = tickets
@@ -135,8 +131,7 @@ namespace ICTProfilingV3.TicketRequestForms
                 ChangedByUserId = _userStore.UserId,
                 TicketRequestId = Id
             };
-            unitOfWork.TicketRequestStatusRepo.Insert(ticketStatus);
-            await unitOfWork.SaveChangesAsync();
+            await _ticketService.TicketRequestStatusService.AddAsync(ticketStatus);
         }
     }
 }

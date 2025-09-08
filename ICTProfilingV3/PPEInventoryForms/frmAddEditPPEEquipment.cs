@@ -1,18 +1,15 @@
 ﻿using DevExpress.XtraEditors;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
-using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.LookUpTables;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,61 +17,71 @@ namespace ICTProfilingV3.PPEInventoryForms
 {
     public partial class frmAddEditPPEEquipment : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private SaveType saveType;
-        private readonly PPEs _PPE;
-        private PPEsSpecs _PPEsSpecs;
-        public frmAddEditPPEEquipment(PPEs PPE)
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IEquipmentService _equipmentService;
+        private readonly IPPEInventoryService _ppeInventoryService;
+        private readonly IControlMapper<PPEsSpecs> _ppeSpecsMapper;
+        private SaveType _saveType;
+        private PPEs _ppe;
+        private PPEsSpecs _ppeSpecs;
+        public frmAddEditPPEEquipment(IServiceProvider serviceProvider, IControlMapper<PPEsSpecs> ppeSpecsMapper, 
+            IEquipmentService equipmentService, IPPEInventoryService ppeInventoryService)
         {
+            _serviceProvider = serviceProvider;
+            _ppeSpecsMapper = ppeSpecsMapper;
+            _ppeInventoryService = ppeInventoryService;
+            _equipmentService = equipmentService;
             InitializeComponent();
-            saveType = SaveType.Insert;
-            unitOfWork = new UnitOfWork();
-            LoadDropdowns();
-            _PPE = PPE;
         }
 
-        public frmAddEditPPEEquipment(PPEsSpecs ppesSpecs)
+        public void InitForm(PPEs ppe)
         {
-            InitializeComponent();
-            _PPEsSpecs = ppesSpecs;
-            saveType = SaveType.Update;
-            unitOfWork = new UnitOfWork();
+            _ppe = ppe;
+            _saveType = SaveType.Insert;
+            LoadDropdowns();
+        }
+
+        public void InitForm(PPEsSpecs ppesSpecs)
+        {
+            _ppeSpecs = ppesSpecs;
+            _saveType = SaveType.Update;
             LoadDropdowns();
             LoadEquipmentSpecs();
         }
         private void LoadEquipmentSpecs()
         {
-            spinQty.Value = _PPEsSpecs.Quantity;
-            cboUnit.EditValue = _PPEsSpecs.Unit;
-            spinUnitCost.Value = _PPEsSpecs.UnitCost;
-            spintTotal.Value = _PPEsSpecs.TotalCost;
-            spinItemNo.Value = _PPEsSpecs.ItemNo;
-            txtSerialNo.Text = _PPEsSpecs.SerialNo;
+            _ppeSpecsMapper.MapControl(_ppeSpecs, this);
+            //spinQuantity.Value = _ppeSpecs.Quantity;
+            //lueUnit.EditValue = _ppeSpecs.Unit;
+            //spinUnitCost.Value = _ppeSpecs.UnitCost;
+            //spinTotalCost.Value = _ppeSpecs.TotalCost;
+            //spinItemNo.Value = _ppeSpecs.ItemNo;
+            //txtSerialNo.Text = _ppeSpecs.SerialNo;
 
-            slueEquipment.EditValue = _PPEsSpecs.Model.Brand.EquipmenSpecsId;
-            txtDescription.Text = _PPEsSpecs.Description;
+            slueEquipment.EditValue = _ppeSpecs.Model.Brand.EquipmenSpecsId;
+            txtDescription.Text = _ppeSpecs.Description;
 
-            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == _PPEsSpecs.Model.Brand.EquipmenSpecsId);
+            var brand = _equipmentService.BrandBaseService.GetAll().Where(x => x.EquipmenSpecsId == _ppeSpecs.Model.Brand.EquipmenSpecsId);
             slueBrand.Properties.DataSource = brand.ToList();
 
-            slueBrand.EditValue = _PPEsSpecs.Model.BrandId;
+            slueBrand.EditValue = _ppeSpecs.Model.BrandId;
 
-            var model = unitOfWork.ModelRepo.FindAllAsync(x => x.BrandId == _PPEsSpecs.Model.BrandId);
+            var model = _equipmentService.ModelBaseService.GetAll().Where(x => x.BrandId == _ppeSpecs.Model.BrandId);
             slueModel.Properties.DataSource = model.ToList();
 
-            slueModel.EditValue = _PPEsSpecs.ModelId;
+            slueModel.EditValue = _ppeSpecs.ModelId;
         }
 
         private void LoadDropdowns()
         {
-            var res = unitOfWork.EquipmentSpecsRepo.GetAll().Select(x => new EquipmentSpecsViewModel
+            var res = _equipmentService.EquipmentSpecsBaseService.GetAll().Select(x => new EquipmentSpecsViewModel
             {
                 Description = x.Description,
                 Equipment = x.Equipment.EquipmentName,
                 Id = x.Id
             });
             slueEquipment.Properties.DataSource = res.ToList();
-            cboUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
+            lueUnit.Properties.DataSource = Enum.GetValues(typeof(Unit)).Cast<Unit>().Select(x => new
             {
                 Unit = x
             });
@@ -87,7 +94,7 @@ namespace ICTProfilingV3.PPEInventoryForms
 
             txtDescription.Text = res.Description;
 
-            var brand = unitOfWork.BrandRepo.FindAllAsync(x => x.EquipmenSpecsId == res.Id);
+            var brand = _equipmentService.BrandBaseService.GetAll().Where(x => x.EquipmenSpecsId == res.Id);
             slueBrand.Properties.DataSource = brand.ToList();
         }
 
@@ -96,34 +103,37 @@ namespace ICTProfilingV3.PPEInventoryForms
             var res = (Brand)slueBrand.Properties.View.GetFocusedRow();
             if (res == null) return;
 
-            var model = unitOfWork.ModelRepo.FindAllAsync(x => x.BrandId == res.Id);
+            var model = _equipmentService.ModelBaseService.GetAll().Where(x => x.BrandId == res.Id);
             slueModel.Properties.DataSource = model.ToList();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (saveType == SaveType.Insert) await InsertEquipment();
+            if (_saveType == SaveType.Insert) await InsertEquipment();
             else await UpdateEquipment();
         }
         private async Task InsertEquipment()
         {
-            var equipment = new PPEsSpecs
-            {
-                PPEsId = _PPE.Id,
-                Quantity = (int)spinQty.Value,
-                Unit = (Unit)cboUnit.EditValue,
-                Model = slueModel.Properties.View.GetFocusedRow() as Model,
-                UnitCost = (long)spinUnitCost.Value,
-                TotalCost = (long)spintTotal.Value,
-                SerialNo = txtSerialNo.Text,
-                ItemNo = (int)spinItemNo.Value,
-                Description = txtDescription.Text
-            };
-            unitOfWork.PPEsSpecsRepo.Insert(equipment);
-            await unitOfWork.SaveChangesAsync();
+            //var equipment = new PPEsSpecs
+            //{
+            //    PPEsId = _ppe.Id,
+            //    Quantity = (int)spinQuantity.Value,
+            //    UnitCost = (long)spinUnitCost.Value,
+            //    TotalCost = (long)spinTotalCost.Value,
+            //    SerialNo = txtSerialNo.Text,
+            //    ItemNo = (int)spinItemNo.Value,
+            //    Description = txtDescription.Text
+            //};
+
+            var equipment = new PPEsSpecs { PPEsId = _ppe.Id };  
+            _ppeSpecsMapper.MapToEntity(equipment, this);
+            equipment.Unit = (Unit)lueUnit.EditValue;
+            equipment.Model = slueModel.Properties.View.GetFocusedRow() as Model;
+
+            await _ppeInventoryService.PPESpecsBaseService.AddAsync(equipment);
 
             var res = (EquipmentSpecsViewModel)slueEquipment.Properties.View.GetFocusedRow();
-            var specs = await unitOfWork.EquipmentSpecsRepo.FindAsync(x => x.Id == res.Id);
+            var specs = await _equipmentService.EquipmentSpecsBaseService.GetByIdAsync(res.Id);
             if (specs.EquipmentSpecsDetails.Count > 0)
             {
                 if (MessageBox.Show("There are Existing Specs for this Equipment, Copy the Specs?",
@@ -143,58 +153,57 @@ namespace ICTProfilingV3.PPEInventoryForms
                     Description = spec.DetailDescription,
                     PPEsSpecs = ppesSpecs
                 };
-                unitOfWork.PPEsSpecsDetailsRepo.Insert(delSpecsDetails);
+                await _ppeInventoryService.PPESpecsDetailsBaseService.AddAsync(delSpecsDetails);
             }
-            await unitOfWork.SaveChangesAsync();
         }
 
         private async Task UpdateEquipment()
         {
-            var ppeSpecs = await unitOfWork.PPEsSpecsRepo.FindAsync(x => x.Id == _PPEsSpecs.Id);
-            ppeSpecs.Quantity = (int)spinQty.Value;
-            ppeSpecs.Unit = (Unit)cboUnit.EditValue;
-            ppeSpecs.ModelId = (int)slueModel.EditValue;
-            ppeSpecs.UnitCost = (long)spinUnitCost.Value;
-            ppeSpecs.TotalCost = (long)spintTotal.Value;
-            ppeSpecs.SerialNo = txtSerialNo.Text;
-            ppeSpecs.ItemNo = (int)spinItemNo.Value;
-            ppeSpecs.Description = txtDescription.Text;
+            var ppeSpecs = await _ppeInventoryService.PPESpecsBaseService.GetByIdAsync(_ppeSpecs.Id);
+            _ppeSpecsMapper.MapToEntity(ppeSpecs, this);
+            //ppeSpecs.Quantity = (int)spinQuantity.Value;
+            //ppeSpecs.Unit = (Unit)lueUnit.EditValue;
+            //ppeSpecs.ModelId = (int)slueModel.EditValue;
+            //ppeSpecs.UnitCost = (long)spinUnitCost.Value;
+            //ppeSpecs.TotalCost = (long)spinTotalCost.Value;
+            //ppeSpecs.SerialNo = txtSerialNo.Text;
+            //ppeSpecs.ItemNo = (int)spinItemNo.Value;
+            //ppeSpecs.Description = txtDescription.Text;
 
-            unitOfWork.PPEsSpecsRepo.Update(ppeSpecs);
-            await unitOfWork.SaveChangesAsync();
+            await _ppeInventoryService.PPESpecsBaseService.SaveChangesAsync();
             this.Close();
         }
 
         private void btnAddEquipment_Click(object sender, EventArgs e)
         {
-            var frm = new frmEquipment();
+            var frm = _serviceProvider.GetRequiredService<frmEquipment>();
             frm.ShowDialog();
             LoadDropdowns();
         }
 
         private void btnAddICTSpecs_Click(object sender, EventArgs e)
         {
-            var frm = new frmEquipmentSpecs();
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentSpecs>();
             frm.ShowDialog();
             LoadDropdowns();
         }
 
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
-            var frm = new frmEquipmentBrand();
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentBrand>();
             frm.ShowDialog();
             LoadDropdowns();
         }
 
         private void btnAddModel_Click(object sender, EventArgs e)
         {
-            var frm = new frmEquipmentModels();
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentModels>();
             frm.ShowDialog();
             LoadDropdowns();
         }
         private void CalcTotalValue()
         {
-            spintTotal.Value = spinUnitCost.Value * spinQty.Value;
+            spinTotalCost.Value = spinUnitCost.Value * spinQuantity.Value;
         }
 
         private void spinQty_EditValueChanged(object sender, EventArgs e)

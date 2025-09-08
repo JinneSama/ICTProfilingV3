@@ -1,8 +1,6 @@
 ﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
-using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.ToolForms;
-using Models.Repository;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,14 +19,14 @@ namespace ICTProfilingV3.DeliveriesForms
         }
         private void LoadDropdowns()
         {
-            var uow = new UnitOfWork();
-            slueSupplierName.Properties.DataSource = uow.SupplierRepo.GetAll().ToList();
-            var employees = HRMISEmployees.GetEmployees();
-            slueEmployee.Properties.DataSource = employees;
+            //var uow = new UnitOfWork();
+            //slueSupplierName.Properties.DataSource = uow.SupplierRepo.GetAll().ToList();
+            //var employees = HRMISEmployees.GetEmployees();
+            //slueEmployee.Properties.DataSource = employees;
         }
         private void LoadDetails()
         {
-            if(deliveries.Deliveries.FindingsRequestedById == null) slueEmployee.EditValue = deliveries.Deliveries.ReqByChiefId;
+            if (deliveries.Deliveries.FindingsRequestedById == null) slueEmployee.EditValue = deliveries.Deliveries.ReqByChiefId;
             else slueEmployee.EditValue = deliveries.Deliveries.FindingsRequestedById;
 
             txtPONo.Text = deliveries.Deliveries.PONo;
@@ -72,19 +70,19 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task UpdateDeliveries()
         {
-            var uow = new UnitOfWork();
-            var del = await uow.DeliveriesRepo.FindAsync(x => x.Id == deliveries.Deliveries.Id);
+            //var uow = new UnitOfWork();
+            //var del = await uow.DeliveriesRepo.FindAsync(x => x.Id == deliveries.Deliveries.Id);
 
-            del.FindingsRequestedById = (long)(slueEmployee.EditValue == null ? ofmisEmployee.Id : slueEmployee.EditValue);
-            
-            if(dePOServed.EditValue == null) del.POServed = null;
-            else del.POServed = dePOServed.DateTime;
+            //del.FindingsRequestedById = (long)(slueEmployee.EditValue == null ? ofmisEmployee.Id : slueEmployee.EditValue);
 
-            del.FindingsStatus = memoStatus.Text;  
-            del.FindingsActionTaken = memoActionTaken.Text;
-            uow.DeliveriesRepo.Update(del);
+            //if (dePOServed.EditValue == null) del.POServed = null;
+            //else del.POServed = dePOServed.DateTime;
 
-            await uow.SaveChangesAsync();
+            //del.FindingsStatus = memoStatus.Text;
+            //del.FindingsActionTaken = memoActionTaken.Text;
+            //uow.DeliveriesRepo.Update(del);
+
+            //await uow.SaveChangesAsync();
         }
 
         private void btnPreview_Click(object sender, System.EventArgs e)

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using ICTProfilingV3.Interfaces;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace ICTProfilingV3.Utility.Security
 {
-    public class Cryptography
+    public class Cryptography : ICryptography
     {
-        public static string Encrypt(string encryptString, string _EncryptionKey)
+        public string Encrypt(string encryptString, string _EncryptionKey)
         { 
             string EncryptionKey = _EncryptionKey; 
 
@@ -36,7 +37,7 @@ namespace ICTProfilingV3.Utility.Security
             return encryptString;
         }
 
-        public static string Decrypt(string cipherText, string _EncryptionKey)
+        public string Decrypt(string cipherText, string _EncryptionKey)
         {
             string EncryptionKey = _EncryptionKey;
             cipherText = cipherText.Replace(" ", "+");

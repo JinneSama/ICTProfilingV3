@@ -1,25 +1,37 @@
-﻿using DevExpress.XtraRichEdit.Import.Html;
-using Helpers.Utility;
+﻿using Helpers.Utility;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
+using System.Data.Entity;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.ReportForms
 {
     public partial class frmQuarterlyReport : BaseForm
     {
+        private readonly IDeliveriesService _deliveriesService;
+        private readonly IRepairService _repairService;
+        private readonly ITechSpecsService _techSpecsService;
+        private readonly ICASService _casService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserStore _userStore;
-        public frmQuarterlyReport(UserStore userStore)
+
+        public frmQuarterlyReport(UserStore userStore, IServiceProvider serviceProvider, IRepairService repairService, 
+            ITechSpecsService techSpecsService, ICASService casService, IDeliveriesService deliveriesService)
         {
+            _serviceProvider = serviceProvider;
             _userStore = userStore;
+            _repairService = repairService;
+            _techSpecsService = techSpecsService;
+            _casService = casService;
+            _deliveriesService = deliveriesService;
+
             InitializeComponent();
             LoadDropdowns();
         }
@@ -72,21 +84,23 @@ namespace ICTProfilingV3.ReportForms
                 DataSource = new List<QuarterlyReport>() { quarterReport }
             };
 
-            var reportViewer = new frmReportViewer(rpt);
+            var reportViewer = _serviceProvider.GetRequiredService<frmReportViewer>();
+            reportViewer.InitForm(rpt);
             reportViewer.ShowDialog();
         }
 
         private QuarterlyReport SetProcess((DateTime start, DateTime end) quarterDate, RequestType requestType, PRQuarter quaterDesc, Sections sections)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             QuarterlyReport quaterReport = new QuarterlyReport();
             if (requestType == RequestType.CAS)
             {
-                var cas = unitOfWork.CustomerActionSheetRepo.FindAllAsync(x => x.RecordsRequestStatus
+                var cas = _casService.GetAll()
+                    .Where(x => x.RecordsRequestStatus
                     .OrderByDescending(s => s.DateStatusChanged).FirstOrDefault().DateStatusChanged >= quarterDate.start && x.RecordsRequestStatus
-                    .OrderByDescending(s => s.DateStatusChanged).FirstOrDefault().DateStatusChanged <= quarterDate.end && x.Status == TicketStatus.Completed,
-                    x => x.EvaluationSheets,
-                    x => x.AssistedBy).ToList();
+                    .OrderByDescending(s => s.DateStatusChanged).FirstOrDefault().DateStatusChanged <= quarterDate.end && x.Status == TicketStatus.Completed)
+                    .Include(x => x.EvaluationSheets)
+                    .Include(x => x.AssistedBy)
+                    .ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
@@ -105,18 +119,19 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.Deliveries)
             {
-                var cas = unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                var cas = _deliveriesService.GetAll().Where(x => x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
-                && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
-                    x => x.EvaluationSheets,
-                    x => x.TicketRequest,
-                    x => x.TicketRequest.ITStaff,
-                    x => x.TicketRequest.ITStaff.Users,
-                    x => x.TicketRequest.TicketRequestStatus,
-                    x => x.DeliveriesSpecs).ToList();
+                            && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections)
+                            .Include(x => x.EvaluationSheets)
+                            .Include(x => x.TicketRequest)
+                            .Include(x => x.TicketRequest.ITStaff)
+                            .Include(x => x.TicketRequest.ITStaff.Users)
+                            .Include(x => x.TicketRequest.TicketRequestStatus)
+                            .Include(x => x.DeliveriesSpecs)
+                            .ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
@@ -135,17 +150,17 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.TechSpecs)
             {
-                var cas = unitOfWork.TechSpecsRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                var cas = _techSpecsService.GetAll().Where(x => x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
-                && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
-                    x => x.EvaluationSheets,
-                    x => x.TicketRequest,
-                    x => x.TicketRequest.ITStaff,
-                    x => x.TicketRequest.ITStaff.Users,
-                    x => x.TicketRequest.TicketRequestStatus).ToList();
+                            && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections)
+                            .Include(x => x.EvaluationSheets)
+                            .Include(x => x.TicketRequest)
+                            .Include(x => x.TicketRequest.ITStaff)
+                            .Include(x => x.TicketRequest.ITStaff.Users)
+                            .Include(x => x.TicketRequest.TicketRequestStatus).ToList();
 
                 var rating = cas.Select(x => new EvaluationRating
                 {
@@ -164,17 +179,18 @@ namespace ICTProfilingV3.ReportForms
 
             if (requestType == RequestType.Repairs)
             {
-                var repair = unitOfWork.RepairsRepo.FindAllAsync(x => x.TicketRequest.TicketRequestStatus
+                var repair = _repairService.GetAll().Where(x => x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged >= quarterDate.start && x.TicketRequest.TicketRequestStatus
                             .OrderByDescending(s => s.DateStatusChanged)
                             .FirstOrDefault().DateStatusChanged <= quarterDate.end && x.TicketRequest.TicketStatus == TicketStatus.Completed
-                && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections,
-                    x => x.EvaluationSheets,
-                    x => x.TicketRequest,
-                    x => x.TicketRequest.ITStaff,
-                    x => x.TicketRequest.ITStaff.Users,
-                    x => x.TicketRequest.TicketRequestStatus).ToList();
+                            && x.TicketRequest.StaffId != null && x.TicketRequest.ITStaff.Section == sections)
+                            .Include(x => x.EvaluationSheets)
+                            .Include(x => x.TicketRequest)
+                            .Include(x => x.TicketRequest.ITStaff)
+                            .Include(x => x.TicketRequest.ITStaff.Users)
+                            .Include(x => x.TicketRequest.TicketRequestStatus)
+                            .ToList();
 
                 var rating = repair.Select(x => new EvaluationRating
                 {

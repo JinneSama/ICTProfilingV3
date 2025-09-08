@@ -1,8 +1,7 @@
 ﻿using DevExpress.XtraEditors;
-using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
-using Models.Repository;
+using ICTProfilingV3.Interfaces;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,15 +11,17 @@ namespace ICTProfilingV3.ToolForms
 {
     public partial class frmChangelogs : BaseForm
     {
-        private readonly string version;
-        private IUnitOfWork unitOfWork;
-        private readonly HTTPNetworkFolder httpNetworkFolder;
-        public frmChangelogs(string version)
+        private readonly IChangeLogService _changeLogService;
+        private string _version;
+        public frmChangelogs(IChangeLogService changeLogService)
         {
+            _changeLogService = changeLogService;
             InitializeComponent();
-            this.version = version;
-            httpNetworkFolder = new HTTPNetworkFolder();
-            unitOfWork = new UnitOfWork();
+        }
+
+        public void InitForm(string version)
+        {
+            _version = version;
             LoadDetails();
         }
 
@@ -30,16 +31,16 @@ namespace ICTProfilingV3.ToolForms
             var firstDayOfLastMonth = new DateTime(now.Year, now.Month, 1).AddMonths(-1);
 
             btnClose.Enabled = false;
-            lblVersion.Text = "Current Version: " + version;
+            lblVersion.Text = "Current Version: " + _version;
             var changes = await Task.WhenAll(
-                unitOfWork.ChangeLogsRepo.GetAll()
+                _changeLogService.GetAll()
                 .Where(x => x.DateCreated >= firstDayOfLastMonth)
                     .OrderByDescending(x => x.DateCreated)
                     .ToList()
                     .Select(async s => new ChangelogsViewModel
                     {
                         ChangeLogs = s,
-                        Image = await httpNetworkFolder.DownloadFile(s.ImageName)
+                        Image = await _changeLogService.DownloadFile(s.ImageName)
                     })
             );
             gcChangelogs.DataSource = changes.ToList();

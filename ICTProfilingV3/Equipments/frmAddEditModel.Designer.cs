@@ -89,7 +89,7 @@
             this.btnSave.Size = new System.Drawing.Size(97, 28);
             this.btnSave.TabIndex = 103;
             this.btnSave.Text = "Save";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_ClickAsync);
             // 
             // memoDesc
             // 

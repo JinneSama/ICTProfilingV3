@@ -1,45 +1,44 @@
 ﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraRichEdit.Layout;
-using Helpers.Interfaces;
-using Helpers.Utility;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels.ReportViewModel;
 using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.ReportForms;
-using ICTProfilingV3.TechSpecsForms;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.MOForms
 {
-    public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
+    public partial class UCMOAccounts : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUCManager _ucManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IMOService _moService;
         private readonly UserStore _userStore;
-        public UCMOAccounts(IUCManager ucManager, IServiceProvider serviceProvider, UserStore userStore)
+        public UCMOAccounts(IServiceProvider serviceProvider, UserStore userStore,
+            IMOService moService)
         {
             _userStore = userStore;
             _serviceProvider = serviceProvider;
+            _moService = moService;
             InitializeComponent();
-            _ucManager = ucManager;
             LoadData();
         }
 
         private void LoadData()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var accounts = unitOfWork.MOAccountRepo.GetAll(x => x.Office,
-                x => x.MOAccountUsers,
-                x => x.MOAccountUsers.Select(s => s.PPE)).ToList().Select(x => new MOAccountsViewModel
+            var accounts = _moService.GetAll()
+                .Include(x => x.Office)
+                .Include(x => x.MOAccountUsers)
+                .Include(x => x.MOAccountUsers.Select(s => s.PPE))
+                .ToList()
+                .Select(x => new MOAccountsViewModel
                 {
                     MOAccount = x,
                     MOAccountUsers = new BindingList<MOAccountUsers>(x.MOAccountUsers.ToList())
@@ -49,28 +48,28 @@ namespace ICTProfilingV3.MOForms
 
         private void btnAddPN_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditMOAccount();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditMOAccount>();
+            frm.InitForm();
             frm.ShowDialog();
 
             LoadData();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             if (MessageBox.Show("Delete this Account? Users of this account will be deleted as well", 
                 "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
             var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
-            unitOfWork.MOAccountUserRepo.DeleteRange(x => x.MOAccountId == row.MOAccount.Id);
-            unitOfWork.MOAccountRepo.DeleteByEx(x => x.Id == row.MOAccount.Id);
-            unitOfWork.Save();
+            await _moService.MOAccountUserBaseService.DeleteRangeAsync(x => x.MOAccountId == row.MOAccount.Id);
+            await _moService.DeleteRangeAsync(x => x.Id == row.MOAccount.Id);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var row = (MOAccountsViewModel)gridLogs.GetFocusedRow();
-            var frm = new frmAddEditMOAccount(row.MOAccount);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditMOAccount>();
+            frm.InitForm(row.MOAccount);
             frm.ShowDialog();
 
             LoadData();
@@ -116,10 +115,12 @@ namespace ICTProfilingV3.MOForms
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var accounts = unitOfWork.MOAccountRepo.GetAll(x => x.Office,
-                x => x.MOAccountUsers,
-                x => x.MOAccountUsers.Select(s => s.PPE)).ToList().Select(x => new MOAccountsViewModel
+            var accounts = _moService.GetAll()
+                .Include(x => x.Office)
+                .Include(x => x.MOAccountUsers)
+                .Include(x => x.MOAccountUsers.Select(s => s.PPE))
+                .ToList()
+                .Select(x => new MOAccountsViewModel
                 {
                     MOAccount = x,
                     MOAccountUsers = new BindingList<MOAccountUsers>(x.MOAccountUsers.ToList())
@@ -138,7 +139,8 @@ namespace ICTProfilingV3.MOForms
             };
 
             rptM365.CreateDocument();
-            var frm = new frmReportViewer(rptM365);
+            var frm = _serviceProvider.GetRequiredService<frmReportViewer>();
+            frm.InitForm(rptM365);
             frm.ShowDialog();
         }
 
@@ -149,16 +151,6 @@ namespace ICTProfilingV3.MOForms
                 var focusedRow = gridLogs.GetRowHandle(i);
                 gridLogs.SetMasterRowExpanded(focusedRow, !gridLogs.GetMasterRowExpanded(focusedRow));
             }
-        }
-
-        public void DisposeUC(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                ctrl.Dispose();
-                GC.Collect();
-            }
-            parent.Controls.Clear();
         }
     }
 }

@@ -85,6 +85,7 @@
             this.txtPassword.Properties.UseSystemPasswordChar = true;
             this.txtPassword.Size = new System.Drawing.Size(331, 28);
             this.txtPassword.TabIndex = 73;
+            this.txtPassword.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyUp);
             // 
             // txtUsername
             // 
@@ -95,6 +96,7 @@
             this.txtUsername.Properties.Appearance.Options.UseFont = true;
             this.txtUsername.Size = new System.Drawing.Size(331, 28);
             this.txtUsername.TabIndex = 72;
+            this.txtUsername.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUsername_KeyUp);
             // 
             // lblversion
             // 
@@ -152,7 +154,6 @@
             this.memoTerms.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.memoTerms.Properties.Appearance.Options.UseFont = true;
             this.memoTerms.Properties.ReadOnly = true;
-            this.memoTerms.Properties.Spin += new DevExpress.XtraEditors.Controls.SpinEventHandler(this.memoEdit1_Properties_Spin);
             this.memoTerms.Size = new System.Drawing.Size(331, 161);
             this.memoTerms.TabIndex = 96;
             // 

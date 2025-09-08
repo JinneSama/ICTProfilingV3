@@ -1,8 +1,7 @@
-﻿using DevExpress.XtraBars;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,29 +10,28 @@ namespace ICTProfilingV3.ToolForms
 {
     public partial class frmViewChangeLogs : BaseForm
     {
-        private IUnitOfWork unitOfWork;
         private readonly IServiceProvider _serviceProvider;
-        public frmViewChangeLogs(IServiceProvider serviceProvider)
+        private readonly IChangeLogService _changeLogService;
+        public frmViewChangeLogs(IServiceProvider serviceProvider, IChangeLogService changeLogService)
         {
             _serviceProvider = serviceProvider;
+            _changeLogService = changeLogService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadDetails();
         }
 
         private void LoadDetails()
         {
-            var changes = unitOfWork.ChangeLogsRepo.GetAll().OrderByDescending(x => x.DateCreated);
+            var changes = _changeLogService.GetAll().OrderByDescending(x => x.DateCreated);
             gcChangelogs.DataSource = changes.ToList();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
             var row = (ChangeLogs)gridChangelogs.GetFocusedRow();
             if (MessageBox.Show("Delete this Changelog?", "Confirmation?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel) return;
 
-            unitOfWork.ChangeLogsRepo.Delete(row);
-            unitOfWork.Save();
+            await _changeLogService.DeleteAsync(row.Id);
 
             LoadDetails();
         }

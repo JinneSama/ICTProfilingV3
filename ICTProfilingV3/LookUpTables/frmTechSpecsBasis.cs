@@ -1,64 +1,70 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
     public partial class frmTechSpecsBasis : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        public bool Copy { get; set; }
+        private readonly ITechSpecsService _tsService;
+        private readonly IEquipmentService _equipmentService;
+        private readonly IServiceProvider _serviceProvider;
+        public bool _copy { get; set; }
         public IEnumerable<TechSpecsBasisDetails> SpecsDetails { get; set; }
-        public frmTechSpecsBasis()
+        public frmTechSpecsBasis(ITechSpecsService techSpecsService, IEquipmentService equipmentService,
+            IServiceProvider serviceProvider)
         {
+            _tsService = techSpecsService;
+            _equipmentService = equipmentService;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
         }
 
         private async void LoadSpecsBasis()
         {
-            colCopy.Visible = Copy;
-            var equipmentDropdown = unitOfWork.EquipmentSpecsRepo.GetAll(x => x.Equipment);
+            colCopy.Visible = _copy;
+            var equipmentDropdown = _equipmentService.EquipmentSpecsBaseService.GetAll().Include(x => x.Equipment);
             equipmentSpecsBindingSource.DataSource = equipmentDropdown.ToList();
 
-            var equipmentBasis = await unitOfWork.TechSpecsBasisRepo.GetAll(x => x.EquipmentSpecs,
-                x => x.EquipmentSpecs.Equipment,
-                x => x.TechSpecsBasisDetails).ToListAsync();
+            var equipmentBasis = await _tsService.TechSpecsBasisBaseService.GetAll()
+                .Include(x => x.EquipmentSpecs)
+                .Include(x => x.EquipmentSpecs.Equipment)
+                .Include(x => x.TechSpecsBasisDetails).ToListAsync();
             gcTSBasis.DataSource = new BindingList<TechSpecsBasis>(equipmentBasis);
         }
 
         private async void gridTSBasis_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (TechSpecsBasis)gridTSBasis.GetFocusedRow();
-            var check = await unitOfWork.TechSpecsBasisRepo.FindAsync(x => x.Id == row.Id);
+            var check = await _tsService.TechSpecsBasisBaseService.GetByIdAsync(row.Id);
             if(check == null) InsertSpecs(row);
-            else UpdateSpecs(row);
+            else await UpdateSpecs(row);
         }
 
-        private async void UpdateSpecs(TechSpecsBasis row)
+        private async Task UpdateSpecs(TechSpecsBasis row)
         {
-            var res = await unitOfWork.TechSpecsBasisRepo.FindAsync(x => x.Id == row.Id);
+            var res = await _tsService.TechSpecsBasisBaseService.GetByIdAsync(row.Id);
             res.PriceRange = row.PriceRange;
             res.PriceDate = row.PriceDate;
             res.URLBasis = row.URLBasis;
             res.Remarks = row.Remarks;
             res.Available = row.Available;
             res.EquipmentSpecsId = row.EquipmentSpecsId;
-            unitOfWork.TechSpecsBasisRepo.Update(res);
-            unitOfWork.Save();
+            await _tsService.TechSpecsBasisBaseService.SaveChangesAsync();
         }
 
         private void InsertSpecs(TechSpecsBasis row)
         {
-            unitOfWork.TechSpecsBasisRepo.Insert(row);
-            unitOfWork.Save();
+            _tsService.TechSpecsBasisBaseService.AddAsync(row);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -67,8 +73,7 @@ namespace ICTProfilingV3.LookUpTables
                 MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
 
             var row = (TechSpecsBasis)gridTSBasis.GetFocusedRow();
-            unitOfWork.TechSpecsBasisRepo.Delete(row);
-            unitOfWork.Save();
+            _tsService.TechSpecsBasisBaseService.DeleteAsync(row.Id);
             LoadSpecsBasis();
 
             MessageBox.Show("Deleted!");
@@ -98,7 +103,8 @@ namespace ICTProfilingV3.LookUpTables
         private void btnAddSpecs_Click(object sender, EventArgs e)
         {
             var row = (TechSpecsBasis)gridTSBasis.GetFocusedRow();
-            var frm = new frmTechSpecsBasisDetails(row);
+            var frm = _serviceProvider.GetRequiredService<frmTechSpecsBasisDetails>();
+            frm.InitForm(row);
             frm.ShowDialog();
         }
 

@@ -34,14 +34,23 @@
     <Reference Include="DevExpress.Utils.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v21.2, Version=21.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Interop.WIA">
+      <HintPath>..\Helpers\obj\Debug\Interop.WIA.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=9.0.0.6, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.9.0.6\lib\net462\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -63,7 +72,11 @@
     <Compile Include="Employee\HRMISEmployees.cs" />
     <Compile Include="EncryptFile.cs" />
     <Compile Include="HelpersDependencyRegistrar.cs" />
+    <Compile Include="MachineCredentials.cs" />
+    <Compile Include="ParseInventory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scanner\ScanDocument.cs" />
+    <Compile Include="Scanner\WIAScanner.cs" />
     <Compile Include="Security\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +91,10 @@
     <ProjectReference Include="..\ICTProfilingV3.Services\ICTProfilingV3.Services.csproj">
       <Project>{6A9E372A-65B2-476B-8241-16CD109D8C6A}</Project>
       <Name>ICTProfilingV3.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\EntityManager.csproj">
+      <Project>{D30CDBB1-D049-45ED-9700-30003C0DB0A8}</Project>
+      <Name>EntityManager</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

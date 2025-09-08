@@ -3,14 +3,13 @@ using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels.ServiceModels.DTOModels;
 using ICTProfilingV3.DebugTools;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.Services.ApiUsers;
 using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.ToolForms;
-using ICTProfilingV3.Utility.Security;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
+using Models.Enums;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,21 +17,24 @@ namespace ICTProfilingV3.LoginForms
 {
     public partial class frmLogin : BaseForm
     {
-        private readonly IICTUserManager userManager;
+        private readonly IStaffService _staffService;
+        private readonly IICTUserManager _userManager;
+        private readonly ICryptography _cryptography;
         private readonly IServiceProvider _serviceProvider;
-        private readonly IUnitOfWork unitOfWork;
         private readonly UserStore _userStore;
 
         private readonly frmMain frmMain;
         private bool Logged = false;
         private bool isLoggingIn = false;
-        public frmLogin(IServiceProvider serviceProvider, UserStore userStore)
+        public frmLogin(IServiceProvider serviceProvider, UserStore userStore, IICTUserManager userManager, ICryptography cryptography, IStaffService staffService)
         {
-            InitializeComponent();
             _userStore = userStore;
             _serviceProvider = serviceProvider;
-            userManager = new ICTUserManager();
-            unitOfWork = new UnitOfWork();
+            _userManager = userManager;
+            _cryptography = cryptography;
+            _staffService = staffService;
+            InitializeComponent();
+
             frmMain = _serviceProvider.GetRequiredService<frmMain>();
             RetrieveLoginDetails();
 
@@ -51,7 +53,8 @@ namespace ICTProfilingV3.LoginForms
                     Properties.Settings.Default.LastVersion = version;
                     Properties.Settings.Default.Save();
 
-                    frmChangelogs frm = new frmChangelogs(version);
+                    var frm = _serviceProvider.GetRequiredService<frmChangelogs>();
+                    frm.InitForm(version);
                     frm.ShowDialog();
                 }
             }
@@ -59,8 +62,13 @@ namespace ICTProfilingV3.LoginForms
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
+            await Login();
+        }
+
+        private async Task Login()
+        {
             if (ceTerms.Checked == false) return;
-            if(txtUsername.Text == "#SetVersion#")
+            if (txtUsername.Text == "#SetVersion#")
             {
                 var frm = new frmVersionSetter();
                 frm.ShowDialog();
@@ -69,10 +77,9 @@ namespace ICTProfilingV3.LoginForms
 
             if (isLoggingIn) return;
             isLoggingIn = true;
-            await Login(txtUsername.Text , txtPassword.Text);
+            await Login(txtUsername.Text, txtPassword.Text);
             isLoggingIn = false;
         }
-
         public async Task Login(string username, string password)
         {
             if (username == "sa")
@@ -86,7 +93,7 @@ namespace ICTProfilingV3.LoginForms
 
             if(systemUser == null)
             {
-                var res = await userManager.Login(username, password);
+                var res = await _userManager.Login(username, password);
                 if(!res.success) logged = false;
                 user = res.user;
             }
@@ -101,9 +108,11 @@ namespace ICTProfilingV3.LoginForms
                 _userStore.UserId = user.Id;
                 _userStore.Username = user.UserName;
                 _userStore.Fullname = user.FullName;
+                _userStore.UserRole = user.Roles.FirstOrDefault().RoleId;
+                var section = await _staffService.GetByFilterAsync(x => x.UserId == _userStore.UserId);
 
                 frmMain.setRoleDesignations();
-                frmMain.SetUser(user.FullName,user.Position);
+                frmMain.SetUser(user.FullName,user.Position, section.Section);
                 if (chkRemember.Checked) SetLoginDetails();
                 else ClearLoginDetails();
 
@@ -122,7 +131,7 @@ namespace ICTProfilingV3.LoginForms
             _userStore.Username = ofmisUser.Username;
             _userStore.Fullname = password;
             frmMain.setClientDesignation();
-            frmMain.SetUser(ofmisUser.Username, "Client");
+            frmMain.SetUser(ofmisUser.Username, "Client", Sections.Client);
             this.Close();
         }
 
@@ -131,7 +140,7 @@ namespace ICTProfilingV3.LoginForms
             var ofmisUser = await OFMISUsers.GetUser(username);
             if (ofmisUser == null) return null;
 
-            var decryptPass = Cryptography.Decrypt(ofmisUser.PasswordHash, ofmisUser.SecurityStamp);
+            var decryptPass = _cryptography.Decrypt(ofmisUser.PasswordHash, ofmisUser.SecurityStamp);
             if (Equals(decryptPass, password)) return ofmisUser;
             else return null;
         }
@@ -141,7 +150,7 @@ namespace ICTProfilingV3.LoginForms
             var user = await CheckOFMIS(username, password);
             if (user == null) return (null, null);
 
-            var systemUser = await unitOfWork.UsersRepo.FindAsync(x => x.UserName == user.Username);
+            var systemUser = await _userManager.FindUserByUsername(user.Username);
             if (systemUser == null) return (null, user);
             return (systemUser, user);
         }
@@ -172,8 +181,16 @@ namespace ICTProfilingV3.LoginForms
             if(!Logged) Application.Exit();
         }
 
-        private void memoEdit1_Properties_Spin(object sender, DevExpress.XtraEditors.Controls.SpinEventArgs e)
-        {  
+        private async void txtUsername_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+                await Login();
+        }
+
+        private async void txtPassword_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                await Login();
         }
     }
 }

@@ -14,10 +14,9 @@ using ICTProfilingV3.TechSpecsForms;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Models;
-using Models.Repository;
 using System;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
@@ -28,23 +27,26 @@ namespace ICTProfilingV3.DashboardForms
 {
     public partial class UCUserTasks : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
+        private readonly ITicketRequestService _ticketService;
         private readonly IICTUserManager _userManager;
         private readonly IICTRoleManager _roleManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IStaffService _staffService;
         private readonly UserStore _userStore;
         public bool FromQueue { get; set; } = false;
         public UCUserTasks(IServiceProvider serviceProvider, UserStore userStore, IICTRoleManager roleManager,
-            IICTUserManager userManager)
+            IICTUserManager userManager, ITicketRequestService ticketService,
+            IStaffService staffService)
         {
             InitializeComponent();
             _userStore = userStore;
             _userManager = userManager;
             _roleManager = roleManager;
-            unitOfWork = new UnitOfWork();
+            _ticketService = ticketService;
+            _serviceProvider = serviceProvider;
+            _staffService = staffService;
             InitKanban();
             LoadDropdowns();
-            _serviceProvider = serviceProvider;
         }
 
         private void LoadDropdowns()
@@ -131,35 +133,35 @@ namespace ICTProfilingV3.DashboardForms
         {
             Expression<Func<TicketRequest, bool>> filterExpression = expression ?? (x => true);
             Expression<Func<TicketRequest, bool>> filterAdminExpression = (x  => true);
-            var section = await _userStore.Section();
+            var section = await _staffService.Section();
 
             if (section == null && taskAdmin) filterAdminExpression = (x => true);
             if (taskAdmin && section != null) filterAdminExpression = x => x.ITStaff.Section == section;
             if (!taskAdmin && section != null) filterAdminExpression = x => x.ITStaff.Section == section;
 
-            var tickets = unitOfWork.TicketRequestRepo.GetAll(
-                x => x.Repairs,
-                x => x.Repairs.Actions,
-                x => x.Repairs.PPEs, 
-                x => x.Repairs.PPEs.PPEsSpecs, 
-                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model), 
-                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand), 
-                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs), 
-                x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
-                x => x.TechSpecs, 
-                x => x.TechSpecs.Actions,
-                x => x.TechSpecs.TechSpecsICTSpecs, 
-                x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs), 
-                x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment),
-                x => x.Deliveries, 
-                x => x.Deliveries.Actions,
-                x => x.Deliveries.DeliveriesSpecs, 
-                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model), 
-                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand), 
-                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs), 
-                x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment),
-                x => x.ITStaff,
-                x => x.ITStaff.Users
+            var tickets = _ticketService.GetAll()
+                .Include(x => x.Repairs)
+                .Include(x => x.Repairs.Actions)
+                .Include(x => x.Repairs.PPEs) 
+                .Include(x => x.Repairs.PPEs.PPEsSpecs) 
+                .Include(x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model)) 
+                .Include(x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand)) 
+                .Include(x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs)) 
+                .Include(x => x.Repairs.PPEs.PPEsSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment))
+                .Include(x => x.TechSpecs) 
+                .Include(x => x.TechSpecs.Actions)
+                .Include(x => x.TechSpecs.TechSpecsICTSpecs) 
+                .Include(x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs)) 
+                .Include(x => x.TechSpecs.TechSpecsICTSpecs.Select(s => s.EquipmentSpecs.Equipment))
+                .Include(x => x.Deliveries) 
+                .Include(x => x.Deliveries.Actions)
+                .Include(x => x.Deliveries.DeliveriesSpecs) 
+                .Include(x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model)) 
+                .Include(x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand)) 
+                .Include(x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs)) 
+                .Include(x => x.Deliveries.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment))
+                .Include(x => x.ITStaff)
+                .Include(x => x.ITStaff.Users
                 ).Where(filterExpression).Where(filterAdminExpression).ToList().Select(x => new TasksViewModel
             {
                 Ticket = x,
@@ -208,10 +210,10 @@ namespace ICTProfilingV3.DashboardForms
 
         private async Task UpdateTicketStatus(TasksViewModel model,TicketStatus status)
         {
-            var task = await unitOfWork.TicketRequestRepo.FindAsync(x => x.Id == model.Ticket.Id);
+            var task = await _ticketService.GetByFilterAsync(x => x.Id == model.Ticket.Id);
             if(task == null) return;    
             task.TicketStatus = status;
-            unitOfWork.Save();
+            await _ticketService.SaveChangesAsync();
         }
 
         private void hplEpisNo_Click(object sender, EventArgs e)

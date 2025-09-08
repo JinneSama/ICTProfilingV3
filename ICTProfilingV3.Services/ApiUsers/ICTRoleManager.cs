@@ -9,7 +9,7 @@ using Models.Enums;
 
 namespace ICTProfilingV3.Services.ApiUsers
 {
-    public class ICTRoleManager : IICTRoleManager , IDisposable
+    public class ICTRoleManager : IICTRoleManager, IDisposable
     {
         private readonly RoleManager _roleManager;
         private readonly UserManager _userManager;
@@ -108,5 +108,11 @@ namespace ICTProfilingV3.Services.ApiUsers
             disposed = true;
         }
 
+        public async Task<bool> HasDesignation(Designation designation, string roleId)
+        {
+            var roles = await GetRoleDesignations(roleId);
+            var hasDesignation = roles.Select(x => x.Designation).Contains(designation);
+            return hasDesignation;
+        }
     }
 }

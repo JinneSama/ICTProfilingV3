@@ -5,19 +5,23 @@ namespace ICTProfilingV3.ToolForms
 {
     public partial class UCAssignedTo : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly StaffModel staffModel;
+        private StaffModel _staffModel;
 
-        public UCAssignedTo(StaffModel staffModel)
+        public UCAssignedTo()
         {
             InitializeComponent();
-            this.staffModel = staffModel;
+        }
+
+        public void InitUC(StaffModel staffModel)
+        {
+            _staffModel = staffModel;
         }
 
         private void UCAssignedTo_Load(object sender, System.EventArgs e)
         {
-            hccAssignedTo.DataContext = new List<StaffModel>() { staffModel };
-            hccAssignedTo.FindElementById("Photo").Hidden = staffModel.PhotoVisible;
-            hccAssignedTo.FindElementById("Initials").Hidden = staffModel.InitialsVisible;
+            hccAssignedTo.DataContext = new List<StaffModel>() { _staffModel };
+            hccAssignedTo.FindElementById("Photo").Hidden = _staffModel.PhotoVisible;
+            hccAssignedTo.FindElementById("Initials").Hidden = _staffModel.InitialsVisible;
         }
     }
 }

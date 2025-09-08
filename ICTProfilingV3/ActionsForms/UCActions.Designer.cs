@@ -191,8 +191,7 @@
             gridFormatRule1.ColumnApplyTo = this.gridColumn7;
             gridFormatRule1.Name = "Format0";
             formatConditionRuleExpression1.AllowAnimation = DevExpress.Utils.DefaultBoolean.True;
-            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Green;
-            formatConditionRuleExpression1.Appearance.BackColor2 = System.Drawing.Color.Green;
+            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.ForestGreen;
             formatConditionRuleExpression1.Appearance.BorderColor = System.Drawing.Color.Black;
             formatConditionRuleExpression1.Appearance.ForeColor = System.Drawing.Color.White;
             formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
@@ -212,7 +211,7 @@
             gridFormatRule3.ApplyToRow = true;
             gridFormatRule3.Column = this.colDiscrepancy;
             gridFormatRule3.Name = "Format3";
-            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Gold;
+            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             formatConditionRuleExpression3.Appearance.ForeColor = System.Drawing.Color.Black;
             formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
             formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;

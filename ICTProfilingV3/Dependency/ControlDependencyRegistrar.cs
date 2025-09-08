@@ -1,5 +1,4 @@
-﻿using DevExpress.XtraCharts;
-using ICTProfilingV3.ActionsForms;
+﻿using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DashboardForms;
@@ -10,16 +9,12 @@ using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
-using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
 
 namespace ICTProfilingV3.Dependency
 {
@@ -33,7 +28,6 @@ namespace ICTProfilingV3.Dependency
             services.AddTransient(typeof(UCDashboard));
             services.AddTransient(typeof(UCM365Dashboard));
             services.AddTransient(typeof(UCPGNDashboard));
-            services.AddTransient(typeof(UCQueue));
             services.AddTransient(typeof(UCRepairDashboard));
             services.AddTransient(typeof(UCRequestDashboard));
             services.AddTransient(typeof(UCRoutedActions));
@@ -54,16 +48,12 @@ namespace ICTProfilingV3.Dependency
             services.AddTransient(typeof(UCFDTS));
             services.AddTransient(typeof(UCOFMISPR));
             services.AddTransient(typeof(UCPR));
-            services.AddTransient(typeof(UCAddPPEEquipment));
             services.AddTransient(typeof(UCRepair));
-            services.AddTransient(typeof(UCStandardPR));
             services.AddTransient(typeof(UCRequestedTechSpecs));
             services.AddTransient(typeof(UCTechSpecs));
             services.AddTransient(typeof(UCTARequestDashboard));
             services.AddTransient(typeof(UCAssignedTo));
-            services.AddTransient(typeof(UCLogManager));
             services.AddTransient(typeof(UCAssignedTo));
-            services.AddTransient(typeof(UCLogManager));
 
             RegisterForms(services);
         }

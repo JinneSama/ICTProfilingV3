@@ -1,7 +1,6 @@
 ﻿using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,33 +11,42 @@ using ICTProfilingV3.ReportForms;
 using System.Collections.Generic;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.Services.ApiUsers;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.DataTransferModels.ReportViewModel;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
     public partial class frmComparisonReport : BaseForm
     {
         private readonly UserStore _userStore;
-        private Deliveries deliveries;
-        private IICTUserManager userManager;
-        private IUnitOfWork unitOfWork;
+        private readonly IICTUserManager _userManager;
+        private readonly IComparisonReportService _comparisonReportService;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IDeliveriesService _deliveriesService;
+
+        private Deliveries _deliveries;
 
         private bool IsDetail = false;
-        public frmComparisonReport(UserStore userStore)
+        public frmComparisonReport(UserStore userStore, IICTUserManager userManager, 
+            IComparisonReportService comparisonReportService, IServiceProvider serviceProvider,
+            IDeliveriesService deliveriesService)
         {
+            _userManager = userManager;
+            _userStore = userStore;
+            _comparisonReportService = comparisonReportService;
+            _serviceProvider = serviceProvider;
+            _deliveriesService = deliveriesService;
+
             InitializeComponent();
-            userManager = new ICTUserManager();
-            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 
         public void InitForm(Deliveries deliveries = null)
         {
-            this.deliveries = deliveries;
+            _deliveries = deliveries;
         }
 
         private void ExpandAll()
@@ -52,8 +60,7 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task LoadData()
         {
-            var uow = new UnitOfWork();
-            var del = await uow.DeliveriesRepo.FindAsync(x => x.Id == deliveries.Id,
+            var del = await _deliveriesService.GetByFilterAsync(x => x.Id == _deliveries.Id,
                 x => x.Supplier,
                 x => x.TicketRequest,
                 x => x.TicketRequest.ITStaff,
@@ -63,26 +70,26 @@ namespace ICTProfilingV3.DeliveriesForms
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
                 x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
 
-            deliveries = del;
-            lblEpisNo.Text = deliveries.Id.ToString();
+            _deliveries = del;
+            lblEpisNo.Text = _deliveries.Id.ToString();
 
-            var employee = HRMISEmployees.GetEmployeeById(deliveries.RequestedById);
-            txtDateOfDelivery.Text = deliveries.DeliveredDate.ToString();
+            var employee = HRMISEmployees.GetEmployeeById(_deliveries.RequestedById);
+            txtDateOfDelivery.Text = _deliveries.DeliveredDate.ToString();
             txtRequestingOffice.Text = employee.Office + " " + employee.Division;
-            txtSupplier.Text = deliveries.Supplier.SupplierName;
-            spinAmount.Value = (decimal)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity));
+            txtSupplier.Text = _deliveries.Supplier.SupplierName;
+            spinAmount.Value = (decimal)_deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity));
 
-            var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138 || x.SubActivityId == 1139).OrderBy(x => x.ActionDate);
+            var inspectActions = _deliveries?.Actions?.Where(x => x.SubActivityId == 1138 || x.SubActivityId == 1139).OrderBy(x => x.ActionDate);
             txtInspectedDate.DateTime = (DateTime)inspectActions?.FirstOrDefault()?.ActionDate;
 
-            if (deliveries.ComparisonReports.FirstOrDefault() == null) await CreateComparisonReport();
+            if (_deliveries.ComparisonReports.FirstOrDefault() == null) await CreateComparisonReport();
             else await LoadDetails();
             ExpandAll();
         }
 
         private async Task LoadDetails()
         {
-            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id,
+            var cr = await _comparisonReportService.GetByFilterAsync(x => x.DeliveryId == _deliveries.Id,
                 x => x.ComparisonReportSpecs,
                 x => x.ComparisonReportSpecs.Select(s => s.ComparisonReportSpecsDetails));
             if (cr == null) return;
@@ -103,42 +110,14 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async Task CreateComparisonReport()
         {
-            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
-            if (cr == null){
-                cr = new ComparisonReport { DeliveryId = deliveries.Id };
-                unitOfWork.ComparisonReportRepo.Insert(cr);
-            }
-            foreach(var item in deliveries.DeliveriesSpecs)
-            {
-                var crSpecs = new ComparisonReportSpecs
-                {
-                    ComparisonReportId = cr.Id,
-                    ItemNo = item.ItemNo,
-                    Quantity = item.Quantity,
-                    Unit = item.Unit,
-                    Type = item.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName,
-                    ActualDelivery = item.Model.Brand.BrandName + " " + item.Model.ModelName
-                };
-                unitOfWork.ComparisonReportSpecsRepo.Insert(crSpecs);
-                foreach(var itemDetails in item.DeliveriesSpecsDetails)
-                {
-                    var crSpecsDetails = new ComparisonReportSpecsDetails
-                    {
-                        ComparisonReportSpecs = crSpecs,
-                        Type = itemDetails.Specs,
-                        ActualDelivery = itemDetails.Description,
-                        ItemOrder = itemDetails.ItemNo
-                    };
-                    unitOfWork.ComparisonReportSpecsDetailsRepo.Insert(crSpecsDetails);
-                }
-            }
-            await unitOfWork.SaveChangesAsync();
+            var cr = new ComparisonReport { DeliveryId = _deliveries.Id };
+            await _comparisonReportService.AddAsync(cr);
             await LoadDetails();
         }
 
         private void LoadDropdowns()
         {
-            var users = userManager.GetUsers().ToList();
+            var users = _userManager.GetUsers().ToList();
             sluePreparedBy.Properties.DataSource = users; 
             slueReviewedBy.Properties.DataSource = users;
             slueNotedBy.Properties.DataSource = users;  
@@ -215,9 +194,8 @@ namespace ICTProfilingV3.DeliveriesForms
             {
                 var row = (ComparisonReportViewModel)gridCR.GetRow(i);
                 if (row == null) continue;
-                unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == row.CRId);
-                unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == row.CRSpecs.Id);
-                await unitOfWork.SaveChangesAsync();
+                await _comparisonReportService.ComparisonReportSpecsService.DeleteRangeAsync(x => x.ComparisonReportId == row.CRId);
+                await _comparisonReportService.ComparisonReportSpecsDetailsService.DeleteRangeAsync(x => x.ComparisonReportSpecsId == row.CRSpecs.Id);
             }
 
             for (int i = 0; i <= gridCR.RowCount; i++)
@@ -240,7 +218,7 @@ namespace ICTProfilingV3.DeliveriesForms
                     Remarks = row.CRSpecs.Remarks,
                     IsDiscrepancy = row.CRSpecs.IsDiscrepancy
                 };
-                unitOfWork.ComparisonReportSpecsRepo.Insert(crSpecs);
+                await _comparisonReportService.ComparisonReportSpecsService.AddAsync(crSpecs);
 
                 if (detailRow == null) continue;
                 for (int x = 0; x < detailRow.RowCount; x++)
@@ -258,49 +236,24 @@ namespace ICTProfilingV3.DeliveriesForms
                         IsDiscrepancy = spec.IsDiscrepancy,
                         ComparisonReportSpecs = crSpecs
                     };
-                    unitOfWork.ComparisonReportSpecsDetailsRepo.Insert(crSpecsDetails);
+                    await _comparisonReportService.ComparisonReportSpecsDetailsService.AddAsync(crSpecsDetails);
                 }
             }
-            await unitOfWork.SaveChangesAsync();
             await LoadData();
             MessageBox.Show("Changes Saved!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private async Task SaveDetails()
         {
-            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
+            var cr = await _comparisonReportService.GetByFilterAsync(x => x.DeliveryId == _deliveries.Id);
             cr.PreparedById = (string)sluePreparedBy.EditValue;
             cr.ReviewedById = (string)slueReviewedBy.EditValue;
             cr.NotedById = (string)slueNotedBy.EditValue;
-            unitOfWork.Save();
         }
 
         private async void btnPreview_Click(object sender, EventArgs e)
         {
-            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id,
-                x => x.PreparedByUser,
-                x => x.NotedByUser,
-                x => x.ReviewedByUser,
-                x => x.ComparisonReportSpecs,
-                x => x.ComparisonReportSpecs.Select(s => s.ComparisonReportSpecsDetails));
-
-            var employee = HRMISEmployees.GetEmployeeById(deliveries.RequestedById);
-
-            var comparisonModel = new ComparisonReportPrintViewModel
-            {
-                DateOfDelivery = deliveries.DeliveredDate,
-                RequestingOffice = employee.Office + " " + employee.Division,
-                Supplier = deliveries.Supplier.SupplierName,
-                Amount = (double)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity)),
-                EpisNo = "EPiS-" + deliveries.TicketRequest.Id.ToString(),
-                TechInspectedDate = txtInspectedDate.DateTime,
-                ComparisonReportSpecs = cr.ComparisonReportSpecs,
-                PreparedBy = cr?.PreparedByUser,
-                ReviewedBy = cr?.ReviewedByUser,
-                NotedBy = cr?.NotedByUser,
-                DatePrinted = DateTime.Now,
-                PrintedBy = _userStore?.Username
-            };
+            var comparisonModel = await _comparisonReportService.GetComparisonReportPrintModel(_deliveries.Id);
 
             var rptCR = new rptComparisonReport
             {
@@ -308,30 +261,30 @@ namespace ICTProfilingV3.DeliveriesForms
             };
 
             rptCR.CreateDocument();
-            var frm = new frmReportViewer(rptCR);
+            var frm = _serviceProvider.GetRequiredService<frmReportViewer>();
+            frm.InitForm(rptCR);
             frm.ShowDialog();
         }
 
         private async void btnRevert_Click(object sender, EventArgs e)
         {
-            var cr = await unitOfWork.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id);
+            var cr = await _comparisonReportService.GetByFilterAsync(x => x.DeliveryId == _deliveries.Id);
             if (cr == null) return;
 
             var crSpecs = cr.ComparisonReportSpecs;
 
             foreach (var crSpec in crSpecs)
             {
-                unitOfWork.ComparisonReportSpecsDetailsRepo.DeleteRange(x => x.ComparisonReportSpecsId == crSpec.Id);
+                await _comparisonReportService.ComparisonReportSpecsDetailsService.DeleteRangeAsync(x => x.ComparisonReportSpecsId == crSpec.Id);
             }
-            unitOfWork.ComparisonReportSpecsRepo.DeleteRange(x => x.ComparisonReportId == cr.Id);
-            unitOfWork.Save();
+            await _comparisonReportService.ComparisonReportSpecsService.DeleteRangeAsync(x => x.ComparisonReportId == cr.Id);
             await CreateComparisonReport();
+            await LoadData();
         }
 
         private void btnAddRow_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             var masterRowHandle = gridCR.FocusedRowHandle;
-            var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
             var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
             row.AddNewRow();
         }
@@ -346,7 +299,6 @@ namespace ICTProfilingV3.DeliveriesForms
             if (IsDetail)
             {
                 var masterRowHandle = gridCR.FocusedRowHandle;
-                var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
                 var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
 
                 if (row.FocusedRowHandle == 0) return;
@@ -371,7 +323,6 @@ namespace ICTProfilingV3.DeliveriesForms
             if (IsDetail)
             {
                 var masterRowHandle = gridCR.FocusedRowHandle;
-                var rowHandle = (gcCR.FocusedView as ColumnView).FocusedRowHandle;
                 var row = gridCR.GetDetailView(masterRowHandle, 0) as GridView;
 
                 if (row.FocusedRowHandle >= row.RowCount - 1) return;
@@ -401,6 +352,16 @@ namespace ICTProfilingV3.DeliveriesForms
                 row.DeleteRow(rowHandle);
             }
         
+        }
+
+        private async void btnDeleteEquipment_Click(object sender, EventArgs e)
+        {
+            var row = (ComparisonReportViewModel)gridCR.GetFocusedRow();
+            if(MessageBox.Show("Are you sure you want to delete this equipment?", "Alert", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return;
+            await _comparisonReportService.ComparisonReportSpecsService.DeleteAsync(row.CRSpecs.Id);
+            await LoadData();
         }
     }
     

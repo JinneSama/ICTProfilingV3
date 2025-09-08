@@ -30,6 +30,12 @@
         Unknown = 25,
         TaskAdmin = 26,
         AssignTo = 27,
-        Tools = 28
+        Tools = 28,
+        PGNAdmin = 29,
+        CASAdmin = 30,
+        PRAdmin = 31,
+        TicketAdmin = 32,
+        MOAdmin = 33,
+        PPEAdmin = 34,
     }
 }

@@ -1,26 +1,33 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
-using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
     public partial class frmEquipment : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        public frmEquipment()
+        private readonly IEquipmentService _equipmentService;
+        public frmEquipment(IEquipmentService equipmentService)
         {
+            _equipmentService = equipmentService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            LoadDropdowns();
             LoadEquipments();
+        }
+
+        private void LoadDropdowns()
+        {
+            var data = _equipmentService.EquEquipmentCategoryBaseService.GetAll().OrderBy(order => order.Name).ToList();
+            bsEquipmentCategory.DataSource = data;
         }
 
         private void LoadEquipments()
         {
-            var equipments = unitOfWork.EquipmentRepo.GetAll().OrderBy(o => o.EquipmentName).ToList();
+            var equipments = _equipmentService.GetAll().OrderBy(o => o.EquipmentName).ToList();
             gcEquipment.DataSource = new BindingList<Equipment>(equipments);
         }
 
@@ -30,10 +37,9 @@ namespace ICTProfilingV3.LookUpTables
             if (msgRes == DialogResult.Cancel) return;
 
             var equipment = (Equipment)gridEquipment.GetFocusedRow();
-            var res = await unitOfWork.EquipmentRepo.FindAsync(x => x.Id == equipment.Id);
+            var res = await _equipmentService.GetByIdAsync(equipment.Id);
             if (res == null) return;
-            unitOfWork.EquipmentRepo.Delete(equipment);
-            unitOfWork.Save();
+            await _equipmentService.DeleteAsync(res.Id);
 
             LoadEquipments();
         }
@@ -41,25 +47,24 @@ namespace ICTProfilingV3.LookUpTables
         private async void gridEquipment_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (Equipment)gridEquipment.GetFocusedRow();
-            var res = await unitOfWork.EquipmentRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertEquipment(row);
-            else UpdateEquipment(row);
+            var res = await _equipmentService.GetByIdAsync(row.Id);
+            if (res == null) await InsertEquipment(row);
+            else await UpdateEquipment(row);
         }
 
-        private void InsertEquipment(Equipment row)
+        private async Task InsertEquipment(Equipment row)
         {
-            unitOfWork.EquipmentRepo.Insert(row);
-            unitOfWork.Save();
+            await _equipmentService.AddAsync(row);
         }
 
-        private async void UpdateEquipment(Equipment row)
+        private async Task UpdateEquipment(Equipment row)
         {
-            var equipment = await unitOfWork.EquipmentRepo.FindAsync(x => x.Id == row.Id);
+            var equipment = await _equipmentService.GetByIdAsync(row.Id);
             if (equipment == null) return;
 
+            equipment.EquipmentCategoryId = row.EquipmentCategoryId;
             equipment.EquipmentName = row.EquipmentName;
-            //unitOfWork.EquipmentRepo.Update(equipment);
-            unitOfWork.Save();
+            await _equipmentService.SaveChangesAsync();
         }
     }
 }

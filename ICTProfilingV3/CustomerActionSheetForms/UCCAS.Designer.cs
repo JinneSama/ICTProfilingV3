@@ -289,6 +289,7 @@
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // gcDetails
             // 

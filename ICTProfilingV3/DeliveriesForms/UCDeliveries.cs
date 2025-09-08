@@ -1,5 +1,4 @@
 ﻿using DevExpress.Data.Filtering;
-using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.Core.Common;
@@ -9,138 +8,92 @@ using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.EvaluationForms;
 using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.ReportForms;
-using ICTProfilingV3.Services;
 using ICTProfilingV3.Services.Employees;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
 using Microsoft.Extensions.DependencyInjection;
-using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DeliveriesForms
 {
-    public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
+    public partial class UCDeliveries : DevExpress.XtraEditors.XtraUserControl
     {
-        private HTTPNetworkFolder networkFolder;
+        private readonly HTTPNetworkFolder networkFolder;
+        private readonly UserStore _userStore;
+
         private readonly IUCManager _ucManager;
         private readonly IServiceProvider _serviceProvider;
         private readonly IStaffService _staffService;
         private readonly IEquipmentService _equipmentService;
-        private UserStore _userStore;
+        private readonly IICTUserManager _userManager;
+        private readonly IDeliveriesService _deliveriesService;
+        private readonly IComparisonReportService _comparisonReportService;
+        private readonly IControlMapper<DeliveriesDetailsViewModel> _delDetailsMapper;
 
         public string filterText { get; set; }
         public UCDeliveries(IUCManager ucManager, IServiceProvider serviceProvider, UserStore userStore,
-            IStaffService staffService, IEquipmentService equipmentService)
+            IStaffService staffService, IEquipmentService equipmentService, IICTUserManager userManager,
+            IDeliveriesService deliveriesService, IComparisonReportService comparisonReportService, IControlMapper<DeliveriesDetailsViewModel> delDetailsMapper)
         {
-            InitializeComponent();
             _ucManager = ucManager;
             _serviceProvider = serviceProvider;
             networkFolder = new HTTPNetworkFolder();
             _userStore = userStore;
             _staffService = staffService;
+            _userManager = userManager;
             _equipmentService = equipmentService;
+            _deliveriesService = deliveriesService;
+            _comparisonReportService = comparisonReportService;
+            _delDetailsMapper = delDetailsMapper;
 
+            InitializeComponent();
             LoadFilterDropdowns();
         }
 
         private void LoadDropdown()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var staff = unitOfWork.UsersRepo.GetAll().ToList();
+            var staff = _userManager.GetUsers().ToList();
             var res = staff.OrderBy(o => o.FullName);
         }
         private void LoadFilterDropdowns()
         {
-            var users = _staffService.GetAllStaff().
+            var users = _staffService.GetAll().
                 Select(x => x.Users).ToList();
             slueTaskOf.Properties.DataSource = users;
 
-            slueEquipment.Properties.DataSource = _equipmentService.GetAllEquipment().ToList();
+            slueEquipment.Properties.DataSource = _equipmentService.GetAll().ToList();
             FilterGrid();
         }
         private async Task LoadDeliveries()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var deliveries = await unitOfWork.DeliveriesRepo.FindAllAsync(x => x.TicketRequest.ITStaff != null,
-                x => x.Supplier,
-                x => x.TicketRequest,
-                x => x.TicketRequest.ITStaff,
-                x => x.TicketRequest.ITStaff.Users,
-                x => x.DeliveriesSpecs,
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment))
-                .OrderByDescending(x => x.DateRequested).ToListAsync();
-
-            var delData = deliveries.Select(x => new DeliveriesViewModel
-            {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                Id = x.Id,
-                Status = x.TicketRequest.TicketStatus,
-                TicketNo = x.TicketRequest.Id,
-                Office = HRMISEmployees.GetEmployeeById(x.RequestedById)?.Office,
-                Supplier = x.Supplier.SupplierName,
-                DeliveryId = "EPiS-" + x.Id,
-                PONo = x.PONo,
-                Deliveries = x,
-                DateCreated = x.DateRequested.Value,
-                AssignedTo = x.TicketRequest.ITStaff?.Users?.FullName,
-                Equipment = x.DeliveriesSpecs.Count() > 0 ? string.Join(", ", x.DeliveriesSpecs?.Select(s => s.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName ?? "")) : "N/A",
-            });
+            var delData = await _deliveriesService.GetDeliveriesViewModels();
             gcDeliveries.DataSource = new BindingList<DeliveriesViewModel>(delData.ToList());
         }
 
         private async Task LoadStaff()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            ITStaff staff = null;
-            if(row != null) staff = await unitOfWork.ITStaffRepo.FindAsync(x => x.Id == row.Deliveries.TicketRequest.StaffId, x => x.Users);
-            Image img = await networkFolder.DownloadFile(staff?.UserId + ".jpeg");
-            var res = new StaffModel
-            {
-                Image = img,
-                AssignedTo = row?.Status == TicketStatus.Accepted ? "Not Yet Assigned!" : (staff == null ? "N / A" : staff.Users.UserName),
-                FullName = img == null ? (staff == null ? "N / A" : staff.Users.FullName) : "",
-                PhotoVisible = img == null ? true : false,
-                InitialsVisible = img == null ? false : true
-            };
-            staffPanel.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
-            GC.Collect();
-            staffPanel.Controls.Clear();
-            staffPanel.Controls.Add(new UCAssignedTo(res)
-            {
-                Dock = DockStyle.Fill
-            });
+            var res = await _staffService.GetStaffModel(row.Id);
+
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCAssignedTo>>();
+            navigation.NavigateTo(staffPanel, act => act.InitUC(res));
         }
 
         private void LoadDetails()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
             spbTicketStatus.SelectedItemIndex = ((int)row.Status) - 1;
-            var deliveriesDetails = row.Deliveries;
-            var requestingEmployee = HRMISEmployees.GetEmployeeById(deliveriesDetails.RequestedById);
-            var chiefID = HRMISEmployees.GetChief(requestingEmployee.Office, requestingEmployee.Division, deliveriesDetails.ReqByChiefId)?.ChiefId;
-            txtChief.Text = HRMISEmployees.GetEmployeeById(chiefID)?.Employee;
-            lblEpisNo.Text = deliveriesDetails.Id.ToString();
-            txtOffice.Text = string.Join(" ", requestingEmployee?.Office, requestingEmployee?.Division);
-            txtReqBy.Text = requestingEmployee?.Employee;
-            txtTel.Text = deliveriesDetails.ContactNo;
-            txtDeliveredBy.Text = HRMISEmployees.GetEmployeeById(deliveriesDetails.DeliveredById)?.Employee;
-            txtSupplierName.Text = deliveriesDetails.Supplier?.SupplierName;
-            txtSupplierAddress.Text = deliveriesDetails.Supplier?.Address;
-            txtSupplierTelNo.Text = deliveriesDetails.Supplier?.TelNumber;
-            dtDeliveredDate.DateTime = deliveriesDetails.DeliveredDate ?? DateTime.MinValue;
+            var detailsModel = _deliveriesService.GetDeliveriesDetailViewModels(row);
+            _delDetailsMapper.MapControl(detailsModel, groupControl1, groupControl3, pnlButtons);
         }
         private void LoadEvaluationSheet()
         {
@@ -149,23 +102,13 @@ namespace ICTProfilingV3.DeliveriesForms
             var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCEvaluationSheet>>();
             navigation.NavigateTo(tabEvaluation, act => act.InitForm(new ActionType { Id = row.Id, RequestType = RequestType.Deliveries }));
         }
-        private async Task LoadEquipmentSpecs()
+        private void LoadEquipmentSpecs()
         {
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
             if (row == null) return;
 
-            IUnitOfWork uow = new UnitOfWork();
-            var deliveries = await uow.DeliveriesRepo.FindAsync(x => x.Id == row.Id , x => x.DeliveriesSpecs);
-
-            if(deliveries == null) return;
-
-            tabEquipmentSpecs.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
-            GC.Collect();
-            tabEquipmentSpecs.Controls.Clear();
-            tabEquipmentSpecs.Controls.Add(new UCDeliveriesSpecs(deliveries)
-            {
-                Dock = DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveriesSpecs>>();
+            navigation.NavigateTo(tabEquipmentSpecs, act => act.InitUC(row.Id));
         }
         
         private void LoadActions()
@@ -174,30 +117,26 @@ namespace ICTProfilingV3.DeliveriesForms
             tabAction.Controls.Clear();
 
             if (row == null) return;
-            tabAction.Controls?.Cast<Control>()?.FirstOrDefault()?.Dispose();
-            GC.Collect();
-            var uc = _serviceProvider.GetRequiredService<UCActions>();
-            uc.setActions(new ActionType
+
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(tabAction, act => act.setActions(new ActionType
             {
                 Id = row.Id,
                 RequestType = RequestType.Deliveries
-            });
-            uc.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabAction.Controls.Add(uc);
+            }));
         }
 
         private async void btnEdit_Click(object sender, System.EventArgs e)
         {
-            var uow = new UnitOfWork();
             var rowHandle = gridDeliveries.FocusedRowHandle;
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var deliveries = await uow.DeliveriesRepo.FindAsync(x => x.Id == row.Id);
+            var deliveries = await _deliveriesService.GetByIdAsync(row.Id);
             var frm = _serviceProvider.GetRequiredService<frmAddEditDeliveries>();
-            frm.InitForm(deliveries);
+            await frm.InitForm(deliveries);
             frm.ShowDialog();
 
             await LoadDeliveries();
-            await LoadEquipmentSpecs();
+            //await LoadEquipmentSpecs();
             LoadDetails();
 
             gridDeliveries.FocusedRowHandle = rowHandle;
@@ -205,62 +144,30 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var ds = unitOfWork.DeliveriesRepo.FindAllAsync(x => x.Id == item.Id,
-                x => x.Supplier,
-                x => x.DeliveriesSpecs.Select(s => s.Model),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment)).ToList();
+            var ds = _deliveriesService.GetAll().Where(x => x.Id == item.Id)
+                .Include(x => x.Supplier)
+                .Include(x => x.DeliveriesSpecs.Select(s => s.Model))
+                .Include(x => x.DeliveriesSpecs.Select(s => s.Model.Brand))
+                .Include(x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs))
+                .Include(x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment))
+                .ToList();
+
             var rpt = new rptDeliveries
             {
                 DataSource = ds,
                 Office = txtOffice.Text
             };
 
-            var frm = new frmReportViewer(rpt);
+            var frm = _serviceProvider.GetRequiredService<frmReportViewer>();
+            frm.InitForm(rpt);
             frm.ShowDialog();
         }
 
         private async Task PrintComparisonReport()
         {
-            var uow = new UnitOfWork();
-
             var item = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var deliveries = await uow.DeliveriesRepo.FindAsync(x => x.Id == item.Id,
-                x => x.TicketRequest,
-                x => x.Supplier,
-                x => x.DeliveriesSpecs.Select(s => s.Model),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs),
-                x => x.DeliveriesSpecs.Select(s => s.Model.Brand.EquipmentSpecs.Equipment));
-
-            var cr = await uow.ComparisonReportRepo.FindAsync(x => x.DeliveryId == deliveries.Id,
-                x => x.PreparedByUser,
-                x => x.NotedByUser,
-                x => x.ReviewedByUser,
-                x => x.ComparisonReportSpecs,
-                x => x.ComparisonReportSpecs.Select(s => s.ComparisonReportSpecsDetails));
-
-            var employee = HRMISEmployees.GetEmployeeById(deliveries.RequestedById);
-            var inspectActions = deliveries?.Actions?.Where(x => x.SubActivityId == 1138 || x.SubActivityId == 1139).OrderBy(x => x.ActionDate);
-
-            var comparisonModel = new ComparisonReportPrintViewModel
-            {
-                DateOfDelivery = deliveries.DeliveredDate,
-                RequestingOffice = employee.Office + " " + employee.Division,
-                Supplier = deliveries.Supplier.SupplierName,
-                Amount = (double)deliveries.DeliveriesSpecs.Sum(x => (x.UnitCost * x.Quantity)),
-                EpisNo = "EPiS-" + deliveries.TicketRequest.Id.ToString(),
-                TechInspectedDate = (DateTime)inspectActions?.FirstOrDefault()?.ActionDate,
-                ComparisonReportSpecs = cr?.ComparisonReportSpecs,
-                PreparedBy = cr?.PreparedByUser,
-                ReviewedBy = cr?.ReviewedByUser,
-                NotedBy = cr?.NotedByUser,
-                DatePrinted = DateTime.Now,
-                PrintedBy = _userStore.Username
-            };
+            var comparisonModel = await _comparisonReportService.GetComparisonReportPrintModel(item.Id);
 
             var rptCR = new rptComparisonReport
             {
@@ -268,7 +175,8 @@ namespace ICTProfilingV3.DeliveriesForms
             };
 
             rptCR.CreateDocument();
-            var frm = new frmReportViewer(rptCR);
+            var frm = _serviceProvider.GetRequiredService<frmReportViewer>();
+            frm.InitForm(rptCR);
             frm.ShowDialog();
         }
 
@@ -286,7 +194,12 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void gridDeliveries_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
-            await LoadEquipmentSpecs();
+            await LoadAllDetails();
+        }
+
+        private async Task LoadAllDetails()
+        {
+            LoadEquipmentSpecs();
             LoadActions();
             LoadDetails();
             LoadEvaluationSheet();
@@ -303,9 +216,8 @@ namespace ICTProfilingV3.DeliveriesForms
 
         private async void btnCompReport_Click(object sender, EventArgs e)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var del = await unitOfWork.DeliveriesRepo.FindAsync(x => x.Id == row.Deliveries.Id,
+            var del = await _deliveriesService.GetByFilterAsync(x => x.Id == row.Deliveries.Id,
                 x => x.Supplier,
                 x => x.TicketRequest,
                 x => x.TicketRequest.ITStaff,
@@ -335,23 +247,13 @@ namespace ICTProfilingV3.DeliveriesForms
             frm.ShowDialog();
         }
 
-        public void DisposeUC(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                ctrl.Dispose();
-                GC.Collect();
-            }
-            parent.Controls.Clear();
-        }
-
         private async void btnFindings_Click(object sender, EventArgs e)
         {
-            var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
-            var frm = new frmInitialFindings(row);
-            frm.ShowDialog();
+            //var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            //var frm = new frmInitialFindings(row);
+            //frm.ShowDialog();
 
-            await LoadDeliveries();
+            //await LoadDeliveries();
         }
 
         private void slueEquipment_EditValueChanged(object sender, EventArgs e)
@@ -418,6 +320,14 @@ namespace ICTProfilingV3.DeliveriesForms
             ceCompleted.Checked = false;
 
             FilterGrid();
+        }
+
+        private void btnComparisonExcel_Click(object sender, EventArgs e)
+        {
+            var row = (DeliveriesViewModel)gridDeliveries.GetFocusedRow();
+            var frm = _serviceProvider.GetRequiredService<frmComparisonReportMenu>();
+            frm.InitForm(row.Id);
+            frm.ShowDialog();
         }
     }
 }

@@ -96,10 +96,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\EquipmentConfiguration.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
     <Compile Include="Entities\ActionDocuments.cs" />
     <Compile Include="Entities\ChangeLogs.cs" />
     <Compile Include="Entities\ComparisonReport.cs" />
+    <Compile Include="Entities\ComparisonReportFiles.cs" />
     <Compile Include="Entities\ComparisonReportSpecs.cs" />
     <Compile Include="Entities\ComparisonReportSpecsDetails.cs" />
     <Compile Include="Entities\CustomerActionSheet.cs" />
@@ -111,6 +113,9 @@
     <Compile Include="Entities\DeliveriesSpecs.cs" />
     <Compile Include="Entities\DeliveriesSpecsDetails.cs" />
     <Compile Include="Entities\Equipment.cs" />
+    <Compile Include="Entities\EquipmentBrand.cs" />
+    <Compile Include="Entities\EquipmentCategory.cs" />
+    <Compile Include="Entities\EquipmentCategoryBrand.cs" />
     <Compile Include="Entities\EquipmentSpecs.cs" />
     <Compile Include="Entities\EquipmentSpecsDetails.cs" />
     <Compile Include="Entities\EvaluationSheet.cs" />
@@ -167,7 +172,6 @@
     <Compile Include="Enums\TicketStatus.cs" />
     <Compile Include="Enums\Unit.cs" />
     <Compile Include="Enums\Year.cs" />
-    <Compile Include="Interfaces\IMachineCredentials.cs" />
     <Compile Include="Migrations\202501130535154_NewDatabaseEntries.cs" />
     <Compile Include="Migrations\202501130535154_NewDatabaseEntries.Designer.cs">
       <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
@@ -224,13 +228,20 @@
     <Compile Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.Designer.cs">
       <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202508200220413_comparisonFilesAdd.cs" />
+    <Compile Include="Migrations\202508200220413_comparisonFilesAdd.Designer.cs">
+      <DependentUpon>202508200220413_comparisonFilesAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.cs" />
+    <Compile Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.Designer.cs">
+      <DependentUpon>202509070159446_AddEquipmentModelBrandCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202509080352102_AddDescriptionForModel.cs" />
+    <Compile Include="Migrations\202509080352102_AddDescriptionForModel.Designer.cs">
+      <DependentUpon>202509080352102_AddDescriptionForModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\GenericRepository.cs" />
-    <Compile Include="Interfaces\IGenericRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
-    <Compile Include="Repository\UnitOfWork.cs" />
-    <Compile Include="Utility\MachineCredentials.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -240,7 +251,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Repository\" />
+    <Folder Include="Utility\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202501130535154_NewDatabaseEntries.resx">
       <DependentUpon>202501130535154_NewDatabaseEntries.cs</DependentUpon>
@@ -283,6 +298,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202508130209321_RoutedRemarksDiscrepancy.resx">
       <DependentUpon>202508130209321_RoutedRemarksDiscrepancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202508200220413_comparisonFilesAdd.resx">
+      <DependentUpon>202508200220413_comparisonFilesAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509070159446_AddEquipmentModelBrandCategory.resx">
+      <DependentUpon>202509070159446_AddEquipmentModelBrandCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202509080352102_AddDescriptionForModel.resx">
+      <DependentUpon>202509080352102_AddDescriptionForModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

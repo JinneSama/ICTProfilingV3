@@ -1,14 +1,9 @@
-﻿using DevExpress.XtraEditors;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,28 +11,27 @@ namespace ICTProfilingV3.LookUpTables
 {
     public partial class frmSuppliers : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        public frmSuppliers()
+        private readonly ILookUpService _lookUpService;
+        public frmSuppliers(ILookUpService lookUpService)
         {
+            _lookUpService = lookUpService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadSuppliers();
         }
         
         private void LoadSuppliers()
         {
-            var data = unitOfWork.SupplierRepo.GetAll();
+            var data = _lookUpService.SupplierDataService.GetAll();
             gcSuppliers.DataSource = new BindingList<Supplier>(data.ToList());
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
             var msgRes = MessageBox.Show("Delete Supplier?" , "Confirmation" , MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
             
             var row = (Supplier)gridSuppliers.GetFocusedRow();
-            unitOfWork.SupplierRepo.Delete(row);
-            unitOfWork.Save();
+            await _lookUpService.SupplierDataService.DeleteAsync(row.Id);
 
             LoadSuppliers();
         }
@@ -45,27 +39,26 @@ namespace ICTProfilingV3.LookUpTables
         private async void gridSuppliers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (Supplier)gridSuppliers.GetFocusedRow();
-            var res = await unitOfWork.SupplierRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertSupplier(row);
-            else UpdateSupplier(row);
+            var res = await _lookUpService.SupplierDataService.GetByIdAsync(row.Id);
+            if (res == null) await InsertSupplier(row);
+            else await UpdateSupplier(row);
         }
 
-        private void InsertSupplier(Supplier supplier)
+        private async Task InsertSupplier(Supplier supplier)
         {
-            unitOfWork.SupplierRepo.Insert(supplier);
-            unitOfWork.Save();  
+            await _lookUpService.SupplierDataService.AddAsync(supplier);
+            LoadSuppliers();
         }
 
-        private async void UpdateSupplier(Supplier supplier)
+        private async Task UpdateSupplier(Supplier supplier)
         {
-            var res = await unitOfWork.SupplierRepo.FindAsync(x => x.Id == supplier.Id);
+            var res = await _lookUpService.SupplierDataService.GetByIdAsync(supplier.Id);
             res.SupplierName = supplier.SupplierName;
             res.Address = supplier.Address;
             res.PhoneNumber = supplier.PhoneNumber;
             res.TelNumber = supplier.TelNumber;
             res.ContactPerson = supplier.ContactPerson;
-            unitOfWork.SupplierRepo.Update(res);
-            unitOfWork.Save();
+            await _lookUpService.SupplierDataService.SaveChangesAsync();
         }
     }
 }

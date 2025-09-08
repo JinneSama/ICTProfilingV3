@@ -1,7 +1,10 @@
 ﻿using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
+using System;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -9,21 +12,31 @@ namespace ICTProfilingV3.PGNForms
 {
     public partial class UCRequestAccount : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly PGNRequests request;
-        private IUnitOfWork unitOfWork;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly IPGNService _pgnService;
+        private PGNRequests _request;
 
-        public UCRequestAccount(PGNRequests request)
+        public UCRequestAccount(IServiceProvider serviceProvider, IPGNService pgnService)
         {
+            _serviceProvider = serviceProvider;
+            _pgnService = pgnService;
             InitializeComponent();
-            this.request = request;
-            unitOfWork = new UnitOfWork();
+        }
+
+        public void InitUC(PGNRequests request)
+        {
+            _request = request;
             LoadData();
         }
 
         private void LoadData()
         {
-            var res = unitOfWork.PGNAccountsRepo.FindAllAsync(x => x.PGNRequestId == request.Id ,x => x.PGNGroupOffices,
-                x => x.PGNNonEmployee).ToList().Select(x => new PGNAccountsViewModel
+            var res = _pgnService.GetAll()
+                .Where(x => x.PGNRequestId == _request.Id)
+                .Include(x => x.PGNGroupOffices)
+                .Include(x => x.PGNNonEmployee)
+                .ToList()
+                .Select(x => new PGNAccountsViewModel
                 {
                     PGNAccount = x
                 });
@@ -36,16 +49,17 @@ namespace ICTProfilingV3.PGNForms
                     MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
 
             var row = (PGNAccountsViewModel)gridAccount.GetFocusedRow();
-            var _request = await unitOfWork.PGNRequestsRepo.FindAsync(x => x.Id == request.Id);
-            _request.PGNAccounts.Remove(row.PGNAccount);
-            unitOfWork.Save();
+            var request = await _pgnService.PGNRequestsService.GetByIdAsync(_request.Id);
+            request.PGNAccounts.Remove(row.PGNAccount);
+            await _pgnService.PGNRequestsService.SaveChangesAsync();
 
             LoadData();
         }
 
         private void btnPGNAccount_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddRequestAccount(request);
+            var frm = _serviceProvider.GetRequiredService<frmAddRequestAccount>();
+            frm.InitForm(_request);
             frm.ShowDialog();
 
             LoadData();

@@ -2,22 +2,28 @@
 using ICTProfilingV3.API.FilesApi;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
-using Models.Repository;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 namespace ICTProfilingV3.UsersForms
 {
     public partial class frmStaff : BaseForm
     {
-        private readonly IUnitOfWork unitOfWork;
-        private HTTPNetworkFolder networkFolder;
-        public frmStaff()
+        private readonly IStaffService _staffService;
+        private readonly IServiceProvider _serviceProvider;
+        private HTTPNetworkFolder _networkFolder;
+
+        public frmStaff(IStaffService staffService, HTTPNetworkFolder networkFolder, IServiceProvider serviceProvider)
         {
+            _staffService = staffService;
+            _networkFolder = networkFolder;
+            _serviceProvider = serviceProvider;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            networkFolder = new HTTPNetworkFolder();
+
             LoadStaff();
         }
 
@@ -47,11 +53,14 @@ namespace ICTProfilingV3.UsersForms
 
         private async void LoadStaff()
         {
-            var staffList = unitOfWork.ITStaffRepo.FindAllAsync(x => x.Users.IsDeleted == false ,x => x.TicketRequests, x => x.Users).ToList();
+            var staffList = _staffService.FetchStaff(x => x.Users.IsDeleted == false)
+                .Include(x => x.TicketRequests)
+                .Include(x => x.Users);
+
             var staffViewModels = new List<StaffViewModel>();
             foreach (var staff in staffList)
             {
-                var image = await networkFolder.DownloadFile(staff.UserId + ".jpeg");
+                var image = await _networkFolder.DownloadFile(staff.UserId + ".jpeg");
                 staffViewModels.Add(new StaffViewModel
                 {
                     Staff = staff,
@@ -63,7 +72,7 @@ namespace ICTProfilingV3.UsersForms
 
         private void btnAddStaff_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditStaff();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditStaff>();
             frm.ShowDialog();
 
             LoadStaff();
@@ -86,7 +95,8 @@ namespace ICTProfilingV3.UsersForms
         private void btnEditStaff_Click(object sender, EventArgs e)
         {
             var row = (StaffViewModel)tvStaff.GetFocusedRow();
-            var frm = new frmAddEditStaff(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditStaff>();
+            frm.InitForm(row);
             frm.ShowDialog();
 
             LoadStaff();

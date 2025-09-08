@@ -55,6 +55,23 @@
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.pnlDeliveries = new DevExpress.XtraEditors.PanelControl();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.slueEquipment = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.ceCompleted = new DevExpress.XtraEditors.CheckEdit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
+            this.slueTaskOf = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
+            this.deTo = new DevExpress.XtraEditors.DateEdit();
+            this.label4 = new System.Windows.Forms.Label();
+            this.deFrom = new DevExpress.XtraEditors.DateEdit();
+            this.label3 = new System.Windows.Forms.Label();
             this.gcTechSpecs = new DevExpress.XtraGrid.GridControl();
             this.gridTechSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colTicket = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -80,33 +97,33 @@
             this.txtRequestedByOffice = new DevExpress.XtraEditors.TextEdit();
             this.txtRequestedByPos = new DevExpress.XtraEditors.TextEdit();
             this.rdbtnGender = new DevExpress.XtraEditors.RadioGroup();
-            this.txtDate = new DevExpress.XtraEditors.DateEdit();
+            this.deDateRequested = new DevExpress.XtraEditors.DateEdit();
             this.txtContactNo = new DevExpress.XtraEditors.TextEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            this.checkEditForReplacement = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditRequestLetter = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditApprovedPR = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedForReplacement = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedRequestLetter = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedPPMP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedAIP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedAPP = new DevExpress.XtraEditors.CheckEdit();
+            this.ceRequestBasedApprovedPR = new DevExpress.XtraEditors.CheckEdit();
             this.spbTicketStatus = new DevExpress.XtraEditors.StepProgressBar();
             this.stepAssigned = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepOnProcess = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepForRelease = new DevExpress.XtraEditors.StepProgressBarItem();
             this.stepCompleted = new DevExpress.XtraEditors.StepProgressBarItem();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.slueNotedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueNotedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.slueReviewedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.slueReviewedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.sluePreparedBy = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.sluePreparedById = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -116,29 +133,22 @@
             this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.tabRequestedSpecs = new DevExpress.XtraTab.XtraTabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.slueEquipment = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label7 = new System.Windows.Forms.Label();
-            this.ceCompleted = new DevExpress.XtraEditors.CheckEdit();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnFilterbyDate = new DevExpress.XtraEditors.SimpleButton();
-            this.slueTaskOf = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnRefresh = new DevExpress.XtraEditors.SimpleButton();
-            this.deTo = new DevExpress.XtraEditors.DateEdit();
-            this.label4 = new System.Windows.Forms.Label();
-            this.deFrom = new DevExpress.XtraEditors.DateEdit();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffPanel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).BeginInit();
             this.pnlDeliveries.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).BeginInit();
@@ -155,38 +165,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateRequested.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateRequested.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedForReplacement.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedRequestLetter.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPPMP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAIP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAPP.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPR.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueNotedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedById.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // colStatus
@@ -345,6 +345,218 @@
             this.pnlDeliveries.Name = "pnlDeliveries";
             this.pnlDeliveries.Size = new System.Drawing.Size(578, 675);
             this.pnlDeliveries.TabIndex = 110;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panel2.Controls.Add(this.slueEquipment);
+            this.panel2.Controls.Add(this.label7);
+            this.panel2.Controls.Add(this.ceCompleted);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btnFilterbyDate);
+            this.panel2.Controls.Add(this.slueTaskOf);
+            this.panel2.Controls.Add(this.btnRefresh);
+            this.panel2.Controls.Add(this.deTo);
+            this.panel2.Controls.Add(this.label4);
+            this.panel2.Controls.Add(this.deFrom);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Location = new System.Drawing.Point(0, 2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(578, 79);
+            this.panel2.TabIndex = 88;
+            // 
+            // slueEquipment
+            // 
+            this.slueEquipment.Location = new System.Drawing.Point(79, 28);
+            this.slueEquipment.Name = "slueEquipment";
+            this.slueEquipment.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.slueEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.slueEquipment.Properties.Appearance.Options.UseFont = true;
+            this.slueEquipment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueEquipment.Properties.DisplayMember = "EquipmentName";
+            this.slueEquipment.Properties.NullText = "(All)";
+            this.slueEquipment.Properties.PopupView = this.searchLookUpEdit1View;
+            this.slueEquipment.Properties.ValueMember = "EquipmentName";
+            this.slueEquipment.Size = new System.Drawing.Size(185, 22);
+            this.slueEquipment.TabIndex = 125;
+            this.slueEquipment.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
+            // 
+            // searchLookUpEdit1View
+            // 
+            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn13});
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "Equipment";
+            this.gridColumn13.FieldName = "EquipmentName";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(5, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(68, 15);
+            this.label7.TabIndex = 124;
+            this.label7.Text = "Equipment:";
+            // 
+            // ceCompleted
+            // 
+            this.ceCompleted.Location = new System.Drawing.Point(296, 30);
+            this.ceCompleted.Name = "ceCompleted";
+            this.ceCompleted.Properties.Appearance.ForeColor = System.Drawing.Color.White;
+            this.ceCompleted.Properties.Appearance.Options.UseForeColor = true;
+            this.ceCompleted.Properties.Caption = "Show Completed";
+            this.ceCompleted.Size = new System.Drawing.Size(118, 19);
+            this.ceCompleted.TabIndex = 126;
+            this.ceCompleted.CheckedChanged += new System.EventHandler(this.ceCompleted_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(35, 54);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 15);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Staff:";
+            // 
+            // btnFilterbyDate
+            // 
+            this.btnFilterbyDate.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnFilterbyDate.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnFilterbyDate.Appearance.Options.UseBackColor = true;
+            this.btnFilterbyDate.Appearance.Options.UseForeColor = true;
+            this.btnFilterbyDate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.adateoccurring_16x161;
+            this.btnFilterbyDate.Location = new System.Drawing.Point(482, 5);
+            this.btnFilterbyDate.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFilterbyDate.Name = "btnFilterbyDate";
+            this.btnFilterbyDate.Size = new System.Drawing.Size(89, 22);
+            this.btnFilterbyDate.TabIndex = 119;
+            this.btnFilterbyDate.Text = "Filter By Date";
+            this.btnFilterbyDate.Click += new System.EventHandler(this.btnFilterbyDate_Click);
+            // 
+            // slueTaskOf
+            // 
+            this.slueTaskOf.Location = new System.Drawing.Point(79, 51);
+            this.slueTaskOf.Name = "slueTaskOf";
+            this.slueTaskOf.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueTaskOf.Properties.Appearance.Options.UseFont = true;
+            this.slueTaskOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueTaskOf.Properties.DisplayMember = "FullName";
+            this.slueTaskOf.Properties.NullText = "(All)";
+            this.slueTaskOf.Properties.PopupView = this.gridView1;
+            this.slueTaskOf.Properties.ValueMember = "Id";
+            this.slueTaskOf.Size = new System.Drawing.Size(185, 22);
+            this.slueTaskOf.TabIndex = 109;
+            this.slueTaskOf.EditValueChanged += new System.EventHandler(this.slueTaskOf_EditValueChanged);
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2});
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Employee";
+            this.gridColumn1.FieldName = "FullName";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Position";
+            this.gridColumn2.FieldName = "Position";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnRefresh.Appearance.Options.UseBackColor = true;
+            this.btnRefresh.Appearance.Options.UseForeColor = true;
+            this.btnRefresh.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.refresh2_16x161;
+            this.btnRefresh.Location = new System.Drawing.Point(482, 28);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(89, 22);
+            this.btnRefresh.TabIndex = 118;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // deTo
+            // 
+            this.deTo.EditValue = null;
+            this.deTo.Location = new System.Drawing.Point(296, 5);
+            this.deTo.Name = "deTo";
+            this.deTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deTo.Properties.Appearance.Options.UseFont = true;
+            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deTo.Properties.NullText = "(All)";
+            this.deTo.Size = new System.Drawing.Size(185, 22);
+            this.deTo.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(268, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(22, 15);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "To:";
+            // 
+            // deFrom
+            // 
+            this.deFrom.EditValue = null;
+            this.deFrom.Location = new System.Drawing.Point(79, 5);
+            this.deFrom.Name = "deFrom";
+            this.deFrom.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deFrom.Properties.Appearance.Options.UseFont = true;
+            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.deFrom.Properties.NullText = "(All)";
+            this.deFrom.Size = new System.Drawing.Size(185, 22);
+            this.deFrom.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(35, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 15);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "From:";
             // 
             // gcTechSpecs
             // 
@@ -573,7 +785,7 @@
             this.groupControl3.Controls.Add(this.txtRequestedByOffice);
             this.groupControl3.Controls.Add(this.txtRequestedByPos);
             this.groupControl3.Controls.Add(this.rdbtnGender);
-            this.groupControl3.Controls.Add(this.txtDate);
+            this.groupControl3.Controls.Add(this.deDateRequested);
             this.groupControl3.Controls.Add(this.txtContactNo);
             this.groupControl3.Controls.Add(this.labelControl5);
             this.groupControl3.Controls.Add(this.labelControl4);
@@ -670,21 +882,21 @@
             this.rdbtnGender.Size = new System.Drawing.Size(153, 18);
             this.rdbtnGender.TabIndex = 84;
             // 
-            // txtDate
+            // deDateRequested
             // 
-            this.txtDate.EditValue = null;
-            this.txtDate.Location = new System.Drawing.Point(94, 19);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtDate.Properties.Appearance.Options.UseFont = true;
-            this.txtDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateRequested.EditValue = null;
+            this.deDateRequested.Location = new System.Drawing.Point(94, 19);
+            this.deDateRequested.Name = "deDateRequested";
+            this.deDateRequested.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.deDateRequested.Properties.Appearance.Options.UseFont = true;
+            this.deDateRequested.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDateRequested.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.ReadOnly = true;
-            this.txtDate.Properties.UseReadOnlyAppearance = false;
-            this.txtDate.Size = new System.Drawing.Size(294, 22);
-            this.txtDate.TabIndex = 78;
+            this.deDateRequested.Properties.ReadOnly = true;
+            this.deDateRequested.Properties.UseReadOnlyAppearance = false;
+            this.deDateRequested.Size = new System.Drawing.Size(294, 22);
+            this.deDateRequested.TabIndex = 78;
             // 
             // txtContactNo
             // 
@@ -736,59 +948,59 @@
             this.labelControl2.TabIndex = 80;
             this.labelControl2.Text = "Contact No.";
             // 
-            // checkEditForReplacement
+            // ceRequestBasedForReplacement
             // 
-            this.checkEditForReplacement.Location = new System.Drawing.Point(117, 71);
-            this.checkEditForReplacement.Name = "checkEditForReplacement";
-            this.checkEditForReplacement.Properties.Caption = "For Replacement";
-            this.checkEditForReplacement.Properties.ReadOnly = true;
-            this.checkEditForReplacement.Size = new System.Drawing.Size(107, 19);
-            this.checkEditForReplacement.TabIndex = 109;
+            this.ceRequestBasedForReplacement.Location = new System.Drawing.Point(117, 71);
+            this.ceRequestBasedForReplacement.Name = "ceRequestBasedForReplacement";
+            this.ceRequestBasedForReplacement.Properties.Caption = "For Replacement";
+            this.ceRequestBasedForReplacement.Properties.ReadOnly = true;
+            this.ceRequestBasedForReplacement.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedForReplacement.TabIndex = 109;
             // 
-            // checkEditRequestLetter
+            // ceRequestBasedRequestLetter
             // 
-            this.checkEditRequestLetter.Location = new System.Drawing.Point(117, 47);
-            this.checkEditRequestLetter.Name = "checkEditRequestLetter";
-            this.checkEditRequestLetter.Properties.Caption = "Request Letter";
-            this.checkEditRequestLetter.Properties.ReadOnly = true;
-            this.checkEditRequestLetter.Size = new System.Drawing.Size(107, 19);
-            this.checkEditRequestLetter.TabIndex = 92;
+            this.ceRequestBasedRequestLetter.Location = new System.Drawing.Point(117, 47);
+            this.ceRequestBasedRequestLetter.Name = "ceRequestBasedRequestLetter";
+            this.ceRequestBasedRequestLetter.Properties.Caption = "Request Letter";
+            this.ceRequestBasedRequestLetter.Properties.ReadOnly = true;
+            this.ceRequestBasedRequestLetter.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedRequestLetter.TabIndex = 92;
             // 
-            // checkEditApprovedPPMP
+            // ceRequestBasedApprovedPPMP
             // 
-            this.checkEditApprovedPPMP.Location = new System.Drawing.Point(117, 21);
-            this.checkEditApprovedPPMP.Name = "checkEditApprovedPPMP";
-            this.checkEditApprovedPPMP.Properties.Caption = "Approved PPMP";
-            this.checkEditApprovedPPMP.Properties.ReadOnly = true;
-            this.checkEditApprovedPPMP.Size = new System.Drawing.Size(107, 19);
-            this.checkEditApprovedPPMP.TabIndex = 91;
+            this.ceRequestBasedApprovedPPMP.Location = new System.Drawing.Point(117, 21);
+            this.ceRequestBasedApprovedPPMP.Name = "ceRequestBasedApprovedPPMP";
+            this.ceRequestBasedApprovedPPMP.Properties.Caption = "Approved PPMP";
+            this.ceRequestBasedApprovedPPMP.Properties.ReadOnly = true;
+            this.ceRequestBasedApprovedPPMP.Size = new System.Drawing.Size(107, 19);
+            this.ceRequestBasedApprovedPPMP.TabIndex = 91;
             // 
-            // checkEditApprovedAIP
+            // ceRequestBasedApprovedAIP
             // 
-            this.checkEditApprovedAIP.Location = new System.Drawing.Point(16, 71);
-            this.checkEditApprovedAIP.Name = "checkEditApprovedAIP";
-            this.checkEditApprovedAIP.Properties.Caption = "Approved AIP";
-            this.checkEditApprovedAIP.Properties.ReadOnly = true;
-            this.checkEditApprovedAIP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAIP.TabIndex = 90;
+            this.ceRequestBasedApprovedAIP.Location = new System.Drawing.Point(16, 71);
+            this.ceRequestBasedApprovedAIP.Name = "ceRequestBasedApprovedAIP";
+            this.ceRequestBasedApprovedAIP.Properties.Caption = "Approved AIP";
+            this.ceRequestBasedApprovedAIP.Properties.ReadOnly = true;
+            this.ceRequestBasedApprovedAIP.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedAIP.TabIndex = 90;
             // 
-            // checkEditApprovedAPP
+            // ceRequestBasedApprovedAPP
             // 
-            this.checkEditApprovedAPP.Location = new System.Drawing.Point(16, 46);
-            this.checkEditApprovedAPP.Name = "checkEditApprovedAPP";
-            this.checkEditApprovedAPP.Properties.Caption = "Approved APP";
-            this.checkEditApprovedAPP.Properties.ReadOnly = true;
-            this.checkEditApprovedAPP.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedAPP.TabIndex = 89;
+            this.ceRequestBasedApprovedAPP.Location = new System.Drawing.Point(16, 46);
+            this.ceRequestBasedApprovedAPP.Name = "ceRequestBasedApprovedAPP";
+            this.ceRequestBasedApprovedAPP.Properties.Caption = "Approved APP";
+            this.ceRequestBasedApprovedAPP.Properties.ReadOnly = true;
+            this.ceRequestBasedApprovedAPP.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedAPP.TabIndex = 89;
             // 
-            // checkEditApprovedPR
+            // ceRequestBasedApprovedPR
             // 
-            this.checkEditApprovedPR.Location = new System.Drawing.Point(16, 21);
-            this.checkEditApprovedPR.Name = "checkEditApprovedPR";
-            this.checkEditApprovedPR.Properties.Caption = "Approved PR";
-            this.checkEditApprovedPR.Properties.ReadOnly = true;
-            this.checkEditApprovedPR.Size = new System.Drawing.Size(95, 19);
-            this.checkEditApprovedPR.TabIndex = 88;
+            this.ceRequestBasedApprovedPR.Location = new System.Drawing.Point(16, 21);
+            this.ceRequestBasedApprovedPR.Name = "ceRequestBasedApprovedPR";
+            this.ceRequestBasedApprovedPR.Properties.Caption = "Approved PR";
+            this.ceRequestBasedApprovedPR.Properties.ReadOnly = true;
+            this.ceRequestBasedApprovedPR.Size = new System.Drawing.Size(95, 19);
+            this.ceRequestBasedApprovedPR.TabIndex = 88;
             // 
             // spbTicketStatus
             // 
@@ -840,9 +1052,9 @@
             // 
             // groupControl1
             // 
-            this.groupControl1.Controls.Add(this.slueNotedBy);
-            this.groupControl1.Controls.Add(this.slueReviewedBy);
-            this.groupControl1.Controls.Add(this.sluePreparedBy);
+            this.groupControl1.Controls.Add(this.slueNotedById);
+            this.groupControl1.Controls.Add(this.slueReviewedById);
+            this.groupControl1.Controls.Add(this.sluePreparedById);
             this.groupControl1.Controls.Add(this.lblNotedBy);
             this.groupControl1.Controls.Add(this.lblReviewedBy);
             this.groupControl1.Controls.Add(this.labelControl6);
@@ -852,22 +1064,22 @@
             this.groupControl1.TabIndex = 114;
             this.groupControl1.Text = "Signatories";
             // 
-            // slueNotedBy
+            // slueNotedById
             // 
-            this.slueNotedBy.Location = new System.Drawing.Point(101, 71);
-            this.slueNotedBy.Name = "slueNotedBy";
-            this.slueNotedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueNotedBy.Properties.Appearance.Options.UseFont = true;
-            this.slueNotedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueNotedById.Location = new System.Drawing.Point(101, 71);
+            this.slueNotedById.Name = "slueNotedById";
+            this.slueNotedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueNotedById.Properties.Appearance.Options.UseFont = true;
+            this.slueNotedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueNotedBy.Properties.DisplayMember = "FullName";
-            this.slueNotedBy.Properties.NullText = "";
-            this.slueNotedBy.Properties.PopupView = this.gridView5;
-            this.slueNotedBy.Properties.ReadOnly = true;
-            this.slueNotedBy.Properties.UseReadOnlyAppearance = false;
-            this.slueNotedBy.Properties.ValueMember = "Id";
-            this.slueNotedBy.Size = new System.Drawing.Size(255, 22);
-            this.slueNotedBy.TabIndex = 119;
+            this.slueNotedById.Properties.DisplayMember = "FullName";
+            this.slueNotedById.Properties.NullText = "";
+            this.slueNotedById.Properties.PopupView = this.gridView5;
+            this.slueNotedById.Properties.ReadOnly = true;
+            this.slueNotedById.Properties.UseReadOnlyAppearance = false;
+            this.slueNotedById.Properties.ValueMember = "Id";
+            this.slueNotedById.Size = new System.Drawing.Size(255, 22);
+            this.slueNotedById.TabIndex = 119;
             // 
             // gridView5
             // 
@@ -895,22 +1107,22 @@
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 1;
             // 
-            // slueReviewedBy
+            // slueReviewedById
             // 
-            this.slueReviewedBy.Location = new System.Drawing.Point(101, 47);
-            this.slueReviewedBy.Name = "slueReviewedBy";
-            this.slueReviewedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueReviewedBy.Properties.Appearance.Options.UseFont = true;
-            this.slueReviewedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueReviewedById.Location = new System.Drawing.Point(101, 47);
+            this.slueReviewedById.Name = "slueReviewedById";
+            this.slueReviewedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueReviewedById.Properties.Appearance.Options.UseFont = true;
+            this.slueReviewedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueReviewedBy.Properties.DisplayMember = "FullName";
-            this.slueReviewedBy.Properties.NullText = "";
-            this.slueReviewedBy.Properties.PopupView = this.gridView4;
-            this.slueReviewedBy.Properties.ReadOnly = true;
-            this.slueReviewedBy.Properties.UseReadOnlyAppearance = false;
-            this.slueReviewedBy.Properties.ValueMember = "Id";
-            this.slueReviewedBy.Size = new System.Drawing.Size(255, 22);
-            this.slueReviewedBy.TabIndex = 118;
+            this.slueReviewedById.Properties.DisplayMember = "FullName";
+            this.slueReviewedById.Properties.NullText = "";
+            this.slueReviewedById.Properties.PopupView = this.gridView4;
+            this.slueReviewedById.Properties.ReadOnly = true;
+            this.slueReviewedById.Properties.UseReadOnlyAppearance = false;
+            this.slueReviewedById.Properties.ValueMember = "Id";
+            this.slueReviewedById.Size = new System.Drawing.Size(255, 22);
+            this.slueReviewedById.TabIndex = 118;
             // 
             // gridView4
             // 
@@ -938,22 +1150,22 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 1;
             // 
-            // sluePreparedBy
+            // sluePreparedById
             // 
-            this.sluePreparedBy.Location = new System.Drawing.Point(101, 24);
-            this.sluePreparedBy.Name = "sluePreparedBy";
-            this.sluePreparedBy.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.sluePreparedBy.Properties.Appearance.Options.UseFont = true;
-            this.sluePreparedBy.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.sluePreparedById.Location = new System.Drawing.Point(101, 24);
+            this.sluePreparedById.Name = "sluePreparedById";
+            this.sluePreparedById.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.sluePreparedById.Properties.Appearance.Options.UseFont = true;
+            this.sluePreparedById.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.sluePreparedBy.Properties.DisplayMember = "FullName";
-            this.sluePreparedBy.Properties.NullText = "";
-            this.sluePreparedBy.Properties.PopupView = this.gridView2;
-            this.sluePreparedBy.Properties.ReadOnly = true;
-            this.sluePreparedBy.Properties.UseReadOnlyAppearance = false;
-            this.sluePreparedBy.Properties.ValueMember = "Id";
-            this.sluePreparedBy.Size = new System.Drawing.Size(255, 22);
-            this.sluePreparedBy.TabIndex = 117;
+            this.sluePreparedById.Properties.DisplayMember = "FullName";
+            this.sluePreparedById.Properties.NullText = "";
+            this.sluePreparedById.Properties.PopupView = this.gridView2;
+            this.sluePreparedById.Properties.ReadOnly = true;
+            this.sluePreparedById.Properties.UseReadOnlyAppearance = false;
+            this.sluePreparedById.Properties.ValueMember = "Id";
+            this.sluePreparedById.Size = new System.Drawing.Size(255, 22);
+            this.sluePreparedById.TabIndex = 117;
             // 
             // gridView2
             // 
@@ -1013,12 +1225,12 @@
             // 
             // groupControl2
             // 
-            this.groupControl2.Controls.Add(this.checkEditForReplacement);
-            this.groupControl2.Controls.Add(this.checkEditApprovedPPMP);
-            this.groupControl2.Controls.Add(this.checkEditApprovedPR);
-            this.groupControl2.Controls.Add(this.checkEditApprovedAPP);
-            this.groupControl2.Controls.Add(this.checkEditApprovedAIP);
-            this.groupControl2.Controls.Add(this.checkEditRequestLetter);
+            this.groupControl2.Controls.Add(this.ceRequestBasedForReplacement);
+            this.groupControl2.Controls.Add(this.ceRequestBasedApprovedPPMP);
+            this.groupControl2.Controls.Add(this.ceRequestBasedApprovedPR);
+            this.groupControl2.Controls.Add(this.ceRequestBasedApprovedAPP);
+            this.groupControl2.Controls.Add(this.ceRequestBasedApprovedAIP);
+            this.groupControl2.Controls.Add(this.ceRequestBasedRequestLetter);
             this.groupControl2.Location = new System.Drawing.Point(999, 92);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(381, 107);
@@ -1042,218 +1254,6 @@
             this.tabRequestedSpecs.Name = "tabRequestedSpecs";
             this.tabRequestedSpecs.Size = new System.Drawing.Size(1147, 220);
             this.tabRequestedSpecs.Text = "Specifications";
-            // 
-            // panel2
-            // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel2.Controls.Add(this.slueEquipment);
-            this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.ceCompleted);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btnFilterbyDate);
-            this.panel2.Controls.Add(this.slueTaskOf);
-            this.panel2.Controls.Add(this.btnRefresh);
-            this.panel2.Controls.Add(this.deTo);
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.deFrom);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(0, 2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(578, 79);
-            this.panel2.TabIndex = 88;
-            // 
-            // slueEquipment
-            // 
-            this.slueEquipment.Location = new System.Drawing.Point(79, 28);
-            this.slueEquipment.Name = "slueEquipment";
-            this.slueEquipment.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.slueEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.slueEquipment.Properties.Appearance.Options.UseFont = true;
-            this.slueEquipment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEquipment.Properties.DisplayMember = "EquipmentName";
-            this.slueEquipment.Properties.NullText = "(All)";
-            this.slueEquipment.Properties.PopupView = this.searchLookUpEdit1View;
-            this.slueEquipment.Properties.ValueMember = "EquipmentName";
-            this.slueEquipment.Size = new System.Drawing.Size(185, 22);
-            this.slueEquipment.TabIndex = 125;
-            this.slueEquipment.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn13});
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "Equipment";
-            this.gridColumn13.FieldName = "EquipmentName";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(5, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 15);
-            this.label7.TabIndex = 124;
-            this.label7.Text = "Equipment:";
-            // 
-            // ceCompleted
-            // 
-            this.ceCompleted.Location = new System.Drawing.Point(296, 30);
-            this.ceCompleted.Name = "ceCompleted";
-            this.ceCompleted.Properties.Appearance.ForeColor = System.Drawing.Color.White;
-            this.ceCompleted.Properties.Appearance.Options.UseForeColor = true;
-            this.ceCompleted.Properties.Caption = "Show Completed";
-            this.ceCompleted.Size = new System.Drawing.Size(118, 19);
-            this.ceCompleted.TabIndex = 126;
-            this.ceCompleted.CheckedChanged += new System.EventHandler(this.ceCompleted_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(35, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Staff:";
-            // 
-            // btnFilterbyDate
-            // 
-            this.btnFilterbyDate.Appearance.BackColor = System.Drawing.Color.Turquoise;
-            this.btnFilterbyDate.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnFilterbyDate.Appearance.Options.UseBackColor = true;
-            this.btnFilterbyDate.Appearance.Options.UseForeColor = true;
-            this.btnFilterbyDate.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.adateoccurring_16x161;
-            this.btnFilterbyDate.Location = new System.Drawing.Point(482, 5);
-            this.btnFilterbyDate.Margin = new System.Windows.Forms.Padding(2);
-            this.btnFilterbyDate.Name = "btnFilterbyDate";
-            this.btnFilterbyDate.Size = new System.Drawing.Size(89, 22);
-            this.btnFilterbyDate.TabIndex = 119;
-            this.btnFilterbyDate.Text = "Filter By Date";
-            this.btnFilterbyDate.Click += new System.EventHandler(this.btnFilterbyDate_Click);
-            // 
-            // slueTaskOf
-            // 
-            this.slueTaskOf.Location = new System.Drawing.Point(79, 51);
-            this.slueTaskOf.Name = "slueTaskOf";
-            this.slueTaskOf.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueTaskOf.Properties.Appearance.Options.UseFont = true;
-            this.slueTaskOf.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueTaskOf.Properties.DisplayMember = "FullName";
-            this.slueTaskOf.Properties.NullText = "(All)";
-            this.slueTaskOf.Properties.PopupView = this.gridView1;
-            this.slueTaskOf.Properties.ValueMember = "Id";
-            this.slueTaskOf.Size = new System.Drawing.Size(185, 22);
-            this.slueTaskOf.TabIndex = 109;
-            this.slueTaskOf.EditValueChanged += new System.EventHandler(this.slueTaskOf_EditValueChanged);
-            // 
-            // gridView1
-            // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2});
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Employee";
-            this.gridColumn1.FieldName = "FullName";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 0;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Position";
-            this.gridColumn2.FieldName = "Position";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Appearance.BackColor = System.Drawing.Color.Turquoise;
-            this.btnRefresh.Appearance.ForeColor = System.Drawing.Color.Black;
-            this.btnRefresh.Appearance.Options.UseBackColor = true;
-            this.btnRefresh.Appearance.Options.UseForeColor = true;
-            this.btnRefresh.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.refresh2_16x161;
-            this.btnRefresh.Location = new System.Drawing.Point(482, 28);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(89, 22);
-            this.btnRefresh.TabIndex = 118;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // deTo
-            // 
-            this.deTo.EditValue = null;
-            this.deTo.Location = new System.Drawing.Point(296, 5);
-            this.deTo.Name = "deTo";
-            this.deTo.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deTo.Properties.Appearance.Options.UseFont = true;
-            this.deTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deTo.Properties.NullText = "(All)";
-            this.deTo.Size = new System.Drawing.Size(185, 22);
-            this.deTo.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(268, 9);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(22, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "To:";
-            // 
-            // deFrom
-            // 
-            this.deFrom.EditValue = null;
-            this.deFrom.Location = new System.Drawing.Point(79, 5);
-            this.deFrom.Name = "deFrom";
-            this.deFrom.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deFrom.Properties.Appearance.Options.UseFont = true;
-            this.deFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.deFrom.Properties.NullText = "(All)";
-            this.deFrom.Size = new System.Drawing.Size(185, 22);
-            this.deFrom.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(35, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "From:";
             // 
             // UCTechSpecs
             // 
@@ -1279,6 +1279,17 @@
             this.pnlButtons.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlDeliveries)).EndInit();
             this.pnlDeliveries.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcTechSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridTechSpecs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.hplTicket)).EndInit();
@@ -1296,40 +1307,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByOffice.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtRequestedByPos.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdbtnGender.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateRequested.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDateRequested.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtContactNo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditForReplacement.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditRequestLetter.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPPMP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAIP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedAPP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditApprovedPR.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedForReplacement.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedRequestLetter.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPPMP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAIP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedAPP.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ceRequestBasedApprovedPR.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spbTicketStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueNotedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueNotedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueReviewedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedBy.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sluePreparedById.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ceCompleted.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueTaskOf.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deTo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.deFrom.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1357,21 +1357,21 @@
         private DevExpress.XtraTab.XtraTabControl tabDetails;
         private DevExpress.XtraTab.XtraTabPage tabAction;
         private DevExpress.XtraEditors.GroupControl groupControl3;
-        private DevExpress.XtraEditors.CheckEdit checkEditForReplacement;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedForReplacement;
         private DevExpress.XtraEditors.TextEdit txtRequestedByDivision;
         private DevExpress.XtraEditors.TextEdit txtRequestingOfficeChiefPos;
         private DevExpress.XtraEditors.TextEdit txtRequestingOfficeChief;
         private DevExpress.XtraEditors.LabelControl labelControl10;
         private DevExpress.XtraEditors.TextEdit txtRequestedByEmployeeName;
         private DevExpress.XtraEditors.TextEdit txtRequestedByOffice;
-        private DevExpress.XtraEditors.CheckEdit checkEditRequestLetter;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedPPMP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedAIP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedAPP;
-        private DevExpress.XtraEditors.CheckEdit checkEditApprovedPR;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedRequestLetter;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedPPMP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedAIP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedAPP;
+        private DevExpress.XtraEditors.CheckEdit ceRequestBasedApprovedPR;
         private DevExpress.XtraEditors.TextEdit txtRequestedByPos;
         private DevExpress.XtraEditors.RadioGroup rdbtnGender;
-        private DevExpress.XtraEditors.DateEdit txtDate;
+        private DevExpress.XtraEditors.DateEdit deDateRequested;
         private DevExpress.XtraEditors.TextEdit txtContactNo;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl4;
@@ -1391,15 +1391,15 @@
         private DevExpress.XtraEditors.PanelControl staffPanel;
         private DevExpress.XtraTab.XtraTabPage tabEvaluation;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueNotedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueNotedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueReviewedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueReviewedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
-        private DevExpress.XtraEditors.SearchLookUpEdit sluePreparedBy;
+        private DevExpress.XtraEditors.SearchLookUpEdit sluePreparedById;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;

@@ -1,8 +1,6 @@
-﻿using DevExpress.XtraEditors;
-using Models.Entities;
+﻿using Models.Entities;
 using System;
 using Models.Enums;
-using Models.Repository;
 using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Interfaces;
 

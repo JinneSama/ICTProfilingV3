@@ -5,10 +5,14 @@ namespace ICTProfilingV3.PurchaseRequestForms
 {
     public partial class UCOFMISPR : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly string _controlNo;
-        public UCOFMISPR(string controlNo)
+        private string _controlNo;
+        public UCOFMISPR()
         {
             InitializeComponent();
+        }
+
+        public void InitUC(string controlNo)
+        {
             _controlNo = controlNo;
         }
 

@@ -41,33 +41,33 @@
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.btnClearUOM = new DevExpress.XtraEditors.SimpleButton();
-            this.spinQuantity = new DevExpress.XtraEditors.SpinEdit();
+            this.seQuantity = new DevExpress.XtraEditors.SpinEdit();
             this.slueUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddICTSpecs = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddEquipment = new DevExpress.XtraEditors.SimpleButton();
             this.txtPurpose = new DevExpress.XtraEditors.TextEdit();
-            this.spinUnitCost = new DevExpress.XtraEditors.SpinEdit();
+            this.seUnitCost = new DevExpress.XtraEditors.SpinEdit();
             this.txtDescription = new DevExpress.XtraEditors.MemoEdit();
-            this.spintTotal = new DevExpress.XtraEditors.SpinEdit();
-            this.slueEquipment = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.seTotalCost = new DevExpress.XtraEditors.SpinEdit();
+            this.slueEquipmentSpecsId = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.txtItemNo = new DevExpress.XtraEditors.SpinEdit();
-            this.btnClearQuantity = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnEquipment = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDescription = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnRemarks = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.seItemNo = new DevExpress.XtraEditors.SpinEdit();
+            this.btnClearQuantity = new DevExpress.XtraEditors.SimpleButton();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seQuantity.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seUnitCost.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seTotalCost.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipmentSpecsId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -197,22 +197,22 @@
             this.btnClearUOM.ToolTip = "Clear UOM";
             this.btnClearUOM.Click += new System.EventHandler(this.btnClearUOM_Click);
             // 
-            // spinQuantity
+            // seQuantity
             // 
-            this.spinQuantity.EditValue = new decimal(new int[] {
+            this.seQuantity.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinQuantity.Location = new System.Drawing.Point(178, 77);
-            this.spinQuantity.Margin = new System.Windows.Forms.Padding(2);
-            this.spinQuantity.Name = "spinQuantity";
-            this.spinQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.seQuantity.Location = new System.Drawing.Point(178, 77);
+            this.seQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.seQuantity.Name = "seQuantity";
+            this.seQuantity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinQuantity.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
-            this.spinQuantity.Size = new System.Drawing.Size(94, 20);
-            this.spinQuantity.TabIndex = 146;
-            this.spinQuantity.EditValueChanged += new System.EventHandler(this.spinQuantity_EditValueChanged_1);
+            this.seQuantity.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.seQuantity.Size = new System.Drawing.Size(94, 20);
+            this.seQuantity.TabIndex = 146;
+            this.seQuantity.EditValueChanged += new System.EventHandler(this.spinQuantity_EditValueChanged_1);
             // 
             // slueUnit
             // 
@@ -291,26 +291,26 @@
             this.txtPurpose.Size = new System.Drawing.Size(379, 20);
             this.txtPurpose.TabIndex = 127;
             // 
-            // spinUnitCost
+            // seUnitCost
             // 
-            this.spinUnitCost.EditValue = new decimal(new int[] {
+            this.seUnitCost.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinUnitCost.Location = new System.Drawing.Point(178, 220);
-            this.spinUnitCost.Margin = new System.Windows.Forms.Padding(2);
-            this.spinUnitCost.Name = "spinUnitCost";
-            this.spinUnitCost.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinUnitCost.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinUnitCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.seUnitCost.Location = new System.Drawing.Point(178, 220);
+            this.seUnitCost.Margin = new System.Windows.Forms.Padding(2);
+            this.seUnitCost.Name = "seUnitCost";
+            this.seUnitCost.Properties.Appearance.Options.UseTextOptions = true;
+            this.seUnitCost.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.seUnitCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinUnitCost.Properties.MaskSettings.Set("mask", "###,###,##0.00");
-            this.spinUnitCost.Properties.NullText = "0.00";
-            this.spinUnitCost.Properties.UseMaskAsDisplayFormat = true;
-            this.spinUnitCost.Size = new System.Drawing.Size(114, 20);
-            this.spinUnitCost.TabIndex = 126;
-            this.spinUnitCost.EditValueChanged += new System.EventHandler(this.spinUnitCost_EditValueChanged);
+            this.seUnitCost.Properties.MaskSettings.Set("mask", "###,###,##0.00");
+            this.seUnitCost.Properties.NullText = "0.00";
+            this.seUnitCost.Properties.UseMaskAsDisplayFormat = true;
+            this.seUnitCost.Size = new System.Drawing.Size(114, 20);
+            this.seUnitCost.TabIndex = 126;
+            this.seUnitCost.EditValueChanged += new System.EventHandler(this.spinUnitCost_EditValueChanged);
             // 
             // txtDescription
             // 
@@ -320,42 +320,42 @@
             this.txtDescription.Size = new System.Drawing.Size(379, 64);
             this.txtDescription.TabIndex = 133;
             // 
-            // spintTotal
+            // seTotalCost
             // 
-            this.spintTotal.EditValue = new decimal(new int[] {
+            this.seTotalCost.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spintTotal.Enabled = false;
-            this.spintTotal.Location = new System.Drawing.Point(178, 244);
-            this.spintTotal.Margin = new System.Windows.Forms.Padding(2);
-            this.spintTotal.Name = "spintTotal";
-            this.spintTotal.Properties.Appearance.Options.UseTextOptions = true;
-            this.spintTotal.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spintTotal.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.seTotalCost.Enabled = false;
+            this.seTotalCost.Location = new System.Drawing.Point(178, 244);
+            this.seTotalCost.Margin = new System.Windows.Forms.Padding(2);
+            this.seTotalCost.Name = "seTotalCost";
+            this.seTotalCost.Properties.Appearance.Options.UseTextOptions = true;
+            this.seTotalCost.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.seTotalCost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spintTotal.Properties.MaskSettings.Set("mask", "n");
-            this.spintTotal.Properties.ReadOnly = true;
-            this.spintTotal.Properties.UseMaskAsDisplayFormat = true;
-            this.spintTotal.Size = new System.Drawing.Size(114, 20);
-            this.spintTotal.TabIndex = 132;
+            this.seTotalCost.Properties.MaskSettings.Set("mask", "n");
+            this.seTotalCost.Properties.ReadOnly = true;
+            this.seTotalCost.Properties.UseMaskAsDisplayFormat = true;
+            this.seTotalCost.Size = new System.Drawing.Size(114, 20);
+            this.seTotalCost.TabIndex = 132;
             // 
-            // slueEquipment
+            // slueEquipmentSpecsId
             // 
-            this.slueEquipment.Location = new System.Drawing.Point(178, 126);
-            this.slueEquipment.Name = "slueEquipment";
-            this.slueEquipment.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.slueEquipment.Properties.Appearance.Options.UseFont = true;
-            this.slueEquipment.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.slueEquipmentSpecsId.Location = new System.Drawing.Point(178, 126);
+            this.slueEquipmentSpecsId.Name = "slueEquipmentSpecsId";
+            this.slueEquipmentSpecsId.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.slueEquipmentSpecsId.Properties.Appearance.Options.UseFont = true;
+            this.slueEquipmentSpecsId.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.slueEquipment.Properties.DisplayMember = "Equipment";
-            this.slueEquipment.Properties.NullText = "";
-            this.slueEquipment.Properties.PopupView = this.gridView4;
-            this.slueEquipment.Properties.ValueMember = "Id";
-            this.slueEquipment.Size = new System.Drawing.Size(331, 22);
-            this.slueEquipment.TabIndex = 125;
-            this.slueEquipment.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
+            this.slueEquipmentSpecsId.Properties.DisplayMember = "Equipment";
+            this.slueEquipmentSpecsId.Properties.NullText = "";
+            this.slueEquipmentSpecsId.Properties.PopupView = this.gridView4;
+            this.slueEquipmentSpecsId.Properties.ValueMember = "Id";
+            this.slueEquipmentSpecsId.Size = new System.Drawing.Size(331, 22);
+            this.slueEquipmentSpecsId.TabIndex = 125;
+            this.slueEquipmentSpecsId.EditValueChanged += new System.EventHandler(this.slueEquipment_EditValueChanged);
             // 
             // gridView4
             // 
@@ -367,34 +367,6 @@
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
-            // 
-            // txtItemNo
-            // 
-            this.txtItemNo.EditValue = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.txtItemNo.Location = new System.Drawing.Point(178, 53);
-            this.txtItemNo.Margin = new System.Windows.Forms.Padding(2);
-            this.txtItemNo.Name = "txtItemNo";
-            this.txtItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtItemNo.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
-            this.txtItemNo.Size = new System.Drawing.Size(94, 20);
-            this.txtItemNo.TabIndex = 140;
-            // 
-            // btnClearQuantity
-            // 
-            this.btnClearQuantity.AutoSize = true;
-            this.btnClearQuantity.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.btnClearQuantity.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.clear_16x16;
-            this.btnClearQuantity.Location = new System.Drawing.Point(277, 77);
-            this.btnClearQuantity.Name = "btnClearQuantity";
-            this.btnClearQuantity.Size = new System.Drawing.Size(18, 20);
-            this.btnClearQuantity.TabIndex = 148;
-            this.btnClearQuantity.ToolTip = "Clear Quantity";
-            this.btnClearQuantity.Click += new System.EventHandler(this.btnClearQuantity_Click);
             // 
             // gridColumnEquipment
             // 
@@ -422,6 +394,34 @@
             this.gridColumnRemarks.VisibleIndex = 2;
             this.gridColumnRemarks.Width = 56;
             // 
+            // seItemNo
+            // 
+            this.seItemNo.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.seItemNo.Location = new System.Drawing.Point(178, 53);
+            this.seItemNo.Margin = new System.Windows.Forms.Padding(2);
+            this.seItemNo.Name = "seItemNo";
+            this.seItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.seItemNo.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.seItemNo.Size = new System.Drawing.Size(94, 20);
+            this.seItemNo.TabIndex = 140;
+            // 
+            // btnClearQuantity
+            // 
+            this.btnClearQuantity.AutoSize = true;
+            this.btnClearQuantity.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.btnClearQuantity.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.clear_16x16;
+            this.btnClearQuantity.Location = new System.Drawing.Point(277, 77);
+            this.btnClearQuantity.Name = "btnClearQuantity";
+            this.btnClearQuantity.Size = new System.Drawing.Size(18, 20);
+            this.btnClearQuantity.TabIndex = 148;
+            this.btnClearQuantity.ToolTip = "Clear Quantity";
+            this.btnClearQuantity.Click += new System.EventHandler(this.btnClearQuantity_Click);
+            // 
             // frmAddEditTechSpecsICTSpecs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,7 +429,7 @@
             this.ClientSize = new System.Drawing.Size(573, 341);
             this.Controls.Add(this.btnClearQuantity);
             this.Controls.Add(this.btnClearUOM);
-            this.Controls.Add(this.spinQuantity);
+            this.Controls.Add(this.seQuantity);
             this.Controls.Add(this.slueUnit);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
@@ -439,31 +439,32 @@
             this.Controls.Add(this.labelControl12);
             this.Controls.Add(this.txtPurpose);
             this.Controls.Add(this.labelControl10);
-            this.Controls.Add(this.spinUnitCost);
+            this.Controls.Add(this.seUnitCost);
             this.Controls.Add(this.labelControl9);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.spintTotal);
-            this.Controls.Add(this.slueEquipment);
+            this.Controls.Add(this.seTotalCost);
+            this.Controls.Add(this.slueEquipmentSpecsId);
             this.Controls.Add(this.labelControl8);
             this.Controls.Add(this.labelControl7);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelControl4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtItemNo);
+            this.Controls.Add(this.seItemNo);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditTechSpecsICTSpecs.IconOptions.Icon")));
             this.Name = "frmAddEditTechSpecsICTSpecs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.frmAddEditTechSpecsICTSpecs_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinQuantity.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seQuantity.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.slueUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPurpose.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spinUnitCost.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seUnitCost.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spintTotal.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.slueEquipment.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seTotalCost.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipmentSpecsId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtItemNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,11 +481,11 @@
         private DevExpress.XtraEditors.LabelControl labelControl12;
         private DevExpress.XtraEditors.TextEdit txtPurpose;
         private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraEditors.SpinEdit spinUnitCost;
+        private DevExpress.XtraEditors.SpinEdit seUnitCost;
         private DevExpress.XtraEditors.LabelControl labelControl9;
         private DevExpress.XtraEditors.MemoEdit txtDescription;
-        private DevExpress.XtraEditors.SpinEdit spintTotal;
-        private DevExpress.XtraEditors.SearchLookUpEdit slueEquipment;
+        private DevExpress.XtraEditors.SpinEdit seTotalCost;
+        private DevExpress.XtraEditors.SearchLookUpEdit slueEquipmentSpecsId;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnEquipment;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDescription;
@@ -495,9 +496,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.SimpleButton btnClose;
-        private DevExpress.XtraEditors.SpinEdit txtItemNo;
+        private DevExpress.XtraEditors.SpinEdit seItemNo;
         private DevExpress.XtraEditors.LookUpEdit slueUnit;
-        private DevExpress.XtraEditors.SpinEdit spinQuantity;
+        private DevExpress.XtraEditors.SpinEdit seQuantity;
         private DevExpress.XtraEditors.SimpleButton btnClearUOM;
         private DevExpress.XtraEditors.SimpleButton btnClearQuantity;
     }

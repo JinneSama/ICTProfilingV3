@@ -1,40 +1,36 @@
 ﻿using DevExpress.Data.ODataLinq.Helpers;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
-using Helpers.Interfaces;
 using Helpers.Scanner;
-using ICTProfilingV3.API.FilesApi;
-using ICTProfilingV3.Utility.Security;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
-using System;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.PGNForms
 {
-    public partial class UCPGNScanDocuments : DevExpress.XtraEditors.XtraUserControl, IEncryptFile
+    public partial class UCPGNScanDocuments : DevExpress.XtraEditors.XtraUserControl
     {
-        private IUnitOfWork unitOfWork;
-        private readonly PGNRequests request;
-        private HTTPNetworkFolder networkFolder;
+        private readonly IPGNService _pgnService;
+        private PGNRequests _request;
 
-        public UCPGNScanDocuments(PGNRequests request)
+        public UCPGNScanDocuments(IPGNService pgnService)
         {
+            _pgnService = pgnService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            networkFolder = new HTTPNetworkFolder();
-            this.request = request;
-
             LoadData();
+        }
+
+        public void InitUC(PGNRequests request)
+        {
+            _request = request;
         }
 
         private void LoadData()
         {
-            if (request == null) return;
-            var docs = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id);
+            if (_request == null) return;
+            var docs = _pgnService.PGNDocumentService.GetAll().Where(x => x.PGNRequestId == _request.Id);
             gcScanDocs.DataSource = docs.ToList();
         }
 
@@ -52,20 +48,7 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
 
-            await networkFolder.DeleteFile(row.FileName);
-            unitOfWork.PGNDocumentsRepo.DeleteByEx(x => x.Id == row.Id);
-            unitOfWork.Save();
-
-            var res = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id);
-
-            int order = 1;
-            foreach (var doc in res)
-            {
-                doc.DocOrder = order;
-                order++;
-            }
-
-            unitOfWork.Save();
+            await _pgnService.PGNDocumentService.DeleteImage(row.FileName, row.Id, _request.Id);
             LoadData();
         }
 
@@ -75,7 +58,7 @@ namespace ICTProfilingV3.PGNForms
             var row = (PGNDocuments)gridDocs.GetFocusedRow();
             if (row == null) return;
 
-            Image img = await networkFolder.DownloadFile(row.FileName);
+            Image img = await _pgnService.PGNDocumentService.DownloadFile(row.FileName);
             XtraForm xtraForm = new XtraForm()
             {
                 WindowState = FormWindowState.Maximized,
@@ -98,26 +81,7 @@ namespace ICTProfilingV3.PGNForms
             var scannedDocs = ScanDocument.ScanImages();
             if (scannedDocs == null) return;
 
-            int DocOrder = 1;
-            var docs = unitOfWork.PGNDocumentsRepo.FindAllAsync(x => x.PGNRequestId == request.Id).ToList().OrderBy(o => o.DocOrder);
-            if (docs.LastOrDefault() != null) DocOrder = docs.LastOrDefault().DocOrder + 1;
-            splashScreenUpload.ShowWaitForm();
-            foreach (Image image in scannedDocs)
-            {
-                var securityStamp = Guid.NewGuid().ToString();
-                var documentData = EncryptFile("PGN-" + request.Id + "-" + DocOrder);
-                var doc = new PGNDocuments
-                {
-                    SecurityStamp = documentData.securityStamp,
-                    FileName = documentData.filename + ".jpeg",
-                    DocOrder = DocOrder,
-                    PGNRequestId = request.Id
-                };
-                await networkFolder.UploadFile(image, doc.FileName);
-                unitOfWork.PGNDocumentsRepo.Insert(doc);
-                DocOrder += 1;
-            }
-            unitOfWork.Save();
+            await _pgnService.PGNDocumentService.ScanFile("PGN", _request.Id);
             LoadData();
             splashScreenUpload.CloseWaitForm();
         }
@@ -129,14 +93,8 @@ namespace ICTProfilingV3.PGNForms
             picDocImage.Image = null;
             progressDownload.Visible = true;
 
-            picDocImage.Image = await networkFolder.DownloadFile(row.FileName);
+            picDocImage.Image = await _pgnService.PGNDocumentService.DownloadFile(row.FileName);
             progressDownload.Visible = false;               
-        }
-
-        public EncryptionData EncryptFile(string filename)
-        {
-            var securityStamp = Guid.NewGuid().ToString();
-            return new EncryptionData(Cryptography.Encrypt(filename, securityStamp), securityStamp);
         }
     }
 }

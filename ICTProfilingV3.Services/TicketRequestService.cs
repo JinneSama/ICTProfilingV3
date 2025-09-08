@@ -8,23 +8,35 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.Services.Employees;
+using ICTProfilingV3.Services.Base;
 
 namespace ICTProfilingV3.Services
 {
-    public class TicketRequestService : ITicketRequestService
+    public class TicketRequestService : BaseDataService<TicketRequest, int>, ITicketRequestService
     {
         private readonly IRepository<int, TicketRequest> _ticketRepository;
+        private readonly IRepository<int, Deliveries> _deliveriesRepo;
+        private readonly IRepository<int, Repairs> _repairRepo;
+        private readonly IRepository<int, TechSpecs> _tsRepo;
+
         private readonly IICTUserManager _userManager;
         private readonly IICTRoleManager _roleManager;
         private readonly UserStore _userStore;
-        public TicketRequestService(IRepository<int, TicketRequest> ticketRepository, IICTUserManager userManager,
-            IICTRoleManager roleManager, UserStore userStore)
+
+        public TicketRequestService(IRepository<int, TicketRequest> baseRepo, IRepository<int, TicketRequest> ticketRepository, IICTUserManager userManager,
+            IICTRoleManager roleManager, UserStore userStore, IBaseDataService<TicketRequestStatus, int> ticketRequestStatusService,
+            IRepository<int, Deliveries> deliveriesRepo, IRepository<int, Repairs> repairRepo, IRepository<int, TechSpecs> tsRepo) : base(baseRepo)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _ticketRepository = ticketRepository;
             _userStore = userStore;
+            TicketRequestStatusService = ticketRequestStatusService;
+            _deliveriesRepo = deliveriesRepo;
+            _repairRepo = repairRepo;
+            _tsRepo = tsRepo;
         }
+        public IBaseDataService<TicketRequestStatus, int> TicketRequestStatusService { get; set; }
 
         public async Task<bool> CanAssignTicket()
         {
@@ -36,10 +48,28 @@ namespace ICTProfilingV3.Services
             return role.Select(x => x.Designation).ToList().Contains(Designation.AssignTo);
         }
 
+        public override async Task DeleteAsync(int id)
+        {
+            var ticket = await base.GetByIdAsync(id);
+            if (ticket.RequestType == RequestType.Deliveries)
+            {
+
+            }
+            if (ticket.RequestType == RequestType.TechSpecs)
+            {
+
+            }
+            if (ticket.RequestType == RequestType.Repairs)
+            {
+
+            }
+            await base.DeleteAsync(id);
+        }
+
         #region GetTicketRequests
         public async Task<IEnumerable<TicketRequestDTM>> GetTicketRequests()
         {
-            var ticketRequests = await _ticketRepository.GetAll()
+            var ticketRequests = await _ticketRepository.GetAll().Where(x => x.IsDeleted == false || x.IsDeleted == null)
             .Include(t => t.ITStaff.Users)
             .Include(t => t.Deliveries)
             .Include(t => t.Deliveries.Supplier)
@@ -101,9 +131,9 @@ namespace ICTProfilingV3.Services
             }
             if (ticket.RequestType == RequestType.Repairs)
             {
-                reqById = ticket.Repairs.RequestedById;
-                reqyByChief = ticket.Repairs.ReqByChiefId;
-                deliveredBy = ticket.Repairs.DeliveredById;
+                reqById = ticket?.Repairs?.RequestedById;
+                reqyByChief = ticket?.Repairs?.ReqByChiefId;
+                deliveredBy = ticket?.Repairs?.DeliveredById;
             }
 
             if (reqById != null)

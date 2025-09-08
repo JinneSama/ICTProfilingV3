@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            DevExpress.Skins.SkinPaddingEdges skinPaddingEdges1 = new DevExpress.Skins.SkinPaddingEdges();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
             this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
@@ -80,6 +80,11 @@
             this.btnRefreshControl = new DevExpress.XtraBars.BarButtonItem();
             this.btnLogs = new DevExpress.XtraBars.BarButtonItem();
             this.btnClientRequests = new DevExpress.XtraBars.BarButtonItem();
+            this.lblSection = new DevExpress.XtraBars.BarStaticItem();
+            this.btnEquipmentCategory = new DevExpress.XtraBars.BarButtonItem();
+            this.btnBrands = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnModelSpecs = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -160,12 +165,18 @@
             this.btnNavigateForward,
             this.btnRefreshControl,
             this.btnLogs,
-            this.btnClientRequests});
+            this.btnClientRequests,
+            this.lblSection,
+            this.btnEquipmentCategory,
+            this.btnBrands,
+            this.barButtonItem2,
+            this.btnModelSpecs});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 47;
+            this.ribbon.MaxItemId = 52;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageHeaderItemLinks.Add(this.lblEmployee);
             this.ribbon.PageHeaderItemLinks.Add(this.lblPosition);
+            this.ribbon.PageHeaderItemLinks.Add(this.lblSection);
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage2,
@@ -322,10 +333,9 @@
             // 
             // btnBrand
             // 
-            this.btnBrand.Caption = "Equipment Brands";
+            this.btnBrand.Caption = "Equipments (New)";
             this.btnBrand.Id = 11;
-            this.btnBrand.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.brand_16x161;
-            this.btnBrand.ImageOptions.LargeImage = global::ICTProfilingV3.Properties.Resources.b_32x32;
+            this.btnBrand.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBrand.ImageOptions.SvgImage")));
             this.btnBrand.Name = "btnBrand";
             this.btnBrand.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBrand_ItemClick);
             // 
@@ -627,6 +637,50 @@
             this.btnClientRequests.Tag = "Client";
             this.btnClientRequests.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnClientRequests_ItemClick);
             // 
+            // lblSection
+            // 
+            this.lblSection.Caption = "Section";
+            this.lblSection.Id = 47;
+            this.lblSection.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("lblSection.ImageOptions.Image")));
+            this.lblSection.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("lblSection.ImageOptions.LargeImage")));
+            this.lblSection.Name = "lblSection";
+            this.lblSection.PaintStyle = DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph;
+            // 
+            // btnEquipmentCategory
+            // 
+            this.btnEquipmentCategory.Caption = "Equipment Category (New)";
+            this.btnEquipmentCategory.Hint = "Equipment Category";
+            this.btnEquipmentCategory.Id = 48;
+            this.btnEquipmentCategory.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnEquipmentCategory.ImageOptions.Image")));
+            this.btnEquipmentCategory.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnEquipmentCategory.ImageOptions.LargeImage")));
+            this.btnEquipmentCategory.Name = "btnEquipmentCategory";
+            this.btnEquipmentCategory.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnEquipmentCategory.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnEquipmentCategory_ItemClick);
+            // 
+            // btnBrands
+            // 
+            this.btnBrands.Caption = "Brands (New)";
+            this.btnBrands.Id = 49;
+            this.btnBrands.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBrands.ImageOptions.SvgImage")));
+            this.btnBrands.Name = "btnBrands";
+            this.btnBrands.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBrands_ItemClick);
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Brands (Old)";
+            this.barButtonItem2.Id = 50;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
+            // btnModelSpecs
+            // 
+            this.btnModelSpecs.Caption = "Model Specs (New)";
+            this.btnModelSpecs.Id = 51;
+            this.btnModelSpecs.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnModelSpecs.ImageOptions.SvgImage")));
+            this.btnModelSpecs.Name = "btnModelSpecs";
+            this.btnModelSpecs.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -727,10 +781,14 @@
             // ribbonPageGroup6
             // 
             this.ribbonPageGroup6.ItemLinks.Add(this.btnSuppliers);
-            this.ribbonPageGroup6.ItemLinks.Add(this.btnEquipment);
-            this.ribbonPageGroup6.ItemLinks.Add(this.btnEquipmentSpecs);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnEquipmentCategory);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnBrands);
             this.ribbonPageGroup6.ItemLinks.Add(this.btnBrand);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnModelSpecs);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnEquipment);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItem2);
             this.ribbonPageGroup6.ItemLinks.Add(this.btnModels);
+            this.ribbonPageGroup6.ItemLinks.Add(this.btnEquipmentSpecs);
             this.ribbonPageGroup6.Name = "ribbonPageGroup6";
             this.ribbonPageGroup6.Text = "Equipment";
             // 
@@ -920,5 +978,10 @@
         private DevExpress.XtraBars.BarButtonItem btnLogs;
         private DevExpress.XtraBars.BarButtonItem btnClientRequests;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup18;
+        private DevExpress.XtraBars.BarStaticItem lblSection;
+        private DevExpress.XtraBars.BarButtonItem btnEquipmentCategory;
+        private DevExpress.XtraBars.BarButtonItem btnBrands;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem btnModelSpecs;
     }
 }

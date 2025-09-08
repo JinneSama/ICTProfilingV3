@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression1 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression2 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression3 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression4 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression5 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule6 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression6 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule7 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression7 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule8 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression8 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule9 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression9 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule10 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleExpression formatConditionRuleExpression10 = new DevExpress.XtraEditors.FormatConditionRuleExpression();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.staffPanel = new DevExpress.XtraEditors.PanelControl();
@@ -79,14 +79,15 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
+            this.btnComparisonExcel = new DevExpress.XtraEditors.SimpleButton();
             this.btnFindings = new DevExpress.XtraEditors.SimpleButton();
             this.btnCompReport = new DevExpress.XtraEditors.SimpleButton();
-            this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
+            this.lblId = new DevExpress.XtraEditors.LabelControl();
             this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
             this.btnPreview = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.dtDeliveredDate = new DevExpress.XtraEditors.DateEdit();
+            this.deDeliveredDate = new DevExpress.XtraEditors.DateEdit();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -137,8 +138,8 @@
             this.pnlButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDeliveredDate.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDeliveredDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDeliveredDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDeliveredDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierTelNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierName.Properties)).BeginInit();
@@ -460,51 +461,51 @@
             this.gridColumn8,
             this.gridColumn9,
             this.gridColumn10});
-            gridFormatRule1.Column = this.colStatus;
-            gridFormatRule1.ColumnApplyTo = this.colStatus;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleExpression1.Appearance.BackColor = System.Drawing.Color.Coral;
-            formatConditionRuleExpression1.Appearance.Options.HighPriority = true;
-            formatConditionRuleExpression1.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression1.Expression = "[Status] = 0";
-            gridFormatRule1.Rule = formatConditionRuleExpression1;
-            gridFormatRule2.Column = this.colStatus;
-            gridFormatRule2.ColumnApplyTo = this.colStatus;
-            gridFormatRule2.Name = "Format1";
-            formatConditionRuleExpression2.Appearance.BackColor = System.Drawing.Color.Pink;
-            formatConditionRuleExpression2.Appearance.Options.HighPriority = true;
-            formatConditionRuleExpression2.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression2.Expression = "[Status] = 1";
-            gridFormatRule2.Rule = formatConditionRuleExpression2;
-            gridFormatRule3.Column = this.colStatus;
-            gridFormatRule3.ColumnApplyTo = this.colStatus;
-            gridFormatRule3.Name = "Format2";
-            formatConditionRuleExpression3.Appearance.BackColor = System.Drawing.Color.Yellow;
-            formatConditionRuleExpression3.Appearance.Options.HighPriority = true;
-            formatConditionRuleExpression3.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression3.Expression = "[Status] = 2";
-            gridFormatRule3.Rule = formatConditionRuleExpression3;
-            gridFormatRule4.Column = this.colStatus;
-            gridFormatRule4.ColumnApplyTo = this.colStatus;
-            gridFormatRule4.Name = "Format3";
-            formatConditionRuleExpression4.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
-            formatConditionRuleExpression4.Appearance.Options.HighPriority = true;
-            formatConditionRuleExpression4.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression4.Expression = "[Status] = 3";
-            gridFormatRule4.Rule = formatConditionRuleExpression4;
-            gridFormatRule5.Column = this.colStatus;
-            gridFormatRule5.ColumnApplyTo = this.colStatus;
-            gridFormatRule5.Name = "Format4";
-            formatConditionRuleExpression5.Appearance.BackColor = System.Drawing.Color.Lime;
-            formatConditionRuleExpression5.Appearance.Options.HighPriority = true;
-            formatConditionRuleExpression5.Appearance.Options.UseBackColor = true;
-            formatConditionRuleExpression5.Expression = "[Status] = 4";
-            gridFormatRule5.Rule = formatConditionRuleExpression5;
-            this.gridDeliveries.FormatRules.Add(gridFormatRule1);
-            this.gridDeliveries.FormatRules.Add(gridFormatRule2);
-            this.gridDeliveries.FormatRules.Add(gridFormatRule3);
-            this.gridDeliveries.FormatRules.Add(gridFormatRule4);
-            this.gridDeliveries.FormatRules.Add(gridFormatRule5);
+            gridFormatRule6.Column = this.colStatus;
+            gridFormatRule6.ColumnApplyTo = this.colStatus;
+            gridFormatRule6.Name = "Format0";
+            formatConditionRuleExpression6.Appearance.BackColor = System.Drawing.Color.Coral;
+            formatConditionRuleExpression6.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression6.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression6.Expression = "[Status] = 0";
+            gridFormatRule6.Rule = formatConditionRuleExpression6;
+            gridFormatRule7.Column = this.colStatus;
+            gridFormatRule7.ColumnApplyTo = this.colStatus;
+            gridFormatRule7.Name = "Format1";
+            formatConditionRuleExpression7.Appearance.BackColor = System.Drawing.Color.Pink;
+            formatConditionRuleExpression7.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression7.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression7.Expression = "[Status] = 1";
+            gridFormatRule7.Rule = formatConditionRuleExpression7;
+            gridFormatRule8.Column = this.colStatus;
+            gridFormatRule8.ColumnApplyTo = this.colStatus;
+            gridFormatRule8.Name = "Format2";
+            formatConditionRuleExpression8.Appearance.BackColor = System.Drawing.Color.Yellow;
+            formatConditionRuleExpression8.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression8.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression8.Expression = "[Status] = 2";
+            gridFormatRule8.Rule = formatConditionRuleExpression8;
+            gridFormatRule9.Column = this.colStatus;
+            gridFormatRule9.ColumnApplyTo = this.colStatus;
+            gridFormatRule9.Name = "Format3";
+            formatConditionRuleExpression9.Appearance.BackColor = System.Drawing.Color.DeepSkyBlue;
+            formatConditionRuleExpression9.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression9.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression9.Expression = "[Status] = 3";
+            gridFormatRule9.Rule = formatConditionRuleExpression9;
+            gridFormatRule10.Column = this.colStatus;
+            gridFormatRule10.ColumnApplyTo = this.colStatus;
+            gridFormatRule10.Name = "Format4";
+            formatConditionRuleExpression10.Appearance.BackColor = System.Drawing.Color.Lime;
+            formatConditionRuleExpression10.Appearance.Options.HighPriority = true;
+            formatConditionRuleExpression10.Appearance.Options.UseBackColor = true;
+            formatConditionRuleExpression10.Expression = "[Status] = 4";
+            gridFormatRule10.Rule = formatConditionRuleExpression10;
+            this.gridDeliveries.FormatRules.Add(gridFormatRule6);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule7);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule8);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule9);
+            this.gridDeliveries.FormatRules.Add(gridFormatRule10);
             this.gridDeliveries.GridControl = this.gcDeliveries;
             this.gridDeliveries.Name = "gridDeliveries";
             this.gridDeliveries.OptionsFind.AlwaysVisible = true;
@@ -584,9 +585,9 @@
             // btnDelete
             // 
             this.btnDelete.AutoHeight = false;
-            editorButtonImageOptions1.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
+            editorButtonImageOptions2.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.btnDelete.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x1610;
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
@@ -616,9 +617,10 @@
             this.pnlButtons.Appearance.Options.UseBackColor = true;
             this.pnlButtons.Appearance.Options.UseBorderColor = true;
             this.pnlButtons.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pnlButtons.Controls.Add(this.btnComparisonExcel);
             this.pnlButtons.Controls.Add(this.btnFindings);
             this.pnlButtons.Controls.Add(this.btnCompReport);
-            this.pnlButtons.Controls.Add(this.lblEpisNo);
+            this.pnlButtons.Controls.Add(this.lblId);
             this.pnlButtons.Controls.Add(this.labelControl8);
             this.pnlButtons.Controls.Add(this.btnPreview);
             this.pnlButtons.Controls.Add(this.btnEdit);
@@ -626,6 +628,22 @@
             this.pnlButtons.Name = "pnlButtons";
             this.pnlButtons.Size = new System.Drawing.Size(1111, 50);
             this.pnlButtons.TabIndex = 5;
+            // 
+            // btnComparisonExcel
+            // 
+            this.btnComparisonExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnComparisonExcel.Appearance.BackColor = System.Drawing.Color.Turquoise;
+            this.btnComparisonExcel.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.btnComparisonExcel.Appearance.Options.UseBackColor = true;
+            this.btnComparisonExcel.Appearance.Options.UseForeColor = true;
+            this.btnComparisonExcel.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.productsalesreport_16x16;
+            this.btnComparisonExcel.Location = new System.Drawing.Point(643, 10);
+            this.btnComparisonExcel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnComparisonExcel.Name = "btnComparisonExcel";
+            this.btnComparisonExcel.Size = new System.Drawing.Size(169, 28);
+            this.btnComparisonExcel.TabIndex = 116;
+            this.btnComparisonExcel.Text = "Comparison Report (Excel)";
+            this.btnComparisonExcel.Click += new System.EventHandler(this.btnComparisonExcel_Click);
             // 
             // btnFindings
             // 
@@ -635,7 +653,7 @@
             this.btnFindings.Appearance.Options.UseBackColor = true;
             this.btnFindings.Appearance.Options.UseForeColor = true;
             this.btnFindings.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x168;
-            this.btnFindings.Location = new System.Drawing.Point(674, 10);
+            this.btnFindings.Location = new System.Drawing.Point(501, 10);
             this.btnFindings.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindings.Name = "btnFindings";
             this.btnFindings.Size = new System.Drawing.Size(138, 28);
@@ -659,16 +677,16 @@
             this.btnCompReport.Text = "Comparison Report";
             this.btnCompReport.Click += new System.EventHandler(this.btnCompReport_Click);
             // 
-            // lblEpisNo
+            // lblId
             // 
-            this.lblEpisNo.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
-            this.lblEpisNo.Appearance.ForeColor = System.Drawing.Color.White;
-            this.lblEpisNo.Appearance.Options.UseFont = true;
-            this.lblEpisNo.Appearance.Options.UseForeColor = true;
-            this.lblEpisNo.Location = new System.Drawing.Point(98, 8);
-            this.lblEpisNo.Name = "lblEpisNo";
-            this.lblEpisNo.Size = new System.Drawing.Size(0, 30);
-            this.lblEpisNo.TabIndex = 113;
+            this.lblId.Appearance.Font = new System.Drawing.Font("Segoe UI", 16F);
+            this.lblId.Appearance.ForeColor = System.Drawing.Color.White;
+            this.lblId.Appearance.Options.UseFont = true;
+            this.lblId.Appearance.Options.UseForeColor = true;
+            this.lblId.Location = new System.Drawing.Point(98, 8);
+            this.lblId.Name = "lblId";
+            this.lblId.Size = new System.Drawing.Size(0, 30);
+            this.lblId.TabIndex = 113;
             // 
             // labelControl8
             // 
@@ -706,7 +724,7 @@
             this.btnEdit.Appearance.Options.UseBackColor = true;
             this.btnEdit.Appearance.Options.UseForeColor = true;
             this.btnEdit.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.edittask_16x168;
-            this.btnEdit.Location = new System.Drawing.Point(577, 10);
+            this.btnEdit.Location = new System.Drawing.Point(404, 10);
             this.btnEdit.Margin = new System.Windows.Forms.Padding(2);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 28);
@@ -723,7 +741,7 @@
             this.groupControl1.Appearance.Options.UseFont = true;
             this.groupControl1.AppearanceCaption.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.groupControl1.AppearanceCaption.Options.UseFont = true;
-            this.groupControl1.Controls.Add(this.dtDeliveredDate);
+            this.groupControl1.Controls.Add(this.deDeliveredDate);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.labelControl3);
@@ -737,19 +755,19 @@
             this.groupControl1.TabIndex = 40;
             this.groupControl1.Text = "Supplier";
             // 
-            // dtDeliveredDate
+            // deDeliveredDate
             // 
-            this.dtDeliveredDate.EditValue = null;
-            this.dtDeliveredDate.Location = new System.Drawing.Point(137, 93);
-            this.dtDeliveredDate.Name = "dtDeliveredDate";
-            this.dtDeliveredDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtDeliveredDate.Properties.Appearance.Options.UseFont = true;
-            this.dtDeliveredDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDeliveredDate.EditValue = null;
+            this.deDeliveredDate.Location = new System.Drawing.Point(137, 93);
+            this.deDeliveredDate.Name = "deDeliveredDate";
+            this.deDeliveredDate.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.deDeliveredDate.Properties.Appearance.Options.UseFont = true;
+            this.deDeliveredDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtDeliveredDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.deDeliveredDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dtDeliveredDate.Size = new System.Drawing.Size(275, 22);
-            this.dtDeliveredDate.TabIndex = 45;
+            this.deDeliveredDate.Size = new System.Drawing.Size(275, 22);
+            this.deDeliveredDate.TabIndex = 45;
             // 
             // labelControl5
             // 
@@ -1087,8 +1105,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDeliveredDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtDeliveredDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDeliveredDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.deDeliveredDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierTelNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSupplierName.Properties)).EndInit();
@@ -1116,7 +1134,7 @@
         private DevExpress.XtraEditors.PanelControl pnlDeliveries;
         private DevExpress.XtraEditors.PanelControl pnlButtons;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.XtraEditors.DateEdit dtDeliveredDate;
+        private DevExpress.XtraEditors.DateEdit deDeliveredDate;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl3;
@@ -1150,7 +1168,7 @@
         private DevExpress.XtraEditors.SimpleButton btnEdit;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDelete;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraEditors.LabelControl lblEpisNo;
+        private DevExpress.XtraEditors.LabelControl lblId;
         private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit hplTicket;
         private DevExpress.XtraEditors.SimpleButton btnCompReport;
         private DevExpress.XtraEditors.StepProgressBar spbTicketStatus;
@@ -1183,5 +1201,6 @@
         private System.Windows.Forms.Label label4;
         private DevExpress.XtraEditors.DateEdit deFrom;
         private System.Windows.Forms.Label label3;
+        private DevExpress.XtraEditors.SimpleButton btnComparisonExcel;
     }
 }

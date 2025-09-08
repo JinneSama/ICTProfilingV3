@@ -1,12 +1,10 @@
-﻿using Helpers.Interfaces;
-using Helpers.Inventory;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.DataTransferModels.Models;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,22 +12,26 @@ namespace ICTProfilingV3.PPEInventoryForms
 {
     public partial class frmInventoryParser : BaseForm
     {
+        private readonly IParseInventory _parseInventory;
+        private readonly IEquipmentService _equipmentService;
+
+        private List<Specs> _specs;
         private Device _device;
         private string _ppeNo;
-        private readonly IParseInventory _parseInventory;
-        private List<Specs> _specs;
 
-        private EquipmentSpecs _equipmentSpecs;
         private Model _model;
-        private Brand _brand;
-        public frmInventoryParser(Device device, string ppeNo)
+        public frmInventoryParser(IParseInventory parseInventory, IEquipmentService equipmentService)
         {
+            _parseInventory = parseInventory;
+            _equipmentService = equipmentService;
             InitializeComponent();
+        }
+
+        public void InitForm(Device device, string ppeNo)
+        {
             _device = device;
-            _parseInventory = new ParseInventory();
             _specs = _device.Specs;
             _ppeNo = ppeNo;
-
             lblEquipment.Text = _device.DeviceType;
             lblBrand.Text = _device.Brand;
             lblModel.Text = _device.Model;
@@ -37,19 +39,17 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void LoadData()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
             gcEquipmentDetails.DataSource = new BindingList<Specs>(_specs);
             SearchBrand();
         }
 
-        private void SearchBrand()
+        private async Task SearchBrand()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var equipmentBrand = unitOfWork.BrandRepo.FindAllAsync(x => x.BrandName == _device.Brand && x.EquipmentSpecs.Equipment.EquipmentName == _device.DeviceType,
-                x => x.EquipmentSpecs,
-                x => x.EquipmentSpecs.Equipment,
-                x => x.EquipmentSpecs.Brands,
-                x => x.EquipmentSpecs.Brands.Select(s => s.Models)).ToList();
+            var equipmentBrand = _equipmentService.BrandBaseService.GetAll().Where(x => x.BrandName == _device.Brand && x.EquipmentSpecs.Equipment.EquipmentName == _device.DeviceType)
+                .Include(x => x.EquipmentSpecs)
+                .Include(x => x.EquipmentSpecs.Equipment)
+                .Include(x => x.EquipmentSpecs.Brands)
+                .Include(x => x.EquipmentSpecs.Brands.Select(s => s.Models)).ToList();
             var equipmentSpecsFromBrand = equipmentBrand.Select(s => s.EquipmentSpecs);
             var equipmentSpecs = equipmentSpecsFromBrand.FirstOrDefault(x => x.Equipment.EquipmentName == _device.DeviceType);
             if (equipmentSpecs == null)
@@ -58,28 +58,27 @@ namespace ICTProfilingV3.PPEInventoryForms
                 {
                     EquipmentName = _device.DeviceType
                 };
-                unitOfWork.EquipmentRepo.Insert(equipmentNew);
+                await _equipmentService.AddAsync(equipmentNew);
 
                 var equipmentSpecsNew = new EquipmentSpecs
                 {
                     Equipment = equipmentNew
                 };
-                unitOfWork.EquipmentSpecsRepo.Insert(equipmentSpecsNew);
+                await _equipmentService.EquipmentSpecsBaseService.AddAsync(equipmentSpecsNew);
 
                 var brandNew = new Brand
                 {
                     BrandName = _device.Brand,
                     EquipmentSpecs = equipmentSpecsNew
                 };
-                unitOfWork.BrandRepo.Insert(brandNew);
+                await _equipmentService.BrandBaseService.AddAsync(brandNew);
 
                 var modelNew = new Model
                 {
                     ModelName = _device.Model,
                     Brand = brandNew
                 };
-                unitOfWork.ModelRepo.Insert(modelNew);
-                unitOfWork.Save();
+                await _equipmentService.ModelBaseService.AddAsync(modelNew);
 
                 _model = modelNew;
                 return;
@@ -93,15 +92,14 @@ namespace ICTProfilingV3.PPEInventoryForms
                     BrandName = _device.Brand,
                     EquipmentSpecs = equipmentSpecs
                 };
-                unitOfWork.BrandRepo.Insert(brandNew);
+                await _equipmentService.BrandBaseService.AddAsync(brandNew);
 
                 var modelNew = new Model
                 {
                     ModelName = _device.Model,
                     Brand = brandNew
                 };
-                unitOfWork.ModelRepo.Insert(modelNew);
-                unitOfWork.Save();
+                await _equipmentService.ModelBaseService.AddAsync(modelNew);
                 _model = modelNew;
                 return;
             }
@@ -114,8 +112,7 @@ namespace ICTProfilingV3.PPEInventoryForms
                     ModelName = _device.Model,
                     Brand = brand
                 };
-                unitOfWork.ModelRepo.Insert(modelNew);
-                unitOfWork.Save();
+                await _equipmentService.ModelBaseService.AddAsync(modelNew);
                 _model = modelNew;
                 return;
             }

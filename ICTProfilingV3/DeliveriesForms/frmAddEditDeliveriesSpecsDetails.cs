@@ -1,7 +1,9 @@
 ﻿using ICTProfilingV3.BaseClasses;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.LookUpTables;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,38 +14,44 @@ namespace ICTProfilingV3.DeliveriesForms
 {
     public partial class frmAddEditDeliveriesSpecsDetails : BaseForm
     {
-        private IUnitOfWork unitOfWork;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly ITechSpecsService _techSpecsService;
+        private readonly IDeliveriesService _deliveriesService;
         private DeliveriesSpecs _specs;
-        public frmAddEditDeliveriesSpecsDetails()
+        public frmAddEditDeliveriesSpecsDetails(IServiceProvider serviceProvider, IDeliveriesService deliveriesService, ITechSpecsService techSpecsService)
         {
+            _serviceProvider = serviceProvider;
+            _deliveriesService = deliveriesService;
+            _techSpecsService = techSpecsService;
             InitializeComponent();
         }
-        public frmAddEditDeliveriesSpecsDetails(DeliveriesSpecs specs)
+
+        public void InitForm(DeliveriesSpecs specs)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
             _specs = specs;
             lblEquipment.Text = specs?.Model?.Brand?.EquipmentSpecs?.Equipment?.EquipmentName ?? "";
             lblDescription.Text = specs?.Model?.Brand?.EquipmentSpecs?.Description ?? "";
             LoadSpecs();
         }
+
         private void LoadSpecs()
         {
-            var data = unitOfWork.DeliveriesSpecsDetailsRepo.FindAllAsync(x => x.DeliveriesSpecsId == _specs.Id).OrderBy(o => o.ItemNo);
+            var data = _deliveriesService.DeliveriesSpecsDetailsBaseService.GetAll().Where(x => x.DeliveriesSpecsId == _specs.Id).OrderBy(o => o.ItemNo);
             gcEquipmentDetails.DataSource = new BindingList<DeliveriesSpecsDetails>(data.ToList());
         }
 
-        private async void UpdateSpecs(DeliveriesSpecsDetails row)
+        private async Task UpdateSpecs(DeliveriesSpecsDetails row)
         {
-            var specs = await unitOfWork.DeliveriesSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
+            //var specs = await unitOfWork.DeliveriesSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
+            var specs = await _deliveriesService.DeliveriesSpecsDetailsBaseService.GetByIdAsync(row.Id);
+            
             specs.ItemNo = row.ItemNo;
             specs.Specs = row.Specs;
             specs.Description = row.Description;
-            unitOfWork.DeliveriesSpecsDetailsRepo.Update(specs);
-            unitOfWork.Save();
+            await _deliveriesService.DeliveriesSpecsDetailsBaseService.SaveChangesAsync();
         }
 
-        private void InsertSpecs(DeliveriesSpecsDetails row)
+        private async Task InsertSpecs(DeliveriesSpecsDetails row)
         {
             var equipmentDetail = new DeliveriesSpecsDetails
             {
@@ -52,17 +60,16 @@ namespace ICTProfilingV3.DeliveriesForms
                 Description = row.Description,
                 DeliveriesSpecsId = _specs.Id
             };
-            unitOfWork.DeliveriesSpecsDetailsRepo.Insert(equipmentDetail);
-            unitOfWork.Save();
+            await _deliveriesService.DeliveriesSpecsDetailsBaseService.AddAsync(equipmentDetail);
             LoadSpecs();
         }
 
         private async void gridEquipmentDetails_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var row = (DeliveriesSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.DeliveriesSpecsDetailsRepo.FindAsync(x => x.Id == row.Id);
-            if (res == null) InsertSpecs(row);
-            else UpdateSpecs(row);
+            var res = await _deliveriesService.DeliveriesSpecsDetailsBaseService.GetByIdAsync(row.Id);
+            if (res == null) await InsertSpecs(row);
+            else await UpdateSpecs(row);
         }
 
         private async void btnDelete_Click(object sender, System.EventArgs e)
@@ -71,11 +78,10 @@ namespace ICTProfilingV3.DeliveriesForms
             if (msgRes == DialogResult.Cancel) return;
 
             var equipment = (DeliveriesSpecsDetails)gridEquipmentDetails.GetFocusedRow();
-            var res = await unitOfWork.DeliveriesSpecsDetailsRepo.FindAsync(x => x.Id == equipment.Id);
+            var res = await _deliveriesService.DeliveriesSpecsDetailsBaseService.GetByIdAsync(equipment.Id);
             if (res == null) return;
-            unitOfWork.DeliveriesSpecsDetailsRepo.Delete(equipment);
-            unitOfWork.Save();
 
+            await _deliveriesService.DeliveriesSpecsDetailsBaseService.DeleteAsync(equipment.Id);
             LoadSpecs();
         }
 
@@ -83,11 +89,8 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             var msgRes = MessageBox.Show("This will Overwrite Existing Specs?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
-
-            var frm = new frmEquipmentSpecs()
-            {
-                Copy = true
-            };
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentSpecs>();
+            frm._copy = true;
             frm.ShowDialog();
             await OverwriteSpecs(frm.SpecsDetails);
         }
@@ -96,9 +99,7 @@ namespace ICTProfilingV3.DeliveriesForms
         {
             if (!specsDetails.Any() || specsDetails == null) return;
 
-            var uow = new UnitOfWork();
-            uow.DeliveriesSpecsDetailsRepo.DeleteRange(x => x.DeliveriesSpecsId == _specs.Id);
-            await uow.SaveChangesAsync();
+            await _deliveriesService.DeliveriesSpecsDetailsBaseService.DeleteRangeAsync(x => x.DeliveriesSpecsId == _specs.Id);
 
             foreach (var spec in specsDetails)
             {
@@ -109,18 +110,15 @@ namespace ICTProfilingV3.DeliveriesForms
                     Description = spec.DetailDescription,
                     DeliveriesSpecsId = _specs.Id
                 };
-                uow.DeliveriesSpecsDetailsRepo.Insert(equipmentDetail);
+                await _deliveriesService.DeliveriesSpecsDetailsBaseService.AddAsync(equipmentDetail);
             }
-            await uow.SaveChangesAsync();
             LoadSpecs();
         }
 
         private async Task OverwriteSpecsFromTSBasis(IEnumerable<TechSpecsBasisDetails> specsDetails)
         {
             if (!specsDetails.Any() || specsDetails == null) return;
-            var uow = new UnitOfWork();
-            uow.TechSpecsICTSpecsDetailsRepo.DeleteRange(x => x.TechSpecsICTSpecsId == _specs.Id);
-            await uow.SaveChangesAsync();
+            await _techSpecsService.DeleteTechSpecsICTSpecsDetailRange(x => x.TechSpecsICTSpecsId == _specs.Id);
 
             foreach (var spec in specsDetails)
             {
@@ -131,9 +129,8 @@ namespace ICTProfilingV3.DeliveriesForms
                     Description = spec.Description,
                     DeliveriesSpecsId = _specs.Id
                 };
-                uow.DeliveriesSpecsDetailsRepo.Insert(equipmentDetail);
+                await _deliveriesService.DeliveriesSpecsDetailsBaseService.AddAsync(equipmentDetail);
             }
-            await uow.SaveChangesAsync();
             LoadSpecs();
         }
 
@@ -142,10 +139,8 @@ namespace ICTProfilingV3.DeliveriesForms
             var msgRes = MessageBox.Show("This will Overwrite Existing Specs?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
             if (msgRes == DialogResult.Cancel) return;
 
-            var frm = new frmTechSpecsBasis()
-            {
-                Copy = true
-            };
+            var frm = _serviceProvider.GetRequiredService<frmTechSpecsBasis>();
+            frm._copy = true;
             frm.ShowDialog();
             await OverwriteSpecsFromTSBasis(frm.SpecsDetails);
         }

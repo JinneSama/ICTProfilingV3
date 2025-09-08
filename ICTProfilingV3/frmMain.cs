@@ -5,7 +5,6 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
-using Helpers.Interfaces;
 using Helpers.Update;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.BaseClasses;
@@ -13,6 +12,8 @@ using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.CustomerActionSheetForms;
 using ICTProfilingV3.DashboardForms;
 using ICTProfilingV3.DeliveriesForms;
+using ICTProfilingV3.EquipmentForms;
+using ICTProfilingV3.Equipments;
 using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.LoginForms;
 using ICTProfilingV3.LookUpTables;
@@ -22,7 +23,6 @@ using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.ReportForms;
-using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.TicketRequestForms;
 using ICTProfilingV3.ToolForms;
@@ -32,7 +32,7 @@ using Models.Enums;
 
 namespace ICTProfilingV3
 {
-    public partial class frmMain : BaseRibbonForm , IDisposeUC
+    public partial class frmMain : BaseRibbonForm
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly IUCManager _ucManager;
@@ -140,10 +140,11 @@ namespace ICTProfilingV3
                 return Designation.Unknown;
         }
 
-        public void SetUser(string name, string position)
+        public void SetUser(string name, string position, Sections section)
         {
             lblEmployee.Caption = name;
             lblPosition.Caption = position;
+            lblSection.Caption = EnumHelper.GetEnumDescription(section);
         }
 
         private void btnTARequest_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -154,50 +155,50 @@ namespace ICTProfilingV3
 
         private void btnSuppliers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmSuppliers();
+            var frm = _serviceProvider.GetRequiredService<frmSuppliers>();
             frm.ShowDialog();
         }
 
         private void btnEquipment_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmEquipment();
+            var frm = _serviceProvider.GetRequiredService<frmEquipment>();
             frm.ShowDialog();
         }
 
         private void btnEquipmentSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmEquipmentSpecs();
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentSpecs>();
             frm.ShowDialog();
         }
 
         private void btnBrand_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmEquipmentBrand();
-            frm.ShowDialog();   
+            var frm = _serviceProvider.GetRequiredService<EquipmentForms.frmEquipmentBrand>();
+            frm.ShowDialog();
+
         }
 
         private void btnModels_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmEquipmentModels();
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentModels>();
             frm.ShowDialog();
         }
 
         private void btnDeliveries_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-             
             var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDeliveries>>();
             navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnUsers_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmUsers();
+            var frm = _serviceProvider.GetRequiredService<frmUsers>();
             frm.ShowDialog();
         }
 
         private void btnUserLevels_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmUserRoles();
+            var frm = _serviceProvider.GetRequiredService<frmUserRoles>();
             frm.ShowDialog();
         }
 
@@ -215,19 +216,18 @@ namespace ICTProfilingV3
 
         private void btnStaff_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmStaff();
+            var frm = _serviceProvider.GetRequiredService<frmStaff>();
             frm.ShowDialog();
         }
 
         private void btnTechSpecsBasis_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmTechSpecsBasis();
+            var frm = _serviceProvider.GetRequiredService<frmTechSpecsBasis>();
             frm.ShowDialog();
         }
 
         private void btnTechSpecs_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-             
             var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCTechSpecs>>();
             navigation.NavigateTo(_mainForm.mainPanel, act => act.IsTechSpecs = true);
         }
@@ -254,8 +254,8 @@ namespace ICTProfilingV3
 
         private void btnStandardPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmStandardPRList();
-            frm.ShowDialog();
+            //var frm = new frmStandardPRList();
+            //frm.ShowDialog();
         }
 
         private void btnVPR_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -283,7 +283,6 @@ namespace ICTProfilingV3
             backstageViewControl1.Close();
             lblEmployee.Caption = string.Empty;
             lblPosition.Caption = string.Empty;
-            DisposeUC(mainPanel);
             var frm = _serviceProvider.GetRequiredService<frmLogin>();
             frm.ShowDialog();
         }
@@ -304,7 +303,7 @@ namespace ICTProfilingV3
 
         private void btnPGNOffices_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var frm = new frmPGNOffices();
+            var frm = _serviceProvider.GetRequiredService<frmPGNOffices>();
             frm.ShowDialog();
         }
 
@@ -368,7 +367,8 @@ namespace ICTProfilingV3
                 System.Deployment.Application.ApplicationDeployment cd = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
                 var version = cd.CurrentVersion.ToString();
 
-                var frm = new frmChangelogs(version);
+                var frm = _serviceProvider.GetRequiredService<frmChangelogs>();
+                frm.InitForm(version);
                 frm.ShowDialog();
             }
         }
@@ -381,18 +381,11 @@ namespace ICTProfilingV3
 
         private void btnDashboard_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            MessageBox.Show("This feature is under development.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+
             var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCDashboard>>();
             navigation.NavigateTo(_mainForm.mainPanel);
-        }
-
-        public void DisposeUC(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                ctrl.Dispose();
-                GC.Collect();
-            }
-            parent.Controls.Clear();
         }
 
         private void btnQuarterlyReport_ItemClick(object sender, ItemClickEventArgs e)
@@ -427,13 +420,29 @@ namespace ICTProfilingV3
 
         private void btnLogs_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCLogManager>>();
-            navigation.NavigateTo(_mainForm.mainPanel);
         }
 
         private void btnClientRequests_ItemClick(object sender, ItemClickEventArgs e)
         {
             _ucManager.ShowUCSystemDetails(e.Item.Name, new UCClientDashboard { Dock = DockStyle.Fill }, null);
+        }
+
+        private void btnEquipmentCategory_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frm = _serviceProvider.GetRequiredService<frmEquipmentCategory>();
+            frm.ShowDialog();
+        }
+
+        private void btnBrands_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frm = _serviceProvider.GetRequiredService<frmBrand>();
+            frm.ShowDialog();
+        }
+
+        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var frm = _serviceProvider.GetRequiredService<ICTProfilingV3.LookUpTables.frmEquipmentBrand>();
+            frm.ShowDialog();
         }
     }
 }

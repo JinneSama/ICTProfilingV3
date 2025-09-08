@@ -1,27 +1,18 @@
-﻿using DevExpress.Charts.Native;
-using DevExpress.Data.Filtering;
-using DevExpress.XtraEditors;
-using Helpers.Interfaces;
-using Helpers.Utility;
+﻿using DevExpress.Data.Filtering;
 using ICTProfilingV3.ActionsForms;
+using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels.Models;
 using ICTProfilingV3.DataTransferModels.ViewModels;
-using ICTProfilingV3.Equipments;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.RepairForms;
 using ICTProfilingV3.Services.Employees;
-using ICTProfilingV3.StandardPRForms;
 using ICTProfilingV3.TechSpecsForms;
 using Microsoft.Extensions.DependencyInjection;
-using Models.Models;
-using Models.Repository;
+using Models.Enums;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -29,22 +20,32 @@ namespace ICTProfilingV3.PurchaseRequestForms
 {
     public partial class UCPR : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUCManager _ucManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IPurchaseReqService _purchaseReqService;
+        private readonly ITechSpecsService _techSpecsService;
+        private readonly IICTRoleManager _roleManager;
+        private readonly UserStore _userStore;
+
         public string filterText { get; set; }
-        public UCPR(IUCManager ucManager, IServiceProvider serviceProvider)
+        public UCPR(IUCManager ucManager, IServiceProvider serviceProvider, IPurchaseReqService purchaseReqService,
+            IICTRoleManager roleManager, UserStore userStore, ITechSpecsService techSpecsService)
         {
-            InitializeComponent();
             _serviceProvider = serviceProvider;
-            _ucManager = ucManager;
+            _purchaseReqService = purchaseReqService;
+            _roleManager = roleManager;
+            _userStore = userStore;
+            _techSpecsService = techSpecsService;
+            InitializeComponent();
             LoadPR();
         }
 
         private void LoadPR()
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var pr = unitOfWork.PurchaseRequestRepo.GetAll(x => x.CreatedByUser,
-                x => x.TechSpecs).OrderByDescending(x => x.DateCreated).ToList()
+            var pr = _purchaseReqService.GetAll()
+                .Include(x => x.CreatedByUser)
+                .Include(x => x.TechSpecs)
+                .OrderByDescending(x => x.DateCreated)
+                .ToList()
                 .Select(x => new PRViewModel
                 {
                     PurchaseRequest = x,
@@ -76,97 +77,58 @@ namespace ICTProfilingV3.PurchaseRequestForms
             var row = (PRViewModel)gridPR.GetFocusedRow();
             if (row == null) return;
 
-            if(!string.IsNullOrWhiteSpace(row.PurchaseRequest.PRNo))
+            if(row.PurchaseRequest.TechSpecsId == null)
             {
                 LoadOFMISPR(row.PurchaseRequest.PRNo);
                 return;
             }
-            if (row.PurchaseRequest.TechSpecsId == null) LoadPRSpecs(row);
             else await LoadTSSpecs(row);
         }
 
         private void LoadOFMISPR(string pRNo)
         {
-            panelSpecs.Controls.Clear();
-            panelSpecs.Controls.Add(new UCOFMISPR(pRNo)
-            {
-                Dock = DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCOFMISPR>>();
+            navigation.NavigateTo(panelSpecs, act => act.InitUC(pRNo));
         }
 
         private async Task LoadTSSpecs(PRViewModel row)
         {
-            IUnitOfWork unitOfWork = new UnitOfWork();
-            var ts = await unitOfWork.TechSpecsRepo.FindAsync(x => x.Id == row.PurchaseRequest.TechSpecs.Id);
-            panelSpecs.Controls.Clear();
-            panelSpecs.Controls.Add(new UCRequestedTechSpecs(ts)
-            {
-                Dock = DockStyle.Fill
-            });
+            var ts = await _techSpecsService.GetByIdAsync(row.PurchaseRequest.TechSpecs.Id);
+            
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCRequestedTechSpecs>>();
+            navigation.NavigateTo(panelSpecs, act => act.InitUC(ts));
         }
         private void LoadActions()
         {
             var row = (PRViewModel)gridPR.GetFocusedRow();
             if (row == null) return;
-            tabAction.Controls.Clear();
-            var uc = _serviceProvider.GetRequiredService<UCActions>();
-            uc.setActions(new ActionType { Id = row.PurchaseRequest.Id, RequestType = Models.Enums.RequestType.PR });
-            uc.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabAction.Controls.Add(uc);
-        }
-
-        private void LoadPRSpecs(PRViewModel row)
-        {
-            panelSpecs.Controls.Clear();
-            panelSpecs.Controls.Add(new UCStandardPR(row.PurchaseRequest)
-            {
-                Dock = DockStyle.Fill
-            });
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(tabAction, act => act.setActions(
+                new ActionType 
+                { 
+                    Id = row.PurchaseRequest.Id, 
+                    RequestType = Models.Enums.RequestType.PR }
+                )
+            );
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var row = (PRViewModel)gridPR.GetFocusedRow();
-            if (row.PurchaseRequest.TechSpecs == null)
-            {
-                var frm = new frmAddEditStandardPR( row.PurchaseRequest);
-                frm.ShowDialog();
-            }
-            else
-            {
-                var frm = new frmEditPR(row.PurchaseRequest);
-                frm.ShowDialog();
-            }
 
-            LoadPR();
-        }
-
-        private void btnAddStandardPR_Click(object sender, EventArgs e)
-        {
-            var frm = new frmAddEditStandardPR();
+            var frm = _serviceProvider.GetRequiredService<frmEditPR>();
+            frm.InitForm(row.PurchaseRequest);
             frm.ShowDialog();
 
             LoadPR();
         }
 
-        private void gridPR_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
+        private async void gridPR_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
         {
             LoadPRDetails();
             LoadSpecs();
             LoadActions();
-            LoadFDTSData();
-        }
-
-        private void LoadFDTSData()
-        {
-            var row = (PRViewModel)gridPR.GetFocusedRow();
-            if (row == null) return;
-
-            fpPanelFDTS.Controls.Clear();
-            fpPanelFDTS.Controls.Add(new UCFDTS(row.PurchaseRequest.PRNo)
-            {
-                Dock = DockStyle.Fill
-            });
+            await LoadFDTSDetails();
         }
 
         private void UCPR_Load(object sender, EventArgs e)
@@ -183,10 +145,47 @@ namespace ICTProfilingV3.PurchaseRequestForms
             navigation.NavigateTo(mainForm.mainPanel, act => act.filterText = pr.PurchaseRequest.TechSpecsId.ToString());
         }
 
-        private void btnFDTS_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            if (fpFDTS.IsPopupOpen) fpFDTS.HidePopup();
-            else fpFDTS.ShowPopup();
+            var res = await _roleManager.HasDesignation(Designation.PRAdmin, _userStore.UserRole);
+            if (!res)
+            {
+                MessageBox.Show("You don't have permission to delete Purchase Requests.", "Permission Denied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("Delete this Request?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.Cancel) return;
+
+            var pr = (PRViewModel)gridPR.GetFocusedRow();
+            await _purchaseReqService.DeleteAsync(pr.PurchaseRequest.Id);
+        }
+
+        private async Task LoadFDTSDetails()
+        {
+            var row = (PRViewModel)gridPR.GetFocusedRow();
+            if (row == null) return;
+
+            var data = await FDTSData.GetData(row.PurchaseRequest.PRNo);
+            if (data == null) return;
+
+            txtDate.Text = data.Date.Value.ToShortDateString();
+            txtPRDesc.Text = data.PRDescription;
+            txtTotalAmount.Value = data.TotalAmount.Value;
+            txtPurpose.Text = data.Purpose;
+            txtBudgetPR.Text = data.BudgetPRNo;
+
+            gcAction.DataSource = data.DocumentActions;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var row = (PRViewModel)gridPR.GetFocusedRow();
+
+            var frm = _serviceProvider.GetRequiredService<frmEditPR>();
+            frm.InitForm(row.PurchaseRequest);
+            frm.ShowDialog();
+
+            LoadPR();
         }
     }
 }

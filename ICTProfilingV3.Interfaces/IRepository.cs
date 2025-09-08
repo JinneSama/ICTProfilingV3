@@ -11,6 +11,7 @@ namespace ICTProfilingV3.Interfaces
         IQueryable<T> Fetch(Expression<Func<T, bool>> filter);
         Task AddAsync(T entity);
         Task<T> GetById(TKey id);
+        Task<T> GetByFilter(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includes);
         Task SaveChangesAsync();
         void Delete(TKey Id);
         void DeleteRange(Expression<Func<T, bool>> filter);

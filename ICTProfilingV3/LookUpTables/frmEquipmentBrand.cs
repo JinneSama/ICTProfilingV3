@@ -1,38 +1,43 @@
-﻿using DevExpress.Utils.About;
-using DevExpress.Utils.Extensions;
-using DevExpress.XtraEditors;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
 using ICTProfilingV3.Equipments;
-using Models.Entities;
-using Models.Repository;
+using ICTProfilingV3.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.LookUpTables
 {
     public partial class frmEquipmentBrand : BaseForm
     {
-        IUnitOfWork unitOfWork;
-        public frmEquipmentBrand()
+        private readonly IEquipmentService _equipmentService;
+        private readonly IServiceProvider _serviceProvider;
+        public frmEquipmentBrand(IServiceProvider serviceProvider, IEquipmentService equipmentService)
         {
+            _serviceProvider = serviceProvider;
+            _equipmentService = equipmentService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
+            LoadDropdowns();
             LoadBrand();
+        }
+
+        private void LoadDropdowns()
+        {
+            var dropdown = _equipmentService.EquEquipmentCategoryBaseService.GetAll();
+            lueEquipmentCategory.DataSource = new BindingList<Models.Entities.EquipmentCategory>(dropdown.ToList());
         }
 
         private void LoadBrand()
         {
-            var res = unitOfWork.BrandRepo.GetAll().Select(x => new BrandViewModel
+            var res = _equipmentService.BrandBaseService.GetAll()
+                .Select(x => new BrandViewModel
             {
                 BrandId = x.Id,
+                EquipmentCategoryId = x.EquipmentSpecs.Equipment.EquipmentCategoryId,
+                EquipmentCategory = x.EquipmentSpecs.Equipment.EquipmentCategory.Name,
                 BrandName = x.BrandName,
                 Equipment = x.EquipmentSpecs.Equipment.EquipmentName,
                 Description = x.EquipmentSpecs.Description,
@@ -43,7 +48,7 @@ namespace ICTProfilingV3.LookUpTables
 
         private void btnAddBrand_Click(object sender, EventArgs e)
         {
-            var frm = new frmAddEditBrand();
+            var frm = _serviceProvider.GetRequiredService<frmAddEditBrand>();
             frm.ShowDialog();
 
             LoadBrand();
@@ -55,10 +60,9 @@ namespace ICTProfilingV3.LookUpTables
             if (msgRes == DialogResult.Cancel) return;
 
             var brand = (BrandViewModel)gridBrand.GetFocusedRow();
-            var res = await unitOfWork.BrandRepo.FindAsync(x => x.Id == brand.BrandId);
+            var res = await _equipmentService.BrandBaseService.GetByIdAsync(brand.BrandId);
             if (res == null) return;
-            unitOfWork.BrandRepo.Delete(res);
-            unitOfWork.Save();
+            await _equipmentService.BrandBaseService.DeleteAsync(res.Id);
 
             LoadBrand();
         }
@@ -66,7 +70,8 @@ namespace ICTProfilingV3.LookUpTables
         private void btnEdit_Click(object sender, EventArgs e)
         {
             var row = (BrandViewModel)gridBrand.GetFocusedRow();
-            var frm = new frmAddEditBrand(row);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditBrand>();
+            frm.InitForm(row);
             frm.ShowDialog();
 
             LoadBrand();

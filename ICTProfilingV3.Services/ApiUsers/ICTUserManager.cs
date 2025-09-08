@@ -92,5 +92,10 @@ namespace ICTProfilingV3.Services.ApiUsers
                 }
             disposed = true;
         }
+
+        public async Task<Users> FindUserByUsername(string username)
+        {
+            return await _userManager.FindByNameAsync(username);
+        }
     }
 }

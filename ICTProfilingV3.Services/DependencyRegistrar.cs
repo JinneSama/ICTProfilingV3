@@ -1,12 +1,11 @@
 ﻿using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.Interfaces;
-using ICTProfilingV3.Mapper;
 using ICTProfilingV3.Mapper.Configurations;
 using ICTProfilingV3.Repository;
 using ICTProfilingV3.Services.ApiUsers;
+using ICTProfilingV3.Services.Base;
 using ICTProfilingV3.Services.Employees;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace ICTProfilingV3.Services
 {
@@ -21,6 +20,10 @@ namespace ICTProfilingV3.Services
             //repository
             services.AddTransient(typeof(IRepository<,>), typeof(BaseRepository<,>));
 
+
+            //base
+            services.AddTransient(typeof(IBaseDataService<,>), typeof(BaseDataService<,>));
+
             //service
             services.AddSingleton(typeof(UserStore));
             services.AddTransient<IICTRoleManager, ICTRoleManager>();
@@ -32,6 +35,18 @@ namespace ICTProfilingV3.Services
             services.AddTransient<IProcessService, ProcessService>();
             services.AddTransient<ICASService, CASService>();
             services.AddTransient<IRepairService, RepairService>();
+            services.AddTransient<IComparisonService, ComparisonService>();
+            services.AddTransient<ITechSpecsService, TechSpecsService>();
+            services.AddTransient<IDeliveriesService, DeliveriesService>();
+            services.AddTransient<ILookUpService, LookUpService>();
+            services.AddTransient<IComparisonReportService, ComparisonReportService>();
+            services.AddTransient<IPurchaseReqService, PurchaseReqService>();
+            services.AddTransient<IPGNService, PGNService>();
+            services.AddTransient<IEvaluationService, EvaluationService>();
+            services.AddTransient<IPPEInventoryService, PPEInventoryService>();
+            services.AddTransient(typeof(PGNDocumentsService));
+            services.AddTransient<IChangeLogService, ChangeLogService>();
+            services.AddTransient<IMOService, MOService>();
 
             //Employees Service
             services.AddTransient(typeof(OFMISService));

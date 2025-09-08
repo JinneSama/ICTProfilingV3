@@ -17,26 +17,26 @@ namespace ICTProfilingV3.TicketRequestForms
             InitializeComponent();
         }
 
-        private void btnDeliveries_Click(object sender, EventArgs e)
+        private async void btnDeliveries_Click(object sender, EventArgs e)
         {
             var frm = _serviceProvider.GetRequiredService<frmAddEditDeliveries>();
-            frm.InitForm();
+            await frm.InitForm();
             frm.ShowDialog();
             this.Close();   
         }
 
-        private void btnTechSpecs_Click(object sender, EventArgs e)
+        private async void btnTechSpecs_Click(object sender, EventArgs e)
         {
             var frm = _serviceProvider.GetRequiredService<frmAddEditTechSpecs>();
-            frm.InitForTSForm();
+            await frm.InitForTSForm();
             frm.ShowDialog();
             this.Close();
         }
 
-        private void btnRepair_Click(object sender, EventArgs e)
+        private async void btnRepair_Click(object sender, EventArgs e)
         {
             var frm = _serviceProvider.GetRequiredService<frmAddEditRepair>();
-            frm.InitForm();
+            await frm.InitForm();
             frm.ShowDialog();
             this.Close();
         }

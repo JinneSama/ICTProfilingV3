@@ -13,9 +13,8 @@ namespace ICTProfilingV3.ReportForms
             InitializeComponent();
         }
 
-        public frmReportViewer(XtraReport xtraReport)
+        public void InitForm(XtraReport xtraReport)
         {
-            InitializeComponent();
             this.xtraReport = xtraReport;
         }
 

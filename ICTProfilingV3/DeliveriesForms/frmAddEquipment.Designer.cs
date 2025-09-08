@@ -42,7 +42,7 @@
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
             this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-            this.spinItemNo = new DevExpress.XtraEditors.SpinEdit();
+            this.seItemNo = new DevExpress.XtraEditors.SpinEdit();
             this.btnCancel = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.btnAddICTSpecs = new DevExpress.XtraEditors.SimpleButton();
@@ -66,7 +66,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.spinQty = new DevExpress.XtraEditors.SpinEdit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).BeginInit();
@@ -215,25 +215,25 @@
             this.labelControl10.TabIndex = 110;
             this.labelControl10.Text = "ItemNo";
             // 
-            // spinItemNo
+            // seItemNo
             // 
-            this.spinItemNo.EditValue = new decimal(new int[] {
+            this.seItemNo.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-            this.spinItemNo.Location = new System.Drawing.Point(125, 48);
-            this.spinItemNo.Margin = new System.Windows.Forms.Padding(2);
-            this.spinItemNo.Name = "spinItemNo";
-            this.spinItemNo.Properties.Appearance.Options.UseTextOptions = true;
-            this.spinItemNo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            this.spinItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.seItemNo.Location = new System.Drawing.Point(125, 48);
+            this.seItemNo.Margin = new System.Windows.Forms.Padding(2);
+            this.seItemNo.Name = "seItemNo";
+            this.seItemNo.Properties.Appearance.Options.UseTextOptions = true;
+            this.seItemNo.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.seItemNo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinItemNo.Properties.MaskSettings.Set("mask", "d");
-            this.spinItemNo.Properties.MaskSettings.Set("hideInsignificantZeros", true);
-            this.spinItemNo.Properties.UseMaskAsDisplayFormat = true;
-            this.spinItemNo.Size = new System.Drawing.Size(138, 20);
-            this.spinItemNo.TabIndex = 111;
+            this.seItemNo.Properties.MaskSettings.Set("mask", "d");
+            this.seItemNo.Properties.MaskSettings.Set("hideInsignificantZeros", true);
+            this.seItemNo.Properties.UseMaskAsDisplayFormat = true;
+            this.seItemNo.Size = new System.Drawing.Size(138, 20);
+            this.seItemNo.TabIndex = 111;
             // 
             // btnCancel
             // 
@@ -514,7 +514,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(508, 405);
-            this.Controls.Add(this.spinItemNo);
+            this.Controls.Add(this.seItemNo);
             this.Controls.Add(this.labelControl10);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -541,11 +541,12 @@
             this.Controls.Add(this.labelControl2);
             this.Controls.Add(this.labelControl1);
             this.Controls.Add(this.labelControl4);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEquipment.IconOptions.Icon")));
             this.Name = "frmAddEquipment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spinItemNo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seItemNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSerialNo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cboUnit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDescription.Properties)).EndInit();
@@ -599,7 +600,7 @@
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.SimpleButton btnCancel;
         private DevExpress.XtraEditors.SimpleButton btnSave;
-        private DevExpress.XtraEditors.SpinEdit spinItemNo;
+        private DevExpress.XtraEditors.SpinEdit seItemNo;
         private DevExpress.XtraEditors.LabelControl labelControl10;
     }
 }

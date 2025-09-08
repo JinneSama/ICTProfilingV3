@@ -1,42 +1,46 @@
 ﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ICTProfilingV3.Equipments
 {
     public partial class frmAddEditBrand : BaseForm
     {
-        private SaveType saveType;
-        private IUnitOfWork unitOfWork;
+        private readonly IEquipmentService _equipmentService;
+        private SaveType _saveType;
         private BrandViewModel _brand;
-        public frmAddEditBrand()
+        public frmAddEditBrand(IEquipmentService equipmentService)
         {
+            _equipmentService = equipmentService;
             InitializeComponent();
-            saveType = SaveType.Insert;
-            unitOfWork = new UnitOfWork();
-            LoadDropdown();
         }
-        public frmAddEditBrand(BrandViewModel brand)
-        {
-            InitializeComponent();
-            saveType = SaveType.Update;
-            unitOfWork = new UnitOfWork();
-            LoadDropdown();
 
-            slueEquipment.EditValue = brand.EquipmentSpecsId;
-            memoDesc.Text = brand.Description;
-            txtBrand.Text = brand.BrandName;
-            _brand = brand;
+        public void InitForm(BrandViewModel brand = null)
+        {
+            if(brand == null)
+            {
+                _saveType = SaveType.Update;
+                slueEquipment.EditValue = brand.EquipmentSpecsId;
+                memoDesc.Text = brand.Description;
+                txtBrand.Text = brand.BrandName;
+                _brand = brand;
+            }
+            else
+            {
+                _saveType = SaveType.Insert;
+            }
+            LoadDropdown();
         }
 
         private void LoadDropdown()
         {
-            var equipmentSpecs = unitOfWork.EquipmentSpecsRepo.GetAll().Select(x => new EquipmentSpecsViewModel
+            var equipmentSpecs = _equipmentService.EquipmentSpecsBaseService.GetAll().Select(x => new EquipmentSpecsViewModel
             {
                 Id = x.Id,
                 Equipment = x.Equipment.EquipmentName,
@@ -45,38 +49,36 @@ namespace ICTProfilingV3.Equipments
             slueEquipment.Properties.DataSource = equipmentSpecs.ToList();
         }
 
-        private void btnAddBrand_Click(object sender, EventArgs e)
+        private async void btnAddBrand_Click(object sender, EventArgs e)
         {
-            if (saveType == SaveType.Insert) InsertBrand();
-            else UpdateBrand();
+            if (_saveType == SaveType.Insert) await InsertBrand();
+            else await UpdateBrand();
         }
 
-        private async void UpdateBrand()
+        private async Task UpdateBrand()
         {
             int equipId = (int)slueEquipment.EditValue;
-            var equipSpecs = await unitOfWork.EquipmentSpecsRepo.FindAsync(x => x.Id == equipId);
+            var equipSpecs = await _equipmentService.EquipmentSpecsBaseService.GetByIdAsync(equipId);
 
-            var res = await unitOfWork.BrandRepo.FindAsync(x => x.Id == _brand.BrandId);
+            var res = await _equipmentService.BrandBaseService.GetByIdAsync(_brand.BrandId);
 
             res.EquipmentSpecs = equipSpecs;
             res.BrandName = txtBrand.Text;
-            unitOfWork.EquipmentSpecsRepo.Update(equipSpecs);
-            unitOfWork.Save();
+            await _equipmentService.BrandBaseService.SaveChangesAsync();
 
             this.Close();
         }
 
-        private async void InsertBrand()
+        private async Task InsertBrand()
         {
             int equipId = (int)slueEquipment.EditValue;
-            var equipSpecs = await unitOfWork.EquipmentSpecsRepo.FindAsync(x => x.Id == equipId);
+            var equipSpecs = await _equipmentService.EquipmentSpecsBaseService.GetByIdAsync(equipId);
             var brand = new Brand
             {
                 BrandName = txtBrand.Text,
                 EquipmentSpecs = equipSpecs
             };
-            unitOfWork.BrandRepo.Insert(brand);
-            unitOfWork.Save();
+            await _equipmentService.BrandBaseService.AddAsync(brand);
 
             this.Close();
         }

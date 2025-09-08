@@ -10,42 +10,48 @@ using ICTProfilingV3.TechSpecsForms;
 using ICTProfilingV3.DeliveriesForms;
 using ICTProfilingV3.RepairForms;
 using DevExpress.Data.Filtering;
-using Helpers.Interfaces;
 using ICTProfilingV3.ActionsForms;
 using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.DataTransferModels;
 using Microsoft.Extensions.DependencyInjection;
 using ICTProfilingV3.DataTransferModels.Models;
 using ICTProfilingV3.Services.Employees;
+using ICTProfilingV3.Core.Common;
 
 namespace ICTProfilingV3.TicketRequestForms
 {
-    public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
+    public partial class UCTARequestDashboard : DevExpress.XtraEditors.XtraUserControl
     {
         private readonly IUCManager _ucManager;
         private readonly ITicketRequestService _ticketService;
         private readonly IStaffService _staffService;
         private readonly IEquipmentService _equipmentService;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IICTRoleManager _roleManager;
+        private readonly UserStore _userStore;
 
         public string filterText { get; set; }
 
         public UCTARequestDashboard(ITicketRequestService ticketService, IUCManager ucManager, 
-            IServiceProvider serviceProvider, IStaffService staffService, IEquipmentService equipmentService)
+            IServiceProvider serviceProvider, IStaffService staffService, IEquipmentService equipmentService,
+            IICTRoleManager roleManager, UserStore userStore)
         {
-            InitializeComponent();
             _ticketService = ticketService;
             _equipmentService = equipmentService;
             _serviceProvider = serviceProvider;
             _staffService = staffService;
             _ucManager = ucManager;
+            _roleManager = roleManager;
+            _userStore = userStore;
+
+            InitializeComponent();
             LoadDropdowns();
             FilterGrid();
         }
 
         private void LoadDropdowns()
         {
-            var users = _staffService.GetAllStaff().ToList().
+            var users = _staffService.GetAll().ToList().
                 Select(x => x.Users);
             slueTaskOf.Properties.DataSource = users;
 
@@ -62,7 +68,7 @@ namespace ICTProfilingV3.TicketRequestForms
                 Full = $"{x.Office} {x.Division}"
             });
 
-            slueEquipment.Properties.DataSource = _equipmentService.GetAllEquipment().ToList();
+            slueEquipment.Properties.DataSource = _equipmentService.GetAll().ToList();
             lueStatus.Properties.DataSource = Enum.GetValues(typeof(TicketStatus)).Cast<TicketStatus>().Select(x => new
             {
                 Id = x,
@@ -262,20 +268,28 @@ namespace ICTProfilingV3.TicketRequestForms
 
         private void LoadActions(ActionType actionType)
         {
-            tabAction.Controls.Clear(); 
-            var uc = _serviceProvider.GetRequiredService<UCActions>();
-            uc.setActions(actionType);
-            uc.Dock = System.Windows.Forms.DockStyle.Fill;
-            tabAction.Controls.Add(uc);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(tabAction, act => act.setActions(actionType));
         }
-        public void DisposeUC(Control parent)
+
+        private async void btnDeleteTA_Click(object sender, EventArgs e)
         {
-            foreach (Control ctrl in parent.Controls)
+            var res = await _roleManager.HasDesignation(Designation.TicketAdmin, _userStore.UserRole);
+            if(!res)
             {
-                ctrl.Dispose();
-                GC.Collect();
+                MessageBox.Show("You do not have Permission to Delete Tickets, Please Contact Helpdesk/Administrator", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            parent.Controls.Clear();
+
+            if (MessageBox.Show("Deleting this Ticket will Delete it's corresponding Process. Delete Anyway?",
+                "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+                return;
+
+            var row = (TicketRequestDTM)gridRequest.GetFocusedRow();
+            var ticket = await _ticketService.GetByIdAsync(row.Id);
+            ticket.IsDeleted = true;
+            ticket.TicketStatus = TicketStatus.Deleted;
+            await _ticketService.SaveChangesAsync();
         }
     }
 }

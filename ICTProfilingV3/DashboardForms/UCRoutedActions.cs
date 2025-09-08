@@ -11,40 +11,40 @@ using ICTProfilingV3.MOForms;
 using ICTProfilingV3.PGNForms;
 using ICTProfilingV3.PurchaseRequestForms;
 using ICTProfilingV3.RepairForms;
-using ICTProfilingV3.Services.ApiUsers;
 using ICTProfilingV3.TechSpecsForms;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Models;
-using Models.Repository;
 using System;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace ICTProfilingV3.DashboardForms
 {
-    public partial class UCRoutedActions : DevExpress.XtraEditors.XtraUserControl, IDisposeUC
+    public partial class UCRoutedActions : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IICTUserManager userManager;
+        private readonly IICTUserManager _userManager;
         private readonly IServiceProvider _serviceProvider;
+        private readonly IDocActionsService _actionService;
         private readonly UserStore _userStore;
-        public UCRoutedActions(IServiceProvider serviceProvider, UserStore userStore)
+        public UCRoutedActions(IServiceProvider serviceProvider, UserStore userStore, IICTUserManager userManager, 
+            IDocActionsService actionService)
         {
-            InitializeComponent();
-            unitOfWork = new UnitOfWork();
-            userManager = new ICTUserManager();
+            _userManager = userManager;
             _serviceProvider = serviceProvider;
             _userStore = userStore;
+            _actionService = actionService;
+
+            InitializeComponent();
             LoadDropdowns();
             LoadRoutedActions();
         }
 
         private void LoadDropdowns()
         {
-            var users = userManager.GetUsers().ToList();
+            var users = _userManager.GetUsers().ToList();
             slueTaskOf.Properties.DataSource = users;
 
             lueProcessType.Properties.DataSource = Enum.GetValues(typeof(RequestType)).Cast<RequestType>().Select(x => new
@@ -56,15 +56,17 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadRoutedActions()
         {
-            var actions = unitOfWork.ActionsRepo.FindAllAsync(x => x.RoutedUsers.Any(r => r.Id == _userStore.UserId) && x.IsSend == true,
-                x => x.Repairs,
-                x => x.Repairs.TicketRequest,
-                x => x.Deliveries.TicketRequest,
-                x => x.TechSpecs.TicketRequest,
-                x => x.MOAccountUsers,
-                x => x.CustomerActionSheet,
-                x => x.PurchaseRequest,
-                x => x.PGNRequests).ToList();
+            var actions = _actionService.GetAll().Where(x => x.RoutedUsers.Any(r => r.Id == _userStore.UserId) && x.IsSend == true)
+                .Include(x => x.Repairs)
+                .Include(x => x.Repairs.TicketRequest)
+                .Include(x => x.Deliveries.TicketRequest)
+                .Include(x => x.TechSpecs.TicketRequest)
+                .Include(x => x.MOAccountUsers)
+                .Include(x => x.CustomerActionSheet)
+                .Include(x => x.PurchaseRequest)
+                .Include(x => x.PGNRequests)
+                .ToList();
+
             var actionsModel = actions.Select(x => new RoutedActionsViewModel
             {
                 Id = x.Id,
@@ -131,11 +133,8 @@ namespace ICTProfilingV3.DashboardForms
 
         private void LoadActions(ActionType actionType)
         {
-            gcActions.Controls.Clear();
-            var uc = _serviceProvider.GetRequiredService<UCActions>();
-            uc.setActions(actionType);
-            uc.Dock = System.Windows.Forms.DockStyle.Fill;
-            gcActions.Controls.Add(uc);
+            var navigation = _serviceProvider.GetRequiredService<IControlNavigator<UCActions>>();
+            navigation.NavigateTo(gcActions, act => act.setActions(actionType));
         }
 
         private void gridRoutedActions_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
@@ -245,16 +244,6 @@ namespace ICTProfilingV3.DashboardForms
         private void spinCtrlNo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter) FilterGrid();
-        }
-
-        public void DisposeUC(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                ctrl.Dispose();
-                GC.Collect();
-            }
-            parent.Controls.Clear();
         }
 
         private void ceCompleted_CheckedChanged(object sender, EventArgs e)

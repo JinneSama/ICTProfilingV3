@@ -48,6 +48,14 @@ namespace ICTProfilingV3.Repository
             return _dbSet;
         }
 
+        public Task<T> GetByFilter(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _dbSet.AsQueryable();
+            foreach (var include in includes)
+                query = query.Include(include);
+            return query.FirstOrDefaultAsync(filter);
+        }
+
         public async Task<T> GetById(TKey id)
         {
             return await _dbSet.FindAsync(id);

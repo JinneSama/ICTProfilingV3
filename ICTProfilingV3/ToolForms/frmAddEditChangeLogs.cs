@@ -1,9 +1,8 @@
-﻿using ICTProfilingV3.API.FilesApi;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Core.Common;
+using ICTProfilingV3.Interfaces;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,32 +11,31 @@ namespace ICTProfilingV3.ToolForms
 {
     public partial class frmAddEditChangeLogs : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private SaveType saveType;
-        private ChangeLogs changelogs;
-        private readonly HTTPNetworkFolder httpNetworkFolder;
+        private IChangeLogService _changeLogService;
         private readonly UserStore _userStore;
 
-        public frmAddEditChangeLogs(UserStore userStore)
+        private SaveType _saveType;
+        private ChangeLogs _changelogs;
+
+        public frmAddEditChangeLogs(UserStore userStore, IChangeLogService changeLogService)
         {
             _userStore = userStore;
+            _changeLogService = changeLogService;
             InitializeComponent();
-            httpNetworkFolder = new HTTPNetworkFolder();
-            unitOfWork = new UnitOfWork();
         }
 
         public void InitForm(ChangeLogs changelogs = null)
         {
-            saveType = SaveType.Update;
-            this.changelogs = changelogs;
+            _saveType = SaveType.Update;
+            _changelogs = changelogs;
             if (changelogs == null) LoadInsertDetails(); 
             else LoadDetails();
         }
 
         private void LoadInsertDetails()
         {
-            var lastVersion = unitOfWork.ChangeLogsRepo.GetAll().ToList()?.LastOrDefault() ?? null;
-            saveType = SaveType.Insert;
+            var lastVersion = _changeLogService.GetAll().ToList()?.LastOrDefault() ?? null;
+            _saveType = SaveType.Insert;
             string version;
             if (lastVersion == null) version = "1.0.0.1";
             else version = GetVersion(lastVersion.Version);
@@ -55,22 +53,22 @@ namespace ICTProfilingV3.ToolForms
 
         private async void LoadDetails()
         {
-            saveType = SaveType.Insert;
-            txtVersion.Text = changelogs.Version;
-            memoChanges.Text = changelogs.Changelogs;
-            var img = await httpNetworkFolder.DownloadFile(changelogs.ImageName);
+            _saveType = SaveType.Insert;
+            txtVersion.Text = _changelogs.Version;
+            memoChanges.Text = _changelogs.Changelogs;
+            var img = await _changeLogService.DownloadFile(_changelogs.ImageName);
             picImageInfo.Image = img;
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (saveType == SaveType.Insert) InsertChanges();
+            if (_saveType == SaveType.Insert) await InsertChanges();
             else await UpdateChanges();
 
             this.Close();
         }
 
-        private async void InsertChanges()
+        private async Task InsertChanges()
         {
             var changes = new ChangeLogs
             {
@@ -80,23 +78,22 @@ namespace ICTProfilingV3.ToolForms
                 Changelogs = memoChanges.Text,
                 ImageName = txtVersion.Text + ".jpeg",
             };
-            unitOfWork.ChangeLogsRepo.Insert(changes);
-            unitOfWork.Save();
+            var res = await _changeLogService.AddAsync(changes);
 
             if (picImageInfo.Image == null) return;
-            await httpNetworkFolder.UploadFile(picImageInfo.Image, txtVersion.Text + ".jpeg");
+            await _changeLogService.UploadImage(picImageInfo.Image, res.ImageName , res.Id);
         }
 
         private async Task UpdateChanges()
         {
-            var changes = await unitOfWork.ChangeLogsRepo.FindAsync(x => x.Id == changelogs.Id);
+            var changes = await _changeLogService.GetByIdAsync(_changelogs.Id);
             if (changes == null) return;
 
             changes.Changelogs = memoChanges.Text;
-            unitOfWork.Save();
+            await _changeLogService.SaveChangesAsync();
 
             if (picImageInfo.Image == null) return;
-            await httpNetworkFolder.UploadFile(picImageInfo.Image, txtVersion.Text + ".jpeg");
+            await _changeLogService.UploadImage(picImageInfo.Image, changes.ImageName, changes.Id);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

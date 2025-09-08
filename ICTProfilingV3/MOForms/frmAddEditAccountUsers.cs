@@ -1,13 +1,12 @@
-﻿using DevExpress.Utils.Drawing;
-using DevExpress.XtraRichEdit.Model.History;
-using ICTProfilingV3.BaseClasses;
+﻿using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.DataTransferModels.ViewModels;
+using ICTProfilingV3.Interfaces;
 using ICTProfilingV3.PPEInventoryForms;
 using ICTProfilingV3.Services.Employees;
+using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
 using Models.Enums;
-using Models.Repository;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,18 +14,23 @@ namespace ICTProfilingV3.MOForms
 {
     public partial class frmAddEditAccountUsers : BaseForm
     {
-        private IUnitOfWork unitOfWork;
-        private SaveType saveType;
-        private MOAccountUsers moAccountUser;
-        private MOAccounts mOAccount;
+        private readonly IPPEInventoryService _ppeInventoryService;
+        private readonly IMOService _moService;
+        private readonly IServiceProvider _serviceProvider;
         private readonly UserStore _userStore;
-        private readonly UserStore userStore;
 
-        public frmAddEditAccountUsers(UserStore userStoer)
+        private SaveType _saveType;
+        private MOAccountUsers _moAccountUser;
+        private MOAccounts _mOAccount;
+
+        public frmAddEditAccountUsers(UserStore userStore, IServiceProvider serviceProvider,
+            IPPEInventoryService ppeInventoryService, IMOService mOService)
         {
-            _userStore = userStoer;
+            _userStore = userStore;
+            _serviceProvider = serviceProvider;
+            _ppeInventoryService = ppeInventoryService;
+            _moService = mOService;
             InitializeComponent();
-            unitOfWork = new UnitOfWork();
             LoadDropdowns();
         }
 
@@ -34,27 +38,27 @@ namespace ICTProfilingV3.MOForms
         {
             if(mOAccount == null)
             {
-                saveType = SaveType.Update;
-                this.moAccountUser = moAccountUser;
+                _saveType = SaveType.Update;
+                _moAccountUser = moAccountUser;
                 LoadDetails();
             }
             else
             {
-                saveType = SaveType.Insert;
-                this.mOAccount = mOAccount;
+                _saveType = SaveType.Insert;
+                _mOAccount = mOAccount;
             }
         }
 
         private void LoadDetails()
         {
-            deInstallationDate.DateTime = (DateTime)moAccountUser.DateCreated;
-            deProcuredDate.DateTime = (DateTime)moAccountUser.ProcuredDate;
-            spinDeviceNo.Value = moAccountUser.DeviceNo;
-            sluePropertyNo.EditValue = moAccountUser.PPEId;
-            txtRemarks.Text = moAccountUser.Remarks;
-            slueIssuedTo.EditValue = moAccountUser.IssuedTo;
-            slueUser.EditValue = moAccountUser.AccountUser;
-            txtDescription.Text = moAccountUser.Description;
+            deInstallationDate.DateTime = (DateTime)_moAccountUser.DateCreated;
+            deProcuredDate.DateTime = (DateTime)_moAccountUser.ProcuredDate;
+            spinDeviceNo.Value = _moAccountUser.DeviceNo;
+            sluePropertyNo.EditValue = _moAccountUser.PPEId;
+            txtRemarks.Text = _moAccountUser.Remarks;
+            slueIssuedTo.EditValue = _moAccountUser.IssuedTo;
+            slueUser.EditValue = _moAccountUser.AccountUser;
+            txtDescription.Text = _moAccountUser.Description;
         }
 
         private void LoadDropdowns()
@@ -66,7 +70,7 @@ namespace ICTProfilingV3.MOForms
         }
         private void LoadPPEs()
         {
-            var ppe = unitOfWork.PPesRepo.GetAll().ToList();
+            var ppe = _ppeInventoryService.GetAll().ToList();
 
             var ppeModel = ppe.Select(x => new PPEsViewModel
             {
@@ -81,9 +85,10 @@ namespace ICTProfilingV3.MOForms
             sluePropertyNo.Properties.DataSource = ppeModel;
         }
 
-        private void btnAddPPE_Click(object sender, System.EventArgs e)
+        private async void btnAddPPE_Click(object sender, System.EventArgs e)
         {
-            var frm = new frmAddEditPPEs(SaveType.Insert, null);
+            var frm = _serviceProvider.GetRequiredService<frmAddEditPPEs>();
+            await frm.InitForm(SaveType.Insert, null);
             frm.ShowDialog();
 
             LoadPPEs();
@@ -96,7 +101,7 @@ namespace ICTProfilingV3.MOForms
 
         private async void btnSave_Click(object sender, System.EventArgs e)
         {
-            if (saveType == SaveType.Insert) InsertUser();
+            if (_saveType == SaveType.Insert) InsertUser();
             else await UpdateUser();
 
             this.Close();
@@ -115,16 +120,15 @@ namespace ICTProfilingV3.MOForms
                 IssuedTo = (long)slueIssuedTo.EditValue,
                 AccountUser = (long)slueUser.EditValue,
                 Description = txtDescription.Text,
-                MOAccountId = mOAccount.Id,
+                MOAccountId = _mOAccount.Id,
                 CreatedById = _userStore.UserId
             };
-            unitOfWork.MOAccountUserRepo.Insert(user);
-            unitOfWork.Save();
+            _moService.MOAccountUserBaseService.AddAsync(user);
         }
 
         private async Task UpdateUser()
         {
-            var user = await unitOfWork.MOAccountUserRepo.FindAsync(x => x.Id == moAccountUser.Id);
+            var user = await _moService.MOAccountUserBaseService.GetByIdAsync(_moAccountUser.Id);
             if (user == null) return;
 
           
@@ -136,8 +140,7 @@ namespace ICTProfilingV3.MOForms
             user.IssuedTo = (long)slueIssuedTo.EditValue;
             user.AccountUser = (long)slueUser.EditValue;
             user.Description = txtDescription.Text;
-            unitOfWork.MOAccountUserRepo.Update(user);
-            unitOfWork.Save();
+            _moService.MOAccountUserBaseService.SaveChangesAsync();
         }
     }
 }

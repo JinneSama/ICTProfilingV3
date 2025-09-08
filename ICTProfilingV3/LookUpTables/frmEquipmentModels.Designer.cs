@@ -38,6 +38,7 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEquipmentModels));
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -53,11 +54,20 @@
             this.btnEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.slueEquipmentBrand = new DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit();
+            this.repositoryItemSearchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lueEquipmentBrand = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gcModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipmentBrand)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentBrand)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,7 +78,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(869, 37);
+            this.panel1.Size = new System.Drawing.Size(1466, 37);
             this.panel1.TabIndex = 89;
             // 
             // labelControl16
@@ -102,7 +112,7 @@
             this.btnAddModel.Appearance.Options.UseBackColor = true;
             this.btnAddModel.Appearance.Options.UseForeColor = true;
             this.btnAddModel.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.add_16x161;
-            this.btnAddModel.Location = new System.Drawing.Point(741, 42);
+            this.btnAddModel.Location = new System.Drawing.Point(1338, 42);
             this.btnAddModel.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddModel.Name = "btnAddModel";
             this.btnAddModel.Size = new System.Drawing.Size(117, 28);
@@ -125,8 +135,10 @@
             this.gcModel.Name = "gcModel";
             this.gcModel.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.btnDeleteEquip,
-            this.btnEdit});
-            this.gcModel.Size = new System.Drawing.Size(869, 412);
+            this.btnEdit,
+            this.lueEquipmentBrand,
+            this.slueEquipmentBrand});
+            this.gcModel.Size = new System.Drawing.Size(1466, 412);
             this.gcModel.TabIndex = 91;
             this.gcModel.UseEmbeddedNavigator = true;
             this.gcModel.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -141,11 +153,12 @@
             this.gridColumn4,
             this.gridColumn5,
             this.gridColumn6,
-            this.gridColumn7});
+            this.gridColumn7,
+            this.gridColumn8});
             this.gridModel.GridControl = this.gcModel;
             this.gridModel.Name = "gridModel";
-            this.gridModel.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
             this.gridModel.OptionsView.ShowGroupPanel = false;
+            this.gridModel.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridModel_RowUpdated);
             // 
             // gridColumn1
             // 
@@ -153,8 +166,8 @@
             this.gridColumn1.FieldName = "Equipment";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 2;
-            this.gridColumn1.Width = 164;
+            this.gridColumn1.VisibleIndex = 4;
+            this.gridColumn1.Width = 147;
             // 
             // gridColumn3
             // 
@@ -182,8 +195,8 @@
             this.gridColumn2.FieldName = "Description";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 3;
-            this.gridColumn2.Width = 202;
+            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.Width = 139;
             // 
             // gridColumn4
             // 
@@ -191,8 +204,8 @@
             this.gridColumn4.FieldName = "Brand";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 4;
-            this.gridColumn4.Width = 223;
+            this.gridColumn4.VisibleIndex = 5;
+            this.gridColumn4.Width = 184;
             // 
             // gridColumn5
             // 
@@ -220,22 +233,83 @@
             this.gridColumn6.FieldName = "Model";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
-            this.gridColumn6.Width = 186;
+            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.Width = 162;
             // 
             // gridColumn7
             // 
             this.gridColumn7.FieldName = "Mark";
             this.gridColumn7.Name = "gridColumn7";
             // 
+            // gridColumn8
+            // 
+            this.gridColumn8.Caption = "Equipment";
+            this.gridColumn8.ColumnEdit = this.slueEquipmentBrand;
+            this.gridColumn8.FieldName = "EquipmentCategoryBrandId";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 3;
+            this.gridColumn8.Width = 143;
+            // 
+            // slueEquipmentBrand
+            // 
+            this.slueEquipmentBrand.AutoHeight = false;
+            this.slueEquipmentBrand.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.slueEquipmentBrand.DisplayMember = "EquipmentBrand.Name";
+            this.slueEquipmentBrand.Name = "slueEquipmentBrand";
+            this.slueEquipmentBrand.PopupView = this.repositoryItemSearchLookUpEdit1View;
+            this.slueEquipmentBrand.ValueMember = "Id";
+            // 
+            // repositoryItemSearchLookUpEdit1View
+            // 
+            this.repositoryItemSearchLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn9,
+            this.gridColumn10});
+            this.repositoryItemSearchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.repositoryItemSearchLookUpEdit1View.Name = "repositoryItemSearchLookUpEdit1View";
+            this.repositoryItemSearchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.repositoryItemSearchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Equipment";
+            this.gridColumn9.FieldName = "EquipmentCategory.Name";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 0;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "Brand";
+            this.gridColumn10.FieldName = "EquipmentBrand.Name";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 1;
+            // 
+            // lueEquipmentBrand
+            // 
+            this.lueEquipmentBrand.AutoHeight = false;
+            this.lueEquipmentBrand.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lueEquipmentBrand.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EquipmentBrand.Name", "Equipment"),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("EquipmentCategory.Name", "Brand")});
+            this.lueEquipmentBrand.DisplayMember = "EquipmentCategory.Name";
+            this.lueEquipmentBrand.DropDownRows = 15;
+            this.lueEquipmentBrand.Name = "lueEquipmentBrand";
+            this.lueEquipmentBrand.NullText = "";
+            this.lueEquipmentBrand.ValueMember = "Id";
+            // 
             // frmEquipmentModels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 486);
+            this.ClientSize = new System.Drawing.Size(1466, 486);
             this.Controls.Add(this.btnAddModel);
             this.Controls.Add(this.gcModel);
             this.Controls.Add(this.panel1);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmEquipmentModels.IconOptions.Icon")));
             this.Name = "frmEquipmentModels";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
@@ -244,6 +318,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEdit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.slueEquipmentBrand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSearchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lueEquipmentBrand)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -265,5 +342,11 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnEdit;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lueEquipmentBrand;
+        private DevExpress.XtraEditors.Repository.RepositoryItemSearchLookUpEdit slueEquipmentBrand;
+        private DevExpress.XtraGrid.Views.Grid.GridView repositoryItemSearchLookUpEdit1View;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
     }
 }

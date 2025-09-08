@@ -207,7 +207,7 @@
             this.btnDeleteEquipment.ContextImageOptions.Image = global::ICTProfilingV3.Properties.Resources.close_16x164;
             this.btnDeleteEquipment.Name = "btnDeleteEquipment";
             this.btnDeleteEquipment.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
-            this.btnDeleteEquipment.Click += new System.EventHandler(this.btnDeleteEquipment_Click);
+            this.btnDeleteEquipment.Click += new System.EventHandler(this.btnDeleteEquipment_ClickAsync);
             // 
             // gridColumn2
             // 

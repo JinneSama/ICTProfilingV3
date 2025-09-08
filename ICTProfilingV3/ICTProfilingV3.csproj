@@ -32,7 +32,7 @@
     <SuiteName>EPiSv3</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>index.htm</WebPage>
-    <ApplicationRevision>138</ApplicationRevision>
+    <ApplicationRevision>157</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -227,6 +227,9 @@
     <Compile Include="BaseClasses\BaseRibbonForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CustomComponents\CustomFieldTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomerActionSheetForms\frmAddEditCAS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,12 +271,6 @@
     </Compile>
     <Compile Include="DashboardForms\UCPGNDashboard.Designer.cs">
       <DependentUpon>UCPGNDashboard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DashboardForms\UCQueue.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="DashboardForms\UCQueue.Designer.cs">
-      <DependentUpon>UCQueue.cs</DependentUpon>
     </Compile>
     <Compile Include="DashboardForms\UCRepairDashboard.cs">
       <SubType>UserControl</SubType>
@@ -335,6 +332,12 @@
     <Compile Include="DeliveriesForms\frmComparisonReport.Designer.cs">
       <DependentUpon>frmComparisonReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeliveriesForms\frmComparisonReportMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeliveriesForms\frmComparisonReportMenu.Designer.cs">
+      <DependentUpon>frmComparisonReportMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveriesForms\frmInitialFindings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -354,6 +357,42 @@
       <DependentUpon>UCDeliveriesSpecs.cs</DependentUpon>
     </Compile>
     <Compile Include="Dependency\ControlDependencyRegistrar.cs" />
+    <Compile Include="EquipmentForms\frmAddEquipmentBrand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmAddEquipmentBrand.Designer.cs">
+      <DependentUpon>frmAddEquipmentBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentForms\frmAddEquipmentCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmAddEquipmentCategory.Designer.cs">
+      <DependentUpon>frmAddEquipmentCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentForms\frmAddEquipmentModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmAddEquipmentModel.Designer.cs">
+      <DependentUpon>frmAddEquipmentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentForms\frmBrand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmBrand.Designer.cs">
+      <DependentUpon>frmBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentForms\frmEquipmentBrand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmEquipmentBrand.Designer.cs">
+      <DependentUpon>frmEquipmentBrand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EquipmentForms\frmEquipmentModelSpecs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EquipmentForms\frmEquipmentModelSpecs.Designer.cs">
+      <DependentUpon>frmEquipmentModelSpecs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Equipments\frmAddEditBrand.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +404,12 @@
     </Compile>
     <Compile Include="Equipments\frmAddEditModel.Designer.cs">
       <DependentUpon>frmAddEditModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Equipments\frmEquipmentCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Equipments\frmEquipmentCategory.Designer.cs">
+      <DependentUpon>frmEquipmentCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="Equipments\frmEquipmentSpecsDetails.cs">
       <SubType>Form</SubType>
@@ -582,12 +627,6 @@
     <Compile Include="ReportForms\rptQuarterlyReport.Designer.cs">
       <DependentUpon>rptQuarterlyReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="StandardPRForms\frmGeneratePRSuggestion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\frmGeneratePRSuggestion.Designer.cs">
-      <DependentUpon>frmGeneratePRSuggestion.cs</DependentUpon>
-    </Compile>
     <Compile Include="TicketRequestForms\frmAssignTicket.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -617,12 +656,6 @@
     </Compile>
     <Compile Include="ToolForms\frmUpdater.Designer.cs">
       <DependentUpon>frmUpdater.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ToolForms\UCLogManager.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ToolForms\UCLogManager.Designer.cs">
-      <DependentUpon>UCLogManager.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WaitFormUpload.cs">
       <SubType>Form</SubType>
@@ -680,12 +713,6 @@
     <Compile Include="PurchaseRequestForms\frmEditPR.Designer.cs">
       <DependentUpon>frmEditPR.cs</DependentUpon>
     </Compile>
-    <Compile Include="RepairForms\frmEditFindings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RepairForms\frmEditFindings.Designer.cs">
-      <DependentUpon>frmEditFindings.cs</DependentUpon>
-    </Compile>
     <Compile Include="RepairForms\frmEditSignatories.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -740,30 +767,6 @@
     <Compile Include="ReportForms\rptTechSpecs.Designer.cs">
       <DependentUpon>rptTechSpecs.cs</DependentUpon>
     </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPR.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPR.Designer.cs">
-      <DependentUpon>frmAddEditStandardPR.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPRSpecs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPRSpecs.Designer.cs">
-      <DependentUpon>frmAddEditStandardPRSpecs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPRSpecsDetails.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\frmAddEditStandardPRSpecsDetails.Designer.cs">
-      <DependentUpon>frmAddEditStandardPRSpecsDetails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPRForms\frmStandardPRList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\frmStandardPRList.Designer.cs">
-      <DependentUpon>frmStandardPRList.cs</DependentUpon>
-    </Compile>
     <Compile Include="PurchaseRequestForms\UCPR.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -775,12 +778,6 @@
     </Compile>
     <Compile Include="RepairForms\frmAddEditRepair.Designer.cs">
       <DependentUpon>frmAddEditRepair.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RepairForms\UCAddPPEEquipment.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="RepairForms\UCAddPPEEquipment.Designer.cs">
-      <DependentUpon>UCAddPPEEquipment.cs</DependentUpon>
     </Compile>
     <Compile Include="RepairForms\UCRepair.cs">
       <SubType>UserControl</SubType>
@@ -799,12 +796,6 @@
     </Compile>
     <Compile Include="ReportForms\frmReportViewer.Designer.cs">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="StandardPRForms\UCStandardPR.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="StandardPRForms\UCStandardPR.Designer.cs">
-      <DependentUpon>UCStandardPR.cs</DependentUpon>
     </Compile>
     <Compile Include="TechSpecsForms\frmAddEditTechSpecs.cs">
       <SubType>Form</SubType>
@@ -965,9 +956,6 @@
     <EmbeddedResource Include="DashboardForms\UCPGNDashboard.resx">
       <DependentUpon>UCPGNDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DashboardForms\UCQueue.resx">
-      <DependentUpon>UCQueue.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DashboardForms\UCRepairDashboard.resx">
       <DependentUpon>UCRepairDashboard.cs</DependentUpon>
     </EmbeddedResource>
@@ -998,6 +986,9 @@
     <EmbeddedResource Include="DeliveriesForms\frmComparisonReport.resx">
       <DependentUpon>frmComparisonReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DeliveriesForms\frmComparisonReportMenu.resx">
+      <DependentUpon>frmComparisonReportMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveriesForms\frmInitialFindings.resx">
       <DependentUpon>frmInitialFindings.cs</DependentUpon>
     </EmbeddedResource>
@@ -1007,11 +998,29 @@
     <EmbeddedResource Include="DeliveriesForms\UCDeliveriesSpecs.resx">
       <DependentUpon>UCDeliveriesSpecs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForms\frmAddEquipmentBrand.resx">
+      <DependentUpon>frmAddEquipmentBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForms\frmAddEquipmentCategory.resx">
+      <DependentUpon>frmAddEquipmentCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForms\frmAddEquipmentModel.resx">
+      <DependentUpon>frmAddEquipmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForms\frmBrand.resx">
+      <DependentUpon>frmBrand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EquipmentForms\frmEquipmentBrand.resx">
+      <DependentUpon>frmEquipmentBrand.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Equipments\frmAddEditBrand.resx">
       <DependentUpon>frmAddEditBrand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Equipments\frmAddEditModel.resx">
       <DependentUpon>frmAddEditModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Equipments\frmEquipmentCategory.resx">
+      <DependentUpon>frmEquipmentCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Equipments\frmEquipmentSpecsDetails.resx">
       <DependentUpon>frmEquipmentSpecsDetails.cs</DependentUpon>
@@ -1121,9 +1130,6 @@
     <EmbeddedResource Include="ReportForms\rptQuarterlyReport.resx">
       <DependentUpon>rptQuarterlyReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\frmGeneratePRSuggestion.resx">
-      <DependentUpon>frmGeneratePRSuggestion.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="TicketRequestForms\frmAssignTicket.resx">
       <DependentUpon>frmAssignTicket.cs</DependentUpon>
     </EmbeddedResource>
@@ -1138,9 +1144,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\frmUpdater.resx">
       <DependentUpon>frmUpdater.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\UCLogManager.resx">
-      <DependentUpon>UCLogManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WaitFormUpload.resx">
       <DependentUpon>WaitFormUpload.cs</DependentUpon>
@@ -1180,9 +1183,6 @@
     <EmbeddedResource Include="PurchaseRequestForms\frmEditPR.resx">
       <DependentUpon>frmEditPR.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RepairForms\frmEditFindings.resx">
-      <DependentUpon>frmEditFindings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RepairForms\frmEditSignatories.resx">
       <DependentUpon>frmEditSignatories.cs</DependentUpon>
     </EmbeddedResource>
@@ -1210,26 +1210,11 @@
     <EmbeddedResource Include="ReportForms\rptTechSpecs.resx">
       <DependentUpon>rptTechSpecs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\frmAddEditStandardPR.resx">
-      <DependentUpon>frmAddEditStandardPR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\frmAddEditStandardPRSpecs.resx">
-      <DependentUpon>frmAddEditStandardPRSpecs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\frmAddEditStandardPRSpecsDetails.resx">
-      <DependentUpon>frmAddEditStandardPRSpecsDetails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\frmStandardPRList.resx">
-      <DependentUpon>frmStandardPRList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PurchaseRequestForms\UCPR.resx">
       <DependentUpon>UCPR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RepairForms\frmAddEditRepair.resx">
       <DependentUpon>frmAddEditRepair.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RepairForms\UCAddPPEEquipment.resx">
-      <DependentUpon>UCAddPPEEquipment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RepairForms\UCRepair.resx">
       <DependentUpon>UCRepair.cs</DependentUpon>
@@ -1239,9 +1224,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportForms\frmReportViewer.resx">
       <DependentUpon>frmReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StandardPRForms\UCStandardPR.resx">
-      <DependentUpon>UCStandardPR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TechSpecsForms\frmAddEditTechSpecs.resx">
       <DependentUpon>frmAddEditTechSpecs.cs</DependentUpon>

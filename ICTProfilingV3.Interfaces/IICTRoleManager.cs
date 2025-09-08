@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Models.Entities;
+using Models.Enums;
 
 namespace ICTProfilingV3.Interfaces
 {
@@ -15,5 +16,6 @@ namespace ICTProfilingV3.Interfaces
         Task<IdentityRole> FindById(string id);
         Task<IEnumerable<RoleDesignation>> GetRoleDesignations(string roleId);
         IEnumerable<Roles> GetRoles();
+        Task<bool> HasDesignation(Designation designation, string roleId);
     }
 }

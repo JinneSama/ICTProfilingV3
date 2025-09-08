@@ -1,4 +1,5 @@
 ﻿using ICTProfilingV3.API.FilesApi;
+using ICTProfilingV3.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ICTProfilingV3.API
@@ -9,6 +10,7 @@ namespace ICTProfilingV3.API
         {
             services.AddSingleton<TokenCache>();
             services.AddSingleton<HTTPNetworkFolder>();
+            services.AddTransient<IHTTPNetworkFolder, HTTPNetworkFolder>();
         }
     }
 }

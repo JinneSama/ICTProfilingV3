@@ -6,7 +6,6 @@ using ICTProfilingV3.BaseClasses;
 using ICTProfilingV3.Core.Common;
 using ICTProfilingV3.Interfaces;
 using Models.Entities;
-using Models.Repository;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,13 +22,14 @@ namespace ICTProfilingV3.ActionsForms
         public frmActionDocuments(HTTPNetworkFolder networkFolder, IDocActionsService docActionsService, UserStore userStore)
         {
             InitializeComponent();
+            _networkFolder = networkFolder;
             _docActService = docActionsService;
             _userStore = userStore;
-            LoadData();
         }
         public void SetAction(Actions action)
         {
             _action = action;
+            LoadData();
         }
 
         private void LoadData()
@@ -122,7 +122,7 @@ namespace ICTProfilingV3.ActionsForms
             await _networkFolder.DeleteFile(row.DocumentName);
             _docActService.DeleteDocument(row.Id);
 
-            _docActService.ReorderDocument(_action?.Id ?? null);
+            await _docActService.ReorderDocument(_action?.Id ?? null);
             LoadData();
         }
 

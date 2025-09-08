@@ -47,6 +47,12 @@
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmComparisonReport));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gridCRSpecs = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repoRTE = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
@@ -72,6 +78,8 @@
             this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.btnShowInfo = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnDeleteEquipment = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.pnlButtons = new DevExpress.XtraEditors.PanelControl();
@@ -114,6 +122,7 @@
             this.btnRowDown = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddRow = new DevExpress.XtraBars.BarButtonItem();
             this.btnDeleteRow = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
@@ -124,6 +133,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShowInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).BeginInit();
             this.pnlButtons.SuspendLayout();
@@ -260,8 +270,9 @@
             this.gcCR.Name = "gcCR";
             this.gcCR.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repoRTE,
-            this.btnShowInfo});
-            this.gcCR.Size = new System.Drawing.Size(1430, 389);
+            this.btnShowInfo,
+            this.btnDeleteEquipment});
+            this.gcCR.Size = new System.Drawing.Size(1440, 389);
             this.gcCR.TabIndex = 11;
             this.gcCR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridCR,
@@ -283,7 +294,8 @@
             this.gridColumn21,
             this.gridColumn22,
             this.gridColumn23,
-            this.gridColumn25});
+            this.gridColumn25,
+            this.gridColumn27});
             gridFormatRule2.Column = this.gridColumn5;
             gridFormatRule2.ColumnApplyTo = this.gridColumn5;
             gridFormatRule2.Name = "Format0";
@@ -344,8 +356,8 @@
             this.gridColumn2.FieldName = "CRSpecs.ItemNo";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 1;
-            this.gridColumn2.Width = 40;
+            this.gridColumn2.VisibleIndex = 2;
+            this.gridColumn2.Width = 37;
             // 
             // gridColumn3
             // 
@@ -353,8 +365,8 @@
             this.gridColumn3.FieldName = "CRSpecs.Quantity";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 2;
-            this.gridColumn3.Width = 34;
+            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.Width = 30;
             // 
             // gridColumn4
             // 
@@ -362,8 +374,8 @@
             this.gridColumn4.FieldName = "CRSpecs.Unit";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 3;
-            this.gridColumn4.Width = 38;
+            this.gridColumn4.VisibleIndex = 4;
+            this.gridColumn4.Width = 35;
             // 
             // gridColumn5
             // 
@@ -372,8 +384,8 @@
             this.gridColumn5.FieldName = "CRSpecs.Type";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 4;
-            this.gridColumn5.Width = 196;
+            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.Width = 190;
             // 
             // gridColumn6
             // 
@@ -382,8 +394,8 @@
             this.gridColumn6.FieldName = "CRSpecs.PR";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 5;
-            this.gridColumn6.Width = 191;
+            this.gridColumn6.VisibleIndex = 6;
+            this.gridColumn6.Width = 185;
             // 
             // gridColumn7
             // 
@@ -392,8 +404,8 @@
             this.gridColumn7.FieldName = "CRSpecs.Quotation";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 6;
-            this.gridColumn7.Width = 254;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 247;
             // 
             // gridColumn8
             // 
@@ -402,8 +414,8 @@
             this.gridColumn8.FieldName = "CRSpecs.PO";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 7;
-            this.gridColumn8.Width = 220;
+            this.gridColumn8.VisibleIndex = 8;
+            this.gridColumn8.Width = 214;
             // 
             // gridColumn20
             // 
@@ -412,8 +424,8 @@
             this.gridColumn20.FieldName = "CRSpecs.ActualDelivery";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 8;
-            this.gridColumn20.Width = 205;
+            this.gridColumn20.VisibleIndex = 9;
+            this.gridColumn20.Width = 198;
             // 
             // gridColumn21
             // 
@@ -427,8 +439,8 @@
             this.gridColumn22.FieldName = "CRSpecs.Remarks";
             this.gridColumn22.Name = "gridColumn22";
             this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 9;
-            this.gridColumn22.Width = 196;
+            this.gridColumn22.VisibleIndex = 10;
+            this.gridColumn22.Width = 212;
             // 
             // gridColumn23
             // 
@@ -436,7 +448,7 @@
             this.gridColumn23.Name = "gridColumn23";
             this.gridColumn23.OptionsColumn.FixedWidth = true;
             this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 0;
+            this.gridColumn23.VisibleIndex = 1;
             this.gridColumn23.Width = 35;
             // 
             // btnShowInfo
@@ -456,6 +468,26 @@
             this.gridColumn25.FieldName = "CRSpecs.IsDiscrepancy";
             this.gridColumn25.Name = "gridColumn25";
             // 
+            // gridColumn27
+            // 
+            this.gridColumn27.ColumnEdit = this.btnDeleteEquipment;
+            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.OptionsColumn.FixedWidth = true;
+            this.gridColumn27.Visible = true;
+            this.gridColumn27.VisibleIndex = 0;
+            this.gridColumn27.Width = 36;
+            // 
+            // btnDeleteEquipment
+            // 
+            this.btnDeleteEquipment.AutoHeight = false;
+            editorButtonImageOptions2.Image = ((System.Drawing.Image)(resources.GetObject("editorButtonImageOptions2.Image")));
+            this.btnDeleteEquipment.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            this.btnDeleteEquipment.ContextImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteEquipment.ContextImageOptions.Image")));
+            this.btnDeleteEquipment.Name = "btnDeleteEquipment";
+            this.btnDeleteEquipment.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            this.btnDeleteEquipment.Click += new System.EventHandler(this.btnDeleteEquipment_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
@@ -463,7 +495,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1430, 41);
+            this.panel1.Size = new System.Drawing.Size(1440, 41);
             this.panel1.TabIndex = 4;
             // 
             // labelControl16
@@ -495,7 +527,7 @@
             this.pnlButtons.Controls.Add(this.btnSave);
             this.pnlButtons.Location = new System.Drawing.Point(0, 39);
             this.pnlButtons.Name = "pnlButtons";
-            this.pnlButtons.Size = new System.Drawing.Size(1430, 50);
+            this.pnlButtons.Size = new System.Drawing.Size(1440, 50);
             this.pnlButtons.TabIndex = 6;
             // 
             // btnRevert
@@ -506,7 +538,7 @@
             this.btnRevert.Appearance.Options.UseBackColor = true;
             this.btnRevert.Appearance.Options.UseForeColor = true;
             this.btnRevert.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.reset_16x16;
-            this.btnRevert.Location = new System.Drawing.Point(1058, 10);
+            this.btnRevert.Location = new System.Drawing.Point(1068, 10);
             this.btnRevert.Margin = new System.Windows.Forms.Padding(2);
             this.btnRevert.Name = "btnRevert";
             this.btnRevert.Size = new System.Drawing.Size(117, 28);
@@ -545,7 +577,7 @@
             this.btnPreview.Appearance.Options.UseBackColor = true;
             this.btnPreview.Appearance.Options.UseForeColor = true;
             this.btnPreview.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.printpreview_16x167;
-            this.btnPreview.Location = new System.Drawing.Point(1303, 10);
+            this.btnPreview.Location = new System.Drawing.Point(1313, 10);
             this.btnPreview.Margin = new System.Windows.Forms.Padding(2);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(114, 28);
@@ -561,7 +593,7 @@
             this.btnSave.Appearance.Options.UseBackColor = true;
             this.btnSave.Appearance.Options.UseForeColor = true;
             this.btnSave.ImageOptions.Image = global::ICTProfilingV3.Properties.Resources.save_16x168;
-            this.btnSave.Location = new System.Drawing.Point(1179, 10);
+            this.btnSave.Location = new System.Drawing.Point(1189, 10);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 28);
@@ -594,7 +626,7 @@
             this.groupControl1.Controls.Add(this.txtInspectedDate);
             this.groupControl1.Location = new System.Drawing.Point(0, 93);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(1430, 139);
+            this.groupControl1.Size = new System.Drawing.Size(1440, 139);
             this.groupControl1.TabIndex = 10;
             this.groupControl1.Text = "Report Details";
             // 
@@ -862,7 +894,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRowUp),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnRowDown),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnAddRow),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteRow)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnDeleteRow),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1)});
             this.popupMenu1.Manager = this.barManager1;
             this.popupMenu1.Name = "popupMenu1";
             // 
@@ -920,6 +953,12 @@
             this.btnDeleteRow.Name = "btnDeleteRow";
             this.btnDeleteRow.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnDeleteRow_ItemClick);
             // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Id = 6;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
             // barManager1
             // 
             this.barManager1.DockControls.Add(this.barDockControlTop);
@@ -933,8 +972,9 @@
             this.btnAddRow,
             this.btnDeleteRow,
             this.btnRowDown,
-            this.btnRowUp});
-            this.barManager1.MaxItemId = 6;
+            this.btnRowUp,
+            this.barButtonItem1});
+            this.barManager1.MaxItemId = 7;
             // 
             // barDockControlTop
             // 
@@ -942,7 +982,7 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1430, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1440, 0);
             // 
             // barDockControlBottom
             // 
@@ -950,7 +990,7 @@
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.barDockControlBottom.Location = new System.Drawing.Point(0, 626);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1430, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1440, 0);
             // 
             // barDockControlLeft
             // 
@@ -964,7 +1004,7 @@
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1430, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1440, 0);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 626);
             // 
@@ -972,7 +1012,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1430, 626);
+            this.ClientSize = new System.Drawing.Size(1440, 626);
             this.Controls.Add(this.gcCR);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.pnlButtons);
@@ -981,6 +1021,7 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmComparisonReport.IconOptions.Icon")));
             this.Name = "frmComparisonReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -990,6 +1031,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcCR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnShowInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnDeleteEquipment)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlButtons)).EndInit();
@@ -1092,5 +1134,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
         private DevExpress.XtraBars.BarButtonItem btnRowUp;
         private DevExpress.XtraBars.BarButtonItem btnRowDown;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit btnDeleteEquipment;
     }
 }

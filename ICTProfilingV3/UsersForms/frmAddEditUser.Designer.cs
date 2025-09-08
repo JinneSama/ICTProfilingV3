@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditUser));
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelControl16 = new DevExpress.XtraEditors.LabelControl();
             this.lblEpisNo = new DevExpress.XtraEditors.LabelControl();
@@ -40,14 +41,14 @@
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
             this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.txtPosition = new DevExpress.XtraEditors.TextEdit();
-            this.txtFullname = new DevExpress.XtraEditors.TextEdit();
-            this.txtUsername = new DevExpress.XtraEditors.TextEdit();
+            this.txtFullName = new DevExpress.XtraEditors.TextEdit();
+            this.txtUserName = new DevExpress.XtraEditors.TextEdit();
             this.lueUserRole = new DevExpress.XtraEditors.LookUpEdit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFullname.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueUserRole.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,7 +114,7 @@
             // 
             this.labelControl6.Location = new System.Drawing.Point(12, 135);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(46, 13);
+            this.labelControl6.Size = new System.Drawing.Size(47, 13);
             this.labelControl6.TabIndex = 121;
             this.labelControl6.Text = "User Role";
             // 
@@ -171,19 +172,19 @@
             this.txtPosition.Size = new System.Drawing.Size(331, 20);
             this.txtPosition.TabIndex = 118;
             // 
-            // txtFullname
+            // txtFullName
             // 
-            this.txtFullname.Location = new System.Drawing.Point(87, 80);
-            this.txtFullname.Name = "txtFullname";
-            this.txtFullname.Size = new System.Drawing.Size(331, 20);
-            this.txtFullname.TabIndex = 112;
+            this.txtFullName.Location = new System.Drawing.Point(87, 80);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.Size = new System.Drawing.Size(331, 20);
+            this.txtFullName.TabIndex = 112;
             // 
-            // txtUsername
+            // txtUserName
             // 
-            this.txtUsername.Location = new System.Drawing.Point(87, 54);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(331, 20);
-            this.txtUsername.TabIndex = 110;
+            this.txtUserName.Location = new System.Drawing.Point(87, 54);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(331, 20);
+            this.txtUserName.TabIndex = 110;
             // 
             // lueUserRole
             // 
@@ -213,19 +214,20 @@
             this.Controls.Add(this.labelControl5);
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.txtFullname);
+            this.Controls.Add(this.txtFullName);
             this.Controls.Add(this.labelControl3);
-            this.Controls.Add(this.txtUsername);
+            this.Controls.Add(this.txtUserName);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lueUserRole);
+            this.IconOptions.Icon = ((System.Drawing.Icon)(resources.GetObject("frmAddEditUser.IconOptions.Icon")));
             this.Name = "frmAddEditUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPosition.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtFullname.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtFullName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtUserName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lueUserRole.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -238,9 +240,9 @@
         private DevExpress.XtraEditors.LabelControl labelControl16;
         private DevExpress.XtraEditors.LabelControl lblEpisNo;
         private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.TextEdit txtUsername;
+        private DevExpress.XtraEditors.TextEdit txtUserName;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.TextEdit txtFullname;
+        private DevExpress.XtraEditors.TextEdit txtFullName;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private DevExpress.XtraEditors.TextEdit txtPosition;
         private DevExpress.XtraEditors.LabelControl labelControl6;

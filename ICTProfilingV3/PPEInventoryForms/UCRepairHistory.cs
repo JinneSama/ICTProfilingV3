@@ -2,7 +2,6 @@
 using ICTProfilingV3.RepairForms;
 using Microsoft.Extensions.DependencyInjection;
 using Models.Entities;
-using Models.Repository;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -11,16 +10,14 @@ namespace ICTProfilingV3.PPEInventoryForms
 {
     public partial class UCRepairHistory : DevExpress.XtraEditors.XtraUserControl
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IUCManager _ucManager;
+        private readonly IRepairService _repairService;
         private readonly IServiceProvider _serviceProvider;
         private PPEs _ppe;
-        public UCRepairHistory(IUCManager uCManager, IServiceProvider serviceProvider)
+        public UCRepairHistory(IServiceProvider serviceProvider, IRepairService repairService)
         {
-            InitializeComponent();
-            _ucManager = uCManager;
             _serviceProvider = serviceProvider;
-            this._unitOfWork = new UnitOfWork();
+            _repairService = repairService;
+            InitializeComponent();
         }
 
         public void SetPPE(PPEs ppe)
@@ -31,7 +28,7 @@ namespace ICTProfilingV3.PPEInventoryForms
 
         private void LoadHistory()
         {
-            var res = _unitOfWork.RepairsRepo.FindAllAsync(x => x.PPEsId == _ppe.Id).ToList();
+            var res = _repairService.GetAll().Where(x => x.PPEsId == _ppe.Id).ToList();
             if (res == null) return;
             gcHistory.DataSource = new BindingList<Repairs>(res);
         }

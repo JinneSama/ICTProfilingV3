@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace ICTProfilingV3.Interfaces
 {
-    public interface IRepairService
+    public interface IRepairService : IBaseDataService<Repairs, int>
     {
         IEnumerable<PPEsViewModel> GetRepairPPE();
         Task<PPEs> GetPPE(int PPEId);
-        Task<Repairs> GetRepair(int repairId);
-        Task SaveRepairChangesAsync();
+        IEnumerable<RepairViewModel> GetRepairViewModels();
     }
 }
